@@ -1,0 +1,107 @@
+@import "./commonMixins";
+
+.c-quote {
+	.header {
+	    text-align: center;
+	    font-size: 34px;
+	    line-height: 1.5;
+	    color: #333333;
+	    margin-top: 85px;
+	    margin-bottom: 30px;
+	}
+	.c-subheader-text {
+	  font-size: 14px;
+	  line-height: 1.5;
+	  color: #666666;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      &.error {
+	  	margin-top: 13px;
+	  	color: red;
+      }
+	}
+	.c-calendar-container {
+	    display: inline-block;
+	    height: 44px;
+	    border-radius: 2px;
+	    background-color: #f7f7f7;
+	    border: solid 1px #cccccc;
+	    line-height: 43px;
+	    width: 8%;
+	    text-align: center;
+	    border-right: 0px;
+	    &+ div {
+	    	display: inline-block;
+	    }
+	}
+    .react-datepicker__input-container input {
+	    color: #333333;
+	    padding-left: 12px;
+    }
+    .c-coverage-amount {
+	    font-size: 34px;
+	    line-height: 1.5;
+	    color: #333333;
+	    margin-top: 60px;
+    }
+    .l-plan-container {
+	    .p-display-name {
+		  font-size: 18px;
+		  font-weight: bold;
+		  line-height: 1.22;
+		  text-align: left;
+		  color: #333333;
+		  margin-top: 29px;
+	    }
+	    .p-per-month {
+	   		font-size: 14px;
+			line-height: 1.57;
+			text-align: right;
+			color: #999999;
+	    }
+	    .p-increment-val {
+			font-size: 24px;
+			font-weight: 600;
+			text-align: right;
+			color: #555555;
+	    }
+	    &.active {
+		    .p-display-name {
+				color: #ffffff;
+		    }
+		    .p-per-month {
+				color: #ffffff;
+		    }
+		    .p-increment-val {
+				color: #ffffff;
+		    }	    
+	    }
+    }
+    .confirmation-header {
+	    font-size: 24px;
+	    font-weight: 600;
+	    text-align: left;
+	    color: #555555;
+	    margin-top: 30px;
+	    margin-bottom: 50px;
+    }
+    .confirmation-msg {
+		font-size: 14px;
+	    color: #666666;
+	    margin-bottom: 20px;
+    }
+    .confirmation-email {
+	  font-size: 14px;
+	  line-height: 1.5;
+	  color: #666666;
+    }
+    .confirmation-email-input {
+	    input {
+		    height: 44px;
+		    border-radius: 2px;
+		    background-color: #ffffff;
+		    border: solid 1px #cccccc;
+		    margin-bottom: 75px;
+	    }
+    }
+}

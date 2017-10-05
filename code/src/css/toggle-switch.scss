@@ -1,0 +1,32 @@
+@import "./commonMixins";
+
+.cf-switch {
+    border: 1px solid #ccc;
+    width: 40px;
+    height: 21px;
+    border-radius: 10.5px;
+    cursor: pointer;
+    display: inline-block;
+    background-color: $btn-primary-color;
+    &.on {
+        background: green;
+        .cf-switch-toggle {
+            left: 18px;
+        }
+    }
+    &.disabled {
+        cursor: not-allowed;
+    }
+}
+
+.cf-switch-toggle {
+    border: 1px solid #999;
+    box-shadow: 1px 0px 1px #ccc;
+    width: 20px;
+    height: 19px;
+    left: 0;
+    border-radius: 9.5px;
+    background: white;
+    position: relative;
+    transition: left .2s ease-in-out;
+}

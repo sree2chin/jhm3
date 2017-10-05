@@ -1,0 +1,71 @@
+$btn-default-bg-color: #317dbd;
+$btn-default-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+$btn-default-color: #ffffff;
+
+$btn-passive-bg-color: #f7f7f7;
+$btn-passive-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+$btn-passive-color: #d4d4d4;
+
+$btn-hover-bg-color: #5091c7;
+$btn-hover-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+$btn-hover-color: #ffffff;
+
+$btn-active-bg-color: #317dbd;
+$btn-active-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+$btn-active-color: #ffffff;
+
+
+$anchor-active-color: #5dcdee;
+$default-circle-radius: 13.5px;
+$default-big-circle-radius: 30px;
+$default-circle-background: #fff;
+$default-font-color: #666666;
+$default-font-size: 14px;
+$primary-color: #317dbd;
+
+// To place the element to horizontal center
+@mixin push--auto {
+    margin: { 
+        left: auto;
+        right: auto;
+    }
+}
+// For pseudo :before & & after
+@mixin pseudo($display: block, $pos: absolute, $content: ''){
+    content: $content;
+    display: $display;
+    position: $pos;
+}
+// For links
+@mixin linx ($link: $btn-primary-color, $visit: $btn-primary-color, $hover: $btn-primary-color, 
+	$active: $btn-primary-color, $focus: $btn-primary-color) {
+ 
+    color: $link;
+    text-decoration: none;
+    &:visited {
+      color: $visit;
+    }
+    &:hover {
+      color: $hover;   
+    }
+    &:active {
+      color: $active;
+    }
+    &:focus {
+      color: $focus;
+    }
+}
+
+@mixin default-checkbox($radius: $default-circle-radius, $backgroundColor: $default-circle-background) {
+    width: $radius;
+    height: $radius;
+    label {
+        width: $radius;
+        height: $radius;
+    }
+    background: $backgroundColor;
+}
+
+@mixin circle($radius: $default-circle-radius, $backgroundColor: $default-circle-background) {
+    border-radius: $radius;
+}

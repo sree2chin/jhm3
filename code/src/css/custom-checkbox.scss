@@ -1,0 +1,112 @@
+@import "./commonMixins";
+.cf-checkbox-inner-container {
+    position: absolute;
+    display: none;
+    display: inline-block;
+    &.normal {
+        @include default-checkbox;
+        [type="checkbox"]:checked + label, &.default-checked [type="checkbox"] + label {
+            &:after {
+                width: 8px;
+                height: 3px;
+                top: 3.5px;
+                left: 1.5px;
+            }
+        }
+        label {
+            &.circle {
+                @include circle;
+            }
+        }
+        &.cross-checked [type="checkbox"] + label {
+            &:after {
+                top: -4.5px;
+                left: 2.5px;
+            }
+        }
+    }
+    &.small {
+        @include default-checkbox(10px);
+        [type="checkbox"]:checked + label, &.default-checked [type="checkbox"] + label {
+            &:after {
+                width: 6.5px;
+                height: 2px;
+                top: 2px;
+                left: 0.5px;
+            }
+        }
+        label {
+            &.circle {
+                @include circle(10px);
+            }
+        }
+        &.cross-checked [type="checkbox"] + label {
+            &:after {
+                top: -2.518px;
+                left: 1.9px;
+                font-size: 10px;
+            }
+        }
+    }
+    &.big {
+        @include default-checkbox(30px);
+        [type="checkbox"]:checked + label, &.default-checked [type="checkbox"] + label {
+            &:after {
+                width: 20px;
+                height: 7px;
+                top: 7px;
+                left: 3px;
+            }
+        }
+        label {
+            &.circle {
+                @include circle(30px);
+            }
+        }
+        &.cross-checked [type="checkbox"] + label {
+            &:after {
+                top: -3px;
+                left: 8px;
+                font-size: 24px;
+            }
+        }
+    }
+    &.cross-checked [type="checkbox"] + label {
+        border: solid 1px #d0011b;
+        color: #d0011b;
+        font-family: BrandonTextWeb-Light;
+        &:after {
+            content: 'x'!important;
+            position: absolute;
+            border: none!important;
+            transform: none!important;
+        }
+    }
+    input {
+        display: none;
+    }
+    [type="checkbox"]:checked + label, &.default-checked [type="checkbox"] + label {
+        &:after {
+            content: '';
+            position: absolute;
+            width: 9px;
+            height: 4px;
+            background: transparent;
+            top: 4px;
+            left: 3px;
+            border: 1px solid #5dcdee;
+            border-top: none;
+            border-right: none;
+            transform: rotate(-45deg);
+        }
+    }
+    label {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 1px solid #5dcdee;
+        margin-top: 3px;
+        margin-left: 5px;
+    }
+}

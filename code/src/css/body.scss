@@ -1,0 +1,76 @@
+@import "./commonMixins";
+
+.fullwidth {
+    width: 100%;
+}
+
+.inplacemodal {
+    background-color: #ffffff;
+    border: solid 2px #f5f5f5;
+    width: 100%;
+    padding: 32px;
+    & > .title {
+        font-size: 24px;
+        margin-bottom: 32px;
+    }
+}
+
+.form-control {
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid $btn-passive-color;
+    height: 40px;
+}
+
+.form-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    white-space: nowrap;
+}
+
+.input-group-addon {
+    background-color: white;
+    border-radius: 0px;
+    color: #CCC;
+    padding-left: 3px;
+    padding-right: 3px
+}
+
+body {
+    #root {
+        height: 100vh;
+        background-color: rgb(247, 247, 247);
+    }
+}
+
+.react-datepicker__input-container {
+    input {
+        height: 44px;
+        border-radius: 2px;
+        background-color: #ffffff;
+        border: solid 1px #cccccc;
+    }
+}
+
+.l-main-content {
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    float: none!important;
+    background-color: rgb(255, 255, 255);
+    padding-left: 5%!important;
+    padding-right: 5%!important;
+}
+
+.l-plan-container {
+    height: 80px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    border: solid 1px #d4d4d4;
+    &.active {
+        background-color: #317dbd;
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    }
+}

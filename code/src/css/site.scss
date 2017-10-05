@@ -1,0 +1,99 @@
+@import "./commonMixins";
+
+.top-buffer{
+  margin-top: 20px;
+}
+
+.about-page{
+  position: relative;
+  top: -20px;
+}
+
+.about-page .jumbotron{
+  margin: 0;
+  background:rgba(9,69,95,0.8);
+  color: white;
+  border-radius: 0 !important;
+}
+
+/*React apply activeClassName to <a> element, but Bootstrap active class is over <li> element*/
+.navbar .nav .active, .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
+  background: #e7e7e7 !important;
+  color: #333 !important;
+}
+
+.avatar {
+   max-width: 80px
+}
+
+.cf-nav-main-header {
+  &.navbar {
+    &.subheader {
+      height: 30px;
+    }
+    height: 80px;
+    background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(to bottom, #ffffff, #f5f5f5);
+    box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.14);   
+    background-color: white;
+    margin-bottom: 0px;
+    .container {
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+  }
+  .navbar-header img {
+    position: relative;
+    padding: 0px;
+    height: 30px;
+    margin-top: 27px;
+  }
+  p {
+    &.navbar-text {
+      font-size: 12px;
+      color: #333333;
+      margin-right: 0px;
+      margin-top: 23px;
+      .link {
+        color: #317dbd;
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.cf-nav-main-header.navbar .navbar-header .navbar-brand{
+ 
+}
+
+@media(max-width:800px) {
+  .cf-nav-main-header > .container .navbar-collapse.collapse p {
+      margin-top: 4px;
+  }
+  .cf-nav-main-header {
+      min-height: 50px;
+      height: auto;
+      margin-bottom: 0px;
+  }
+}
+
+.c-body {
+  color: $default-font-color;
+  font-size: $default-font-size;
+  &+div {
+    margin-bottom: 50px;
+  }
+  .c-address-input {
+    font-size: 14px;
+    color: #333333;
+    .infinite-autocomplete-default-input {
+      height: 44px;
+      border-radius: 2px;
+      background-color: #ffffff;
+      border: solid 1px #cccccc;
+      padding-left: 12px;
+    }
+    .infinite-autocomplete-options-wrapper {
+      width: 100%;
+    }
+  }
+}

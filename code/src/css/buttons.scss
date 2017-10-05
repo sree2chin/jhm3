@@ -1,0 +1,34 @@
+@import "./commonMixins";
+
+.c-button-default.btn {
+    width: 100%;;
+    height: 44px!important;
+    border-radius: 10px!important;
+    background-color: $btn-passive-bg-color!important;
+    border: solid 1px #d4d4d4;
+    color: $btn-passive-color;
+    &:focus {
+        background-color: $btn-hover-color!important;;
+        box-shadow: $btn-hover-box-shadow!important;;
+        color: $btn-hover-color!important;;   
+    } 
+    &:active {
+        background-color: $btn-active-bg-color!important;;
+        color: $btn-active-color!important;;
+        box-shadow: $btn-active-box-shadow!important;;
+    } 
+    &:hover {
+        background-color: $btn-hover-bg-color!important;
+        box-shadow: $btn-hover-box-shadow!important;;
+        color: $btn-hover-color!important;;
+    } 
+    &.big {
+        width: 100%;
+        border-radius: 0px!important;
+    }
+    &.active{
+        background-color: $btn-default-bg-color!important;
+        color: $btn-default-color!important;
+        box-shadow: $btn-default-box-shadow!important;
+    }
+}

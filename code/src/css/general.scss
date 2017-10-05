@@ -1,0 +1,44 @@
+@import "./commonMixins";
+
+a{
+    @include linx
+    &:hover {
+        font-weight: bold
+    }
+}
+
+tr {
+    border-bottom: 0
+}
+
+.table > thead > tr > th {
+    height: 50px;
+    white-space: nowrap;
+    background-color: #5dcdee;
+    color:white;
+    text-align: center;
+    vertical-align: middle;
+    border-right: 2px solid white
+}
+
+.table > tbody > tr > td {
+    text-align: center;
+    height: 80px;
+    vertical-align: middle
+}
+
+.table > thead > tr > th, .table > tbody > tr > td {
+    border-bottom: 0;
+    border-top: 0
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #f6f6f6;
+}
+
+tbody:before {
+    content: "-";
+    display: block;
+    line-height: 9px;
+    color: transparent;
+}
