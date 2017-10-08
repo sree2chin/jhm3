@@ -14,6 +14,7 @@ import loadStates from '../../actions/loadStates';
 import DatePicker from 'react-datepicker';
 import Plans from "./Plans";
 import Confirmation from "./confirmation";
+import SelectPersons from "./selectPersons";
 import { InfinityAutoComplete } from 'react-infinite-autocomplete';
 import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm} from '../../actions/Quote';
 
@@ -140,6 +141,7 @@ class Main extends React.Component<Props, {}> {
     return (
       <div>
         <Subheader />
+        <SelectPersons onSubmit={this.submitEmailForm.bind(this)} />
         <div className="row c-quote" style={{backgroundColor: "#f7f7f7", paddingBottom: "160px"}}>
           {!this.props.isSubmmitedQuoteForm && <div> 
             <div className="header">

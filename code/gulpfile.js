@@ -26,7 +26,7 @@ gulp.task("prod", function () {
 
 gulp.task("watch", function () {
   return gulp.watch([
-    "src/**/*.*"], 
+    "src/**/*.*", "src/**/**/*.*"], 
    runSequence(["scss"], ["build"])
   );
 });

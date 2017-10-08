@@ -1,11 +1,11 @@
 {
-	"files": [
-		"src/css/buttons.scss",
-		"src/css/body.scss",
-		"src/css/custom-checkbox.scss",
-		"src/css/site.scss",
-		"src/css/quote.scss",
-		"src/css/coverage.scss"
-
-	]
+  "files": [
+    "src/css/buttons.scss",
+    "src/css/body.scss",
+    "src/css/custom-checkbox.scss",
+    "src/css/select-persons.scss",
+    "src/css/site.scss",
+    "src/css/quote.scss",
+    "src/css/coverage.scss"
+  ]
 }

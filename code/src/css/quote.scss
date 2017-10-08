@@ -105,3 +105,23 @@
 	    }
     }
 }
+
+.confirmation-header {
+    &.col-sm-4 {
+    	font-weight: 500;
+    	margin-top: 11px;
+    	color: #999999;
+    	&.active {
+    		color: #317dbd;
+    	}
+    }
+    .hr-container {
+		display: inline-block;
+		width: 80px;
+		margin-left: 10%;
+    	hr {
+		    margin: auto;
+		    padding-bottom: 3px;
+    	}
+    }
+}
