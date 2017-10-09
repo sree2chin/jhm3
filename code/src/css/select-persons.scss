@@ -22,6 +22,9 @@
     height: 200px;
     margin-right: 3%;
     margin-top: 23px;
+    &.active {
+      background-color: #317dbd;
+    }
     img {
       width: 30%;
       margin-left: auto;
@@ -42,6 +45,9 @@
     margin-top: 23px;
     height: 200px;
     margin-bottom: 27px;
+    &.active {
+      background-color: #317dbd;
+    }
     img {
       width: 30%;
       margin-left: auto;

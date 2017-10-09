@@ -22,9 +22,7 @@ interface State {
 class SelectPersons extends React.Component<Props, State> {
   constructor(props : Props, context){
     super(props);
-    this.state = {
-      email: ""
-    }
+    this.state = {};
   };
 
   selectNoOfPersons = (value) => {
@@ -54,13 +52,13 @@ class SelectPersons extends React.Component<Props, State> {
                 </Row>
               </Col>
 
-              <Col sm={3} className="c-select-one-person" onClick={()=> this.selectNoOfPersons(1)} >
+              <Col sm={3} className={`c-select-one-person ${this.state.noOfPersons==1 ? "active" : ""}`} onClick={()=> this.selectNoOfPersons(1)} >
                  {(!this.state.noOfPersons || this.state.noOfPersons==2) && <img src="./images/one-people.svg" /> }
                  {this.state.noOfPersons==1 && <img src="./images/one-people-active.svg" /> }
                 <p> One person</p>
               </Col>
 
-              <Col sm={3} className="c-select-two-person" onClick={()=> this.selectNoOfPersons(2)} >
+              <Col sm={3} className={`c-select-two-person ${this.state.noOfPersons==2 ? "active" : ""}`}  onClick={()=> this.selectNoOfPersons(2)} >
                 {(!this.state.noOfPersons || this.state.noOfPersons==1) && <img src="./images/two-people.svg" /> }
                 {this.state.noOfPersons==2 && <img src="./images/two-people-active.svg" /> }
                 <p> Two persons</p>
