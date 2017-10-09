@@ -32,6 +32,14 @@ interface Props {
   plans: any
 }
 
+import { InputComponent } from 'infinite-autocomplete';
+
+class CustomInput extends InputComponent {
+  render() {
+    return '<input style="background: red;"/>';
+  }
+}
+
 class Main extends React.Component<Props, {}> {
   constructor(){
     super();
@@ -105,6 +113,9 @@ class Main extends React.Component<Props, {}> {
   handleStateInputChange(selectedElement, selectedData) {
     this.setState({
       state: selectedData.value
+    });
+    this.setState({
+      selectedStateData: selectedData
     });
   },  
   handleBirthDateChange(date) {
@@ -210,6 +221,7 @@ class Main extends React.Component<Props, {}> {
                       <InfinityAutoComplete 
                         data={statesObjects}
                         onSelect={this.handleStateInputChange.bind(this)}
+                        customizedInput={CustomInput}
                       />
                     </Col>
                     { this.state.stateError && <Col sm={12} className={"c-subheader-text error"}>
@@ -257,7 +269,8 @@ const mapStateToProps = (state: any): Props => {
     isSubmmitedQuoteForm: state.quotes.isSubmmitedQuoteForm,
     isSubmmitedPlansForm: state.quotes.isSubmmitedPlansForm,
     products: state.quotes.products,
-    plans: state.quotes.plans
+    plans: state.quotes.plans,
+    noOfPersons: state.selectPersons.noOfPersons
   };
 }
 
