@@ -134,7 +134,7 @@ class Main extends React.Component<Props, {}> {
     });
   },
   state = {      
-    healthRating: 4
+    persons: [{}, {}]
   },
   starsConfig = {
     size: 35,
@@ -144,6 +144,11 @@ class Main extends React.Component<Props, {}> {
     color1: 'lightgrey',
     color2: '#317dbd',
     onChange: this.handleHealthChange.bind(this)
+  },
+  handleNameChange(arrayIndex, nV) {
+    this.setState({
+      persons[]
+    });
   },
   public render() {
     var statesObjects = getStateObjects();
@@ -157,13 +162,24 @@ class Main extends React.Component<Props, {}> {
           {!this.props.isSubmmitedQuoteForm && <div> 
             <div className="header">
               <div style={{textAlign: "center"}}>
-                Get a Quote
+                Application information
               </div>  
             </div>
             <Row>
-              <Col md={6} style={{marginLeft: "auto", marginRight: "auto", float: "none", backgroundColor: "#fff"}}>
-                <Col sm={12} style={{backgroundColor: "rgb(255, 255, 255)", paddingLeft: "20px", paddingRight: "20px", paddingBottom: "35px"}}>
+              <Col md={8} style={{marginLeft: "auto", marginRight: "auto", float: "none", backgroundColor: "#fff"}}>
+                <Col sm={12} className="c-one-person-container">
                   <div>
+                    <Col sm={12} className={"c-person-header-text"}>
+                      Applicant 1
+                    </Col>
+                    <Col>
+                      <Input 
+                        name="first-applicant-name"
+                        name="Name"
+                        placeholder="Name"
+                        onChange={this.handleNameChange.bind(this)}
+                      />
+                    </Col>
                     <Col sm={12} className={"c-subheader-text"}>
                       I am
                     </Col>
