@@ -17,6 +17,7 @@ import Confirmation from "./confirmation";
 import SelectPersons from "./selectPersons";
 import { InfinityAutoComplete } from 'react-infinite-autocomplete';
 import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm} from '../../actions/Quote';
+const objectAssign = require('object-assign');
 
 interface Props {
   s_birthDate: string,
@@ -145,9 +146,12 @@ class Main extends React.Component<Props, {}> {
     color2: '#317dbd',
     onChange: this.handleHealthChange.bind(this)
   },
-  handleNameChange(arrayIndex, nV) {
+  handleNameChange (arrayIndex, e) {
+    const persons = objectAssign({}, this.state.persons);
+
+    persons[arrayIndex].name = e.target.value;
     this.setState({
-      persons[]
+      persons: persons
     });
   },
   public render() {
@@ -172,12 +176,12 @@ class Main extends React.Component<Props, {}> {
                     <Col sm={12} className={"c-person-header-text"}>
                       Applicant 1
                     </Col>
-                    <Col>
+                    <Col sm={12}>
                       <Input 
                         name="first-applicant-name"
-                        name="Name"
+                        label="Name"
                         placeholder="Name"
-                        onChange={this.handleNameChange.bind(this)}
+                        onChange={(e) => {this.handleNameChange(0, e)} }
                       />
                     </Col>
                     <Col sm={12} className={"c-subheader-text"}>

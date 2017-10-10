@@ -17,8 +17,13 @@
     "filesGlob": [
         "./src/**/*.tsx",
         "./src/**/*.ts",
+        "./src/**/**/*.ts",
+        "./src/**/**/*.tsx",
         "./typings/tsd.d.ts",
         "!./node_modules/**/*"
+    ],
+    "exclude": [
+
     ],
     "atom": {
         "rewriteTsconfig": false
