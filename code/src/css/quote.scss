@@ -13,8 +13,6 @@
 	  font-size: 14px;
 	  line-height: 1.5;
 	  color: #666666;
-      margin-top: 30px;
-      margin-bottom: 10px;
       &.error {
 	  	margin-top: 13px;
 	  	color: red;
@@ -37,6 +35,34 @@
 		background-color: rgb(255, 255, 255); padding-left: 0px; 
 		padding-right: 0px; 
 		padding-bottom: 35px;
+	    .form-group {
+	    	label {
+				font-size: 14px;
+			    line-height: 1.5;
+			    text-align: left;
+			    color: #666666;
+			    margin-top: 15px;
+	    	}
+	    }
+	    .Select-control {
+		    border-radius: 2px;
+		    background-color: #ffffff;
+		    border: solid 1px #cccccc;
+		    width: 35%;
+		    height: 44px;
+		    .Select-placeholder {
+		    	padding-top: 4px;
+		    }
+	    }
+	    input {
+	    	&.form-control {
+				border-radius: 2px;
+			    background-color: #ffffff;
+			    border: solid 1px #cccccc;
+			    width: 35%;
+			    height: 44px;
+	    	}
+	    }
 	}
 	.c-calendar-container {
 	    display: inline-block;

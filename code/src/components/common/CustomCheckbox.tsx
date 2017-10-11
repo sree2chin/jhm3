@@ -16,6 +16,7 @@ const CustomCheckbox = React.createClass<CustomCheckboxProps, {}>({
         <div onClick={this.onClick} className={"cf-checkbox-inner-container " + (this.props.kind || "normal")}>
                 <input type="checkbox" value="1" id={"checkbox-input-" + this.props.counter} name="" />
                 <label className={this.props.type || "square"} htmlFor={"checkbox-input-" + this.props.counter}></label>
+                <span>{this.props.label}</span>
             </div>
         )
     }

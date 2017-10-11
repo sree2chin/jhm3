@@ -67,11 +67,12 @@ module.exports = {
   entry: {
     app: './index.tsx',
     styles: [
-      '../dist/app.css',
-      '../node_modules/toastr/build/toastr.css',
-      '../node_modules/bootstrap/dist/css/bootstrap.css',
-      '../node_modules/react-datepicker/dist/react-datepicker.min.css',
-      '../font-awesome/css/font-awesome.min.css'
+      "../dist/app.css",
+      "../node_modules/toastr/build/toastr.css",
+      "../node_modules/bootstrap/dist/css/bootstrap.css",
+      "../node_modules/react-select/dist/react-select.css",
+      "../node_modules/react-datepicker/dist/react-datepicker.min.css",
+      "../font-awesome/css/font-awesome.min.css"
     ],
 
     vendor: [

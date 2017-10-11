@@ -3,11 +3,13 @@ import * as Autocomplete from "react-autocomplete"
 import {Link} from 'react-router';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import {Button, Row, Col} from "react-bootstrap";
+import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import Input from "../common/textInput"
+import CustomCheckbox from "../common/CustomCheckbox"
 import Subheader from "../common/subheader"
 import StarsCustom from "../common/Stars"
 import ReactStars from 'react-stars';
+import Select from 'react-select';
 import StarRatingComponent from "react-star-rating-component";
 import { getStateObjects } from '../../utility/states';
 import loadStates from '../../actions/loadStates';
@@ -24,7 +26,7 @@ interface Props {
   s_gender: number,
   state: string,
   isTobaccoUser: boolean,
-  healthRating: number,
+  health: number,
   submitQuoteForm: ()=>void,
   submitProductsForm: ()=>void,
   statesArray: any,
@@ -55,22 +57,22 @@ class Main extends React.Component<Props, {}> {
   },
 
   validateQuoteForm() {
-    const {s_birthDate, s_gender, state, isTobaccoUser, healthRating} = this.state;
+    const {s_birthDate, s_gender, state, isTobaccoUser, health} = this.state;
     
     const s_birthDateError = !(s_birthDate && s_birthDate.format("YYYY-MM-DD").length > 0);
     const s_genderError = !(s_gender ==1 || s_gender ==0);
     const stateError = !(state && state.length > 0);
     const isTobaccoUserError = !(isTobaccoUser==true || isTobaccoUser==false);
-    const healthRatingError = !(healthRating);
+    const healthError = !(health);
 
     this.setState({
       s_birthDateError,
       s_genderError,
       stateError, 
       isTobaccoUserError,
-      healthRatingError,
+      healthError,
     });
-    return !(s_birthDateError || s_genderError || stateError || isTobaccoUserError || healthRatingError);
+    return !(s_birthDateError || s_genderError || stateError || isTobaccoUserError || healthError);
   },
 
   submitQuoteForm() {
@@ -111,12 +113,12 @@ class Main extends React.Component<Props, {}> {
   AddressChange() {
     return null;
   },
-  handleStateInputChange(selectedElement, selectedData) {
+  handleStateInputChange(selectedElement) {
     this.setState({
-      state: selectedData.value
+      state: selectedElement.value
     });
     this.setState({
-      selectedStateData: selectedData
+      selectedStateData: selectedElement
     });
   },  
   handleBirthDateChange(date) {
@@ -129,22 +131,13 @@ class Main extends React.Component<Props, {}> {
       [key]: value
     });
   },
-  handleHealthChange(newValue) {
+  handleHealthChange(selectedElement) {
     this.setState({
-      healthRating: newValue
+      health: selectedElement.value
     });
   },
   state = {      
     persons: [{}, {}]
-  },
-  starsConfig = {
-    size: 35,
-    count: 5,
-    half: false,
-    value: this.state.healthRating,
-    color1: 'lightgrey',
-    color2: '#317dbd',
-    onChange: this.handleHealthChange.bind(this)
   },
   handleNameChange (arrayIndex, e) {
     const persons = objectAssign({}, this.state.persons);
@@ -156,7 +149,7 @@ class Main extends React.Component<Props, {}> {
   },
   public render() {
     var statesObjects = getStateObjects();
-    this.starsConfig.value = this.state.healthRating;
+    const personsContainerWidth = this.props.noOfPersons == 1 ? 8 : 4;
 
     return (
       <div>
@@ -170,7 +163,7 @@ class Main extends React.Component<Props, {}> {
               </div>  
             </div>
             <Row>
-              <Col md={8} style={{marginLeft: "auto", marginRight: "auto", float: "none", backgroundColor: "#fff"}}>
+              <Col md={personsContainerWidth} style={{marginLeft: "auto", marginRight: "auto", float: "none", backgroundColor: "#fff"}}>
                 <Col sm={12} className="c-one-person-container">
                   <div>
                     <Col sm={12} className={"c-person-header-text"}>
@@ -185,17 +178,29 @@ class Main extends React.Component<Props, {}> {
                       />
                     </Col>
                     <Col sm={12} className={"c-subheader-text"}>
-                      I am
+                      Gender
                     </Col>
                     <Col sm={4} style={{paddingRight: "22px"}}>
-                      <Button onClick={()=> this.handleKeyChange("s_gender", 1)} className={`c-button-default ${this.state.s_gender==1 ? "active" : ""}`}>MALE</Button>
+                      <FormGroup>
+                        <Radio name="s_gender" 
+                            onClick={ ()=> {
+                              this.handleKeyChange("s_gender", 1)
+                            }}>
+                          Male
+                        </Radio>
+                        {' '}
+                        <Radio name="s_gender" 
+                            onClick={ ()=> {
+                              this.handleKeyChange("s_gender", 1)
+                            }}>
+                          Female
+                        </Radio>
+                        {' '}
+                      </FormGroup>
+                      { this.state.s_genderError && <Col sm={12} className={"c-subheader-text error"}>
+                        Please select your gender.
+                      </Col> }
                     </Col>
-                    <Col sm={4} style={{paddingLeft: "0px", paddingRight: "37px"}}>
-                      <Button onClick={()=> this.handleKeyChange("s_gender", 0)} className={`c-button-default ${this.state.s_gender==0 ? "active" : ""}`}>FEMALE</Button>
-                    </Col>
-                    { this.state.s_genderError && <Col sm={12} className={"c-subheader-text error"}>
-                      Please select your gender.
-                    </Col> }
                   </div>
                   <div>
                     <Col sm={12} className={"c-subheader-text"}>
@@ -221,27 +226,13 @@ class Main extends React.Component<Props, {}> {
                   </div>
                   <div>
                     <Col sm={12} className={"c-subheader-text"}>
-                      Tobacco use
-                    </Col>
-                    <Col sm={4} style={{paddingRight: "22px"}}>
-                      <Button className={`c-button-default ${this.state.isTobaccoUser==true ? "active" : ""}`} onClick={()=> this.handleKeyChange("isTobaccoUser", true)}>YES</Button>
-                    </Col>
-                    <Col sm={4} style={{paddingLeft: "0px", paddingRight: "37px"}}>
-                      <Button className={`c-button-default ${this.state.isTobaccoUser==false ? "active" : ""}`} onClick={()=> this.handleKeyChange("isTobaccoUser", false)}>NO</Button>
-                    </Col>
-                    { this.state.isTobaccoUserError && <Col sm={12} className={"c-subheader-text error"}>
-                      Please select your Tobacco use.
-                    </Col> }
-                  </div>
-                  <div>
-                    <Col sm={12} className={"c-subheader-text"}>
-                      Current Address
+                      State
                     </Col>
                     <Col sm={12} className={"c-address-input"}>
-                      <InfinityAutoComplete 
-                        data={statesObjects}
-                        onSelect={this.handleStateInputChange.bind(this)}
-                        customizedInput={CustomInput}
+                      <Select
+                        name="form-field-name"
+                        options={statesObjects}
+                        onChange={this.handleStateInputChange.bind(this)}
                       />
                     </Col>
                     { this.state.stateError && <Col sm={12} className={"c-subheader-text error"}>
@@ -249,16 +240,49 @@ class Main extends React.Component<Props, {}> {
                     </Col> }
                   </div>
                   <div>
-                    <Col sm={4} className={"c-subheader-text"} style={{width:"auto", marginTop: "35px"}}>
-                      My overall health is
+                    <Col sm={12} className={"c-subheader-text"} style={{marginTop: "35px"}}>
+                      Overall health
                     </Col>
-                    <Col sm={8} style={{marginBottom: "23px", marginTop: "19px"}}>
-                      <ReactStars
-                        {...this.starsConfig}
+                    <Col sm={12} style={{marginBottom: "23px", marginTop: "19px"}}>
+                      <Select
+                        name="form-field-name"
+                        options={[
+                          {value: "Fair", label: "Fair"},
+                          {value: "Good", label: "Good"},
+                          {value: "Very Good", label: "Very Good"},
+                          {value: "Excellent", label: "Excellent"},
+                        ]}
+                        onChange={this.handleHealthChange.bind(this)}
                       />
                     </Col>
-                    { this.state.healthRatingError && <Col sm={12} className={"c-subheader-text error"}>
+                    { this.state.healthError && <Col sm={12} className={"c-subheader-text error"}>
                       Please select your health status.
+                    </Col> }
+                  </div>
+                  <div>
+                    <Col sm={12} className={"c-subheader-text"}>
+                      Tobacco use
+                    </Col>
+                    <Col sm={4} style={{paddingRight: "22px"}}>
+                      <FormGroup>
+                        <Radio name="isTobaccoUser" 
+                            onClick={ ()=> {
+                              this.handleKeyChange("Smoke", "Yes")
+                            }}>
+                          Male
+                        </Radio>
+                        {' '}
+                        <Radio name="isTobaccoUser" 
+                            onClick={ ()=> {
+                              this.handleKeyChange("Smoke", "No")
+                            }}>
+                          Female
+                        </Radio>
+                        {' '}
+                      </FormGroup>
+                    </Col>
+                    { this.state.isTobaccoUserError && <Col sm={12} className={"c-subheader-text error"}>
+                      Please select your Tobacco use.
                     </Col> }
                   </div>
                   <div>
@@ -283,7 +307,7 @@ const mapStateToProps = (state: any): Props => {
     s_gender: state.s_gender,
     state: state.state,
     isTobaccoUser: state.isTobaccoUser,
-    healthRating: state.healthRating,
+    health: state.health,
     statesList: state.statesList,
     statesArray: state.statesArray
     isSubmmitedQuoteForm: state.quotes.isSubmmitedQuoteForm,
