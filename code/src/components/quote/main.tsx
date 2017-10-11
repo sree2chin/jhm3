@@ -22,11 +22,11 @@ import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm} f
 const objectAssign = require('object-assign');
 
 interface Props {
-  s_birthDate: string,
-  s_gender: number,
-  state: string,
-  isTobaccoUser: boolean,
-  health: number,
+  person1_s_birthDate: string,
+  person1_s_gender: number,
+  person1_state: string,
+  person1_smoke: string,
+  person1_health: string,
   submitQuoteForm: ()=>void,
   submitProductsForm: ()=>void,
   statesArray: any,
@@ -48,41 +48,40 @@ class Main extends React.Component<Props, {}> {
     super();
   },
   componentWillMount() {
-
-    /*if(this.props.statesArray && this.props.statesArray.length > 0) {
-      
-    } else {
-      this.props.loadStates();
-    }*/
   },
 
   validateQuoteForm() {
-    const {s_birthDate, s_gender, state, isTobaccoUser, health} = this.state;
+    const {person1_s_birthDate, person1_s_gender, person1_state, person1_smoke, person1_health} = this.state;
     
-    const s_birthDateError = !(s_birthDate && s_birthDate.format("YYYY-MM-DD").length > 0);
-    const s_genderError = !(s_gender ==1 || s_gender ==0);
-    const stateError = !(state && state.length > 0);
-    const isTobaccoUserError = !(isTobaccoUser==true || isTobaccoUser==false);
-    const healthError = !(health);
+    const person1_s_birthDateError = !(person1_s_birthDate && person1_s_birthDate.format("YYYY-MM-DD").length > 0);
+    const person1_s_genderError = !(person1_s_gender ==1 || person1_s_gender ==0);
+    const person1_stateError = !(person1_state && person1_state.length > 0);
+    const person1_smokeError = !(person1_smoke=="Yes" || person1_smoke=="No");
+    const person1_healthError = !(person1_health);
 
     this.setState({
-      s_birthDateError,
-      s_genderError,
-      stateError, 
-      isTobaccoUserError,
-      healthError,
+      person1_s_birthDateError,
+      person1_s_genderError,
+      person1_stateError, 
+      person1_smokeError,
+      person1_healthError,
     });
-    return !(s_birthDateError || s_genderError || stateError || isTobaccoUserError || healthError);
+    return !(person1_s_birthDateError || person1_s_genderError || person1_stateError || person1_smokeError || person1_healthError);
   },
-
   submitQuoteForm() {
     if(this.validateQuoteForm()) {
-      const {s_birthDate, s_gender, state} = this.state;
-      this.props.submitQuoteForm({
-        s_birthDate: s_birthDate.format("YYYY-MM-DD"), 
-        s_gender, 
-        state
-      }).then(()=>{
+      const {person1_s_birthDate, person1_s_gender, person1_state, person1_name, person1_health, person1_smoke} = this.state;
+      const persons = [
+        {
+          "applicant":"1",
+          s_birthDate: person1_s_birthDate.format("YYYY-MM-DD"),
+          s_gender: person1_s_gender,
+          state: person1_state, 
+          smoke: person1_smoke,
+          health: person1_health
+        }
+      ];
+      this.props.submitQuoteForm(persons).then(()=>{
         this.submitProductsForm();
         this.submmitedQuoteForm = true;
       }).catch(()=>{
@@ -91,14 +90,20 @@ class Main extends React.Component<Props, {}> {
     } 
   },
   submitProductsForm() {
-    const {s_birthDate, s_gender, state} = this.state;
+    const {person1_s_birthDate, person1_s_gender, person1_state, person1_name, person1_health} = this.state;
     const sProductID = this.props.products.data.products_list[1].ProductID;
-    this.props.submitProductsForm({
-      sBirthDate: s_birthDate.format("YYYY-MM-DD"),
-      sGender: s_gender,
-      state,
-      sProductID,
-    }).then(() => {
+    const persons = [
+      { 
+        "applicant":"1"
+        s_birthDate: person1_s_birthDate.format("YYYY-MM-DD"),
+        s_gender: person1_s_gender,
+        state: person1_state, 
+        smoke: person1_smoke,
+        health: person1_health,
+        sProductID
+      }
+    ];
+    this.props.submitProductsForm(persons).then(() => {
       this.submmitedProductForm = true;
     }).catch(()=>{
       this.submmitedProductForm = false;
@@ -110,20 +115,17 @@ class Main extends React.Component<Props, {}> {
   submitEmailForm() {
     this.props.submitEmailForm(this.props);
   },
-  AddressChange() {
-    return null;
-  },
-  handleStateInputChange(selectedElement) {
+  handlePerson1StateInputChange(selectedElement) {
     this.setState({
-      state: selectedElement.value
+      person1_state: selectedElement.value
     });
     this.setState({
-      selectedStateData: selectedElement
+      person1_selectedStateData: selectedElement
     });
   },  
-  handleBirthDateChange(date) {
+  handlePerson1BirthDateChange(date) {
     this.setState({
-      s_birthDate: date
+      person1_s_birthDate: date
     });
   },
   handleKeyChange(key, value) {
@@ -131,25 +133,22 @@ class Main extends React.Component<Props, {}> {
       [key]: value
     });
   },
-  handleHealthChange(selectedElement) {
+  handleperson1_HealthChange(selectedElement) {
     this.setState({
-      health: selectedElement.value
+      person1_health: selectedElement.value
     });
   },
   state = {      
     persons: [{}, {}]
   },
-  handleNameChange (arrayIndex, e) {
-    const persons = objectAssign({}, this.state.persons);
-
-    persons[arrayIndex].name = e.target.value;
+  handleNameChange (key, e) {
     this.setState({
-      persons: persons
+      [key]: e.target.value
     });
   },
   public render() {
     var statesObjects = getStateObjects();
-    const personsContainerWidth = this.props.noOfPersons == 1 ? 8 : 4;
+    const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
 
     return (
       <div>
@@ -174,30 +173,33 @@ class Main extends React.Component<Props, {}> {
                         name="first-applicant-name"
                         label="Name"
                         placeholder="Name"
-                        onChange={(e) => {this.handleNameChange(0, e)} }
+                        onChange={(e) => {this.handleNameChange("person1_name", e)} }
                       />
+                      { this.state.person1_nameError && <Col sm={12} className={"c-subheader-text error"}>
+                        Please enter your name.
+                      </Col> }
                     </Col>
                     <Col sm={12} className={"c-subheader-text"}>
                       Gender
                     </Col>
                     <Col sm={4} style={{paddingRight: "22px"}}>
                       <FormGroup>
-                        <Radio name="s_gender" 
+                        <Radio name="person1_s_gender" 
                             onClick={ ()=> {
-                              this.handleKeyChange("s_gender", 1)
+                              this.handleKeyChange("person1_s_gender", "1")
                             }}>
                           Male
                         </Radio>
                         {' '}
-                        <Radio name="s_gender" 
+                        <Radio name="person1_s_gender" 
                             onClick={ ()=> {
-                              this.handleKeyChange("s_gender", 1)
+                              this.handleKeyChange("person1_s_gender", "0")
                             }}>
                           Female
                         </Radio>
                         {' '}
                       </FormGroup>
-                      { this.state.s_genderError && <Col sm={12} className={"c-subheader-text error"}>
+                      { this.state.person1_s_genderError && <Col sm={12} className={"c-subheader-text error"}>
                         Please select your gender.
                       </Col> }
                     </Col>
@@ -212,15 +214,15 @@ class Main extends React.Component<Props, {}> {
                           <img src={"../images/calendar.svg"} />
                         </div>
                         <DatePicker 
-                          selected={this.state.s_birthDate} 
-                          onChange={this.handleBirthDateChange.bind(this)}
+                          selected={this.state.person1_s_birthDate} 
+                          onChange={this.handlePerson1BirthDateChange.bind(this)}
                           showMonthDropdown
                           showYearDropdown
                           dropdownMode="select"
                         />
                       </div>
                     </Col>
-                    { this.state.s_birthDateError && <Col sm={12} className={"c-subheader-text error"}>
+                    { this.state.person1_s_birthDateError && <Col sm={12} className={"c-subheader-text error"}>
                       Please select your birth date.
                     </Col> }
                   </div>
@@ -232,7 +234,7 @@ class Main extends React.Component<Props, {}> {
                       <Select
                         name="form-field-name"
                         options={statesObjects}
-                        onChange={this.handleStateInputChange.bind(this)}
+                        onChange={this.handlePerson1StateInputChange.bind(this)}
                       />
                     </Col>
                     { this.state.stateError && <Col sm={12} className={"c-subheader-text error"}>
@@ -241,7 +243,7 @@ class Main extends React.Component<Props, {}> {
                   </div>
                   <div>
                     <Col sm={12} className={"c-subheader-text"} style={{marginTop: "35px"}}>
-                      Overall health
+                      Overall person1_health
                     </Col>
                     <Col sm={12} style={{marginBottom: "23px", marginTop: "19px"}}>
                       <Select
@@ -252,11 +254,11 @@ class Main extends React.Component<Props, {}> {
                           {value: "Very Good", label: "Very Good"},
                           {value: "Excellent", label: "Excellent"},
                         ]}
-                        onChange={this.handleHealthChange.bind(this)}
+                        onChange={this.handleperson1_HealthChange.bind(this)}
                       />
                     </Col>
-                    { this.state.healthError && <Col sm={12} className={"c-subheader-text error"}>
-                      Please select your health status.
+                    { this.state.person1_healthError && <Col sm={12} className={"c-subheader-text error"}>
+                      Please select your person1_health status.
                     </Col> }
                   </div>
                   <div>
@@ -265,24 +267,24 @@ class Main extends React.Component<Props, {}> {
                     </Col>
                     <Col sm={4} style={{paddingRight: "22px"}}>
                       <FormGroup>
-                        <Radio name="isTobaccoUser" 
+                        <Radio name="person1_smoke" 
                             onClick={ ()=> {
-                              this.handleKeyChange("Smoke", "Yes")
+                              this.handleKeyChange("person1_smoke", "Yes")
                             }}>
-                          Male
+                          Yes
                         </Radio>
                         {' '}
-                        <Radio name="isTobaccoUser" 
+                        <Radio name="person1_smoke" 
                             onClick={ ()=> {
-                              this.handleKeyChange("Smoke", "No")
+                              this.handleKeyChange("person1_smoke", "No")
                             }}>
-                          Female
+                          No
                         </Radio>
                         {' '}
                       </FormGroup>
                     </Col>
-                    { this.state.isTobaccoUserError && <Col sm={12} className={"c-subheader-text error"}>
-                      Please select your Tobacco use.
+                    { this.state.person1_smokeError && <Col sm={12} className={"c-subheader-text error"}>
+                      Please select whether you smoke or not.
                     </Col> }
                   </div>
                   <div>
@@ -303,11 +305,11 @@ class Main extends React.Component<Props, {}> {
 
 const mapStateToProps = (state: any): Props => {
   return {
-    s_birthDate: state.s_birthDate,
-    s_gender: state.s_gender,
-    state: state.state,
-    isTobaccoUser: state.isTobaccoUser,
-    health: state.health,
+    person1_s_birthDate: state.person1_s_birthDate,
+    person1_s_gender: state.person1_s_gender,
+    person1_state: state.person1_state,
+    person1_smoke: state.person1_smoke,
+    person1_health: state.person1_health,
     statesList: state.statesList,
     statesArray: state.statesArray
     isSubmmitedQuoteForm: state.quotes.isSubmmitedQuoteForm,
