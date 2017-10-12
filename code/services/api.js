@@ -29,9 +29,13 @@ module.exports = new function(){
   };
 
   this.getQuoteProducts = function(data, cb){
+    var url = restOptions.host + '/v1/quote/products';
+    var formData = {
+      applicants: JSON.stringify(data)
+    };
     request({
-      url: restOptions.host + '/v1/quote/products', 
-      formData: data, 
+      url: url, 
+      formData: formData, 
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },
