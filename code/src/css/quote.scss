@@ -148,6 +148,27 @@
 		    margin-bottom: 75px;
 	    }
     }
+    .two-person-outer-container {
+    	.one-person-content, .second-person-content {
+		    background-color: rgb(255, 255, 255);
+		    padding-left: 0px;
+		    padding-right: 0px;
+		}
+    	.second-person-content {
+    		margin-left: 15px;
+		}
+    	.one-person-content {
+		   margin-left: 18%;
+		}
+    }
+   .one-person-outer-container {
+    	.one-person-content {
+		    margin-left: auto; 
+		    margin-right: auto;
+		    float: none;
+		    background-color: #fff;
+    	}
+    }
 }
 
 .confirmation-header {

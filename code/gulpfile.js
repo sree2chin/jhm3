@@ -17,7 +17,7 @@ const wbBuild = require('workbox-build');
 var pump = require('pump');
 
 gulp.task("default", function () {
-  runSequence("clean:dist", ["scss", "image"], ["build"], ["watch"], 'start_server');
+  runSequence("clean:dist", ["scss", "image"], ["build"], 'start_server');
 });
 
 gulp.task("prod", function () {
