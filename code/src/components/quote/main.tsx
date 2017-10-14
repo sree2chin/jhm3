@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as Autocomplete from "react-autocomplete"
+import * as moment from "moment";
 import {Link} from 'react-router';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
@@ -7,14 +8,13 @@ import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import Input from "../common/textInput"
 import CustomCheckbox from "../common/CustomCheckbox"
 import Subheader from "../common/subheader"
-import StarsCustom from "../common/Stars"
-import ReactStars from 'react-stars';
+import Person from "../common/Person"
 import Select from 'react-select';
-import StarRatingComponent from "react-star-rating-component";
 import { getStateObjects } from '../../utility/states';
 import loadStates from '../../actions/loadStates';
 import DatePicker from 'react-datepicker';
 import Plans from "./Plans";
+import {each, isEmpty} from "underscore";
 import Confirmation from "./confirmation";
 import SelectPersons from "./selectPersons";
 import { InfinityAutoComplete } from 'react-infinite-autocomplete';
@@ -46,11 +46,42 @@ class CustomInput extends InputComponent {
 class Main extends React.Component<Props, {}> {
   constructor(){
     super();
+    this.submitQuoteForm.bind(this);
   },
   componentWillMount() {
   },
 
   validateQuoteForm() {
+    var result = true;
+    var errors = [];
+    each (this.state.persons, (person, index) => {
+      if (index==0 || (!isEmpty(person))) {
+        const {s_birthDate, s_gender, state, smoke, health, name} = person;
+
+        const s_birthDateError = !(s_birthDate && moment(s_birthDate).format("YYYY-MM-DD").length > 0);
+        const s_genderError = !(s_gender ==1 || s_gender ==0);
+        const stateError = !(state && state.length > 0);
+        const smokeError = !(smoke=="Yes" || smoke=="No");
+        const healthError = !(health);
+        const nameError = !(name && name.length > 0);
+
+        errors.push({
+          s_birthDateError, 
+          s_genderError,
+          stateError, 
+          smokeError, 
+          healthError,
+          nameError
+        });
+        result = result && !(s_birthDateError || s_genderError || stateError || smokeError || healthError);
+      }
+    });
+    this.setState({
+      errors
+    });
+
+    return result;
+
     const {person1_s_birthDate, person1_s_gender, person1_state, person1_smoke, person1_health} = this.state;
     
     const person1_s_birthDateError = !(person1_s_birthDate && person1_s_birthDate.format("YYYY-MM-DD").length > 0);
@@ -95,7 +126,7 @@ class Main extends React.Component<Props, {}> {
       const persons = [
         {
           applicant: 1,
-          s_birthDate: person1_s_birthDate.format("YYYY-MM-DD"),
+          s_birthDate: moment(person1_s_birthDate).format("YYYY-MM-DD"),
           s_gender: person1_s_gender,
           state: person1_state, 
           smoke: person1_smoke,
@@ -167,6 +198,20 @@ class Main extends React.Component<Props, {}> {
       [key]: value
     });
   },
+  changePersonInfo(index, key, val) {
+    var person = JSON.parse(JSON.stringify(this.state.persons[index]));
+    person[key] = val;
+    var persons = [];
+    if(index ==0) {
+      persons[0] = person;
+      persons[1] = this.state.persons[1];
+    } else {
+      persons[0] = this.state.persons[0];
+      persons[1] = person;
+    }
+
+    this.setState({persons});
+  },
   handleperson1_HealthChange(selectedElement) {
     this.setState({
       person1_health: selectedElement.value
@@ -180,7 +225,8 @@ class Main extends React.Component<Props, {}> {
   },
 
   state = {      
-    persons: [{}, {}]
+    persons: [{}, {}],
+    errors: [{}, {}]
   },
   handleNameChange (key, e) {
     this.setState({
@@ -209,263 +255,25 @@ class Main extends React.Component<Props, {}> {
             </div>
             <Row className={this.props.noOfPersons==2 ? "two-person-outer-container": "one-person-outer-container"}>
               <Col md={personsContainerWidth} className="one-person-content">
-                <Col sm={12} className="c-one-person-container">
-                  <div>
-                    <Col sm={12} className={"c-person-header-text"}>
-                      Applicant 1
-                    </Col>
-                    <Col sm={12}>
-                      <Input 
-                        name="first-applicant-name"
-                        label="Name"
-                        placeholder="Name"
-                        onChange={(e) => {this.handleNameChange("person1_name", e)} }
-                      />
-                      { this.state.person1_nameError && <Col sm={12} className={"c-subheader-text error"}>
-                        Please enter your name.
-                      </Col> }
-                    </Col>
-                    <Col sm={12} className={"c-subheader-text"}>
-                      Gender
-                    </Col>
-                    <Col sm={4} style={{paddingRight: "22px"}}>
-                      <FormGroup>
-                        <Radio name="person1_s_gender" 
-                            onClick={ ()=> {
-                              this.handleKeyChange("person1_s_gender", "1")
-                            }}>
-                          Male
-                        </Radio>
-                        {' '}
-                        <Radio name="person1_s_gender" 
-                            onClick={ ()=> {
-                              this.handleKeyChange("person1_s_gender", "0")
-                            }}>
-                          Female
-                        </Radio>
-                        {' '}
-                      </FormGroup>
-                      { this.state.person1_s_genderError && <Col sm={12} className={"c-subheader-text error"}>
-                        Please select your gender.
-                      </Col> }
-                    </Col>
-                  </div>
-                  <div>
-                    <Col sm={12} className={"c-subheader-text"}>
-                      Birth date
-                    </Col>
-                    <Col sm={12}>
-                      <div>
-                        <div className={"c-calendar-container"}>
-                          <img src={"../images/calendar.svg"} />
-                        </div>
-                        <DatePicker 
-                          selected={this.state.person1_s_birthDate} 
-                          onChange={this.handlePerson1BirthDateChange.bind(this)}
-                          showMonthDropdown
-                          showYearDropdown
-                          dropdownMode="select"
-                        />
-                      </div>
-                    </Col>
-                    { this.state.person1_s_birthDateError && <Col sm={12} className={"c-subheader-text error"}>
-                      Please select your birth date.
-                    </Col> }
-                  </div>
-                  <div>
-                    <Col sm={12} className={"c-subheader-text"}>
-                      State
-                    </Col>
-                    <Col sm={12} className={"c-address-input"}>
-                      <Select
-                        name="form-field-name1"
-                        options={statesObjects}
-                        value={this.state.person1_state}
-                        onChange={this.handlePerson1StateInputChange.bind(this)}
-                      />
-                    </Col>
-                    { this.state.stateError && <Col sm={12} className={"c-subheader-text error"}>
-                      Please select your state.
-                    </Col> }
-                  </div>
-                  <div>
-                    <Col sm={12} className={"c-subheader-text"} style={{marginTop: "35px"}}>
-                      Overall health
-                    </Col>
-                    <Col sm={12} style={{marginBottom: "23px", marginTop: "19px"}}>
-                      <Select
-                        name="form-field-name1"
-                        options={healthRatingObjects}
-                        value={this.state.person1_health}
-                        onChange={this.handleperson1_HealthChange.bind(this)}
-                      />
-                    </Col>
-                    { this.state.person1_healthError && <Col sm={12} className={"c-subheader-text error"}>
-                      Please select your person1_health status.
-                    </Col> }
-                  </div>
-                  <div>
-                    <Col sm={12} className={"c-subheader-text"}>
-                      Tobacco use
-                    </Col>
-                    <Col sm={4} style={{paddingRight: "22px"}}>
-                      <FormGroup>
-                        <Radio name="person1_smoke" 
-                            onClick={ ()=> {
-                              this.handleKeyChange("person1_smoke", "Yes")
-                            }}>
-                          Yes
-                        </Radio>
-                        {' '}
-                        <Radio name="person1_smoke" 
-                            onClick={ ()=> {
-                              this.handleKeyChange("person1_smoke", "No")
-                            }}>
-                          No
-                        </Radio>
-                        {' '}
-                      </FormGroup>
-                    </Col>
-                    { this.state.person1_smokeError && <Col sm={12} className={"c-subheader-text error"}>
-                      Please select whether you smoke or not.
-                    </Col> }
-                  </div>
-                  <div>
-                    <Col sm={12}>
-                      <Button className="c-button-default big" onClick={this.submitQuoteForm.bind(this)}>CONTINUE</Button>
-                    </Col>
-                  </div>
-                </Col>
+                <Person 
+                  onChange={this.changePersonInfo.bind(this)}
+                  index={0}
+                  person={this.state.persons[0]}
+                  errors={this.state.errors[0]}
+                  submitQuoteForm={this.submitQuoteForm.bind(this)}
+                />
               </Col>
               { this.props.noOfPersons==2 &&
                 <Col md={personsContainerWidth} className="second-person-content">
-                  <Col sm={12} className="c-one-person-container">
-                    <div>
-                      <Col sm={12} className={"c-person-header-text"}>
-                        Applicant 2
-                      </Col>
-                      <Col sm={12}>
-                        <Input 
-                          name="first-applicant-name"
-                          label="Name"
-                          placeholder="Name"
-                          onChange={(e) => {this.handleNameChange("person2_name", e)} }
-                        />
-                        { this.state.person2_nameError && <Col sm={12} className={"c-subheader-text error"}>
-                          Please enter your name.
-                        </Col> }
-                      </Col>
-                      <Col sm={12} className={"c-subheader-text"}>
-                        Gender
-                      </Col>
-                      <Col sm={4} style={{paddingRight: "22px"}}>
-                        <FormGroup>
-                          <Radio name="person1_s_gender" 
-                              onClick={ ()=> {
-                                this.handleKeyChange("person2_s_gender", "1")
-                              }}>
-                            Male
-                          </Radio>
-                          {' '}
-                          <Radio name="person2_s_gender" 
-                              onClick={ ()=> {
-                                this.handleKeyChange("person2_s_gender", "0")
-                              }}>
-                            Female
-                          </Radio>
-                          {' '}
-                        </FormGroup>
-                        { this.state.person2_s_genderError && <Col sm={12} className={"c-subheader-text error"}>
-                          Please select your gender.
-                        </Col> }
-                      </Col>
-                    </div>
-                    <div>
-                      <Col sm={12} className={"c-subheader-text"}>
-                        Birth date
-                      </Col>
-                      <Col sm={12}>
-                        <div>
-                          <div className={"c-calendar-container"}>
-                            <img src={"../images/calendar.svg"} />
-                          </div>
-                          <DatePicker 
-                            selected={this.state.person2_s_birthDate} 
-                            onChange={this.handlePerson2BirthDateChange.bind(this)}
-                            showMonthDropdown
-                            showYearDropdown
-                            dropdownMode="select"
-                          />
-                        </div>
-                      </Col>
-                      { this.state.person2_s_birthDateError && <Col sm={12} className={"c-subheader-text error"}>
-                        Please select your birth date.
-                      </Col> }
-                    </div>
-                    <div>
-                      <Col sm={12} className={"c-subheader-text"}>
-                        State
-                      </Col>
-                      <Col sm={12} className={"c-address-input"}>
-                        <Select
-                          name="form-field-name3"
-                          options={statesObjects}
-                          value={this.state.person2_state}
-                          onChange={this.handlePerson2StateInputChange.bind(this)}
-                        />
-                      </Col>
-                      { this.state.person2_stateError && <Col sm={12} className={"c-subheader-text error"}>
-                        Please select your state.
-                      </Col> }
-                    </div>
-                    <div>
-                      <Col sm={12} className={"c-subheader-text"} style={{marginTop: "35px"}}>
-                        Overall health
-                      </Col>
-                      <Col sm={12} style={{marginBottom: "23px", marginTop: "19px"}}>
-                        <Select
-                          name="form-field-name4"
-                          options={healthRatingObjects}
-                          value={this.state.person2_health}
-                          onChange={this.handleperson2_HealthChange.bind(this)}
-                        />
-                      </Col>
-                      { this.state.person2_healthError && <Col sm={12} className={"c-subheader-text error"}>
-                        Please select your health status.
-                      </Col> }
-                    </div>
-                    <div>
-                      <Col sm={12} className={"c-subheader-text"}>
-                        Tobacco use
-                      </Col>
-                      <Col sm={4} style={{paddingRight: "22px"}}>
-                        <FormGroup>
-                          <Radio name="person2_smoke" 
-                              onClick={ ()=> {
-                                this.handleKeyChange("person2_smoke", "Yes")
-                              }}>
-                            Yes
-                          </Radio>
-                          {' '}
-                          <Radio name="person2_smoke" 
-                              onClick={ ()=> {
-                                this.handleKeyChange("person2_smoke", "No")
-                              }}>
-                            No
-                          </Radio>
-                          {' '}
-                        </FormGroup>
-                      </Col>
-                      { this.state.person2_smokeError && <Col sm={12} className={"c-subheader-text error"}>
-                        Please select whether you smoke or not.
-                      </Col> }
-                    </div>
-                    <div>
-                      <Col sm={12}>
-                        <Button className="c-button-default big" onClick={this.submitQuoteForm.bind(this)}>CONTINUE</Button>
-                      </Col>
-                    </div>
-                  </Col>
+                  <Person 
+                    onChange={this.changePersonInfo.bind(this)}
+                    index={1}
+                    person={this.state.persons[1]}
+                    errors={this.state.errors[1]}
+                    submitQuoteForm={()=> {
+                      this.submitQuoteForm()
+                    }}
+                  />
                 </Col>
               }
             </Row>
