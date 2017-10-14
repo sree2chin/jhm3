@@ -42,6 +42,8 @@ ReactDOM.render(
     <Route  path="/" component= {App} >
       <IndexRoute getComponent={ loadQuotePage } />
       <Route path="/gather-information" getComponent={ loadQuotePage } />
+      <Route path="/agent" getComponent={ loadQuotePage } />
+      <Route path="/customer" getComponent={ loadQuotePage } />
       <Route path="/quote" getComponent={ loadQuotePage } />
       <Route path="/about" getComponent={ loadAboutPage } />
       <Route path="/member" getComponent={ loadMemberPage } />

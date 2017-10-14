@@ -72,7 +72,7 @@ export default class Person extends React.Component<Props, {}> {
           <Col sm={12} className={"c-subheader-text"}>
             Birth date
           </Col>
-          <Col sm={12}>
+          <Col sm={12} style={{marginBottom: "25px"}}>
             <div>
               <div className={"c-calendar-container"}>
                 <img src={"../images/calendar.svg"} />
@@ -86,6 +86,9 @@ export default class Person extends React.Component<Props, {}> {
                 showYearDropdown
                 dropdownMode="select"
               />
+              <div style={{display: 'inline-block', marginLeft: "2.5%"}}>
+                <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
+              </div>
             </div>
           </Col>
           { errors.s_birthDateError && <Col sm={12} className={"c-subheader-text error"}>
@@ -105,13 +108,16 @@ export default class Person extends React.Component<Props, {}> {
                 this.onChange("state", stateObj.value)
               }}
             />
+            <div style={{display: "inline-block", marginLeft: "2.5%"}}>
+              <img style={{marginBottom: "38px"}} src={"../images/question-mark.svg"} />
+            </div>
           </Col>
           { errors.stateError && <Col sm={12} className={"c-subheader-text error"}>
             Please select your state.
           </Col> }
         </div>
         <div>
-          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "35px"}}>
+          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "10px"}}>
             Overall health
           </Col>
           <Col sm={12} style={{marginBottom: "23px", marginTop: "19px"}}>
@@ -123,6 +129,9 @@ export default class Person extends React.Component<Props, {}> {
                 this.onChange("health", healthObj.value)
               }}
             />
+            <div style={{display: "inline-block", marginLeft: "2.5%"}}>
+              <img style={{marginBottom: "38px"}} src={"../images/question-mark.svg"} />
+            </div>
           </Col>
           { errors.person1_healthError && <Col sm={12} className={"c-subheader-text error"}>
             Please select your person1_health status.

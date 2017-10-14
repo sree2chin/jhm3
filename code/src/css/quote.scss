@@ -48,11 +48,14 @@
 		    border-radius: 2px;
 		    background-color: #ffffff;
 		    border: solid 1px #cccccc;
-		    width: 35%;
 		    height: 44px;
 		    .Select-placeholder {
 		    	padding-top: 4px;
 		    }
+	    }
+	    .Select--single {
+	    	width: 35%;
+	    	display: inline-block;
 	    }
 	    input {
 	    	&.form-control {

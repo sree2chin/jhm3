@@ -11,7 +11,7 @@ var ejs = require('ejs');
 
 module.exports = function(app) {
 
-  app.get('/', function(req, res, next) {
+  app.get('/*', function(req, res, next) {
     //res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
     templatePath = "../../dist/";
     res.render(templatePath);

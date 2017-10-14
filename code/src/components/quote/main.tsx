@@ -6,7 +6,6 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import Input from "../common/textInput"
-import CustomCheckbox from "../common/CustomCheckbox"
 import Subheader from "../common/subheader"
 import Person from "../common/Person"
 import Select from 'react-select';
@@ -270,9 +269,7 @@ class Main extends React.Component<Props, {}> {
                     index={1}
                     person={this.state.persons[1]}
                     errors={this.state.errors[1]}
-                    submitQuoteForm={()=> {
-                      this.submitQuoteForm()
-                    }}
+                    submitQuoteForm={this.submitQuoteForm.bind(this)}
                   />
                 </Col>
               }
