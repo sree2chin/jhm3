@@ -18,6 +18,9 @@ export default class Person extends React.Component<Props, {}> {
   },
   public render() {
     const toolTipStyles = {
+      wrapper: {
+        marginLeft: "15px"
+      },
       content: {
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         borderRadius: '10px',
@@ -128,9 +131,9 @@ export default class Person extends React.Component<Props, {}> {
                 this.onChange("state", stateObj.value)
               }}
             />
-            <div style={{display: "inline-block", marginLeft: "2.5%"}}>
-              <img style={{marginBottom: "38px"}} src={"../images/question-mark.svg"} />
-            </div>
+            <Tooltip content="Please select your state" styles={toolTipStyles}>
+              <img style={{marginBottom: "34px"}} src={"../images/question-mark.svg"} />
+            </Tooltip>
           </Col>
           { errors.stateError && <Col sm={12} className={"c-subheader-text error"}>
             Please select your state.
@@ -149,9 +152,9 @@ export default class Person extends React.Component<Props, {}> {
                 this.onChange("health", healthObj.value)
               }}
             />
-            <div style={{display: "inline-block", marginLeft: "2.5%"}}>
-              <img style={{marginBottom: "38px"}} src={"../images/question-mark.svg"} />
-            </div>
+            <Tooltip content="Please select your health status" styles={toolTipStyles}>
+              <img style={{marginBottom: "34px"}} src={"../images/question-mark.svg"} />
+            </Tooltip>
           </Col>
           { errors.person1_healthError && <Col sm={12} className={"c-subheader-text error"}>
             Please select your person1_health status.

@@ -80,45 +80,8 @@ class Main extends React.Component<Props, {}> {
     });
 
     return result;
-
-    const {person1_s_birthDate, person1_s_gender, person1_state, person1_smoke, person1_health} = this.state;
-    
-    const person1_s_birthDateError = !(person1_s_birthDate && person1_s_birthDate.format("YYYY-MM-DD").length > 0);
-    const person1_s_genderError = !(person1_s_gender ==1 || person1_s_gender ==0);
-    const person1_stateError = !(person1_state && person1_state.length > 0);
-    const person1_smokeError = !(person1_smoke=="Yes" || person1_smoke=="No");
-    const person1_healthError = !(person1_health);
-
-    this.setState({
-      person1_s_birthDateError,
-      person1_s_genderError,
-      person1_stateError, 
-      person1_smokeError,
-      person1_healthError,
-    });
-    var result = !(person1_s_birthDateError || person1_s_genderError || person1_stateError || person1_smokeError || person1_healthError);
-
-    if(this.props.noOfPersons ==2) {
-      const {person2_s_birthDate, person2_s_gender, person2_state, person2_smoke, person2_health} = this.state;
-      const person2_s_birthDateError = !(person2_s_birthDate && person2_s_birthDate.format("YYYY-MM-DD").length > 0);
-      const person2_s_genderError = !(person2_s_gender ==1 || person2_s_gender ==0);
-      const person2_stateError = !(person2_state && person2_state.length > 0);
-      const person2_smokeError = !(person2_smoke=="Yes" || person2_smoke=="No");
-      const person2_healthError = !(person2_health);
-
-      this.setState({
-        person2_s_birthDateError,
-        person2_s_genderError,
-        person2_stateError, 
-        person2_smokeError,
-        person2_healthError,
-      });
-      result = result && !(person2_s_birthDateError || person2_s_genderError || person2_stateError || person2_smokeError || person2_healthError);
-    }
-
-    return result;
-
   },
+
   submitQuoteForm() {
     if(this.validateQuoteForm()) {
       const {person1_s_birthDate, person1_s_gender, person1_state, person1_name, person1_health, person1_smoke} = this.state;
@@ -140,6 +103,7 @@ class Main extends React.Component<Props, {}> {
       });
     } 
   },
+
   submitProductsForm() {
     const {person1_s_birthDate, person1_s_gender, person1_state, person1_name, person1_health} = this.state;
     const sProductID = this.props.products.data.products_list[1].ProductID;
@@ -165,40 +129,15 @@ class Main extends React.Component<Props, {}> {
   },
   submitEmailForm() {
     this.props.submitEmailForm(this.props);
-  },
-  handlePerson1StateInputChange(selectedElement) {
-    this.setState({
-      person1_state: selectedElement.value
-    });
-    this.setState({
-      person1_selectedStateData: selectedElement
-    });
-  },  
-  handlePerson2StateInputChange(selectedElement) {
-    this.setState({
-      person2_state: selectedElement.value
-    });
-    this.setState({
-      person2_selectedStateData: selectedElement
-    });
-  },  
-  handlePerson1BirthDateChange(date) {
-    this.setState({
-      person1_s_birthDate: date
-    });
-  },
-  handlePerson2BirthDateChange(date) {
-    this.setState({
-      person2_s_birthDate: date
-    });
-  },
-  handleKeyChange(key, value) {
-    this.setState({
-      [key]: value
-    });
-  },
+  }, 
+
   changePersonInfo(index, key, val) {
     var person = JSON.parse(JSON.stringify(this.state.persons[index]));
+
+    if (person.s_birthDate) {
+      person.s_birthDate = moment(person.s_birthDate);
+    }
+
     person[key] = val;
     var persons = [];
     if(index ==0) {
@@ -211,26 +150,10 @@ class Main extends React.Component<Props, {}> {
 
     this.setState({persons});
   },
-  handleperson1_HealthChange(selectedElement) {
-    this.setState({
-      person1_health: selectedElement.value
-    });
-  },
-
-  handleperson2_HealthChange(selectedElement) {
-    this.setState({
-      person2_health: selectedElement.value
-    });
-  },
 
   state = {      
     persons: [{}, {}],
     errors: [{}, {}]
-  },
-  handleNameChange (key, e) {
-    this.setState({
-      [key]: e.target.value
-    });
   },
   public render() {
     var statesObjects = getStateObjects();
