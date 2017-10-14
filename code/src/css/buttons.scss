@@ -26,6 +26,12 @@
         width: 100%;
         border-radius: 0px!important;
     }
+    &.circular {
+        border-radius: 100px!important;
+        background-color: #317dbd!important;
+        width: 100%;
+        margin-top: 30px;
+    }
     &.active{
         background-color: $btn-default-bg-color!important;
         color: $btn-default-color!important;

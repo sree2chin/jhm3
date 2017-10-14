@@ -273,6 +273,16 @@ class Main extends React.Component<Props, {}> {
                   />
                 </Col>
               }
+              <div>
+                <Col sm={4} style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
+                  <Button className="c-button-default circular" onClick={(){
+                      this.props.submitQuoteForm()
+                    }}
+                  >
+                    CONTINUE
+                  </Button>
+                </Col>
+              </div>
             </Row>
           </div>}
           {this.props.isSubmmitedQuoteForm && !this.props.isSubmmitedPlansForm && <Plans plans={this.props.plans} submitForm={this.submitPlansForm.bind(this)} />}

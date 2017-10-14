@@ -163,16 +163,6 @@ export default class Person extends React.Component<Props, {}> {
             Please select whether you smoke or not.
           </Col> }
         </div>
-        <div>
-          <Col sm={12}>
-            <Button className="c-button-default big" onClick={(){
-                this.props.submitQuoteForm()
-              }}
-            >
-              CONTINUE
-            </Button>
-          </Col>
-        </div>
       </Col>
     );
   }
