@@ -10,6 +10,14 @@ function submitQuoteForm(postData) {
 	};
 }
 
+function setPersonsData(persons) {
+	return (dispatch) => {
+		return dispatch({
+				type: 'SETTING_PERSONS_INFO',  persons: persons
+			})
+	};
+}
+
 function submitProductsForm(postData) {
 	return (dispatch) => {
 		return SubmitQuoteApi.submitProductsForm(postData).then(
@@ -46,5 +54,6 @@ export {
 	submitQuoteForm,
 	submitPlansForm,
 	submitEmailForm,
-	submitProductsForm
+	submitProductsForm,
+	setPersonsData
 }

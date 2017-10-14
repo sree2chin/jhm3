@@ -12,34 +12,17 @@ import Select from 'react-select';
 import { getStateObjects } from '../../utility/states';
 import loadStates from '../../actions/loadStates';
 import DatePicker from 'react-datepicker';
-import Plans from "./Plans";
 import {each, isEmpty} from "underscore";
 import Confirmation from "./confirmation";
 import SelectPersons from "./selectPersons";
 import { InfinityAutoComplete } from 'react-infinite-autocomplete';
-import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm} from '../../actions/Quote';
+import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm, setPersonsData} from '../../actions/Quote';
 const objectAssign = require('object-assign');
+import { browserHistory } from 'react-router';
 
 interface Props {
-  person1_s_birthDate: string,
-  person1_s_gender: number,
-  person1_state: string,
-  person1_smoke: string,
-  person1_health: string,
   submitQuoteForm: ()=>void,
   submitProductsForm: ()=>void,
-  statesArray: any,
-  statesList: any,
-  products: any,
-  plans: any
-}
-
-import { InputComponent } from 'infinite-autocomplete';
-
-class CustomInput extends InputComponent {
-  render() {
-    return '<input style="background: red;"/>';
-  }
 }
 
 class Main extends React.Component<Props, {}> {
@@ -84,13 +67,12 @@ class Main extends React.Component<Props, {}> {
 
   submitQuoteForm() {
     if(this.validateQuoteForm()) {
-      const {person1_s_birthDate, person1_s_gender, person1_state, person1_name, person1_health, person1_smoke} = this.state;
+
       const persons = [];
 
       const personOne = JSON.parse(JSON.stringify(this.state.persons[0]));
       personOne.s_birthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
       personOne.applicant = "1";
-
       persons.push(personOne);
 
       if(this.props.noOfPersons == 2) {
@@ -100,11 +82,12 @@ class Main extends React.Component<Props, {}> {
         persons.push(personTwo);
       }
 
+      this.props.setPersonsData(persons);
+
       this.props.submitQuoteForm(persons).then(()=>{
-        this.submitProductsForm();
-        this.submmitedQuoteForm = true;
+        browserHistory.push("/products");
       }).catch(()=>{
-        this.submmitedQuoteForm = false;
+        browserHistory.push("/products");
       });
     } 
   },
@@ -213,9 +196,6 @@ class Main extends React.Component<Props, {}> {
               </div>
             </Row>
           </div>}
-          {this.props.isSubmmitedQuoteForm && !this.props.isSubmmitedPlansForm && <Plans plans={this.props.plans} submitForm={this.submitPlansForm.bind(this)} />}
-          {this.props.isSubmmitedQuoteForm && !this.props.isSubmmitedPlansForm && <Plans plans={this.props.plans} submitForm={this.submitPlansForm.bind(this)} />}
-          {this.props.isSubmmitedPlansForm && <Confirmation onSubmit={this.submitEmailForm.bind(this)} />}
         </div>
       </div>);
   }
@@ -223,15 +203,6 @@ class Main extends React.Component<Props, {}> {
 
 const mapStateToProps = (state: any): Props => {
   return {
-    person1_s_birthDate: state.person1_s_birthDate,
-    person1_s_gender: state.person1_s_gender,
-    person1_state: state.person1_state,
-    person1_smoke: state.person1_smoke,
-    person1_health: state.person1_health,
-    statesList: state.statesList,
-    statesArray: state.statesArray
-    isSubmmitedQuoteForm: state.quotes.isSubmmitedQuoteForm,
-    isSubmmitedPlansForm: state.quotes.isSubmmitedPlansForm,
     products: state.quotes.products,
     plans: state.quotes.plans,
     noOfPersons: state.selectPersons.noOfPersons
@@ -244,9 +215,18 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     submitProductsForm: (data) => {
       return dispatch(submitProductsForm(data))
     },
-    submitPlansForm: (data) => {return dispatch(submitPlansForm(data))},
-    submitEmailForm: (data) => {return dispatch(submitEmailForm(data))},
-    loadStates: () => { return loadStates(); }
+    setPersonsData: (data) => {
+      return dispatch(setPersonsData(data))
+    },
+    submitPlansForm: (data) => {
+      return dispatch(submitPlansForm(data))
+    },
+    submitEmailForm: (data) => {
+      return dispatch(submitEmailForm(data))
+    },
+    loadStates: () => { 
+      return loadStates(); 
+    }
   };
 }
 

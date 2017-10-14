@@ -6,8 +6,10 @@ export default (state: Array<any> = [], action) => {
     	return objectAssign({}, state, {isSubmmitedQuoteForm: action.isSubmmitedQuoteForm, products: action.products});
     case 'SUMBMITTED_PRODUCTS_INFO':
       return objectAssign({}, state, {isSubmmitedProductsForm: action.isSubmmitedProductsForm, plans: action.plans});
-    case "SUMBMITTED_PLANS_INFO":
-    	return objectAssign({}, state, {isSubmmitedPlansForm: action.isSubmmitedPlansForm});
+    case 'SUMBMITTED_PRODUCTS_INFO':
+      return objectAssign({}, state, {isSubmmitedProductsForm: action.isSubmmitedProductsForm, plans: action.plans});
+    case "SETTING_PERSONS_INFO":
+    	return objectAssign({}, state, {persons: action.persons});
     case "SUMBMITTED_EMAIL_INFO":
     	return objectAssign({}, state, {isSubmmitedEmailForm: action.isSubmmitedPlansForm});
     default:
