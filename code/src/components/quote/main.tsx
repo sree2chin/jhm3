@@ -85,16 +85,21 @@ class Main extends React.Component<Props, {}> {
   submitQuoteForm() {
     if(this.validateQuoteForm()) {
       const {person1_s_birthDate, person1_s_gender, person1_state, person1_name, person1_health, person1_smoke} = this.state;
-      const persons = [
-        {
-          applicant: 1,
-          s_birthDate: moment(person1_s_birthDate).format("YYYY-MM-DD"),
-          s_gender: person1_s_gender,
-          state: person1_state, 
-          smoke: person1_smoke,
-          health: person1_health
-        }
-      ];
+      const persons = [];
+
+      const personOne = JSON.parse(JSON.stringify(this.state.persons[0]));
+      personOne.s_birthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
+      personOne.applicant = "1";
+
+      persons.push(personOne);
+
+      if(this.props.noOfPersons == 2) {
+        const personTwo = JSON.parse(JSON.stringify(this.state.persons[1]));
+        personTwo.s_birthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
+        personTwo.applicant = "2";
+        persons.push(personTwo);
+      }
+
       this.props.submitQuoteForm(persons).then(()=>{
         this.submitProductsForm();
         this.submmitedQuoteForm = true;
@@ -169,7 +174,7 @@ class Main extends React.Component<Props, {}> {
         <Subheader />
         <SelectPersons onSubmit={this.submitEmailForm.bind(this)} />
         <div className="row c-quote" style={{backgroundColor: "#f7f7f7", paddingBottom: "160px"}}>
-          {!this.props.isSubmmitedQuoteForm && <div> 
+          {this.props.noOfPersons && !this.props.isSubmmitedQuoteForm && <div> 
             <div className="header">
               <div style={{textAlign: "center"}}>
                 Application information
