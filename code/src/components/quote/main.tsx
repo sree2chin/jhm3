@@ -276,7 +276,7 @@ class Main extends React.Component<Props, {}> {
               <div>
                 <Col sm={4} style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
                   <Button className="c-button-default circular" onClick={(){
-                      this.props.submitQuoteForm()
+                      this.submitQuoteForm()
                     }}
                   >
                     CONTINUE

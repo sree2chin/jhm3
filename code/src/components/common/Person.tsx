@@ -4,7 +4,10 @@ import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import { getStateObjects } from '../../utility/states';
 import DatePicker from 'react-datepicker';
 import Select from 'react-select';
-import Input from "../common/textInput"
+import Input from "../common/textInput";
+import ReactTooltip from 'react-tooltip';
+import {Tooltip} from 'react-lightweight-tooltip';
+
 
 interface Props extends React.Props<Person> {
 }
@@ -14,6 +17,21 @@ export default class Person extends React.Component<Props, {}> {
     this.props.onChange(this.props.index, key, value);
   },
   public render() {
+    const toolTipStyles = {
+      content: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        borderRadius: '10px',
+        fontSize: "12px"
+      },
+      tooltip: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        borderRadius: '10px'
+      },
+      arrow: {
+        borderTop: 'solid rgba(0, 0, 0, 0.5) 5px'
+      }
+    };
+
     var statesObjects = getStateObjects();
     const personIndex = this.props.index;
     const {errors, person} = this.props;
@@ -87,7 +105,9 @@ export default class Person extends React.Component<Props, {}> {
                 dropdownMode="select"
               />
               <div style={{display: 'inline-block', marginLeft: "2.5%"}}>
-                <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
+                <Tooltip content="Please enter your date of birth" styles={toolTipStyles}>
+                  <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
+                </Tooltip>
               </div>
             </div>
           </Col>
