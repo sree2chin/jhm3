@@ -4,7 +4,7 @@ function submitQuoteForm(postData) {
 	return (dispatch) => {
 		return SubmitQuoteApi.submit(postData).then(
 			data => dispatch({
-				type: 'SUMBMITTED_PERSONAL_INFO', isSubmmitedQuoteForm: true, products: data
+				type: 'SUMBMITTED_PERSONAL_INFO', isSubmmitedQuoteForm: true, products: data.data.applicants
 			}))
 		);
 	};
@@ -22,7 +22,7 @@ function submitProductsForm(postData) {
 	return (dispatch) => {
 		return SubmitQuoteApi.submitProductsForm(postData).then(
 			data => dispatch({
-				type: 'SUMBMITTED_PRODUCTS_INFO', isSubmmitedProductsForm: true, plans: data
+				type: 'SUMBMITTED_PRODUCTS_INFO', isSubmmitedProductsForm: true, plans: data.data.applicants
 			}))
 		);
 	};

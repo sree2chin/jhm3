@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty} from "underscore";
-import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm, setPersonsData} from '../../actions/Quote';
+import {submitQuoteForm, submitEmailForm, submitPlansForm, setPersonsData} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
 import ProductContainer from "./ProductContainer";
@@ -18,12 +18,12 @@ interface Props {
   persons: [any]
 }
 
-class ProductsPage extends React.Component<Props, {}> {
+class PlansPage extends React.Component<Props, {}> {
   constructor(){
     super();
   },
   componentWillMount() {
-    if (isEmpty(this.props.products) && isEmpty(this.props.persons)) {
+    if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent" : "/";
       browserHistory.push(basePath);
     }
@@ -55,8 +55,7 @@ class ProductsPage extends React.Component<Props, {}> {
     this.props.setPersonsData(persons);
 
     this.props.submitProductsForm(persons).then(() => {
-      const basePath = this.props.location.pathname.length > 1 ? this.props.location.pathname + "/" : this.props.location.pathname;
-      browserHistory.push(basePath + "plans");
+      this.submmitedProductForm = true;
     }).catch(()=>{
       this.submmitedProductForm = false;
     });
@@ -68,38 +67,7 @@ class ProductsPage extends React.Component<Props, {}> {
     return (
       <div className="product-pager-container">
         <Subheader />
-        { this.props.noOfPersons==1 &&
-          <PersonInfo 
-            person={persons[0]}
-          />
-        }
-        { this.props.noOfPersons==2 &&
-          <PersonInfo 
-            person={persons[1]}
-          />
-        }
-        <ProductHeader />
-        <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
-          <Col sm={8} className="c-center">
-            <ProductContainer 
-              productInfo={this.props.products[0]}
-              selectProduct={this.selectProduct.bind(this)}
-            />
-          </Col>
-        </Row>
-
-
-        <Row>
-          <Col sm={4} style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
-            <Button className="c-button-default circular" onClick={(){
-                this.submitProductsForm()
-              }}
-            >
-              CONTINUE
-            </Button>
-          </Col>
-        </Row>
-
+         APPEND EXISTING PLANS COMPONENTS
       </div>);
   }
 }
@@ -108,7 +76,8 @@ const mapStateToProps = (state: any): Props => {
   return {
     persons: state.quotes.persons,
     products: state.quotes.products,
-    noOfPersons: state.selectPersons.noOfPersons
+    noOfPersons: state.selectPersons.noOfPersons,
+    plans: state.quotes.plans
   };
 }
 
@@ -117,10 +86,10 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     setPersonsData: (data) => {
       return dispatch(setPersonsData(data))
     },
-    submitProductsForm: (data) => {
-      return dispatch(submitProductsForm(data))
+    submitPlansForm: (data) => {
+      return dispatch(submitPlansForm(data))
     },
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(PlansPage);

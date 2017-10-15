@@ -46,9 +46,12 @@ module.exports = new function(){
   };
 
   this.getQuotePlans = function(data, cb){
+    var formData = {
+      applicants: JSON.stringify(data)
+    };
     request({
       url: restOptions.host + '/v1/quote/plans', 
-      formData: data, 
+      formData: formData, 
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },

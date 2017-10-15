@@ -1,0 +1,98 @@
+.product-pager-container {
+	.person-info-container {   
+	    background-color: #ffffff;
+	    border: solid 1px #d4d4d4;
+	    margin-left: auto;
+	    margin-right: auto;
+	    float: none;
+	    margin-top: 60px;
+	    .person-label {
+	    	color: #666666;
+	    }
+	    .person-label-content {
+	    	color: #464646;
+	    }
+	    .person-info-header-container {
+		    padding-top: 20px;
+		    padding-bottom: 20px;
+		    border-bottom: solid 1px #d4d4d4;
+	    }
+	    .person-name-container {
+			font-size: 20px;
+			line-height: 1.65;
+			text-align: left;
+			color: #464646;
+			padding-left: 20px;
+	    }
+	    .person-edit-container {
+			font-size: 14px;
+			text-align: right;
+			color: #317dbd;
+			padding-right: 20px;
+			padding-top: 7px;
+	    }
+	    .person-content {
+			font-size: 14px;
+		    text-align: left;
+		    padding-left: 8px;
+		    padding-top: 30px;
+		    padding-bottom: 30px;
+		}
+	}
+	.select-product-header {
+	    font-size: 22px;
+	    text-align: center;
+	    color: #333333;
+	    margin-top: 30px;
+	}
+	.select-product-header-content {
+	    font-size: 13px;
+	    line-height: 1.38;
+	    text-align: center;
+	    color: #666666;
+	    margin-top: 5px;
+	    margin-bottom: 25px;
+	}
+	.single-product-content {
+		border-radius: 6px;
+		background-color: #ffffff;
+		border: solid 1px #d4d4d4;
+		margin-left: 10px;
+	    min-height: 200px;
+	    .header {
+		    font-size: 26px;
+		    text-align: left;
+		    color: #464646;
+		    margin-top: 20px;
+		    margin-left: 8px;
+	    }
+	}
+	.quote-product {
+		margin-left: 10px;
+		margin-bottom: 20px;
+	    height: 40px;
+	    border-radius: 6px;
+	    background-color: #f7f7f7;
+	    border: solid 1px #cccccc;
+	    padding-top: 9px;
+	    border-top: none;
+	    &.active {
+		    background-color: #317dbd;
+		    color: white;
+	    }
+	}
+	.c-product-text {
+		margin-left: 30px;
+    	margin-right: 30px;
+		font-size: 13px;
+    	text-align: left;
+    	color: #666666;
+	}
+	.c-product-desc-line {
+		margin-left: 6px;
+	    margin-right: 31px;
+	    font-size: 13px;
+	    text-align: left;
+	    color: #666666;
+    }
+}

@@ -9,8 +9,6 @@ import Input from "../common/textInput"
 import Subheader from "../common/subheader"
 import Person from "../common/Person"
 import Select from 'react-select';
-import { getStateObjects } from '../../utility/states';
-import loadStates from '../../actions/loadStates';
 import DatePicker from 'react-datepicker';
 import {each, isEmpty} from "underscore";
 import Confirmation from "./confirmation";
@@ -84,33 +82,13 @@ class Main extends React.Component<Props, {}> {
 
       this.props.setPersonsData(persons);
 
-      this.props.submitQuoteForm(persons).then(()=>{
-        browserHistory.push("/products");
+      this.props.submitQuoteForm(persons).then(() => {
+        const basePath = this.props.location.pathname.length > 1 ? this.props.location.pathname + "/" : this.props.location.pathname;
+        browserHistory.push(basePath + "products");
       }).catch(()=>{
         browserHistory.push("/products");
       });
     } 
-  },
-
-  submitProductsForm() {
-    const {person1_s_birthDate, person1_s_gender, person1_state, person1_name, person1_health} = this.state;
-    const sProductID = this.props.products.data.products_list[1].ProductID;
-    const persons = [
-      { 
-        "applicant":"1"
-        s_birthDate: person1_s_birthDate.format("YYYY-MM-DD"),
-        s_gender: person1_s_gender,
-        state: person1_state, 
-        smoke: person1_smoke,
-        health: person1_health,
-        sProductID
-      }
-    ];
-    this.props.submitProductsForm(persons).then(() => {
-      this.submmitedProductForm = true;
-    }).catch(()=>{
-      this.submmitedProductForm = false;
-    });
   },
   submitPlansForm() {
     this.props.submitPlansForm(this.props);
@@ -144,7 +122,6 @@ class Main extends React.Component<Props, {}> {
     errors: [{}, {}]
   },
   public render() {
-    var statesObjects = getStateObjects();
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
     const healthRatingObjects = [
           {value: "Fair", label: "Fair"},
@@ -212,9 +189,6 @@ const mapStateToProps = (state: any): Props => {
 const mapDispatchToProps = (dispatch: Dispatch): Props => {
   return {
     submitQuoteForm: (data) => {return dispatch(submitQuoteForm(data))},
-    submitProductsForm: (data) => {
-      return dispatch(submitProductsForm(data))
-    },
     setPersonsData: (data) => {
       return dispatch(setPersonsData(data))
     },

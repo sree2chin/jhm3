@@ -6,6 +6,7 @@
     "src/css/select-persons.scss",
     "src/css/site.scss",
     "src/css/quote.scss",
-    "src/css/coverage.scss"
+    "src/css/coverage.scss",
+    "src/css/product.scss"
   ]
 }

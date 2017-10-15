@@ -4,9 +4,7 @@ import {Button, Row, Col} from "react-bootstrap";
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Tooltip from 'rc-tooltip';
-const Handle = Slider.Handle;
-import Slider from 'react-rangeslider';
-import {map} from "underscore";
+import {map, isEmpty} from "underscore";
 
 interface Props {
   product: any,
@@ -16,7 +14,7 @@ interface Props {
 interface State {
 }
 
-export default class Products extends React.Component<Props, State> {
+export default class ProductContainer extends React.Component<Props, State> {
   constructor(props : Props, context){
     super(props);
     this.state = {
@@ -29,32 +27,54 @@ export default class Products extends React.Component<Props, State> {
     })
   };
 
-  selectProduct = () => {
-    this.props.selectProduct(this.props.product);
+  selectProduct = (product) => {
+    this.setState({
+      productId: product.ProductID
+    });
+    this.props.selectProduct(product);
   };
 
   public render() {
-    const {product} = this.props;
-    if(product) {
+    const {productInfo} = this.props;
+    const products = productInfo && productInfo.products_data && productInfo.products_data.products_list;
+
+    if(!isEmpty(products)) {
 
       return (
-      <div>
-        <div className="header">
-          <div style={{textAlign: "center"}}>
-            {product.ProductDisplayName}
-          </div>  
-        </div>
-        <Row>
-          <Col sm={12} className="l-main-content c-coverage">
-            <Row className="text-center">
-              <div className="c-coverage-amount">{product.ProductDisplayDescription}</div>
-            </Row>
-            <Row className="text-center" onClick={()=> this.selectProduct()}>
-              <div className="c-coverage-amount">QUOTE THIS PRODUCT</div>
-            </Row>
-          </Col>
+        <Row className="c-center">
+          {map(products, (product) =>
+            
+              <Col key={product.ProductID} sm={6} className="single-product-container">
+                <Row className="single-product-content">
+                  <Row className="header">
+                    <Col style={{textAlign: "center"}} sm={12}>
+                      {product.ProductDisplayName}
+                    </Col>  
+                  </Row>
+                  <Row>
+                    <Col sm={12} className="product-main-content">
+                      <Row className="text-center">
+                        <div className="c-product-text">{product.ProductDisplayDescription.split(".")[0]}</div>
+                        <ul className="c-product-desc-line">
+                          {map(product.ProductDisplayDescription.split("."), (descLine, index)=>{
+                            if(index!=0 && descLine && descLine.trim().length >0) {
+                              return <li key={"desc-" + index}>{descLine.trim()}</li>
+                            } else {
+                              return null
+                            }
+                          })}
+                        </ul>
+                      </Row>
+                    </Col>
+                  </Row>
+                </Row>
+                <Row className={`text-center quote-product ${this.state.productId==product.ProductID ? "active" : ""}`} onClick={()=> this.selectProduct(product)}>
+                  <div className="c-coverage-amount">QUOTE THIS PRODUCT</div>
+                </Row>
+              </Col>
+            
+          )}
         </Row>
-      </div>
      );
     } else {
       return null;
