@@ -34,7 +34,7 @@ class ProductsPage extends React.Component<Props, {}> {
       productId: product.ProductID
     });
   },
-
+  state={},
   submitProductsForm() {
 
     const persons = [];

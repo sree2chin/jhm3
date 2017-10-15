@@ -1,0 +1,33 @@
+.product-pager-container {
+	.plans-product-header{
+		margin-top: 53px;
+		margin-bottom: 15px;
+		.c-plans-product-text {
+		    font-size: 22px;
+    		text-align: left;
+    		color: #333333;
+		}
+		.c-select-diff-product-link {
+		    font-size: 14px;
+		    text-align: right;
+		    color: #317dbd;
+		}
+	}	
+	.plans-selector-container {
+	    height: 60px;
+	    background-color: #ffffff;
+	    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+	    border: solid 1px #d4d4d4;
+	    .c-center {
+			font-size: 14px;
+		    text-align: left;
+		    color: #666666;
+		    padding-top: 20px;
+	    }
+	}
+	.plan-details-container {
+	  	border-radius: 6px;
+  		background-color: #ffffff;
+  		border: solid 1px #d4d4d4;
+  	}
+}
