@@ -14,6 +14,7 @@ import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
 import Plan from "../common/Plan"
 import { browserHistory } from 'react-router';
+import {submitPlansForm } from '../../actions/Quote';
 
 interface Props {
   plans: [any]
@@ -35,39 +36,40 @@ class PlansPage extends React.Component<Props, {}> {
       productId: product.ProductID
     });
   },
-
-  submitProductsForm() {
-
+  submitPlansForm(data) {
     const persons = [];
 
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
-    personOne.s_birthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
-    personOne.sProductID = this.state.productId;
-
+    personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
+    personOne.sPlanID = data[0].plan.PlanID;
+    personOne.sFaceAmount = data[0].sFaceAmount;
+    personOne.sClassNum="2";
+    personOne.sDividendNum = "1";
+    personOne.sWP="1";
     persons.push(personOne);
 
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-      personTwo.s_birthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
-      personTwo.applicant = "2";
+      personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
+      personTwo.sPlanID = data[1].plan.PlanID;
+      personTwo.sFaceAmount = data[1].plan.sFaceAmount;
+      personOne.sClassNum="2";
+      personOne.sDividendNum = "1";
+      personOne.sWP="1";
       persons.push(personTwo);
     }
 
     this.props.setPersonsData(persons);
 
-    this.props.submitProductsForm(persons).then(() => {
-      this.submmitedProductForm = true;
+    this.props.submitPlansForm(persons).then(() => {
+      
     }).catch(()=>{
       this.submmitedProductForm = false;
     });
   },
+
   public render() {
-    const healthRatingObjects = [
-          {value: "Fair", label: "Fair"},
-          {value: "Good", label: "Good"},
-          {value: "Very Good", label: "Very Good"},
-          {value: "Excellent", label: "Excellent"},
-        ];
+
     var {persons} = this.props;
     persons = persons || [];
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
@@ -96,7 +98,18 @@ class PlansPage extends React.Component<Props, {}> {
             </Row>
           </Col>
         </Row>
-        <Plan />
+        { this.props.noOfPersons==1 &&
+          <Plan 
+            plans={this.props.plans[0]}
+            submitPlansForm={this.submitPlansForm.bind(this)}
+          />
+        }
+        { this.props.noOfPersons==2 &&
+          <Plan 
+            plans={this.props.plans[1]}
+            submitPlansForm={this.submitPlansForm.bind(this)}
+          />
+        }
 
 
       </div>);

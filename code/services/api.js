@@ -18,13 +18,19 @@ module.exports = new function(){
   };
 
   this.getQuotePremiums = function(data, cb){
-    var options = _.extend({}, restOptions);
-    options.path =  '/v1/quote/premiums';
-    options.headers = restOptions.headers || {};
-    options.headers['Authorization'] = "Basic YWRtaW46NyVkUkdyZVQ=";
-
-    rest.postJSON(_.clone(options), data, function (statusCode, result) {
-      cb(statusCode, result);
+    var url = restOptions.host + '/v1/quote/premiums';
+    var formData = {
+      applicants: JSON.stringify(data)
+    };
+    request({
+      url: url, 
+      formData: formData, 
+      headers: {
+        'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
+      },
+      method: 'POST'
+    }, function callback(err, httpResponse, body) {
+      cb(err, httpResponse);
     });
   };
 

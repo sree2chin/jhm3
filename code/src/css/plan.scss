@@ -26,8 +26,22 @@
 	    }
 	}
 	.plan-details-container {
-	  	border-radius: 6px;
-  		background-color: #ffffff;
-  		border: solid 1px #d4d4d4;
+		.c-center {
+		    border-radius: 6px;
+		    background-color: #ffffff;
+		    border: solid 1px #d4d4d4;
+		}
+		.plan-product-name {
+			font-size: 26px;
+			text-align: left;
+			color: #464646;
+			margin-top: 20px;
+		}
+		.plan-sider-info-text {
+			font-size: 13px;
+			line-height: 1.38;
+			text-align: left;
+			color: #666666;
+		}
   	}
 }

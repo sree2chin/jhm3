@@ -90,9 +90,6 @@ class Main extends React.Component<Props, {}> {
       });
     } 
   },
-  submitPlansForm() {
-    this.props.submitPlansForm(this.props);
-  },
   submitEmailForm() {
     this.props.submitEmailForm(this.props);
   }, 

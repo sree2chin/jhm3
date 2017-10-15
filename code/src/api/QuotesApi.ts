@@ -4,7 +4,7 @@ import { getStates } from '../utility/states';
 
 class QuotesApi {
   submit(payload) {
-    return fetch('v1/quote/submit'{
+    return fetch('v1/quote/products'{
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -21,7 +21,7 @@ class QuotesApi {
   };
 
   submitProductsForm(payload) {
-    return fetch('v1/products/submit'{
+    return fetch('v1/quote/plans'{
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -40,18 +40,20 @@ class QuotesApi {
   
   plansSubmit() {
 
-    return new Promise(function(resolve, reject) {
-      resolve(true)
-    });
-
-    /*return fetch('quotes/plans/submit').then(function(res) {
-        var states;
-
-        return res.json().then(function (response: any) {
-
+    return fetch('v1/quote/premiums'{
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(function(res) {
+        return res.json().then(function (response: any) {    
+          return new Promise(function(resolve, reject) {
+            resolve(response)
+          });
         })
-
-    }));*/
+    }));
   };
   emailSubmit() {
 

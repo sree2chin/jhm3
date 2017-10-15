@@ -1,50 +1,56 @@
 import * as React from 'react';
 import {Link} from 'react-router';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
-import { getStateObjects } from '../../utility/states';
-import DatePicker from 'react-datepicker';
 import Select from 'react-select';
-import Input from "../common/textInput";
-import ReactTooltip from 'react-tooltip';
-import {Tooltip} from 'react-lightweight-tooltip';
-
+import {each, isEmpty, deepEqual} from "lodash";
+import Slider from 'react-rangeslider';
 
 interface Props extends React.Props<Plan> {
 }
 
 export default class Plan extends React.Component<Props, {}> {
-  onChange(key, value) {
-    this.props.onChange(this.props.index, key, value);
+  onPlanChange(key, obj) {
+    this.setState({
+      [key]: obj.value,
+      selectedPlan: obj,
+      sFaceAmount: obj.FaceMin
+    })
+    this.props.submitPlansForm([{plan: obj, sFaceAmount: obj.FaceMin}]);
+  },
+  onsFaceAmountChange() {
+    this.props.submitPlansForm({sFaceAmount: this.state.sFaceAmount);
+  },
+  componentWillReceiveProps(nextProps) {
+    if(isEmpty(this.props.plans) && !isEmpty(nextProps.plans)) {
+      const plan = JSON.parse(JSON.stringify(nextProps.plans.plans_data.plans_list[0]));
+      plan.value = plan.PlanID;
+      plan.label = plan.PlanDisplayName;
+      this.onPlanChange("sPlanID", plan);
+    }
   },
   getPlansDetailsForDropdown() {
-    const plans = JSON.parse(JSON.stringify(this.props.plans));
+    if(isEmpty(this.props.plans) || isEmpty(this.props.plans.plans_data) || (isEmpty(this.props.plans.plans_data.plans_list))) {
+      return [];
+    }
+
+    const plans = JSON.parse(JSON.stringify(this.props.plans.plans_data.plans_list));
+    const plansObj = []
     for(var i=0; i<plans.length; i++) {
-      plans[i].value = plans[i].PlanName;
-      plans[i].lable = plans[i].PlanDisplayName;
+      plans[i].value = plans[i].PlanID;
+      plans[i].label = plans[i].PlanDisplayName;
+      plansObj.push({
+        value:plans[i].PlanID,
+        label: plans[i].PlanDisplayName
+      })
     }
     return plans;
   },
-  selectPlan(plan) {
-    this.setState({
-      plan: plan
-    });
-  },
+  
   state = {},
-  onChange(key, value) {
-    this.props.onChange(this.props.index, key, value);
-  },
+
   public render() {
-
-
-    var statesObjects = getStateObjects();
     const personIndex = this.props.index;
-    const {errors, person} = this.props;
-    const healthRatingObjects = [
-          {value: "Fair", label: "Fair"},
-          {value: "Good", label: "Good"},
-          {value: "Very Good", label: "Very Good"},
-          {value: "Excellent", label: "Excellent"},
-        ];
+    const plansObjs = this.getPlansDetailsForDropdown();
 
     return (
       <Col sm={12} className="c-one-person-container">
@@ -56,7 +62,7 @@ export default class Plan extends React.Component<Props, {}> {
                   Payment schedule
                 </Col>
                 <Col sm={6}>
-                  DROPDOWN
+
                 </Col>
               </Col>
             </Row>
@@ -65,14 +71,50 @@ export default class Plan extends React.Component<Props, {}> {
         <Row className="plan-details-container">
           <Col sm={8} className="c-center">
             <Row>
-              <Col sm={2} style={{width: "14%", height: "90px", backgroundColor: "#317dbd"}}>
+              <Col sm={2} style={{width: "16%", height: "90px", backgroundColor: "#317dbd", margin: "20px"}}>
               </Col>
               <Col sm={8}>
-                <Row>
-                  Single Premium Whole Life
+                <Row className="plan-product-name">
+                  
+                </Row>
+                <Row className="plan-sider-info-text">
+                  This is the fun part! Move the coverage slide to your desired amount of life insurance. Watch the monthly cost estimates change as you move. Then choose how long you want that coverage to last (plan length). Finally, click on your preferred  payment method! It's that simple.
+                </Row>
+              </Col>
+            </Row>
+            <Row className="plan-sider-info-text">
+              <Col sm={6}>
+                <Row className="plan-coverage-container">
+                  ${this.state.sFaceAmount} {this.state.sFaceAmount && "of"} Coverage
                 </Row>
                 <Row>
-                  This is the fun part! Move the coverage slide to your desired amount of life insurance. Watch the monthly cost estimates change as you move. Then choose how long you want that coverage to last (plan length). Finally, click on your preferred  payment method! It's that simple.
+                  {this.state.selectedPlan && 
+                    <Col className="plan-faceMin" sm={2}>
+                      ${this.state.selectedPlan.FaceMin}
+                    </Col>
+
+       
+                  }
+                </Row>
+              </Col>
+              <Col sm={3}>
+                <Select
+                  name="form-field-plans"
+                  options={plansObjs}
+                  value={this.state.sPlanID}
+                  onChange={(stateObj)=>{
+                    this.onPlanChange("sPlanID", stateObj)
+                  }}
+                />
+              </Col>
+              <Col sm={3}>
+                <Row>
+                  <Col sm={6}>
+                    Cost
+                  </Col>
+                  <Col sm={6}>
+                    $
+                  </Col>
                 </Row>
               </Col>
             </Row>

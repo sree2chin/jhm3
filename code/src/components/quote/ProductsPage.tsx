@@ -40,15 +40,17 @@ class ProductsPage extends React.Component<Props, {}> {
     const persons = [];
 
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
-    personOne.s_birthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
+    personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
     personOne.sProductID = this.state.productId;
+    personOne.sGender = personOne.s_gender;
 
     persons.push(personOne);
 
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-      personTwo.s_birthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
+      personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
       personTwo.applicant = "2";
+      personTwo.sGender = personTwo.s_gender;
       persons.push(personTwo);
     }
 

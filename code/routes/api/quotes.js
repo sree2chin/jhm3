@@ -13,7 +13,7 @@ module.exports = function(app) {
     QuotesService.getQuotePremiums(req, function(statusCode, data){
       res.statusCode = statusCode;
       res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(data));
+      res.send(data);
     });
   });
 
@@ -21,11 +21,11 @@ module.exports = function(app) {
     QuotesService.getQuoteProducts(req, function(statusCode, data){
       res.statusCode = statusCode;
       res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(data));
+      res.send(data);
     });
   });
 
-  app.post(prefix + '/products/submit', function(req, res) {
+  app.post(prefix + '/quote/plans', function(req, res) {
     QuotesService.getQuotePlans(req, function(statusCode, data){
       res.statusCode = statusCode;
       res.setHeader('Content-Type', 'application/json');
