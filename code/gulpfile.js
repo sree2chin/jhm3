@@ -13,7 +13,6 @@ var runSequence = require('run-sequence');
 var stripComments = require('gulp-strip-comments');
 var uglify = require('gulp-uglify');
 var gulpUtil = require('gulp-util');
-const wbBuild = require('workbox-build');
 var pump = require('pump');
 
 gulp.task("default", function () {
