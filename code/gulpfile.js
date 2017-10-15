@@ -21,7 +21,7 @@ gulp.task("default", function () {
 });
 
 gulp.task("prod", function () {
-  runSequence("clean:dist", ["scss"], ["build"], ["compress"]);
+  runSequence("clean:dist", ["scss", "image"], ["build"], ["compress"]);
 });
 
 gulp.task("watch", function () {
