@@ -32,7 +32,7 @@ function submitPlansForm(postData) {
 	return (dispatch) => {
 		SubmitQuoteApi.plansSubmit(postData).then(
 			data => dispatch({
-				type: 'SUMBMITTED_PLANS_INFO', premiums: data
+				type: 'SUMBMITTED_PLANS_INFO', premiums: data.data.applicants
 			}))
 		);
 	};

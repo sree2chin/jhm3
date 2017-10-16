@@ -9,6 +9,10 @@ interface Props extends React.Props<Plan> {
 }
 
 export default class Plan extends React.Component<Props, {}> {
+  constructor(){
+    super();
+    this.onFaceValChange.bind(this);
+  },
   onPlanChange(key, obj) {
     this.setState({
       [key]: obj.value,
@@ -16,6 +20,12 @@ export default class Plan extends React.Component<Props, {}> {
       sFaceAmount: obj.FaceMin
     })
     this.props.submitPlansForm([{plan: obj, sFaceAmount: obj.FaceMin}]);
+  },
+  onFaceValChange(key, value) {
+    this.setState({
+      [key]: value,
+    })
+    this.props.submitPlansForm([{plan: this.state.selectedPlan, sFaceAmount: value}]);
   },
   onsFaceAmountChange() {
     this.props.submitPlansForm({sFaceAmount: this.state.sFaceAmount);
@@ -92,8 +102,11 @@ export default class Plan extends React.Component<Props, {}> {
                     <Col className="plan-faceMin" sm={2}>
                       ${this.state.selectedPlan.FaceMin}
                     </Col>
-
-       
+                  }
+                  {this.state.selectedPlan && 
+                    <Col className="plan-faceMax" sm={2}>
+                      ${this.state.selectedPlan.FaceMax}
+                    </Col>
                   }
                 </Row>
               </Col>

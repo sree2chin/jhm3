@@ -62,7 +62,7 @@ class PlansPage extends React.Component<Props, {}> {
     this.props.setPersonsData(persons);
 
     this.props.submitPlansForm(persons).then(() => {
-      
+      console.log("sdfds");
     }).catch(()=>{
       this.submmitedProductForm = false;
     });
@@ -102,12 +102,14 @@ class PlansPage extends React.Component<Props, {}> {
           <Plan 
             plans={this.props.plans[0]}
             submitPlansForm={this.submitPlansForm.bind(this)}
+            premiums={this.props.premiums}
           />
         }
         { this.props.noOfPersons==2 &&
           <Plan 
             plans={this.props.plans[1]}
             submitPlansForm={this.submitPlansForm.bind(this)}
+            premiums={this.props.premiums}
           />
         }
 
@@ -121,7 +123,8 @@ const mapStateToProps = (state: any): Props => {
     persons: state.quotes.persons,
     products: state.quotes.products,
     noOfPersons: state.selectPersons.noOfPersons,
-    plans: state.quotes.plans
+    plans: state.quotes.plans,
+    premiums: state.quotes.premiums
   };
 }
 

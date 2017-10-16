@@ -18,6 +18,7 @@ module.exports = new function(){
   };
 
   this.getQuotePremiums = function(data, cb){
+    console.log("data:  " + JSON.stringify(data));
     var url = restOptions.host + '/v1/quote/premiums';
     var formData = {
       applicants: JSON.stringify(data)
@@ -30,6 +31,7 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
+      console.log("httpResponse: " + JSON.stringify(httpResponse));
       cb(err, httpResponse);
     });
   };

@@ -4,7 +4,7 @@ import { getStates } from '../utility/states';
 
 class QuotesApi {
   submit(payload) {
-    return fetch('v1/quote/products'{
+    return fetch('/v1/quote/products', {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -21,7 +21,7 @@ class QuotesApi {
   };
 
   submitProductsForm(payload) {
-    return fetch('v1/quote/plans'{
+    return fetch('/v1/quote/plans', {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -38,9 +38,8 @@ class QuotesApi {
   };
 
   
-  plansSubmit() {
-
-    return fetch('v1/quote/premiums'{
+  plansSubmit(payload) {
+    return fetch('/v1/quote/premiums', {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {

@@ -8,15 +8,12 @@ module.exports = new function() {
   var self = this;
 
   this.getQuotePremiums = function(req, callback) {
-    ApiService.getQuotePremiums(req.body, function(statusCode, data) {
+    ApiService.getQuotePremiums(req.body, function(err, res) {
       var formattedUser = {};
-      if (statusCode == 200) {
-        if(req.session) {
-          req.session.user = formattedUser;
-        }
-        callback(statusCode, formattedUser);
+      if (!err && res.statusCode == 200) {
+        callback(res.statusCode, res.body);
       } else {
-        callback(statusCode, data);
+        callback(res.statusCode, data);
       }
     });
   };
