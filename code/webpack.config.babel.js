@@ -71,7 +71,9 @@ module.exports = {
       "../node_modules/bootstrap/dist/css/bootstrap.css",
       "../node_modules/react-select/dist/react-select.css",
       "../node_modules/react-datepicker/dist/react-datepicker.min.css",
-      "../font-awesome/css/font-awesome.min.css"
+      "../node_modules/react-rangeslider/umd/rangeslider.min.js",
+      "../font-awesome/css/font-awesome.min.css",
+
     ],
 
     vendor: [

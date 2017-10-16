@@ -1,8 +1,6 @@
 import * as React from 'react';
 import Input from './../common/textInput';
 import {Button, Row, Col} from "react-bootstrap";
-import Slider, { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
 import Tooltip from 'rc-tooltip';
 import {map, isEmpty} from "underscore";
 

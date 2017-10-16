@@ -8,6 +8,7 @@ module.exports = new function() {
   var self = this;
 
   this.getQuotePremiums = function(req, callback) {
+    console.log("req.body:  " + JSON.stringify(req.body));
     ApiService.getQuotePremiums(req.body, function(err, res) {
       var formattedUser = {};
       if (!err && res.statusCode == 200) {

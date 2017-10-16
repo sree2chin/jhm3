@@ -37,11 +37,46 @@
 			color: #464646;
 			margin-top: 20px;
 		}
-		.plan-sider-info-text {
+		.plan-sider-info-text1{
 			font-size: 13px;
-			line-height: 1.38;
-			text-align: left;
-			color: #666666;
+		}
+		.plan-sider-info-text {
+		    font-size: 13px;
+		    line-height: 1.38;
+		    text-align: left;
+		    color: #666666;
+		    height: 94px;
+		    background-color: #f7f7f7;
+		    border: solid 1px #d4d4d4;
+		    .plan-coverage-container {
+		    	text-align: center;
+		    	margin-top: 15px;
+		    	.plan-faceMax {
+		    		padding-left: 0px;
+		    	}
+		    }
+		    .Select {
+			    margin-top: 5px;
+			    width: 82%;
+			    margin-left: auto;
+			    height: 40px;
+			    margin-right: auto;
+		    }
+		}
+		.plan-length-container, .plan-cost-container{
+			border-left: solid 1px #d4d4d4;
+    		height: 94px;
+		}
+		.plan-cost-container {
+			.plan-cost-text {
+				padding-top: 7px;
+			}
+			.plan-cost-amount {
+			    font-size: 22px;
+			    font-weight: 500;
+			    text-align: right;
+			    color: #464646;
+			}
 		}
   	}
 }
