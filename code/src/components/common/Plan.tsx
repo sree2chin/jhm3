@@ -38,9 +38,6 @@ export default class Plan extends React.Component<Props, {}> {
     })
     this.props.onPaymentTypeChange(obj);
   },
-  onsFaceAmountChange() {
-    //this.props.submitPlansForm({sFaceAmount: this.state.sFaceAmount);
-  },
   componentWillReceiveProps(nextProps) {
     if(isEmpty(this.props.plans) && !isEmpty(nextProps.plans)) {
       const plan = JSON.parse(JSON.stringify(nextProps.plans.plans_data.plans_list[0]));

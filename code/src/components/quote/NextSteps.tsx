@@ -11,6 +11,7 @@ const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
 import EmailModal from "./EmailModal";
 import ThanksEmail from "./ThanksEmail";
+import LicensedModal from "./LicensedModal"; 
 import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
@@ -89,6 +90,12 @@ class PlansPage extends React.Component<Props, {}> {
       showModalEmail: true
     });
   },
+
+  openAgentInputPopup() {
+    this.setState({
+      showModalAgent: true
+    });
+  },
   saveQuote() {
     const persons = [];
 
@@ -155,7 +162,7 @@ class PlansPage extends React.Component<Props, {}> {
                     <img src={"../images/email.svg"} />
                   </Col>
                 </Col>
-                <Col sm={4} onClick={this.openAgentInputPopup}>
+                <Col sm={4} onClick={this.openAgentInputPopup.bind(this)}>
                   <Col sm={12} className="next-action-img-container">
                     <img src={"../images/phone.svg"} />
                   </Col>
