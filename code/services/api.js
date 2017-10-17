@@ -68,7 +68,6 @@ module.exports = new function(){
   };
 
   this.saveQuoteForm = function(data, cb){
-    console.log("JSON.stringify(data): sdfdfsd" + JSON.stringify(data))
     var formData = {
       applicants: JSON.stringify(data)
     };
@@ -80,7 +79,6 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
-      console.log("httpResponse: " + JSON.stringify(httpResponse));
       cb(err, httpResponse);
     });
   };
