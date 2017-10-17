@@ -196,7 +196,7 @@ class PlansPage extends React.Component<Props, {}> {
         />
 
         <ThanksEmail
-          showModalEmail={this.state.showModalEmailThanks}
+          showModalEmailThanks={this.state.showModalEmailThanks}
         />
 
       </div>);
