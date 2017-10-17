@@ -1,36 +1,17 @@
 import * as React from "react";
-import { Modal, Button, Row, Col } from "react-bootstrap";
+import { Modal, Button, Row, Col, Radio } from "react-bootstrap";
 import Input from "../common/textInput";
 
 interface Props extends React.Props<Plan> {
 }
 
-export default class EmailModal extends React.Component<Props, {}> {
+export default class LicensedModal extends React.Component<Props, {}> {
   constructor(){
     super();
 
   },
-  onPlanChange(key, obj) {
-    this.setState({
-      [key]: obj.value,
-      selectedPlan: obj,
-      sFaceAmount: parseInt(obj.FaceMin)
-    })
-    this.props.submitPlansForm([{plan: obj, sFaceAmount: obj.FaceMin}]);
-  },
-  onPaymentTypeChange(key, obj) {
-    this.setState({
-      [key]: obj.value,
-      selectedPaymentType: obj
-    })
-  },
-  onFaceValChange(key, value) {
-    this.setState({
-      [key]: value,
-    })
-  },
-  onsFaceAmountChange() {
-    //this.props.submitPlansForm({sFaceAmount: this.state.sFaceAmount);
+  saveQuote() {
+    this.props.saveQuote();
   },
   getAmountFormat(amount) {
     var a = parseInt(amount);
@@ -44,26 +25,80 @@ export default class EmailModal extends React.Component<Props, {}> {
 
   
   state = {},
-  handleChange(value) {
+  handleChange(e) {
+    this.props.handleChange(e.target.value);
+    
     this.setState({
-      sFaceAmount: parseInt(value)
+      email: e.target.value
     });
+  },
+  onCloseModal() {
+
   },
 
   public render() {  
 
     return (
-            <Modal show={this.props.showModalEmail} onHide={this.props.onCloseModal}>
+       <Modal show={this.props.showModalEmail} onHide={this.props.onCloseModal} className="email-modal-container">
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
+                    <Row className="email-quote-text">
+                        Connect me to a licensed agent
+                    </Row>
                     <Row>
-                      <Col sm={12} className="confirmation-email">
-                        We've sent you an email!
+                        <Col className="email-description c-center" sm={12}>
+                            Tell us when we may best reach you and a number to call you on and a licensed agent will follow up with you quote.
+                        </Col>
+                    </Row>
+
+                    <Row style={{marginTop: "35px"}}>
+                      <Col sm={6}>
+                        <Col sm={12} className="email-label">
+                          Best time to reach you?
+                        </Col>
+                        <Col sm={12} className={"email-input-container"}>
+                          <Input 
+                            name={"email"}
+                            placeholder={"Enter your email"}
+                            value={this.state.email}
+                            onChange={this.handleChange.bind(this)}
+                          />
+                        </Col>
                       </Col>
-                      <Col sm={12} className={"confirmation-email-input"}>
-                        We send your email a link where you can view the rest of the form and fill it out when you have time.
+                      <Col sm={6}>
+                        <Col sm={12} className="email-label">
+                          Phone number
+                        </Col>
+                        <Col sm={12} className={"email-input-container"}>
+                          <Input 
+                            name={"email"}
+                            placeholder={"Enter your email"}
+                            value={this.state.email}
+                            onChange={this.handleChange.bind(this)}
+                          />
+                        </Col>
                       </Col>
                     </Row>
+                    <Row>
+                      <Radio name="okay-to-text-number" 
+                          onClick={ ()=> {
+                            this.onChange("okay_to_text", "Yes")
+                          }}>
+                        Yes
+                      </Radio>
+                    </Row>
                 </Modal.Body>
+                <Modal.Footer>
+                    <Row>
+                      <Col sm={8} className="c-center">
+                        <Button  style={{float: "right"}} className="c-button-default circular" onClick={(){
+                            this.saveQuote()
+                          }}
+                        >
+                          SUBMIT
+                        </Button>
+                      </Col>
+                    </Row>
+                </Modal.Footer>
             </Modal>
     );
   }

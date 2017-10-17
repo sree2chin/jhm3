@@ -8,7 +8,7 @@ import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Tooltip from 'rc-tooltip';
 const Handle = Slider.Handle;
-import Slider from 'react-rangeslider';
+
 
 interface Props extends React.Props<Plan> {
 }
@@ -106,10 +106,18 @@ export default class Plan extends React.Component<Props, {}> {
     this.setState({
       sFaceAmount: parseInt(value)
     });
-    this.props.submitPlansForm([{
-      plan: this.state.selectedPlan,
-      sFaceAmount: value
-    }]);
+    var f = function() {
+      this.props.submitPlansForm([{
+        plan: this.state.selectedPlan,
+        sFaceAmount: value
+      }]);
+    }.bind(this);
+    setTimeout(f);
+  },
+  handleSliderChange(value) {
+    this.setState({
+      sFaceAmount: parseInt(value)
+    });
   },
   onFaceValChange(key, value) {
     this.setState({
@@ -182,10 +190,18 @@ export default class Plan extends React.Component<Props, {}> {
                           min={parseInt(this.state.selectedPlan.FaceMin)}
                           max={parseInt(this.state.selectedPlan.FaceMax)}
                           step={parseInt(this.state.selectedPlan.PlanDisplayFaceAmtIncrementValue)}
-                          value={this.state.sFaceAmount}
-                          onChangeStart={this.handleChangeStart}
-                          onChange={this.handleChange.bind(this)}
-                          onChangeComplete={()=>{}}
+
+                          onAfterChange={this.handleChange.bind(this)}
+                          trackStyle={{ backgroundColor: 'blue', height: 10 }}
+                          handleStyle={{
+                            borderColor: 'blue',
+                            height: 28,
+                            width: 28,
+                            marginLeft: -14,
+                            marginTop: -9,
+                            backgroundColor: 'black',
+                          }}
+                          railStyle={{ backgroundColor: 'red', height: 10 }}
                         />
                       </Col>
                   }

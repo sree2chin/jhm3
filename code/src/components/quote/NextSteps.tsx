@@ -87,13 +87,15 @@ class PlansPage extends React.Component<Props, {}> {
 
   openEmailPopup() {
     this.setState({
-      showModalEmail: true
+      showModalEmail: true,
+      showModalAgent: false
     });
   },
 
   openAgentInputPopup() {
     this.setState({
-      showModalAgent: true
+      showModalAgent: true,
+      showModalEmail: false
     });
   },
   saveQuote() {
@@ -177,7 +179,7 @@ class PlansPage extends React.Component<Props, {}> {
                 <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
                   Email me quote
                 </Col>
-                <Col sm={4} onClick={this.openAgentInputPopup}>
+                <Col sm={4} onClick={this.openAgentInputPopup.bind(this)}>
                   Connect me to a licensed agent
                 </Col>
               </Col>
@@ -198,6 +200,11 @@ class PlansPage extends React.Component<Props, {}> {
 
         <EmailModal 
           showModalEmail={this.state.showModalEmail}
+          saveQuote={this.saveQuote.bind(this)}
+          handleChange={this.handleEmailChange.bind(this)}
+        />
+        <LicensedModal 
+          showModalEmail={this.state.showModalAgent}
           saveQuote={this.saveQuote.bind(this)}
           handleChange={this.handleEmailChange.bind(this)}
         />
