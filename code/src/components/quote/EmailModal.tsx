@@ -59,13 +59,13 @@ export default class EmailModal extends React.Component<Props, {}> {
                         Email me the quote
                     </Row>
                     <Row>
-                        <Col className="email-description c-center" sm={10}>
+                        <Col className="email-description c-center" sm={12}>
                             Email the quote and fill it out at your best convience. Simply enter your 
                             email address below and we'll mail you a copy of this quote and a link to continue your application.
                         </Col>
                     </Row>
 
-                    <Row>
+                    <Row style={{marginTop: "35px"}}>
                       <Col sm={12} className="email-label">
                         Email address
                       </Col>
@@ -75,7 +75,7 @@ export default class EmailModal extends React.Component<Props, {}> {
                           placeholder={"Enter your email"}
                           value={this.state.email}
                           onChange={this.handleChange.bind(this)}
-                          />
+                        />
                       </Col>
                     </Row>
                 </Modal.Body>

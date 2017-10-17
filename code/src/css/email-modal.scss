@@ -4,6 +4,7 @@
 	    line-height: 1.77;
 	    text-align: center;
 	    color: #333333;
+	    margin-top: 15px;
 	}
 	.email-label {
 		font-size: 14px;
@@ -19,6 +20,17 @@
 	.email-input-container {
 		.form-group {
 			line-height: 10px;
+		    border-radius: 2px;
+		    background-color: #ffffff;
+		    border: solid 1px #cccccc;
+		    height: 44px;
+		    input {
+			    line-height: 10px;
+			    border-radius: 2px;
+			    background-color: #ffffff;
+			    border: solid 1px #cccccc;
+			    height: 44px;
+		    }
 		}
 	}
 }
