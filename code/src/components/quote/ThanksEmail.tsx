@@ -28,7 +28,7 @@ export default class ThanksEmail extends React.Component<Props, {}> {
   public render() {  
 
     return (
-          <Modal show={this.props.showModalEmailThanks} onHide={()=>{}}>
+          <Modal show={this.props.showModalEmailThanks} onHide={()=>{}} bsSize="small">
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     <Row>
                       <img style={{marginBottom: "34px", marginTop: "54px"}} src={"../images/thanks-email.svg"} />
