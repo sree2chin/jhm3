@@ -53,21 +53,23 @@ export default class EmailModal extends React.Component<Props, {}> {
   public render() {  
 
     return (
-       <Modal show={this.props.showModalEmail} onHide={this.props.onCloseModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-lg">Email me the quote</Modal.Title>
-                </Modal.Header>
+       <Modal show={this.props.showModalEmail} onHide={this.props.onCloseModal} className="email-modal-container">
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
+                    <Row className="email-quote-text">
+                        Email me the quote
+                    </Row>
                     <Row>
-                        Email the quote and fill it out at your best convience. Simply enter your 
-                        email address below and we'll mail you a copy of this quote and a link to continue your application.
+                        <Col className="email-description c-center" sm={10}>
+                            Email the quote and fill it out at your best convience. Simply enter your 
+                            email address below and we'll mail you a copy of this quote and a link to continue your application.
+                        </Col>
                     </Row>
 
                     <Row>
-                      <Col sm={12} className="confirmation-email">
+                      <Col sm={12} className="email-label">
                         Email address
                       </Col>
-                      <Col sm={12} className={"confirmation-email-input"}>
+                      <Col sm={12} className={"email-input-container"}>
                         <Input 
                           name={"email"}
                           placeholder={"Enter your email"}

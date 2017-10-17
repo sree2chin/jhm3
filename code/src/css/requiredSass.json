@@ -9,6 +9,7 @@
     "src/css/coverage.scss",
     "src/css/product.scss",
     "src/css/plan.scss",
-    "src/css/NextSteps.scss"
+    "src/css/NextSteps.scss",
+    "src/css/email-modal.scss"
   ]
 }
