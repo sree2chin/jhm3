@@ -162,7 +162,7 @@ class PlansPage extends React.Component<Props, {}> {
                     <img src={"../images/email.svg"} />
                   </Col>
                 </Col>
-                <Col sm={4} onClick={this.openAgentInputPopup.bind(this)}>
+                <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
                   <Col sm={12} className="next-action-img-container">
                     <img src={"../images/phone.svg"} />
                   </Col>
