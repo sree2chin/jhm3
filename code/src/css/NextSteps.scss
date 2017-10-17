@@ -1,0 +1,41 @@
+.next-steps-container {
+	.customer-next-steps-container {
+	    background-color: #ffffff;
+    	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    	border: solid 1px #d4d4d4;
+    	margin-top: 110px;
+    	.next-steps-header {
+		    font-size: 22px;
+		    line-height: 1.77;
+		    text-align: center;
+		    color: #333333;
+		    margin-top: 22px;
+    	}
+    	.next-steps-text {
+			font-size: 13px;
+			text-align: center;
+			color: #999999;
+			margin-bottom: 30px;
+    	}
+    	.next-action-img-container {
+		    height: 130px;
+		    border-radius: 6px;
+		    background-color: #ffffff;
+		    border: solid 1px #d4d4d4;
+		    img {
+			    width: 60px;
+			    height: 60px;
+			    margin-left: 73px;
+			    margin-top: 31px;
+		    }
+    	}
+    	.next-steps-footer {
+		    font-size: 14px;
+		    font-weight: 500;
+		    text-align: center;
+		    color: #317dbd;
+		    margin-top: 15px;
+		    margin-bottom: 80px;
+    	}
+	}
+}

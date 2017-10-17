@@ -54,6 +54,15 @@ export default class Plan extends React.Component<Props, {}> {
       });
     }
   },
+  getAmountFormat(amount) {
+    var a = parseInt(amount);
+
+    if(a/1000000 >=1) {
+      return (a/1000000) + "m";
+    } else {
+      return (a/1000) + "k";
+    }
+  },
   getPlansDetailsForDropdown() {
     if(isEmpty(this.props.plans) || isEmpty(this.props.plans.plans_data) || (isEmpty(this.props.plans.plans_data.plans_list))) {
       return [];
@@ -83,12 +92,14 @@ export default class Plan extends React.Component<Props, {}> {
     });
     var p = [];
 
-    each(face.Premium, (k, v)=> {
-      var f = {};
-      f.value = k;
-      f.label = v;
-      p.push(f);
-    })
+    if(face && face.Premium) {
+      each(face.Premium, (k, v)=> {
+        var f = {};
+        f.value = k;
+        f.label = v;
+        p.push(f);
+      });
+    }
 
     return p;
   },

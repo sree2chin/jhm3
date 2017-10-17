@@ -9,13 +9,13 @@ import {each, isEmpty} from "underscore";
 import {submitQuoteForm, submitEmailForm, submitPlansForm, setPersonsData} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
+import EmailModal from "./EmailModal";
 import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
 import Plan from "../common/Plan"
 import { browserHistory } from 'react-router';
 import {submitPlansForm } from '../../actions/Quote';
-import { browserHistory } from 'react-router';
 
 interface Props {
   plans: [any]
@@ -25,6 +25,7 @@ class PlansPage extends React.Component<Props, {}> {
   constructor(){
     super();
   },
+  state={},
   componentWillMount() {
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent" : "/";
@@ -68,65 +69,95 @@ class PlansPage extends React.Component<Props, {}> {
       this.submmitedProductForm = false;
     });
   },
-  redirectToNextSteps() {
-      const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent/" : "/";
-      browserHistory.push(basePath + "next-steps");
+
+  changeTypeOfSubmission(val) {
+    this.setState({
+      type_of_submission: val
+    })
+  },
+
+  submitQuote() {
+    this.props.submitQuote();
+  }, 
+
+  openEmailPopup() {
+    this.setState({
+      showModalEmail: !this.state.showModalEmail
+    });
   }
+
+
   public render() {
 
     var {persons} = this.props;
     persons = persons || [];
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
     return (
-      <div className="product-pager-container">
+      <div className="next-steps-container">
         <Subheader />
-        { this.props.noOfPersons==1 &&
-          <PersonInfo 
-            person={persons[0]}
-          />
-        }
-        { this.props.noOfPersons==2 &&
-          <PersonInfo 
-            person={persons[1]}
-          />
-        }
-        <Row className="plans-product-header">
-          <Col sm={8} className="c-center">
+
+        <Row>
+          <Col sm={8} className="c-center customer-next-steps-container">
             <Row>
-              <Col sm={8} className="c-plans-product-text">
-                Selected Products
+              <Col sm={6} className="c-center next-steps-header">
+                OK... Let's Take Some Action
               </Col>
-              <Col sm={4} className="c-select-diff-product-link">
-                SELECT DIFFERENT PRODUCTS
+            </Row>
+            <Row>
+              <Col sm={8} className="next-steps-text c-center">
+                This where the rubber hits the road. You're well on your way on getting covered with life insurance! Click on the appropriate button to take the next step.
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={12}> 
+                <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
+                  <Col sm={12} className="next-action-img-container">
+                    <img src={"../images/application.svg"} />
+                  </Col>
+                </Col>
+                <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
+                  <Col sm={12} className="next-action-img-container">
+                    <img src={"../images/email.svg"} />
+                  </Col>
+                </Col>
+                <Col sm={4} onClick={this.openAgentInputPopup}>
+                  <Col sm={12} className="next-action-img-container">
+                    <img src={"../images/phone.svg"} />
+                  </Col>
+                </Col>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={12} className="next-steps-footer"> 
+                <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
+                  Continue to application
+                </Col>
+                <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
+                  Email me quote
+                </Col>
+                <Col sm={4} onClick={this.openAgentInputPopup}>
+                  Connect me to a licensed agent
+                </Col>
               </Col>
             </Row>
           </Col>
-        </Row>
-        { this.props.noOfPersons==1 &&
-          <Plan 
-            plans={this.props.plans[0]}
-            submitPlansForm={this.submitPlansForm.bind(this)}
-            premiums={this.props.premiums}
-          />
-        }
-        { this.props.noOfPersons==2 &&
-          <Plan 
-            plans={this.props.plans[1]}
-            submitPlansForm={this.submitPlansForm.bind(this)}
-            premiums={this.props.premiums}
-          />
-        }
 
+        </Row>
         <Row>
-          <Col sm={4} style={{  marginRight: "16%", float: "right"}}>
-            <Button className="c-button-default circular" onClick={(){
-                this.redirectToNextSteps()
+          <Col sm={8} className="c-center">
+            <Button  style={{width: "50%", float: "right"}} className="c-button-default circular" onClick={(){
+                this.submitQuote()
               }}
             >
-              CONTINUE TO THE NEXT STEP
+              CONTINUE
             </Button>
           </Col>
         </Row>
+
+        <EmailModal 
+          showModalEmail={this.state.showModalEmail}
+        />
+
 
       </div>);
   }

@@ -51,12 +51,20 @@ function loadPlansPage(location: any, callback: LoadCallback) {
     "QuotePage");
 }
 
+function loadNextStepsPage(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/quote/NextSteps") as typeof _QuotePage).default),
+    "QuotePage");
+}
+
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route  path="/" component= {App} >
       <IndexRoute getComponent={ loadQuotePage } />
       <Route path="/agent" getComponent={ loadQuotePage } />
       <Route path="/products" getComponent={ loadProductsPage } />
+      <Route path="/next-steps" getComponent={ loadNextStepsPage } />
       <Route path="/products/plans" getComponent={ loadPlansPage } />
       <Route path="/agent/products/plans" getComponent={ loadPlansPage } />
       <Route path="/agent/products" getComponent={ loadProductsPage } />
