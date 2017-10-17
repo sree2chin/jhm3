@@ -32,6 +32,9 @@ export default class EmailModal extends React.Component<Props, {}> {
       email: e.target.value
     });
   },
+  onCloseModal() {
+
+  },
 
   public render() {  
 

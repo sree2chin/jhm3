@@ -28,13 +28,16 @@ export default class ThanksEmail extends React.Component<Props, {}> {
   public render() {  
 
     return (
-          <Modal show={this.props.showModalEmailThanks} onHide={this.props.showModalEmailThanks}>
+          <Modal show={this.props.showModalEmailThanks} onHide={()=>{}}>
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     <Row>
-                      <Col sm={12} className="confirmation-email">
+                      <img style={{marginBottom: "34px", marginTop: "54px"}} src={"../images/thanks-email.svg"} />
+                    </Row>
+                    <Row>
+                      <Col sm={12} className="confirmation-email-text">
                         We've sent you an email!
                       </Col>
-                      <Col sm={12} className={"confirmation-email-input"}>
+                      <Col sm={12} className={"confirmation-email-desc"}>
                         We send your email a link where you can view the rest of the form and fill it out when you have time.
                       </Col>
                     </Row>
