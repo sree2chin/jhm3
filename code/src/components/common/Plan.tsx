@@ -229,8 +229,16 @@ export default class Plan extends React.Component<Props, {}> {
         <Row>
           <Col sm={8} className="plans-selector-container c-center">
             <Row>
-              <Col sm={2} className="c-center" style={{}}>
-                Total $
+              <Col sm={2} style={{float: "right", marginRight: "15px"}}>
+                <Row>
+                  <Col sm={4} className="plan-total-text">
+                    Total
+                  </Col>
+                  <Col sm={8} className="plan-total-amount">
+                    {this.props.premiums && this.props.premiums[0] && this.props.premiums[0].plans_data && this.props.premiums[0].plans_data.QuoteRateGrid && this.props.premiums[0].plans_data.QuoteRateGrid && this.props.premiums[0].plans_data.QuoteRateGrid.Col1.Face3.Premium.Annual}
+                  </Col>
+                </Row>
+                
               </Col>
             </Row>
           </Col>
