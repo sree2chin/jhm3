@@ -35,6 +35,14 @@ module.exports = function(app) {
     });
   });
 
+  app.post(prefix + '/quote/savequote', function(req, res) {
+    QuotesService.saveQuoteForm(req, function(statusCode, data){
+      res.statusCode = statusCode;
+      res.setHeader('Content-Type', 'application/json');
+      res.send(data);
+    });
+  });
+
   app.post(prefix + '/quote/submit', function(req, res) {
     QuotesService.getQuoteProducts(req, function(statusCode, data){
       res.statusCode = statusCode;

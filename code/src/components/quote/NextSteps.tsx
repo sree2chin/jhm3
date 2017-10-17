@@ -6,10 +6,11 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty} from "underscore";
-import {submitQuoteForm, submitEmailForm, submitPlansForm, setPersonsData} from '../../actions/Quote';
+import {submitQuoteForm, submitEmailForm, submitPlansForm, setPersonsData, saveQuoteForm} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
 import EmailModal from "./EmailModal";
+import ThanksEmail from "./ThanksEmail";
 import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
@@ -63,8 +64,11 @@ class PlansPage extends React.Component<Props, {}> {
 
     this.props.setPersonsData(persons);
 
-    this.props.submitPlansForm(persons).then(() => {
-      console.log("sdfds");
+    this.props.saveQuoteForm(persons).then(() => {
+      this.setState({
+        showModalEmailThanks: true,
+        showModalEmail: false
+      });
     }).catch(()=>{
       this.submmitedProductForm = false;
     });
@@ -82,11 +86,42 @@ class PlansPage extends React.Component<Props, {}> {
 
   openEmailPopup() {
     this.setState({
-      showModalEmail: !this.state.showModalEmail
+      showModalEmail: true
     });
-  }
+  },
+  saveQuote() {
+    const persons = [];
 
+    const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
+    personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
+    personOne.email = this.state.email;
+    personOne.type_of_submission = 10002;
+    persons.push(personOne);
 
+    if(this.props.noOfPersons == 2) {
+      const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
+      personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
+      personTwo.email = this.state.email;
+      personTwo.premium_type = "monthly";
+      persons.push(personTwo);
+    }
+
+    this.props.setPersonsData(persons);
+
+    this.props.saveQuoteForm(persons).then(() => {
+      this.setState({
+        showModalEmailThanks: true,
+        showModalEmail: false
+      });
+    }).catch(()=>{
+      this.submmitedProductForm = false;
+    });
+  },
+  handleEmailChange(v) {
+    this.setState({
+      email: v
+    });
+  },
   public render() {
 
     var {persons} = this.props;
@@ -156,8 +191,13 @@ class PlansPage extends React.Component<Props, {}> {
 
         <EmailModal 
           showModalEmail={this.state.showModalEmail}
+          saveQuote={this.saveQuote.bind(this)}
+          handleChange={this.handleEmailChange.bind(this)}
         />
 
+        <ThanksEmail
+          showModalEmail={this.state.showModalEmailThanks}
+        />
 
       </div>);
   }
@@ -181,6 +221,9 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     submitPlansForm: (data) => {
       return dispatch(submitPlansForm(data))
     },
+    saveQuoteForm: (data) => {
+      return dispatch(saveQuoteForm(data))
+    }
   };
 }
 

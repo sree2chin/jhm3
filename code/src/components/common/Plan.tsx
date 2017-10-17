@@ -25,13 +25,18 @@ export default class Plan extends React.Component<Props, {}> {
       selectedPlan: obj,
       sFaceAmount: parseInt(obj.FaceMin)
     })
-    this.props.submitPlansForm([{plan: obj, sFaceAmount: obj.FaceMin}]);
+    this.props.submitPlansForm([{
+      plan: obj,
+      sFaceAmount: obj.FaceMin
+    }]);
   },
   onPaymentTypeChange(key, obj) {
     this.setState({
       [key]: obj.value,
-      selectedPaymentType: obj
+      selectedPaymentType: obj,
+      payment_amount: obj.label
     })
+    this.props.onPaymentTypeChange(obj);
   },
   onFaceValChange(key, value) {
     this.setState({

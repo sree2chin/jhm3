@@ -25,6 +25,7 @@ class PlansPage extends React.Component<Props, {}> {
   constructor(){
     super();
   },
+  state ={},
   componentWillMount() {
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent" : "/";
@@ -37,6 +38,11 @@ class PlansPage extends React.Component<Props, {}> {
       productId: product.ProductID
     });
   },
+  onPaymentTypeChange(ob) {
+    this.setState({
+      selectedPaymentType: ob
+    });
+  },
   submitPlansForm(data) {
     const persons = [];
 
@@ -46,6 +52,7 @@ class PlansPage extends React.Component<Props, {}> {
     personOne.sFaceAmount = data[0].sFaceAmount;
     personOne.sClassNum="2";
     personOne.sDividendNum = "1";
+    personOne.duration = data[0].plan.PlanName.split(" ")[0];
     personOne.sWP="1";
     persons.push(personOne);
 
@@ -54,9 +61,10 @@ class PlansPage extends React.Component<Props, {}> {
       personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
       personTwo.sPlanID = data[1].plan.PlanID;
       personTwo.sFaceAmount = data[1].plan.sFaceAmount;
-      personOne.sClassNum="2";
-      personOne.sDividendNum = "1";
-      personOne.sWP="1";
+      personTwo.duration = data[1].plan.PlanName.split(" ")[0];
+      personTwo.sClassNum="2";
+      personTwo.sDividendNum = "1";
+      personTwo.sWP="1";
       persons.push(personTwo);
     }
 
@@ -69,6 +77,22 @@ class PlansPage extends React.Component<Props, {}> {
     });
   },
   redirectToNextSteps() {
+    const persons = [];
+
+    const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
+    personOne.premium_amount=this.state.selectedPaymentType.label;
+    personOne.premium_type=this.state.selectedPaymentType.value;
+    persons.push(personOne);
+
+    if(this.props.noOfPersons == 2) {
+      const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
+      personTwo.premium_amount=this.state.selectedPaymentType.label;
+      personTwo.premium_type=this.state.selectedPaymentType.value;
+      persons.push(personTwo);
+    }
+
+    this.props.setPersonsData(persons);
+
       const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent/" : "/";
       browserHistory.push(basePath + "next-steps");
   }
@@ -107,6 +131,7 @@ class PlansPage extends React.Component<Props, {}> {
             plans={this.props.plans[0]}
             submitPlansForm={this.submitPlansForm.bind(this)}
             premiums={this.props.premiums}
+            onPaymentTypeChange={this.onPaymentTypeChange.bind(this)}
           />
         }
         { this.props.noOfPersons==2 &&
@@ -114,6 +139,7 @@ class PlansPage extends React.Component<Props, {}> {
             plans={this.props.plans[1]}
             submitPlansForm={this.submitPlansForm.bind(this)}
             premiums={this.props.premiums}
+            onPaymentTypeChange={this.onPaymentTypeChange.bind(this)}
           />
         }
 

@@ -48,6 +48,15 @@ function submitEmailForm(postData) {
 	};
 }
 
+function saveQuoteForm(postData) {
+	return (dispatch) => {
+		return SubmitQuoteApi.saveQuoteForm(postData).then(
+			data => dispatch({
+				type: 'SUMBMITTED_SAVE_QUOTE', quoteResponse: data
+			}))
+		);
+	};
+}
 
 
 export {
@@ -55,5 +64,6 @@ export {
 	submitPlansForm,
 	submitEmailForm,
 	submitProductsForm,
-	setPersonsData
+	setPersonsData,
+	saveQuoteForm
 }

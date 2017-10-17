@@ -18,7 +18,6 @@ module.exports = new function(){
   };
 
   this.getQuotePremiums = function(data, cb){
-    console.log("data:  " + JSON.stringify(data));
     var url = restOptions.host + '/v1/quote/premiums';
     var formData = {
       applicants: JSON.stringify(data)
@@ -31,7 +30,6 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
-      console.log("httpResponse: " + JSON.stringify(httpResponse));
       cb(err, httpResponse);
     });
   };
@@ -65,6 +63,24 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
+      cb(err, httpResponse);
+    });
+  };
+
+  this.saveQuoteForm = function(data, cb){
+    console.log("JSON.stringify(data): sdfdfsd" + JSON.stringify(data))
+    var formData = {
+      applicants: JSON.stringify(data)
+    };
+    request({
+      url: restOptions.host + '/v1/quote/savequote', 
+      formData: formData, 
+      headers: {
+        'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
+      },
+      method: 'POST'
+    }, function callback(err, httpResponse, body) {
+      console.log("httpResponse: " + JSON.stringify(httpResponse));
       cb(err, httpResponse);
     });
   };

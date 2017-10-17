@@ -8,7 +8,6 @@ module.exports = new function() {
   var self = this;
 
   this.getQuotePremiums = function(req, callback) {
-    console.log("req.body:  " + JSON.stringify(req.body));
     ApiService.getQuotePremiums(req.body, function(err, res) {
       var formattedUser = {};
       if (!err && res.statusCode == 200) {
@@ -31,6 +30,16 @@ module.exports = new function() {
 
   this.getQuotePlans= function(req, callback) {
     ApiService.getQuotePlans(req.body, function(err, res) {
+      if (!err && res.statusCode == 200){
+        callback(res.statusCode, res.body);
+      } else {
+        callback(res.statusCode, err);
+      }
+    });
+  };
+
+  this.saveQuoteForm= function(req, callback) {
+    ApiService.saveQuoteForm(req.body, function(err, res) {
       if (!err && res.statusCode == 200){
         callback(res.statusCode, res.body);
       } else {

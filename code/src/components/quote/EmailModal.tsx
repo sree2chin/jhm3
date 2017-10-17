@@ -10,27 +10,8 @@ export default class EmailModal extends React.Component<Props, {}> {
     super();
 
   },
-  onPlanChange(key, obj) {
-    this.setState({
-      [key]: obj.value,
-      selectedPlan: obj,
-      sFaceAmount: parseInt(obj.FaceMin)
-    })
-    this.props.submitPlansForm([{plan: obj, sFaceAmount: obj.FaceMin}]);
-  },
-  onPaymentTypeChange(key, obj) {
-    this.setState({
-      [key]: obj.value,
-      selectedPaymentType: obj
-    })
-  },
-  onFaceValChange(key, value) {
-    this.setState({
-      [key]: value,
-    })
-  },
-  onsFaceAmountChange() {
-    //this.props.submitPlansForm({sFaceAmount: this.state.sFaceAmount);
+  saveQuote() {
+    this.props.saveQuote();
   },
   getAmountFormat(amount) {
     var a = parseInt(amount);
@@ -44,9 +25,11 @@ export default class EmailModal extends React.Component<Props, {}> {
 
   
   state = {},
-  handleChange(value) {
+  handleChange(e) {
+    this.props.handleChange(e.target.value);
+    
     this.setState({
-      sFaceAmount: parseInt(value)
+      email: e.target.value
     });
   },
 
@@ -80,7 +63,16 @@ export default class EmailModal extends React.Component<Props, {}> {
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.props.onCloseModal}>Close</Button>
+                    <Row>
+                      <Col sm={8} className="c-center">
+                        <Button  style={{float: "right"}} className="c-button-default circular" onClick={(){
+                            this.saveQuote()
+                          }}
+                        >
+                          SUBMIT
+                        </Button>
+                      </Col>
+                    </Row>
                 </Modal.Footer>
             </Modal>
     );

@@ -54,22 +54,23 @@ class QuotesApi {
         })
     }));
   };
-  emailSubmit() {
 
-    return new Promise(function(resolve, reject) {
-      resolve(true)
-    });
-
-    /*return fetch('quotes/email/submit').then(function(res) {
-        var states;
-
-        return res.json().then(function (response: any) {
-
+  saveQuoteForm(payload) {
+    return fetch('/v1/quote/savequote', {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(function(res) {
+        return res.json().then(function (response: any) {    
+          return new Promise(function(resolve, reject) {
+            resolve(response)
+          });
         })
-
-    }));*/
-  }
-
+    }));
+  };
 }
 
 export default new QuotesApi();

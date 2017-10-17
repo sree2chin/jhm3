@@ -10,6 +10,8 @@ export default (state: Array<any> = [], action) => {
       return objectAssign({}, state, {premiums: action.premiums});
     case "SETTING_PERSONS_INFO":
     	return objectAssign({}, state, {persons: action.persons});
+    case "SUMBMITTED_SAVE_QUOTE":
+      return objectAssign({}, state, {quoteResponse: action.persons});
     case "SUMBMITTED_EMAIL_INFO":
     	return objectAssign({}, state, {isSubmmitedEmailForm: action.isSubmmitedPlansForm});
     default:
