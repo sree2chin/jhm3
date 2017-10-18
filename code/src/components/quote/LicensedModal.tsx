@@ -98,7 +98,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
                         </Col>
                       </Col>
                     </Row>
-                    <Row>
+                    <Row className="okay-to-text-number">
                       <Radio name="okay-to-text-number" 
                           onClick={ ()=> {
                             this.onTextAllowedChange("okay_to_text", "Yes")
@@ -119,12 +119,12 @@ export default class LicensedModal extends React.Component<Props, {}> {
                       </Col>
                     </Row>
                     <Row>
-                      <Col sm={8}>
+                      <Col sm={10} className="c-center" style={{marginTop: "20px"}}>
                         <Row>
-                          <Col>
+                          <Col sm={7} className="free-toll-no-text">
                             Vantis Life Call Center toll free number: 
                           </Col>
-                          <Col>
+                          <Col  sm={3} className="free-toll-no">
                             555-555-5555
                           </Col>
                         </Row>

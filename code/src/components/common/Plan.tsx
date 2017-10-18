@@ -25,7 +25,7 @@ export default class Plan extends React.Component<Props, {}> {
       selectedPlan: obj,
       sFaceAmount: parseInt(obj.FaceMin)
     })
-    this.props.submitPlansForm([{
+    this.props.submitPlansForm(this.props.personIndex, [{
       plan: obj,
       sFaceAmount: obj.FaceMin
     }]);

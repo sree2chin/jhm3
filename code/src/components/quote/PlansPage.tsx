@@ -43,7 +43,7 @@ class PlansPage extends React.Component<Props, {}> {
       selectedPaymentType: ob
     });
   },
-  submitPlansForm(data) {
+  submitPlansForm(personIndex, data) {
     const persons = [];
 
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
@@ -55,17 +55,18 @@ class PlansPage extends React.Component<Props, {}> {
     personOne.duration = data[0].plan.PlanName.split(" ")[0];
     personOne.sWP="1";
     persons.push(personOne);
-
-    if(this.props.noOfPersons == 2) {
-      const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-      personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
-      personTwo.sPlanID = data[1].plan.PlanID;
-      personTwo.sFaceAmount = data[1].plan.sFaceAmount;
-      personTwo.duration = data[1].plan.PlanName.split(" ")[0];
-      personTwo.sClassNum="2";
-      personTwo.sDividendNum = "1";
-      personTwo.sWP="1";
-      persons.push(personTwo);
+    
+    var persons = [];
+    if(this.props.noOfPersons ==2) {
+      if(personIndex ==0) {
+        persons[0] = personOne;
+        persons[1] = this.props.persons[1];
+      } else {
+        persons[0] = this.props.persons[0];
+        persons[1] = personOne;
+      }
+    } else {
+      persons.push(personOne);
     }
 
     this.props.setPersonsData(persons);
@@ -136,6 +137,7 @@ class PlansPage extends React.Component<Props, {}> {
             submitPlansForm={this.submitPlansForm.bind(this)}
             premiums={this.props.premiums}
             onPaymentTypeChange={this.onPaymentTypeChange.bind(this)}
+            personIndex={0}
           />
         }
         { this.props.noOfPersons==2 &&
@@ -144,6 +146,7 @@ class PlansPage extends React.Component<Props, {}> {
             submitPlansForm={this.submitPlansForm.bind(this)}
             premiums={this.props.premiums}
             onPaymentTypeChange={this.onPaymentTypeChange.bind(this)}
+            personIndex={0}
           />
         }
 

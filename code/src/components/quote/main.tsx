@@ -103,13 +103,17 @@ class Main extends React.Component<Props, {}> {
 
     person[key] = val;
     var persons = [];
-    if(index ==0) {
-      persons[0] = person;
-      persons[1] = this.state.persons[1];
-    } else {
-      persons[0] = this.state.persons[0];
-      persons[1] = person;
-    }
+    if(this.props.noOfPersons ==2) {
+      if(index ==0) {
+        persons[0] = person;
+        persons[1] = this.state.persons[1];
+      } else {
+        persons[0] = this.state.persons[0];
+        persons[1] = person;
+      }
+      } else {
+        persons.push(person);
+      }
 
     this.setState({persons});
   },
