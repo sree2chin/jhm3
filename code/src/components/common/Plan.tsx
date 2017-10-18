@@ -36,7 +36,7 @@ export default class Plan extends React.Component<Props, {}> {
       selectedPaymentType: obj,
       payment_amount: obj.label
     })
-    this.props.onPaymentTypeChange(obj);
+    this.props.onPaymentTypeChange(this.props.personIndex, obj);
   },
   componentWillReceiveProps(nextProps) {
     if(isEmpty(this.props.plans) && !isEmpty(nextProps.plans)) {
@@ -45,9 +45,9 @@ export default class Plan extends React.Component<Props, {}> {
       plan.label = plan.PlanDisplayName;
       this.onPlanChange("sPlanID", plan);
     }
-    if(!isEmpty(this.props.premiums) && !isEmpty(this.props.premiums[0].plans_data) && !isEmpty(this.props.premiums[0].plans_data)) {
+    if(!isEmpty(this.props.premiums) && !isEmpty(this.props.premiums.plans_data) && !isEmpty(this.props.premiums.plans_data)) {
       this.setState({
-        sFaceAmount: parseInt(this.props.premiums[0].plans_data.FaceAmount)
+        sFaceAmount: parseInt(this.props.premiums.plans_data.FaceAmount)
       });
     }
   },
@@ -79,11 +79,11 @@ export default class Plan extends React.Component<Props, {}> {
   },
 
   getPaymentSchedules() {
-    if(isEmpty(this.props.premiums) || isEmpty(this.props.premiums[0].plans_data) || isEmpty(this.props.premiums[0].plans_data.QuoteRateGrid) || isEmpty(this.props.premiums[0].plans_data.QuoteRateGrid.Col1)) {
+    if(isEmpty(this.props.premiums) || isEmpty(this.props.premiums.plans_data) || isEmpty(this.props.premiums.plans_data.QuoteRateGrid) || isEmpty(this.props.premiums.plans_data.QuoteRateGrid.Col1)) {
       return [];
     }
 
-    const paymentSchedules = JSON.parse(JSON.stringify(this.props.premiums[0].plans_data.QuoteRateGrid.Col1));
+    const paymentSchedules = JSON.parse(JSON.stringify(this.props.premiums.plans_data.QuoteRateGrid.Col1));
     const face = find(paymentSchedules, (paymentSchedule)=>{
       return (paymentSchedule.FaceAmount == this.state.sFaceAmount || paymentSchedule.FaceAmount < this.state.sFaceAmount) 
     });
@@ -125,7 +125,7 @@ export default class Plan extends React.Component<Props, {}> {
     })
   },
   public render() {
-    const personIndex = this.props.index;
+    const personIndex = this.props.personIndex;
     const plansObjs = this.getPlansDetailsForDropdown();
     const paymentSchedules = this.getPaymentSchedules();
   
@@ -251,7 +251,7 @@ export default class Plan extends React.Component<Props, {}> {
                     Total
                   </Col>
                   <Col sm={8} className="plan-total-amount">
-                    {this.props.premiums && this.props.premiums[0] && this.props.premiums[0].plans_data && this.props.premiums[0].plans_data.QuoteRateGrid && this.props.premiums[0].plans_data.QuoteRateGrid && this.props.premiums[0].plans_data.QuoteRateGrid.Col1.Face1 && this.props.premiums[0].plans_data.QuoteRateGrid.Col1.Face1.Premium && this.props.premiums[0].plans_data.QuoteRateGrid.Col1.Face1.Premium.Annual}
+                    {this.props.premiums && this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.QuoteRateGrid && this.props.premiums.plans_data.QuoteRateGrid && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium.Annual}
                   </Col>
                 </Row>
                 

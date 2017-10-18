@@ -38,9 +38,9 @@ class PlansPage extends React.Component<Props, {}> {
       productId: product.ProductID
     });
   },
-  onPaymentTypeChange(ob) {
+  onPaymentTypeChange(personIndex, ob) {
     this.setState({
-      selectedPaymentType: ob
+      ["selectedPaymentType" + personIndex]: ob
     });
   },
   submitPlansForm(personIndex, data) {
@@ -81,14 +81,18 @@ class PlansPage extends React.Component<Props, {}> {
     const persons = [];
 
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
-    personOne.premium_amount=this.state.selectedPaymentType.label;
-    personOne.premium_type=this.state.selectedPaymentType.value;
+    if(this.state.selectedPaymentType0) {
+      personOne.premium_amount=this.state.selectedPaymentType0.label;
+      personOne.premium_type=this.state.selectedPaymentType0.value;
+    }
     persons.push(personOne);
 
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-      personTwo.premium_amount=this.state.selectedPaymentType.label;
-      personTwo.premium_type=this.state.selectedPaymentType.value;
+      if(this.state.selectedPaymentType1) {
+        personTwo.premium_amount=this.state.selectedPaymentType1.label;
+        personTwo.premium_type=this.state.selectedPaymentType1.value;
+      }
       persons.push(personTwo);
     }
 
@@ -131,7 +135,7 @@ class PlansPage extends React.Component<Props, {}> {
             </Row>
           </Col>
         </Row>
-        { this.props.noOfPersons==1 &&
+        { this.props.noOfPersons>=1 &&
           <Plan 
             plans={this.props.plans[0]}
             submitPlansForm={this.submitPlansForm.bind(this)}
