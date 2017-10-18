@@ -88,7 +88,12 @@ class PlansPage extends React.Component<Props, {}> {
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
     personOne.type_of_submission = this.state.type_of_submission;
-    personOne.email = this.state.email0;
+    if(this.state.email0) {
+      personOne.email = this.state.email0;
+    } else {
+      personOne.email = "TEST@co.COM";
+    }
+    
     this.getExtraInfo(personOne);
 
     persons.push(personOne);
@@ -96,7 +101,12 @@ class PlansPage extends React.Component<Props, {}> {
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
       personTwo.type_of_submission = this.state.type_of_submission;
-      personTwo.email = this.state.email1;
+      if(this.state.email1) {
+        personTwo.email = this.state.email1;
+      } else {
+        personTwo.email = "TEST@co.COM";
+      }
+      
       this.getExtraInfo(personOne);
       persons.push(personTwo);
     }
