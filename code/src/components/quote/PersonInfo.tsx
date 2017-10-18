@@ -11,11 +11,9 @@ interface Props extends React.Props<PersonInfo> {
 export default class PersonInfo extends React.Component<Props, {}> {
   public render() {
     const {person} = this.props;
-    
+    const personsContainerWidth = this.props.noOfPersons == 2 ? 6 : 12;
     return (
-      <div style={{backgroundColor: "rgb(247, 247, 247)"}}>
-        <Row>
-          <Col sm={8} className="person-info-container">
+          <Col sm={personsContainerWidth} className="person-info-container">
             <Row className="person-info-header-container">
               <Col sm={11} className="person-name-container">
                 {person.name} 
@@ -58,8 +56,6 @@ export default class PersonInfo extends React.Component<Props, {}> {
               </Col>
             </Row>
           </Col>
-        </Row>
-      </div>
     );
   }
 }

@@ -49,7 +49,7 @@ export default class Person extends React.Component<Props, {}> {
       <Col sm={12} className="c-one-person-container">
         <div>
           <Col sm={12} className={"c-person-header-text"}>
-            Applicant 1
+            {"Applicant " + (personIndex + 1)}
           </Col>
           <Col sm={12}>
             <Input 
@@ -166,14 +166,14 @@ export default class Person extends React.Component<Props, {}> {
           </Col>
           <Col sm={4} style={{paddingRight: "22px"}}>
             <FormGroup>
-              <Radio name="person1_smoke" 
+              <Radio name={"person1_smoke_" + personIndex}
                   onClick={ ()=> {
                     this.onChange("smoke", "Yes")
                   }}>
                 Yes
               </Radio>
               {' '}
-              <Radio name="person1_smoke" 
+              <Radio name={"person1_smoke"  + personIndex}
                   onClick={ ()=> {
                     this.onChange("smoke", "No")
                   }}>

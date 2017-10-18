@@ -104,16 +104,20 @@ class PlansPage extends React.Component<Props, {}> {
     return (
       <div className="product-pager-container">
         <Subheader />
-        { this.props.noOfPersons==1 &&
-          <PersonInfo 
-            person={persons[0]}
-          />
-        }
-        { this.props.noOfPersons==2 &&
-          <PersonInfo 
-            person={persons[1]}
-          />
-        }
+        <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
+          <Col sm={8} style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
+            { this.props.noOfPersons>=1 &&
+              <PersonInfo 
+                person={persons[0]}
+              />
+            }
+            { this.props.noOfPersons==2 &&
+              <PersonInfo 
+                person={persons[1]}
+              />
+            }
+          </Col>
+        </Row>
         <Row className="plans-product-header">
           <Col sm={8} className="c-center">
             <Row>

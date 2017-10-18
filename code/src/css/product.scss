@@ -2,11 +2,15 @@
 	.person-info-container {   
 	    background-color: #ffffff;
 	    border: solid 1px #d4d4d4;
-	    margin-left: auto;
-	    margin-right: auto;
-	    float: none;
 	    margin-top: 60px;
-	    .person-label {
+	    &.col-sm-6 {
+	    	.person-content {
+	    		.col-sm-12 {
+	    			padding: 0px;
+	    		}
+	    	}
+	    }
+ 	    .person-label {
 	    	color: #666666;
 	    }
 	    .person-label-content {

@@ -29,9 +29,9 @@ class ProductsPage extends React.Component<Props, {}> {
     }
   },
 
-  selectProduct(product) {
+  selectProductForIndex(personIndex, product) {
     this.setState({
-      productId: product.ProductID
+      ["productId" + personIndex]: product.ProductID
     });
   },
   state={},
@@ -41,7 +41,8 @@ class ProductsPage extends React.Component<Props, {}> {
 
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
-    personOne.sProductID = this.state.productId;
+    personOne.sProductID = this.state.productId0;
+    personOne.applicant = "1";
     personOne.sGender = personOne.s_gender;
 
     persons.push(personOne);
@@ -49,6 +50,7 @@ class ProductsPage extends React.Component<Props, {}> {
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
       personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
+      personTwo.sProductID = this.state.productId1;
       personTwo.applicant = "2";
       personTwo.sGender = personTwo.s_gender;
       persons.push(personTwo);
@@ -70,23 +72,43 @@ class ProductsPage extends React.Component<Props, {}> {
     return (
       <div className="product-pager-container">
         <Subheader />
-        { this.props.noOfPersons==1 &&
-          <PersonInfo 
-            person={persons[0]}
-          />
-        }
-        { this.props.noOfPersons==2 &&
-          <PersonInfo 
-            person={persons[1]}
-          />
-        }
+        <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
+          <Col sm={8} style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
+            { this.props.noOfPersons>=1 &&
+              <PersonInfo 
+                person={persons[0]}
+                noOfPersons={this.props.noOfPersons}
+              />
+            }
+            { this.props.noOfPersons==2 &&
+              <PersonInfo 
+                person={persons[1]}
+                noOfPersons={this.props.noOfPersons}
+              />
+            }
+          </Col>
+        </Row>
         <ProductHeader />
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
           <Col sm={8} className="c-center">
-            <ProductContainer 
-              productInfo={this.props.products[0]}
-              selectProduct={this.selectProduct.bind(this)}
-            />
+            <Row>
+              { this.props.products && this.props.products.length >=1 && 
+                <ProductContainer 
+                  productInfo={this.props.products[0]}
+                  selectProduct={this.selectProductForIndex.bind(this)}
+                  personIndex={0}
+                  noOfPersons={this.props.noOfPersons}
+                />
+              }
+              { this.props.products && this.props.products.length ==2 && 
+                  <ProductContainer 
+                    productInfo={this.props.products[1]}
+                    selectProduct={this.selectProductForIndex.bind(this)}
+                    personIndex={1}
+                    noOfPersons={this.props.noOfPersons}
+                  />
+              }
+            </Row>
           </Col>
         </Row>
 
