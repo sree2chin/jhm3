@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Modal, Button, Row, Col, Radio } from "react-bootstrap";
 import Input from "../common/textInput";
+import Select from 'react-select';
 
 interface Props extends React.Props<Plan> {
 }
@@ -8,38 +9,55 @@ interface Props extends React.Props<Plan> {
 export default class LicensedModal extends React.Component<Props, {}> {
   constructor(){
     super();
-
   },
+
   saveQuote() {
     this.props.saveQuote();
   },
-  getAmountFormat(amount) {
-    var a = parseInt(amount);
 
-    if(a/1000000 >=1) {
-      return (a/1000000) + "m";
-    } else {
-      return (a/1000) + "k";
-    }
-  },
-
-  
   state = {},
-  handleChange(e) {
-    this.props.handleChange(e.target.value);
-    
+
+  handlePhoneChange(e) {
+    this.props.handlePhoneChange(e.target.value);
     this.setState({
-      email: e.target.value
+      phone: e.target.value
     });
   },
-  onCloseModal() {
 
+  onSlotChange(key, obj) {
+    this.setState({
+      [key]: obj.value
+    });
+    this.props.handleSlotChange(obj.value);
   },
 
-  public render() {  
+  onTextAllowedChange(k, v) {
+    this.props.keyValueChange(k, v);
+  };
 
+  public render() {  
+    const timingSlots = [
+      { 
+        value: "Morning",
+        label: "Morning"
+      },
+      { 
+        value: "After noon",
+        label: "After noon"
+      },
+      { 
+        value: "Evening",
+        label: "Evening"
+      },
+      { 
+        value: "Night",
+        label: "Night"
+      }
+    ];
     return (
-       <Modal show={this.props.showModalEmail} onHide={this.props.onCloseModal} className="email-modal-container">
+       <Modal show={this.props.showModalPhone} onHide={this.props.onCloseModal} className="email-modal-container agent-modal-container">
+                <Modal.Header closeButton>
+                </Modal.Header>
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     <Row className="email-quote-text">
                         Connect me to a licensed agent
@@ -52,15 +70,17 @@ export default class LicensedModal extends React.Component<Props, {}> {
 
                     <Row style={{marginTop: "35px"}}>
                       <Col sm={6}>
-                        <Col sm={12} className="email-label">
+                        <Col sm={12} className="email-label slot-label">
                           Best time to reach you?
                         </Col>
-                        <Col sm={12} className={"email-input-container"}>
-                          <Input 
-                            name={"email"}
-                            placeholder={"Enter your email"}
-                            value={this.state.email}
-                            onChange={this.handleChange.bind(this)}
+                        <Col sm={12} className={"slot-input-container"}>
+                          <Select
+                            name="form-field-slot"
+                            options={timingSlots}
+                            value={this.state.slot}
+                            onChange={(slot)=>{
+                              this.onSlotChange("slot", slot)
+                            }}
                           />
                         </Col>
                       </Col>
@@ -70,10 +90,10 @@ export default class LicensedModal extends React.Component<Props, {}> {
                         </Col>
                         <Col sm={12} className={"email-input-container"}>
                           <Input 
-                            name={"email"}
-                            placeholder={"Enter your email"}
-                            value={this.state.email}
-                            onChange={this.handleChange.bind(this)}
+                            name={"phone-number"}
+                            placeholder={"555-555-5555"}
+                            value={this.state.phone}
+                            onChange={this.handlePhoneChange.bind(this)}
                           />
                         </Col>
                       </Col>
@@ -81,13 +101,13 @@ export default class LicensedModal extends React.Component<Props, {}> {
                     <Row>
                       <Radio name="okay-to-text-number" 
                           onClick={ ()=> {
-                            this.onChange("okay_to_text", "Yes")
+                            this.onTextAllowedChange("okay_to_text", "Yes")
                           }}>
-                        Yes
+                        It's okay to text this number.
                       </Radio>
                     </Row>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer style={{borderBottom: "none"}}>
                     <Row>
                       <Col sm={8} className="c-center">
                         <Button  style={{float: "right"}} className="c-button-default circular" onClick={(){
@@ -96,6 +116,18 @@ export default class LicensedModal extends React.Component<Props, {}> {
                         >
                           SUBMIT
                         </Button>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col sm={8}>
+                        <Row>
+                          <Col>
+                            Vantis Life Call Center toll free number: 
+                          </Col>
+                          <Col>
+                            555-555-5555
+                          </Col>
+                        </Row>
                       </Col>
                     </Row>
                 </Modal.Footer>

@@ -40,6 +40,8 @@ export default class EmailModal extends React.Component<Props, {}> {
 
     return (
        <Modal show={this.props.showModalEmail} onHide={this.props.onCloseModal} className="email-modal-container">
+                <Modal.Header closeButton>
+                </Modal.Header>
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     <Row className="email-quote-text">
                         Email me the quote

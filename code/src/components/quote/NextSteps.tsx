@@ -6,18 +6,18 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty} from "underscore";
-import {submitQuoteForm, submitEmailForm, submitPlansForm, setPersonsData, saveQuoteForm} from '../../actions/Quote';
+import {submitQuoteForm, submitEmailForm, setPersonsData, saveQuoteForm} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
 import EmailModal from "./EmailModal";
 import ThanksEmail from "./ThanksEmail";
+import ThanksPhone from "./ThanksPhone";
 import LicensedModal from "./LicensedModal"; 
 import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
 import Plan from "../common/Plan"
 import { browserHistory } from 'react-router';
-import {submitPlansForm } from '../../actions/Quote';
 
 interface Props {
   plans: [any]
@@ -40,40 +40,6 @@ class PlansPage extends React.Component<Props, {}> {
       productId: product.ProductID
     });
   },
-  submitPlansForm(data) {
-    const persons = [];
-
-    const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
-    personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
-    personOne.sPlanID = data[0].plan.PlanID;
-    personOne.sFaceAmount = data[0].sFaceAmount;
-    personOne.sClassNum="2";
-    personOne.sDividendNum = "1";
-    personOne.sWP="1";
-    persons.push(personOne);
-
-    if(this.props.noOfPersons == 2) {
-      const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-      personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
-      personTwo.sPlanID = data[1].plan.PlanID;
-      personTwo.sFaceAmount = data[1].plan.sFaceAmount;
-      personOne.sClassNum="2";
-      personOne.sDividendNum = "1";
-      personOne.sWP="1";
-      persons.push(personTwo);
-    }
-
-    this.props.setPersonsData(persons);
-
-    this.props.saveQuoteForm(persons).then(() => {
-      this.setState({
-        showModalEmailThanks: true,
-        showModalEmail: false
-      });
-    }).catch(()=>{
-      this.submmitedProductForm = false;
-    });
-  },
 
   changeTypeOfSubmission(val) {
     this.setState({
@@ -88,39 +54,68 @@ class PlansPage extends React.Component<Props, {}> {
   openEmailPopup() {
     this.setState({
       showModalEmail: true,
-      showModalAgent: false
+      type_of_submission: 10002,
+      showModalPhone: false,
     });
   },
 
   openAgentInputPopup() {
     this.setState({
-      showModalAgent: true,
-      showModalEmail: false
+      showModalPhone: true,
+      showModalEmail: false,
+      type_of_submission: 10003
     });
+  },
+  handlePhoneChange(v) {
+    this.setState({
+      phone: v
+    });
+  },
+  handleSlotChange(v) {
+    this.setState({
+      slot: v
+    });
+  },
+  getExtraInfo(person) {
+    if (person.type_of_submission == 10002) {
+      person.email = this.state.email;
+      this.isEmail = true;
+    } else if (person.type_of_submission == 10003) {
+      person.email = this.state.phone;
+      person.slot = this.state.slot;
+    }
   },
   saveQuote() {
     const persons = [];
 
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
-    personOne.email = this.state.email;
-    personOne.type_of_submission = 10002;
+    personOne.type_of_submission = this.state.type_of_submission;
+    this.getExtraInfo(personOne);
+
     persons.push(personOne);
 
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-      personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
-      personTwo.email = this.state.email;
-      personTwo.premium_type = "monthly";
+      personOne.type_of_submission = this.state.type_of_submission;
+      this.getExtraInfo(personOne);
       persons.push(personTwo);
     }
 
     this.props.setPersonsData(persons);
 
     this.props.saveQuoteForm(persons).then(() => {
+      var k1, k2;
+      if(this.isEmail) {
+        k1 = "showModalEmailThanks";
+        k2 = "showModalEmail";
+      } else {
+        k1 = "showModalPhoneThanks";
+        k2 = "showModalPhone";
+      }
       this.setState({
-        showModalEmailThanks: true,
-        showModalEmail: false
+        [k1]: true,
+        [k2]: false
       });
     }).catch(()=>{
       this.submmitedProductForm = false;
@@ -129,6 +124,21 @@ class PlansPage extends React.Component<Props, {}> {
   handleEmailChange(v) {
     this.setState({
       email: v
+    });
+  },
+  closeEmailModal() {
+    this.setState({
+      showModalEmail: false
+    });
+  },
+  closeLicensedModal() {
+    this.setState({
+      showModalPhone: false
+    });
+  },
+  keyValueChange(k, v) {
+    this.setState({
+      [k]: v
     });
   },
   public render() {
@@ -164,7 +174,7 @@ class PlansPage extends React.Component<Props, {}> {
                     <img src={"../images/email.svg"} />
                   </Col>
                 </Col>
-                <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
+                <Col sm={4} onClick={this.openAgentInputPopup.bind(this)}>
                   <Col sm={12} className="next-action-img-container">
                     <img src={"../images/phone.svg"} />
                   </Col>
@@ -202,15 +212,23 @@ class PlansPage extends React.Component<Props, {}> {
           showModalEmail={this.state.showModalEmail}
           saveQuote={this.saveQuote.bind(this)}
           handleChange={this.handleEmailChange.bind(this)}
+          onCloseModal={this.closeEmailModal.bind(this)}
         />
         <LicensedModal 
-          showModalEmail={this.state.showModalAgent}
+          showModalPhone={this.state.showModalPhone}
           saveQuote={this.saveQuote.bind(this)}
-          handleChange={this.handleEmailChange.bind(this)}
-        />
+          handlePhoneChange={this.handlePhoneChange.bind(this)}
+          handleSlotChange={this.handleSlotChange.bind(this)}
+          onCloseModal={this.closeLicensedModal.bind(this)}
+          keyValueChange={this.keyValueChange.bind(this)}
+        /> 
 
         <ThanksEmail
           showModalEmailThanks={this.state.showModalEmailThanks}
+        />
+
+        <ThanksPhone
+          showModalPhoneThanks={this.state.showModalPhoneThanks}
         />
 
       </div>);
@@ -231,9 +249,6 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
   return {
     setPersonsData: (data) => {
       return dispatch(setPersonsData(data))
-    },
-    submitPlansForm: (data) => {
-      return dispatch(submitPlansForm(data))
     },
     saveQuoteForm: (data) => {
       return dispatch(saveQuoteForm(data))

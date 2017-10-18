@@ -10,6 +10,7 @@
     "src/css/product.scss",
     "src/css/plan.scss",
     "src/css/NextSteps.scss",
-    "src/css/email-modal.scss"
+    "src/css/email-modal.scss",
+    "src/css/agent-modal.scss"
   ]
 }

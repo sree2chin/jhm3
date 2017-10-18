@@ -189,8 +189,8 @@ export default class Plan extends React.Component<Props, {}> {
                         <Slider
                           min={parseInt(this.state.selectedPlan.FaceMin)}
                           max={parseInt(this.state.selectedPlan.FaceMax)}
-                          step={parseInt(this.state.selectedPlan.PlanDisplayFaceAmtIncrementValue)}
-
+                          value={this.state.sFaceAmount}
+                          onChange={this.handleSliderChange.bind(this)}
                           onAfterChange={this.handleChange.bind(this)}
                           trackStyle={{ backgroundColor: 'blue', height: 10 }}
                           handleStyle={{
