@@ -97,7 +97,7 @@ class PlansPage extends React.Component<Props, {}> {
 
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-      personOne.type_of_submission = this.state.type_of_submission;
+      personTwo.type_of_submission = this.state.type_of_submission;
       this.getExtraInfo(personOne);
       persons.push(personTwo);
     }

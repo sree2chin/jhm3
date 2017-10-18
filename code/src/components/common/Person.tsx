@@ -173,7 +173,7 @@ export default class Person extends React.Component<Props, {}> {
                 Yes
               </Radio>
               {' '}
-              <Radio name={"person1_smoke"  + personIndex}
+              <Radio name={"person1_smoke_"  + personIndex}
                   onClick={ ()=> {
                     this.onChange("smoke", "No")
                   }}>

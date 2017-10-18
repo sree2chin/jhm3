@@ -107,7 +107,7 @@ export default class Plan extends React.Component<Props, {}> {
       sFaceAmount: parseInt(value)
     });
     var f = function() {
-      this.props.submitPlansForm([{
+      this.props.submitPlansForm(this.props.personIndex, [{
         plan: this.state.selectedPlan,
         sFaceAmount: value
       }]);
