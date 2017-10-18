@@ -76,13 +76,10 @@ class PlansPage extends React.Component<Props, {}> {
       slot: v
     });
   },
-  getExtraInfo(person) {
-    if (person.type_of_submission == 10002) {
-      person.email = this.state.email;
-      this.isEmail = true;
-    } else if (person.type_of_submission == 10003) {
-      person.email = this.state.phone;
-      person.slot = this.state.slot;
+  getExtraInfo(data) {
+    if ( this.state.type_of_submission == 10003) {
+      data.contact_time = this.state.slot;
+      data.phone_number = this.state.phone;
     }
   },
   saveQuote() {
@@ -91,6 +88,7 @@ class PlansPage extends React.Component<Props, {}> {
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
     personOne.type_of_submission = this.state.type_of_submission;
+    personOne.email = this.state.email0;
     this.getExtraInfo(personOne);
 
     persons.push(personOne);
@@ -98,15 +96,23 @@ class PlansPage extends React.Component<Props, {}> {
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
       personTwo.type_of_submission = this.state.type_of_submission;
+      personTwo.email = this.state.email1;
       this.getExtraInfo(personOne);
       persons.push(personTwo);
     }
 
+    var data = {
+      applicants: JSON.stringify(persons)
+    };
+
+    this.getExtraInfo(data)
+
+
     this.props.setPersonsData(persons);
 
-    this.props.saveQuoteForm(persons).then(() => {
+    this.props.saveQuoteForm(data).then(() => {
       var k1, k2;
-      if(this.isEmail) {
+      if(this.state.type_of_submission == 10002) {
         k1 = "showModalEmailThanks";
         k2 = "showModalEmail";
       } else {
@@ -121,9 +127,9 @@ class PlansPage extends React.Component<Props, {}> {
       this.submmitedProductForm = false;
     });
   },
-  handleEmailChange(v) {
+  handleEmailChange(personIndex, v) {
     this.setState({
-      email: v
+      ["email" + personIndex]: v
     });
   },
   closeEmailModal() {
@@ -213,6 +219,7 @@ class PlansPage extends React.Component<Props, {}> {
           saveQuote={this.saveQuote.bind(this)}
           handleChange={this.handleEmailChange.bind(this)}
           onCloseModal={this.closeEmailModal.bind(this)}
+          noOfPersons={this.props.noOfPersons}
         />
         <LicensedModal 
           showModalPhone={this.state.showModalPhone}

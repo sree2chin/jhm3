@@ -68,12 +68,9 @@ module.exports = new function(){
   };
 
   this.saveQuoteForm = function(data, cb){
-    var formData = {
-      applicants: JSON.stringify(data)
-    };
     request({
       url: restOptions.host + '/v1/quote/savequote', 
-      formData: formData, 
+      formData: data, 
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },

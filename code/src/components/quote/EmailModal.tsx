@@ -25,11 +25,11 @@ export default class EmailModal extends React.Component<Props, {}> {
 
   
   state = {},
-  handleChange(e) {
-    this.props.handleChange(e.target.value);
-    
+  handleChange(personIndex, e) {
+    this.props.handleChange(personIndex, e.target.value);
     this.setState({
-      email: e.target.value
+      personIndex: personIndex,
+      ["email" + personIndex]: e.target.value
     });
   },
   onCloseModal() {
@@ -55,17 +55,35 @@ export default class EmailModal extends React.Component<Props, {}> {
 
                     <Row style={{marginTop: "35px"}}>
                       <Col sm={12} className="email-label">
-                        Email address
+                        Applicant Email address 1
                       </Col>
                       <Col sm={12} className={"email-input-container"}>
                         <Input 
-                          name={"email"}
+                          name={"email-1"}
                           placeholder={"Enter your email"}
-                          value={this.state.email}
-                          onChange={this.handleChange.bind(this)}
+                          value={this.state.email0}
+                          onChange={(e)=>{
+                            this.handleChange(0, e)
+                          }}
                         />
                       </Col>
                     </Row>
+                    {this.props.noOfPersons ==2 && <Row style={{marginTop: "35px"}}>
+                        <Col sm={12} className="email-label">
+                          Applicant Email address 2
+                        </Col>
+                        <Col sm={12} className={"email-input-container"}>
+                          <Input 
+                            name={"email-1"}
+                            placeholder={"Enter your email"}
+                            value={this.state.email1}
+                            onChange={(e)=>{
+                              this.handleChange(1, e)
+                            }}
+                          />
+                        </Col>
+                      </Row>
+                    }
                 </Modal.Body>
                 <Modal.Footer>
                     <Row>
