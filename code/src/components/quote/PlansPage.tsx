@@ -139,7 +139,7 @@ class PlansPage extends React.Component<Props, {}> {
           <Plan 
             plans={this.props.plans[0]}
             submitPlansForm={this.submitPlansForm.bind(this)}
-            premiums={this.props.premiums}
+            premiums={this.props.premiums ? this.props.premiums[0] : {}}
             onPaymentTypeChange={this.onPaymentTypeChange.bind(this)}
             personIndex={0}
           />
@@ -148,9 +148,9 @@ class PlansPage extends React.Component<Props, {}> {
           <Plan 
             plans={this.props.plans[1]}
             submitPlansForm={this.submitPlansForm.bind(this)}
-            premiums={this.props.premiums}
+            premiums={this.props.premiums ? this.props.premiums[1] : {}}
             onPaymentTypeChange={this.onPaymentTypeChange.bind(this)}
-            personIndex={0}
+            personIndex={1}
           />
         }
 
