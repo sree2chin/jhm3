@@ -67,7 +67,7 @@ export default class Person extends React.Component<Props, {}> {
           <Col sm={12} className={"c-subheader-text"}>
             Gender
           </Col>
-          <Col sm={4} style={{paddingRight: "22px"}}>
+          <Col sm={12} style={{paddingRight: "22px"}}>
             <FormGroup>
               <Radio name={"person_s_gender_" + personIndex} 
                   onClick={ ()=> {

@@ -84,11 +84,25 @@ export default class Plan extends React.Component<Props, {}> {
     }
 
     const paymentSchedules = JSON.parse(JSON.stringify(this.props.premiums.plans_data.QuoteRateGrid.Col1));
-    const face = find(paymentSchedules, (paymentSchedule)=>{
-      return (paymentSchedule.FaceAmount == this.state.sFaceAmount || paymentSchedule.FaceAmount < this.state.sFaceAmount) 
+    var sFaceAmount;
+    if(this.state.sFaceAmount == 0) {
+      if(this.state.selectedPlan && this.state.selectedPlan.FaceMin) {
+        sFaceAmount = this.state.selectedPlan.FaceMin;
+        this.setState({
+          sFaceAmount
+        });
+      }
+    } else {
+      sFaceAmount = this.state.sFaceAmount;
+    }
+    var face = find(paymentSchedules, (paymentSchedule)=>{
+      return (parseInt(paymentSchedule.FaceAmount) <= parseInt(sFaceAmount)) 
     });
     var p = [];
 
+    if(isEmpty(face)) {
+      face=paymentSchedules[0];
+    }
     if(face && face.Premium) {
       each(face.Premium, (k, v)=> {
         var f = {};
