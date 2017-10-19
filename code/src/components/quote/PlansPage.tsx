@@ -46,7 +46,7 @@ class PlansPage extends React.Component<Props, {}> {
   submitPlansForm(personIndex, data) {
     const persons = [];
 
-    const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
+    const personOne = JSON.parse(JSON.stringify(this.props.persons[personIndex]));
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
     personOne.sPlanID = data[0].plan.PlanID;
     personOne.sFaceAmount = data[0].sFaceAmount;
