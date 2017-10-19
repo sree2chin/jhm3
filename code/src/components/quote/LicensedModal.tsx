@@ -42,8 +42,8 @@ export default class LicensedModal extends React.Component<Props, {}> {
         label: "Morning"
       },
       { 
-        value: "After noon",
-        label: "After noon"
+        value: "Afternoon",
+        label: "Afternoon"
       },
       { 
         value: "Evening",
