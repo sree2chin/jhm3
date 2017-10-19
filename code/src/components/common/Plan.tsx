@@ -83,14 +83,11 @@ export default class Plan extends React.Component<Props, {}> {
       return [];
     }
 
-    const paymentSchedules = JSON.parse(JSON.stringify(this.props.premiums.plans_data.QuoteRateGrid.Col1));
+    var paymentSchedules = JSON.parse(JSON.stringify(this.props.premiums.plans_data.QuoteRateGrid.Col1));
     var sFaceAmount;
     if(this.state.sFaceAmount == 0) {
       if(this.state.selectedPlan && this.state.selectedPlan.FaceMin) {
         sFaceAmount = this.state.selectedPlan.FaceMin;
-        this.setState({
-          sFaceAmount
-        });
       }
     } else {
       sFaceAmount = this.state.sFaceAmount;
@@ -101,7 +98,7 @@ export default class Plan extends React.Component<Props, {}> {
     var p = [];
 
     if(isEmpty(face)) {
-      face=paymentSchedules[0];
+      face=paymentSchedules["Face1"];
     }
     if(face && face.Premium) {
       each(face.Premium, (k, v)=> {
@@ -241,11 +238,11 @@ export default class Plan extends React.Component<Props, {}> {
               </Col>
               <Col sm={3} className="plan-cost-container">
                 <Row style={{marginTop: "30px"}}>
-                  <Col sm={6}>
-                    <Col sm={3} className="plan-cost-text">
+                  <Col sm={8}>
+                    <Col sm={4} className="plan-cost-text">
                       Cost
                     </Col>
-                    <Col sm={3} className="plan-cost-amount">
+                    <Col sm={4} className="plan-cost-amount">
                       {this.state.selectedPaymentType && this.state.selectedPaymentType.value}
                     </Col>
                   </Col>
