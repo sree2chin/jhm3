@@ -12,10 +12,16 @@ export default class PersonInfo extends React.Component<Props, {}> {
   public render() {
     const {person} = this.props;
     const personsContainerWidth = this.props.noOfPersons == 2 ? 6 : 12;
+    var additionalClass = this.props.noOfPersons==2 ? "contains-two-persons" : "";
+    if(this.props.personIndex == 0) {
+      additionalClass += " first-person";
+    } else {
+      additionalClass += " second-person";
+    }
     return (
-          <Col sm={personsContainerWidth} className="person-info-container">
+          <Col sm={personsContainerWidth} className={`person-info-container ${additionalClass}`}>
             <Row className="person-info-header-container">
-              <Col sm={11} className="person-name-container">
+              <Col sm={10} className="person-name-container">
                 {person.name} 
               </Col>
               <Col sm={1} className="person-edit-container" onClick={()=> person.editPerson(person.index)}>
@@ -23,7 +29,7 @@ export default class PersonInfo extends React.Component<Props, {}> {
               </Col>
             </Row>
             <Row className="person-content">
-              <Col sm={4}>
+              <Col sm={4} className="person-info-columns">
                 <Row>
                   <Col sm={12}>
                     <span className="person-label">State: </span>
@@ -31,11 +37,11 @@ export default class PersonInfo extends React.Component<Props, {}> {
                   </Col>
                   <Col sm={12}>
                     <span className="person-label">Gender: </span>
-                    <span className="person-label-content">{person.s_gender}</span>
+                    <span className="person-label-content">{person.s_gender ==1 ? "Male" : "Female"}</span>
                   </Col>
                 </Row>
               </Col>
-              <Col sm={4}>
+              <Col sm={4} className="person-info-columns">
                 <Row>
                   <Col sm={12}>
                     <span className="person-label">D.O.B: </span> 
@@ -46,7 +52,7 @@ export default class PersonInfo extends React.Component<Props, {}> {
                   </Col>
                 </Row>
               </Col>
-              <Col sm={4}>
+              <Col sm={4} className="person-info-columns">
                 <Row>
                   <Col sm={12}>
                     <span className="person-label">Tobacco Use: </span> 

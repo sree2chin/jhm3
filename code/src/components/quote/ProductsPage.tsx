@@ -78,12 +78,14 @@ class ProductsPage extends React.Component<Props, {}> {
               <PersonInfo 
                 person={persons[0]}
                 noOfPersons={this.props.noOfPersons}
+                personIndex={0}
               />
             }
             { this.props.noOfPersons==2 &&
               <PersonInfo 
                 person={persons[1]}
                 noOfPersons={this.props.noOfPersons}
+                personIndex={1}
               />
             }
           </Col>
@@ -100,7 +102,7 @@ class ProductsPage extends React.Component<Props, {}> {
                   noOfPersons={this.props.noOfPersons}
                 />
               }
-              { this.props.products && this.props.products.length ==2 && 
+              { this.props.products && this.props.products.length==2 && 
                   <ProductContainer 
                     productInfo={this.props.products[1]}
                     selectProduct={this.selectProductForIndex.bind(this)}
