@@ -3,11 +3,11 @@ import {Link} from 'react-router';
 import { Navbar } from "react-bootstrap"
 import {Button, Row, Col} from "react-bootstrap";
 
-interface Props extends React.Props<cfooter> {
+interface Props extends React.Props<Header> {
   location: any
 }
 
-export default class cfooter extends React.Component<Props, {}> {
+export default class Header extends React.Component<Props, {}> {
   public render() {
     return (
       <Navbar className={`cf-nav-main-header subheader`}>
