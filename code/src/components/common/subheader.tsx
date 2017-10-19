@@ -13,20 +13,26 @@ export default class cfooter extends React.Component<Props, {}> {
       <Navbar className={`cf-nav-main-header subheader`}>
           <Row>
             <Col sm={4} className={`confirmation-header ${window.location.pathname=="/" || window.location.pathname=="/agent" ? "active" : ""}`}>
-              <span>
-                Gather information
-              </span>
-              <div className="hr-container" style={{marginLeft: "10%"}}>
-                <hr/>
-              </div>
+              <Row>
+                <Col sm={8}>
+                  Gather information
+                </Col>
+                <Col sm={4}>
+                  <div className="hr-container">
+                  </div>
+                </Col>
+              </Row>
             </Col>
             <Col sm={4} className={`confirmation-header ${window.location.pathname.indexOf("products") >-1 ? "active" : ""}`}>
-              <span>
-                Production selection
-              </span>
-              <div className="hr-container">
-                <hr/>
-              </div>
+              <Row>
+                <Col sm={8}>
+                  Production selection
+                </Col>
+                <Col sm={4}>
+                  <div className="hr-container">
+                  </div>
+                </Col>
+              </Row>
             </Col>
             <Col sm={4} className={`confirmation-header ${window.location.pathname=="/next-steps" ? "active" : ""}`}>
               <span>
