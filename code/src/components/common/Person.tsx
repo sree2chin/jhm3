@@ -106,6 +106,7 @@ export default class Person extends React.Component<Props, {}> {
                 showMonthDropdown
                 showYearDropdown
                 dropdownMode="select"
+                placeholderText="MM/DD/YYYY"
               />
               <div style={{display: 'inline-block', marginLeft: "2.5%"}}>
                 <Tooltip content="Please enter your date of birth" styles={toolTipStyles}>

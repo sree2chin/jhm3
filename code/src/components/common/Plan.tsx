@@ -34,7 +34,7 @@ export default class Plan extends React.Component<Props, {}> {
     this.setState({
       [key]: obj.value,
       selectedPaymentType: obj,
-      payment_amount: obj.label
+      payment_amount: parseFloat((obj.label).split("$")[1])
     })
     this.props.onPaymentTypeChange(this.props.personIndex, obj);
   },
@@ -192,16 +192,17 @@ export default class Plan extends React.Component<Props, {}> {
                           value={this.state.sFaceAmount}
                           onChange={this.handleSliderChange.bind(this)}
                           onAfterChange={this.handleChange.bind(this)}
-                          trackStyle={{ backgroundColor: 'blue', height: 10 }}
+                          trackStyle={{ backgroundColor: '#ffffff', height: 10, border: "solid 1px #999999" }}
                           handleStyle={{
-                            borderColor: 'blue',
-                            height: 28,
-                            width: 28,
+                            height: 24,
+                            width: 24,
                             marginLeft: -14,
                             marginTop: -9,
-                            backgroundColor: 'black',
+                            backgroundColor: "#009c91",
+                            boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.15)",
+                            border: "solid 1px rgba(0, 0, 0, 0.75)"
                           }}
-                          railStyle={{ backgroundColor: 'red', height: 10 }}
+                          railStyle={{ backgroundColor: '#ffffff', border: "solid 1px #999999", height: 10 }}
                         />
                       </Col>
                   }
