@@ -14,7 +14,6 @@
 	  line-height: 1.5;
 	  color: #666666;
       &.error {
-	  	margin-top: 13px;
 	  	color: red;
       }
 	}
@@ -168,6 +167,13 @@
 		}
     	.one-person-content {
 		   margin-left: 16%;
+		}
+		.c-one-person-container {
+		    input {
+		    	&.form-control {
+					width: 60%;
+		    	}
+		    }
 		}
     }
    .one-person-outer-container {

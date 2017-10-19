@@ -93,7 +93,7 @@ export default class Person extends React.Component<Props, {}> {
           <Col sm={12} className={"c-subheader-text"}>
             Birth date
           </Col>
-          <Col sm={12} style={{marginBottom: "25px"}}>
+          <Col sm={12}>
             <div>
               <div className={"c-calendar-container"}>
                 <img src={"../images/calendar.svg"} />
@@ -136,7 +136,7 @@ export default class Person extends React.Component<Props, {}> {
               <img style={{marginBottom: "34px"}} src={"../images/question-mark.svg"} />
             </Tooltip>
           </Col>
-          { errors.stateError && <Col sm={12} className={"c-subheader-text error"}>
+          { errors.stateError && <Col style={{marginTop: "-17px"}} sm={12} className={"c-subheader-text error"}>
             Please select your state.
           </Col> }
         </div>
