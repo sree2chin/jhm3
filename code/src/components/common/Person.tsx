@@ -90,7 +90,7 @@ export default class Person extends React.Component<Props, {}> {
           </Col> 
         </div>
         <div>
-          <Col sm={12} className={"c-subheader-text"}>
+          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "10px"}}>
             Birth date
           </Col>
           <Col sm={12}>
