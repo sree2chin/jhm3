@@ -195,7 +195,7 @@ export default class Plan extends React.Component<Props, {}> {
                 <Row>
                   {this.state.selectedPlan && 
                     <Col className="plan-faceMin" sm={2}>
-                      ${this.state.selectedPlan.FaceMin}
+                      ${this.getAmountFormat(this.state.selectedPlan.FaceMin)}
                     </Col>
                   }
                   {this.state.selectedPlan && 
@@ -223,7 +223,7 @@ export default class Plan extends React.Component<Props, {}> {
                   }
                   {this.state.selectedPlan && 
                     <Col className="plan-faceMax" sm={2}>
-                      ${this.state.selectedPlan.FaceMax}
+                      ${this.getAmountFormat(this.state.selectedPlan.FaceMax)}
                     </Col>
                   }
                 </Row>
