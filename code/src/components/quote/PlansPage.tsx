@@ -81,16 +81,16 @@ class PlansPage extends React.Component<Props, {}> {
     const persons = [];
 
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
-    if(this.state.selectedPaymentType0 && this.state.selectedPaymentType0.value) {
-      personOne.premium_amount=parseFloat(this.state.selectedPaymentType0.value.split("$")[1]);
+    if(this.state.selectedPaymentType0 && this.state.selectedPaymentType0.amount) {
+      personOne.premium_amount=parseFloat(this.state.selectedPaymentType0.amount.split("$")[1]);
       personOne.premium_type=this.state.selectedPaymentType0.label;
     }
     persons.push(personOne);
 
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-      if(this.state.selectedPaymentType1 && this.state.selectedPaymentType1.value) {
-        personTwo.premium_amount=parseFloat(this.state.selectedPaymentType1.value.split("$")[1]);
+      if(this.state.selectedPaymentType1 && this.state.selectedPaymentType1.amount) {
+        personTwo.premium_amount=parseFloat(this.state.selectedPaymentType1.amount.split("$")[1]);
         personTwo.premium_type=this.state.selectedPaymentType1.label;
       }
       persons.push(personTwo);

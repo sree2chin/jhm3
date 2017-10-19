@@ -34,7 +34,7 @@ export default class Plan extends React.Component<Props, {}> {
     this.setState({
       [key]: obj.value,
       selectedPaymentType: obj,
-      payment_amount: parseFloat((obj.value).split(" ")[1])
+      payment_amount: parseFloat((obj.amount).split("$")[1])
     })
     this.props.onPaymentTypeChange(this.props.personIndex, obj);
   },
@@ -103,8 +103,9 @@ export default class Plan extends React.Component<Props, {}> {
     if(face && face.Premium) {
       each(face.Premium, (k, v)=> {
         var f = {};
-        f.value = k;
+        f.value = v;
         f.label = v;
+        f.amount=k;
         p.push(f);
       });
     }
@@ -243,7 +244,7 @@ export default class Plan extends React.Component<Props, {}> {
                       Cost
                     </Col>
                     <Col sm={4} className="plan-cost-amount">
-                      {this.state.selectedPaymentType && this.state.selectedPaymentType.value}
+                      {this.props.premiums && this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.QuoteRateGrid && this.props.premiums.plans_data.QuoteRateGrid.Col1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type]}
                     </Col>
                   </Col>
                 </Row>
