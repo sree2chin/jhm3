@@ -184,11 +184,11 @@ export default class Plan extends React.Component<Props, {}> {
             <Row className="plan-sider-info-text">
               <Col sm={6}>
                 <Row className="plan-coverage-container">
-                  {this.state.sFaceAmount && this.state.sFaceAmount !=0 && 
-                    <span style={{fontSize: "26px", textAlign: "right", color: "#009c91"}}>${this.state.sFaceAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </span> 
+                  {(this.state.sFaceAmount && this.state.sFaceAmount !=0) ? 
+                    [<span style={{fontSize: "26px", textAlign: "right", color: "#009c91"}}>${this.state.sFaceAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </span] : null 
                   }
-                  {this.state.sFaceAmount && this.state.sFaceAmount !=0 && 
-                    <span style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> of</span> 
+                  {(this.state.sFaceAmount && this.state.sFaceAmount !=0) ?
+                    [<span style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> of</span>] : null
                   }
                   <span style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Coverage </span>
                 </Row>
