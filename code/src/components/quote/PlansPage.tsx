@@ -114,11 +114,15 @@ class PlansPage extends React.Component<Props, {}> {
             { this.props.noOfPersons>=1 &&
               <PersonInfo 
                 person={persons[0]}
+                noOfPersons={this.props.noOfPersons}
+                personIndex={0}
               />
             }
             { this.props.noOfPersons==2 &&
               <PersonInfo 
                 person={persons[1]}
+                noOfPersons={this.props.noOfPersons}
+                personIndex={1}
               />
             }
           </Col>
