@@ -34,7 +34,7 @@ export default class Plan extends React.Component<Props, {}> {
     this.setState({
       [key]: obj.value,
       selectedPaymentType: obj,
-      payment_amount: parseFloat((obj.label).split("$")[1])
+      payment_amount: parseFloat((obj.value).split(" ")[1])
     })
     this.props.onPaymentTypeChange(this.props.personIndex, obj);
   },
@@ -123,15 +123,13 @@ export default class Plan extends React.Component<Props, {}> {
     var f = function() {
       this.props.submitPlansForm(this.props.personIndex, [{
         plan: this.state.selectedPlan,
-        sFaceAmount: value
+        sFaceAmount: parseInt(value)
       }]);
     }.bind(this);
     setTimeout(f);
   },
   handleSliderChange(value) {
-    this.setState({
-      sFaceAmount: parseInt(value)
-    });
+    this.sFaceAmount = value;
   },
   onFaceValChange(key, value) {
     this.setState({
@@ -185,12 +183,12 @@ export default class Plan extends React.Component<Props, {}> {
               <Col sm={6}>
                 <Row className="plan-coverage-container">
                   {(this.state.sFaceAmount && this.state.sFaceAmount !=0) ? 
-                    [<span style={{fontSize: "26px", textAlign: "right", color: "#009c91"}}>${this.state.sFaceAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </span] : null 
+                    [<span key="1" style={{fontSize: "26px", textAlign: "right", color: "#009c91"}}>${this.state.sFaceAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </span] : null 
                   }
                   {(this.state.sFaceAmount && this.state.sFaceAmount !=0) ?
-                    [<span style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> of</span>] : null
+                    [<span key="2" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> of</span>] : null
                   }
-                  <span style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Coverage </span>
+                  <span key="3" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Coverage </span>
                 </Row>
                 <Row>
                   {this.state.selectedPlan && 
@@ -203,9 +201,7 @@ export default class Plan extends React.Component<Props, {}> {
                         <Slider
                           min={parseInt(this.state.selectedPlan.FaceMin)}
                           max={parseInt(this.state.selectedPlan.FaceMax)}
-                          value={this.state.sFaceAmount}
                           step={10000}
-                          onChange={this.handleSliderChange.bind(this)}
                           onAfterChange={this.handleChange.bind(this)}
                           trackStyle={{ backgroundColor: '#ffffff', height: 10, border: "solid 1px #999999" }}
                           handleStyle={{
