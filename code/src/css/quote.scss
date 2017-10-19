@@ -41,6 +41,15 @@
 			    text-align: left;
 			    color: #666666;
 			    margin-top: 15px;
+			    font-weight: 400;
+	    	}
+	    	&.radio-group {
+	    		.radio {
+	    			margin-top: 3px;
+	    		}
+	    		label {
+	    			margin-top: 2px;
+	    		}
 	    	}
 	    }
 	    .Select-control {

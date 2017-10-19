@@ -68,7 +68,7 @@ export default class Person extends React.Component<Props, {}> {
             Gender
           </Col>
           <Col sm={12} style={{paddingRight: "22px"}}>
-            <FormGroup>
+            <FormGroup className="radio-group">
               <Radio name={"person_s_gender_" + personIndex} 
                   onClick={ ()=> {
                     this.onChange("s_gender", "1")
@@ -89,11 +89,11 @@ export default class Person extends React.Component<Props, {}> {
             </Col> }
           </Col> 
         </div>
-        <div>
-          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "10px"}}>
+        <Row style={{marginBottom: "25px", marginLeft: "0px"}}>
+          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "10px", marginBottom: "3px"}}>
             Birth date
           </Col>
-          <Col sm={12}>
+          <Col sm={12} >
             <div>
               <div className={"c-calendar-container"}>
                 <img src={"../images/calendar.svg"} />
@@ -118,9 +118,9 @@ export default class Person extends React.Component<Props, {}> {
           { errors.s_birthDateError && <Col sm={12} className={"c-subheader-text error"}>
             Please select your birth date.
           </Col> }
-        </div>
+        </Row>
         <div>
-          <Col sm={12} className={"c-subheader-text"}>
+          <Col sm={12} className={"c-subheader-text"} style={{marginBottom: "2px"}}>
             State
           </Col>
           <Col sm={12} className={"c-address-input"}>
@@ -141,10 +141,10 @@ export default class Person extends React.Component<Props, {}> {
           </Col> }
         </div>
         <div>
-          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "10px"}}>
+          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "7px"}}>
             Overall health
           </Col>
-          <Col sm={12} style={{marginBottom: "23px", marginTop: "19px"}}>
+          <Col sm={12} style={{marginBottom: "10px", marginTop: "6px"}}>
             <Select
               name={"form-field-name-" + personIndex}
               options={healthRatingObjects}
@@ -166,7 +166,7 @@ export default class Person extends React.Component<Props, {}> {
             Tobacco use
           </Col>
           <Col sm={4} style={{paddingRight: "22px"}}>
-            <FormGroup>
+            <FormGroup className="radio-group">
               <Radio name={"person1_smoke_" + personIndex}
                   onClick={ ()=> {
                     this.onChange("smoke", "Yes")

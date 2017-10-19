@@ -6,8 +6,8 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import Input from "../common/textInput"
-import Subheader from "../common/subheader"
-import Person from "../common/Person"
+import Subheader from "../common/subheader";
+import Person from "../common/Person";
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import {each, isEmpty} from "underscore";
