@@ -1,4 +1,28 @@
 .product-pager-container {
+   .two-product-outer-container {
+   		.first-product-container {
+   			padding-right: 0px;
+   		}
+   		.second-product-container {
+   			padding-left: 0px;
+   		}
+   		.single-product-content{
+   			margin-left: 0px;
+   		}
+   }
+   .one-product-outer-container {
+   		.single-product-container {
+   			padding-left: 0px;
+   			.single-product-content {
+    			margin-left: 0px;
+    			margin-right: 0px;
+   			}
+   			.quote-product {
+   				margin-left: 0px;
+   				margin-right: 0px;
+   			}
+   		}
+   }
 	.person-info-container {   
 	    background-color: #ffffff;
 	    border: solid 1px #d4d4d4;

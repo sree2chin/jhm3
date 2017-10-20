@@ -41,7 +41,7 @@ export default class ProductContainer extends React.Component<Props, State> {
     if(!isEmpty(products)) {
 
       return (
-          <Col sm={personsContainerWidth}>
+          <Col sm={personsContainerWidth} className={this.props.personIndex==0 ? "first-product-container": "second-product-container"}>
             <Row className="c-center">
               {map(products, (product) =>
                 
