@@ -22,16 +22,23 @@ export default class Person extends React.Component<Props, {}> {
         marginLeft: "15px"
       },
       content: {
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        background: 'none',
         borderRadius: '10px',
-        fontSize: "12px"
+        fontSize: "12px",
+        color: "#ffffff",
+        whiteSpace: "normal",
+        padding: '.3em 5px',
       },
       tooltip: {
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        borderRadius: '10px'
+        borderRadius: '10px',
+        width: "109px",
+        background: 'rgba(0, 0, 0, 0.5)'
       },
       arrow: {
         borderTop: 'solid rgba(0, 0, 0, 0.5) 5px'
+      },
+      gap:{
+
       }
     };
 
@@ -39,10 +46,10 @@ export default class Person extends React.Component<Props, {}> {
     const personIndex = this.props.index;
     const {errors, person} = this.props;
     const healthRatingObjects = [
-          {value: "Fair", label: "Fair"},
-          {value: "Good", label: "Good"},
-          {value: "Very Good", label: "Very Good"},
           {value: "Excellent", label: "Excellent"},
+          {value: "Very Good", label: "Very Good"},
+          {value: "Good", label: "Good"},
+          {value: "Fair", label: "Fair"}
         ];
 
     return (
@@ -61,7 +68,7 @@ export default class Person extends React.Component<Props, {}> {
               )}}
             />
             { errors.nameError && <Col sm={12} className={"c-subheader-text error"}>
-              Please enter your name.
+              Please enter applicant name.
             </Col> }
           </Col>
           <Col sm={12} className={"c-subheader-text"}>
@@ -78,7 +85,7 @@ export default class Person extends React.Component<Props, {}> {
               {' '}
               <Radio name={"person_s_gender_" + personIndex} 
                   onClick={ ()=> {
-                    this.onChange("s_gender", "0")
+                    this.onChange("s_gender", "2")
                   }}>
                 Female
               </Radio>

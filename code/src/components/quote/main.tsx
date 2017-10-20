@@ -39,7 +39,7 @@ class Main extends React.Component<Props, {}> {
         const {s_birthDate, s_gender, state, smoke, health, name} = person;
 
         const s_birthDateError = !(s_birthDate && moment(s_birthDate).format("YYYY-MM-DD").length > 0);
-        const s_genderError = !(s_gender ==1 || s_gender ==0);
+        const s_genderError = !(s_gender ==1 || s_gender ==2);
         const stateError = !(state && state.length > 0);
         const smokeError = !(smoke=="Yes" || smoke=="No");
         const healthError = !(health);
