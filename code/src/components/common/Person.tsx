@@ -19,7 +19,8 @@ export default class Person extends React.Component<Props, {}> {
   public render() {
     const toolTipStyles = {
       wrapper: {
-        marginLeft: "15px"
+        marginLeft: "15px",
+        top: "-16px"
       },
       content: {
         background: 'none',
@@ -42,6 +43,9 @@ export default class Person extends React.Component<Props, {}> {
       }
     };
 
+    const toolTipStylesBirthData = toolTipStyles;
+    toolTipStylesBirthData.wrapper.top = "-2px";
+
     var statesObjects = getStateObjects();
     const personIndex = this.props.index;
     const {errors, person} = this.props;
@@ -58,7 +62,7 @@ export default class Person extends React.Component<Props, {}> {
           <Col sm={12} className={"c-person-header-text"}>
             {"Applicant " + (personIndex + 1)}
           </Col>
-          <Col sm={12}>
+          <Col sm={12} style={{marginBottom: "15px"}} className="person-name-container">
             <Input 
               name={"first-applicant-name-" + personIndex}
               label="Name"
@@ -67,14 +71,14 @@ export default class Person extends React.Component<Props, {}> {
                 this.onChange("name", e.target.value
               )}}
             />
-            { errors.nameError && <Col sm={12} className={"c-subheader-text error"}>
+            { errors.nameError && <Col sm={12} className={"c-subheader-text error"}  style={{paddingLeft: "0px"}}>
               Please enter applicant name.
             </Col> }
           </Col>
           <Col sm={12} className={"c-subheader-text"}>
             Gender
           </Col>
-          <Col sm={12} style={{paddingRight: "22px"}}>
+          <Col sm={12} style={{paddingRight: "22px", marginBottom: "15px"}} className="person-gender-container">
             <FormGroup className="radio-group">
               <Radio name={"person_s_gender_" + personIndex} 
                   onClick={ ()=> {
@@ -91,13 +95,13 @@ export default class Person extends React.Component<Props, {}> {
               </Radio>
               {' '}
             </FormGroup>
-            { errors.s_genderError && <Col sm={12} className={"c-subheader-text error"}>
+            { errors.s_genderError && <Col sm={12} className={"c-subheader-text error"} style={{paddingLeft: "0px"}}>
               Please select your gender.
             </Col> }
           </Col> 
         </div>
         <Row style={{marginBottom: "25px", marginLeft: "0px"}}>
-          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "10px", marginBottom: "3px"}}>
+          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "0px", marginBottom: "3px"}}>
             Birth date
           </Col>
           <Col sm={12} >
@@ -115,8 +119,8 @@ export default class Person extends React.Component<Props, {}> {
                 dropdownMode="select"
                 placeholderText="MM/DD/YYYY"
               />
-              <div style={{display: 'inline-block', marginLeft: "2.5%"}}>
-                <Tooltip content="Please enter your date of birth" styles={toolTipStyles}>
+              <div style={{display: 'inline-block'}}>
+                <Tooltip content="Please enter your date of birth" styles={toolTipStylesBirthData}>
                   <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
                 </Tooltip>
               </div>
@@ -126,7 +130,7 @@ export default class Person extends React.Component<Props, {}> {
             Please select your birth date.
           </Col> }
         </Row>
-        <div>
+        <div style={{marginBottom: "12px"}}>
           <Col sm={12} className={"c-subheader-text"} style={{marginBottom: "2px"}}>
             State
           </Col>
@@ -140,15 +144,16 @@ export default class Person extends React.Component<Props, {}> {
               }}
             />
             <Tooltip content="Please select your state" styles={toolTipStyles}>
-              <img style={{marginBottom: "34px"}} src={"../images/question-mark.svg"} />
+              <img src={"../images/question-mark.svg"} />
             </Tooltip>
+             { errors.stateError && <Col style={{ paddingLeft: "0px"}} sm={12} className={"c-subheader-text error"}>
+                  Please select your state.
+                </Col> }
           </Col>
-          { errors.stateError && <Col style={{marginTop: "-17px"}} sm={12} className={"c-subheader-text error"}>
-            Please select your state.
-          </Col> }
+   
         </div>
-        <div>
-          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "7px"}}>
+        <div  style={{marginBottom: "0px"}}>
+          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "15px"}}>
             Overall health
           </Col>
           <Col sm={12} style={{marginBottom: "10px", marginTop: "6px"}}>
@@ -161,18 +166,19 @@ export default class Person extends React.Component<Props, {}> {
               }}
             />
             <Tooltip content="Please select your health status" styles={toolTipStyles}>
-              <img style={{marginBottom: "34px"}} src={"../images/question-mark.svg"} />
+              <img src={"../images/question-mark.svg"} />
             </Tooltip>
+            { errors.person1_healthError && <Col sm={12} className={"c-subheader-text error"}>
+              Please select your person1_health status.
+            </Col> }
           </Col>
-          { errors.person1_healthError && <Col sm={12} className={"c-subheader-text error"}>
-            Please select your person1_health status.
-          </Col> }
+
         </div>
         <div>
-          <Col sm={12} className={"c-subheader-text"}>
+          <Col sm={12} className={"c-subheader-text"}  style={{marginTop: "5px"}}>
             Tobacco use
           </Col>
-          <Col sm={4} style={{paddingRight: "22px"}}>
+          <Col sm={12} style={{paddingRight: "22px"}} className="person-tobacco-container">
             <FormGroup className="radio-group">
               <Radio name={"person1_smoke_" + personIndex}
                   onClick={ ()=> {
@@ -189,10 +195,10 @@ export default class Person extends React.Component<Props, {}> {
               </Radio>
               {' '}
             </FormGroup>
+            { errors.smokeError && <Col sm={12} className={"c-subheader-text error"} style={{marginTop: "0px", paddingLeft: "0px"}}>
+              Please select whether you smoke or not.
+            </Col> }
           </Col>
-          { errors.smokeError && <Col sm={12} className={"c-subheader-text error"}>
-            Please select whether you smoke or not.
-          </Col> }
         </div>
       </Col>
     );

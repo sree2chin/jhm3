@@ -15,6 +15,7 @@
 	  color: #666666;
       &.error {
 	  	color: red;
+	  	margin-top: 5px;
       }
 	}
 	.c-person-header-text {
@@ -194,6 +195,27 @@
 		    margin-right: auto;
 		    float: none;
 		    background-color: #fff;
+    	}
+    }
+    .person-name-container {
+    	.form-group {
+    		margin-bottom: 0px;
+    	}
+    }
+    .person-gender-container {
+    	.radio-group.form-group {
+    		margin-bottom: 0px;
+    		.radio {
+    			margin-bottom: 0px;
+    		}
+    	}
+    }
+    .person-tobacco-container {
+    	.radio-group.form-group {
+    		margin-bottom: 0px;
+    		.radio {
+    			margin-bottom: 0px;
+    		}
     	}
     }
 }
