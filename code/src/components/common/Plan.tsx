@@ -45,11 +45,6 @@ export default class Plan extends React.Component<Props, {}> {
       plan.label = plan.PlanDisplayName;
       this.onPlanChange("sPlanID", plan);
     }
-    if(!isEmpty(this.props.premiums) && !isEmpty(this.props.premiums.plans_data) && !isEmpty(this.props.premiums.plans_data)) {
-      this.setState({
-        sFaceAmount: parseInt(this.props.premiums.plans_data.FaceAmount)
-      });
-    }
   },
   getAmountFormat(amount) {
     var a = parseInt(amount);
