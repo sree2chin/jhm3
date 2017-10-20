@@ -54,13 +54,13 @@ class SelectPersons extends React.Component<Props, State> {
 
               <Col sm={3} className={`c-select-one-person ${this.state.noOfPersons==1 ? "active" : ""}`} onClick={()=> this.selectNoOfPersons(1)} >
                  {(!this.state.noOfPersons || this.state.noOfPersons==2) && <img src="./images/one-people.svg" /> }
-                 {this.state.noOfPersons==1 && <img src="./images/one-people-active.svg" /> }
+                 {this.state.noOfPersons==1 && <img src="./images/one-people-active.png" /> }
                 <p> One person</p>
               </Col>
 
               <Col sm={3} className={`c-select-two-person ${this.state.noOfPersons==2 ? "active" : ""}`}  onClick={()=> this.selectNoOfPersons(2)} >
                 {(!this.state.noOfPersons || this.state.noOfPersons==1) && <img src="./images/two-people.svg" /> }
-                {this.state.noOfPersons==2 && <img src="./images/two-people-active.svg" /> }
+                {this.state.noOfPersons==2 && <img src="./images/two-people-active.png" /> }
                 <p> Two persons</p>
               </Col>
 
