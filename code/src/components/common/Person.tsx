@@ -80,20 +80,28 @@ export default class Person extends React.Component<Props, {}> {
           </Col>
           <Col sm={12} style={{paddingRight: "22px", marginBottom: "15px"}} className="person-gender-container">
             <FormGroup className="radio-group">
-              <Radio name={"person_s_gender_" + personIndex} 
+              <div className="c-radio">
+                <input 
+                  type="radio" 
+                  name={"person_s_gender_" + personIndex} 
                   onClick={ ()=> {
-                    this.onChange("s_gender", "1")
-                  }}>
-                Male
-              </Radio>
-              {' '}
-              <Radio name={"person_s_gender_" + personIndex} 
-                  onClick={ ()=> {
-                    this.onChange("s_gender", "2")
-                  }}>
-                Female
-              </Radio>
-              {' '}
+                      this.onChange("s_gender", "1")
+                    }}
+                />
+                <span></span>
+                <abbr> Male </abbr>
+              </div>
+              <div className="c-radio">
+                <input 
+                  type="radio" 
+                  name={"person_s_gender_" + personIndex} 
+                    onClick={ ()=> {
+                      this.onChange("s_gender", "2")
+                    }}
+                />
+                <span></span>
+                <abbr> Female </abbr>
+              </div>
             </FormGroup>
             { errors.s_genderError && <Col sm={12} className={"c-subheader-text error"} style={{paddingLeft: "0px"}}>
               Please select your gender.
@@ -120,9 +128,9 @@ export default class Person extends React.Component<Props, {}> {
                 placeholderText="MM/DD/YYYY"
               />
               <div style={{display: 'inline-block'}}>
-                <Tooltip content="Please enter your date of birth" styles={toolTipStylesBirthData}>
-                  <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
-                </Tooltip>
+              <Tooltip content="Please enter your date of birth" styles={toolTipStylesBirthData}>
+                <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
+              </Tooltip>
               </div>
             </div>
           </Col>
@@ -180,20 +188,28 @@ export default class Person extends React.Component<Props, {}> {
           </Col>
           <Col sm={12} style={{paddingRight: "22px"}} className="person-tobacco-container">
             <FormGroup className="radio-group">
-              <Radio name={"person1_smoke_" + personIndex}
+              <div className="c-radio">
+                <input 
+                  type="radio" 
+                  name={"person1_smoke_" + personIndex}
                   onClick={ ()=> {
-                    this.onChange("smoke", "Yes")
-                  }}>
-                Yes
-              </Radio>
-              {' '}
-              <Radio name={"person1_smoke_"  + personIndex}
+                      this.onChange("smoke", "Yes")
+                    }}
+                />
+                <span></span>
+                <abbr> Yes </abbr>
+              </div>
+              <div className="c-radio">
+                <input 
+                  type="radio" 
+                  name={"person1_smoke_" + personIndex}
                   onClick={ ()=> {
-                    this.onChange("smoke", "No")
-                  }}>
-                No
-              </Radio>
-              {' '}
+                      this.onChange("smoke", "No")
+                    }}
+                />
+                <span></span>
+                <abbr> No </abbr>
+              </div>
             </FormGroup>
             { errors.smokeError && <Col sm={12} className={"c-subheader-text error"} style={{marginTop: "0px", paddingLeft: "0px"}}>
               Please select whether you smoke or not.
