@@ -24,6 +24,7 @@
     height: 200px;
     margin-right: 3%;
     margin-top: 23px;
+    cursor: pointer;
     &.active {
       background-color: #317dbd;
       color: white;
@@ -48,6 +49,7 @@
     margin-top: 23px;
     height: 200px;
     margin-bottom: 27px;
+    cursor: pointer;
     &.active {
       background-color: #317dbd;
       color: white;

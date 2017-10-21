@@ -13,7 +13,11 @@ interface Props extends React.Props<Person> {
 }
 
 export default class Person extends React.Component<Props, {}> {
+  state = {},
   onChange(key, value) {
+    this.setState({
+      [key]: value
+    });
     this.props.onChange(this.props.index, key, value);
   },
   public render() {
@@ -80,27 +84,27 @@ export default class Person extends React.Component<Props, {}> {
           </Col>
           <Col sm={12} style={{paddingRight: "22px", marginBottom: "15px"}} className="person-gender-container">
             <FormGroup className="radio-group">
-              <div className="c-radio">
-                <input 
-                  type="radio" 
-                  name={"person_s_gender_" + personIndex} 
-                  onClick={ ()=> {
+              <div className="c-radio" onClick={ ()=> {
                       this.onChange("s_gender", "1")
-                    }}
-                />
-                <span></span>
-                <abbr> Male </abbr>
-              </div>
-              <div className="c-radio">
+                    }}>
                 <input 
                   type="radio" 
                   name={"person_s_gender_" + personIndex} 
-                    onClick={ ()=> {
-                      this.onChange("s_gender", "2")
-                    }}
+                  checked={this.state.s_gender == "1"}
                 />
                 <span></span>
-                <abbr> Female </abbr>
+                <label htmlFor={"person_s_gender_" + personIndex}> Male </label >
+              </div>
+              <div className="c-radio" onClick={ ()=> {
+                      this.onChange("s_gender", "2")
+                    }}>
+                <input 
+                  type="radio" 
+                  name={"person_s_gender_" + personIndex} 
+                  checked={this.state.s_gender == "2"}
+                />
+                <span></span>
+                <label htmlFor={"person_s_gender_" + personIndex}> Female </label>
               </div>
             </FormGroup>
             { errors.s_genderError && <Col sm={12} className={"c-subheader-text error"} style={{paddingLeft: "0px"}}>
@@ -188,27 +192,27 @@ export default class Person extends React.Component<Props, {}> {
           </Col>
           <Col sm={12} style={{paddingRight: "22px"}} className="person-tobacco-container">
             <FormGroup className="radio-group">
-              <div className="c-radio">
-                <input 
-                  type="radio" 
-                  name={"person1_smoke_" + personIndex}
-                  onClick={ ()=> {
+              <div className="c-radio" onClick={ ()=> {
                       this.onChange("smoke", "Yes")
-                    }}
-                />
-                <span></span>
-                <abbr> Yes </abbr>
-              </div>
-              <div className="c-radio">
+                    }}>
                 <input 
                   type="radio" 
                   name={"person1_smoke_" + personIndex}
-                  onClick={ ()=> {
-                      this.onChange("smoke", "No")
-                    }}
+                  checked={this.state.smoke == "Yes"}
                 />
                 <span></span>
-                <abbr> No </abbr>
+                <label> Yes </label>
+              </div>
+              <div className="c-radio" onClick={ ()=> {
+                      this.onChange("smoke", "No")
+                    }}>
+                <input 
+                  type="radio" 
+                  name={"person1_smoke_" + personIndex}
+                  checked={this.state.smoke == "No"}
+                />
+                <span></span>
+                <label> No </label>
               </div>
             </FormGroup>
             { errors.smokeError && <Col sm={12} className={"c-subheader-text error"} style={{marginTop: "0px", paddingLeft: "0px"}}>
