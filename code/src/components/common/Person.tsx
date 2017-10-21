@@ -47,8 +47,8 @@ export default class Person extends React.Component<Props, {}> {
       }
     };
 
-    const toolTipStylesBirthData = toolTipStyles;
-    toolTipStylesBirthData.wrapper.top = "-2px";
+    const toolTipStylesBirthData = JSON.parse(JSON.stringify(toolTipStyles));
+    toolTipStylesBirthData.wrapper.top = "0px";
 
     var statesObjects = getStateObjects();
     const personIndex = this.props.index;
@@ -155,9 +155,11 @@ export default class Person extends React.Component<Props, {}> {
                 this.onChange("state", stateObj.value)
               }}
             />
+            <div style={{display: 'inline-block'}}>
             <Tooltip content="Please select your state" styles={toolTipStyles}>
-              <img src={"../images/question-mark.svg"} />
+              <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
             </Tooltip>
+            </div>
              { errors.stateError && <Col style={{ paddingLeft: "0px"}} sm={12} className={"c-subheader-text error"}>
                   Please select your state.
                 </Col> }
@@ -177,9 +179,11 @@ export default class Person extends React.Component<Props, {}> {
                 this.onChange("health", healthObj.value)
               }}
             />
+            <div style={{display: 'inline-block'}}>
             <Tooltip content="Please select your health status" styles={toolTipStyles}>
-              <img src={"../images/question-mark.svg"} />
+              <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
             </Tooltip>
+            </div>
             { errors.person1_healthError && <Col sm={12} className={"c-subheader-text error"}>
               Please select your person1_health status.
             </Col> }
