@@ -98,8 +98,8 @@ class PlansPage extends React.Component<Props, {}> {
 
     this.props.setPersonsData(persons);
 
-      const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent/" : "/";
-      browserHistory.push(basePath + "next-steps");
+    const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
+    browserHistory.push(basePath + "next-steps");
   }
   public render() {
 

@@ -30,10 +30,9 @@
 	    padding-top: 21px;
 	}
 	.c-one-person-container {
-		.birth-date-picker-container {
-			div:first-child {
-				display: inline-block;
-			}
+		.birth-date-picker-container span.test-class + div{
+			display: inline-block;
+			width: 27%;
 		}
 		box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
 		border: solid 1px #d4d4d4;
@@ -103,7 +102,11 @@
 	}
     .react-datepicker__input-container input {
 	    color: #333333;
-	    padding-left: 12px;
+	    background-repeat: no-repeat;
+	    background-image: url("./images/calendar.svg");
+	    background-position: 20px 11px;
+	    width: 100%;
+	    padding-left: 20%;
     }
     .c-coverage-amount {
 	    font-size: 34px;
