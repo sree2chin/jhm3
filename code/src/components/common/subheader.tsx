@@ -12,7 +12,7 @@ export default class cfooter extends React.Component<Props, {}> {
     return (
       <Navbar className={`cf-nav-main-header subheader`}>
           <Row>
-            <Col sm={4} className={`confirmation-header ${window.location.pathname=="/" || window.location.pathname=="/agent" ? "active" : ""}`}>
+            <Col xs={12} sm={4} className={`confirmation-header ${window.location.pathname=="/" || window.location.pathname=="/agent" ? "active" : ""}`}>
               <Row>
                 <Col sm={8}>
                   Gather information
@@ -23,7 +23,7 @@ export default class cfooter extends React.Component<Props, {}> {
                 </Col>
               </Row>
             </Col>
-            <Col sm={4} className={`confirmation-header ${window.location.pathname.indexOf("products") >-1 ? "active" : ""}`}>
+            <Col xs={12} sm={4} className={`confirmation-header ${window.location.pathname.indexOf("products") >-1 ? "active" : ""}`}>
               <Row>
                 <Col sm={8}>
                   Production selection
@@ -34,7 +34,7 @@ export default class cfooter extends React.Component<Props, {}> {
                 </Col>
               </Row>
             </Col>
-            <Col sm={4} className={`confirmation-header ${window.location.pathname=="/next-steps" ? "active" : ""}`}>
+            <Col xs={12} sm={4} className={`confirmation-header ${window.location.pathname=="/next-steps" ? "active" : ""}`}>
               <span>
                 Next steps
               </span>

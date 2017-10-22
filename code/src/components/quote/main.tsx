@@ -143,7 +143,7 @@ class Main extends React.Component<Props, {}> {
               </div>  
             </div>
             <Row className={this.props.noOfPersons==2 ? "two-person-outer-container": "one-person-outer-container"}>
-              <Col md={personsContainerWidth} className="one-person-content">
+              <Col sm={personsContainerWidth} className="one-person-content">
                 <Person 
                   onChange={this.changePersonInfo.bind(this)}
                   index={0}
@@ -153,7 +153,7 @@ class Main extends React.Component<Props, {}> {
                 />
               </Col>
               { this.props.noOfPersons==2 &&
-                <Col md={personsContainerWidth} className="second-person-content">
+                <Col sm={personsContainerWidth} className="second-person-content">
                   <Person 
                     onChange={this.changePersonInfo.bind(this)}
                     index={1}
