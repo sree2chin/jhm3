@@ -113,6 +113,7 @@ class Main extends React.Component<Props, {}> {
       }
       } else {
         persons.push(person);
+        persons.push({});
       }
 
     this.setState({persons});

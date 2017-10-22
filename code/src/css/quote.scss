@@ -30,6 +30,11 @@
 	    padding-top: 21px;
 	}
 	.c-one-person-container {
+		.birth-date-picker-container {
+			div:first-child {
+				display: inline-block;
+			}
+		}
 		box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
 		border: solid 1px #d4d4d4;
 		background-color: rgb(255, 255, 255); padding-left: 0px; 
@@ -83,13 +88,13 @@
 	    }
 	}
 	.c-calendar-container {
+		width: 58px;
 	    display: inline-block;
 	    height: 44px;
 	    border-radius: 2px;
 	    background-color: #f7f7f7;
 	    border: solid 1px #cccccc;
 	    line-height: 43px;
-	    width: 8%;
 	    text-align: center;
 	    border-right: 0px;
 	    &+ div {

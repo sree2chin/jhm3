@@ -116,11 +116,7 @@ export default class Person extends React.Component<Props, {}> {
           <Col sm={12} className={"c-subheader-text"} style={{marginTop: "0px", marginBottom: "3px"}}>
             Birth date
           </Col>
-          <Col sm={12} >
-            <div>
-              <div className={"c-calendar-container"}>
-                <img src={"../images/calendar.svg"} />
-              </div>
+          <Col sm={12} className="birth-date-picker-container" >
               <DatePicker 
                 selected={person.s_birthDate} 
                 onChange={(date)=>{
@@ -130,12 +126,17 @@ export default class Person extends React.Component<Props, {}> {
                 showYearDropdown
                 dropdownMode="select"
                 placeholderText="MM/DD/YYYY"
+                customInput={<div style={{display: "inline-block"}}>
+                  <div className={"c-calendar-container"}>
+                    <img src={"../images/calendar.svg"} />
+                  </div>
+                  <input type="text" value="" placeholder="MM/DD/YYYY" />
+                </div>}
               />
               <div style={{display: 'inline-block'}}>
-              <Tooltip content="Please enter your date of birth" styles={toolTipStylesBirthData}>
-                <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
-              </Tooltip>
-              </div>
+                <Tooltip content="Please enter your date of birth" styles={toolTipStylesBirthData}>
+                  <img style={{marginBottom: "2px"}} src={"../images/question-mark.svg"} />
+                </Tooltip>
             </div>
           </Col>
           { errors.s_birthDateError && <Col sm={12} className={"c-subheader-text error"}>
