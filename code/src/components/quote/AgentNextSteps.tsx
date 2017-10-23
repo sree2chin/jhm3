@@ -195,9 +195,7 @@ class PlansPage extends React.Component<Props, {}> {
               <Col sm={8} className="agent-next-steps-container">
                 <FormGroup className="radio-group">
                   <div className="agent-next-step-container">
-                    <div className="c-radio l-next-step-container" onClick={ ()=> {
-                            this.onChange("s_gender", "1")
-                          }}>
+                    <div className="c-radio l-next-step-container" onClick={this.handleTickToVantisLinkClick.bind(this)}>
                       <input 
                         type="radio" 
                         name={"person_s_gender_"} 
@@ -212,7 +210,7 @@ class PlansPage extends React.Component<Props, {}> {
                       <input 
                         type="radio" 
                         name={"person_s_gender_"} 
-                        checked={this.state.s_gender == "1"}
+                        checked={this.state.showModalPhone && this.state.type_of_submission==10004}
                       />
                       <span></span>
                       <label htmlFor={"person_s_gender_"}> Ticket to Vantis Life sales rep to complete application </label >
@@ -223,7 +221,7 @@ class PlansPage extends React.Component<Props, {}> {
                       <input 
                         type="radio" 
                         name={"person_s_gender_"} 
-                        checked={this.state.handlePhoneChange && this.state.type_of_submission==10005}
+                        checked={this.state.showModalPhone && this.state.type_of_submission==10005}
                       />
                       <span></span>
                       <label htmlFor={"person_s_gender_"}> Ticket to internal agent to complete application </label >

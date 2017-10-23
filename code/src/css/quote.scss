@@ -195,6 +195,13 @@
 		    .Select--single {
 		    	width: 48%;
 		    }
+			.birth-date-picker-container span.test-class + div{
+				display: inline-block;
+				width: 46%;
+			}
+		}
+		.react-datepicker__input-container input {
+			padding-left: 27%;
 		}
     }
    .one-person-outer-container {

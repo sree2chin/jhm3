@@ -12,7 +12,7 @@ export default class cfooter extends React.Component<Props, {}> {
     return (
       <Navbar className={`cf-nav-main-header subheader`}>
           <Row>
-            <Col xs={12} sm={4} className={`confirmation-header ${window.location.pathname=="/" || window.location.pathname=="/agent" ? "active" : ""}`}>
+            <Col xs={12} sm={4} className={`confirmation-header ${window.location.pathname=="/" || window.location.pathname=="/agent" || window.location.pathname=="/agent/" ? "active" : ""}`}>
               <Row>
                 <Col sm={8}>
                   Gather information
