@@ -26,6 +26,9 @@ interface Props {
 class PlansPage extends React.Component<Props, {}> {
   constructor(){
     super();
+    this.changeTypeOfSubmission.bind(this);
+    this.openAgentInputPopup.bind(this);
+    this.openEmailPopup.bind(this);
   },
   state={},
   componentWillMount() {
@@ -54,18 +57,30 @@ class PlansPage extends React.Component<Props, {}> {
   openEmailPopup() {
     this.setState({
       showModalEmail: true,
-      type_of_submission: 10002,
       showModalPhone: false,
     });
   },
 
+  handleEmailApplicationLinkClick() {
+    this.openEmailPopup();
+    this.changeTypeOfSubmission(10002);
+  },
+
+  handleTickToInternalAgentLinkClick() {
+    this.openAgentInputPopup();
+    this.changeTypeOfSubmission(10005);
+  },
+  handleTickToVantisLinkClick() {
+    this.openAgentInputPopup();
+    this.changeTypeOfSubmission(10004);
+  },
   openAgentInputPopup() {
     this.setState({
       showModalPhone: true,
       showModalEmail: false,
-      type_of_submission: 10003
     });
   },
+
   handlePhoneChange(v) {
     this.setState({
       phone: v
@@ -169,58 +184,66 @@ class PlansPage extends React.Component<Props, {}> {
         <Row>
           <Col sm={8} className="c-center customer-next-steps-container">
             <Row>
-              <Col sm={6} className="c-center next-steps-header">
-                OK... Let's Take Some fjkdfkhdjkfhdskjction
+              <Col sm={4} className="">
+                <Row className="next-steps-header">
+                  OK... Let's Take Some Action!
+                </Row>
+                <Row sm={8} className="next-steps-text">
+                  This where the rubber hits the road. You're well on your way on getting covered with life insurance! Click on the appropriate button to take the next step.
+                </Row>
               </Col>
-            </Row>
-            <Row>
-              <Col sm={8} className="next-steps-text c-center">
-                This where the rubber hits the road. You're well on your way on getting covered with life insurance! Click on the appropriate button to take the next step.
+              <Col sm={8} className="agent-next-steps-container">
+                <FormGroup className="radio-group">
+                  <div className="agent-next-step-container">
+                    <div className="c-radio l-next-step-container" onClick={ ()=> {
+                            this.onChange("s_gender", "1")
+                          }}>
+                      <input 
+                        type="radio" 
+                        name={"person_s_gender_"} 
+                        checked={this.state.s_gender == "1"}
+                      />
+                      <span></span>
+                      <label htmlFor={"person_s_gender_"}> Complet the application (20 minutes) </label >
+                    </div>
+                  </div>
+                  <div className="agent-next-step-container">
+                    <div className="c-radio l-next-step-container" onClick={this.handleTickToVantisLinkClick.bind(this)}>
+                      <input 
+                        type="radio" 
+                        name={"person_s_gender_"} 
+                        checked={this.state.s_gender == "1"}
+                      />
+                      <span></span>
+                      <label htmlFor={"person_s_gender_"}> Ticket to Vantis Life sales rep to complete application </label >
+                    </div>
+                  </div>
+                  <div className="agent-next-step-container">
+                    <div className="c-radio l-next-step-container" onClick={this.handleTickToInternalAgentLinkClick.bind(this)}>
+                      <input 
+                        type="radio" 
+                        name={"person_s_gender_"} 
+                        checked={this.state.handlePhoneChange && this.state.type_of_submission==10005}
+                      />
+                      <span></span>
+                      <label htmlFor={"person_s_gender_"}> Ticket to internal agent to complete application </label >
+                    </div>
+                  </div>
+                  <div className="agent-next-step-container">
+                    <div className="c-radio l-next-step-container" onClick={this.handleEmailApplicationLinkClick.bind(this)}>
+                      <input 
+                        type="radio" 
+                        name={"person_s_gender_"} 
+                        checked={this.state.showModalEmail && this.state.type_of_submission==10002}
+                      />
+                      <span></span>
+                      <label htmlFor={"person_s_gender_"}> Email the application link to your customer to complete </label >
+                    </div>
+                  </div>
+                </FormGroup>
               </Col>
-            </Row>
-            <Row>
-              <Col sm={12}> 
-                <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
-                  <Col sm={12} className="next-action-img-container">
-                    <img src={"../images/application.svg"} />
-                  </Col>
-                </Col>
-                <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
-                  <Col sm={12} className="next-action-img-container">
-                    <img src={"../images/email.svg"} />
-                  </Col>
-                </Col>
-                <Col sm={4} onClick={this.openAgentInputPopup.bind(this)}>
-                  <Col sm={12} className="next-action-img-container">
-                    <img src={"../images/phone.svg"} />
-                  </Col>
-                </Col>
-              </Col>
-            </Row>
-            <Row>
-              <Col sm={12} className="next-steps-footer"> 
-                <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
-                  Continue to application
-                </Col>
-                <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
-                  Email me quote
-                </Col>
-                <Col sm={4} onClick={this.openAgentInputPopup.bind(this)}>
-                  Connect me to a licensed agent
-                </Col>
-              </Col>
-            </Row>
-          </Col>
 
-        </Row>
-        <Row>
-          <Col sm={8} className="c-center">
-            <Button  style={{width: "50%", float: "right"}} className="c-button-default circular" onClick={(){
-                this.submitQuote()
-              }}
-            >
-              CONTINUE
-            </Button>
+            </Row>
           </Col>
         </Row>
 

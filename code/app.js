@@ -64,6 +64,7 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'dist'), {maxAge: thirtyDay}));
 app.use("/dist", express.static(__dirname +'/dist/'));
+app.use("/agent", express.static(__dirname +'/dist/'));
 
 requireFu(__dirname + '/routes')(app);
 

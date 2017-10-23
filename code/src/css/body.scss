@@ -68,15 +68,26 @@ body {
     padding-right: 5%!important;
 }
 
-.l-plan-container {
-    height: 80px;
-    background-color: #ffffff;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
-    border: solid 1px #d4d4d4;
+.l-next-step-container {
     &.active {
         background-color: #317dbd;
         box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
     }
+    &.c-radio {
+        width: 100%;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        margin-left: 4%;
+        label {
+            font-weight: normal;
+        }
+    }
+}
+.agent-next-steps-container {
+    margin-top: 20px;
+    margin-bottom: 3px;
 }
 .c-footer {
   height: 240px;
@@ -89,4 +100,11 @@ body {
       margin-top: 62px;
       line-height: 22px;
   }
+}
+
+.agent-next-step-container {
+    background-color: #ffffff;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    border: solid 1px #d4d4d4;
+    height: 80px;
 }
