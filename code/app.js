@@ -41,14 +41,14 @@ var thirtyDay = 30 * 86400000;
 app.use(session({
     store: new RedisStore({
       host: appConfig.getProperty('redis_url'),
-      port: appConfig.getProperty('redis_port'), prefix: 'test-sess',
+      port: appConfig.getProperty('redis_port'), prefix: 'c-sess',
       ttl: 30*86400
     }),
-    cookie: {domain: appConfig.getProperty('server_domain'), expires: new Date(Date.now() + thirtyDay)},
-    secret: 'testSecret',
+    cookie: {domain: "localhost", expires: new Date(Date.now() + thirtyDay)},
+    secret: 'cenkrypt',
     resave: false,
     saveUninitialized: true,
-    name: 'test-session',
+    name: 'c-session',
     rolling: true
 }));
 
@@ -70,7 +70,7 @@ requireFu(__dirname + '/routes')(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-
+  req.session.cartTimestamp = 123;
   if(req.url && req.url.indexOf('/api/')>-1 || req.url.indexOf('-min.map') > -1 || req.url.indexOf('js.map') > -1){
     console.log('Unknown api called : '+ req.url);
     res.status(500);
@@ -84,7 +84,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (err, req, res, next) {
-
+    req.session.cartTimestamp = 123;
     res.status(err.status || 500);
 
     if(req.url && req.url.indexOf('/api/')){

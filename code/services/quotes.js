@@ -8,7 +8,7 @@ module.exports = new function() {
   var self = this;
 
   this.getQuotePremiums = function(req, callback) {
-    ApiService.getQuotePremiums(req.body, function(err, res) {
+    ApiService.getQuotePremiums(req, function(err, res) {
       var formattedUser = {};
       if (!err && res.statusCode == 200) {
         callback(res.statusCode, res.body);
@@ -19,7 +19,7 @@ module.exports = new function() {
   };
 
   this.getQuoteProducts = function(req, callback) {
-    ApiService.getQuoteProducts(req.body, function(err, res) {
+    ApiService.getQuoteProducts(req, function(err, res) {
       if (!err && res.statusCode == 200) {
         callback(res.statusCode, res.body);
       } else {
@@ -29,7 +29,7 @@ module.exports = new function() {
   };
 
   this.getQuotePlans= function(req, callback) {
-    ApiService.getQuotePlans(req.body, function(err, res) {
+    ApiService.getQuotePlans(req, function(err, res) {
       if (!err && res.statusCode == 200){
         callback(res.statusCode, res.body);
       } else {
@@ -39,7 +39,7 @@ module.exports = new function() {
   };
 
   this.saveQuoteForm= function(req, callback) {
-    ApiService.saveQuoteForm(req.body, function(err, res) {
+    ApiService.saveQuoteForm(req, function(err, res) {
       if (!err && res.statusCode == 200){
         callback(res.statusCode, res.body);
       } else {
