@@ -44,7 +44,7 @@ app.use(session({
       port: appConfig.getProperty('redis_port'), prefix: 'c-sess',
       ttl: 30*86400
     }),
-    cookie: {domain: "localhost", expires: new Date(Date.now() + thirtyDay)},
+    cookie: {domain: "127.0.0.1", expires: new Date(Date.now() + thirtyDay)},
     secret: 'cenkrypt',
     resave: false,
     saveUninitialized: true,

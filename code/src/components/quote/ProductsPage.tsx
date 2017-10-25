@@ -149,7 +149,8 @@ const mapStateToProps = (state: any): Props => {
     persons: state.quotes.persons,
     products: state.quotes.products,
     showModalEditPerson: state.quotes.showModalEditPerson,
-    noOfPersons: state.selectPersons.noOfPersons
+    noOfPersons: state.selectPersons.noOfPersons,
+    editablePerson: state.quotes.editablePerson
   };
 }
 
