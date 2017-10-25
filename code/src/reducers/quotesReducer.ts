@@ -10,6 +10,10 @@ export default (state: Array<any> = [], action) => {
       return objectAssign({}, state, {premiums: action.premiums});
     case "SETTING_PERSONS_INFO":
     	return objectAssign({}, state, {persons: action.persons});
+    case "OPEN_EDIT_PERSON_MODAL":
+      return objectAssign({}, state, {showModalEditPerson: true, editablePerson: action.editablePerson});
+    case "CLOSE_EDIT_PERSON_MODAL":
+      return objectAssign({}, state, {showModalEditPerson: false, editablePerson: {});
     case "SUMBMITTED_SAVE_QUOTE":
       return objectAssign({}, state, {quoteResponse: action.persons});
     case "SUMBMITTED_EMAIL_INFO":

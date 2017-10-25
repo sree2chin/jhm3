@@ -6,13 +6,14 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty} from "underscore";
-import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm, setPersonsData} from '../../actions/Quote';
+import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm, setPersonsData, openEditPersonModal, closeEditPersonModal} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
 import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
 import { browserHistory } from 'react-router';
+import EditPerson from "./EditPerson";
 
 interface Props {
   persons: [any]
@@ -65,6 +66,9 @@ class ProductsPage extends React.Component<Props, {}> {
       this.submmitedProductForm = false;
     });
   },
+  openEditPersonModal = (person) => {
+    this.props.openEditPersonModal(person);
+  },
   public render() {
     var {persons} = this.props;
     persons = persons || [];
@@ -79,6 +83,8 @@ class ProductsPage extends React.Component<Props, {}> {
                 person={persons[0]}
                 noOfPersons={this.props.noOfPersons}
                 personIndex={0}
+                index={0}
+                openEditPersonModal={this.openEditPersonModal.bind(this)}
               />
             }
             { this.props.noOfPersons==2 &&
@@ -86,6 +92,8 @@ class ProductsPage extends React.Component<Props, {}> {
                 person={persons[1]}
                 noOfPersons={this.props.noOfPersons}
                 personIndex={1}
+                index={1}
+                openEditPersonModal={this.openEditPersonModal.bind(this)}
               />
             }
           </Col>
@@ -99,6 +107,7 @@ class ProductsPage extends React.Component<Props, {}> {
                   productInfo={this.props.products[0]}
                   selectProduct={this.selectProductForIndex.bind(this)}
                   personIndex={0}
+                  person={this.props.persons[0]}
                   noOfPersons={this.props.noOfPersons}
                 />
               }
@@ -107,6 +116,7 @@ class ProductsPage extends React.Component<Props, {}> {
                     productInfo={this.props.products[1]}
                     selectProduct={this.selectProductForIndex.bind(this)}
                     personIndex={1}
+                    person={this.props.persons[1]}
                     noOfPersons={this.props.noOfPersons}
                   />
               }
@@ -125,7 +135,11 @@ class ProductsPage extends React.Component<Props, {}> {
             </Button>
           </Col>
         </Row>
-
+        <EditPerson 
+          showModalEditPerson={this.props.showModalEditPerson}
+          onCloseModal={this.props.closeEditPersonModal.bind(this)}
+          editablePerson={this.props.editablePerson}
+        />
       </div>);
   }
 }
@@ -134,6 +148,7 @@ const mapStateToProps = (state: any): Props => {
   return {
     persons: state.quotes.persons,
     products: state.quotes.products,
+    showModalEditPerson: state.quotes.showModalEditPerson,
     noOfPersons: state.selectPersons.noOfPersons
   };
 }
@@ -144,8 +159,14 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
       return dispatch(setPersonsData(data))
     },
     submitProductsForm: (data) => {
-      return dispatch(submitProductsForm(data))
+      return dispatch(submitProductsForm(data));
     },
+    openEditPersonModal: (person) => {
+      return dispatch(openEditPersonModal(person))
+    },
+    closeEditPersonModal: () => {
+      return dispatch(closeEditPersonModal())
+    }
   };
 }
 

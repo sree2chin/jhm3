@@ -18,6 +18,25 @@ function setPersonsData(persons) {
 	};
 }
 
+function openEditPersonModal(person) {
+	return (dispatch) => {
+		return dispatch({
+				type: 'OPEN_EDIT_PERSON_MODAL',
+				editablePerson: person
+			})
+	};
+}
+
+function closeEditPersonModal() {
+	return (dispatch) => {
+		return dispatch({
+				type: 'CLOSE_EDIT_PERSON_MODAL'
+			})
+	};
+}
+
+
+
 function submitProductsForm(postData) {
 	return (dispatch) => {
 		return SubmitQuoteApi.submitProductsForm(postData).then(
@@ -65,5 +84,7 @@ export {
 	submitEmailForm,
 	submitProductsForm,
 	setPersonsData,
-	saveQuoteForm
+	saveQuoteForm,
+	openEditPersonModal,
+	closeEditPersonModal
 }
