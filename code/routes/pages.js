@@ -21,8 +21,10 @@ module.exports = function(app) {
     console.log("req.session: " + JSON.stringify(req.session));
     if(!_.isEmpty(req.query)) {
       req.session.agent_id = req.query.agent_id || req.query.agentId;
+      req.session.save();
     }
     console.log("req.session: " + JSON.stringify(req.session));
+
     templatePath = "../../dist/";
     res.render(templatePath);
   });
