@@ -24,7 +24,7 @@ export default class PersonInfo extends React.Component<Props, {}> {
               <Col sm={10} className="person-name-container">
                 {person.name} 
               </Col>
-              <Col sm={1} className="person-edit-container" onClick={()=> this.props.openEditPersonModal(this.props.person)}>
+              <Col sm={1} className="person-edit-container" onClick={()=> this.props.openEditPersonModal(this.props.person, this.props.personIndex)}>
                 Edit
               </Col>
             </Row>

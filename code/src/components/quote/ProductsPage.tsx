@@ -66,8 +66,8 @@ class ProductsPage extends React.Component<Props, {}> {
       this.submmitedProductForm = false;
     });
   },
-  openEditPersonModal = (person) => {
-    this.props.openEditPersonModal(person);
+  openEditPersonModal = (person, personIndex) => {
+    this.props.openEditPersonModal(person, personIndex);
   },
   public render() {
     var {persons} = this.props;
@@ -139,6 +139,7 @@ class ProductsPage extends React.Component<Props, {}> {
           showModalEditPerson={this.props.showModalEditPerson}
           onCloseModal={this.props.closeEditPersonModal.bind(this)}
           editablePerson={this.props.editablePerson}
+          personIndex={this.props.editablePersonIndex}
         />
       </div>);
   }
@@ -150,7 +151,8 @@ const mapStateToProps = (state: any): Props => {
     products: state.quotes.products,
     showModalEditPerson: state.quotes.showModalEditPerson,
     noOfPersons: state.selectPersons.noOfPersons,
-    editablePerson: state.quotes.editablePerson
+    editablePerson: state.quotes.editablePerson,
+    editablePersonIndex: state.quotes.editablePersonIndex
   };
 }
 
@@ -162,8 +164,8 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     submitProductsForm: (data) => {
       return dispatch(submitProductsForm(data));
     },
-    openEditPersonModal: (person) => {
-      return dispatch(openEditPersonModal(person))
+    openEditPersonModal: (person, personIndex) => {
+      return dispatch(openEditPersonModal(person, personIndex))
     },
     closeEditPersonModal: () => {
       return dispatch(closeEditPersonModal())

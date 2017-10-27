@@ -18,11 +18,12 @@ function setPersonsData(persons) {
 	};
 }
 
-function openEditPersonModal(person) {
+function openEditPersonModal(person, personIndex) {
 	return (dispatch) => {
 		return dispatch({
 				type: 'OPEN_EDIT_PERSON_MODAL',
-				editablePerson: person
+				editablePerson: person,
+				editablePersonIndex: personIndex
 			})
 	};
 }

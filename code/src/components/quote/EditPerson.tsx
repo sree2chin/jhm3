@@ -41,7 +41,7 @@ export default class EditPerson extends React.Component<Props, {}> {
     return (
        <Modal show={this.props.showModalEditPerson} onHide={this.props.onCloseModal} className="email-modal-container">
                 <Modal.Header closeButton>
-                  {"Applicant " + (0 + 1)}
+                  {"Applicant " + (this.props.personIndex + 1)}
                 </Modal.Header>
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     
