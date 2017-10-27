@@ -41,10 +41,11 @@ var thirtyDay = 30 * 86400000;
 app.use(session({
     store: new RedisStore({
       host: appConfig.getProperty('redis_url'),
-      port: appConfig.getProperty('redis_port'), prefix: 'c-sess',
+      port: appConfig.getProperty('redis_port'), 
+      prefix: 'c-sess',
       ttl: 30*86400
     }),
-    cookie: {domain: "127.0.0.1", expires: new Date(Date.now() + thirtyDay)},
+    cookie: {expires: new Date(Date.now() + thirtyDay)},
     secret: 'cenkrypt',
     resave: false,
     saveUninitialized: true,
