@@ -71,7 +71,7 @@ module.exports = new function(){
       applicants: JSON.stringify(data)
     };
     appendAgentInfo(req, formData);
-
+    console.log("formData: " + JSON.stringify(formData));
     request({
       url: restOptions.host + '/v1/quote/plans', 
       formData: formData, 

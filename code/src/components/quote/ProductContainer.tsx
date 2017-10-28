@@ -30,11 +30,20 @@ export default class ProductContainer extends React.Component<Props, State> {
     var productIds = JSON.parse(JSON.stringify(this.state.productIds));
     productIds.push(product.ProductID);
     productIds = uniq(productIds);
+    if(this.props.productValidations && this.props.productValidations.product_selection_count >= productIds.length) {
+      this.setState({
+        productIds: productIds,
+        productSelectionErrorMsg: ""
+        productSelectionError: false
+      });
+      this.props.selectProduct(this.props.personIndex, product);
+    } else {
+      this.setState({
+        productSelectionErrorMsg: this.props.productValidations.product_selection_error_message,
+        productSelectionError: true
+      });
+    }
 
-    this.setState({
-      productIds: productIds
-    });
-    this.props.selectProduct(this.props.personIndex, product);
   };
 
   public render() {
@@ -47,6 +56,11 @@ export default class ProductContainer extends React.Component<Props, State> {
 
       return (
           <Col sm={personsContainerWidth} className={this.props.personIndex==0 ? "first-product-container": "second-product-container"}>
+            {this.state.productSelectionError && <Row>
+              <Col sm={8} className="c-center product-selection-error-msg">
+                {this.state.productSelectionErrorMsg}
+              </Col>
+            </Row>}
             <Row className="c-center">
               {map(products, (product) =>
                 

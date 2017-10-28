@@ -57,7 +57,7 @@ class ProductsPage extends React.Component<Props, {}> {
 
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
-    personOne.sProductID = this.state.productId0;
+    personOne.selected_products = this.state.productId0;
     personOne.applicant = "1";
     personOne.sGender = personOne.s_gender;
 
@@ -66,7 +66,7 @@ class ProductsPage extends React.Component<Props, {}> {
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
       personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
-      personTwo.sProductID = this.state.productId1;
+      personTwo.selected_products = this.state.productId1;
       personTwo.applicant = "2";
       personTwo.sGender = personTwo.s_gender;
       persons.push(personTwo);
@@ -86,7 +86,7 @@ class ProductsPage extends React.Component<Props, {}> {
 
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
-    personOne.sProductID = this.state.productId0;
+    personOne.selected_products = this.state.productId0;
     personOne.applicant = "1";
     personOne.sGender = personOne.s_gender;
 
@@ -95,7 +95,7 @@ class ProductsPage extends React.Component<Props, {}> {
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
       personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
-      personTwo.sProductID = this.state.productId1;
+      personTwo.selected_products = this.state.productId1;
       personTwo.applicant = "2";
       personTwo.sGender = personTwo.s_gender;
       persons.push(personTwo);
@@ -153,6 +153,7 @@ class ProductsPage extends React.Component<Props, {}> {
                   personIndex={0}
                   person={this.props.persons[0]}
                   noOfPersons={this.props.noOfPersons}
+                  productValidations={this.props.productValidations}
                 />
               }
               { this.props.products && this.props.products.length==2 && 
@@ -162,6 +163,7 @@ class ProductsPage extends React.Component<Props, {}> {
                     personIndex={1}
                     person={this.props.persons[1]}
                     noOfPersons={this.props.noOfPersons}
+                    productValidations={this.props.productValidations}
                   />
               }
             </Row>
@@ -197,7 +199,8 @@ const mapStateToProps = (state: any): Props => {
     showModalEditPerson: state.quotes.showModalEditPerson,
     noOfPersons: state.selectPersons.noOfPersons,
     editablePerson: state.quotes.editablePerson,
-    editablePersonIndex: state.quotes.editablePersonIndex
+    editablePersonIndex: state.quotes.editablePersonIndex,
+    productValidations: state.quotes.productValidations
   };
 }
 

@@ -3,7 +3,7 @@ import objectAssign = require('object-assign');
 export default (state: Array<any> = [], action) => {
   switch (action.type) {
     case 'SUMBMITTED_PERSONAL_INFO':
-    	return objectAssign({}, state, {products: action.products});
+    	return objectAssign({}, state, {products: action.products, productValidations: action.productValidations});
     case 'SUMBMITTED_PRODUCTS_INFO':
       return objectAssign({}, state, {plans: action.plans});
     case 'SUMBMITTED_PLANS_INFO':
