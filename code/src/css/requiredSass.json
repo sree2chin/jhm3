@@ -12,6 +12,7 @@
     "src/css/NextSteps.scss",
     "src/css/email-modal.scss",
     "src/css/agent-modal.scss",
-    "src/css/c-radio.scss"
+    "src/css/c-radio.scss",
+    "src/css/edit-modal.scss"
   ]
 }

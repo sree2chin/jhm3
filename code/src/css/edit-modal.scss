@@ -1,0 +1,82 @@
+.edit-modal-container {
+	.person-name-container {
+		.form-group {
+			label {
+				font-size: 14px;
+			    line-height: 1.5;
+			    text-align: left;
+			    color: #666666;
+			    margin-top: 15px;
+			    font-weight: 400;
+			    display: block;
+			}
+		}
+		input {
+		    border-radius: 2px;
+		    background-color: #ffffff;
+		    border: solid 1px #cccccc;
+		    width: 75%;
+		    height: 44px;
+		    display: block;
+		}
+	}
+	.radio-group.form-group {
+		margin-bottom: 0px;
+		.radio {
+			margin-bottom: 0px;
+		}
+		label {
+		    font-size: 14px;
+		    text-align: left;
+		    color: #666666;
+		    font-weight: 400;
+		    margin-top: 0px;
+		    top: -5px;
+		    position: relative;
+		}
+	}
+    .c-subheader-text {
+	    font-size: 14px;
+	    line-height: 1.5;
+	    color: #666666;
+	    width: 100%;
+	    text-align: left;
+    }
+    .react-datepicker__input-container input {
+	    color: #333333;
+	    background-repeat: no-repeat;
+	    background-image: url("./images/calendar.svg");
+	    background-position: 20px 11px;
+	    width: 100%;
+	    padding-left: 20%;
+	    float: left;
+	    font-size: 16px;
+    }
+    .birth-date-picker-container span.test-class + div{ 
+        display: inline-block;
+    	width: 50%;
+    	float: left;
+    }
+    .Select-control {
+	    border-radius: 2px;
+	    background-color: #ffffff;
+	    border: solid 1px #cccccc;
+	    height: 44px;
+	    font-size: 16px;
+	    text-align: left;
+	    .Select-placeholder {
+	    	padding-top: 4px;
+	    }
+	    .Select-value {
+	    	padding-top: 4px;
+	    }
+	    .Select-clear {
+	    	display: none;
+	    }
+    }
+    .Select--single {
+    	width: 35%;
+    	display: inline-block;
+    	float: left;
+    }
+}

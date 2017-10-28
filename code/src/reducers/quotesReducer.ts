@@ -14,6 +14,11 @@ export default (state: Array<any> = [], action) => {
       return objectAssign({}, state, {showModalEditPerson: true, editablePerson: action.editablePerson, editablePersonIndex: action.editablePersonIndex});
     case "CLOSE_EDIT_PERSON_MODAL":
       return objectAssign({}, state, {showModalEditPerson: false, editablePerson: {});
+    case "EDITED_PERSON":
+      const person = JSON.parse(JSON.stringify(action.person));
+      const persons = JSON.parse(JSON.stringify(state.persons));
+      persons[parseInt(person["applicant"]) - 1 ] = person;
+      return objectAssign({}, state, {editablePerson: person, persons: persons});
     case "SUMBMITTED_SAVE_QUOTE":
       return objectAssign({}, state, {quoteResponse: action.persons});
     case "SUMBMITTED_EMAIL_INFO":

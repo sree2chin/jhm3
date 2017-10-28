@@ -36,6 +36,15 @@ function closeEditPersonModal() {
 	};
 }
 
+function handleEditChange(person) {
+	return (dispatch) => {
+		return dispatch({
+				type: 'EDITED_PERSON',
+				person: person
+			})
+	};
+}
+
 
 
 function submitProductsForm(postData) {
@@ -87,5 +96,6 @@ export {
 	setPersonsData,
 	saveQuoteForm,
 	openEditPersonModal,
-	closeEditPersonModal
+	closeEditPersonModal,
+	handleEditChange
 }

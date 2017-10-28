@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty} from "underscore";
-import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm, setPersonsData, openEditPersonModal, closeEditPersonModal} from '../../actions/Quote';
+import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm, setPersonsData, openEditPersonModal, closeEditPersonModal, handleEditChange} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
 import ProductContainer from "./ProductContainer";
@@ -35,7 +35,44 @@ class ProductsPage extends React.Component<Props, {}> {
       ["productId" + personIndex]: product.ProductID
     });
   },
+
   state={},
+  handleEditChange(person) {
+    this.props.handleEditChange(person);
+    setTimeout(()=> {
+      this.submitProductsFormOnEditPerson();
+    });
+  },
+
+  submitProductsFormOnEditPerson() {
+
+    const persons = [];
+
+    const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
+    personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
+    personOne.sProductID = this.state.productId0;
+    personOne.applicant = "1";
+    personOne.sGender = personOne.s_gender;
+
+    persons.push(personOne);
+
+    if(this.props.noOfPersons == 2) {
+      const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
+      personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
+      personTwo.sProductID = this.state.productId1;
+      personTwo.applicant = "2";
+      personTwo.sGender = personTwo.s_gender;
+      persons.push(personTwo);
+    }
+
+    this.props.setPersonsData(persons);
+
+    this.props.submitProductsForm(persons).then(() => {
+      
+    }).catch(()=>{
+      this.submmitedProductForm = false;
+    });
+  },
   submitProductsForm() {
 
     const persons = [];
@@ -140,6 +177,7 @@ class ProductsPage extends React.Component<Props, {}> {
           onCloseModal={this.props.closeEditPersonModal.bind(this)}
           editablePerson={this.props.editablePerson}
           personIndex={this.props.editablePersonIndex}
+          handleChange={this.handleEditChange.bind(this)}
         />
       </div>);
   }
@@ -169,6 +207,9 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     },
     closeEditPersonModal: () => {
       return dispatch(closeEditPersonModal())
+    }, 
+    handleEditChange: (person) => {
+      return dispatch(handleEditChange(person));
     }
   };
 }
