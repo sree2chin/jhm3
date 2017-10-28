@@ -73,7 +73,7 @@ module.exports = new function(){
     appendAgentInfo(req, formData);
     console.log("formData: " + JSON.stringify(formData));
     request({
-      url: restOptions.host + '/v1/quote/plans', 
+      url: restOptions.host + '/v1/quote/productplans', 
       formData: formData, 
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
