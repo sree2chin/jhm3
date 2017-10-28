@@ -2,7 +2,7 @@ import * as React from 'react';
 import Input from './../common/textInput';
 import {Button, Row, Col} from "react-bootstrap";
 import Tooltip from 'rc-tooltip';
-import {map, isEmpty} from "underscore";
+import {map, isEmpty, uniq} from "underscore";
 
 interface Props {
   product: any,
@@ -16,6 +16,7 @@ export default class ProductContainer extends React.Component<Props, State> {
   constructor(props : Props, context){
     super(props);
     this.state = {
+      productIds: []
     }
   },
 
@@ -26,8 +27,12 @@ export default class ProductContainer extends React.Component<Props, State> {
   };
 
   selectProduct = (product) => {
+    var productIds = JSON.parse(JSON.stringify(this.state.productIds));
+    productIds.push(product.ProductID);
+    productIds = uniq(productIds);
+
     this.setState({
-      productId: product.ProductID
+      productIds: productIds
     });
     this.props.selectProduct(this.props.personIndex, product);
   };
@@ -69,7 +74,7 @@ export default class ProductContainer extends React.Component<Props, State> {
                         </Col>
                       </Row>
                     </Row>
-                    <Row className={`text-center quote-product ${this.state.productId==product.ProductID ? "active" : ""}`} onClick={()=> this.selectProduct(product)}>
+                    <Row className={`text-center quote-product ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`} onClick={()=> this.selectProduct(product)}>
                       <div className="c-coverage-amount">QUOTE THIS PRODUCT</div>
                     </Row>
                   </Col>

@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
-import {each, isEmpty} from "underscore";
+import {each, isEmpty, uniq} from "underscore";
 import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm, setPersonsData, openEditPersonModal, closeEditPersonModal, handleEditChange} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
@@ -31,12 +31,19 @@ class ProductsPage extends React.Component<Props, {}> {
   },
 
   selectProductForIndex(personIndex, product) {
+    var productsList = JSON.parse(JSON.stringify(this.state["productId" + personIndex]));
+
+    productsList.push(product.ProductID);
+    productsList = uniq(productsList);
     this.setState({
-      ["productId" + personIndex]: product.ProductID
+      ["productId" + personIndex]: productsList
     });
   },
 
-  state={},
+  state={
+    productId0: []
+    productId1: []
+  },
   handleEditChange(person) {
     this.props.handleEditChange(person);
     setTimeout(()=> {
@@ -67,8 +74,8 @@ class ProductsPage extends React.Component<Props, {}> {
 
     this.props.setPersonsData(persons);
 
-    this.props.submitProductsForm(persons).then(() => {
-      
+    this.props.submitQuoteForm(persons).then(() => {
+      this.state;
     }).catch(()=>{
       this.submmitedProductForm = false;
     });
@@ -196,6 +203,7 @@ const mapStateToProps = (state: any): Props => {
 
 const mapDispatchToProps = (dispatch: Dispatch): Props => {
   return {
+    submitQuoteForm: (data) => {return dispatch(submitQuoteForm(data))},
     setPersonsData: (data) => {
       return dispatch(setPersonsData(data))
     },
