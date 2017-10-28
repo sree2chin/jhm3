@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import {Tooltip} from 'react-lightweight-tooltip';
 import Select from 'react-select';
 import { getStateObjects } from '../../utility/states';
+import {isEmpty} from 'underscore';
 import * as moment from "moment";
 
 interface Props extends React.Props<Plan> {
@@ -28,10 +29,11 @@ export default class EditPerson extends React.Component<Props, {}> {
     });
   },
   componentWillReceiveProps(nextProps) {
-    console.log("nextProps.selectedPerson: " + nextProps);
-    const person = JSON.parse(JSON.stringify(nextProps.editablePerson));
-    person.s_birthDate = moment(person.s_birthDate);
-    this.setState(person);
+    if(!isEmpty(nextProps.editablePerson)) {
+      const person = JSON.parse(JSON.stringify(nextProps.editablePerson));
+      person.s_birthDate = moment(person.s_birthDate);
+      this.setState(person);
+    }
   },
 
   onCloseModal() {
@@ -82,7 +84,7 @@ export default class EditPerson extends React.Component<Props, {}> {
     toolTipStylesBirthData.wrapper.top = "0px";
 
     return (
-       <Modal show={this.props.showModalEditPerson} className="edit-modal-container"  onHide={this.props.onCloseModal} className="edit-modal-container">
+       <Modal bsSize="small" show={this.props.showModalEditPerson} className="edit-modal-container"  onHide={this.props.onCloseModal} className="edit-modal-container">
                 <Modal.Header closeButton>
                   {"Applicant " + (personIndex + 1)}
                 </Modal.Header>
@@ -246,11 +248,11 @@ export default class EditPerson extends React.Component<Props, {}> {
                     </Col>
                   </div>
                   <div>
-                    <Col style={{ }}>
+                    <Col style={{marginLeft: "-15px", marginRight: "-15px", marginBottom: "-15px"}}>
                       <Button className="c-button-default" onClick={(){
                           this.submitEditForm()
                         }}
-                        style={{borderRadius: "none"}}
+                        style={{borderRadius: "5px!important"}}
                       >
                         SAVE CHANGES
                       </Button>
