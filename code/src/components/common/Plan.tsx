@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Link} from 'react-router';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import Select from 'react-select';
-import {each, isEmpty, deepEqual, find} from "lodash";
+import {each, isEmpty, find} from "underscore";
 
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
