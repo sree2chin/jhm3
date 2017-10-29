@@ -28,7 +28,7 @@ class ProductsPage extends React.Component<Props, {}> {
       const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent" : "/";
       browserHistory.push(basePath);
     }
-    if(this.props.persons && this.props.persons[0]) {
+    if(this.props.persons && this.props.persons[0] && this.props.products && this.props.products[0] && this.props.products[0].products_data) {
       const productList = this.props.products[0].products_data.products_list;
       var productId0 = [];
       if(!isEmpty(this.props.persons[0].selected_products)) {
