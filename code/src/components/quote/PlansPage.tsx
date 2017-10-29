@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty} from "underscore";
-import {submitQuoteForm, submitEmailForm, submitPlansForm, setPersonsData} from '../../actions/Quote';
+import {submitQuoteForm, submitEmailForm, submitPlansForm, setPersonsData, openEditPersonModal, closeEditPersonModal, handleEditChange} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
 import ProductContainer from "./ProductContainer";
@@ -16,6 +16,7 @@ import Plan from "../common/Plan"
 import { browserHistory } from 'react-router';
 import {submitPlansForm } from '../../actions/Quote';
 import { browserHistory } from 'react-router';
+import EditPerson from "./EditPerson";
 
 interface Props {
   plans: [any]
@@ -100,7 +101,44 @@ class PlansPage extends React.Component<Props, {}> {
 
     const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
     browserHistory.push(basePath + "next-steps");
-  }
+  },
+  openEditPersonModal = (person, personIndex) => {
+    this.props.openEditPersonModal(person, personIndex);
+  },
+  handleEditChange(person) {
+    this.props.handleEditChange(person);
+    setTimeout(()=> {
+      this.submitProductsFormOnEditPerson();
+    });
+  },
+  submitProductsFormOnEditPerson() {
+
+    const persons = [];
+
+    const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
+    personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
+    personOne.applicant = "1";
+    personOne.sGender = personOne.s_gender;
+
+    persons.push(personOne);
+
+    if(this.props.noOfPersons == 2) {
+      const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
+      personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
+      personTwo.applicant = "2";
+      personTwo.sGender = personTwo.s_gender;
+      persons.push(personTwo);
+    }
+
+    this.props.setPersonsData(persons);
+
+    this.props.submitQuoteForm(persons).then(() => {
+      const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
+      browserHistory.push(basePath + "products");
+    }).catch(()=>{
+      this.submmitedProductForm = false;
+    });
+  },
   public render() {
 
     var {persons} = this.props;
@@ -116,6 +154,8 @@ class PlansPage extends React.Component<Props, {}> {
                 person={persons[0]}
                 noOfPersons={this.props.noOfPersons}
                 personIndex={0}
+                index={0}
+                openEditPersonModal={this.openEditPersonModal.bind(this)}
               />
             }
             { this.props.noOfPersons==2 &&
@@ -123,6 +163,8 @@ class PlansPage extends React.Component<Props, {}> {
                 person={persons[1]}
                 noOfPersons={this.props.noOfPersons}
                 personIndex={1}
+                index={1}
+                openEditPersonModal={this.openEditPersonModal.bind(this)}
               />
             }
           </Col>
@@ -169,6 +211,14 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>
 
+        <EditPerson 
+          showModalEditPerson={this.props.showModalEditPerson}
+          onCloseModal={this.props.closeEditPersonModal.bind(this)}
+          editablePerson={this.props.editablePerson}
+          personIndex={this.props.editablePersonIndex}
+          handleChange={this.handleEditChange.bind(this)}
+        />
+
       </div>);
   }
 }
@@ -178,19 +228,32 @@ const mapStateToProps = (state: any): Props => {
     persons: state.quotes.persons,
     products: state.quotes.products,
     noOfPersons: state.selectPersons.noOfPersons,
+    showModalEditPerson: state.quotes.showModalEditPerson,
     plans: state.quotes.plans,
+    editablePerson: state.quotes.editablePerson,
+    editablePersonIndex: state.quotes.editablePersonIndex,
     premiums: state.quotes.premiums
   };
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): Props => {
   return {
+    submitQuoteForm: (data) => {return dispatch(submitQuoteForm(data))},
     setPersonsData: (data) => {
       return dispatch(setPersonsData(data))
     },
+    openEditPersonModal: (person, personIndex) => {
+      return dispatch(openEditPersonModal(person, personIndex))
+    },
+    closeEditPersonModal: () => {
+      return dispatch(closeEditPersonModal())
+    }, 
     submitPlansForm: (data) => {
       return dispatch(submitPlansForm(data))
     },
+    handleEditChange: (person) => {
+      return dispatch(handleEditChange(person));
+    }
   };
 }
 

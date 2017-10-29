@@ -2,7 +2,7 @@ import * as React from 'react';
 import Input from './../common/textInput';
 import {Button, Row, Col} from "react-bootstrap";
 import Tooltip from 'rc-tooltip';
-import {map, isEmpty, uniq} from "underscore";
+import {map, isEmpty, uniq, intersection} from "underscore";
 
 interface Props {
   product: any,
@@ -15,8 +15,15 @@ interface State {
 export default class ProductContainer extends React.Component<Props, State> {
   constructor(props : Props, context){
     super(props);
+    var productIds = [];
+    if(this.props.person && !isEmpty(this.props.person.selected_products)) {
+      productIds = this.props.person.selected_products;
+      if(!isEmpty(this.props.productIds)) {
+        productIds = intersection(this.props.productIds, this.props.person.selected_products);
+      }
+    }
     this.state = {
-      productIds: []
+      productIds: productIds
     }
   },
 

@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
-import {each, isEmpty, uniq} from "underscore";
+import {each, isEmpty, uniq, each, intersection, map} from "underscore";
 import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm, setPersonsData, openEditPersonModal, closeEditPersonModal, handleEditChange} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
@@ -27,6 +27,32 @@ class ProductsPage extends React.Component<Props, {}> {
     if (isEmpty(this.props.products) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent" : "/";
       browserHistory.push(basePath);
+    }
+    if(this.props.persons && this.props.persons[0]) {
+      const productList = this.props.products[0].products_data.products_list;
+      var productId0 = [];
+      if(!isEmpty(this.props.persons[0].selected_products)) {
+        var productListIds = map(productList, (product) {
+          return product.ProductID
+        });
+        productId0 = intersection(this.props.persons[0].selected_products, productListIds);
+      }
+      this.setState({
+        productId0: productId0
+      });
+    }
+    if(this.props.persons && this.props.persons[1]){
+      const productList = this.props.products[1].products_data.products_list;
+      var productId1 = [];
+      if(!isEmpty(this.props.persons[1].selected_products)) {
+        var productListIds = map(productList, (product) {
+          return product.ProductID
+        });
+        productId1 = intersection(this.props.persons[1].selected_products, productListIds);
+      }
+      this.setState({
+        productId1: productId1
+      });
     }
   },
 
@@ -154,6 +180,7 @@ class ProductsPage extends React.Component<Props, {}> {
                   person={this.props.persons[0]}
                   noOfPersons={this.props.noOfPersons}
                   productValidations={this.props.productValidations}
+                  productIds={this.state.productId0}
                 />
               }
               { this.props.products && this.props.products.length==2 && 
@@ -164,6 +191,7 @@ class ProductsPage extends React.Component<Props, {}> {
                     person={this.props.persons[1]}
                     noOfPersons={this.props.noOfPersons}
                     productValidations={this.props.productValidations}
+                    productIds={this.state.productId1}
                   />
               }
             </Row>
