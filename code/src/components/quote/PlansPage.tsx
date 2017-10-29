@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
-import {each, isEmpty} from "underscore";
+import {each, isEmpty, map} from "underscore";
 import {submitQuoteForm, submitEmailForm, submitPlansForm, setPersonsData, openEditPersonModal, closeEditPersonModal, handleEditChange} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
@@ -50,6 +50,7 @@ class PlansPage extends React.Component<Props, {}> {
     const personOne = JSON.parse(JSON.stringify(this.props.persons[personIndex]));
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
     personOne.sPlanID = data[0].plan.PlanID;
+    personOne.sProductID = data[0].productId;
     personOne.sFaceAmount = data[0].sFaceAmount;
     personOne.sClassNum="2";
     personOne.sDividendNum = "1";
@@ -143,6 +144,7 @@ class PlansPage extends React.Component<Props, {}> {
 
     var {persons} = this.props;
     persons = persons || [];
+    var self = this;
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
     return (
       <div className="product-pager-container">
@@ -182,13 +184,18 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>
         { this.props.noOfPersons>=1 &&
-          <Plan 
-            plans={this.props.plans[0]}
-            submitPlansForm={this.submitPlansForm.bind(this)}
-            premiums={this.props.premiums ? this.props.premiums[0] : {}}
-            onPaymentTypeChange={this.onPaymentTypeChange.bind(this)}
-            personIndex={0}
-          />
+          map(this.props.plans[0].plans_data, (p)=>{
+            var pl = {
+              plans_data: p
+            };
+            return <Plan 
+              plans={pl}
+              submitPlansForm={self.submitPlansForm.bind(self)}
+              premiums={self.props.premiums ? self.props.premiums[0] : {}}
+              onPaymentTypeChange={self.onPaymentTypeChange.bind(self)}
+              personIndex={0}
+            />
+          })
         }
         { this.props.noOfPersons==2 &&
           <Plan 

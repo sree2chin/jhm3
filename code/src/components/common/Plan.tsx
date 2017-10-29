@@ -27,7 +27,8 @@ export default class Plan extends React.Component<Props, {}> {
     })
     this.props.submitPlansForm(this.props.personIndex, [{
       plan: obj,
-      sFaceAmount: obj.FaceMin
+      sFaceAmount: obj.FaceMin,
+      productId: this.props.plans.plans_data.product_id
     }]);
   },
   onPaymentTypeChange(key, obj) {
