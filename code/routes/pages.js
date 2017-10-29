@@ -18,12 +18,14 @@ module.exports = function(app) {
 
   app.get('/', function(req, res, next) {
     //res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
-    console.log("req.session: " + JSON.stringify(req.session));
-    if(!_.isEmpty(req.query)) {
-      req.session.agent_id = req.query.agent_id || req.query.agentId;
-      req.session.save();
+    if(req.session) {
+      console.log("req.session: " + JSON.stringify(req.session));
+      if(!_.isEmpty(req.query)) {
+        req.session.agent_id = req.query.agent_id || req.query.agentId;
+        req.session.save();
+      }
+      console.log("req.session: " + JSON.stringify(req.session));
     }
-    console.log("req.session: " + JSON.stringify(req.session));
 
     templatePath = "../../dist/";
     res.render(templatePath);
@@ -31,10 +33,12 @@ module.exports = function(app) {
 
   app.get('/agent', function(req, res, next) {
     //res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
-    if(!_.isEmpty(req.query)) {
-      req.session.agent_id = req.query.agent_id || req.query.agentId;
+    if(req.session) {
+      if(!_.isEmpty(req.query)) {
+        req.session.agent_id = req.query.agent_id || req.query.agentId;
+      }
+      console.log("req.session: " + JSON.stringify(req.session));
     }
-    console.log("req.session: " + JSON.stringify(req.session));
     templatePath = "../../dist/";
     res.render(templatePath);
   });

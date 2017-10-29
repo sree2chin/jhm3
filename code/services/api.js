@@ -11,12 +11,14 @@ var restOptions = {
 module.exports = new function(){
 
   var appendAgentInfo = function(req, data) {
-    console.log("req.session: " + JSON.stringify(req.session));
-    if(req.session.agent_id) {
-      data.type_of_user = "2";
-      data.agent_id = req.session.agent_id;
-    } else {
-      data.type_of_user = "1";
+    if(req.session) {
+      console.log("req.session: " + JSON.stringify(req.session));
+      if(req.session.agent_id) {
+        data.type_of_user = "2";
+        data.agent_id = req.session.agent_id;
+      } else {
+        data.type_of_user = "1";
+      }
     }
   };
 
