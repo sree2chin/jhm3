@@ -17,6 +17,7 @@ import { browserHistory } from 'react-router';
 import {submitPlansForm } from '../../actions/Quote';
 import { browserHistory } from 'react-router';
 import EditPerson from "./EditPerson";
+import Riders from "./Riders";
 
 interface Props {
   plans: [any]
@@ -208,6 +209,12 @@ class PlansPage extends React.Component<Props, {}> {
         }
 
         <Row>
+          <Riders 
+            persons={persons}
+          />
+        </Row>
+
+        <Row>
           <Col sm={4} style={{  marginRight: "16%", float: "right"}}>
             <Button className="c-button-default circular" onClick={(){
                 this.redirectToNextSteps()
@@ -225,6 +232,7 @@ class PlansPage extends React.Component<Props, {}> {
           personIndex={this.props.editablePersonIndex}
           handleChange={this.handleEditChange.bind(this)}
         />
+
 
       </div>);
   }

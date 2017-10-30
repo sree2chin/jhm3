@@ -209,6 +209,7 @@ class ProductsPage extends React.Component<Props, {}> {
             </Button>
           </Col>
         </Row>
+
         <EditPerson 
           showModalEditPerson={this.props.showModalEditPerson}
           onCloseModal={this.props.closeEditPersonModal.bind(this)}
