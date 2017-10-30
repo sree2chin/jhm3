@@ -7,7 +7,28 @@ export default (state: Array<any> = [], action) => {
     case 'SUMBMITTED_PRODUCTS_INFO':
       return objectAssign({}, state, {plans: action.plans});
     case 'SUMBMITTED_PLANS_INFO':
-      return objectAssign({}, state, {premiums: action.premiums});
+      var premiums;
+      if(state.premiums) {  
+        premiums= JSON.parse(JSON.stringify(state.premiums));
+      } else {
+        premiums = action.premiums;
+      }
+       
+      if(premiums[0] && action.premiums[0]) {
+        premiums[0].input_data = action.premiums[0].input_data;
+        if (action.premiums[0].plans_data && action.premiums[0].plans_data.ProductID) {
+          premiums[0][action.premiums[0].plans_data.ProductID] = action.premiums[0].plans_data;
+        }
+      }
+      if(premiums[1] && action.premiums[1]) {
+        premiums[1].input_data = action.premiums[1].input_data;
+        if (action.premiums[1].plans_data) {
+          if (action.premiums[1].plans_data.ProductID) {
+            premiums[1][action.premiums[1].plans_data.ProductID] = action.premiums[1].plans_data;
+          }
+        }
+      }
+      return objectAssign({}, state, {premiums: premiums});
     case "SETTING_PERSONS_INFO":
     	return objectAssign({}, state, {persons: action.persons});
     case "OPEN_EDIT_PERSON_MODAL":

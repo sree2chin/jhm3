@@ -113,6 +113,12 @@ class PlansPage extends React.Component<Props, {}> {
       this.submitProductsFormOnEditPerson();
     });
   },
+
+  selectProductPlan(personIndex, productId) {
+    this.setState({
+      ["productIdPlan"+personIndex]: productId
+    });
+  },
   submitProductsFormOnEditPerson() {
 
     const persons = [];
@@ -189,11 +195,15 @@ class PlansPage extends React.Component<Props, {}> {
             var pl = {
               plans_data: p
             };
+            var premiums =  this.props.premiums && this.props.premiums[0] &&  this.props.premiums[0][p.product_id] ? this.props.premiums[0][p.product_id] : {};
+            premiums = {plans_data: premiums};
             return <Plan 
               plans={pl}
               submitPlansForm={self.submitPlansForm.bind(self)}
-              premiums={self.props.premiums ? self.props.premiums[0] : {}}
+              premiums={premiums}
+              productIdPlan={self.state.productIdPlan0}
               onPaymentTypeChange={self.onPaymentTypeChange.bind(self)}
+              selectProductPlan={self.selectProductPlan.bind(self)}
               personIndex={0}
             />
           })
@@ -203,12 +213,16 @@ class PlansPage extends React.Component<Props, {}> {
             var pl = {
               plans_data: p
             };
+            var premiums =  this.props.premiums && this.props.premiums[1] &&  this.props.premiums[1][p.product_id] ? this.props.premiums[1][p.product_id] : {};
+            premiums = {plans_data: premiums};
             return <Plan 
               plans={pl}
               submitPlansForm={self.submitPlansForm.bind(self)}
-              premiums={self.props.premiums ? self.props.premiums[1] : {}}
+              premiums={premiums}
+              productIdPlan={self.state.productIdPlan1}
               onPaymentTypeChange={self.onPaymentTypeChange.bind(self)}
               personIndex={1}
+              selectProductPlan={self.selectProductPlan.bind(self)}
             />
           })
         }

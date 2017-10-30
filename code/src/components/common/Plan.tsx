@@ -131,6 +131,16 @@ export default class Plan extends React.Component<Props, {}> {
       [key]: value
     })
   },
+  selectThisProduct() {
+    this.props.selectProductPlan(this.props.personIndex, this.props.premiums.plans_data.ProductID);
+    if(this.state.selectedPlan && this.state.sFaceAmount) {
+      this.props.submitPlansForm(this.props.personIndex, [{
+        plan: this.state.selectedPlan,
+        sFaceAmount: this.state.sFaceAmount,
+        productId: this.props.plans.plans_data.product_id
+      }]);
+    }
+  },
   public render() {
     const personIndex = this.props.personIndex;
     const plansObjs = this.getPlansDetailsForDropdown();
@@ -247,7 +257,7 @@ export default class Plan extends React.Component<Props, {}> {
                 </Row>
               </Col>
             </Row>
-            <Row className="select-this-product-container">
+            <Row className={"select-this-product-container" + (this.props.productIdPlan == this.props.plans.plans_data.product_id ? " active" : "")} onClick={this.selectThisProduct.bind(this)}>
               SELECT THIS PRODUCT
             </Row>
           </Col>

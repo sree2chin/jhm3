@@ -53,6 +53,10 @@
 				border: solid 2px #317dbd;
 				padding-top: 8px;
 			}
+			&.active {
+				background-color: #317dbd;
+				color: #ffffff;
+			}
 		}
 		.c-center {
 		    border-radius: 6px;
