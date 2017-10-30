@@ -31,7 +31,7 @@ export default class Plan extends React.Component<Props, {}> {
             </Col>
           </Row>
         </Row>
-        <Row className={`text-center quote-product`} style={{paddingTop: "0px", marginLeft: "5px"}} onClick={()=> this.selectRider(rider)}>
+        <Row className={`text-center quote-product`} style={{paddingTop: "10px", marginLeft: "5px", height: "62px"}} onClick={()=> this.selectRider(rider)}>
           <div className="c-coverage-amount" style={{fontSize: "14px", color: "#317dbd"}}>included in policy</div>
           <div className="c-coverage-amount" style={{fontSize: "14px", color: "#999999"}}>(no additional premium)</div>
         </Row>
