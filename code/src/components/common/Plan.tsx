@@ -117,7 +117,8 @@ export default class Plan extends React.Component<Props, {}> {
     var f = function() {
       this.props.submitPlansForm(this.props.personIndex, [{
         plan: this.state.selectedPlan,
-        sFaceAmount: parseInt(value)
+        sFaceAmount: parseInt(value),
+        productId: this.props.plans.plans_data.product_id
       }]);
     }.bind(this);
     setTimeout(f);

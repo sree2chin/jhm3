@@ -131,6 +131,7 @@
 		&.rider-container {
 		    margin-left: -10px;
 		    margin-right: 10px;
+		    min-height: 200px;
 			.single-product-content {
 				margin-left: 5px;
 				padding-left: 0px;
@@ -162,7 +163,7 @@
 		background-color: #ffffff;
 		border: solid 1px #d4d4d4;
 		margin-left: 10px;
-	    min-height: 200px;
+	    min-height: 250px;
 	    .header {
 		    font-size: 26px;
 		    text-align: left;

@@ -199,13 +199,18 @@ class PlansPage extends React.Component<Props, {}> {
           })
         }
         { this.props.noOfPersons==2 &&
-          <Plan 
-            plans={this.props.plans[1]}
-            submitPlansForm={this.submitPlansForm.bind(this)}
-            premiums={this.props.premiums ? this.props.premiums[1] : {}}
-            onPaymentTypeChange={this.onPaymentTypeChange.bind(this)}
-            personIndex={1}
-          />
+          map(this.props.plans[1].plans_data, (p)=>{
+            var pl = {
+              plans_data: p
+            };
+            return <Plan 
+              plans={pl}
+              submitPlansForm={self.submitPlansForm.bind(self)}
+              premiums={self.props.premiums ? self.props.premiums[1] : {}}
+              onPaymentTypeChange={self.onPaymentTypeChange.bind(self)}
+              personIndex={1}
+            />
+          })
         }
 
         <Row>
