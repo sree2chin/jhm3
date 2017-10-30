@@ -38,6 +38,22 @@
 	    }
 	}
 	.plan-details-container {
+		.select-this-product-container {
+			height: 40px;
+			border-radius: 6px;
+			background-color: #ffffff;
+ 			font-size: 14px;
+			font-weight: 500;
+			text-align: center;
+			color: #317dbd;
+			padding-top: 10px;
+			cursor: pointer;
+			&:hover {
+				background-color: #f7f7f7;
+				border: solid 2px #317dbd;
+				padding-top: 8px;
+			}
+		}
 		.c-center {
 		    border-radius: 6px;
 		    background-color: #ffffff;

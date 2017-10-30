@@ -247,6 +247,9 @@ export default class Plan extends React.Component<Props, {}> {
                 </Row>
               </Col>
             </Row>
+            <Row className="select-this-product-container">
+              SELECT THIS PRODUCT
+            </Row>
           </Col>
         </Row>
         <Row>
@@ -264,6 +267,7 @@ export default class Plan extends React.Component<Props, {}> {
                 
               </Col>
             </Row>
+
           </Col>
         </Row>
       </Col>
