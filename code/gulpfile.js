@@ -16,11 +16,11 @@ var gulpUtil = require('gulp-util');
 var pump = require('pump');
 
 gulp.task("default", function () {
-  runSequence("clean:dist", ["scss", "image"], ["build"], 'start_server');
+  runSequence("clean:dist", ["scss", "image"], ["build", "font"], 'start_server');
 });
 
 gulp.task("prod", function () {
-  runSequence("clean:dist", ["scss", "image"], ["build"], ["compress"]);
+  runSequence("clean:dist", ["scss", "image"], ["build", "font"], ["compress"]);
 });
 
 gulp.task("watch", function () {
@@ -93,8 +93,8 @@ gulp.task('angularCSS', function () {
 });
 
 gulp.task('font', function () {
-    return gulp.src("src/static_assets/fonts/**")
-        .pipe(gulp.dest("dist/client/fonts/"))
+    return gulp.src("fonts/**")
+        .pipe(gulp.dest("dist/fonts/"))
 });
 
 gulp.task('bundle-sw', () => {

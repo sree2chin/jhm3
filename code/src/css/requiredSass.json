@@ -1,5 +1,6 @@
 {
   "files": [
+    "src/css/font.scss",
     "src/css/buttons.scss",
     "src/css/body.scss",
     "src/css/custom-checkbox.scss",
