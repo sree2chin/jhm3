@@ -229,7 +229,7 @@ export default class Plan extends React.Component<Props, {}> {
                       Cost
                     </Col>
                     <Col sm={4} className="plan-cost-text-two-person">
-                      Cost (billed )
+                      Cost (billed {this.props.selectedPaymentType && this.props.selectedPaymentType.label})
                     </Col>
                     <Col sm={4} className="plan-cost-amount">
                       {this.props.selectedPaymentType && this.props.selectedPaymentType.label && this.props.premiums && this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.QuoteRateGrid && this.props.premiums.plans_data.QuoteRateGrid.Col1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium[this.props.selectedPaymentType.label]}
