@@ -18,7 +18,7 @@ export default class Header extends React.Component<Props, {}> {
           </div>
         </Navbar.Header>
         <Navbar.Text pullRight>
-          <div className="header-text" style={{marginLeft: "52%"}}>                            
+          <div className="header-text" style={{marginLeft: "49%"}}>                            
             Need help?
           </div>
           <div className="header-text link">

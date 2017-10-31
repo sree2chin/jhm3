@@ -34,7 +34,7 @@ export default class cfooter extends React.Component<Props, {}> {
                 </Col>
               </Row>
             </Col>
-            <Col xs={12} sm={4} className={`confirmation-header ${window.location.pathname=="/next-steps" ? "active" : ""}`}>
+            <Col styles={{top: "-16px"}} xs={12} sm={4} className={`confirmation-header ${window.location.pathname=="/next-steps" ? "active" : ""}`}>
               <span>
                 Next steps
               </span>
