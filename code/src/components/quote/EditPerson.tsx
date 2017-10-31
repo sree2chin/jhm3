@@ -243,7 +243,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                         </div>
                       </FormGroup>
                       { errors.smokeError && <Col sm={12} className={"c-subheader-text error"} style={{marginTop: "0px", paddingLeft: "0px"}}>
-                        Please select whether you smoke or not.
+                        Please indicate whether or not you use tobacco products.
                       </Col> }
                     </Col>
                   </div>
