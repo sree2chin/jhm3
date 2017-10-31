@@ -144,38 +144,16 @@ export default class Plan extends React.Component<Props, {}> {
   public render() {
     const personIndex = this.props.personIndex;
     const plansObjs = this.getPlansDetailsForDropdown();
-    const paymentSchedules = this.getPaymentSchedules();
-  
+    const personsContainerWidth = this.props.noOfPersons == 2 ? 6 : 12;
 
     return (
-      <Col sm={12} className="c-one-person-container">
-        <Row>
-          <Col sm={8} className="c-center plans-selector-container">
-            <Row>
-              <Col sm={6} className="c-center" style={{paddingTop: "0px"}}>
-                <Col sm={6} style={{paddingTop: "20px", paddingRight: "0px"}}>
-                  Payment schedule
-                </Col>
-                <Col sm={6} className="plan-schedule-container" style={{paddingTop: "10px", paddingLeft: "0px"}}>
-                  <Select
-                    name="form-field-plans-3"
-                    options={paymentSchedules}
-                    value={this.state.premium_type}
-                    onChange={(payment)=>{
-                      this.onPaymentTypeChange("premium_type", payment)
-                    }}
-                  />
-                </Col>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+      <Col sm={12} className={`single-plan-container ${this.props.noOfPersons==2 ? "two-persons-plan-container" : ""}`}>
         <Row className="plan-details-container">
-          <Col sm={8} className="c-center">
+          <Col sm={12} className="c-center">
             <Row>
-              <Col sm={2} style={{width: "16%", height: "90px", backgroundColor: "#317dbd", margin: "20px"}}>
+              <Col sm={2} style={{width: "16%", height: "90px", backgroundColor: "#317dbd", margin: "20px"}} className="blue-plan-container">
               </Col>
-              <Col sm={8}>
+              <Col sm={8} className="plan-product-info-text">
                 <Row className="plan-product-name">
                   {this.state.selectedPlan && this.state.selectedPlan.PlanName}
                 </Row>
@@ -185,7 +163,7 @@ export default class Plan extends React.Component<Props, {}> {
               </Col>
             </Row>
             <Row className="plan-sider-info-text">
-              <Col sm={6}>
+              <Col sm={6} className="plan-sider-coverage-container">
                 <Row className="plan-coverage-container">
                   {(this.state.sFaceAmount && this.state.sFaceAmount !=0) ? 
                     [<span key="1" style={{fontSize: "26px", textAlign: "right", color: "#009c91"}}>${this.state.sFaceAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </span] : null 
@@ -230,10 +208,10 @@ export default class Plan extends React.Component<Props, {}> {
                 </Row>
               </Col>
               <Col sm={3} className="plan-length-container">
-                <Row style={{marginLeft: "5px", marginTop: "16px"}}>
+                <Row style={{marginLeft: "5px", marginTop: "16px"}}  className="plan-length-container-text">
                   Plan length
                 </Row>
-                <Row>
+                <Row className="plan-length-container-selector">
                   <Select
                     name="form-field-plans"
                     options={plansObjs}
@@ -246,12 +224,15 @@ export default class Plan extends React.Component<Props, {}> {
               </Col>
               <Col sm={3} className="plan-cost-container">
                 <Row style={{marginTop: "30px"}}>
-                  <Col sm={8}>
+                  <Col sm={12}>
                     <Col sm={4} className="plan-cost-text">
                       Cost
                     </Col>
+                    <Col sm={4} className="plan-cost-text-two-person">
+                      Cost (billed )
+                    </Col>
                     <Col sm={4} className="plan-cost-amount">
-                      {this.props.premiums && this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.QuoteRateGrid && this.props.premiums.plans_data.QuoteRateGrid.Col1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type]}
+                      {this.props.selectedPaymentType && this.props.selectedPaymentType.label && this.props.premiums && this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.QuoteRateGrid && this.props.premiums.plans_data.QuoteRateGrid.Col1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium[this.props.selectedPaymentType.label]}
                     </Col>
                   </Col>
                 </Row>
@@ -260,24 +241,6 @@ export default class Plan extends React.Component<Props, {}> {
             <Row className={"select-this-product-container" + (this.props.productIdPlan == this.props.plans.plans_data.product_id ? " active" : "")} onClick={this.selectThisProduct.bind(this)}>
               SELECT THIS PRODUCT
             </Row>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={8} className="plans-selector-container c-center">
-            <Row>
-              <Col sm={3} style={{float: "right", marginRight: "15px"}}>
-                <Row>
-                  <Col sm={4} className="plan-total-text">
-                    Total
-                  </Col>
-                  <Col sm={8} className="plan-total-amount">
-                    {this.props.premiums && this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.QuoteRateGrid && this.props.premiums.plans_data.QuoteRateGrid.Col1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium.Annual}
-                  </Col>
-                </Row>
-                
-              </Col>
-            </Row>
-
           </Col>
         </Row>
       </Col>

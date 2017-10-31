@@ -18,6 +18,7 @@ import {submitPlansForm } from '../../actions/Quote';
 import { browserHistory } from 'react-router';
 import EditPerson from "./EditPerson";
 import Riders from "./Riders";
+import Select from 'react-select';
 
 interface Props {
   plans: [any]
@@ -40,9 +41,10 @@ class PlansPage extends React.Component<Props, {}> {
       productId: product.ProductID
     });
   },
-  onPaymentTypeChange(personIndex, ob) {
+  onPaymentTypeChange(ob) {
     this.setState({
-      ["selectedPaymentType" + personIndex]: ob
+      premium_type: ob.label,
+      selectedPaymentType: ob
     });
   },
   submitPlansForm(personIndex, data) {
@@ -84,17 +86,23 @@ class PlansPage extends React.Component<Props, {}> {
     const persons = [];
 
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
-    if(this.state.selectedPaymentType0 && this.state.selectedPaymentType0.amount) {
-      personOne.premium_amount=parseFloat(this.state.selectedPaymentType0.amount.split("$")[1]);
-      personOne.premium_type=this.state.selectedPaymentType0.label;
+    if(this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium ) {
+      var amount = this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
+      amount = amount ? parseFloat(amount.split("$")[1]) : 0;
+
+      personOne.premium_amount=amount;
+      personOne.premium_type=this.state.premium_type;
     }
     persons.push(personOne);
 
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-      if(this.state.selectedPaymentType1 && this.state.selectedPaymentType1.amount) {
-        personTwo.premium_amount=parseFloat(this.state.selectedPaymentType1.amount.split("$")[1]);
-        personTwo.premium_type=this.state.selectedPaymentType1.label;
+      if(this.props.premiums && this.props.premiums[1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium ) {
+        var amount = this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
+        amount = amount ? parseFloat(amount.split("$")[1]) : 0;
+
+        personTwo.premium_amount=amount;
+        personTwo.premium_type=this.state.premium_type;
       }
       persons.push(personTwo);
     }
@@ -147,12 +155,41 @@ class PlansPage extends React.Component<Props, {}> {
       this.submmitedProductForm = false;
     });
   },
+  getPaymentSchedules() {
+    if(isEmpty(this.props.premiums) || isEmpty(this.props.premiums[0].plans_data) || isEmpty(this.props.premiums[0].plans_data.QuoteRateGrid) || isEmpty(this.props.premiums[0].plans_data.QuoteRateGrid.Col1)) {
+      return [];
+    }
+    var p;
+
+    p = [
+      {
+        value: "Monthly",
+        label: "Monthly"
+      },
+      {
+        value: "Quarterly",
+        label: "Quarterly"
+      },
+      {
+        value: "Semi-Annual",
+        label: "Semi-Annual"
+      },
+      {
+        value: "Annual",
+        label: "Annual"
+      }
+    ]
+
+    return p;
+  },
   public render() {
 
     var {persons} = this.props;
     persons = persons || [];
     var self = this;
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
+    const individualPlanContainerWidth = this.props.noOfPersons == 2 ? 6 : 12;
+    const paymentSchedules = this.getPaymentSchedules();
     return (
       <div className="product-pager-container">
         <Subheader />
@@ -190,47 +227,99 @@ class PlansPage extends React.Component<Props, {}> {
             </Row>
           </Col>
         </Row>
-        { this.props.noOfPersons>=1 &&
-          map(this.props.plans[0].plans_data, (p)=>{
-            var pl = {
-              plans_data: p
-            };
-            var premiums =  this.props.premiums && this.props.premiums[0] &&  this.props.premiums[0][p.product_id] ? this.props.premiums[0][p.product_id] : {};
-            premiums = {plans_data: premiums};
-            return <Plan 
-              plans={pl}
-              submitPlansForm={self.submitPlansForm.bind(self)}
-              premiums={premiums}
-              productIdPlan={self.state.productIdPlan0}
-              onPaymentTypeChange={self.onPaymentTypeChange.bind(self)}
-              selectProductPlan={self.selectProductPlan.bind(self)}
-              personIndex={0}
-            />
-          })
-        }
-        { this.props.noOfPersons==2 &&
-          map(this.props.plans[1].plans_data, (p)=>{
-            var pl = {
-              plans_data: p
-            };
-            var premiums =  this.props.premiums && this.props.premiums[1] &&  this.props.premiums[1][p.product_id] ? this.props.premiums[1][p.product_id] : {};
-            premiums = {plans_data: premiums};
-            return <Plan 
-              plans={pl}
-              submitPlansForm={self.submitPlansForm.bind(self)}
-              premiums={premiums}
-              productIdPlan={self.state.productIdPlan1}
-              onPaymentTypeChange={self.onPaymentTypeChange.bind(self)}
-              personIndex={1}
-              selectProductPlan={self.selectProductPlan.bind(self)}
-            />
-          })
-        }
+
+        <Row>
+          <Col sm={8} className="c-center" style={{paddingLeft: "28px", paddingRight: "30px", marginBottom: "15px"}}>
+            <Row className="plans-selector-container">
+              <Col sm={6} className="c-center" style={{paddingTop: "0px"}}>
+                <Col sm={6} style={{paddingTop: "20px", paddingRight: "0px"}}>
+                  Payment schedule
+                </Col>
+                <Col sm={6} className="plan-schedule-container" style={{paddingTop: "10px", paddingLeft: "0px"}}>
+                  <Select
+                    name="form-field-plans-3"
+                    options={paymentSchedules}
+                    value={this.state.premium_type}
+                    onChange={(payment)=>{
+                      this.onPaymentTypeChange(payment)
+                    }}
+                  />
+                </Col>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col sm={8} className="c-center">
+            <Col sm={individualPlanContainerWidth} className="one-person-plan-container">
+              { this.props.noOfPersons>=1 &&
+                map(this.props.plans[0].plans_data, (p)=>{
+                  var pl = {
+                    plans_data: p
+                  };
+                  var premiums =  this.props.premiums && this.props.premiums[0] &&  this.props.premiums[0][p.product_id] ? this.props.premiums[0][p.product_id] : {};
+                  premiums = {plans_data: premiums};
+                  return <Plan 
+                    plans={pl}
+                    submitPlansForm={self.submitPlansForm.bind(self)}
+                    premiums={premiums}
+                    productIdPlan={self.state.productIdPlan0}
+                    noOfPersons={self.props.noOfPersons}
+                    selectedPaymentType={self.state.selectedPaymentType}
+                    selectProductPlan={self.selectProductPlan.bind(self)}
+                    personIndex={0}
+                  />
+                })
+              }
+            </Col>
+            <Col sm={individualPlanContainerWidth} className="second-person-plan-container">
+              { this.props.noOfPersons==2 &&
+                map(this.props.plans[1].plans_data, (p)=>{
+                  var pl = {
+                    plans_data: p
+                  };
+                  var premiums =  this.props.premiums && this.props.premiums[1] &&  this.props.premiums[1][p.product_id] ? this.props.premiums[1][p.product_id] : {};
+                  premiums = {plans_data: premiums};
+                  return <Plan 
+                    plans={pl}
+                    submitPlansForm={self.submitPlansForm.bind(self)}
+                    premiums={premiums}
+                    noOfPersons={self.props.noOfPersons}
+                    productIdPlan={self.state.productIdPlan1}
+                    selectedPaymentType={self.state.selectedPaymentType}
+                    personIndex={1}
+                    selectProductPlan={self.selectProductPlan.bind(self)}
+                  />
+                })
+              }
+            </Col>
+          </Col>
+        </Row>
 
         <Row>
           <Riders 
             persons={persons}
           />
+        </Row>
+
+        <Row>
+          <Col sm={8} className="c-center" style={{paddingLeft: "26px", paddingRight: "30px"}}>
+            <Row className="plans-selector-container">
+              <Col sm={3} style={{float: "right", marginRight: "15px"}}>
+                <Row>
+                  <Col sm={4} className="plan-total-text">
+                    Total
+                  </Col>
+                  <Col sm={8} className="plan-total-amount">
+                    {this.props.premiums && this.props.premiums[0] && this.props.premiums[0].plans_data && this.props.premiums[0].plans_data.QuoteRateGrid && this.props.premiums[0].plans_data.QuoteRateGrid.Col1 && this.props.premiums[0].plans_data.QuoteRateGrid.Col1.Face1 && this.props.premiums[0].plans_data.QuoteRateGrid.Col1.Face1.Premium && this.props.premiums[0].plans_data.QuoteRateGrid.Col1.Face1.Premium.Annual}
+                  </Col>
+                </Row>
+                
+              </Col>
+            </Row>
+
+          </Col>
         </Row>
 
         <Row>
