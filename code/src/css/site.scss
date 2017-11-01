@@ -35,7 +35,7 @@
         padding-right: 10%;
       }
     }
-    height: 80px;
+    min-height: 80px;
     background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(to bottom, #ffffff, #f5f5f5);
     box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.14);   
     background-color: white;
@@ -44,6 +44,9 @@
       padding-left: 7%;
       padding-right: 7%;
     }
+  }
+  .navbar-header {
+    float: left;
   }
   .navbar-header img {
     position: relative;
@@ -57,6 +60,7 @@
       color: #333333;
       margin-right: 0px;
       margin-top: 23px;
+      float: right;
       .link {
         color: #317dbd;
         font-size: 18px;
