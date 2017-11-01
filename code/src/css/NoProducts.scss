@@ -1,0 +1,11 @@
+.no-product-container {
+	height: 220px;
+    text-align: center;
+    background-color: #f7f7f7;
+    border: solid 1px #d4d4d4;
+    .inner-no-product-container {
+		top: 50%;
+	    position: relative;
+	    margin-top: -31px;
+    }
+}

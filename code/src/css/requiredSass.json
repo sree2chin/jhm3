@@ -14,6 +14,7 @@
     "src/css/email-modal.scss",
     "src/css/agent-modal.scss",
     "src/css/c-radio.scss",
-    "src/css/edit-modal.scss"
+    "src/css/edit-modal.scss",
+    "src/css/NoProducts.scss"
   ]
 }

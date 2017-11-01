@@ -11,6 +11,8 @@ var restOptions = {
 module.exports = new function(){
 
   var appendAgentInfo = function(req, data) {
+    console.log("req.headers: " + JSON.stringify(req.headers.cookie));
+    console.log("req.req.cookies: " + JSON.stringify(req.cookies));
     if(req.session) {
       console.log("req.session: " + JSON.stringify(req.session));
       if(req.session.agent_id) {

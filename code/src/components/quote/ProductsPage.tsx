@@ -14,6 +14,8 @@ import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
 import { browserHistory } from 'react-router';
 import EditPerson from "./EditPerson";
+import NoProducts from "./NoProducts"
+
 
 interface Props {
   persons: [any]
@@ -172,7 +174,7 @@ class ProductsPage extends React.Component<Props, {}> {
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}} className={this.props.noOfPersons==2 ? "two-product-outer-container": "one-product-outer-container"}>
           <Col sm={8} className="c-center">
             <Row>
-              { this.props.products && this.props.products.length >=1 && 
+              { this.props.products && this.props.products.length >=1 && this.props.products[0] ? 
                 <ProductContainer 
                   productInfo={this.props.products[0]}
                   selectProduct={this.selectProductForIndex.bind(this)}
@@ -181,9 +183,9 @@ class ProductsPage extends React.Component<Props, {}> {
                   noOfPersons={this.props.noOfPersons}
                   productValidations={this.props.productValidations}
                   productIds={this.state.productId0}
-                />
+                /> : <NoProducts />
               }
-              { this.props.products && this.props.products.length==2 && 
+              { this.props.products && this.props.products.length==2 && this.props.products[1] ?
                   <ProductContainer 
                     productInfo={this.props.products[1]}
                     selectProduct={this.selectProductForIndex.bind(this)}
@@ -192,7 +194,7 @@ class ProductsPage extends React.Component<Props, {}> {
                     noOfPersons={this.props.noOfPersons}
                     productValidations={this.props.productValidations}
                     productIds={this.state.productId1}
-                  />
+                  />  : this.props.products && this.props.products.length==2 ? <NoProducts /> : null 
               }
             </Row>
           </Col>
@@ -225,6 +227,7 @@ const mapStateToProps = (state: any): Props => {
   return {
     persons: state.quotes.persons,
     products: state.quotes.products,
+    isProductFetchCallDone: state.quotes.isProductFetchCallDone,
     showModalEditPerson: state.quotes.showModalEditPerson,
     noOfPersons: state.selectPersons.noOfPersons,
     editablePerson: state.quotes.editablePerson,
