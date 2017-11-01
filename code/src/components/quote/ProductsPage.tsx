@@ -43,7 +43,7 @@ class ProductsPage extends React.Component<Props, {}> {
         productId0: productId0
       });
     }
-    if(this.props.persons && this.props.persons[1]){
+    if(this.props.persons && this.props.persons[1] && this.props.products && this.props.products[1] && this.props.products[1].products_data){
       const productList = this.props.products[1].products_data.products_list;
       var productId1 = [];
       if(!isEmpty(this.props.persons[1].selected_products)) {
