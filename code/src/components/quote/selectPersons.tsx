@@ -27,19 +27,29 @@ class SelectPersons extends React.Component<Props, State> {
 
   selectNoOfPersons = (value) => {
     this.setState({
-      noOfPersons: value
+      noOfPersons: value,
+      selectNoOfPersonsError: false
     });
-    this.props.selectNoOfPersons(value);
+    if(!(document.getElementById("select-no-of-persons-mobile-btn").offsetHeight > 0)) {
+      this.props.selectNoOfPersons(value);
+    }
   };
 
-  selectNoOfPersonsForMobile = (value) => {
-    this.setState({
-      noOfPersons: value
-    });
-    this.props.selectNoOfPersons(value);
+  selectNoOfPersonsForMobile = () => {
+    if(this.state.noOfPersons) {
+      this.props.selectNoOfPersons(this.state.noOfPersons);
+      this.setState({
+        noOfPersonsSelectedForMobileAndSubmitted: true
+      });
+    } else {
+      this.setState({
+        selectNoOfPersonsError: true
+      });
+    }
   };
 
   public render() {
+    if(!this.state.noOfPersonsSelectedForMobileAndSubmitted) {
     return (
       <div style={{backgroundColor: "rgb(247, 247, 247)"}}>
         <Row>
@@ -71,6 +81,10 @@ class SelectPersons extends React.Component<Props, State> {
                 <p> Two persons</p>
               </Col>
 
+              { this.state.selectNoOfPersonsError && <Col style={{ paddingLeft: "0px", marginLeft: "30px", color: "red"}}sm={12} className={"c-subheader-text error"}  style={{paddingLeft: "0px"}}>
+                Please select the number of person
+              </Col> }
+
               <div className="visible-xs" id="select-no-of-persons-mobile-btn">
                 <Col sm={4}>
                   <Button className="c-button-default" onClick={(){
@@ -85,8 +99,12 @@ class SelectPersons extends React.Component<Props, State> {
             </Row>
           </Col>
         </Row>
-      </div>
-     );
+      </div> 
+     )   
+    } else {
+      return null;
+    }
+
   }
 }
 
