@@ -71,9 +71,9 @@ class SelectPersons extends React.Component<Props, State> {
                 <p> Two persons</p>
               </Col>
 
-              <div>
-                <Col sm={4} style={{ marginLeft: "33%"}}>
-                  <Button id="select-no-of-persons-mobile-btn" className="c-button-default circular" onClick={(){
+              <div className="visible-xs" id="select-no-of-persons-mobile-btn">
+                <Col sm={4}>
+                  <Button className="c-button-default" onClick={(){
                       this.selectNoOfPersonsForMobile()
                     }}
                   >

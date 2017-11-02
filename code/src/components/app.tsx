@@ -25,8 +25,8 @@ export default class App extends React.Component<Props, {}> {
           <div className="c-body">
             {this.props.children}
           </div>
-      <Row className="c-footer" style={{marginBottom: "0px"}}>
-        <Col sm={8} className="c-footer-content c-center">
+      <Row className="c-footer hidden-xs" style={{marginBottom: "0px"}}>
+        <Col xs={8} className="c-footer-content c-center">
         <Row>
         <Col>
         Site Map »  Privacy Policy » 

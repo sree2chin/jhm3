@@ -18,6 +18,7 @@
     "src/css/NoProducts.scss",
     "src/css/mobile/header.scss",
     "src/css/mobile/subheader.scss",
-    "src/css/mobile/select-persons.scss"
+    "src/css/mobile/select-persons.scss",
+    "src/css/mobile/person-info.scss"
   ]
 }
