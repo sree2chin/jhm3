@@ -29,10 +29,12 @@
 .cf-nav-main-header {
   &.navbar {
     &.subheader {
-      height: 30px;
+      min-height: 45px;
       .container {
-        padding-left: 20%;
-        padding-right: 10%;
+        padding-left: 16%;
+        padding-right: 16%;
+        margin-top: 10px;
+        width: 100%;
       }
     }
     min-height: 80px;

@@ -1,0 +1,40 @@
+@media(max-width:768px) {
+	.cf-nav-main-header.navbar.subheader {
+		font-size: 10px;
+		.container {
+			padding-left: 15px;
+		    padding-right: 0%;	
+		    margin-top: 14px;
+		}
+		.confirmation-header {
+			.gather-information {
+				padding-right: 0px;
+			}
+		    &.next-steps {
+		        padding-right: 10px;
+		        padding-left: 0px;
+		    	span {
+    				padding-right: 0px;
+		    	}
+		    }
+		    .product-selection-container {
+				.product-selection {
+					padding-left: 5px;
+					padding-right: 10px;
+					left: 16%;
+				}
+				&:before {
+					content: "";
+				    display: block;
+				    border-top: solid 1px #ececec;
+				    width: 90%;
+				    height: 1px;
+				    position: absolute;
+				    top: 50%;
+				    z-index: 1;
+				    left: 6%;
+		    	}
+			}
+		}
+	}
+}
