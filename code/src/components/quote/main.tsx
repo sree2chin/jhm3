@@ -176,9 +176,9 @@ class Main extends React.Component<Props, {}> {
                   />
                 </Col>
               }
-              <div>
-                <Col sm={4} style={{ marginLeft: "33%"}}>
-                  <Button className="c-button-default circular" onClick={(){
+              <div className="c-submit-person-info-btn">
+                <Col sm={4}>
+                  <Button className="c-button-default" onClick={(){
                       this.submitQuoteForm()
                     }}
                   >
