@@ -32,6 +32,13 @@ class SelectPersons extends React.Component<Props, State> {
     this.props.selectNoOfPersons(value);
   };
 
+  selectNoOfPersonsForMobile = (value) => {
+    this.setState({
+      noOfPersons: value
+    });
+    this.props.selectNoOfPersons(value);
+  };
+
   public render() {
     return (
       <div style={{backgroundColor: "rgb(247, 247, 247)"}}>
@@ -42,11 +49,11 @@ class SelectPersons extends React.Component<Props, State> {
                 <Row className="c-selected-person-header">
                   For How Many People are We Quoting?
                 </Row>
-                <Row style={{marginTop: "15px"}}>
-                  <Col sm={12} className="confirmation-msg">
+                <Row style={{marginTop: "15px"}} className="quotation-msg-text-container">
+                  <Col sm={12} className="confirmation-msg confirmation-msg-first-line">
                     OK! Let's get started!
                   </Col>
-                  <Col sm={12} className="confirmation-msg">
+                  <Col sm={12} className="confirmation-msg confirmation-msg-second-line">
                     First, tell us how many people need a quote today?
                   </Col>
                 </Row>
@@ -63,6 +70,17 @@ class SelectPersons extends React.Component<Props, State> {
                 {this.state.noOfPersons==2 && <img src="./images/two-people-active.png" /> }
                 <p> Two persons</p>
               </Col>
+
+              <div>
+                <Col sm={4} style={{ marginLeft: "33%"}}>
+                  <Button id="select-no-of-persons-mobile-btn" className="c-button-default circular" onClick={(){
+                      this.selectNoOfPersonsForMobile()
+                    }}
+                  >
+                    CONTINUE
+                  </Button>
+                </Col>
+              </div>
 
             </Row>
           </Col>

@@ -19,9 +19,9 @@ export default class Header extends React.Component<Props, {}> {
         </Navbar.Header>
         <Navbar.Text pullRight>
           <div className="header-text" style={{marginLeft: "22px"}}>                            
-            Need help? <img src={"../images/small-phone.svg"} />
+            Need help? <img className="visible-xs" style={{float: "right", paddingLeft: "10px"}} src={"../images/small-phone.svg"} />
           </div>
-          <div className="header-text link" className="hidden-xs">
+          <div className="hidden-xs">
             <TelLinkComponent 
               phoneNumber={"1-800-555-1234"}
             />

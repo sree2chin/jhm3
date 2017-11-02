@@ -1,0 +1,21 @@
+@media(max-width:768px) {
+  .c-select-persons-container {
+    margin-top: 0px;
+    .quotation-msg-text-container {
+      padding-left: 23px;
+      padding-right: 15px;
+    }
+    .confirmation-msg.confirmation-msg-first-line {
+      display: inline;
+      padding-right: 0px;
+      padding-left: 0px;
+    }
+    .confirmation-msg.confirmation-msg-second-line {
+      display: inline;
+      padding-left: 2px;
+    }
+    .c-selected-person-header {
+      padding-left: 5px;
+    }
+  }
+}

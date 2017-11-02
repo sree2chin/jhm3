@@ -149,7 +149,7 @@ class Main extends React.Component<Props, {}> {
         <Subheader />
         <SelectPersons onSubmit={this.submitEmailForm.bind(this)} />
         <div className="row c-quote" style={{backgroundColor: "#f7f7f7", paddingBottom: "160px"}}>
-          {this.props.noOfPersons && !this.props.isSubmmitedQuoteForm && <div> 
+          {this.props.noOfPersons && <div> 
             <div className="header">
               <div style={{textAlign: "center"}}>
                 Application information

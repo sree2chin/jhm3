@@ -238,7 +238,7 @@
 .confirmation-header {
 	&.next-steps {
 		text-align: right;
-		padding-right: 30px;
+		padding-right: 10px;
 	}
     &.col-xs-4 {
     	font-weight: 500;
@@ -283,3 +283,11 @@
 
 	}
 }
+
+	.cf-nav-main-header {
+		p.navbar-text {
+			.header-text {
+				margin-left: 50%;
+			}
+		}
+	}
