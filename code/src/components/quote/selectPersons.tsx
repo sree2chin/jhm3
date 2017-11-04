@@ -53,7 +53,7 @@ class SelectPersons extends React.Component<Props, State> {
     return (
       <div style={{backgroundColor: "rgb(247, 247, 247)"}}>
         <Row>
-          <Col sm={8} className="c-select-persons-container">
+          <Col sm={8} className="c-select-persons-container" style={{width: "54.2%"}}>
             <Row>
               <Col sm={5} className="confirmation-msg-container">
                 <Row className="c-selected-person-header">

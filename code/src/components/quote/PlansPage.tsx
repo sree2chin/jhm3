@@ -35,7 +35,9 @@ class PlansPage extends React.Component<Props, {}> {
       browserHistory.push(basePath);
     }
   },
+  componentDidMount () {
 
+  },
   selectProduct(product) {
     this.setState({
       productId: product.ProductID

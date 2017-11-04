@@ -25,6 +25,9 @@ class ProductsPage extends React.Component<Props, {}> {
   constructor(){
     super();
   },
+  componentDidMount () {
+
+  },
   componentWillMount() {
     if (isEmpty(this.props.products) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent" : "/";
