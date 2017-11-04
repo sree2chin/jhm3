@@ -238,13 +238,12 @@
 
 .confirmation-header {
 	&.next-steps {
-		text-align: right;c
+		text-align: right;
 		padding-left: 0px;
     	padding-right: 0px;
 	}
-    &.col-xs-4 {
+    &.col-xs-4, &.gather-information-container, &.next-steps {
     	font-weight: 500;
-    	margin-top: 11px;
     	color: #999999;
     	&.active {
     		color: #317dbd;
@@ -265,6 +264,7 @@
     }
     .product-selection-container {
 		position: relative;
+		padding-left: 6%;
 		.product-selection {
 		    background: #fff;
 		    position: relative;
@@ -276,7 +276,7 @@
 	    	content: "";
 		    display: block;
 		    border-top: solid 1px #ececec;
-		    width: 100%;
+		    width: 94%;
 		    height: 1px;
 		    position: absolute;
 		    top: 50%;

@@ -29,6 +29,7 @@
 .cf-nav-main-header {
   &.navbar {
     &.subheader {
+      color: #999999;
       min-height: 45px;
       .container {
         padding-left: 31.74%;
@@ -41,6 +42,14 @@
       .gather-information, .product-selection {
         padding-left: 0px;
         padding-right: 0px;
+      }
+      .gather-information-container {
+        padding-right: 0px;
+        padding-left: 0px;
+        .row {
+          margin-left: 0px;
+          margin-right: 0px;
+        }
       }
     }
     min-height: 80px;
