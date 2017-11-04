@@ -238,8 +238,9 @@
 
 .confirmation-header {
 	&.next-steps {
-		text-align: right;
-		padding-right: 10px;
+		text-align: right;c
+		padding-left: 0px;
+    	padding-right: 0px;
 	}
     &.col-xs-4 {
     	font-weight: 500;
