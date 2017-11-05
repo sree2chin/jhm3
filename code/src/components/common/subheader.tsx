@@ -12,21 +12,21 @@ export default class cfooter extends React.Component<Props, {}> {
     return (
       <Navbar className={`cf-nav-main-header subheader`}>
           <Row>
-            <Col xs={3} className={`confirmation-header gather-information-container ${window.location.pathname=="/" || window.location.pathname=="/agent" || window.location.pathname=="/agent/" ? "active" : ""}`} style={{paddingRight: "0px"}}>
+            <Col className={`confirmation-header gather-information-container ${window.location.pathname=="/" || window.location.pathname=="/agent" || window.location.pathname=="/agent/" ? "active" : ""}`} style={{paddingRight: "0px"}}>
               <Row>
-                <Col xs={12} className="gather-information">
+                <Col className="gather-information">
                   Gather information
                 </Col>
               </Row>
             </Col>
-            <Col xs={6} sm={7} className={`confirmation-header product-selection-text-container ${window.location.pathname.indexOf("products") >-1 ? "active" : ""}`}>
-              <Row className="product-selection-container">
-                <Col xs={8} className='product-selection'>
+            <Col className={`confirmation-header product-selection-text-container ${window.location.pathname.indexOf("products") >-1 ? "active" : ""}`}>
+              <div className="product-selection-container">
+                <div className='product-selection'>
                   Production selection
-                </Col>
-              </Row>
+                </div>
+              </div>
             </Col>
-            <Col style={{}} xs={3} sm={2} className={`confirmation-header next-steps ${window.location.pathname=="/next-steps" ? "active" : ""}`}>
+            <Col style={{}} className={`confirmation-header next-steps ${window.location.pathname=="/next-steps" ? "active" : ""}`}>
               <span>
                 Next steps
               </span>
