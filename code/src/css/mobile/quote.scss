@@ -1,0 +1,18 @@
+@media(max-width: 768px) {
+  .c-quote {
+    .one-person-outer-container {
+      .one-person-content {
+        	width: auto;
+      }
+    }
+	.one-person-outer-container {
+		.c-submit-person-info-btn {
+	    	width: 84.21%;
+	    	padding-bottom: 15px; 
+	    	.c-button-default.btn {
+	        	width: 100%;
+	        }
+	    }
+    }
+  }
+}

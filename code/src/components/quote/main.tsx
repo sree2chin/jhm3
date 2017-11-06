@@ -148,14 +148,14 @@ class Main extends React.Component<Props, {}> {
       <div>
         <Subheader />
         <SelectPersons onSubmit={this.submitEmailForm.bind(this)} />
-        <div className="row c-quote" style={{backgroundColor: "#f7f7f7"}}>
+        <div className="row c-quote">
           {this.props.noOfPersons && <div> 
             <div className="header hidden-xs">
-              <div style={{textAlign: "center"}}>
+              <div style={{textAlign: "center", fontSize: "26px"}}>
                 Application information
               </div>  
             </div>
-            <Row className={this.props.noOfPersons==2 ? "two-person-outer-container": "one-person-outer-container"}>
+            <div className={this.props.noOfPersons==2 ? "two-person-outer-container c-center": "one-person-outer-container"}>
               <Col sm={personsContainerWidth} className="one-person-content">
                 <Person 
                   onChange={this.changePersonInfo.bind(this)}
@@ -176,17 +176,21 @@ class Main extends React.Component<Props, {}> {
                   />
                 </Col>
               }
-              <div className="c-submit-person-info-btn">
-                <Col sm={4}>
-                  <Button className="c-button-default" onClick={(){
+              <div className="c-submit-person-info-btn c-center">
+                  <Button className="c-button-default circular hidden-xs" onClick={(){
                       this.submitQuoteForm()
                     }}
                   >
                     CONTINUE
                   </Button>
-                </Col>
+                  <Button className="c-button-default visible-xs" onClick={(){
+                      this.submitQuoteForm()
+                    }}
+                  >
+                    CONTINUE
+                  </Button>
               </div>
-            </Row>
+            </div>
           </div>}
         </div>
       </div>);

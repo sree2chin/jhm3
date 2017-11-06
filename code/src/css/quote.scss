@@ -1,14 +1,15 @@
 @import "./commonMixins";
 
 .c-quote {
-	padding-bottom: 160px;
+	background-color: #fcfcfc;
+    padding-bottom: 60px;
 	.header {
 	    text-align: center;
 	    font-size: 34px;
 	    line-height: 1.5;
 	    color: #333333;
 	    margin-top: 33px;
-	    margin-bottom: 30px;
+	    margin-bottom: 20px;
 	}
 	.c-subheader-text {
 	  font-size: 14px;
@@ -18,6 +19,23 @@
 	  	color: red;
 	  	margin-top: 5px;
       }
+	}
+	.one-person-outer-container {
+		.c-submit-person-info-btn  { 
+			width: 20.21%;
+		}
+	}
+	.two-person-outer-container {
+		.c-submit-person-info-btn  { 
+			width: 36%;
+		}
+	}
+	.c-submit-person-info-btn  {
+		
+		.c-button-default.btn {
+			margin-top: 15px;
+    		width: 100%;
+		}
 	}
 	.c-person-header-text {
 		font-size: 20px;
@@ -176,16 +194,18 @@
 	    }
     }
     .two-person-outer-container {
+    	width: 54.2%;
     	.one-person-content, .second-person-content {
 		    background-color: rgb(255, 255, 255);
 		    padding-left: 0px;
 		    padding-right: 0px;
+		    width: 49%;
 		}
     	.second-person-content {
-    		margin-left: 15px;
+    		float: right;
 		}
     	.one-person-content {
-		   margin-left: 16%;
+		   
 		}
 		.c-one-person-container {
 		    input {
@@ -211,6 +231,9 @@
 		    margin-right: auto;
 		    float: none;
 		    background-color: #fff;
+			width: 54.2%;
+		    padding-left: 0px;
+		    padding-right: 0px;
     	}
     }
     .person-name-container {

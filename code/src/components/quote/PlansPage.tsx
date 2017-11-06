@@ -196,7 +196,7 @@ class PlansPage extends React.Component<Props, {}> {
       <div className="product-pager-container">
         <Subheader />
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
-          <Col sm={8} style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
+          <Col sm={8} style={{marginLeft: "auto",marginRight: "auto", float: "none"}} className="person-info-main-container">
             { this.props.noOfPersons>=1 &&
               <PersonInfo 
                 person={persons[0]}

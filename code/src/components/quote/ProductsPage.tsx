@@ -26,7 +26,10 @@ class ProductsPage extends React.Component<Props, {}> {
     super();
   },
   componentDidMount () {
-
+    console.log("DDFDSD");
+    setTimeout(() => {
+      this._scrollView.scrollTo({y: 100})
+    }, 1)
   },
   componentWillMount() {
     if (isEmpty(this.props.products) && isEmpty(this.props.persons)) {
@@ -149,7 +152,7 @@ class ProductsPage extends React.Component<Props, {}> {
     persons = persons || [];
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
     return (
-      <div className="product-pager-container">
+      <div className="product-pager-container" ref={(c) => { this._scrollView = c; }}>
         <Subheader />
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
           <Col sm={8} style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>

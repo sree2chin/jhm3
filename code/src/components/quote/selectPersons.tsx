@@ -51,7 +51,7 @@ class SelectPersons extends React.Component<Props, State> {
   public render() {
     if(!this.state.noOfPersonsSelectedForMobileAndSubmitted) {
     return (
-      <div style={{backgroundColor: "rgb(247, 247, 247)"}}>
+      <div style={{backgroundColor: "#fcfcfc"}}>
         <Row>
           <Col className="c-select-persons-container">
             <Row style={{marginLeft: "0px", marginRight: "0px"}}>
@@ -81,7 +81,7 @@ class SelectPersons extends React.Component<Props, State> {
                 <p> Two persons</p>
               </Col>
 
-              { this.state.selectNoOfPersonsError && <Col style={{ paddingLeft: "0px", marginLeft: "30px", color: "red"}}sm={12} className={"c-subheader-text error"}  style={{paddingLeft: "0px"}}>
+              { this.state.selectNoOfPersonsError && <Col style={{ paddingLeft: "0px", marginLeft: "30px", color: "red"}} sm={12} className={"c-subheader-text error"}  style={{paddingLeft: "0px"}}>
                 Please select the number of person
               </Col> }
 
