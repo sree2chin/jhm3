@@ -83,7 +83,7 @@ export default class Person extends React.Component<Props, {}> {
             Gender
           </Col>
           <Col sm={12} style={{paddingRight: "22px", marginBottom: "15px"}} className="person-gender-container">
-            <FormGroup className="radio-group">
+            <FormGroup className="radio-group hidden-xs">
               <div className="c-radio" onClick={ ()=> {
                       this.onChange("s_gender", "1")
                     }}>
@@ -107,6 +107,24 @@ export default class Person extends React.Component<Props, {}> {
                 <label htmlFor={"person_s_gender_" + personIndex}> Female </label>
               </div>
             </FormGroup>
+            <Row className="visible-xs">
+              <Col xs={6}>
+                <Button className="c-button-default circular" className={`c-button-default circular ${this.state.s_gender == "1" ? "active" : ""}`} onClick={(){
+                      this.onChange("s_gender", "1")
+                    }}
+                  >
+                    MALE
+                </Button>
+              </Col>
+              <Col xs={6}>
+                <Button className="c-button-default circular" className={`c-button-default circular ${this.state.s_gender == "2" ? "active" : ""}`} onClick={(){
+                      this.onChange("s_gender", "2")
+                    }}
+                  >
+                    FEMALE
+                </Button>
+              </Col>
+            </Row>
             { errors.s_genderError && <Col sm={12} className={"c-subheader-text error"} style={{paddingLeft: "0px"}}>
               Please select your gender.
             </Col> }
@@ -183,7 +201,7 @@ export default class Person extends React.Component<Props, {}> {
             Tobacco use
           </Col>
           <Col sm={12} style={{paddingRight: "22px"}} className="person-tobacco-container">
-            <FormGroup className="radio-group">
+            <FormGroup className="radio-group hidden-xs">
               <div className="c-radio" onClick={ ()=> {
                       this.onChange("smoke", "Yes")
                     }}>
@@ -207,6 +225,24 @@ export default class Person extends React.Component<Props, {}> {
                 <label> No </label>
               </div>
             </FormGroup>
+            <Row className="visible-xs">
+              <Col xs={6}>
+                <Button className="c-button-default circular" className={`c-button-default circular ${this.state.smoke == "Yes" ? "active" : ""}`} onClick={(){
+                      this.onChange("smoke", "Yes")
+                    }}
+                  >
+                    YES
+                </Button>
+              </Col>
+              <Col xs={6}>
+                <Button className="c-button-default circular" className={`c-button-default circular ${this.state.smoke == "No" ? "active" : ""}`} onClick={(){
+                      this.onChange("smoke", "No")
+                    }}
+                  >
+                    NO
+                </Button>
+              </Col>
+            </Row>
             { errors.smokeError && <Col sm={12} className={"c-subheader-text error"} style={{marginTop: "0px", paddingLeft: "0px"}}>
               Please indicate whether or not you use tobacco products.
             </Col> }

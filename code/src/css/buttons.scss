@@ -28,9 +28,11 @@
     }
     &.circular {
         border-radius: 100px!important;
-        background-color: #317dbd!important;
         width: 100%;
         margin-top: 30px;
+        &.active{ 
+            background-color: #317dbd!important;
+        }
     }
     &.active{
         background-color: $btn-default-bg-color!important;
