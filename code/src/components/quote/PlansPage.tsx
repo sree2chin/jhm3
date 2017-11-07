@@ -214,6 +214,8 @@ class PlansPage extends React.Component<Props, {}> {
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
     const individualPlanContainerWidth = this.props.noOfPersons == 2 ? 6 : 12;
     const paymentSchedules = this.getPaymentSchedules();
+    var additionalPersonClass = this.props.noOfPersons==2 ? "all-plan-person-info-container" : "";
+
     return (
       <div className="product-pager-container">
         <Subheader />
@@ -249,7 +251,7 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
-          <Col sm={12} style={{marginLeft: "auto",marginRight: "auto", float: "none"}} className="person-info-main-container">
+          <Col className={`person-info-main-container ${additionalPersonClass}`} style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
             { this.props.noOfPersons>=1 &&
               <PersonInfo 
                 person={persons[0]}
