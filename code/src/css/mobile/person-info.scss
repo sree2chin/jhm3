@@ -40,8 +40,11 @@
 
     .two-person-outer-container {
       .one-person-content, .second-person-content {
-        margin-left: -15px!important;
+        margin-left: 15px!important;
         margin-right: 15px!important;
+      }
+      .second-person-content {
+        margin-right: -15px!important;
       }
     }
     .c-person-header-text {
