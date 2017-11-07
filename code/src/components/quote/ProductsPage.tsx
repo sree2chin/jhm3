@@ -208,8 +208,14 @@ class ProductsPage extends React.Component<Props, {}> {
 
 
         <Row>
-          <Col sm={4} style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
-            <Button className="c-button-default circular" onClick={(){
+          <Col sm={4} xs={11} style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
+            <Button className="c-button-default circular hidden-xs" onClick={(){
+                this.submitProductsForm()
+              }}
+            >
+              CONTINUE
+            </Button>
+            <Button className="c-button-default visible-xs" style={{marginBottom: "15px"}} onClick={(){
                 this.submitProductsForm()
               }}
             >

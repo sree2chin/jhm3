@@ -1,0 +1,35 @@
+@media(max-width: 768px) {
+	.product-pager-container .plans-selector-container{
+		height: auto;
+		.payment-schedule-text {
+			padding-left: 0px;
+		}
+	}
+	.plan-details-container {
+		.plan-sider-info-text1{
+		    padding-left: 15px;
+		    padding-right: 15px;
+		    padding-bottom: 15px;
+		}
+		.plan-product-name {
+			margin-left: 0px;
+		}
+		.plan-sider-info-text .Select {
+			width: 100%;
+		    padding-left: 15px;
+    		padding-right: 15px;
+		}
+		.plan-length-container {
+			margin-top: 20px;
+			.plan-length-container-text {
+				margin-left: 0px!important;
+			    width: 30%;
+			    float: left;
+			}
+			.plan-length-container-selector {
+			    width: 84%;
+			    float: left;
+			}
+		}
+	}
+}

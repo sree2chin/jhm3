@@ -151,7 +151,7 @@ export default class Plan extends React.Component<Props, {}> {
         <Row className="plan-details-container">
           <Col sm={12} className="c-center">
             <Row>
-              <Col sm={2} style={{width: "16%", height: "90px", backgroundColor: "#317dbd", margin: "20px"}} className="blue-plan-container">
+              <Col sm={2} style={{width: "16%", height: "90px", backgroundColor: "#317dbd", margin: "20px"}} className="blue-plan-container hidden-xs">
               </Col>
               <Col sm={8} className="plan-product-info-text">
                 <Row className="plan-product-name">
@@ -175,12 +175,12 @@ export default class Plan extends React.Component<Props, {}> {
                 </Row>
                 <Row>
                   {this.state.selectedPlan && 
-                    <Col className="plan-faceMin" sm={2}>
+                    <Col className="plan-faceMin" xs={2}>
                       ${this.getAmountFormat(this.state.selectedPlan.FaceMin)}
                     </Col>
                   }
                   {this.state.selectedPlan && 
-                      <Col className="plan-face-val-slider" sm={8}>
+                      <Col className="plan-face-val-slider" xs={8}>
                         <Slider
                           min={parseInt(this.state.selectedPlan.FaceMin)}
                           max={parseInt(this.state.selectedPlan.FaceMax)}
@@ -201,14 +201,14 @@ export default class Plan extends React.Component<Props, {}> {
                       </Col>
                   }
                   {this.state.selectedPlan && 
-                    <Col className="plan-faceMax" sm={2}>
+                    <Col className="plan-faceMax" xs={2}>
                       ${this.getAmountFormat(this.state.selectedPlan.FaceMax)}
                     </Col>
                   }
                 </Row>
               </Col>
               <Col sm={3} className="plan-length-container">
-                <Row style={{marginLeft: "5px", marginTop: "16px"}}  className="plan-length-container-text">
+                <Row style={{ marginTop: "16px"}}  className="plan-length-container-text">
                   Plan length
                 </Row>
                 <Row className="plan-length-container-selector">
@@ -225,7 +225,7 @@ export default class Plan extends React.Component<Props, {}> {
               <Col sm={3} className="plan-cost-container">
                 <Row style={{marginTop: "30px"}}>
                   <Col sm={12}>
-                    <Col sm={4} className="plan-cost-text">
+                    <Col xs={4} className="plan-cost-text">
                       Cost
                     </Col>
                     <Col sm={4} className="plan-cost-text-two-person">

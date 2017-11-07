@@ -223,7 +223,7 @@ class PlansPage extends React.Component<Props, {}> {
               <Col sm={8} className="c-plans-product-text">
                 Selected Products
               </Col>
-              <Col sm={4} className="c-select-diff-product-link">
+              <Col sm={4} className="c-select-diff-product-link hidden-xs">
                 SELECT DIFFERENT PRODUCTS
               </Col>
             </Row>
@@ -234,7 +234,7 @@ class PlansPage extends React.Component<Props, {}> {
           <Col sm={8} className="c-center" style={{paddingLeft: "28px", paddingRight: "30px", marginBottom: "15px"}}>
             <Row className="plans-selector-container">
               <Col sm={6} className="c-center" style={{paddingTop: "0px"}}>
-                <Col sm={6} style={{paddingTop: "20px", paddingRight: "0px"}}>
+                <Col sm={6} className="payment-schedule-text" style={{paddingTop: "20px", paddingRight: "0px"}}>
                   Payment schedule
                 </Col>
                 <Col sm={6} className="plan-schedule-container" style={{paddingTop: "10px", paddingLeft: "0px"}}>
