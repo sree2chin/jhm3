@@ -184,6 +184,28 @@ class PlansPage extends React.Component<Props, {}> {
 
     return p;
   },
+  getTotalPaymentAmount() {
+    var total = 0;
+    var sProductID = this.props.persons && this.props.persons[0] && this.props.persons[0].sProductID || null;
+    var sProductID1 = this.props.persons && this.props.persons[1] && this.props.persons[1].sProductID || null;
+
+    if (this.props.premiums && this.props.premiums[0] && this.props.premiums[0] && sProductID && this.state.premium_type){
+      if (this.props.premiums[0][sProductID].QuoteRateGrid && this.props.premiums[0][sProductID].QuoteRateGrid.Col1 && this.props.premiums[0][sProductID].QuoteRateGrid.Col1.Face1 && this.props.premiums[0][sProductID].QuoteRateGrid.Col1.Face1.Premium) {
+        total = parseFloat(this.props.premiums[0][sProductID].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type].split("$")[1]) ;
+      }
+    }
+
+
+    if (this.props.premiums && this.props.premiums[1] && this.props.premiums[1] && sProductID1 && this.state.premium_type){
+      if (this.props.premiums[1][sProductID1].QuoteRateGrid && this.props.premiums[1][sProductID1].QuoteRateGrid.Col1 && this.props.premiums[1][sProductID1].QuoteRateGrid.Col1.Face1 && this.props.premiums[1][sProductID1].QuoteRateGrid.Col1.Face1.Premium) {
+        total += parseFloat(this.props.premiums[1][sProductID1].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type].split("$")[1]) ;
+      }
+    }
+    total = "$" + total;
+
+    return total;
+
+  },
   public render() {
 
     var {persons} = this.props;
@@ -262,7 +284,7 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
 
         <Row className="hidden-xs">
-          <Col className="c-center plan-selector-outer-container" style={{paddingLeft: "12px", paddingRight: "14px", marginBottom: "15px"}}>
+          <Col className="c-center plan-selector-outer-container" style={{paddingLeft: "15px", paddingRight: "15px", marginBottom: "15px"}}>
             <Row className="plans-selector-container">
               <Col sm={6} className="c-center" style={{paddingTop: "0px"}}>
                 <Col sm={6} className="payment-schedule-text" style={{paddingTop: "20px", paddingRight: "0px"}}>
@@ -345,7 +367,7 @@ class PlansPage extends React.Component<Props, {}> {
                     Total
                   </Col>
                   <Col sm={8} className="plan-total-amount">
-                    {this.props.premiums && this.props.premiums[0] && this.props.premiums[0].plans_data && this.props.premiums[0].plans_data.QuoteRateGrid && this.props.premiums[0].plans_data.QuoteRateGrid.Col1 && this.props.premiums[0].plans_data.QuoteRateGrid.Col1.Face1 && this.props.premiums[0].plans_data.QuoteRateGrid.Col1.Face1.Premium && this.props.premiums[0].plans_data.QuoteRateGrid.Col1.Face1.Premium.Annual}
+                    {this.getTotalPaymentAmount()}
                   </Col>
                 </Row>
                 

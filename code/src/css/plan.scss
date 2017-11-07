@@ -21,7 +21,8 @@
 		display: none;
 	}
 	.single-plan-container {
-		padding-left: 12px;
+		padding-left: 0px;
+		padding-right: 0px;
 		margin-bottom: 20px;
 		&.two-persons-plan-container {
 			padding-right: 10px;
@@ -145,6 +146,8 @@
 	    }
 	}
 	.plan-details-container {
+		margin-left: 0px;
+	    margin-right: 0px;
 		.select-this-product-container {
 			height: 40px;
 			border-radius: 6px;
