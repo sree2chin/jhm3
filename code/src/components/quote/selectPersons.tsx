@@ -24,6 +24,14 @@ class SelectPersons extends React.Component<Props, State> {
     super(props);
     this.state = {};
   };
+  componentWillMount() {
+    if(this.props.noOfPersons) {
+      this.setState({
+        noOfPersons: this.props.noOfPersons,
+        selectNoOfPersonsError: false
+      });
+    }
+  },
 
   selectNoOfPersons = (value) => {
     this.setState({
@@ -110,7 +118,7 @@ class SelectPersons extends React.Component<Props, State> {
 
 const mapStateToProps = (state: any): Props => {
   return {
-
+    noOfPersons: state.selectPersons.noOfPersons
   };
 }
 

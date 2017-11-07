@@ -147,6 +147,17 @@ class ProductsPage extends React.Component<Props, {}> {
   openEditPersonModal = (person, personIndex) => {
     this.props.openEditPersonModal(person, personIndex);
   },
+  shouldDisplayBackBtn() {
+    var shouldRedirect = isEmpty(this.props.products) || isEmpty(this.props.products[0]);
+    if(this.props.noOfPersons == 2) {
+      shouldRedirect = isEmpty(this.props.products) || isEmpty(this.props.products[1]);
+    }
+    return shouldRedirect;
+  },
+  redirectToMainPage() {
+    const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
+    browserHistory.push(basePath);
+  },
   public render() {
     var {persons} = this.props;
     persons = persons || [];
@@ -155,7 +166,7 @@ class ProductsPage extends React.Component<Props, {}> {
       <div className="product-pager-container" ref={(c) => { this._scrollView = c; }}>
         <Subheader />
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
-          <Col sm={8} style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
+          <Col sm={12} style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
             { this.props.noOfPersons>=1 &&
               <PersonInfo 
                 person={persons[0]}
@@ -208,7 +219,7 @@ class ProductsPage extends React.Component<Props, {}> {
 
 
         <Row>
-          <Col sm={4} xs={11} style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
+          {!this.shouldDisplayBackBtn() && <Col sm={4} xs={11} style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
             <Button className="c-button-default circular hidden-xs" onClick={(){
                 this.submitProductsForm()
               }}
@@ -222,6 +233,22 @@ class ProductsPage extends React.Component<Props, {}> {
               CONTINUE
             </Button>
           </Col>
+          }
+          {this.shouldDisplayBackBtn() && <Col sm={4} xs={11} style={{ marginTop: "15px", marginLeft: "auto", marginRight: "auto", float: "none"}}>
+            <Button className="c-button-default circular hidden-xs" onClick={(){
+                this.redirectToMainPage()
+              }}
+            >
+              BACK
+            </Button>
+            <Button className="c-button-default visible-xs" style={{marginBottom: "15px"}} onClick={(){
+                this.redirectToMainPage()
+              }}
+            >
+              BACK
+            </Button>
+          </Col>
+          }
         </Row>
 
         <EditPerson 

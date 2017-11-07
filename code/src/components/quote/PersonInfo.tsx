@@ -19,7 +19,7 @@ export default class PersonInfo extends React.Component<Props, {}> {
       additionalClass += " second-person";
     }
     return (
-          <Col sm={personsContainerWidth} className={`person-info-container ${additionalClass}`}>
+          <Col sm={personsContainerWidth} className={`person-info-container c-center ${additionalClass}`}>
             <Row className="person-info-header-container">
               <Col xs={10} className="person-name-container">
                 {person.name} 

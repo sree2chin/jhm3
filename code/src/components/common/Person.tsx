@@ -52,7 +52,8 @@ export default class Person extends React.Component<Props, {}> {
 
     var statesObjects = getStateObjects();
     const personIndex = this.props.index;
-    const {errors, person} = this.props;
+    var {errors, person} = this.props;
+    person = person || {};
     const healthRatingObjects = [
           {value: "Excellent", label: "Excellent"},
           {value: "Very Good", label: "Very Good"},
@@ -71,6 +72,7 @@ export default class Person extends React.Component<Props, {}> {
               name={"first-applicant-name-" + personIndex}
               label="Name"
               placeholder="Name"
+              value={person.name}
               onChange={(e) => {
                 this.onChange("name", e.target.value
               )}}
@@ -90,7 +92,7 @@ export default class Person extends React.Component<Props, {}> {
                 <input 
                   type="radio" 
                   name={"person_s_gender_" + personIndex} 
-                  checked={this.state.s_gender == "1"}
+                  checked={person.s_gender == "1"}
                 />
                 <span></span>
                 <label htmlFor={"person_s_gender_" + personIndex}> Male </label >
@@ -101,7 +103,7 @@ export default class Person extends React.Component<Props, {}> {
                 <input 
                   type="radio" 
                   name={"person_s_gender_" + personIndex} 
-                  checked={this.state.s_gender == "2"}
+                  checked={person.s_gender == "2"}
                 />
                 <span></span>
                 <label htmlFor={"person_s_gender_" + personIndex}> Female </label>
@@ -109,7 +111,7 @@ export default class Person extends React.Component<Props, {}> {
             </FormGroup>
             <Row className="visible-xs">
               <Col xs={6}>
-                <Button className="c-button-default circular" className={`c-button-default circular ${this.state.s_gender == "1" ? "active" : ""}`} onClick={(){
+                <Button className="c-button-default circular" className={`c-button-default circular ${person.s_gender == "1" ? "active" : ""}`} onClick={(){
                       this.onChange("s_gender", "1")
                     }}
                   >
@@ -117,7 +119,7 @@ export default class Person extends React.Component<Props, {}> {
                 </Button>
               </Col>
               <Col xs={6}>
-                <Button className="c-button-default circular" className={`c-button-default circular ${this.state.s_gender == "2" ? "active" : ""}`} onClick={(){
+                <Button className="c-button-default circular" className={`c-button-default circular ${person.s_gender == "2" ? "active" : ""}`} onClick={(){
                       this.onChange("s_gender", "2")
                     }}
                   >
@@ -208,7 +210,7 @@ export default class Person extends React.Component<Props, {}> {
                 <input 
                   type="radio" 
                   name={"person1_smoke_" + personIndex}
-                  checked={this.state.smoke == "Yes"}
+                  checked={person.smoke == "Yes"}
                 />
                 <span></span>
                 <label> Yes </label>
@@ -219,7 +221,7 @@ export default class Person extends React.Component<Props, {}> {
                 <input 
                   type="radio" 
                   name={"person1_smoke_" + personIndex}
-                  checked={this.state.smoke == "No"}
+                  checked={person.smoke == "No"}
                 />
                 <span></span>
                 <label> No </label>
@@ -227,7 +229,7 @@ export default class Person extends React.Component<Props, {}> {
             </FormGroup>
             <Row className="visible-xs">
               <Col xs={6}>
-                <Button className="c-button-default circular" className={`c-button-default circular ${this.state.smoke == "Yes" ? "active" : ""}`} onClick={(){
+                <Button className="c-button-default circular" className={`c-button-default circular ${person.smoke == "Yes" ? "active" : ""}`} onClick={(){
                       this.onChange("smoke", "Yes")
                     }}
                   >
@@ -235,7 +237,7 @@ export default class Person extends React.Component<Props, {}> {
                 </Button>
               </Col>
               <Col xs={6}>
-                <Button className="c-button-default circular" className={`c-button-default circular ${this.state.smoke == "No" ? "active" : ""}`} onClick={(){
+                <Button className="c-button-default circular" className={`c-button-default circular ${person.smoke == "No" ? "active" : ""}`} onClick={(){
                       this.onChange("smoke", "No")
                     }}
                   >

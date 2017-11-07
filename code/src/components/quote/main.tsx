@@ -42,6 +42,18 @@ class Main extends React.Component<Props, {}> {
     if(this.props.location.query.agent_id) {
       this.setCookie("agent_id", this.props.location.query.agent_id, 1)
     }
+    if(!isEmpty(this.props.persons) && !isEmpty(this.props.persons[0])) {
+      const persons = JSON.parse(JSON.stringify(this.props.persons));
+      if(persons[0] && persons[0].s_birthDate) {
+        persons[0].s_birthDate = moment(persons[0].s_birthDate)
+      }
+      if(persons[1] && persons[1].s_birthDate) {
+        persons[1].s_birthDate = moment(persons[1].s_birthDate)
+      }
+      this.setState({
+        persons: persons
+      });
+    }
   },
 
   validateQuoteForm() {
@@ -106,7 +118,13 @@ class Main extends React.Component<Props, {}> {
   submitEmailForm() {
     this.props.submitEmailForm(this.props);
   }, 
-
+  componentWillReceiveProps(nextProps) {
+    if(!isEmpty(nextProps.persons) && isEmpty(this.state.persons)) {
+      this.setState({
+        persons: nextProps.persons
+      });
+    }
+  },
   changePersonInfo(index, key, val) {
     var person = JSON.parse(JSON.stringify(this.state.persons[index]));
 
@@ -201,6 +219,7 @@ const mapStateToProps = (state: any): Props => {
   return {
     products: state.quotes.products,
     plans: state.quotes.plans,
+    persons: state.quotes.persons,
     noOfPersons: state.selectPersons.noOfPersons
   };
 }
