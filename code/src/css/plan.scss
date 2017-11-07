@@ -1,4 +1,18 @@
 .product-pager-container {
+	.plan-selector-outer-container {
+		width: 54.17%;
+	}
+	.person-info-main-container {
+		padding-left: 0px;
+    	padding-right: 0px;
+	}
+	.all-plans-main-container {
+		width: 54.17%;
+		.one-person-plan-container {
+		    padding-left: 0px;
+    		padding-right: 0px;
+		}
+	}
 	.continue-to-next-steps {
 		margin-right: 16%; 
 		float: right;
@@ -101,6 +115,9 @@
 		    font-size: 14px;
 		    text-align: right;
 		    color: #317dbd;
+		}
+		.plans-product-header-text-container {
+			width: 54.17%;
 		}
 	}	
 	.plan-total-text {

@@ -1,4 +1,7 @@
 .product-pager-container {
+	.all-products-info-container {
+		width: 54.17%;
+	}
 	.product-selection-error-msg {
 	    text-align: center;
 	    color: red;
@@ -164,7 +167,7 @@
 		background-color: #ffffff;
 		border: solid 1px #d4d4d4;
 		margin-left: 10px;
-	    min-height: 250px;
+	    min-height: 270px;
 	    .header {
 		    font-size: 26px;
 		    text-align: left;

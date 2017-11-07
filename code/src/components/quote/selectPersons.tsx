@@ -59,7 +59,7 @@ class SelectPersons extends React.Component<Props, State> {
   public render() {
     if(!this.state.noOfPersonsSelectedForMobileAndSubmitted) {
     return (
-      <div style={{backgroundColor: "#fcfcfc"}}>
+      <div style={{backgroundColor: "#fcfcfc"}} className={`${!this.props.noOfPersons ? "before-select-persons" : ""}`}>
         <Row>
           <Col className="c-select-persons-container">
             <Row style={{marginLeft: "0px", marginRight: "0px"}}>

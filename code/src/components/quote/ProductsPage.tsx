@@ -189,7 +189,7 @@ class ProductsPage extends React.Component<Props, {}> {
         </Row>
         <ProductHeader />
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}} className={this.props.noOfPersons==2 ? "two-product-outer-container": "one-product-outer-container"}>
-          <Col sm={8} className="c-center">
+          <Col className="c-center all-products-info-container">
             <Row>
               { this.props.products && this.props.products.length >=1 && this.props.products[0] ? 
                 <ProductContainer 

@@ -206,7 +206,7 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
 
         <Row className="visible-xs">
-          <Col sm={8} className="c-center" style={{paddingLeft: "28px", paddingRight: "30px", marginBottom: "15px"}}>
+          <Col className="c-center plan-selector-outer-container" style={{paddingLeft: "28px", paddingRight: "30px", marginBottom: "15px"}}>
             <Row className="plans-selector-container">
               <Col sm={6} className="c-center" style={{paddingTop: "0px"}}>
                 <Col sm={6} className="payment-schedule-text" style={{paddingTop: "20px", paddingRight: "0px"}}>
@@ -249,7 +249,7 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>
         <Row className="plans-product-header hidden-xs">
-          <Col sm={8} className="c-center">
+          <Col className="c-center plans-product-header-text-container">
             <Row>
               <Col sm={8} className="c-plans-product-text">
                 Selected Products
@@ -262,7 +262,7 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
 
         <Row className="hidden-xs">
-          <Col sm={8} className="c-center" style={{paddingLeft: "28px", paddingRight: "30px", marginBottom: "15px"}}>
+          <Col className="c-center plan-selector-outer-container" style={{paddingLeft: "12px", paddingRight: "14px", marginBottom: "15px"}}>
             <Row className="plans-selector-container">
               <Col sm={6} className="c-center" style={{paddingTop: "0px"}}>
                 <Col sm={6} className="payment-schedule-text" style={{paddingTop: "20px", paddingRight: "0px"}}>
@@ -284,7 +284,7 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
 
         <Row>
-          <Col sm={8} className="c-center">
+          <Col className="c-center all-plans-main-container">
             <Col sm={individualPlanContainerWidth} className="one-person-plan-container">
               { this.props.noOfPersons>=1 &&
                 map(this.props.plans[0].plans_data, (p)=>{
