@@ -1,4 +1,9 @@
 .product-pager-container {
+	.all-persons-info-container {
+	    width: 54.17%;
+	    padding-left: 0px;
+	    padding-right: 0px;
+	}
 	.all-products-info-container {
 		width: 54.17%;
 	}
@@ -45,7 +50,7 @@
    		}
    }
 	.person-info-container {
-		width: 54.17%;   
+
 	    background-color: #ffffff;
 	    border: solid 1px #d4d4d4;
 	    margin-top: 60px;
@@ -57,14 +62,14 @@
 	    	}
 	    }
 	    &.contains-two-persons.first-person {
-		    margin-right: 5px;
-		    width: 48%;
-		    margin-left: 18px;
+		    margin-right: 1.5%;
+		    width: 47.5%;
+		    margin-left: 2%;
 	    }
 
 	    &.contains-two-persons.second-person {
-    		width: 48%;
-    		margin-left: 10px;
+		    width: 47.5%;
+		    margin-left: 1%;
 	    }
 	    &.contains-two-persons {
 	    	.person-info-columns {

@@ -166,7 +166,7 @@ class ProductsPage extends React.Component<Props, {}> {
       <div className="product-pager-container" ref={(c) => { this._scrollView = c; }}>
         <Subheader />
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
-          <Col sm={12} style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
+          <Col className="all-persons-info-container" style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
             { this.props.noOfPersons>=1 &&
               <PersonInfo 
                 person={persons[0]}
@@ -219,10 +219,11 @@ class ProductsPage extends React.Component<Props, {}> {
 
 
         <Row>
-          {!this.shouldDisplayBackBtn() && <Col sm={4} xs={11} style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
+          {!this.shouldDisplayBackBtn() && <Col sm={3} xs={11} style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
             <Button className="c-button-default circular hidden-xs" onClick={(){
                 this.submitProductsForm()
               }}
+              style={{ marginTop: "0px", marginBottom: "60px"}}
             >
               CONTINUE
             </Button>
@@ -234,10 +235,11 @@ class ProductsPage extends React.Component<Props, {}> {
             </Button>
           </Col>
           }
-          {this.shouldDisplayBackBtn() && <Col sm={4} xs={11} style={{ marginTop: "15px", marginLeft: "auto", marginRight: "auto", float: "none"}}>
+          {this.shouldDisplayBackBtn() && <Col sm={3} xs={11} style={{ marginTop: "15px", marginLeft: "auto", marginRight: "auto", float: "none"}}>
             <Button className="c-button-default circular hidden-xs" onClick={(){
                 this.redirectToMainPage()
               }}
+              style={{ marginTop: "0px", marginBottom: "60px"}}
             >
               BACK
             </Button>
