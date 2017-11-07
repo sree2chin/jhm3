@@ -1,9 +1,13 @@
 @media(max-width:768px) {
+    .c-quote .two-person-outer-container .one-person-content, .c-quote .two-person-outer-container .second-person-content {
+        width: 100%;
+    }
   .c-quote  {
+    width: 100%;
     padding-bottom: 0px;
     .one-person-outer-container, .two-person-outer-container {
       .one-person-content, .second-person-content {
-        margin-left: 15px;
+        margin-left: -15px;
         margin-right: 15px;
         .person-gender-container, .person-tobacco-container {
         	.radio-group.form-group {
@@ -36,8 +40,8 @@
 
     .two-person-outer-container {
       .one-person-content, .second-person-content {
-        margin-left: 30px!important;
-        margin-right: 30px!important;
+        margin-left: -15px!important;
+        margin-right: 15px!important;
       }
     }
     .c-person-header-text {

@@ -29,7 +29,7 @@ export default class Plan extends React.Component<Props, {}> {
 
     ];
     return (
-      <Row>
+      <Row className="all-riders-info-container">
         {map(this.props.persons, (person) =>
           <Col key={person.name} sm={12} className="c-one-person-container riders-outer-container">
             <Row>

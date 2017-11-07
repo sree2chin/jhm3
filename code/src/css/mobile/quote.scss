@@ -1,5 +1,11 @@
 @media(max-width: 768px) {
   .c-quote {
+    .two-person-outer-container {
+      width: 100%;
+    }
+    .c-quote .two-person-outer-container .one-person-content, .c-quote .two-person-outer-container .second-person-content {
+      
+    }
     .one-person-outer-container {
       .one-person-content {
         	width: auto;
@@ -7,8 +13,9 @@
     }
 	.one-person-outer-container {
 		.c-submit-person-info-btn {
-	    	width: 84.21%;
-	    	padding-bottom: 15px; 
+      width: 91.21%;
+      padding-bottom: 15px;
+      margin-left: 30px!important;
 	    	.c-button-default.btn {
 	        	width: 100%;
 	        }

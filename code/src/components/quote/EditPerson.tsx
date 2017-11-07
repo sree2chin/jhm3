@@ -189,8 +189,8 @@ export default class EditPerson extends React.Component<Props, {}> {
                     </Col>
              
                   </div>
-                  <div  style={{marginBottom: "0px", marginLeft: "-15px"}}>
-                    <Col sm={12} className={"c-subheader-text"} style={{marginTop: "15px"}}>
+                  <Row  style={{marginBottom: "0px", marginLeft: "-15px"}}>
+                    <Col sm={12} className={"c-subheader-text c-subheader-overall-health"} style={{marginTop: "15px"}}>
                       Overall health
                     </Col>
                     <Col sm={12} style={{marginBottom: "10px", marginTop: "6px"}}>
@@ -212,8 +212,8 @@ export default class EditPerson extends React.Component<Props, {}> {
                       </Col> }
                     </Col>
 
-                  </div>
-                  <div style={{ marginLeft: "-15px"}}>
+                  </Row>
+                  <Row style={{ marginLeft: "-15px"}}>
                     <Col sm={12} className={"c-subheader-text"}  style={{marginTop: "5px"}}>
                       Tobacco use
                     </Col>
@@ -246,7 +246,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                         Please indicate whether or not you use tobacco products.
                       </Col> }
                     </Col>
-                  </div>
+                  </Row>
                   <div>
                     <Col style={{marginLeft: "-15px", marginRight: "-15px", marginBottom: "-15px"}}>
                       <Button className="c-button-default" onClick={(){

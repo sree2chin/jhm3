@@ -22,6 +22,9 @@
     "src/css/mobile/person-info.scss",
     "src/css/mobile/product.scss",
     "src/css/mobile/plan.scss",
+    "src/css/mobile/edit-modal.scss",
     "src/css/mobile/quote.scss"
+
+    
   ]
 }

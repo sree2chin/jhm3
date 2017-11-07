@@ -1,11 +1,46 @@
 @media(max-width: 768px) {
 	.product-pager-container .plans-selector-container{
 		height: auto;
+	    border-top: none;
+	    box-shadow: none;
+	    margin-top: 0px;
 		.payment-schedule-text {
 			padding-left: 0px;
 		}
 	}
-	.product-pager-container {
+	.product-pager-container {	
+		.plans-product-header {
+    		padding-top: 30px;
+		    padding-bottom: 15px;
+		    margin-left: 0px;
+		    background-color: white;
+			margin-top: 0px;
+		    margin-bottom: 0px;
+		}
+		.plan-schedule-container {
+			margin-bottom: 15px;
+			.Select-input {
+			    height: 44px;
+			    border-radius: 2px;
+			    background-color: #ffffff;
+			}
+			.Select-placeholder {
+				padding-top: 5px;
+			}
+		}
+		.all-plans-main-container {
+		    width: auto;
+		    margin-left: 30px!important;
+		    margin-right: 30px!important;
+		    margin-top: 15px;
+		}
+		.plan-selector-outer-container {
+			width: auto;
+			margin-bottom: 0px!important;
+		}
+		.person-info-main-container {
+			width: auto;
+		}
 		.continue-to-next-steps {
 		    margin-right: 15px;
 		    float: right;
@@ -14,6 +49,14 @@
 		}	
 		.riders-outer-container .c-center {
 			padding-left: 41px;
+		}
+	}
+	.product-pager-container .plan-details-container {
+		.plan-length-container {
+			border-left: none;
+		}
+		.plan-cost-container {
+			border-left: none;
 		}
 	}
 	.plan-details-container {

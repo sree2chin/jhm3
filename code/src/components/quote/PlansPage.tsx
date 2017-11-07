@@ -189,14 +189,14 @@ class PlansPage extends React.Component<Props, {}> {
     var sProductID = this.props.persons && this.props.persons[0] && this.props.persons[0].sProductID || null;
     var sProductID1 = this.props.persons && this.props.persons[1] && this.props.persons[1].sProductID || null;
 
-    if (this.props.premiums && this.props.premiums[0] && this.props.premiums[0] && sProductID && this.state.premium_type){
+    if (this.props.premiums && this.props.premiums[0] && this.props.premiums[0] && this.props.premiums[0][sProductID] && sProductID && this.state.premium_type){
       if (this.props.premiums[0][sProductID].QuoteRateGrid && this.props.premiums[0][sProductID].QuoteRateGrid.Col1 && this.props.premiums[0][sProductID].QuoteRateGrid.Col1.Face1 && this.props.premiums[0][sProductID].QuoteRateGrid.Col1.Face1.Premium) {
         total = parseFloat(this.props.premiums[0][sProductID].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type].split("$")[1].replace(",", ""));
       }
     }
 
 
-    if (this.props.premiums && this.props.premiums[1] && this.props.premiums[1] && sProductID1 && this.state.premium_type){
+    if (this.props.premiums && this.props.premiums[1] && this.props.premiums[1] && this.props.premiums[1][sProductID1] && sProductID1 && this.state.premium_type){
       if (this.props.premiums[1][sProductID1].QuoteRateGrid && this.props.premiums[1][sProductID1].QuoteRateGrid.Col1 && this.props.premiums[1][sProductID1].QuoteRateGrid.Col1.Face1 && this.props.premiums[1][sProductID1].QuoteRateGrid.Col1.Face1.Premium) {
         total += parseFloat(this.props.premiums[1][sProductID1].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type].split("$")[1].replace(",", ""));
       }
