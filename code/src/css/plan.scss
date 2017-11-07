@@ -89,7 +89,7 @@
 	.one-person-plan-container {
 		.single-plan-container {
 			&.two-persons-plan-container {
-				padding-right: 10px;
+				padding-right: 0px;
 				padding-left: 0px;
 			}
 		}
@@ -98,7 +98,7 @@
 	.second-person-plan-container {
 		.single-plan-container {
 			&.two-persons-plan-container {
-				padding-left: 10px;
+				padding-left: 0px;
 				padding-right: 0px;
 
 			}
