@@ -361,7 +361,7 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
 
         <Row>
-          <Col sm={8} className="c-center" style={{paddingLeft: "26px", paddingRight: "30px"}}>
+          <Col sm={8} className="c-center plan-total-container">
             <Row className="plans-selector-container">
               <Col sm={3} style={{float: "right", marginRight: "15px"}}>
                 <Row>
@@ -380,7 +380,7 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
 
         <Row>
-          <Col sm={4} className="continue-to-next-steps" style={{ }}>
+          <Col sm={3} className="continue-to-next-steps" style={{ }}>
             <Button className="c-button-default circular hidden-xs" onClick={(){
                 this.redirectToNextSteps()
               }}

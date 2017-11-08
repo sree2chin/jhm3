@@ -1,11 +1,28 @@
 @media(max-width:768px) { 
-
+	.riders-outer-container {
+		margin-left: -5px;
+	    margin-right: 20px;
+	}
 	.product-pager-container {
 		.all-persons-info-container {
 			width: auto;
 		}
+		.two-product-outer-container .all-products-info-container {
+			.single-product-container {
+			    margin-right: 45px;
+			}
+		}
 		.all-products-info-container {
-			width: 92%;
+			width: 100%;
+			.single-product-container {
+				margin: 15px;
+			}
+			.second-product-container {
+				.single-product-container {
+					margin-right: 30px;
+    				margin-left: 30px;
+				}
+			}
 		}
 		.one-product-outer-container { 
 			margin-left: 0px;
@@ -32,9 +49,33 @@
 			    width: 40%;
 			    text-align: left;
 			}
+			&.contains-two-persons {
+				&.first-person{
+					width: auto;
+				}
+			}
 		}
 	}
 	.person-info-main-container {
 		width: auto;
+	}
+	.product-pager-container .person-info-container.contains-two-persons .person-label {
+	    display: inline-block;
+	    width: 50%;
+	    text-align: right;
+	    float: left;
+	    margin-right: 0px;
+	}
+	.product-pager-container .person-info-container.contains-two-persons .person-label-content {
+	    display: inline-block;
+	    width: 45%;
+	    text-align: left;
+	    margin-left: 0%;
+	    float: right;
+	}
+	.product-pager-container .person-info-container.contains-two-persons.second-person {
+		width: 100%;
+	    margin-left: 40px;
+	    padding-right: 90px;
 	}
 }

@@ -33,10 +33,10 @@ export default class Plan extends React.Component<Props, {}> {
         {map(this.props.persons, (person) =>
           <Col key={person.name} sm={12} className="c-one-person-container riders-outer-container">
             <Row>
-              <Col sm={8} className="c-center" style={{paddingLeft: "20px"}}>
+              <Col sm={8} className="c-center rider-header-text">
                 Riders for {person.name}
               </Col>
-              <Col sm={8} className="c-center">
+              <Col sm={8} className="riders-container c-center">
                   {map(riders, (rider) =>
                      return <Rider key={rider.header}
                         rider={rider}

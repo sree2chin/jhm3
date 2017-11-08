@@ -165,6 +165,7 @@ class ProductsPage extends React.Component<Props, {}> {
     return (
       <div className="product-pager-container" ref={(c) => { this._scrollView = c; }}>
         <Subheader />
+        <div className="visible-xs"><ProductHeader /> </div>
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
           <Col className="all-persons-info-container" style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
             { this.props.noOfPersons>=1 &&
@@ -176,18 +177,20 @@ class ProductsPage extends React.Component<Props, {}> {
                 openEditPersonModal={this.openEditPersonModal.bind(this)}
               />
             }
-            { this.props.noOfPersons==2 &&
-              <PersonInfo 
-                person={persons[1]}
-                noOfPersons={this.props.noOfPersons}
-                personIndex={1}
-                index={1}
-                openEditPersonModal={this.openEditPersonModal.bind(this)}
-              />
-            }
+            <div className="hidden-xs">
+              { this.props.noOfPersons==2 &&
+                <PersonInfo 
+                  person={persons[1]}
+                  noOfPersons={this.props.noOfPersons}
+                  personIndex={1}
+                  index={1}
+                  openEditPersonModal={this.openEditPersonModal.bind(this)}
+                />
+              }
+            </div>
           </Col>
         </Row>
-        <ProductHeader />
+        <div className="hidden-xs"><ProductHeader /> </div>
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}} className={this.props.noOfPersons==2 ? "two-product-outer-container": "one-product-outer-container"}>
           <Col className="c-center all-products-info-container">
             <Row>
@@ -202,6 +205,31 @@ class ProductsPage extends React.Component<Props, {}> {
                   productIds={this.state.productId0}
                 /> : <NoProducts />
               }
+
+              <Row style={{backgroundColor: "rgb(247, 247, 247)"}} className="visible-xs">
+                <Col className="all-persons-info-container" className="visible-xs" style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
+                  <div className="hidden-xs">
+                  { this.props.noOfPersons>=1 &&
+                    <PersonInfo 
+                      person={persons[0]}
+                      noOfPersons={this.props.noOfPersons}
+                      personIndex={0}
+                      index={0}
+                      openEditPersonModal={this.openEditPersonModal.bind(this)}
+                    />
+                  }
+                  </div>
+                  { this.props.noOfPersons==2 &&
+                    <PersonInfo 
+                      person={persons[1]}
+                      noOfPersons={this.props.noOfPersons}
+                      personIndex={1}
+                      index={1}
+                      openEditPersonModal={this.openEditPersonModal.bind(this)}
+                    />
+                  }
+                </Col>
+              </Row>
               { this.props.products && this.props.products.length==2 && this.props.products[1] ?
                   <ProductContainer 
                     productInfo={this.props.products[1]}

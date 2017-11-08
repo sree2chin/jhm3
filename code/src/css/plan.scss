@@ -12,12 +12,13 @@
 		width: 54.17%;
 		.one-person-plan-container {
 		    padding-left: 0px;
-    		padding-right: 0px;
+    		padding-right: 7.5px;
 		}
 	}
 	.continue-to-next-steps {
-		margin-right: 16%; 
-		float: right;
+	    margin-right: 21.8%;
+	    float: right;
+	    margin-bottom: 60px;
 	}
 	.plan-cost-text-two-person {
 		display: none;
@@ -98,6 +99,8 @@
 	}
 
 	.second-person-plan-container {
+		padding-right: 0px;
+    	padding-left: 7.5px;
 		.single-plan-container {
 			&.two-persons-plan-container {
 				padding-left: 0px;
@@ -133,6 +136,15 @@
 	    text-align: left;
 	    color: #009c91;
 	    margin-top: 12px;
+	}
+	.plan-total-container {
+		width: 54.17%;
+		padding-left: 0px;
+		padding-right: 0px;
+		.plans-selector-container {
+			margin-left: 0px;
+		    margin-right: 0px;
+		}
 	}
 	.plans-selector-container {
 	    height: 60px;
