@@ -30,15 +30,36 @@
 		    margin-top: 23px;
 		    margin-left: 0px;
     	}
+    	.next-action-application-img-container {
+		    padding-left: 8px;
+		    padding-right: 8px;
+    	}
+    	.next-action-email-img-container {
+			padding-left: 8px;
+		    padding-right: 8px;
+    	}
+    	.next-action-phone-img-container {
+		    padding-left: 8px;
+		    padding-right: 9px;
+    	}
     	.next-action-img-container {
 		    height: 130px;
 		    border-radius: 6px;
 		    background-color: #ffffff;
 		    border: solid 1px #d4d4d4;
 		    img {
-				width: 30%;
-			    margin-left: 35%;
-			    margin-top: 38px;
+	    	    width: 30%;
+                margin-left: 35%;
+                margin-top: 38px;
+		    }
+		    .next-steps-tool-tips {
+			    margin-top: 21px;
+			    padding-left: 32px;
+			    img {
+				    margin-bottom: 7px;
+				    width: 20px;
+				    margin-top: 19px;
+			    }
 		    }
     	}
     	.next-steps-footer {

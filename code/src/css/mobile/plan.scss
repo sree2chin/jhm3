@@ -1,4 +1,9 @@
 @media(max-width: 768px) {
+	.product-pager-container .riders-outer-container .riders-container.c-center {
+		padding-left: 41px!important;
+	    padding-right: 15px;
+	    width: 100%;
+	}
 	.product-pager-container .plans-selector-container{
 		height: auto;
 	    border-top: none;
@@ -8,7 +13,24 @@
 			padding-left: 0px;
 		}
 	}
-	.product-pager-container {	
+	.product-pager-container {
+		.plan-total-container {
+			width: 100%;
+		    background-color: #ffffff;
+		    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+		    border: solid 1px #d4d4d4;
+		    .plans-selector-container {
+		    	.plan-total-text {
+					text-align: right;
+				    margin-top: 2px;
+				    margin-bottom: 16px;
+		    	}
+		    	.plan-total-amount {
+		    		text-align: left;
+    				margin-top: -4px;
+		    	}
+		    }
+		}	
 		.plans-product-header {
     		padding-top: 30px;
 		    padding-bottom: 15px;

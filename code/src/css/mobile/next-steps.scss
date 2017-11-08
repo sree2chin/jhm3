@@ -1,0 +1,45 @@
+
+@media(max-width: 768px) {
+	.next-steps-container {
+		.next-step-submit-btn-container {
+			width: 86%;
+			border-radius: 2px!important;
+			.next-step-submit-btn {
+				margin-bottom: 0px; 
+			}
+		}
+		.customer-next-steps-container {
+	    	.next-action-application-img-container {
+	    		padding-left: 9px;
+	    		padding-right: 9px;
+	    	}
+	    	.next-action-email-img-container {
+	    		padding-left: 9px;
+	    		padding-right: 9px;
+	    	}
+	    	.next-action-phone-img-container {
+	    		padding-left: 9px;
+	    		padding-right: 9px;
+	    	}
+			width: 100%;
+			margin-top: 0px;
+			.next-action-img-container {
+				&.next-action-img-container-mobile {
+					margin-left: 22px;
+				}
+			    img {
+	  				width: 86%;
+			    	margin-left: 0px;
+			    	margin-top: 16px;
+			    }
+			    height: 70px;
+			    padding-top: 0px;
+			      color: #317dbd;
+			    padding-bottom: 0px;
+			    margin-bottom: 21px;
+			    margin-right: 20px;
+			    margin-left: 10px;
+			}
+		}
+	}
+}

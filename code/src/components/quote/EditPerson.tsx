@@ -249,7 +249,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                   </Row>
                   <div>
                     <Col style={{marginLeft: "-15px", marginRight: "-15px", marginBottom: "-15px"}}>
-                      <Button className="c-button-default" onClick={(){
+                      <Button className="c-button-default active" onClick={(){
                           this.submitEditForm()
                         }}
                         style={{borderRadius: "5px!important"}}

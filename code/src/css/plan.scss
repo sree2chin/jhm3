@@ -18,7 +18,8 @@
 	.continue-to-next-steps {
 	    margin-right: 21.8%;
 	    float: right;
-	    margin-bottom: 60px;
+	    margin-top: 30px;
+    	margin-bottom: 15px;
 	}
 	.plan-cost-text-two-person {
 		display: none;
@@ -144,6 +145,9 @@
 		.plans-selector-container {
 			margin-left: 0px;
 		    margin-right: 0px;
+		    .plan-total-text {
+		    	color: #999999;
+		    }
 		}
 	}
 	.plans-selector-container {

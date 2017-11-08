@@ -263,7 +263,7 @@ class ProductsPage extends React.Component<Props, {}> {
             </Button>
           </Col>
           }
-          {this.shouldDisplayBackBtn() && <Col sm={3} xs={11} style={{ marginTop: "15px", marginLeft: "auto", marginRight: "auto", float: "none"}}>
+          {this.shouldDisplayBackBtn() && <Col sm={3} xs={11} className="product-page-continue-btn" style={{ marginTop: "15px", marginLeft: "auto", marginRight: "auto", float: "none"}}>
             <Button className="c-button-default circular hidden-xs" onClick={(){
                 this.redirectToMainPage()
               }}

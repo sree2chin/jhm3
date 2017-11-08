@@ -18,6 +18,7 @@ import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
 import Plan from "../common/Plan"
 import { browserHistory } from 'react-router';
+import {Tooltip} from 'react-lightweight-tooltip';
 
 interface Props {
   plans: [any]
@@ -159,6 +160,32 @@ class PlansPage extends React.Component<Props, {}> {
   },
   public render() {
 
+    const toolTipStyles = {
+      wrapper: {
+        marginLeft: "15px",
+        top: "-16px"
+      },
+      content: {
+        background: 'none',
+        borderRadius: '10px',
+        fontSize: "12px",
+        color: "#ffffff",
+        whiteSpace: "normal",
+        padding: '.3em 5px',
+      },
+      tooltip: {
+        borderRadius: '10px',
+        width: "109px",
+        background: 'rgba(0, 0, 0, 0.5)'
+      },
+      arrow: {
+        borderTop: 'solid rgba(0, 0, 0, 0.5) 5px'
+      },
+      gap:{
+
+      }
+    };
+
     var {persons} = this.props;
     persons = persons || [];
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
@@ -180,24 +207,63 @@ class PlansPage extends React.Component<Props, {}> {
             </Row>
             <Row>
               <Col sm={12}> 
-                <Col sm={4} onClick={this.openEmailPopup.bind(this)} style={{paddingLeft: "20px", paddingRight: "8px"}}>
-                  <Col sm={12} className="next-action-img-container">
-                    <img src={"../images/application.svg"} />
+                <Col sm={4} className="next-action-application-img-container" onClick={this.openEmailPopup.bind(this)} style={{}}>
+                  <Col sm={12} className="next-action-img-container next-action-img-container-mobile">
+                    <img src={"../images/application.svg"} className="hidden-xs"/>
+                    <Row className="visible-xs">
+                      <Col xs={2} style={{paddingRight: "0px"}}>
+                        <img src={"../images/application.svg"}/>
+                      </Col>
+                      <Col xs={7} style={{marginTop: "23px"}}>
+                        Apply now
+                      </Col>
+                      <Col xs={3} className="next-steps-tool-tips">
+                       <Tooltip content="Apply now" styles={toolTipStyles}>
+                          <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
+                        </Tooltip>
+                      </Col>
+                    </Row>
                   </Col>
                 </Col>
-                <Col sm={4} onClick={this.openEmailPopup.bind(this)} style={{paddingLeft: "8px", paddingRight: "8px"}}>
-                  <Col sm={12} className="next-action-img-container">
-                    <img src={"../images/email.svg"} />
+                <Col sm={4} className="next-action-email-img-container" onClick={this.openEmailPopup.bind(this)} style={{}}>
+                  <Col sm={12} className="next-action-img-container next-action-img-container-mobile">
+                    <img src={"../images/email.svg"} className="hidden-xs"/>
+                    <Row className="visible-xs">
+                      <Col xs={2} style={{paddingRight: "0px"}}>
+                        <img src={"../images/email.svg"}/>
+                      </Col>
+                      <Col xs={7} style={{marginTop: "23px"}}>
+                        Email me the quote
+                      </Col>
+                      <Col xs={3} className="next-steps-tool-tips">
+                       <Tooltip content="Apply now" styles={toolTipStyles}>
+                          <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
+                        </Tooltip>
+                      </Col>
+                    </Row>
                   </Col>
                 </Col>
-                <Col sm={4} onClick={this.openAgentInputPopup.bind(this)} style={{paddingLeft: "8x", paddingRight: "20px"}}>
-                  <Col sm={12} className="next-action-img-container">
-                    <img src={"../images/phone.svg"} />
+                <Col sm={4} className="next-action-phone-img-container" onClick={this.openAgentInputPopup.bind(this)} style={{}}>
+                  <Col sm={12} className="next-action-img-container next-action-img-container-mobile">
+                    <img src={"../images/phone.svg"} className="hidden-xs"/>
+                    <Row className="visible-xs">
+                      <Col xs={2} style={{paddingRight: "0px"}}>
+                        <img src={"../images/phone.svg"}/>
+                      </Col>
+                      <Col xs={7} style={{marginTop: "23px"}}>
+                        Connect me to a licensed agent
+                      </Col>
+                      <Col xs={3} className="next-steps-tool-tips">
+                       <Tooltip content="Apply now" styles={toolTipStyles}>
+                          <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
+                        </Tooltip>
+                      </Col>
+                    </Row>
                   </Col>
                 </Col>
               </Col>
             </Row>
-            <Row>
+            <Row className="hidden-xs">
               <Col sm={12} className="next-steps-footer"> 
                 <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
                   Continue to application
@@ -215,7 +281,7 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
         <Row>
           <Col className="c-center next-step-submit-btn-container">
-            <Button className="c-button-default circular next-step-submit-btn" onClick={(){
+            <Button className="c-button-default next-step-submit-btn" onClick={(){
                 this.submitQuote()
               }}
             >
