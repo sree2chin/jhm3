@@ -114,6 +114,16 @@ class ProductsPage extends React.Component<Props, {}> {
       this.submmitedProductForm = false;
     });
   },
+
+  getContinueBtnActiveClass() {
+
+    if(this.props.noOfPersons == 2) {
+      if(this.state.productId0.length > 0 && this.state.productId1.length > 0) return "active"; 
+    } else if(this.state.productId0.length > 0) {return "active";}
+
+    return "";
+
+  },
   submitProductsForm() {
 
     const persons = [];
@@ -248,14 +258,14 @@ class ProductsPage extends React.Component<Props, {}> {
 
         <Row>
           {!this.shouldDisplayBackBtn() && <Col sm={3} xs={11} style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
-            <Button className="c-button-default circular hidden-xs" onClick={(){
+            <Button className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
                 this.submitProductsForm()
               }}
               style={{ marginTop: "0px", marginBottom: "60px"}}
             >
               CONTINUE
             </Button>
-            <Button className="c-button-default visible-xs" style={{marginBottom: "15px"}} onClick={(){
+            <Button className={`c-button-default circular visible-xs ${this.getContinueBtnActiveClass()}`} style={{marginBottom: "15px"}} onClick={(){
                 this.submitProductsForm()
               }}
             >

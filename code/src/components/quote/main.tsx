@@ -154,6 +154,32 @@ class Main extends React.Component<Props, {}> {
     persons: [{}, {}],
     errors: [{}, {}]
   },
+  getContinueBtnActiveClass() {
+
+    var result = true;
+    var errors = [];
+    each (this.state.persons, (person, index) => {
+      if (index==0 || (!isEmpty(person))) {
+        const {s_birthDate, s_gender, state, smoke, health, name} = person;
+
+        const s_birthDateError = !(s_birthDate && moment(s_birthDate).format("YYYY-MM-DD").length > 0);
+        const s_genderError = !(s_gender ==1 || s_gender ==2);
+        const stateError = !(state && state.length > 0);
+        const smokeError = !(smoke=="Yes" || smoke=="No");
+        const healthError = !(health);
+        const nameError = !(name && name.length > 0);
+
+        result = result && !(s_birthDateError || s_genderError || stateError || smokeError || healthError);
+      }
+    });
+
+    if(result) {
+      return "active";
+    } else {
+      return "";
+    }
+
+  },
   public render() {
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
     const healthRatingObjects = [
@@ -195,13 +221,13 @@ class Main extends React.Component<Props, {}> {
                 </Col>
               }
               <div className="c-submit-person-info-btn c-center">
-                  <Button className="c-button-default circular hidden-xs" onClick={(){
+                  <Button  className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
                       this.submitQuoteForm()
                     }}
                   >
                     CONTINUE
                   </Button>
-                  <Button className="c-button-default visible-xs" onClick={(){
+                  <Button className={`c-button-default circular visible-xs ${this.getContinueBtnActiveClass()}`}  onClick={(){
                       this.submitQuoteForm()
                     }}
                   >
