@@ -1,5 +1,16 @@
 .next-steps-container {
+	.next-step-submit-btn-container {
+	    margin-top: 0px;
+	    padding-top: 0px;
+	    width: 20.2%;
+	    .next-step-submit-btn {
+		    width: 100%;
+		    margin-top: 16px;
+		    margin-bottom: 124px;
+	    }
+	}
 	.customer-next-steps-container {
+		width: 54.17%;
 	    background-color: #ffffff;
     	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
     	border: solid 1px #d4d4d4;
@@ -25,10 +36,9 @@
 		    background-color: #ffffff;
 		    border: solid 1px #d4d4d4;
 		    img {
-			    width: 60px;
-			    height: 60px;
-			    margin-left: 39%;
-			    margin-top: 35px;
+				width: 30%;
+			    margin-left: 35%;
+			    margin-top: 38px;
 		    }
     	}
     	.next-steps-footer {

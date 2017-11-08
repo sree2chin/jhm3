@@ -167,7 +167,7 @@ class PlansPage extends React.Component<Props, {}> {
         <Subheader />
 
         <Row>
-          <Col sm={8} className="c-center customer-next-steps-container">
+          <Col className="c-center customer-next-steps-container">
             <Row>
               <Col sm={6} className="c-center next-steps-header">
                 OK... Let's Take Some Action
@@ -180,17 +180,17 @@ class PlansPage extends React.Component<Props, {}> {
             </Row>
             <Row>
               <Col sm={12}> 
-                <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
+                <Col sm={4} onClick={this.openEmailPopup.bind(this)} style={{paddingLeft: "20px", paddingRight: "8px"}}>
                   <Col sm={12} className="next-action-img-container">
                     <img src={"../images/application.svg"} />
                   </Col>
                 </Col>
-                <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
+                <Col sm={4} onClick={this.openEmailPopup.bind(this)} style={{paddingLeft: "8px", paddingRight: "8px"}}>
                   <Col sm={12} className="next-action-img-container">
                     <img src={"../images/email.svg"} />
                   </Col>
                 </Col>
-                <Col sm={4} onClick={this.openAgentInputPopup.bind(this)}>
+                <Col sm={4} onClick={this.openAgentInputPopup.bind(this)} style={{paddingLeft: "8x", paddingRight: "20px"}}>
                   <Col sm={12} className="next-action-img-container">
                     <img src={"../images/phone.svg"} />
                   </Col>
@@ -214,8 +214,8 @@ class PlansPage extends React.Component<Props, {}> {
 
         </Row>
         <Row>
-          <Col sm={8} className="c-center">
-            <Button  style={{width: "50%", float: "right"}} className="c-button-default circular" onClick={(){
+          <Col className="c-center next-step-submit-btn-container">
+            <Button className="c-button-default circular next-step-submit-btn" onClick={(){
                 this.submitQuote()
               }}
             >
