@@ -160,7 +160,7 @@ class PlansPage extends React.Component<Props, {}> {
     });
   },
   getPaymentSchedules() {
-    if(isEmpty(this.props.premiums) || isEmpty(this.props.premiums[0].plans_data) || isEmpty(this.props.premiums[0].plans_data.QuoteRateGrid) || isEmpty(this.props.premiums[0].plans_data.QuoteRateGrid.Col1)) {
+    if(isEmpty(this.props.premiums) || isEmpty(this.props.premiums[0])) {
       return [];
     }
     var p;
@@ -363,7 +363,7 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
 
         <Row>
-          <Col sm={8} xs={12} className="c-center plan-total-container">
+          <Col xs={12} className="c-center plan-total-container visible-xs">
             <Row className="plans-selector-container">
               <Col sm={8} className="c-center" style={{float: "right", marginRight: "15px"}}>
                 <Row>
@@ -377,7 +377,21 @@ class PlansPage extends React.Component<Props, {}> {
                 
               </Col>
             </Row>
-
+          </Col>
+          <Col sm={3} xs={12} className="c-center plan-total-container hidden-xs">
+            <Row className="plans-selector-container">
+              <Col sm={3} className="" style={{float: "right", marginRight: "15px"}}>
+                <Row>
+                  <Col sm={4} xs={6} className="plan-total-text">
+                    Total
+                  </Col>
+                  <Col sm={8} xs={6} className="plan-total-amount">
+                    {this.getTotalPaymentAmount()}
+                  </Col>
+                </Row>
+                
+              </Col>
+            </Row>
           </Col>
         </Row>
 

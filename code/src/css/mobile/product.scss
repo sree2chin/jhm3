@@ -1,4 +1,12 @@
 @media(max-width:768px) { 
+	.product-continue-btn-container {
+    	box-shadow: 0 0px 0 0 #d4d4d4, 0 -1px 0 0 #d4d4d4; 
+    	padding-top: 15px; 
+    	button {
+		    width: 92%;
+		    margin-left: 4%;
+    	}
+	}
 	.riders-outer-container {
 		margin-left: -5px;
 	    margin-right: 20px;
