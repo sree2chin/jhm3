@@ -87,6 +87,10 @@ class ProductsPage extends React.Component<Props, {}> {
 
   submitProductsFormOnEditPerson() {
 
+    this.setState({
+      submittingProductsInfo: true
+    });
+
     const persons = [];
 
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
@@ -109,9 +113,14 @@ class ProductsPage extends React.Component<Props, {}> {
     this.props.setPersonsData(persons);
 
     this.props.submitQuoteForm(persons).then(() => {
-      this.state;
+      this.setState({
+        submittingProductsInfo: false
+      });
     }).catch(()=>{
       this.submmitedProductForm = false;
+      this.setState({
+        submittingProductsInfo: false
+      });
     });
   },
 
@@ -125,6 +134,10 @@ class ProductsPage extends React.Component<Props, {}> {
 
   },
   submitProductsForm() {
+
+    this.setState({
+      submittingProductsInfo: true
+    });
 
     const persons = [];
 
@@ -150,8 +163,14 @@ class ProductsPage extends React.Component<Props, {}> {
     this.props.submitProductsForm(persons).then(() => {
       const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
       browserHistory.push(basePath + "plans");
+      this.setState({
+        submittingProductsInfo: true
+      });
     }).catch(()=>{
       this.submmitedProductForm = false;
+      this.setState({
+        submittingProductsInfo: true
+      });
     });
   },
   openEditPersonModal = (person, personIndex) => {
@@ -264,12 +283,14 @@ class ProductsPage extends React.Component<Props, {}> {
               style={{ marginTop: "0px", marginBottom: "60px"}}
             >
               CONTINUE
+              {this.state.submittingProductsInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
             <Button className={`c-button-default circular visible-xs ${this.getContinueBtnActiveClass()}`} style={{marginBottom: "15px"}} onClick={(){
                 this.submitProductsForm()
               }}
             >
               CONTINUE
+              {this.state.submittingProductsInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
           </Col>
           }

@@ -86,7 +86,9 @@ class PlansPage extends React.Component<Props, {}> {
   },
   redirectToNextSteps() {
     const persons = [];
-
+    this.setState({
+      movingToFinalStep: true
+    });
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
     if(this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium ) {
       var amount = this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
@@ -386,6 +388,7 @@ class PlansPage extends React.Component<Props, {}> {
               }}
             >
               CONTINUE TO THE NEXT STEP
+              {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
 
             <Button className="c-button-default visible-xs" onClick={(){
@@ -393,6 +396,7 @@ class PlansPage extends React.Component<Props, {}> {
               }}
             >
               CONTINUE TO THE NEXT STEP
+              {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
           </Col>
         </Row>

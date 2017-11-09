@@ -32,6 +32,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
   },
 
   onTextAllowedChange(k, v) {
+    this.setState({k, v});
     this.props.keyValueChange(k, v);
   };
 
@@ -97,15 +98,22 @@ export default class LicensedModal extends React.Component<Props, {}> {
                       </Col>
                     </Row>
                     <Row className="okay-to-text-number">
-                      <Radio name="okay-to-text-number" 
-                          onClick={ ()=> {
-                            this.onTextAllowedChange("okay_to_text", "Yes")
-                          }}>
-                        
-                      </Radio>
+                      <FormGroup className="radio-group">
+                        <div className="c-radio" onClick={ ()=> {
+                                this.onTextAllowedChange("okay_to_text", "Yes")
+                              }}>
+                          <input 
+                            type="radio" 
+                            name={"okay_to_text"} 
+                            checked={this.state.okay_to_text == "Yes"}
+                          />
+                          <span></span>
+                          <label htmlFor={"okay_to_text"}> It's okay to text this number. </label >
+                        </div>
+                      </FormGroup>
                     </Row>
                 </Modal.Body>
-                <Modal.Footer style={{borderBottom: "none"}}>
+                <Modal.Footer>
                     <Row>
                       <Col sm={8} className="c-center">
                         <Button  style={{float: "right"}} className="c-button-default circular" onClick={(){
@@ -116,16 +124,18 @@ export default class LicensedModal extends React.Component<Props, {}> {
                         </Button>
                       </Col>
                     </Row>
-                    <Row>
-                      By clicking SUBMIT, I consent to receive phone calls from Vantis Life Insurance Company, at the telephone numbers indicated above including wireless numbers, if provided. I understand these calls may be generated using an automatic dialing system. I understand consent is not required to get a quote, apply for insurance or to make a purchase from Vantis Life Insurance Company.
+                    <Row className="agent-modal-submit-text-container">
+                      <Col className="agent-modal-submit-text">
+                        By clicking SUBMIT, I consent to receive phone calls from Vantis Life Insurance Company, at the telephone numbers indicated above including wireless numbers, if provided. I understand these calls may be generated using an automatic dialing system. I understand consent is not required to get a quote, apply for insurance or to make a purchase from Vantis Life Insurance Company.
+                      </Col>
                     </Row>
                     <Row>
                       <Col sm={10} className="c-center" style={{marginTop: "20px"}}>
                         <Row>
-                          <Col sm={8} className="free-toll-no-text">
+                          <Col className="free-toll-no-text">
                             Vantis Life Call Center toll free number  |  M-F 8am to 7pm PST: 
                           </Col>
-                          <Col  sm={6} className="free-toll-no center">
+                          <Col className="free-toll-no center">
                             555-555-5555
                           </Col>
                         </Row>

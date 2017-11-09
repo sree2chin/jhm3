@@ -33,6 +33,9 @@
         &.active{ 
             background-color: #317dbd!important;
         }
+        &:active {
+            box-shadow: none;
+        } 
     }
     &.active{
         background-color: $btn-default-bg-color!important;

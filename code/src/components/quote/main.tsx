@@ -92,7 +92,9 @@ class Main extends React.Component<Props, {}> {
     if(this.validateQuoteForm()) {
 
       const persons = [];
-
+      this.setState({
+        submittingUserInfo: true
+      });
       const personOne = JSON.parse(JSON.stringify(this.state.persons[0]));
       personOne.s_birthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
       personOne.applicant = "1";
@@ -110,8 +112,14 @@ class Main extends React.Component<Props, {}> {
       this.props.submitQuoteForm(persons).then(() => {
         const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
         browserHistory.push(basePath + "products");
+        this.setState({
+          submittingUserInfo: false
+        });
       }).catch(()=>{
         browserHistory.push("/products");
+        this.setState({
+          submittingUserInfo: false
+        });
       });
     } 
   },
@@ -235,12 +243,14 @@ class Main extends React.Component<Props, {}> {
                     }}
                   >
                     CONTINUE
+                    {this.state.submittingUserInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                   </Button>
                   <Button className={`c-button-default circular visible-xs`}  onClick={(){
                       this.submitQuoteForm()
                     }}
                   >
                     CONTINUE
+                    {this.state.submittingUserInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                   </Button>
               </div>
             </div>
