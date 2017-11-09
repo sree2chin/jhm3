@@ -97,7 +97,7 @@ export default class Person extends React.Component<Props, {}> {
                 <span></span>
                 <label htmlFor={"person_s_gender_" + personIndex}> Male </label >
               </div>
-              <div className="c-radio" onClick={ ()=> {
+              <div className="c-radio" style={{marginBottom: "0px"}} onClick={ ()=> {
                       this.onChange("s_gender", "2")
                     }}>
                 <input 
@@ -119,7 +119,7 @@ export default class Person extends React.Component<Props, {}> {
                 </Button>
               </Col>
               <Col xs={6}>
-                <Button className="c-button-default circular" className={`c-button-default circular ${person.s_gender == "2" ? "active" : ""}`} onClick={(){
+                <Button style={{marginBottom: "0px"}} className={`c-button-default circular ${person.s_gender == "2" ? "active" : ""}`} onClick={(){
                       this.onChange("s_gender", "2")
                     }}
                   >
@@ -127,7 +127,7 @@ export default class Person extends React.Component<Props, {}> {
                 </Button>
               </Col>
             </Row>
-            { errors.s_genderError && <Col sm={12} className={"c-subheader-text error"} style={{paddingLeft: "0px"}}>
+            { errors.s_genderError && <Col sm={12} className={"c-subheader-text error"} style={{paddingLeft: "0px", marginTop: "0px"}}>
               Please select your gender.
             </Col> }
           </Col> 
@@ -192,8 +192,8 @@ export default class Person extends React.Component<Props, {}> {
               <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
             </Tooltip>
             </div>
-            { errors.person1_healthError && <Col sm={12} className={"c-subheader-text error"}>
-              Please select your person1_health status.
+            { errors.healthError && <Col sm={12} style={{marginTop: "0px", paddingLeft: "0px"}} className={"c-subheader-text error"}>
+              Please select your health status.
             </Col> }
           </Col>
 
@@ -204,7 +204,7 @@ export default class Person extends React.Component<Props, {}> {
           </Col>
           <Col sm={12} style={{paddingRight: "22px"}} className="person-tobacco-container">
             <FormGroup className="radio-group hidden-xs">
-              <div className="c-radio" onClick={ ()=> {
+              <div className="c-radio" style={{marginBottom: "0px"}} onClick={ ()=> {
                       this.onChange("smoke", "Yes")
                     }}>
                 <input 
@@ -215,7 +215,7 @@ export default class Person extends React.Component<Props, {}> {
                 <span></span>
                 <label> Yes </label>
               </div>
-              <div className="c-radio" onClick={ ()=> {
+              <div className="c-radio" style={{marginBottom: "0px"}} onClick={ ()=> {
                       this.onChange("smoke", "No")
                     }}>
                 <input 

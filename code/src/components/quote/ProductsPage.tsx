@@ -72,6 +72,36 @@ class ProductsPage extends React.Component<Props, {}> {
     this.setState({
       ["productId" + personIndex]: productsList
     });
+    var self = this;
+    setTimeout(function() {
+      self.setProductFormSubmissionErrorMsg();
+    }, 10);
+  },
+
+  setProductFormSubmissionErrorMsg() {
+    if(this.productSubmissionBtnClicked) {
+      var errorMsg = null;
+      if(this.props.noOfPersons == 2) {
+        if(!(this.state.productId0.length > 0)) {
+          if(!(this.state.productId1.length > 0)) {
+            errorMsg = "Please select at least one product for each applicant";
+          } else {
+            errorMsg = "Please select a product for applicant 1";
+          }
+        } else {
+          if(!(this.state.productId1.length > 0)) {
+            errorMsg = "Please select a product for applicant 2";
+          }
+        }
+      } else {
+        if(!(this.state.productId0.length > 0)) {
+          errorMsg = "Please select at least one product";
+        }
+      }
+      this.setState({
+        productSelectionErrorMsg: errorMsg
+      });
+    }
   },
 
   state={
@@ -84,44 +114,54 @@ class ProductsPage extends React.Component<Props, {}> {
       this.submitProductsFormOnEditPerson();
     });
   },
-
-  submitProductsFormOnEditPerson() {
-
-    this.setState({
-      submittingProductsInfo: true
-    });
-
-    const persons = [];
-
-    const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
-    personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
-    personOne.selected_products = this.state.productId0;
-    personOne.applicant = "1";
-    personOne.sGender = personOne.s_gender;
-
-    persons.push(personOne);
-
+  validateProductsFormSubmission () {
     if(this.props.noOfPersons == 2) {
-      const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-      personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
-      personTwo.selected_products = this.state.productId1;
-      personTwo.applicant = "2";
-      personTwo.sGender = personTwo.s_gender;
-      persons.push(personTwo);
+      return (this.state.productId0.length > 0 && this.state.productId1.length > 0)
+    } else {
+      return this.state.productId0.length > 0;
     }
-
-    this.props.setPersonsData(persons);
-
-    this.props.submitQuoteForm(persons).then(() => {
+  },
+  submitProductsFormOnEditPerson() {
+    this.productSubmissionBtnClicked = true;
+    if(this.validateProductsFormSubmission()) {
       this.setState({
-        submittingProductsInfo: false
+        submittingProductsInfo: true
       });
-    }).catch(()=>{
-      this.submmitedProductForm = false;
-      this.setState({
-        submittingProductsInfo: false
+
+      const persons = [];
+
+      const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
+      personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
+      personOne.selected_products = this.state.productId0;
+      personOne.applicant = "1";
+      personOne.sGender = personOne.s_gender;
+
+      persons.push(personOne);
+
+      if(this.props.noOfPersons == 2) {
+        const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
+        personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
+        personTwo.selected_products = this.state.productId1;
+        personTwo.applicant = "2";
+        personTwo.sGender = personTwo.s_gender;
+        persons.push(personTwo);
+      }
+
+      this.props.setPersonsData(persons);
+
+      this.props.submitQuoteForm(persons).then(() => {
+        this.setState({
+          submittingProductsInfo: false
+        });
+      }).catch(()=>{
+        this.submmitedProductForm = false;
+        this.setState({
+          submittingProductsInfo: false
+        });
       });
-    });
+    } else {
+      this.setProductFormSubmissionErrorMsg();
+    }
   },
 
   getContinueBtnActiveClass() {
@@ -134,44 +174,66 @@ class ProductsPage extends React.Component<Props, {}> {
 
   },
   submitProductsForm() {
+    this.productSubmissionBtnClicked = true;
+    if(this.validateProductsFormSubmission()) {
+      this.setState({
+        submittingProductsInfo: true
+      });
 
-    this.setState({
-      submittingProductsInfo: true
-    });
+      const persons = [];
 
-    const persons = [];
+      const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
+      personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
+      personOne.selected_products = this.state.productId0;
+      personOne.applicant = "1";
+      personOne.sGender = personOne.s_gender;
 
-    const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
-    personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
-    personOne.selected_products = this.state.productId0;
-    personOne.applicant = "1";
-    personOne.sGender = personOne.s_gender;
+      persons.push(personOne);
 
-    persons.push(personOne);
+      if(this.props.noOfPersons == 2) {
+        const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
+        personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
+        personTwo.selected_products = this.state.productId1;
+        personTwo.applicant = "2";
+        personTwo.sGender = personTwo.s_gender;
+        persons.push(personTwo);
+      }
 
-    if(this.props.noOfPersons == 2) {
-      const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-      personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
-      personTwo.selected_products = this.state.productId1;
-      personTwo.applicant = "2";
-      personTwo.sGender = personTwo.s_gender;
-      persons.push(personTwo);
+      this.props.setPersonsData(persons);
+
+      this.props.submitProductsForm(persons).then(() => {
+        const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
+        browserHistory.push(basePath + "plans");
+        this.setState({
+          submittingProductsInfo: true
+        });
+      }).catch(()=>{
+        this.submmitedProductForm = false;
+        this.setState({
+          submittingProductsInfo: true
+        });
+      });
+    } else {
+      var errorMsg = "";
+      if(this.props.noOfPersons == 2) {
+        if(!(this.state.productId0.length > 0)) {
+          if(!(this.state.productId1.length > 0)) {
+            errorMsg = "Please select at least one product for each applicant";
+          } else {
+            errorMsg = "Please select a product for applicant 1";
+          }
+        } else {
+          errorMsg = "Please select a product for applicant 2";
+        }
+      } else {
+        if(!(this.state.productId0.length > 0)) {
+          errorMsg = "Please select at least one product";
+        }
+      }
+      this.setState({
+        productSelectionErrorMsg: errorMsg
+      })
     }
-
-    this.props.setPersonsData(persons);
-
-    this.props.submitProductsForm(persons).then(() => {
-      const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
-      browserHistory.push(basePath + "plans");
-      this.setState({
-        submittingProductsInfo: true
-      });
-    }).catch(()=>{
-      this.submmitedProductForm = false;
-      this.setState({
-        submittingProductsInfo: true
-      });
-    });
   },
   openEditPersonModal = (person, personIndex) => {
     this.props.openEditPersonModal(person, personIndex);
@@ -277,6 +339,9 @@ class ProductsPage extends React.Component<Props, {}> {
 
         <Row>
           {!this.shouldDisplayBackBtn() && <Col sm={3} xs={11} style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
+            {this.state.productSelectionErrorMsg && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "15px"}} sm={12} className={"c-subheader-text error"}>
+                      {this.state.productSelectionErrorMsg}
+                    </Col> }
             <Button className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
                 this.submitProductsForm()
               }}

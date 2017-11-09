@@ -11,6 +11,9 @@ export default class EmailModal extends React.Component<Props, {}> {
 
   },
   saveQuote() {
+    this.setState({
+      savingQuote: true
+    });
     this.props.saveQuote();
   },
   getAmountFormat(amount) {
@@ -93,6 +96,7 @@ export default class EmailModal extends React.Component<Props, {}> {
                           }}
                         >
                           SUBMIT
+                          {this.state.savingQuote && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                         </Button>
                       </Col>
                     </Row>
