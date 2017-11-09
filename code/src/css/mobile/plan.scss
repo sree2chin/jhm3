@@ -60,13 +60,26 @@
 		    margin-right: 30px!important;
 		    margin-top: 15px;
 		    .mobile-second-person-info-in-plan-container {
-		    	.product-pager-container .person-info-container.contains-two-persons.second-person {
+		    	.person-info-container.contains-two-persons.second-person {
 		    		margin-left: 0px;
 		    	}
 		    }
-		    .product-pager-container .second-person-plan-container {
+		    .second-person-plan-container {
 			    padding-left: 0px;
 			    margin-top: 15px;
+		    }
+		    .single-plan-container.two-persons-plan-container {
+		    	.plan-length-container .plan-length-container-selector {
+		    		margin-top: 5px;
+		    	}
+		    	.plan-cost-text-two-person {
+				    width: 50%;
+				    margin-left: 15px;
+		    	}
+		    	.plan-cost-container .plan-cost-amount {
+				    width: 45%;
+				    display: inline-block;
+		    	}
 		    }
 		}
 		.plan-selector-outer-container {
@@ -137,13 +150,13 @@
 		    height: 78px;
 			.plan-length-container-text {
 				margin-left: 0px!important;
-			    width: 30%;
+			    width: 30%!important;
 			    float: left;
 			    font-size: 14px;
 			    margin-top: 37px!important;
 			}
 			.plan-length-container-selector {
-			    width: 84%;
+			    width: 84%!important;
 			    float: left;
 			    margin-top: 21px;
 		    	.Select-value {
