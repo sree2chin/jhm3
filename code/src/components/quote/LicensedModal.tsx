@@ -12,6 +12,9 @@ export default class LicensedModal extends React.Component<Props, {}> {
   },
 
   saveQuote() {
+    this.setState({
+      savingQuote: true
+    });
     this.props.saveQuote();
   },
 
@@ -32,7 +35,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
   },
 
   onTextAllowedChange(k, v) {
-    this.setState({k, v});
+    this.setState({[k]: v});
     this.props.keyValueChange(k, v);
   };
 
@@ -107,7 +110,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
                             name={"okay_to_text"} 
                             checked={this.state.okay_to_text == "Yes"}
                           />
-                          <span></span>
+                          <span style={{top: "3px"}}></span>
                           <label htmlFor={"okay_to_text"}> It's okay to text this number. </label >
                         </div>
                       </FormGroup>
@@ -116,11 +119,12 @@ export default class LicensedModal extends React.Component<Props, {}> {
                 <Modal.Footer>
                     <Row>
                       <Col sm={8} className="c-center">
-                        <Button  style={{float: "right"}} className="c-button-default circular" onClick={(){
+                        <Button  style={{float: "right"}} className={`c-button-default circular ${this.state.savingQuote ? "active" : ""}`} onClick={(){
                             this.saveQuote()
                           }}
                         >
                           SUBMIT
+                          {this.state.savingQuote && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                         </Button>
                       </Col>
                     </Row>

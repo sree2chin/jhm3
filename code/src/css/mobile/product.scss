@@ -3,7 +3,7 @@
     	box-shadow: 0 0px 0 0 #d4d4d4, 0 -1px 0 0 #d4d4d4; 
     	padding-top: 15px; 
     	button {
-		    width: 92%;
+		    width: 92%!important;
 		    margin-left: 4%;
     	}
 	}
@@ -12,6 +12,9 @@
 	    margin-right: 20px;
 	}
 	.product-pager-container {
+		.product-selection-error-msg {
+			margin-top: 20px;
+		}
 		.product-page-continue-btn {
 		    padding-top: 18px;
 		    background-color: #fafafa;
@@ -56,7 +59,7 @@
 			}
 			.person-label {
 			    display: inline-block;
-			    width: 35%;
+			    width: 30%;
 			    text-align: right;
 			    margin-right: 6%;
 			}

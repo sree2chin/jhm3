@@ -42,25 +42,22 @@ export default class EmailModal extends React.Component<Props, {}> {
   public render() {  
 
     return (
-       <Modal show={this.props.showModalEmail} onHide={this.props.onCloseModal} className="email-modal-container">
-                <Modal.Header closeButton>
-                </Modal.Header>
+       <Modal bsSize="small" show={this.props.showModalEmail} onHide={this.props.onCloseModal} className="email-modal-container email-modal-unique-container">
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
-                    <Row className="email-quote-text">
-                        Email me the quote
+                    <Row className="email-quote-text email-quote-text-on-modal">
+                        Email the quote
                     </Row>
                     <Row>
-                        <Col className="email-description c-center" sm={12}>
-                            Email the quote and fill it out at your best convience. Simply enter your 
-                            email address below and we'll mail you a copy of this quote and a link to continue your application.
+                        <Col className="email-description email-description-on-modal c-center" sm={12}>
+                            Email the quote and fill it out at your best convience. Simply enter your email address below and we’ll mail you a copy of this quote and a link to continue your application.
                         </Col>
                     </Row>
 
                     <Row style={{marginTop: "35px"}}>
-                      <Col sm={12} className="email-label">
+                      <Col sm={12} className="email-label email-label-on-modal">
                         Applicant Email address 1
                       </Col>
-                      <Col sm={12} className={"email-input-container"}>
+                      <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
                         <Input 
                           name={"email-1"}
                           placeholder={"Enter your email"}
@@ -75,7 +72,7 @@ export default class EmailModal extends React.Component<Props, {}> {
                         <Col sm={12} className="email-label">
                           Applicant Email address 2
                         </Col>
-                        <Col sm={12} className={"email-input-container"}>
+                        <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
                           <Input 
                             name={"email-1"}
                             placeholder={"Enter your email"}
@@ -90,8 +87,8 @@ export default class EmailModal extends React.Component<Props, {}> {
                 </Modal.Body>
                 <Modal.Footer>
                     <Row>
-                      <Col sm={8} className="c-center">
-                        <Button  style={{float: "right"}} className="c-button-default circular" onClick={(){
+                      <Col sm={12} className="c-center">
+                        <Button  style={{float: "right"}} className={`c-button-default circular ${this.state.savingQuote ? "active" : ""}`}  onClick={(){
                             this.saveQuote()
                           }}
                         >

@@ -1,4 +1,36 @@
 .email-modal-container {
+	&.agent-modal-container {
+		.email-input-container {
+			margin-top: -2px;
+		}
+ 	}
+	&.email-modal-unique-container {
+		.modal-footer {
+		    border-top: 0px;
+		    padding-top: 0px;
+		    padding-left: 0px;
+		    padding-right: 0px;
+		}
+		.email-label { 
+			padding-left: 15px;
+		}
+		.email-input-container.email-input-container-on-modal {
+			padding-left: 15px;
+		}
+		.modal-footer {
+			border-top: none;
+		    padding-top: 0px;
+			.c-button-default.btn.circular {
+			    margin-top: 0px;
+			    margin-left: 15px;
+			    margin-right: 18px;
+			    width: 89%;
+			    float: none;
+			}
+		}
+	}
+}
+.email-modal-container {
 	.email-quote-text {
 		font-size: 22px;
 	    line-height: 1.77;
@@ -6,6 +38,9 @@
 	    color: #333333;
 	    margin-top: 15px;
 	    margin-left: 0px;
+	    &.email-quote-text-on-modal {
+	    	text-align: center;
+	    }
 	}
 	.email-label {
 		font-size: 14px;
@@ -13,6 +48,9 @@
 		text-align: left;
 		color: #666666;
 		padding-left: 5px;
+		&.email-label-on-modal {
+			padding-left: 15px;
+		}
 	}
 	.slot-input-container {
 		padding-left: 5px;
@@ -22,12 +60,19 @@
 		text-align: left;
 		color: #999999;
 		padding-left: 20px;
+		&.email-description-on-modal {
+			text-align: center;
+			padding-left: 15px;
+		}
 	}
 	.email-input-container {
 		padding-left: 0px;
 	    padding-right: 20px;
 	    padding-top: 0px;
 	    margin-top: -6px;
+	    &.email-input-container-on-modal {
+	    	padding-left: 15px;
+	    }
 		.form-group {
 			line-height: 10px;
 		    input {
