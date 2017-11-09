@@ -33,14 +33,15 @@
 		}	
 		.plans-product-header {
     		padding-top: 30px;
-		    padding-bottom: 15px;
+		    padding-bottom: 0px;
 		    margin-left: 0px;
 		    background-color: white;
 			margin-top: 0px;
 		    margin-bottom: 0px;
 		}
 		.plan-schedule-container {
-			margin-bottom: 15px;
+			margin-bottom: 30px;
+			padding-right: 0px;
 			.Select-input {
 			    height: 44px;
 			    border-radius: 2px;
@@ -78,10 +79,33 @@
 			border-left: none;
 		}
 		.plan-cost-container {
-			border-left: none;
+		    border-left: none;
+		    font-size: 14px;
+		    text-align: left;
+		    color: #464646;
+		    height: 56px;
+		    padding-left: 0px;
 		}
+		.plan-sider-coverage-container {
+			padding-bottom: 25px;
+			border-bottom: solid 1px #d4d4d4
+		} 
 	}
 	.plan-details-container {
+		.plan-sider-info-text {
+		    border-top: solid 1px #d4d4d4;
+		    border-bottom: solid 1px #d4d4d4;
+		    border-left: none;
+		    border-right: none;
+		    .Select {
+		    	border-radius: 2px;
+		    	width: 94%;
+		    	float: right;
+		    	.Select-control {
+		    		height: 40px;
+		    	}
+		    }
+		}
 		.plan-sider-info-text1{
 		    padding-left: 15px;
 		    padding-right: 15px;
@@ -96,11 +120,14 @@
     		padding-right: 15px;
 		}
 		.plan-length-container {
-			margin-top: 20px;
+		    border-left: none;
+		    border-bottom: solid 1px #d4d4d4;
+		    height: 78px;
 			.plan-length-container-text {
 				margin-left: 0px!important;
 			    width: 30%;
 			    float: left;
+			    font-size: 14px;
 			}
 			.plan-length-container-selector {
 			    width: 84%;
