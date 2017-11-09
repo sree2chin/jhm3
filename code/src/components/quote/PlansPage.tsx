@@ -263,15 +263,17 @@ class PlansPage extends React.Component<Props, {}> {
                 openEditPersonModal={this.openEditPersonModal.bind(this)}
               />
             }
-            { this.props.noOfPersons==2 &&
-              <PersonInfo 
-                person={persons[1]}
-                noOfPersons={this.props.noOfPersons}
-                personIndex={1}
-                index={1}
-                openEditPersonModal={this.openEditPersonModal.bind(this)}
-              />
-            }
+            <div className="hidden-xs">
+              { this.props.noOfPersons==2 &&
+                <PersonInfo 
+                  person={persons[1]}
+                  noOfPersons={this.props.noOfPersons}
+                  personIndex={1}
+                  index={1}
+                  openEditPersonModal={this.openEditPersonModal.bind(this)}
+                />
+              }
+            </div>
           </Col>
         </Row>
         <Row className="plans-product-header hidden-xs">
@@ -332,6 +334,19 @@ class PlansPage extends React.Component<Props, {}> {
                 })
               }
             </Col>
+            <Row style={{backgroundColor: "rgb(247, 247, 247)"}} className="visible-xs mobile-second-person-info-in-plan-container">
+              <Col className={`person-info-main-container ${additionalPersonClass}`} style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
+                { this.props.noOfPersons==2 &&
+                  <PersonInfo 
+                    person={persons[1]}
+                    noOfPersons={this.props.noOfPersons}
+                    personIndex={1}
+                    index={1}
+                    openEditPersonModal={this.openEditPersonModal.bind(this)}
+                  />
+                }
+              </Col>
+            </Row>
             <Col sm={individualPlanContainerWidth} className="second-person-plan-container">
               { this.props.noOfPersons==2 &&
                 map(this.props.plans[1].plans_data, (p)=>{

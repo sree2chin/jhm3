@@ -64,10 +64,10 @@
 				}
 			}
 			.plan-sider-info-text {
-				border-left: none;
-			    border-right: none;
-			    border-top: solid 1px #d4d4d4;
-			    border-bottom: solid 1px #d4d4d4;
+				border-left: none!important;
+			    border-right: none!important;
+			    border-top: solid 1px #d4d4d4!important;
+			    border-bottom: solid 1px #d4d4d4!important;
 			}
 			.plan-length-container {
 			    width: 100%;
@@ -85,9 +85,6 @@
 				    width: 70%;
 				    .Select {
 				    	padding-top: 16px;
-				    }
-				    .Select-value {
-    					padding-top: 5px;
 				    }
 			    }
 			}

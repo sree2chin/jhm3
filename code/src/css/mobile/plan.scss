@@ -29,6 +29,9 @@
 		    		text-align: left;
     				margin-top: -4px;
 		    	}
+		    	.Select-value {
+					padding-top: 5px;
+			    }
 		    }
 		}	
 		.plans-product-header {
@@ -47,7 +50,7 @@
 			    border-radius: 2px;
 			    background-color: #ffffff;
 			}
-			.Select-placeholder {
+			.Select-value {
 				padding-top: 5px;
 			}
 		}
@@ -56,6 +59,15 @@
 		    margin-left: 30px!important;
 		    margin-right: 30px!important;
 		    margin-top: 15px;
+		    .mobile-second-person-info-in-plan-container {
+		    	.product-pager-container .person-info-container.contains-two-persons.second-person {
+		    		margin-left: 0px;
+		    	}
+		    }
+		    .product-pager-container .second-person-plan-container {
+			    padding-left: 0px;
+			    margin-top: 15px;
+		    }
 		}
 		.plan-selector-outer-container {
 			width: auto;
@@ -93,10 +105,10 @@
 	}
 	.plan-details-container {
 		.plan-sider-info-text {
-		    border-top: solid 1px #d4d4d4;
-		    border-bottom: solid 1px #d4d4d4;
-		    border-left: none;
-		    border-right: none;
+		    border-top: solid 1px #d4d4d4!important;
+		    border-bottom: solid 1px #d4d4d4!important;
+		    border-left: none!important;
+		    border-right: none!important;
 		    .Select {
 		    	border-radius: 2px;
 		    	width: 94%;
@@ -128,10 +140,15 @@
 			    width: 30%;
 			    float: left;
 			    font-size: 14px;
+			    margin-top: 37px!important;
 			}
 			.plan-length-container-selector {
 			    width: 84%;
 			    float: left;
+			    margin-top: 21px;
+		    	.Select-value {
+					padding-top: 2px;
+			    }
 			}
 		}
 	}
