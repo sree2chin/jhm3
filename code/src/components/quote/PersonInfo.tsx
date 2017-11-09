@@ -21,10 +21,10 @@ export default class PersonInfo extends React.Component<Props, {}> {
     return (
           <Col sm={personsContainerWidth} className={`person-info-container  ${additionalClass}`}>
             <Row className="person-info-header-container">
-              <Col xs={10} className="person-name-container">
+              <Col sm={11} xs={10} className="person-name-container">
                 {person.name} 
               </Col>
-              <Col xs={1} className="person-edit-container" onClick={()=> this.props.openEditPersonModal(this.props.person, this.props.personIndex)}>
+              <Col sm={1} xs={2} className="person-edit-container" onClick={()=> this.props.openEditPersonModal(this.props.person, this.props.personIndex)}>
                 EDIT
               </Col>
             </Row>

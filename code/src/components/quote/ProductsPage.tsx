@@ -337,7 +337,7 @@ class ProductsPage extends React.Component<Props, {}> {
         </Row>
 
 
-        <Row>
+        <Row className="product-continue-btn-main-container">
           {!this.shouldDisplayBackBtn() && <Col sm={3} xs={12} className="product-continue-btn-container" style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
             {this.state.productSelectionErrorMsg && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "15px"}} sm={12} className={"c-subheader-text error"}>
                       {this.state.productSelectionErrorMsg}

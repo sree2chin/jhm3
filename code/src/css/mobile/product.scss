@@ -1,4 +1,7 @@
 @media(max-width:768px) { 
+	.product-continue-btn-main-container {
+		background-color: #fafafa;
+	}
 	.product-continue-btn-container {
     	box-shadow: 0 0px 0 0 #d4d4d4, 0 -1px 0 0 #d4d4d4; 
     	padding-top: 15px; 
@@ -53,6 +56,14 @@
 		.person-info-container{
 			margin-top: 0px;
 			width: auto;
+			.person-name-container {
+				padding-left: 30px;
+				width: 75%;
+			}
+			.person-edit-container {
+				padding-right: 30px;
+				width: 25%;
+			}
 			.person-info-header-container {
 			    padding-top: 13px;
 			    padding-bottom: 13px;
