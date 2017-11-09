@@ -12,7 +12,7 @@ export default class PersonInfo extends React.Component<Props, {}> {
   public render() {
     const {person} = this.props;
     const personsContainerWidth = this.props.noOfPersons == 2 ? 6 : 12;
-    var additionalClass = this.props.noOfPersons==2 ? "contains-two-persons" : "";
+    var additionalClass = this.props.noOfPersons==2 ? "contains-two-persons" : "contains-one-person";
     if(this.props.personIndex == 0) {
       additionalClass += " first-person";
     } else {
@@ -21,10 +21,10 @@ export default class PersonInfo extends React.Component<Props, {}> {
     return (
           <Col sm={personsContainerWidth} className={`person-info-container  ${additionalClass}`}>
             <Row className="person-info-header-container">
-              <Col sm={11} xs={10} className="person-name-container">
+              <Col sm={10} xs={10} className="person-name-container">
                 {person.name} 
               </Col>
-              <Col sm={1} xs={2} className="person-edit-container" onClick={()=> this.props.openEditPersonModal(this.props.person, this.props.personIndex)}>
+              <Col sm={2} xs={2} className="person-edit-container" onClick={()=> this.props.openEditPersonModal(this.props.person, this.props.personIndex)}>
                 EDIT
               </Col>
             </Row>

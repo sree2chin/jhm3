@@ -62,7 +62,16 @@
    		}
    }
 	.person-info-container {
-
+		&.contains-two-persons {
+			.person-edit-container {
+				margin-right: 0px;
+			}
+		}
+		&.contains-one-person.first-person {
+			.person-edit-container {
+				margin-right: 0px;
+			}
+		}
 	    background-color: #ffffff;
 	    border: solid 1px #d4d4d4;
 	    margin-top: 60px;
@@ -112,19 +121,22 @@
 		    border-bottom: solid 1px #d4d4d4;
 	    }
 	    .person-name-container {
-			font-size: 20px;
+			font-size: 15px;
 			line-height: 1.65;
 			text-align: left;
 			color: #464646;
-			padding-left: 20px;
+			padding-left: 15px;
 	    }
 	    .person-edit-container {
-			font-size: 14px;
-			text-align: right;
-			color: #317dbd;
-			padding-right: 20px;
-			padding-top: 7px;
-			cursor: pointer;
+		    font-size: 14px;
+		    text-align: right;
+		    color: #317dbd;
+		    padding-right: 20px;
+		    padding-top: 2px;
+		    cursor: pointer;
+		    padding-left: 0px;
+		    float: right;
+		    margin-right: 15px;
 	    }
 	    .person-content {
 			font-size: 14px;
