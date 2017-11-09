@@ -180,6 +180,15 @@ class Main extends React.Component<Props, {}> {
     }
 
   },
+
+  getMobileContinueBtnActiveClass() {
+
+    if(this.props.noOfPersons > 0) {
+      return "active";
+    } 
+    return "";
+
+  },
   public render() {
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
     const healthRatingObjects = [
@@ -227,7 +236,7 @@ class Main extends React.Component<Props, {}> {
                   >
                     CONTINUE
                   </Button>
-                  <Button className={`c-button-default circular visible-xs ${this.getContinueBtnActiveClass()}`}  onClick={(){
+                  <Button className={`c-button-default circular visible-xs`}  onClick={(){
                       this.submitQuoteForm()
                     }}
                   >

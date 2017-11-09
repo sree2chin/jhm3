@@ -55,6 +55,14 @@ class SelectPersons extends React.Component<Props, State> {
       });
     }
   };
+  getMobileContinueBtnActiveClass() {
+
+    if(this.state.noOfPersons > 0) {
+      return "active";
+    } 
+    return "";
+
+  },
 
   public render() {
     if(!this.state.noOfPersonsSelectedForMobileAndSubmitted) {
@@ -95,7 +103,7 @@ class SelectPersons extends React.Component<Props, State> {
 
               <div className="visible-xs" id="select-no-of-persons-mobile-btn">
                 <Col sm={4}>
-                  <Button className="c-button-default" onClick={(){
+                  <Button className={`c-button-default ${this.getMobileContinueBtnActiveClass()}`} onClick={(){
                       this.selectNoOfPersonsForMobile()
                     }}
                   >
