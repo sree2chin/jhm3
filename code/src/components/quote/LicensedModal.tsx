@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Modal, Button, Row, Col, Radio } from "react-bootstrap";
+import { Modal, Button, Row, Col, Radio, FormGroup } from "react-bootstrap";
 import Input from "../common/textInput";
 import Select from 'react-select';
 
@@ -56,15 +56,13 @@ export default class LicensedModal extends React.Component<Props, {}> {
     ];
     return (
        <Modal show={this.props.showModalPhone} onHide={this.props.onCloseModal} className="email-modal-container agent-modal-container">
-                <Modal.Header closeButton>
-                </Modal.Header>
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     <Row className="email-quote-text">
                         Connect me to a licensed agent
                     </Row>
                     <Row>
                         <Col className="email-description c-center" sm={12}>
-                            Tell us when we may best reach you and a number to call you on and a licensed agent will follow up with you quote.
+                            Tell us when we may best reach you and a number to call you on and a licensed agent will follow up with your quote.
                         </Col>
                     </Row>
 
@@ -103,7 +101,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
                           onClick={ ()=> {
                             this.onTextAllowedChange("okay_to_text", "Yes")
                           }}>
-                        It's okay to text this number.
+                        
                       </Radio>
                     </Row>
                 </Modal.Body>
@@ -119,12 +117,15 @@ export default class LicensedModal extends React.Component<Props, {}> {
                       </Col>
                     </Row>
                     <Row>
+                      By clicking SUBMIT, I consent to receive phone calls from Vantis Life Insurance Company, at the telephone numbers indicated above including wireless numbers, if provided. I understand these calls may be generated using an automatic dialing system. I understand consent is not required to get a quote, apply for insurance or to make a purchase from Vantis Life Insurance Company.
+                    </Row>
+                    <Row>
                       <Col sm={10} className="c-center" style={{marginTop: "20px"}}>
                         <Row>
-                          <Col sm={7} className="free-toll-no-text">
-                            Vantis Life Call Center toll free number: 
+                          <Col sm={8} className="free-toll-no-text">
+                            Vantis Life Call Center toll free number  |  M-F 8am to 7pm PST: 
                           </Col>
-                          <Col  sm={3} className="free-toll-no">
+                          <Col  sm={6} className="free-toll-no center">
                             555-555-5555
                           </Col>
                         </Row>

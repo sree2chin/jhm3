@@ -2,29 +2,39 @@
 	.email-quote-text {
 		font-size: 22px;
 	    line-height: 1.77;
-	    text-align: center;
+	    text-align: left;
 	    color: #333333;
 	    margin-top: 15px;
+	    margin-left: 0px;
 	}
 	.email-label {
 		font-size: 14px;
 		line-height: 1.5;
 		text-align: left;
 		color: #666666;
+		padding-left: 5px;
+	}
+	.slot-input-container {
+		padding-left: 5px;
 	}
 	.email-description {
 		font-size: 13px;
-		text-align: center;
+		text-align: left;
 		color: #999999;
+		padding-left: 20px;
 	}
 	.email-input-container {
+		padding-left: 0px;
+	    padding-right: 20px;
+	    padding-top: 0px;
+	    margin-top: -6px;
 		.form-group {
 			line-height: 10px;
 		    input {
 			    border-radius: 2px;
 			    background-color: #ffffff;
 			    border: solid 1px #cccccc;
-			    height: 44px;
+			    height: 42px;
 		    }
 		}
 	}
