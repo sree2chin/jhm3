@@ -10,7 +10,8 @@ class QuotesApi {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'
       }).then(function(res) {
         return res.json().then(function (response: any) {    
           return new Promise(function(resolve, reject) {
@@ -27,7 +28,8 @@ class QuotesApi {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'
       }).then(function(res) {
         return res.json().then(function (response: any) {    
           return new Promise(function(resolve, reject) {
@@ -45,7 +47,8 @@ class QuotesApi {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'
       }).then(function(res) {
         return res.json().then(function (response: any) {    
           return new Promise(function(resolve, reject) {
@@ -62,7 +65,8 @@ class QuotesApi {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'
       }).then(function(res) {
         return res.json().then(function (response: any) {    
           return new Promise(function(resolve, reject) {
