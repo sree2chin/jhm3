@@ -11,8 +11,6 @@ var restOptions = {
 module.exports = new function(){
 
   var appendAgentInfo = function(req, data) {
-    console.log("req.headers: " + JSON.stringify(req.headers.cookie));
-    console.log("req.req.cookies: " + JSON.stringify(req.cookies));
     if(req.session) {
       console.log("req.session: " + JSON.stringify(req.session));
       if(req.session.agent_id) {
@@ -75,7 +73,6 @@ module.exports = new function(){
       applicants: JSON.stringify(data)
     };
     appendAgentInfo(req, formData);
-    console.log("formData: " + JSON.stringify(formData));
     request({
       url: restOptions.host + '/v1/quote/productplans', 
       formData: formData, 
@@ -91,7 +88,6 @@ module.exports = new function(){
   this.saveQuoteForm = function(req, cb){
     var data = req.body;
     appendAgentInfo(req, data);
-    console.log("data: " + JSON.stringify(data));
     request({
       url: restOptions.host + '/v1/quote/savequote', 
       formData: data, 

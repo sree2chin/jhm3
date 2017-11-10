@@ -10,7 +10,6 @@ module.exports = function(app) {
   var prefix = "/v1";
 
   app.post(prefix + '/quote/premiums', function(req, res) {
-    console.log("req: " + JSON.stringify(req.body));
     QuotesService.getQuotePremiums(req, function(statusCode, data){
       res.statusCode = statusCode;
       res.setHeader('Content-Type', 'application/json');
@@ -20,7 +19,6 @@ module.exports = function(app) {
 
   app.post(prefix + '/quote/products', function(req, res) {
     QuotesService.getQuoteProducts(req, function(statusCode, data){
-      console.log("statusCode: " + statusCode);
       res.statusCode = statusCode;
       res.setHeader('Content-Type', 'application/json');
       res.send(data);
