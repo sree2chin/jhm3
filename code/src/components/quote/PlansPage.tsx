@@ -223,7 +223,7 @@ class PlansPage extends React.Component<Props, {}> {
       <div className="product-pager-container">
         <ScrollToTopOnMount />
         <Subheader />
-        <Row className="plans-product-header visible-xs">
+        {this.props.noOfPersons==2 && <Row className="plans-product-header visible-xs">
           <Col sm={8} className="c-center">
             <Row>
               <Col sm={8} className="c-plans-product-text">
@@ -232,8 +232,9 @@ class PlansPage extends React.Component<Props, {}> {
             </Row>
           </Col>
         </Row>
+        }
 
-        <Row className="visible-xs">
+        {this.props.noOfPersons==2 && <Row className="visible-xs">
           <Col className="c-center plan-selector-outer-container" style={{paddingLeft: "28px", paddingRight: "30px", marginBottom: "15px"}}>
             <Row className="plans-selector-container">
               <Col sm={6} className="c-center" style={{paddingTop: "0px"}}>
@@ -254,6 +255,7 @@ class PlansPage extends React.Component<Props, {}> {
             </Row>
           </Col>
         </Row>
+        }
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
           <Col className={`person-info-main-container ${additionalPersonClass}`} style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
             { this.props.noOfPersons>=1 &&
@@ -264,6 +266,38 @@ class PlansPage extends React.Component<Props, {}> {
                 index={0}
                 openEditPersonModal={this.openEditPersonModal.bind(this)}
               />
+            }
+            {this.props.noOfPersons==1 && <Row className="plans-product-header plans-product-header-below-personinfo visible-xs">
+              <Col sm={8} className="c-center">
+                <Row>
+                  <Col sm={8} className="c-plans-product-text">
+                    Selected Products
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            }
+            {this.props.noOfPersons==1 && <Row className="visible-xs">
+              <Col className="c-center plan-selector-outer-container" style={{paddingLeft: "28px", paddingRight: "30px", marginBottom: "15px"}}>
+                <Row className="plans-selector-container plans-selector-container-below-personinfo">
+                  <Col sm={6} className="c-center" style={{paddingTop: "0px"}}>
+                    <Col sm={6} className="payment-schedule-text" style={{paddingTop: "20px", paddingRight: "0px"}}>
+                      Payment schedule
+                    </Col>
+                    <Col sm={6} className="plan-schedule-container" style={{paddingTop: "10px", paddingLeft: "0px"}}>
+                      <Select
+                        name="form-field-plans-3"
+                        options={paymentSchedules}
+                        value={this.state.premium_type}
+                        onChange={(payment)=>{
+                          this.onPaymentTypeChange(payment)
+                        }}
+                      />
+                    </Col>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
             }
             <div className="hidden-xs">
               { this.props.noOfPersons==2 &&

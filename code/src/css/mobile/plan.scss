@@ -9,6 +9,10 @@
 	    border-top: none;
 	    box-shadow: none;
 	    margin-top: 0px;
+	    &.plans-selector-container-below-personinfo {
+	    	margin-left: 0px;
+	    	margin-right: 0px;
+	    }
 		.payment-schedule-text {
 			padding-left: 0px;
 		}
@@ -19,6 +23,9 @@
 		    background-color: #ffffff;
 		    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
 		    border: solid 1px #d4d4d4;
+		    padding-left: 0%!important;
+		    margin-left: 4%!important;
+		    bottom: 80px;
 		    .plans-selector-container {
 		    	.plan-total-text {
 					text-align: right;
@@ -41,6 +48,9 @@
 		    background-color: white;
 			margin-top: 0px;
 		    margin-bottom: 0px;
+		    &.plans-product-header-below-personinfo  {
+		    	margin-left: 15px;
+		    }
 		}
 		.plan-schedule-container {
 			margin-bottom: 30px;
@@ -49,6 +59,9 @@
 			    height: 44px;
 			    border-radius: 2px;
 			    background-color: #ffffff;
+			}
+			.Select-placeholder {
+				padding-top: 4px;
 			}
 			.Select-value {
 				padding-top: 5px;
