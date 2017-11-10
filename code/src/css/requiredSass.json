@@ -24,6 +24,9 @@
     "src/css/mobile/plan.scss",
     "src/css/mobile/edit-modal.scss",
     "src/css/mobile/quote.scss",
-    "src/css/mobile/next-steps.scss"
+    "src/css/mobile/next-steps.scss",
+    "src/css/mobile/agentNextSteps.scss"
+
+    
   ]
 }

@@ -1,0 +1,26 @@
+.next-steps-container {
+	.customer-next-steps-container {
+		&.agent-next-steps-outer-container {
+		    width: 65.28%;
+		    margin-top: 60px;
+		    border-radius: 3px;
+		    .agent-next-steps-text-container {
+		    	width: 36%;
+		    	padding-left: 20px;
+		    	.next-steps-header, .next-steps-text {
+		    		text-align: left;
+		    	}
+		    	.next-steps-text {
+		    		margin-top: 15px;
+		    		color: #666666;
+		    	}
+		    }
+		    .agent-next-steps-container {
+			    float: right;
+			    width: 62.23%;
+			    padding-right: 20px;
+			    padding-bottom: 4px;
+		    }
+		}
+	}
+}

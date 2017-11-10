@@ -182,9 +182,9 @@ class PlansPage extends React.Component<Props, {}> {
         <Subheader />
 
         <Row>
-          <Col sm={8} className="c-center customer-next-steps-container">
+          <Col sm={8} className="c-center customer-next-steps-container agent-next-steps-outer-container">
             <Row>
-              <Col sm={4} className="">
+              <Col sm={4} className="agent-next-steps-text-container">
                 <Row className="next-steps-header">
                   OK... Let's Take Some Action!
                 </Row>
@@ -242,6 +242,16 @@ class PlansPage extends React.Component<Props, {}> {
               </Col>
 
             </Row>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="c-center next-step-submit-btn-container">
+            <Button className="c-button-default next-step-submit-btn" onClick={(){
+
+              }}
+            >
+              CONTINUE
+            </Button>
           </Col>
         </Row>
 
