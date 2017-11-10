@@ -16,6 +16,7 @@
     "src/css/c-radio.scss",
     "src/css/edit-modal.scss",
     "src/css/NoProducts.scss",
+    "src/css/agentNextSteps.scss",
     "src/css/mobile/header.scss",
     "src/css/mobile/subheader.scss",
     "src/css/mobile/select-persons.scss",
@@ -24,9 +25,6 @@
     "src/css/mobile/plan.scss",
     "src/css/mobile/edit-modal.scss",
     "src/css/mobile/quote.scss",
-    "src/css/mobile/next-steps.scss",
-    "src/css/mobile/agentNextSteps.scss"
-
-    
+    "src/css/mobile/next-steps.scss"
   ]
 }
