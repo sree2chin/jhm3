@@ -17,6 +17,7 @@ import { InfinityAutoComplete } from 'react-infinite-autocomplete';
 import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm, setPersonsData} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
+import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 
 interface Props {
   submitQuoteForm: ()=>void,
@@ -207,6 +208,7 @@ class Main extends React.Component<Props, {}> {
         ];
     return (
       <div>
+        <ScrollToTopOnMount />
         <Subheader />
         <SelectPersons onSubmit={this.submitEmailForm.bind(this)} />
         <div className="row c-quote">

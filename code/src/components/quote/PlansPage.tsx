@@ -19,6 +19,7 @@ import { browserHistory } from 'react-router';
 import EditPerson from "./EditPerson";
 import Riders from "./Riders";
 import Select from 'react-select';
+import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 
 interface Props {
   plans: [any]
@@ -220,6 +221,7 @@ class PlansPage extends React.Component<Props, {}> {
 
     return (
       <div className="product-pager-container">
+        <ScrollToTopOnMount />
         <Subheader />
         <Row className="plans-product-header visible-xs">
           <Col sm={8} className="c-center">

@@ -18,6 +18,7 @@ module.exports = function(app) {
 
   app.get('/', function(req, res, next) {
     //res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
+    console.log("ABCD");
     if(req.session) {
       if(!_.isEmpty(req.query)) {
         req.session.agent_id = req.query.agent_id || req.query.agentId;
@@ -42,6 +43,7 @@ module.exports = function(app) {
 
   app.get('/*', function(req, res, next) {
     //res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
+    console.log("ABCD");
     templatePath = "../../dist/";
     res.render(templatePath);
   });

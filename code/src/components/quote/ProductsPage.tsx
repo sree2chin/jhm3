@@ -12,6 +12,7 @@ import ProductHeader from "./ProductHeader";
 import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
+import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 import { browserHistory } from 'react-router';
 import EditPerson from "./EditPerson";
 import NoProducts from "./NoProducts"
@@ -255,6 +256,7 @@ class ProductsPage extends React.Component<Props, {}> {
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
     return (
       <div className="product-pager-container" ref={(c) => { this._scrollView = c; }}>
+        <ScrollToTopOnMount />
         <Subheader />
         <div className="visible-xs"><ProductHeader /> </div>
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>

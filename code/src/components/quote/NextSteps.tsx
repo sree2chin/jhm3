@@ -19,6 +19,7 @@ import Subheader from "../common/subheader";
 import Plan from "../common/Plan"
 import { browserHistory } from 'react-router';
 import {Tooltip} from 'react-lightweight-tooltip';
+import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 
 interface Props {
   plans: [any]
@@ -191,6 +192,7 @@ class PlansPage extends React.Component<Props, {}> {
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
     return (
       <div className="next-steps-container">
+        <ScrollToTopOnMount />
         <Subheader />
 
         <Row>
