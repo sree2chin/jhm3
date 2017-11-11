@@ -18,4 +18,11 @@
 			}
 		}
 	}
+	.email-modal-container {
+		&.agent-modal-container {
+			.modal-dialog {
+				width: auto;
+			}
+	 	}
+	 }
 }

@@ -12,7 +12,7 @@ import ProductHeader from "./ProductHeader";
 import EmailModal from "./EmailModal";
 import ThanksEmail from "./ThanksEmail";
 import ThanksPhone from "./ThanksPhone";
-import LicensedModal from "./LicensedModal"; 
+import AgentLicensedModal from "./AgentLicensedModal"; 
 import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
@@ -162,7 +162,7 @@ class PlansPage extends React.Component<Props, {}> {
       showModalEmail: false
     });
   },
-  closeLicensedModal() {
+  closeAgentLicensedModal() {
     this.setState({
       showModalPhone: false
     });
@@ -274,12 +274,12 @@ class PlansPage extends React.Component<Props, {}> {
           onCloseModal={this.closeEmailModal.bind(this)}
           noOfPersons={this.props.noOfPersons}
         />
-        <LicensedModal 
+        <AgentLicensedModal 
           showModalPhone={this.state.showModalPhone}
           saveQuote={this.saveQuote.bind(this)}
           handlePhoneChange={this.handlePhoneChange.bind(this)}
           handleSlotChange={this.handleSlotChange.bind(this)}
-          onCloseModal={this.closeLicensedModal.bind(this)}
+          onCloseModal={this.closeAgentLicensedModal.bind(this)}
           keyValueChange={this.keyValueChange.bind(this)}
         /> 
 
