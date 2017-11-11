@@ -316,7 +316,7 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
 
         </Row>
-        <Row>
+        <Row className="next-step-submit-btn-outer-container">
           <Col className="c-center next-step-submit-btn-container">
             <Button className={`c-button-default next-step-submit-btn circular ${this.state.nextStep ? "active" : ""}`} onClick={(){
                 this.openCorrespondingPopup()

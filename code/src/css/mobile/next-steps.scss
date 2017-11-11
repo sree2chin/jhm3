@@ -1,11 +1,15 @@
 
 @media(max-width: 768px) {
 	.next-steps-container {
+		.next-step-submit-btn-outer-container {
+			background-color: white;
+		}
 		.next-step-submit-btn-container {
 			width: 86%;
 			border-radius: 2px!important;
 			.next-step-submit-btn {
 				margin-bottom: 0px; 
+				margin-top: 15px;
 			}
 		}
 		.customer-next-steps-container {
