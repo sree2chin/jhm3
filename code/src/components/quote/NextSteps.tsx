@@ -61,6 +61,12 @@ class PlansPage extends React.Component<Props, {}> {
     });
   },
 
+  selectNextStep (nextStep) {
+    this.setState({
+      nextStep
+    });
+  },
+
   openAgentInputPopup() {
     this.setState({
       showModalPhone: true,
@@ -159,6 +165,15 @@ class PlansPage extends React.Component<Props, {}> {
       [k]: v
     });
   },
+  openCorrespondingPopup() {
+    if (this.state.nextStep == "continueToApplication") {
+      this.openEmailPopup();
+    } else if (this.state.nextStep == "connectMeToAgent") {
+      this.openAgentInputPopup();
+    } else {
+      this.openEmailPopup();
+    }
+  },
   public render() {
 
     const toolTipStyles = {
@@ -209,12 +224,18 @@ class PlansPage extends React.Component<Props, {}> {
             </Row>
             <Row>
               <Col sm={12}> 
-                <Col sm={4} className="next-action-application-img-container" onClick={this.openEmailPopup.bind(this)} style={{}}>
-                  <Col sm={12} className="next-action-img-container next-action-img-container-mobile">
-                    <img src={"../images/application.svg"} className="hidden-xs"/>
+                <Col sm={4} className="next-action-application-img-container" onClick={()=>{
+                  this.selectNextStep("continueToApplication")
+                }} style={{}}>
+                  <Col sm={12} className={`next-action-img-container next-action-img-container-mobile ${this.state.nextStep=="continueToApplication" ? "active" : ""}`}>
+
+                    {this.state.nextStep!="continueToApplication" && <img src={"../images/application.svg"} className="hidden-xs"/>}
+                    {this.state.nextStep=="continueToApplication" && <img src={"../images/form@2x.png"} className="hidden-xs"/>}
+
                     <Row className="visible-xs">
                       <Col xs={2} style={{paddingRight: "0px"}}>
-                        <img src={"../images/application.svg"}/>
+                        {this.state.nextStep!="continueToApplication" && <img src={"../images/application.svg"} className="hidden-xs"/>}
+                        {this.state.nextStep=="continueToApplication" && <img src={"../images/form@2x.png"} className="hidden-xs"/>}
                       </Col>
                       <Col xs={7} style={{marginTop: "23px"}}>
                         Apply now
@@ -227,12 +248,16 @@ class PlansPage extends React.Component<Props, {}> {
                     </Row>
                   </Col>
                 </Col>
-                <Col sm={4} className="next-action-email-img-container" onClick={this.openEmailPopup.bind(this)} style={{}}>
-                  <Col sm={12} className="next-action-img-container next-action-img-container-mobile">
-                    <img src={"../images/email.svg"} className="hidden-xs"/>
+                <Col sm={4} className="next-action-email-img-container" onClick={()=>{
+                  this.selectNextStep("emailMeQuote")
+                }} style={{}}>
+                  <Col sm={12} className={`next-action-img-container next-action-img-container-mobile ${this.state.nextStep=="emailMeQuote" ? "active" : ""}`}>
+                    {this.state.nextStep!="emailMeQuote" && <img src={"../images/email.svg"} className="hidden-xs"/>}
+                    {this.state.nextStep=="emailMeQuote" && <img src={"../images/activeemail.png"} className="hidden-xs"/>}
                     <Row className="visible-xs">
                       <Col xs={2} style={{paddingRight: "0px"}}>
-                        <img src={"../images/email.svg"}/>
+                        {this.state.nextStep!="emailMeQuote" && <img src={"../images/email.svg"} className="hidden-xs"/>}
+                        {this.state.nextStep=="emailMeQuote" && <img src={"../images/activeemail.png"} className="hidden-xs"/>}
                       </Col>
                       <Col xs={7} style={{marginTop: "23px"}}>
                         Email me the quote
@@ -245,12 +270,16 @@ class PlansPage extends React.Component<Props, {}> {
                     </Row>
                   </Col>
                 </Col>
-                <Col sm={4} className="next-action-phone-img-container" onClick={this.openAgentInputPopup.bind(this)} style={{}}>
-                  <Col sm={12} className="next-action-img-container next-action-img-container-mobile">
-                    <img src={"../images/phone.svg"} className="hidden-xs"/>
+                <Col sm={4} className="next-action-phone-img-container" onClick={()=>{
+                  this.selectNextStep("connectMeToAgent")
+                }} style={{}}>
+                  <Col sm={12} className={`next-action-img-container next-action-img-container-mobile ${this.state.nextStep=="connectMeToAgent" ? "active" : ""}`}>
+                    {this.state.nextStep!="connectMeToAgent" && <img src={"../images/phone.svg"} className="hidden-xs"/>}
+                    {this.state.nextStep=="connectMeToAgent" && <img src={"../images/activephone.png"} className="hidden-xs"/>}
                     <Row className="visible-xs">
                       <Col xs={2} style={{paddingRight: "0px"}}>
-                        <img src={"../images/phone.svg"}/>
+                      {this.state.nextStep!="connectMeToAgent" && <img src={"../images/phone.svg"} className="hidden-xs"/>}
+                      {this.state.nextStep=="connectMeToAgent" && <img src={"../images/activephone.png"} className="hidden-xs"/>}
                       </Col>
                       <Col xs={7} style={{marginTop: "23px"}}>
                         Connect me to a licensed agent
@@ -267,13 +296,19 @@ class PlansPage extends React.Component<Props, {}> {
             </Row>
             <Row className="hidden-xs">
               <Col sm={12} className="next-steps-footer"> 
-                <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
+                <Col sm={4}  onClick={()=>{
+                  this.selectNextStep("continueToApplication")
+                }}>
                   Continue to application
                 </Col>
-                <Col sm={4} onClick={this.openEmailPopup.bind(this)}>
+                <Col sm={4} onClick={()=>{
+                  this.selectNextStep("emailMeQuote")
+                }}>
                   Email me quote
                 </Col>
-                <Col sm={4} onClick={this.openAgentInputPopup.bind(this)}>
+                <Col sm={4}  onClick={()=>{
+                  this.selectNextStep("connectMeToAgent")
+                }}>
                   Connect me to a licensed agent
                 </Col>
               </Col>
@@ -283,8 +318,8 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
         <Row>
           <Col className="c-center next-step-submit-btn-container">
-            <Button className="c-button-default next-step-submit-btn" onClick={(){
-                this.submitQuote()
+            <Button className={`c-button-default next-step-submit-btn circular ${this.state.nextStep ? "active" : ""}`} onClick={(){
+                this.openCorrespondingPopup()
               }}
             >
               CONTINUE

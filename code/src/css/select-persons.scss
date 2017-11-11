@@ -48,6 +48,13 @@
       text-align: center;
     }
   }
+  .c-select-two-person:hover {
+    border: solid 2px #317dbd;
+  }
+  .c-select-one-person:hover {
+    border: solid 2px #317dbd;
+    color: #317dbd;
+  }
   .c-select-two-person { 
     border-radius: 6px;
     background-color: rgb(255, 255, 255);

@@ -75,6 +75,11 @@ body {
 input:focus {
     border: solid 1px #317dbd;
 }
+
+input.form-control:focus {
+    border: solid 1px #317dbd;
+}
+
 .l-next-step-container {
     &.active {
         background-color: #317dbd;

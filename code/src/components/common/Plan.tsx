@@ -141,6 +141,9 @@ export default class Plan extends React.Component<Props, {}> {
       }]);
     }
   },
+  getProductDisplayName() {
+    return this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.ProductDisplayName;
+  },
   public render() {
     const personIndex = this.props.personIndex;
     const plansObjs = this.getPlansDetailsForDropdown();
@@ -155,7 +158,7 @@ export default class Plan extends React.Component<Props, {}> {
               </Col>
               <Col sm={8} className="plan-product-info-text">
                 <Row className="plan-product-name">
-                  {this.state.selectedPlan && this.state.selectedPlan.PlanName}
+                  {this.getProductDisplayName()}
                 </Row>
                 <Row className="plan-sider-info-text1">
                   This is the fun part! Move the coverage slide to your desired amount of life insurance. Watch the monthly cost estimates change as you move. Then choose how long you want that coverage to last (plan length). Finally, click on your preferred  payment method! It's that simple.
