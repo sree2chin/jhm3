@@ -99,6 +99,12 @@
 	    .Select--single {
 	    	width: 40%;
 	    	display: inline-block;
+	    	.Select-menu-outer {
+	    		.is-focused {
+					background-color: #317dbd;
+					color: #ffffff;
+	    		}
+	    	}
 	    }
 	    input {
 	    	&.form-control {
