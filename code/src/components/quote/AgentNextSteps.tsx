@@ -172,6 +172,15 @@ class PlansPage extends React.Component<Props, {}> {
       [k]: v
     });
   },
+  openCorrespondingPopup() {
+    if (this.state.nextStep == "continueToApplication") {
+      this.openEmailPopup();
+    } else if (this.state.nextStep == "connectMeToAgent") {
+      this.openAgentInputPopup();
+    } else {
+      this.openEmailPopup();
+    }
+  },
   public render() {
 
     var {persons} = this.props;
@@ -258,8 +267,8 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
         <Row>
           <Col className="c-center next-step-submit-btn-container">
-            <Button className="c-button-default next-step-submit-btn circular" onClick={(){
-
+            <Button className="c-button-default next-step-submit-btn" onClick={(){
+                this.openCorrespondingPopup()
               }}
             >
               CONTINUE

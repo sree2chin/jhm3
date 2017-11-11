@@ -234,8 +234,8 @@ class PlansPage extends React.Component<Props, {}> {
 
                     <Row className="visible-xs">
                       <Col xs={2} style={{paddingRight: "0px"}}>
-                        {this.state.nextStep!="continueToApplication" && <img src={"../images/application.svg"} className="hidden-xs"/>}
-                        {this.state.nextStep=="continueToApplication" && <img src={"../images/form@2x.png"} className="hidden-xs"/>}
+                        {this.state.nextStep!="continueToApplication" && <img src={"../images/application.svg"} />}
+                        {this.state.nextStep=="continueToApplication" && <img src={"../images/form@2x.png"} />}
                       </Col>
                       <Col xs={7} style={{marginTop: "23px"}}>
                         Apply now
@@ -256,8 +256,8 @@ class PlansPage extends React.Component<Props, {}> {
                     {this.state.nextStep=="emailMeQuote" && <img src={"../images/activeemail.png"} className="hidden-xs"/>}
                     <Row className="visible-xs">
                       <Col xs={2} style={{paddingRight: "0px"}}>
-                        {this.state.nextStep!="emailMeQuote" && <img src={"../images/email.svg"} className="hidden-xs"/>}
-                        {this.state.nextStep=="emailMeQuote" && <img src={"../images/activeemail.png"} className="hidden-xs"/>}
+                        {this.state.nextStep!="emailMeQuote" && <img src={"../images/email.svg"}/>}
+                        {this.state.nextStep=="emailMeQuote" && <img src={"../images/activeemail.png"}/>}
                       </Col>
                       <Col xs={7} style={{marginTop: "23px"}}>
                         Email me the quote
@@ -278,8 +278,8 @@ class PlansPage extends React.Component<Props, {}> {
                     {this.state.nextStep=="connectMeToAgent" && <img src={"../images/activephone.png"} className="hidden-xs"/>}
                     <Row className="visible-xs">
                       <Col xs={2} style={{paddingRight: "0px"}}>
-                      {this.state.nextStep!="connectMeToAgent" && <img src={"../images/phone.svg"} className="hidden-xs"/>}
-                      {this.state.nextStep=="connectMeToAgent" && <img src={"../images/activephone.png"} className="hidden-xs"/>}
+                      {this.state.nextStep!="connectMeToAgent" && <img src={"../images/phone.svg"}/>}
+                      {this.state.nextStep=="connectMeToAgent" && <img src={"../images/activephone.png"}/>}
                       </Col>
                       <Col xs={7} style={{marginTop: "23px"}}>
                         Connect me to a licensed agent
@@ -318,7 +318,7 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
         <Row className="next-step-submit-btn-outer-container">
           <Col className="c-center next-step-submit-btn-container">
-            <Button className={`c-button-default next-step-submit-btn circular ${this.state.nextStep ? "active" : ""}`} onClick={(){
+            <Button className={`c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
                 this.openCorrespondingPopup()
               }}
             >
