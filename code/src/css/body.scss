@@ -93,6 +93,7 @@ input.form-control:focus {
         transform: translateY(-50%);
         margin-left: 4%;
         label {
+            display: inline;
             font-weight: normal;
             line-height: 2.4 !important;
         }
