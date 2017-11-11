@@ -14,6 +14,14 @@ export default class Input extends React.Component<Props, {}> {
     super(props);
   }
 
+  getClassName() {
+    var className = "form-control ";
+    if(this.props.className) {
+      className = className + this.props.className;
+    }
+    return className;
+  }
+
   public render() {
     var wrapperClass : string = 'form-group';
     if (this.props.error && this.props.error.length > 0) {
@@ -25,7 +33,7 @@ export default class Input extends React.Component<Props, {}> {
         <div className="field">
           <input type="text"
             name={this.props.name}
-            className="form-control"
+            className={this.getClassName()}
             placeholder={this.props.placeholder}
             ref={this.props.name}
             value={this.props.value}

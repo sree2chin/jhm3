@@ -76,6 +76,11 @@
 	    		}
 	    	}
 	    }
+	    .input-border-error {
+	    	.Select-control {
+	    		border: none;
+	    	}
+	    }
 	    .Select-control {
 		    border-radius: 2px;
 		    background-color: #ffffff;

@@ -20,6 +20,13 @@ export default class Person extends React.Component<Props, {}> {
     });
     this.props.onChange(this.props.index, key, value);
   },
+
+  getErrorsClassNames(errors, key) {
+    if(errors[key]) {
+      return "input-border-error";
+    }
+    
+  },
   public render() {
     const toolTipStyles = {
       wrapper: {
@@ -76,6 +83,7 @@ export default class Person extends React.Component<Props, {}> {
               onChange={(e) => {
                 this.onChange("name", e.target.value
               )}}
+              className={this.getErrorsClassNames(errors, "nameError")}
             />
             { errors.nameError && <Col sm={12} className={"c-subheader-text error"}  style={{paddingLeft: "0px"}}>
               Please enter applicant name.
@@ -149,6 +157,7 @@ export default class Person extends React.Component<Props, {}> {
                 showYearDropdown
                 dropdownMode="select"
                 placeholderText="MM/DD/YYYY"
+                className={this.getErrorsClassNames(errors, "s_birthDateError")}
               />
           </Col>
           { errors.s_birthDateError && <Col sm={12} className={"c-subheader-text error"}>
@@ -167,6 +176,7 @@ export default class Person extends React.Component<Props, {}> {
               onChange={(stateObj)=>{
                 this.onChange("state", stateObj.value)
               }}
+              className={this.getErrorsClassNames(errors, "stateError")}
             />
              { errors.stateError && <Col style={{ paddingLeft: "0px"}} sm={12} className={"c-subheader-text error"}>
                   Please select your state.
@@ -186,6 +196,7 @@ export default class Person extends React.Component<Props, {}> {
               onChange={(healthObj)=>{
                 this.onChange("health", healthObj.value)
               }}
+              className={this.getErrorsClassNames(errors, "healthError")}
             />
             <div style={{display: 'inline-block'}}>
             <Tooltip content="Please select your health status" styles={toolTipStyles}>
