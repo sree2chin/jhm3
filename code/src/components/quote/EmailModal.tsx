@@ -16,16 +16,6 @@ export default class EmailModal extends React.Component<Props, {}> {
     });
     this.props.saveQuote();
   },
-  getAmountFormat(amount) {
-    var a = parseInt(amount);
-
-    if(a/1000000 >=1) {
-      return (a/1000000) + "m";
-    } else {
-      return (a/1000) + "k";
-    }
-  },
-
   
   state = {},
   handleChange(personIndex, e) {

@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty} from "underscore";
-import {submitQuoteForm, submitEmailForm, setPersonsData, saveQuoteForm} from '../../actions/Quote';
+import {submitQuoteForm, submitEmailForm, setPersonsData, saveQuoteForm, setTypeOfSubmission} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
 import EmailModal from "./EmailModal";
@@ -48,6 +48,7 @@ class PlansPage extends React.Component<Props, {}> {
     this.setState({
       type_of_submission: val
     })
+    this.props.setTypeOfSubmission(val);
   },
 
   submitQuote() {
@@ -179,6 +180,15 @@ class PlansPage extends React.Component<Props, {}> {
       this.openAgentInputPopup();
     } else {
       this.openEmailPopup();
+    }
+  },
+  directToCorrespondingPage() {
+    if (this.state.nextStep == "continueToApplication") {
+      browserHistory.push("/agent/connect-to-agent");
+    } else if (this.state.nextStep == "connectMeToAgent") {
+      browserHistory.push("/agent/connect-to-agent");
+    } else {
+      browserHistory.push("/agent/email-to-quote");
     }
   },
   public render() {
@@ -321,6 +331,9 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     },
     saveQuoteForm: (data) => {
       return dispatch(saveQuoteForm(data))
+    },
+    setTypeOfSubmission: (data) => {
+      return dispatch(setTypeOfSubmission(data))
     }
   };
 }

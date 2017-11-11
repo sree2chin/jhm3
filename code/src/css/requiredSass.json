@@ -17,6 +17,8 @@
     "src/css/edit-modal.scss",
     "src/css/NoProducts.scss",
     "src/css/agentNextSteps.scss",
+    "src/css/ContactAgentPage.scss",
+    
     "src/css/mobile/header.scss",
     "src/css/mobile/subheader.scss",
     "src/css/mobile/select-persons.scss",

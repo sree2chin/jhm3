@@ -31,6 +31,8 @@ export default (state: Array<any> = [], action) => {
       return objectAssign({}, state, {premiums: premiums});
     case "SETTING_PERSONS_INFO":
     	return objectAssign({}, state, {persons: action.persons});
+    case "SETTING_TYPE_OF_SUBMISSION":
+      return objectAssign({}, state, {typeOfSubmission: action.typeOfSubmission});
     case "OPEN_EDIT_PERSON_MODAL":
       return objectAssign({}, state, {showModalEditPerson: true, editablePerson: action.editablePerson, editablePersonIndex: action.editablePersonIndex});
     case "CLOSE_EDIT_PERSON_MODAL":

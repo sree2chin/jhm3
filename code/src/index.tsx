@@ -65,6 +65,21 @@ function loadAgentNextStepsPage(location: any, callback: LoadCallback) {
     "QuotePage");
 }
 
+function loadContactAgent(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/quote/ContactAgent") as typeof _QuotePage).default),
+    "QuotePage");
+}
+function loadContactAgentSuccess(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/quote/ContactAgentSuccess") as typeof _QuotePage).default),
+    "QuotePage");
+}
+
+
+
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route  path="/" component= {App} >
@@ -78,6 +93,21 @@ ReactDOM.render(
       <Route path="/agent/products" getComponent={ loadProductsPage } />
       <Route path="/agent/plans" getComponent={ loadPlansPage } />
       <Route path="/agent/next-steps" getComponent={ loadAgentNextStepsPage } />
+
+      <Route path="/connect-to-agent" getComponent={ loadContactAgent } />
+      <Route path="/agent/connect-to-agent" getComponent={ loadContactAgent } />
+
+
+      <Route path="/connect-agent-success" getComponent={ loadContactAgentSuccess } />
+      <Route path="/agent/connect-agent-success" getComponent={ loadAgentNextStepsPage } />
+
+      
+      <Route path="/email-to-quote" getComponent={ loadAgentNextStepsPage } />
+      <Route path="/agent/email-to-quote" getComponent={ loadAgentNextStepsPage } />
+
+      <Route path="/agent/email-quote-success" getComponent={ loadAgentNextStepsPage } />
+      <Route path="/email-quote-success" getComponent={ loadAgentNextStepsPage } />
+
 
       <Route path="/customer" getComponent={ loadQuotePage } />
       <Route path="/quote" getComponent={ loadQuotePage } />

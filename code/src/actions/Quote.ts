@@ -19,6 +19,16 @@ function setPersonsData(persons) {
 	};
 }
 
+function setTypeOfSubmission(typeOfSubmission) {
+	return (dispatch) => {
+		return dispatch({
+				type: 'SETTING_TYPE_OF_SUBMISSION',  typeOfSubmission: typeOfSubmission
+			})
+	};
+}
+
+
+
 function openEditPersonModal(person, personIndex) {
 	return (dispatch) => {
 		return dispatch({

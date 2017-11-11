@@ -1,0 +1,37 @@
+.agent-page-container {
+	background-color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    .contact-agent-phone-container {
+    	margin-left: 5px;
+    	margin-top: 30px;
+    }
+    .email-description {
+    	margin-top: 30px;
+	    font-size: 14px;
+	    text-align: left;
+	    color: #666666;
+    }
+    .email-quote-text {
+	    border-bottom: 1px solid #e5e5e5;
+	    margin-left: -15px;
+	    padding-top: 20px;
+	    padding-bottom: 10px;
+    }
+	.slot-input-container {
+		.Select-input {
+			height: 44px!important;
+		}
+		.Select-placeholder {
+			padding-top: 5px;
+		}
+	}
+	.okay-to-text-number {
+		margin-top: 0px;
+	}
+	.contact-agent-text-submit-btn-container {
+	    position: fixed;
+	    bottom: 15px;
+	    margin-right: 4px;
+	}
+}

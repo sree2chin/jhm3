@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty} from "underscore";
-import {submitQuoteForm, submitEmailForm, setPersonsData, saveQuoteForm} from '../../actions/Quote';
+import {submitQuoteForm, submitEmailForm, setPersonsData, saveQuoteForm, setTypeOfSubmission} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
 import EmailModal from "./EmailModal";
@@ -20,6 +20,7 @@ import Plan from "../common/Plan"
 import { browserHistory } from 'react-router';
 import {Tooltip} from 'react-lightweight-tooltip';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
+import { browserHistory } from 'react-router';
 
 interface Props {
   plans: [any]
@@ -46,7 +47,8 @@ class PlansPage extends React.Component<Props, {}> {
   changeTypeOfSubmission(val) {
     this.setState({
       type_of_submission: val
-    })
+    });
+    this.props.setTypeOfSubmission(val);
   },
 
   submitQuote() {
@@ -90,9 +92,7 @@ class PlansPage extends React.Component<Props, {}> {
       data.phone_number = this.state.phone;
     }
   },
-  saveQuote() {
-    const persons = [];
-
+  constructPersonsInfo(persons) {
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
     personOne.type_of_submission = this.state.type_of_submission;
@@ -118,13 +118,15 @@ class PlansPage extends React.Component<Props, {}> {
       this.getExtraInfo(personOne);
       persons.push(personTwo);
     }
-
+  },
+  saveQuote() {
+    const persons = [];
+    this.constructPersonsInfo(persons);
     var data = {
       applicants: JSON.stringify(persons)
     };
 
     this.getExtraInfo(data)
-
 
     this.props.setPersonsData(persons);
 
@@ -172,6 +174,15 @@ class PlansPage extends React.Component<Props, {}> {
       this.openAgentInputPopup();
     } else {
       this.openEmailPopup();
+    }
+  },
+  directToCorrespondingPage() {
+    if (this.state.nextStep == "continueToApplication") {
+      browserHistory.push("/connect-to-agent");
+    } else if (this.state.nextStep == "connectMeToAgent") {
+      browserHistory.push("/connect-to-agent");
+    } else {
+      browserHistory.push("/email-to-quote");
     }
   },
   public render() {
@@ -318,8 +329,14 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
         <Row className="next-step-submit-btn-outer-container">
           <Col className="c-center next-step-submit-btn-container">
-            <Button className={`c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
+            <Button className={`hidden-xs c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
                 this.openCorrespondingPopup()
+              }}
+            >
+              CONTINUE
+            </Button>
+            <Button className={`visible-xs c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
+                this.directToCorrespondingPage()
               }}
             >
               CONTINUE
@@ -372,6 +389,9 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     },
     saveQuoteForm: (data) => {
       return dispatch(saveQuoteForm(data))
+    },
+    setTypeOfSubmission: (data) => {
+      return dispatch(setTypeOfSubmission(data))
     }
   };
 }
