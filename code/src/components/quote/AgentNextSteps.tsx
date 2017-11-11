@@ -202,7 +202,7 @@ class PlansPage extends React.Component<Props, {}> {
                         checked={this.state.s_gender == "1"}
                       />
                       <span></span>
-                      <label htmlFor={"person_s_gender_"}> Complet the application (20 minutes) </label >
+                      <label htmlFor={"person_s_gender_"}> Complete the application (20 minutes) </label >
                     </div>
                   </div>
                   <div className="agent-next-step-container">
@@ -238,6 +238,18 @@ class PlansPage extends React.Component<Props, {}> {
                       <label htmlFor={"person_s_gender_"}> Email the application link to your customer to complete </label >
                     </div>
                   </div>
+
+                  <div className="agent-next-step-container">
+                    <div className="c-radio l-next-step-container" onClick={this.handleEmailApplicationLinkClick.bind(this)}>
+                      <input 
+                        type="radio" 
+                        name={"person_s_gender_"} 
+                        checked={this.state.showModalEmail && this.state.type_of_submission==10002}
+                      />
+                      <span></span>
+                      <label htmlFor={"person_s_gender_"}> Print the information </label >
+                    </div>
+                  </div>
                 </FormGroup>
               </Col>
 
@@ -246,7 +258,7 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
         <Row>
           <Col className="c-center next-step-submit-btn-container">
-            <Button className="c-button-default next-step-submit-btn" onClick={(){
+            <Button className="c-button-default next-step-submit-btn circular" onClick={(){
 
               }}
             >
