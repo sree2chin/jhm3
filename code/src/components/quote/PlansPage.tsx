@@ -37,7 +37,32 @@ class PlansPage extends React.Component<Props, {}> {
     }
   },
   componentDidMount () {
+    var p;
 
+    p = [
+      {
+        value: "Monthly",
+        label: "Monthly"
+      },
+      {
+        value: "Quarterly",
+        label: "Quarterly"
+      },
+      {
+        value: "Semi-Annual",
+        label: "Semi-Annual"
+      },
+      {
+        value: "Annual",
+        label: "Annual"
+      }
+    ];
+
+    this.setState({
+      paymentSchedules: p
+    });
+
+    this.onPaymentTypeChange(p[0]);
   },
   selectProduct(product) {
     this.setState({
@@ -204,33 +229,7 @@ class PlansPage extends React.Component<Props, {}> {
       this.submmitedProductForm = false;
     });
   },
-  getPaymentSchedules() {
-    if(isEmpty(this.props.premiums) || isEmpty(this.props.premiums[0])) {
-      return [];
-    }
-    var p;
 
-    p = [
-      {
-        value: "Monthly",
-        label: "Monthly"
-      },
-      {
-        value: "Quarterly",
-        label: "Quarterly"
-      },
-      {
-        value: "Semi-Annual",
-        label: "Semi-Annual"
-      },
-      {
-        value: "Annual",
-        label: "Annual"
-      }
-    ]
-
-    return p;
-  },
   getTotalPaymentAmount() {
     var total = 0;
     var sProductID = this.props.persons && this.props.persons[0] && this.props.persons[0].sProductID || null;
@@ -260,7 +259,7 @@ class PlansPage extends React.Component<Props, {}> {
     var self = this;
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
     const individualPlanContainerWidth = this.props.noOfPersons == 2 ? 6 : 12;
-    const paymentSchedules = this.getPaymentSchedules();
+    const paymentSchedules = this.state.paymentSchedules;
     var additionalPersonClass = this.props.noOfPersons==2 ? "all-plan-person-info-container" : "";
 
     return (
