@@ -86,37 +86,76 @@ class PlansPage extends React.Component<Props, {}> {
       this.submmitedProductForm = false;
     });
   },
-  redirectToNextSteps() {
-    const persons = [];
-    this.setState({
-      movingToFinalStep: true
-    });
-    const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
-    if(this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium ) {
-      var amount = this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
-      amount = amount ? parseFloat(amount.split("$")[1]) : 0;
 
-      personOne.premium_amount=amount;
-      personOne.premium_type=this.state.premium_type;
+  setPlanFormSubmissionErrorMsg() {
+    if(this.productSubmissionBtnClicked) {
+      var errorMsg = null;
+      if(this.props.noOfPersons == 2) {
+        if(!(this.state.productIdPlan0)) {
+          if(!(this.state.productIdPlan1)) {
+            errorMsg = "Please select a plan for each applicant";
+          } else {
+            errorMsg = "Please select a plan for applicant 1";
+          }
+        } else {
+          if(!(this.state.productIdPlan1)) {
+            errorMsg = "Please select a plan for applicant 2";
+          }
+        }
+      } else {
+        if(!(this.state.productIdPlan0)) {
+          errorMsg = "Please select one plan";
+        }
+      }
+      this.setState({
+        productSelectionErrorMsg: errorMsg
+      });
     }
-    persons.push(personOne);
-
+  },
+  validatePlansSelections() {
     if(this.props.noOfPersons == 2) {
-      const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-      if(this.props.premiums && this.props.premiums[1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium ) {
-        var amount = this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
+      return (this.state.productIdPlan0 && this.state.productIdPlan1)
+    } else {
+      return this.state.productIdPlan0;
+    }
+  },
+
+  redirectToNextSteps() {
+    this.productSubmissionBtnClicked = true;
+    if(this.validatePlansSelections()) {
+      const persons = [];
+      this.setState({
+        movingToFinalStep: true
+      });
+      const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
+      if(this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium ) {
+        var amount = this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
         amount = amount ? parseFloat(amount.split("$")[1]) : 0;
 
-        personTwo.premium_amount=amount;
-        personTwo.premium_type=this.state.premium_type;
+        personOne.premium_amount=amount;
+        personOne.premium_type=this.state.premium_type;
       }
-      persons.push(personTwo);
+      persons.push(personOne);
+
+      if(this.props.noOfPersons == 2) {
+        const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
+        if(this.props.premiums && this.props.premiums[1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium ) {
+          var amount = this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
+          amount = amount ? parseFloat(amount.split("$")[1]) : 0;
+
+          personTwo.premium_amount=amount;
+          personTwo.premium_type=this.state.premium_type;
+        }
+        persons.push(personTwo);
+      }
+
+      this.props.setPersonsData(persons);
+
+      const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
+      browserHistory.push(basePath + "next-steps");
+    } else {
+      this.setPlanFormSubmissionErrorMsg();
     }
-
-    this.props.setPersonsData(persons);
-
-    const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
-    browserHistory.push(basePath + "next-steps");
   },
   openEditPersonModal = (person, personIndex) => {
     this.props.openEditPersonModal(person, personIndex);
@@ -131,6 +170,10 @@ class PlansPage extends React.Component<Props, {}> {
   selectProductPlan(personIndex, productId) {
     this.setState({
       ["productIdPlan"+personIndex]: productId
+    });
+    var self = this;
+    setTimeout(function() {
+      self.setPlanFormSubmissionErrorMsg();
     });
   },
   submitProductsFormOnEditPerson() {
@@ -367,6 +410,7 @@ class PlansPage extends React.Component<Props, {}> {
                     selectedPaymentType={self.state.selectedPaymentType}
                     selectProductPlan={self.selectProductPlan.bind(self)}
                     personIndex={0}
+                    key={self.state.productIdPlan0 + "0"}
                   />
                 })
               }
@@ -401,6 +445,7 @@ class PlansPage extends React.Component<Props, {}> {
                     selectedPaymentType={self.state.selectedPaymentType}
                     personIndex={1}
                     selectProductPlan={self.selectProductPlan.bind(self)}
+                    key={self.state.productIdPlan1 + "1"}
                   />
                 })
               }
@@ -448,6 +493,9 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
 
         <Row>
+          {this.state.productSelectionErrorMsg && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "-15px"}} sm={12} className={"c-subheader-text error"}>
+                    {this.state.productSelectionErrorMsg}
+                  </Col> }
           <Col sm={3} className="continue-to-next-steps" style={{ }}>
             <Button className="c-button-default circular hidden-xs" onClick={(){
                 this.redirectToNextSteps()
