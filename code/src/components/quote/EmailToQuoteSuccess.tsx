@@ -136,17 +136,14 @@ class ContactAgent extends React.Component<Props, {}> {
     return (
       <div className="next-steps-container agent-success-page-container">
         <Row className="thanks-phone-img-container">
-          <img style={{marginBottom: "34px", marginTop: "90px"}} src={"../images/thanks-phone.svg"} />
+          <img style={{marginBottom: "34px", marginTop: "90px"}} src={"../images/thanks-email.svg"} />
         </Row>
         <Row>
           <Col sm={12} className="confirmation-email-text">
-            Thank you!
-          </Col>
-          <Col sm={12} className="confirmation-email-text">
-            We will contact you soon
+            We’ve sent you an email!
           </Col>
           <Col sm={12} className={"confirmation-email-desc"}>
-            An agent will be in touch with you as soon as possible during your selected availability window.
+            We sent your email a link where you can view the rest of the form and fill it out when you have time.
           </Col>
         </Row>
           <Row>

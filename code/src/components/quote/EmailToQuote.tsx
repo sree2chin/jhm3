@@ -52,18 +52,28 @@ class EmailToQuote extends React.Component<Props, {}> {
         emailError0: true
       });
       isError = true;
+    } else {
+      this.setState({
+        emailError0: false
+      });
     }
     if(this.state.noOfPersons == 2) {
       if(!this.state.email0) {
         this.setState({
           emailError1: true
         });
+      } else {
+        this.setState({
+          emailError1: false
+        });
       }
       isError = true;
     }
-    this.setState({
-      emailErrorExists: true
-    });
+    if(isError) {
+      this.setState({
+        emailErrorExists: true
+      });
+    }
 
     return !isError;
   },
@@ -102,7 +112,7 @@ class EmailToQuote extends React.Component<Props, {}> {
 
       this.props.saveQuoteForm(data).then(() => {
         const basePath = this.props.location.pathname.indexOf("/agent") > 1 ? "/agent/" : "/";
-        browserHistory.push(basePath + "connect-agent-success");
+        browserHistory.push(basePath + "email-quote-success");
       }).catch(()=>{
         this.submmitedProductForm = false;
       });
@@ -159,7 +169,7 @@ class EmailToQuote extends React.Component<Props, {}> {
               }}
               className={this.getErrorsClassNames(this.state, "emailError0")}
             />
-            { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error"}  style={{paddingLeft: "0px"}}>
+            { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
               Please enter email address of applicant 1.
             </Col> }
           </Col>
@@ -178,7 +188,7 @@ class EmailToQuote extends React.Component<Props, {}> {
                 }}
                 className={this.getErrorsClassNames(this.state, "emailError1")}
               />
-            { this.state.emailError1 && <Col sm={12} className={"c-subheader-text error"}  style={{paddingLeft: "0px"}}>
+            { this.state.emailError1 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
               Please enter email address of applicant 2.
             </Col> }
             </Col>
