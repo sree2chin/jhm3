@@ -130,13 +130,36 @@
 	    	display: inline-block;
 	    }
 	}
-    .react-datepicker__input-container input {
+    .react-datepicker__input-container .custom-date-picker-container {
 	    color: #333333;
 	    background-repeat: no-repeat;
-	    background-image: url("./images/calendar.svg");
 	    background-position: 20px 11px;
 	    width: 100%;
-	    padding-left: 28%;
+	    height: 44px;
+	    border-radius: 2px;
+	    background-color: #ffffff;
+	    .custom-date-picker {
+		    float: left;
+		    display: inline-block;
+		    width: 24%;
+		    height: 44px;
+		    border-radius: 2px;
+		    background-color: #f7f7f7;
+		    border: solid 1px #cccccc;
+		    border-right: none;
+		    img {
+				position: absolute;
+			    top: calc(50% - 10px);
+			    left: 8%;
+		    }
+	    }
+	    input {
+		    height: 44px;
+		    border-radius: 2px;
+		    padding-left: 9%;
+		    border: solid 1px #cccccc;
+		    width: 75%;
+	    }
     }
     .c-coverage-amount {
 	    font-size: 34px;

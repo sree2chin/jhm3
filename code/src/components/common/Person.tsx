@@ -3,6 +3,8 @@ import {Link} from 'react-router';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import { getStateObjects } from '../../utility/states';
 import DatePicker from 'react-datepicker';
+import CustomDatepicker from "../common/CustomDatepicker";
+
 import Select from 'react-select';
 import Input from "../common/textInput";
 import ReactTooltip from 'react-tooltip';
@@ -156,10 +158,12 @@ export default class Person extends React.Component<Props, {}> {
                 onChange={(date)=>{
                   this.onChange("s_birthDate", date)
                 }}
+                customInput={<CustomDatepicker />}
                 showMonthDropdown
                 showYearDropdown
                 dropdownMode="select"
                 placeholderText="MM/DD/YYYY"
+                disabledKeyboardNavigation
                 className={this.getErrorsClassNames(errors, "s_birthDateError")}
               />
           </Col>
