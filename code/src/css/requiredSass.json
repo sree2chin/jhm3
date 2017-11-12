@@ -19,7 +19,8 @@
     "src/css/mobile/noProducts.scss",
     "src/css/agentNextSteps.scss",
     "src/css/ContactAgentPage.scss",
-    
+    "src/css/mobile/ContactAgentSuccess.scss",
+
     "src/css/mobile/header.scss",
     "src/css/mobile/subheader.scss",
     "src/css/mobile/select-persons.scss",

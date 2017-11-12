@@ -99,7 +99,7 @@ ReactDOM.render(
 
 
       <Route path="/connect-agent-success" getComponent={ loadContactAgentSuccess } />
-      <Route path="/agent/connect-agent-success" getComponent={ loadAgentNextStepsPage } />
+      <Route path="/agent/connect-agent-success" getComponent={ loadContactAgentSuccess } />
 
       
       <Route path="/email-to-quote" getComponent={ loadAgentNextStepsPage } />

@@ -54,12 +54,13 @@ class ContactAgent extends React.Component<Props, {}> {
     this.setState({[k]: v});
   };
   directToCorrespondingPage() {
+    const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
     if (this.state.nextStep == "continueToApplication") {
-      browserHistory.push("/agent/connect-to-agent");
+      browserHistory.push(basePath + "/connect-to-agent");
     } else if (this.state.nextStep == "connectMeToAgent") {
-      browserHistory.push("/agent/connect-to-agent");
+      browserHistory.push(basePath + "/agent/connect-to-agent");
     } else {
-      browserHistory.push("/agent/email-to-quote");
+      browserHistory.push(basePath + "/agent/email-to-quote");
     }
   },
   getExtraInfo(data) {
@@ -105,7 +106,7 @@ class ContactAgent extends React.Component<Props, {}> {
     this.props.setPersonsData(persons);
 
     this.props.saveQuoteForm(data).then(() => {
-      const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent/" : "/";
+      const basePath = this.props.location.pathname.indexOf("/agent") > 1 ? "/agent/" : "/";
       browserHistory.push(basePath + "connect-agent-success");
     }).catch(()=>{
       this.submmitedProductForm = false;

@@ -59,6 +59,10 @@ class ContactAgent extends React.Component<Props, {}> {
       browserHistory.push("/agent/email-to-quote");
     }
   },
+  goBack() {
+      const basePath = this.props.location.pathname.indexOf("/agent") > 1 ? "/agent/" : "/";
+      browserHistory.push(basePath);
+  },
   saveQuote() {
     const persons = [];
 
@@ -130,9 +134,9 @@ class ContactAgent extends React.Component<Props, {}> {
       }
     ];
     return (
-      <div className="next-steps-container">
-        <Row>
-          <img style={{marginBottom: "34px", marginTop: "54px"}} src={"../images/thanks-phone.svg"} />
+      <div className="next-steps-container agent-success-page-container">
+        <Row className="thanks-phone-img-container">
+          <img style={{marginBottom: "34px", marginTop: "90px"}} src={"../images/thanks-phone.svg"} />
         </Row>
         <Row>
           <Col sm={12} className="confirmation-email-text">
@@ -143,6 +147,17 @@ class ContactAgent extends React.Component<Props, {}> {
           </Col>
           <Col sm={12} className={"confirmation-email-desc"}>
             An agent will be in touch with you as soon as possible during your selected availability window.
+          </Col>
+        </Row>
+          <Row>
+          <Col xs={11} className="c-center agent-success-go-back-btn">
+            <Button  style={{float: "right"}} className="c-button-default active" onClick={(){
+                this.goBack()
+              }}
+            >
+              GO BACK
+              {this.state.savingQuote && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+            </Button>
           </Col>
         </Row>
       </div>);
