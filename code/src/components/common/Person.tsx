@@ -60,6 +60,7 @@ export default class Person extends React.Component<Props, {}> {
     var statesObjects = getStateObjects();
     const personIndex = this.props.index;
     var {errors, person} = this.props;
+    errors = errors || {};
     person = person || {};
     const healthRatingObjects = [
           {value: "Excellent", label: "Excellent"},
@@ -74,7 +75,7 @@ export default class Person extends React.Component<Props, {}> {
           <Col sm={12} className={"c-person-header-text"}>
             {"Applicant " + (personIndex + 1)}
           </Col>
-          <Col sm={12} style={{marginBottom: "15px"}} className="person-name-container">
+          <Col sm={12} style={{marginBottom: "0px"}} className="person-name-container">
             <Input 
               name={"first-applicant-name-" + personIndex}
               label="Name"
@@ -85,14 +86,15 @@ export default class Person extends React.Component<Props, {}> {
               )}}
               className={this.getErrorsClassNames(errors, "nameError")}
             />
-            { errors.nameError && <Col sm={12} className={"c-subheader-text error"}  style={{paddingLeft: "0px"}}>
+
+            <Col sm={12} className={`c-subheader-text error ${errors.nameError ? "visibility-show" : "visibility-hidden"}`} style={{paddingLeft: "0px"}}>
               Please enter applicant name.
-            </Col> }
+            </Col>
           </Col>
           <Col sm={12} className={"c-subheader-text"}>
             Gender
           </Col>
-          <Col sm={12} style={{paddingRight: "22px", marginBottom: "15px"}} className="person-gender-container">
+          <Col sm={12} style={{paddingRight: "22px", marginBottom: "0px"}} className="person-gender-container">
             <FormGroup className="radio-group hidden-xs">
               <div className="c-radio" onClick={ ()=> {
                       this.onChange("s_gender", "1")
@@ -114,7 +116,7 @@ export default class Person extends React.Component<Props, {}> {
                   checked={person.s_gender == "2"}
                 />
                 <span></span>
-                <label htmlFor={"person_s_gender_" + personIndex}> Female </label>
+                <label htmlFor={"person_s_gender_" + personIndex} style={{marginBottom: "0px"}}> Female </label>
               </div>
             </FormGroup>
             <Row className="visible-xs">
@@ -135,12 +137,13 @@ export default class Person extends React.Component<Props, {}> {
                 </Button>
               </Col>
             </Row>
-            { errors.s_genderError && <Col sm={12} className={"c-subheader-text error"} style={{paddingLeft: "0px", marginTop: "0px"}}>
+
+            <Col sm={12} className={`c-subheader-text error ${errors.s_genderError ? "visibility-show" : "visibility-hidden"}`} style={{paddingLeft: "0px", marginTop: "0px"}}>
               Please select your gender.
-            </Col> }
+            </Col> 
           </Col> 
         </div>
-        <Row style={{marginBottom: "25px", marginLeft: "0px"}}>
+        <Row style={{marginBottom: "10px", marginLeft: "0px"}}>
           <Col sm={12} className={"c-subheader-text"} style={{marginTop: "0px", marginBottom: "3px"}}>
             Birth date
           </Col>
@@ -160,9 +163,9 @@ export default class Person extends React.Component<Props, {}> {
                 className={this.getErrorsClassNames(errors, "s_birthDateError")}
               />
           </Col>
-          { errors.s_birthDateError && <Col sm={12} className={"c-subheader-text error"}>
+          <Col sm={12} className={`c-subheader-text error ${errors.s_birthDateError ? "visibility-show" : "visibility-hidden"}`}>
             Please select your birth date.
-          </Col> }
+          </Col> 
         </Row>
         <div style={{marginBottom: "12px"}}>
           <Col sm={12} className={"c-subheader-text"} style={{marginBottom: "2px"}}>
@@ -178,17 +181,17 @@ export default class Person extends React.Component<Props, {}> {
               }}
               className={this.getErrorsClassNames(errors, "stateError")}
             />
-             { errors.stateError && <Col style={{ paddingLeft: "0px"}} sm={12} className={"c-subheader-text error"}>
+             <Col style={{ paddingLeft: "0px"}} sm={12} className={`c-subheader-text error ${errors.stateError ? "visibility-show" : "visibility-hidden"}`}>
                   Please select your state.
-                </Col> }
+                </Col>
           </Col>
    
         </div>
         <div  style={{marginBottom: "0px"}}>
-          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "15px"}}>
+          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "5px"}}>
             Overall health
           </Col>
-          <Col sm={12} style={{marginBottom: "10px", marginTop: "6px"}}>
+          <Col sm={12} style={{marginBottom: "0px", marginTop: "6px"}}>
             <Select
               name={"form-field-name-" + personIndex}
               options={healthRatingObjects}
@@ -203,14 +206,14 @@ export default class Person extends React.Component<Props, {}> {
               <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
             </Tooltip>
             </div>
-            { errors.healthError && <Col sm={12} style={{marginTop: "0px", paddingLeft: "0px"}} className={"c-subheader-text error"}>
+            <Col sm={12} style={{marginTop: "-5px", paddingLeft: "0px"}} className={`c-subheader-text error ${errors.healthError ? "visibility-show" : "visibility-hidden"}`}>
               Please select your health status.
-            </Col> }
+            </Col>
           </Col>
 
         </div>
         <div>
-          <Col sm={12} className={"c-subheader-text"}  style={{marginTop: "5px"}}>
+          <Col sm={12} className={"c-subheader-text"}  style={{marginTop: "0px"}}>
             Tobacco use
           </Col>
           <Col sm={12} style={{paddingRight: "22px"}} className="person-tobacco-container">
@@ -235,7 +238,7 @@ export default class Person extends React.Component<Props, {}> {
                   checked={person.smoke == "No"}
                 />
                 <span></span>
-                <label> No </label>
+                <label style={{marginBottom: "0px"}}> No </label>
               </div>
             </FormGroup>
             <Row className="visible-xs">
@@ -256,9 +259,9 @@ export default class Person extends React.Component<Props, {}> {
                 </Button>
               </Col>
             </Row>
-            { errors.smokeError && <Col sm={12} className={"c-subheader-text error"} style={{marginTop: "0px", paddingLeft: "0px"}}>
+            <Col sm={12} className={`c-subheader-text error ${errors.smokeError ? "visibility-show" : "visibility-hidden"}`} style={{marginTop: "0px", paddingLeft: "0px"}}>
               Please indicate whether or not you use tobacco products.
-            </Col> }
+            </Col>
           </Col>
         </div>
       </Col>

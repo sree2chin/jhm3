@@ -61,7 +61,7 @@ class Main extends React.Component<Props, {}> {
     var result = true;
     var errors = [];
     each (this.state.persons, (person, index) => {
-      if (index==0 || (!isEmpty(person))) {
+      
         const {s_birthDate, s_gender, state, smoke, health, name} = person;
 
         const s_birthDateError = !(s_birthDate && moment(s_birthDate).format("YYYY-MM-DD").length > 0);
@@ -80,7 +80,7 @@ class Main extends React.Component<Props, {}> {
           nameError
         });
         result = result && !(s_birthDateError || s_genderError || stateError || smokeError || healthError);
-      }
+
     });
     this.setState({
       errors
