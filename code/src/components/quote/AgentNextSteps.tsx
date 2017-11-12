@@ -266,7 +266,7 @@ class PlansPage extends React.Component<Props, {}> {
                         checked={this.state.showModalEmail && this.state.type_of_submission==10002}
                       />
                       <span></span>
-                      <label htmlFor={"person_s_gender_"}> Print the information </label >
+                      <label htmlFor={"person_s_gender_"}> Print this quote </label >
                     </div>
                   </div>
                 </FormGroup>
