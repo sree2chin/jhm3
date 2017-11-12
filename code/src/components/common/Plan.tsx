@@ -18,6 +18,7 @@ export default class Plan extends React.Component<Props, {}> {
     super();
     this.onFaceValChange.bind(this);
     this.handleChange.bind(this);
+    this.stopSliderChanging.bind(this);
   },
   onPlanChange(key, obj) {
     this.setState({
@@ -110,6 +111,11 @@ export default class Plan extends React.Component<Props, {}> {
   },
   
   state = {},
+  stopSliderChanging() {
+    this.setState({
+      sliderSliding: false
+    });
+  },
   handleChange(value) {
     this.setState({
       sFaceAmount: parseInt(value)
@@ -119,9 +125,15 @@ export default class Plan extends React.Component<Props, {}> {
         plan: this.state.selectedPlan,
         sFaceAmount: parseInt(value),
         productId: this.props.plans.plans_data.product_id
-      }]);
+      }], this.stopSliderChanging.bind(this));
     }.bind(this);
     setTimeout(f);
+  },
+  duringSliderChanging(value) {
+    this.setState({
+      sFaceAmount: parseInt(value),
+      sliderSliding: true
+    });
   },
   handleSliderChange(value) {
     this.sFaceAmount = value;
@@ -188,6 +200,7 @@ export default class Plan extends React.Component<Props, {}> {
                           min={parseInt(this.state.selectedPlan.FaceMin)}
                           max={parseInt(this.state.selectedPlan.FaceMax)}
                           step={25000}
+                          onChange={this.duringSliderChanging.bind(this)}
                           onAfterChange={this.handleChange.bind(this)}
                           trackStyle={{ backgroundColor: '#ffffff', height: 10, border: "solid 1px #999999" }}
                           handleStyle={{
@@ -235,7 +248,8 @@ export default class Plan extends React.Component<Props, {}> {
                       Cost (billed {this.props.selectedPaymentType && this.props.selectedPaymentType.label})
                     </Col>
                     <Col sm={4} className="plan-cost-amount">
-                      {this.props.selectedPaymentType && this.props.selectedPaymentType.label && this.props.premiums && this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.QuoteRateGrid && this.props.premiums.plans_data.QuoteRateGrid.Col1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium[this.props.selectedPaymentType.label]}
+                      {this.state.sliderSliding && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                      {!this.state.sliderSliding && this.props.selectedPaymentType && this.props.selectedPaymentType.label && this.props.premiums && this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.QuoteRateGrid && this.props.premiums.plans_data.QuoteRateGrid.Col1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium[this.props.selectedPaymentType.label]}
                     </Col>
                   </Col>
                 </Row>

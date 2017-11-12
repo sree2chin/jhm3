@@ -50,7 +50,7 @@ class PlansPage extends React.Component<Props, {}> {
       selectedPaymentType: ob
     });
   },
-  submitPlansForm(personIndex, data) {
+  submitPlansForm(personIndex, data, successCb) {
     const persons = [];
 
     const personOne = JSON.parse(JSON.stringify(this.props.persons[personIndex]));
@@ -80,6 +80,7 @@ class PlansPage extends React.Component<Props, {}> {
     this.props.setPersonsData(persons);
 
     this.props.submitPlansForm(persons).then(() => {
+      if(successCb) { successCb(); }
       console.log("sdfds");
     }).catch(()=>{
       this.submmitedProductForm = false;
