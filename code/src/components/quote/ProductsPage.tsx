@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
-import {each, isEmpty, uniq, each, intersection, map} from "underscore";
+import {each, isEmpty, uniq, each, intersection, map, without} from "underscore";
 import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm, setPersonsData, openEditPersonModal, closeEditPersonModal, handleEditChange} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
@@ -79,6 +79,19 @@ class ProductsPage extends React.Component<Props, {}> {
     }, 10);
   },
 
+  deSelectProductForIndex(personIndex, product) {
+    var productsList = JSON.parse(JSON.stringify(this.state["productId" + personIndex]));
+    productsList =  without(productsList, product.ProductID );
+
+    this.setState({
+      ["productId" + personIndex]: productsList
+    });
+    var self = this;
+    setTimeout(function() {
+      self.setProductFormSubmissionErrorMsg();
+    }, 10);
+
+  },
   setProductFormSubmissionErrorMsg() {
     if(this.productSubmissionBtnClicked) {
       var errorMsg = null;
@@ -291,6 +304,7 @@ class ProductsPage extends React.Component<Props, {}> {
                 <ProductContainer 
                   productInfo={this.props.products[0]}
                   selectProduct={this.selectProductForIndex.bind(this)}
+                  deSelectProduct={this.deSelectProductForIndex.bind(this)}
                   personIndex={0}
                   person={this.props.persons[0]}
                   noOfPersons={this.props.noOfPersons}
@@ -327,6 +341,7 @@ class ProductsPage extends React.Component<Props, {}> {
                   <ProductContainer 
                     productInfo={this.props.products[1]}
                     selectProduct={this.selectProductForIndex.bind(this)}
+                    deSelectProduct={this.deSelectProductForIndex.bind(this)}
                     personIndex={1}
                     person={this.props.persons[1]}
                     noOfPersons={this.props.noOfPersons}

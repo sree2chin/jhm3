@@ -2,7 +2,7 @@ import * as React from 'react';
 import Input from './../common/textInput';
 import {Button, Row, Col} from "react-bootstrap";
 import Tooltip from 'rc-tooltip';
-import {map, isEmpty, uniq, intersection} from "underscore";
+import {map, isEmpty, uniq, intersection, without} from "underscore";
 
 interface Props {
   product: any,
@@ -35,21 +35,32 @@ export default class ProductContainer extends React.Component<Props, State> {
 
   selectProduct = (product) => {
     var productIds = JSON.parse(JSON.stringify(this.state.productIds));
-    productIds.push(product.ProductID);
-    productIds = uniq(productIds);
-    if(this.props.productValidations && this.props.productValidations.product_selection_count >= productIds.length) {
+    if(productIds.indexOf(product.ProductID)>=0 ) {
+      productIds = without(productIds, product.ProductID );
+      this.props.deSelectProduct(this.props.personIndex, product);
       this.setState({
         productIds: productIds,
         productSelectionErrorMsg: ""
         productSelectionError: false
       });
-      this.props.selectProduct(this.props.personIndex, product);
     } else {
-      this.setState({
-        productSelectionErrorMsg: this.props.productValidations.product_selection_error_message,
-        productSelectionError: true
-      });
+      productIds.push(product.ProductID);
+      productIds = uniq(productIds);
+      if(this.props.productValidations && this.props.productValidations.product_selection_count >= productIds.length) {
+        this.setState({
+          productIds: productIds,
+          productSelectionErrorMsg: ""
+          productSelectionError: false
+        });
+        this.props.selectProduct(this.props.personIndex, product);
+      } else {
+        this.setState({
+          productSelectionErrorMsg: this.props.productValidations.product_selection_error_message,
+          productSelectionError: true
+        });
+      }    
     }
+
 
   };
 
@@ -96,7 +107,8 @@ export default class ProductContainer extends React.Component<Props, State> {
                       </Row>
                     </Row>
                     <Row className={`text-center quote-product ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`} onClick={()=> this.selectProduct(product)}>
-                      <div className="c-coverage-amount">QUOTE THIS PRODUCT</div>
+                      {this.state.productIds.indexOf(product.ProductID)>=0 && <div className="c-coverage-amount">PRODUCT SELECTED</div>}
+                      {this.state.productIds.indexOf(product.ProductID)<0 && <div className="c-coverage-amount">QUOTE THIS PRODUCT</div>}
                     </Row>
                   </Col>
                 
