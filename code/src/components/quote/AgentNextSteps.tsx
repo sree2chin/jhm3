@@ -221,7 +221,7 @@ class PlansPage extends React.Component<Props, {}> {
                         checked={this.state.s_gender == "1"}
                       />
                       <span></span>
-                      <label htmlFor={"person_s_gender_"}> Complete the application (20 minutes) </label >
+                      <label htmlFor={"person_s_gender_"}> Complete the application </label >
                     </div>
                   </div>
                   <div className="agent-next-step-container">

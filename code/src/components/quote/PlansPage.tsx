@@ -464,7 +464,7 @@ class PlansPage extends React.Component<Props, {}> {
               <Col sm={8} className="c-center" style={{float: "right", marginRight: "15px"}}>
                 <Row>
                   <Col sm={4} xs={6} className="plan-total-text">
-                    Total
+                    {this.state.premium_type} Total
                   </Col>
                   <Col sm={8} xs={6} className="plan-total-amount">
                     {this.getTotalPaymentAmount()}
@@ -479,7 +479,7 @@ class PlansPage extends React.Component<Props, {}> {
               <Col sm={3} className="" style={{float: "right", marginRight: "15px"}}>
                 <Row>
                   <Col sm={4} xs={6} className="plan-total-text">
-                    Total
+                    {this.state.premium_type} Total
                   </Col>
                   <Col sm={8} xs={6} className="plan-total-amount">
                     {this.getTotalPaymentAmount()}
