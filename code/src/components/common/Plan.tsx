@@ -154,8 +154,14 @@ export default class Plan extends React.Component<Props, {}> {
     }
   },
   getProductDisplayName() {
-    return this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.ProductDisplayName;
-    return this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.ProductDisplayName;
+    var productId = this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.product_id; 
+    var productList = this.props.productInfo && this.props.productInfo.products_data && this.props.productInfo.products_data.products_list;
+    
+    productList = productList || [];
+    var product = find(productList, (product)=>{
+      return product.ProductID == productId
+    });
+    return product && product.ProductDisplayName;
   },
   public render() {
     const personIndex = this.props.personIndex;

@@ -430,6 +430,7 @@ class PlansPage extends React.Component<Props, {}> {
                     selectedPaymentType={self.state.selectedPaymentType}
                     selectProductPlan={self.selectProductPlan.bind(self)}
                     personIndex={0}
+                    productInfo={self.props.products[0]}
                     key={p.product_id + "0"}
                   />
                 })
@@ -464,6 +465,7 @@ class PlansPage extends React.Component<Props, {}> {
                     productIdPlan={self.state.productIdPlan1}
                     selectedPaymentType={self.state.selectedPaymentType}
                     personIndex={1}
+                    productInfo={self.props.products[1]}
                     selectProductPlan={self.selectProductPlan.bind(self)}
                     key={p.product_id + "1"}
                   />
@@ -499,10 +501,10 @@ class PlansPage extends React.Component<Props, {}> {
             <Row className="plans-selector-container">
               <Col sm={4} className="" style={{float: "right", marginRight: "15px"}}>
                 <Row>
-                  <Col sm={6} xs={6} className="plan-total-text">
+                  <Col sm={7} xs={6} className="plan-total-text">
                     {this.state.premium_type} Total
                   </Col>
-                  {this.shouldShowTotal() && <Col sm={6} xs={6} className="plan-total-amount">
+                  {this.shouldShowTotal() && <Col sm={5} xs={6} className="plan-total-amount">
                     {this.getTotalPaymentAmount()}
                   </Col> }
                 </Row>
