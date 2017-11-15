@@ -168,13 +168,13 @@ export default class Plan extends React.Component<Props, {}> {
             <Row>
               <Col sm={2} style={{width: "16%", height: "90px", backgroundColor: "#317dbd", margin: "20px"}} className="blue-plan-container hidden-xs">
               </Col>
-              <Col sm={8} className="plan-product-info-text">
-                <Row className="plan-product-name">
+              <Col sm={8} className={`plan-product-info-text`}>
+                <Row className={`plan-product-name ${window.location.pathname.indexOf("/agent")>=0 ? "agent-page" : ""}`}>
                   {this.getProductDisplayName()}
                 </Row>
-                <Row className="plan-sider-info-text1">
+                {!(window.location.pathname.indexOf("/agent")>=0) && <Row className="plan-sider-info-text1">
                   This is the fun part! Move the coverage slide to your desired amount of life insurance. Watch the monthly cost estimates change as you move. Then choose how long you want that coverage to last (plan length). Finally, click on your preferred  payment method! It's that simple.
-                </Row>
+                </Row>}
               </Col>
             </Row>
             <Row className="plan-sider-info-text">
