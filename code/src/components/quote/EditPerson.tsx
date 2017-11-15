@@ -155,11 +155,6 @@ export default class EditPerson extends React.Component<Props, {}> {
                           dropdownMode="select"
                           placeholderText="MM/DD/YYYY"
                         />
-                        <div style={{display: 'inline-block', float: "left"}}>
-                          <Tooltip content="Please enter your date of birth" styles={toolTipStylesBirthData}>
-                            <img style={{marginBottom: "2px"}} src={"../images/question-mark.svg"} />
-                          </Tooltip>
-                      </div>
                     </Col>
                     { errors.s_birthDateError && <Col sm={12} className={"c-subheader-text error"}>
                       Please select your birth date.
@@ -178,11 +173,6 @@ export default class EditPerson extends React.Component<Props, {}> {
                           this.handleChange(personIndex, "state", stateObj.value)
                         }}
                       />
-                      <div style={{display: 'inline-block', float: 'left'}}>
-                      <Tooltip content="Please select your state" styles={toolTipStyles}>
-                        <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
-                      </Tooltip>
-                      </div>
                        { errors.stateError && <Col style={{ paddingLeft: "0px"}} sm={12} className={"c-subheader-text error"}>
                             Please select your state.
                           </Col> }
