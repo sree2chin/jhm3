@@ -431,6 +431,7 @@ class PlansPage extends React.Component<Props, {}> {
                     selectProductPlan={self.selectProductPlan.bind(self)}
                     personIndex={0}
                     productInfo={self.props.products[0]}
+                    person={persons[0]}
                     key={p.product_id + "0"}
                   />
                 })
@@ -461,11 +462,13 @@ class PlansPage extends React.Component<Props, {}> {
                     plans={pl}
                     submitPlansForm={self.submitPlansForm.bind(self)}
                     premiums={premiums}
+                    person={persons[1]}
                     noOfPersons={self.props.noOfPersons}
                     productIdPlan={self.state.productIdPlan1}
                     selectedPaymentType={self.state.selectedPaymentType}
                     personIndex={1}
                     productInfo={self.props.products[1]}
+                    person={persons[0]}
                     selectProductPlan={self.selectProductPlan.bind(self)}
                     key={p.product_id + "1"}
                   />

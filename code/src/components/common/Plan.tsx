@@ -40,9 +40,43 @@ export default class Plan extends React.Component<Props, {}> {
     })
     this.props.onPaymentTypeChange(this.props.personIndex, obj);
   },
+  getProductName(){
+
+  },
+  getPlan(plansData) {
+    var plansList = plansData.plans_list;
+    const plan = JSON.parse(JSON.stringify(plansList[0]));
+
+      var tenYearPlanLengthProducts = ["Vantis Velocity Term", "Vantis Velocity Term with ROP"];
+      var straightLifeProducts = ["Vantis Velocity Whole Life", "Vantis Velocity Whole Life Plus", "Gauranteed Golden"];
+
+      var productId = this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.product_id; 
+      var productList = this.props.productInfo && this.props.productInfo.products_data && this.props.productInfo.products_data.products_list;
+      
+      productList = productList || [];
+      var product = find(productList, (product)=>{
+        return product.ProductID == productId
+      });
+      var productName =  product && product.ProductDisplayName;
+
+
+    for(var i=0; i<plansList.length; i++) {
+      if (tenYearPlanLengthProducts.indexOf(productName)>=0) {
+        plan = find(plansList, function(plan) {
+          return "10 Year Level Term" == plan.PlanDisplayName
+        });
+      } else if (straightLifeProducts.indexOf(productName)>=0) {
+        plan = find(plansList, function(plan) {
+          return "Straight Life" == plan.PlanDisplayName
+        });
+      }
+    }
+    return plan;
+  },
+
   componentWillReceiveProps(nextProps) {
-    if(isEmpty(this.props.plans) && !isEmpty(nextProps.plans)) {
-      const plan = JSON.parse(JSON.stringify(nextProps.plans.plans_data.plans_list[0]));
+    if(!this.props.selectedPaymentType && nextProps.selectedPaymentType) {
+      var plan = this.getPlan(nextProps.plans.plans_data);
       plan.value = plan.PlanID;
       plan.label = plan.PlanDisplayName;
       this.onPlanChange("sPlanID", plan);
