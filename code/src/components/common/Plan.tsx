@@ -155,6 +155,7 @@ export default class Plan extends React.Component<Props, {}> {
   },
   getProductDisplayName() {
     return this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.ProductDisplayName;
+    return this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.ProductDisplayName;
   },
   public render() {
     const personIndex = this.props.personIndex;
@@ -225,7 +226,7 @@ export default class Plan extends React.Component<Props, {}> {
               </Col>
               <Col sm={3} className="plan-length-container">
                 <Row style={{ marginTop: "16px"}}  className="plan-length-container-text">
-                  Plan length
+                  Plan Choice
                 </Row>
                 <Row className="plan-length-container-selector">
                   <Select

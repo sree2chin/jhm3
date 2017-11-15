@@ -252,6 +252,27 @@ class PlansPage extends React.Component<Props, {}> {
     return total;
 
   },
+  shouldShowTotal () {
+    if(!this.props.persons) return true;
+    if(this.props.noOfPersons ==1) {
+      if(this.props.persons[0].selected_products.length==1) return true;
+      return this.state.productIdPlan0 && this.state.productIdPlan0.length > 0;
+    } else {
+      if(this.props.persons[0].selected_products.length==1) {
+        if(this.props.persons[1].selected_products.length==1) {
+          return true;
+        } else {
+          return this.state.productIdPlan1 && this.state.productIdPlan1.length>0;
+        }
+      } else {
+        if(this.props.persons[1].selected_products.length==1) { 
+          return this.state.productIdPlan0 && this.state.productIdPlan0.length > 0;
+        } 
+        return this.state.productIdPlan0 && this.state.productIdPlan0.length>0 && this.state.productIdPlan1 && this.state.productIdPlan1.length>0;
+      }
+    }
+
+  },
   public render() {
 
     var {persons} = this.props;
@@ -481,9 +502,9 @@ class PlansPage extends React.Component<Props, {}> {
                   <Col sm={6} xs={6} className="plan-total-text">
                     {this.state.premium_type} Total
                   </Col>
-                  <Col sm={6} xs={6} className="plan-total-amount">
+                  {this.shouldShowTotal() && <Col sm={6} xs={6} className="plan-total-amount">
                     {this.getTotalPaymentAmount()}
-                  </Col>
+                  </Col> }
                 </Row>
                 
               </Col>
