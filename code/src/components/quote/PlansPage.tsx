@@ -144,6 +144,10 @@ class PlansPage extends React.Component<Props, {}> {
       return this.state.productIdPlan0;
     }
   },
+  redirectToProductPage() {
+    const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
+    browserHistory.push(basePath + "products");
+  },
 
   redirectToNextSteps() {
     this.productSubmissionBtnClicked = true;
