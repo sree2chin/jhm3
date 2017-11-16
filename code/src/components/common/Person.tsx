@@ -1,14 +1,15 @@
 import * as React from 'react';
 import {Link} from 'react-router';
-import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
+import {Button, Row, Col, FormGroup, Radio, ControlLabel} from "react-bootstrap";
 import { getStateObjects } from '../../utility/states';
 import DatePicker from 'react-datepicker';
 import CustomDatepicker from "../common/CustomDatepicker";
-
+var BootStrapDatePicker = require("react-bootstrap-date-picker");
 import Select from 'react-select';
 import Input from "../common/textInput";
 import ReactTooltip from 'react-tooltip';
 import {Tooltip} from 'react-lightweight-tooltip';
+import * as moment from "moment";
 
 
 interface Props extends React.Props<Person> {
@@ -21,6 +22,14 @@ export default class Person extends React.Component<Props, {}> {
       [key]: value
     });
     this.props.onChange(this.props.index, key, value);
+  },
+
+  onDateChange(key, value, formattedDate) {
+    this.setState({
+      [key]: moment(value),
+      formattedDate
+    });
+    this.props.onChange(this.props.index, key, moment(value));
   },
 
   getErrorsClassNames(errors, key) {
@@ -153,19 +162,25 @@ export default class Person extends React.Component<Props, {}> {
               <span className="test-class">
                
               </span>
-              <DatePicker 
-                selected={person.s_birthDate} 
-                onChange={(date)=>{
-                  this.onChange("s_birthDate", date)
-                }}
-                customInput={<CustomDatepicker />}
-                showMonthDropdown
-                showYearDropdown
-                dropdownMode="select"
-                placeholderText="MM/DD/YYYY"
-                disabledKeyboardNavigation
-                className={this.getErrorsClassNames(errors, "s_birthDateError")}
-              />
+              <FormGroup controlId="change_handler">
+                <ControlLabel>      
+                  <div className="custom-date-picker-container">
+                    <span className="custom-date-picker" onClick={this.props.onClick}>
+                      <img src={"../images/calendar.svg"} />
+                    </span>
+                  </div>
+                </ControlLabel>
+                <BootStrapDatePicker 
+                  onChange={this.handleChange} 
+                  placeholder={"YYYY-MM-DD"}
+                  value={this.state.formattedDate} 
+                  id="change_handler_example" 
+                  dateFormat={"YYYY-MM-DD"}
+                  onChange={(date, formattedDate)=>{
+                    this.onDateChange("s_birthDate", date, formattedDate)
+                  }}/>
+              </FormGroup>
+
           </Col>
           <Col sm={12} className={`c-subheader-text error ${errors.s_birthDateError ? "visibility-show" : "visibility-hidden"}`}>
             Please select your birth date.

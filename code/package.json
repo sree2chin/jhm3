@@ -57,6 +57,7 @@
     "react-autocomplete-input": "^1.0.4",
     "react-autosuggest": "^9.3.2",
     "react-bootstrap": "^0.31.3",
+    "react-bootstrap-date-picker": "^5.1.0",
     "react-datepicker": "^0.54.0",
     "react-dom": "^15.2.1",
     "react-infinite-autocomplete": "^2.0.2",
