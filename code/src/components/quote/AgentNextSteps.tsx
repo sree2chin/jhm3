@@ -18,6 +18,7 @@ import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
 import Plan from "../common/Plan"
 import { browserHistory } from 'react-router';
+import EmailModalCapture from "./EmailModalCapture";
 
 interface Props {
   plans: [any]
@@ -54,31 +55,31 @@ class PlansPage extends React.Component<Props, {}> {
   submitQuote() {
     this.props.submitQuote();
   }, 
+  
+  openEmailCapturePopup() {
+    this.setState({
+      showModalEmailCapture: true,
+      type_of_submission: 10001,
+      showModalPhone: false,
+      showModalEmail: false,
+    });
+  },
 
   openEmailPopup() {
     this.setState({
       showModalEmail: true,
       showModalPhone: false,
+      showModalEmailCapture: false,
+      type_of_submission: 10002
     });
   },
 
-  handleEmailApplicationLinkClick() {
-    this.openEmailPopup();
-    this.changeTypeOfSubmission(10002);
-  },
-
-  handleTickToInternalAgentLinkClick() {
-    this.openAgentInputPopup();
-    this.changeTypeOfSubmission(10005);
-  },
-  handleTickToVantisLinkClick() {
-    this.openAgentInputPopup();
-    this.changeTypeOfSubmission(10004);
-  },
   openAgentInputPopup() {
     this.setState({
       showModalPhone: true,
       showModalEmail: false,
+      showModalEmailCapture: false,
+      type_of_submission: 10005
     });
   },
 
@@ -141,6 +142,9 @@ class PlansPage extends React.Component<Props, {}> {
       if(this.state.type_of_submission == 10002) {
         k1 = "showModalEmailThanks";
         k2 = "showModalEmail";
+      } else if(this.state.type_of_submission == 10001) {
+        k1 = "showModalEmailThanks";
+        k2 = "showModalEmailCapture";
       } else {
         k1 = "showModalPhoneThanks";
         k2 = "showModalPhone";
@@ -175,21 +179,31 @@ class PlansPage extends React.Component<Props, {}> {
   },
   openCorrespondingPopup() {
     if (this.state.nextStep == "continueToApplication") {
-      this.openEmailPopup();
-    } else if (this.state.nextStep == "connectMeToAgent") {
+      this.openEmailCapturePopup();
+    } else if (this.state.nextStep == "ticketToInternalAgent") {
       this.openAgentInputPopup();
     } else {
       this.openEmailPopup();
     }
   },
+  closeEmailCaptureModal() {
+    this.setState({
+      showModalEmailCapture: false
+    });
+  },
   directToCorrespondingPage() {
     if (this.state.nextStep == "continueToApplication") {
       browserHistory.push("/agent/connect-to-agent");
-    } else if (this.state.nextStep == "connectMeToAgent") {
+    } else if (this.state.nextStep == "ticketToInternalAgent") {
       browserHistory.push("/agent/connect-to-agent");
     } else {
       browserHistory.push("/agent/email-to-quote");
     }
+  },
+  selectNextStep (nextStep) {
+    this.setState({
+      nextStep
+    });
   },
   public render() {
 
@@ -214,44 +228,52 @@ class PlansPage extends React.Component<Props, {}> {
               <Col sm={8} className="agent-next-steps-container">
                 <FormGroup className="radio-group">
                   <div className="agent-next-step-container">
-                    <div className="c-radio l-next-step-container" onClick={this.handleTickToVantisLinkClick.bind(this)}>
+                    <div className="c-radio l-next-step-container" onClick={()=>{
+                      this.selectNextStep("continueToApplication")
+                    }}>
                       <input 
                         type="radio" 
-                        name={"person_s_gender_"} 
-                        checked={this.state.s_gender == "1"}
+                        name={"nextStep-continueToApplication"} 
+                        checked={this.state.nextStep == "continueToApplication"}
                       />
                       <span></span>
                       <label htmlFor={"person_s_gender_"}> Complete the application </label >
                     </div>
                   </div>
                   <div className="agent-next-step-container">
-                    <div className="c-radio l-next-step-container" onClick={this.handleTickToVantisLinkClick.bind(this)}>
+                    <div className="c-radio l-next-step-container" onClick={()=>{
+                      this.selectNextStep("ticketToVantisLifeSales")
+                    }}>
                       <input 
                         type="radio" 
                         name={"person_s_gender_"} 
-                        checked={this.state.showModalPhone && this.state.type_of_submission==10004}
+                        checked={this.state.nextStep=="ticketToVantisLifeSales"}
                       />
                       <span></span>
                       <label htmlFor={"person_s_gender_"}> Ticket to Vantis Life sales rep to complete application </label >
                     </div>
                   </div>
                   <div className="agent-next-step-container">
-                    <div className="c-radio l-next-step-container" onClick={this.handleTickToInternalAgentLinkClick.bind(this)}>
+                    <div className="c-radio l-next-step-container" onClick={()=>{
+                      this.selectNextStep("ticketToInternalAgent")
+                    }}>
                       <input 
                         type="radio" 
                         name={"person_s_gender_"} 
-                        checked={this.state.showModalPhone && this.state.type_of_submission==10005}
+                        checked={this.state.nextStep=="ticketToInternalAgent"}
                       />
                       <span></span>
                       <label htmlFor={"person_s_gender_"}> Ticket to internal agent to complete application </label >
                     </div>
                   </div>
                   <div className="agent-next-step-container">
-                    <div className="c-radio l-next-step-container" onClick={this.handleEmailApplicationLinkClick.bind(this)}>
+                    <div className="c-radio l-next-step-container" onClick={()=>{
+                      this.selectNextStep("emailApplicationLink")
+                    }}>
                       <input 
                         type="radio" 
                         name={"person_s_gender_"} 
-                        checked={this.state.showModalEmail && this.state.type_of_submission==10002}
+                        checked={this.state.nextStep=="emailApplicationLink"}
                       />
                       <span></span>
                       <label htmlFor={"person_s_gender_"}> Email the application link to your customer to complete </label >
@@ -259,14 +281,16 @@ class PlansPage extends React.Component<Props, {}> {
                   </div>
 
                   <div className="agent-next-step-container">
-                    <div className="c-radio l-next-step-container" onClick={this.handleEmailApplicationLinkClick.bind(this)}>
+                    <div className="c-radio l-next-step-container" onClick={()=>{
+                      this.selectNextStep("printTheQuote")
+                    }}>
                       <input 
                         type="radio" 
                         name={"person_s_gender_"} 
-                        checked={this.state.showModalEmail && this.state.type_of_submission==10002}
+                        checked={this.state.nextStep=="printTheQuote"}
                       />
                       <span></span>
-                      <label htmlFor={"person_s_gender_"}> Print this quote </label >
+                      <label htmlFor={"printTheQuote"}> Print this quote </label >
                     </div>
                   </div>
                 </FormGroup>
@@ -275,16 +299,30 @@ class PlansPage extends React.Component<Props, {}> {
             </Row>
           </Col>
         </Row>
-        <Row>
+        <Row className="next-step-submit-btn-outer-container">
           <Col className="c-center next-step-submit-btn-container">
-            <Button className="c-button-default next-step-submit-btn" onClick={(){
+            <Button className={`hidden-xs c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
                 this.openCorrespondingPopup()
+              }}
+            >
+              CONTINUE
+            </Button>
+            <Button className={`visible-xs c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
+                this.directToCorrespondingPage()
               }}
             >
               CONTINUE
             </Button>
           </Col>
         </Row>
+
+        <EmailModalCapture 
+          showModalEmail={this.state.showModalEmailCapture}
+          saveQuote={this.saveQuote.bind(this)}
+          handleChange={this.handleEmailChange.bind(this)}
+          onCloseModal={this.closeEmailCaptureModal.bind(this)}
+          noOfPersons={this.props.noOfPersons}
+        />
 
         <EmailModal 
           showModalEmail={this.state.showModalEmail}

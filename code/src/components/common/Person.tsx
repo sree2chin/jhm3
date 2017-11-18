@@ -162,7 +162,7 @@ export default class Person extends React.Component<Props, {}> {
               <span className="test-class">
                
               </span>
-              <FormGroup controlId="change_handler">
+              <FormGroup controlId={"change_handler_" + this.props.personIndex}> 
                 <ControlLabel>      
                   <div className="custom-date-picker-container">
                     <span className="custom-date-picker" onClick={this.props.onClick}>
@@ -174,7 +174,7 @@ export default class Person extends React.Component<Props, {}> {
                   onChange={this.handleChange} 
                   placeholder={"YYYY-MM-DD"}
                   value={this.state.formattedDate} 
-                  id="change_handler_example" 
+                  id={"change_handler_example_" + + this.props.personIndex} 
                   dateFormat={"YYYY-MM-DD"}
                   onChange={(date, formattedDate)=>{
                     this.onDateChange("s_birthDate", date, formattedDate)

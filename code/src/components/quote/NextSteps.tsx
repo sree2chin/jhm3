@@ -10,6 +10,7 @@ import {submitQuoteForm, submitEmailForm, setPersonsData, saveQuoteForm, setType
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
 import EmailModal from "./EmailModal";
+import EmailModalCapture from "./EmailModalCapture";
 import ThanksEmail from "./ThanksEmail";
 import ThanksPhone from "./ThanksPhone";
 import LicensedModal from "./LicensedModal"; 
@@ -60,6 +61,16 @@ class PlansPage extends React.Component<Props, {}> {
       showModalEmail: true,
       type_of_submission: 10002,
       showModalPhone: false,
+      showModalEmailCapture: false
+    });
+  },
+
+  openEmailCapturePopup() {
+    this.setState({
+      showModalEmailCapture: true,
+      type_of_submission: 10001,
+      showModalPhone: false,
+      showModalEmail: false,
     });
   },
 
@@ -73,7 +84,8 @@ class PlansPage extends React.Component<Props, {}> {
     this.setState({
       showModalPhone: true,
       showModalEmail: false,
-      type_of_submission: 10003
+      type_of_submission: 10003,
+      showModalEmailCapture: false
     });
   },
   handlePhoneChange(v) {
@@ -135,6 +147,9 @@ class PlansPage extends React.Component<Props, {}> {
       if(this.state.type_of_submission == 10002) {
         k1 = "showModalEmailThanks";
         k2 = "showModalEmail";
+      } else if(this.state.type_of_submission == 10001) {
+        k1 = "showModalEmailThanks";
+        k2 = "showModalEmailCapture";
       } else {
         k1 = "showModalPhoneThanks";
         k2 = "showModalPhone";
@@ -157,6 +172,13 @@ class PlansPage extends React.Component<Props, {}> {
       showModalEmail: false
     });
   },
+
+  closeEmailCaptureModal() {
+    this.setState({
+      showModalEmailCapture: false
+    });
+  },
+
   closeLicensedModal() {
     this.setState({
       showModalPhone: false
@@ -169,7 +191,7 @@ class PlansPage extends React.Component<Props, {}> {
   },
   openCorrespondingPopup() {
     if (this.state.nextStep == "continueToApplication") {
-      this.openEmailPopup();
+      this.openEmailCapturePopup();
     } else if (this.state.nextStep == "connectMeToAgent") {
       this.openAgentInputPopup();
     } else {
@@ -178,7 +200,7 @@ class PlansPage extends React.Component<Props, {}> {
   },
   directToCorrespondingPage() {
     if (this.state.nextStep == "continueToApplication") {
-      browserHistory.push("/connect-to-agent");
+      browserHistory.push("/connect-through-application");
     } else if (this.state.nextStep == "connectMeToAgent") {
       browserHistory.push("/connect-to-agent");
     } else {
@@ -349,6 +371,14 @@ class PlansPage extends React.Component<Props, {}> {
           saveQuote={this.saveQuote.bind(this)}
           handleChange={this.handleEmailChange.bind(this)}
           onCloseModal={this.closeEmailModal.bind(this)}
+          noOfPersons={this.props.noOfPersons}
+        />
+
+        <EmailModalCapture 
+          showModalEmail={this.state.showModalEmailCapture}
+          saveQuote={this.saveQuote.bind(this)}
+          handleChange={this.handleEmailChange.bind(this)}
+          onCloseModal={this.closeEmailCaptureModal.bind(this)}
           noOfPersons={this.props.noOfPersons}
         />
         <LicensedModal 

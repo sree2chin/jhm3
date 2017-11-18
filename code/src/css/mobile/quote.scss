@@ -1,5 +1,19 @@
 @media(max-width: 768px) {
   .c-quote {
+    .birth-date-picker-container .custom-date-picker-container .custom-date-picker img {
+      left: 8%;
+    }
+    .c-one-person-container {
+
+      .birth-date-picker-container span.test-class + div{
+          width: 27%;
+          label.control-label {
+            width: 16%;
+            margin-top: 0px;
+            margin-bottom: 0px;
+          }
+        }
+    }
     .two-person-outer-container {
       .c-submit-person-info-btn  { 
         width: 92%;

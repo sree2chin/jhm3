@@ -1,0 +1,20 @@
+.email-modal-container {
+	&.email-modal-capture-container {
+		.email-quote-text.email-quote-text-on-modal {
+			text-align: left;
+		}
+		.email-description.email-description-on-modal {
+			text-align: left;			
+		}
+		.email-label.email-label-on-modal {
+			padding-left: 30px;
+		}
+		.modal-dialog {
+			width: 34.72%;
+		}
+		.modal-footer {
+			border-top: none;
+		    padding-top: 0px;
+		}
+	}
+}

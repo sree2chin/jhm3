@@ -135,13 +135,30 @@
 	    	display: inline-block;
 	    }
 	}
-	#change_handler_example_group {
+	#change_handler_example_0_group {
 	    display: inline-block;
 	    width: 77%;
 	    line-height: 20px;
 		.input-group-addon {
 			display: none;
 		}
+	}
+	#change_handler_example_1_group {
+	    display: inline-block;
+	    width: 77%;
+	    line-height: 20px;
+		.input-group-addon {
+			display: none;
+		}
+	}
+	.two-person-outer-container {
+	    .custom-date-picker-container {
+		    .custom-date-picker {
+			    img {
+				    left: 8.1%;
+			    }
+		    }
+	    }	
 	}
     .custom-date-picker-container {
 	    color: #333333;
@@ -241,6 +258,7 @@
 	    }
     }
     .two-person-outer-container {
+
     	width: 54.2%;
     	.one-person-content, .second-person-content {
 		    background-color: rgb(255, 255, 255);

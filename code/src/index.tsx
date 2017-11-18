@@ -79,6 +79,13 @@ function loadEmailToQuote(location: any, callback: LoadCallback) {
     "QuotePage");
 }
 
+function loadEmailCaptureToQuote(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/quote/EmailToQuoteCapture") as typeof _QuotePage).default),
+    "QuotePage");
+}
+
 function loadContactAgentSuccess(location: any, callback: LoadCallback) {
   require.ensure(
     [],
@@ -110,6 +117,7 @@ ReactDOM.render(
       <Route path="/agent/next-steps" getComponent={ loadAgentNextStepsPage } />
 
       <Route path="/connect-to-agent" getComponent={ loadContactAgent } />
+      <Route path="/connect-through-application" getComponent={ loadEmailCaptureToQuote } />
       <Route path="/agent/connect-to-agent" getComponent={ loadContactAgent } />
 
 
@@ -119,7 +127,7 @@ ReactDOM.render(
       
       <Route path="/email-to-quote" getComponent={ loadEmailToQuote } />
       <Route path="/agent/email-to-quote" getComponent={ loadEmailToQuote } />
-
+      <Route path="/agent/connect-through-application" getComponent={ loadEmailCaptureToQuote } />
       <Route path="/agent/email-quote-success" getComponent={ loadEmailToQuoteSuccess } />
       <Route path="/email-quote-success" getComponent={ loadEmailToQuoteSuccess } />
 

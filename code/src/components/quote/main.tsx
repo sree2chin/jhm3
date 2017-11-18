@@ -135,7 +135,12 @@ class Main extends React.Component<Props, {}> {
     }
   },
   changePersonInfo(index, key, val) {
-    var person = JSON.parse(JSON.stringify(this.state.persons[index]));
+    if (this.state.persons[index]) {
+      var person = JSON.parse(JSON.stringify(this.state.persons[index]));
+    } else {
+      var person = {};
+    }
+    
 
     if (person.s_birthDate) {
       person.s_birthDate = moment(person.s_birthDate);
@@ -151,10 +156,10 @@ class Main extends React.Component<Props, {}> {
         persons[0] = this.state.persons[0];
         persons[1] = person;
       }
-      } else {
-        persons.push(person);
-        persons.push({});
-      }
+    } else {
+      persons.push(person);
+      persons.push({});
+    }
 
     this.setState({persons});
   },
@@ -223,6 +228,7 @@ class Main extends React.Component<Props, {}> {
                 <Person 
                   onChange={this.changePersonInfo.bind(this)}
                   index={0}
+                  personIndex={0}
                   person={this.state.persons[0]}
                   errors={this.state.errors[0]}
                   submitQuoteForm={this.submitQuoteForm.bind(this)}
@@ -233,6 +239,7 @@ class Main extends React.Component<Props, {}> {
                   <Person 
                     onChange={this.changePersonInfo.bind(this)}
                     index={1}
+                    personIndex={1}
                     person={this.state.persons[1]}
                     errors={this.state.errors[1]}
                     submitQuoteForm={this.submitQuoteForm.bind(this)}
