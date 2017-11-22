@@ -47,27 +47,27 @@ export default class Plan extends React.Component<Props, {}> {
     var plansList = plansData.plans_list;
     const plan = JSON.parse(JSON.stringify(plansList[0]));
 
-      var tenYearPlanLengthProducts = ["Vantis Velocity Term", "Vantis Velocity Term with ROP"];
-      var straightLifeProducts = ["Vantis Velocity Whole Life", "Vantis Velocity Whole Life Plus", "Gauranteed Golden"];
+    var tenYearPlanLengthProducts = ["Vantis Velocity Term".toLowerCase(), "Vantis Velocity Term with ROP".toLowerCase()];
+    var straightLifeProducts = ["Vantis Velocity Whole Life".toLowerCase(), "Vantis Velocity Whole Life Plus".toLowerCase(), "Gauranteed Golden".toLowerCase()];
 
-      var productId = this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.product_id; 
-      var productList = this.props.productInfo && this.props.productInfo.products_data && this.props.productInfo.products_data.products_list;
-      
-      productList = productList || [];
-      var product = find(productList, (product)=>{
-        return product.ProductID == productId
-      });
-      var productName =  product && product.ProductDisplayName;
+    var productId = this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.product_id; 
+    var productList = this.props.productInfo && this.props.productInfo.products_data && this.props.productInfo.products_data.products_list;
+    
+    productList = productList || [];
+    var product = find(productList, (product)=>{
+      return product.ProductID == productId
+    });
+    var productName =  product && product.ProductDisplayName;
 
 
     for(var i=0; i<plansList.length; i++) {
       if (tenYearPlanLengthProducts.indexOf(productName)>=0) {
         plan = find(plansList, function(plan) {
-          return "10 Year Level Term" == plan.PlanDisplayName
+          return "10 Year Level Term".toLowerCase() == plan.PlanDisplayName.toLowerCase()
         });
       } else if (straightLifeProducts.indexOf(productName)>=0) {
         plan = find(plansList, function(plan) {
-          return "Straight Life" == plan.PlanDisplayName
+          return "Straight Life".toLowerCase() == plan.PlanDisplayName.toLowerCase()
         });
       }
     }
@@ -75,11 +75,13 @@ export default class Plan extends React.Component<Props, {}> {
   },
 
   componentWillReceiveProps(nextProps) {
-    if(!this.props.selectedPaymentType && nextProps.selectedPaymentType) {
+    if (nextProps && nextProps.plans && nextProps.plans.plans_data) {
       var plan = this.getPlan(nextProps.plans.plans_data);
-      plan.value = plan.PlanID;
-      plan.label = plan.PlanDisplayName;
-      this.onPlanChange("sPlanID", plan);
+      if(!this.props.selectedPaymentType && nextProps.selectedPaymentType && plan) {
+        plan.value = plan.PlanID;
+        plan.label = plan.PlanDisplayName;
+        this.onPlanChange("sPlanID", plan);
+      }
     }
   },
   getAmountFormat(amount) {

@@ -488,7 +488,7 @@ class PlansPage extends React.Component<Props, {}> {
           />
         </Row>
 
-        <Row>
+        {this.props.noOfPersons==2 && <Row>
           <Col xs={12} className="c-center plan-total-container visible-xs">
             <Row className="plans-selector-container">
               <Col sm={8} className="c-center" style={{float: "right", marginRight: "15px"}}>
@@ -519,7 +519,7 @@ class PlansPage extends React.Component<Props, {}> {
               </Col>
             </Row>
           </Col>
-        </Row>
+        </Row>}
 
         <Row>
           {this.state.productSelectionErrorMsg && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "-15px"}} sm={12} className={"c-subheader-text error"}>
