@@ -45,7 +45,11 @@ export default class Plan extends React.Component<Props, {}> {
   },
   getPlan(plansData) {
     var plansList = plansData.plans_list;
-    const plan = JSON.parse(JSON.stringify(plansList[0]));
+    if (plansData.plans_list.constructor.toString().indexOf("Array") == -1) {
+      plansList = [plansList];
+    };
+
+    var plan = JSON.parse(JSON.stringify(plansList[0]));
 
     var tenYearPlanLengthProducts = ["Vantis Velocity Term".toLowerCase(), "Vantis Velocity Term with ROP".toLowerCase()];
     var straightLifeProducts = ["Vantis Velocity Whole Life".toLowerCase(), "Vantis Velocity Whole Life Plus".toLowerCase(), "Gauranteed Golden".toLowerCase()];
@@ -71,6 +75,10 @@ export default class Plan extends React.Component<Props, {}> {
         });
       }
     }
+    if (isEmpty(plan)) {
+      plan = JSON.parse(JSON.stringify(plansList[0]));
+    }
+    
     return plan;
   },
 
@@ -98,7 +106,10 @@ export default class Plan extends React.Component<Props, {}> {
       return [];
     }
 
-    const plans = JSON.parse(JSON.stringify(this.props.plans.plans_data.plans_list));
+    var plans = JSON.parse(JSON.stringify(this.props.plans.plans_data.plans_list));
+    if (plans.constructor.toString().indexOf("Array") == -1) {
+      plans = [plans];
+    };
     const plansObj = []
     for(var i=0; i<plans.length; i++) {
       plans[i].value = plans[i].PlanID;
@@ -199,6 +210,9 @@ export default class Plan extends React.Component<Props, {}> {
     });
     return product && product.ProductDisplayName;
   },
+  isProductSPWL() {
+    return this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.spwl_flag==1;
+  },
   public render() {
     const personIndex = this.props.personIndex;
     const plansObjs = this.getPlansDetailsForDropdown();
@@ -229,7 +243,7 @@ export default class Plan extends React.Component<Props, {}> {
                   {(this.state.sFaceAmount && this.state.sFaceAmount !=0) ?
                     [<span key="2" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> of</span>] : null
                   }
-                  <span key="3" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Coverage </span>
+                  {this.isProductSPWL() ? <span key="3" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Premium </span> : <span key="3" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Coverage </span>}
                 </Row>
                 <Row>
                   {this.state.selectedPlan && 
@@ -266,7 +280,7 @@ export default class Plan extends React.Component<Props, {}> {
                   }
                 </Row>
               </Col>
-              <Col sm={3} className="plan-length-container">
+              {this.isProductSPWL() ? null : <Col sm={3} className="plan-length-container">
                 <Row style={{ marginTop: "16px"}}  className="plan-length-container-text">
                   Plan Choice
                 </Row>
@@ -280,8 +294,20 @@ export default class Plan extends React.Component<Props, {}> {
                     }}
                   />
                 </Row>
-              </Col>
-              <Col sm={3} className="plan-cost-container">
+              </Col>}
+              {this.isProductSPWL() ? <Col sm={6} className="plan-cost-container">
+                <Row style={{marginTop: "30px"}}>
+                  <Col sm={12}>
+                    <Col xs={5} className="plan-cost-text">
+                      Coverage
+                    </Col>
+                    <Col sm={7} className="plan-cost-amount">
+                      {this.state.sliderSliding && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                      {!this.state.sliderSliding && this.state.sFaceAmount}
+                    </Col>
+                  </Col>
+                </Row>
+              </Col> : <Col sm={3} className="plan-cost-container">
                 <Row style={{marginTop: "30px"}}>
                   <Col sm={12}>
                     <Col xs={4} className="plan-cost-text">
@@ -296,7 +322,7 @@ export default class Plan extends React.Component<Props, {}> {
                     </Col>
                   </Col>
                 </Row>
-              </Col>
+              </Col>}
             </Row>
             <Row className={"select-this-product-container" + (this.props.productIdPlan == this.props.plans.plans_data.product_id ? " active" : "")} onClick={this.selectThisProduct.bind(this)}>
               SELECT THIS PRODUCT
