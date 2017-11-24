@@ -93,7 +93,7 @@ gulp.task('angularCSS', function () {
 });
 
 gulp.task('font', function () {
-    return gulp.src("fonts/**")
+    return gulp.src("fonts/Nunito/**")
         .pipe(gulp.dest("dist/fonts/"))
 });
 
