@@ -72,7 +72,7 @@ class SelectPersons extends React.Component<Props, State> {
           <Col className="c-select-persons-container">
             <Row style={{marginLeft: "0px", marginRight: "0px"}}>
               <Col sm={5} className="confirmation-msg-container">
-                <Row className="c-selected-person-header">
+                <Row className="c-selected-person-header fwbold">
                   For How Many People are We Quoting?
                 </Row>
                 <Row style={{marginTop: "15px"}} className="quotation-msg-text-container">

@@ -219,7 +219,7 @@ class Main extends React.Component<Props, {}> {
         <div className="row c-quote">
           {this.props.noOfPersons && <div> 
             <div className="header hidden-xs">
-              <div style={{textAlign: "center", fontSize: "26px"}}>
+              <div style={{textAlign: "center", fontSize: "26px"}} className="fwbold">
                 Application information
               </div>  
             </div>

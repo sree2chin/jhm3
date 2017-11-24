@@ -1,53 +1,31 @@
 @font-face {
-  font-family: ProximaNova-Regular;
-  src: url('/dist/fonts/ProximaNova-Reg.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'NunitoExtraLight';
+	src: url('/dist/fonts/Nunito-ExtraLight.ttf')  format('truetype')
+}
+@font-face {
+	font-family: 'NunitoBlack';
+	src: url('/dist/fonts/Nunito-Black.ttf')  format('truetype')
+}
+@font-face {
+	font-family: 'NunitoLight';
+	src: url('/dist/fonts/Nunito-Light.ttf')  format('truetype')
+}
+@font-face {
+	font-family: 'NunitoRegular';
+	src: url('/dist/fonts/Nunito-Regular.ttf')  format('truetype')
+}
+@font-face {
+	font-family: 'NunitoBlack';
+	src: url('/dist/fonts/Nunito-Black.ttf')  format('truetype')
 }
 
 @font-face {
-  font-family: ProximaNova-Bold;
-  src: url('/dist/fonts/ProximaNova-Bold.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'NunitoSemiBold';
+	src: url('/dist/fonts/Nunito-SemiBold.ttf')  format('truetype')
 }
 
 @font-face {
-  font-family: ProximaNova-SemiBold;
-  src: url('/dist/fonts/ProximaNova-Sbold.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: ProximaNova-Medium;
-  src: url('/dist/fonts/proximanova-bold-webfont.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: ProximaNova-Light;
-  src: url('/dist/fonts/ProximaNova-Light.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: ProximaNova-Black;
-  src: url('/dist/fonts/ProximaNova-Black.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: ProximaNova-Thin;
-  src: url('/dist/fonts/ProximaNova-Thin.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: ProximaNova-XBold;
-  src: url('/dist/fonts/ProximaNova-Xbold.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'NunitoBold';
+	src: url('/dist/fonts/Nunito-Bold.ttf')  format('truetype')
+	
 }

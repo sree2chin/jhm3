@@ -57,10 +57,12 @@ body {
     #root {
         overflow-x: hidden;
         background-color: rgb(247, 247, 247);
-        font-family: ProximaNova-Regular;
+        font-family: NunitoRegular;
     }
 }
-
+.fwbold{
+    font-family: NunitoSemiBold;
+}
 .react-datepicker-wrapper {
     width: 100%;
 }
