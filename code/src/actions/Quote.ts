@@ -39,7 +39,7 @@ function openEditPersonModal(person, personIndex) {
 	};
 }
 
-function closeEditPersonModal() {
+function closeEditPersonModal() : any {
 	return (dispatch) => {
 		return dispatch({
 				type: 'CLOSE_EDIT_PERSON_MODAL'
@@ -47,7 +47,7 @@ function closeEditPersonModal() {
 	};
 }
 
-function handleEditChange(person) {
+function handleEditChange(person) : any {
 	return (dispatch) => {
 		return dispatch({
 				type: 'EDITED_PERSON',
@@ -58,7 +58,7 @@ function handleEditChange(person) {
 
 
 
-function submitProductsForm(postData) {
+function submitProductsForm(postData) : any {
 	return (dispatch) => {
 		return SubmitQuoteApi.submitProductsForm(postData).then(
 			data => dispatch({
@@ -68,7 +68,7 @@ function submitProductsForm(postData) {
 	};
 }
 
-function submitPlansForm(postData) {
+function submitPlansForm(postData) : any {
 	return (dispatch) => {
 		return SubmitQuoteApi.plansSubmit(postData).then(
 			data => dispatch({
@@ -78,7 +78,7 @@ function submitPlansForm(postData) {
 	};
 }
 
-function submitEmailForm(postData) {
+function submitEmailForm(postData) : any{
 	return (dispatch) => {
 		SubmitQuoteApi.emailSubmit(postData).then(
 			data => dispatch({
@@ -88,7 +88,7 @@ function submitEmailForm(postData) {
 	};
 }
 
-function saveQuoteForm(postData) {
+function saveQuoteForm(postData) : any{
 	return (dispatch) => {
 		return SubmitQuoteApi.saveQuoteForm(postData).then(
 			data => dispatch({

@@ -87,6 +87,7 @@ module.exports = new function(){
 
   this.saveQuoteForm = function(req, cb){
     var data = req.body;
+
     appendAgentInfo(req, data);
     request({
       url: restOptions.host + '/v1/quote/savequote', 
@@ -96,6 +97,19 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
+      cb(err, httpResponse);
+    });
+  };
+
+  this.getQuestions = function(req, cb){
+    request({
+      url: restOptions.host + '/v1/questions/questions', 
+      headers: {
+        'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
+      },
+      method: 'POST'
+    }, function callback(err, httpResponse, body) {
+ 
       cb(err, httpResponse);
     });
   };

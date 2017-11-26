@@ -3,6 +3,7 @@ import member from './memberReducer';
 import members from './membersReducer';
 import states from './StatesReducer';
 import quotes from './quotesReducer';
+import questions from './questionsReducer';
 import selectPersons from './selectPersons';
 
 export default combineReducers({
@@ -10,5 +11,6 @@ export default combineReducers({
   members,
   states,
   quotes,
+  questions,
   selectPersons
 });

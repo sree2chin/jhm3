@@ -2,6 +2,15 @@ import * as _ from 'underscore';
 import * as fetch from "isomorphic-fetch";
 import { getStates } from '../utility/states';
 
+var QuotesApiI; 
+
+interface QuotesApiI {
+  submit: any;
+  submitProductsForm: any;
+  plansSubmit: any;
+  saveQuoteForm: any;
+}
+
 class QuotesApi {
   submit(payload) {
     return fetch('/v1/quote/products', {
@@ -21,7 +30,7 @@ class QuotesApi {
     }));
   };
 
-  submitProductsForm(payload) {
+  submitProductsForm(payload) : Promise<any> {
     return fetch('/v1/quote/plans', {
         method: "POST",
         body: JSON.stringify(payload),
@@ -40,7 +49,7 @@ class QuotesApi {
   };
 
   
-  plansSubmit(payload) {
+  plansSubmit(payload) : Promise<any> {
     return fetch('/v1/quote/premiums', {
         method: "POST",
         body: JSON.stringify(payload),
@@ -58,7 +67,7 @@ class QuotesApi {
     }));
   };
 
-  saveQuoteForm(payload) {
+  saveQuoteForm(payload) : Promise<any> {
     return fetch('/v1/quote/savequote', {
         method: "POST",
         body: JSON.stringify(payload),

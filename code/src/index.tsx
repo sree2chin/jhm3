@@ -6,6 +6,7 @@ import * as _AboutPage from "./components/about/aboutPage";
 import * as _MemberPage from "./components/member/memberPage";
 import * as _MembersPage from "./components/members/membersPage";
 import * as _QuotePage from "./components/quote/main";
+import * as _QuestionsPage from "./components/questions/main";
 
 type LoadCallback = (error: any, component: React.ComponentClass<any>) => void;
 
@@ -34,6 +35,13 @@ function loadQuotePage(location: any, callback: LoadCallback) {
   require.ensure(
     [],
     () => callback(null, (require("./components/quote/main") as typeof _QuotePage).default),
+    "QuotePage");
+}
+
+function loadQuestionsPage(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/questions/main") as typeof _QuestionsPage).default),
     "QuotePage");
 }
 
@@ -102,6 +110,8 @@ function loadEmailToQuoteSuccess(location: any, callback: LoadCallback) {
 
 
 
+
+
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route  path="/" component= {App} >
@@ -110,6 +120,8 @@ ReactDOM.render(
       <Route path="/products" getComponent={ loadProductsPage } />
       <Route path="/plans" getComponent={ loadPlansPage } />
       <Route path="/next-steps" getComponent={ loadNextStepsPage } />
+
+      <Route path="/questions" getComponent={ loadQuestionsPage } />
 
       <Route path="/agent" getComponent={ loadQuotePage } />
       <Route path="/agent/products" getComponent={ loadProductsPage } />
