@@ -8,6 +8,7 @@ import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import SingleSelection from "./SingleSelection";
 import Label from "./Label"
 import CustomInput from "./CustomInput";
+import CustomSelect from "./CustomSelect";
 import QuestionsCustomDatePicker from "./QuestionsCustomDatePicker";
 import Subheader from "../common/subheader";
 import {each, isEmpty, map} from "underscore";
@@ -15,6 +16,7 @@ import {getQuestions} from '../../actions/Questions';
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
+
 
 interface Props {
   submitQuoteForm: ()=>void,
@@ -36,9 +38,14 @@ class Main extends React.Component<Props, {}> {
           var q = JSON.parse(JSON.stringify(qe));
           q.key = q.id;
           if (q.type == "singleselection") {
-            return <SingleSelection 
+            if(q.options.length ==2) {           
+              return <SingleSelection 
                     {...q}
                   />
+            } else {
+              return <CustomSelect {...q} />
+            }
+
           } else  if (q.type == "label") {
             return <Label 
                     {...q}
@@ -67,9 +74,13 @@ class Main extends React.Component<Props, {}> {
           var q = JSON.parse(JSON.stringify(qe));
           q.key = q.id;
           if (q.type == "singleselection") {
-            return <SingleSelection 
+            if(q.options.length ==2) {           
+              return <SingleSelection 
                     {...q}
                   />
+            } else {
+              return <CustomSelect {...q} />
+            }
           } else  if (q.type == "label") {
             return <Label 
                     {...q}
