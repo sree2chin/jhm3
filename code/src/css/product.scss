@@ -172,17 +172,17 @@
 				padding-left: 0px;
 				.header {
 				    font-size: 18px;
-				    text-align: center;
-				    color: #767676;
-				    height: 52px;
-				    border-radius: 6px;
-				    background-color: #ffffff;
-				    border-bottom: solid 1px #d4d4d4;
-				    margin-top: 0px;
-				    border-top: none;
-				    margin-left: 0px;
-				    margin-right: 0px;
-				    padding-top: 13px;
+			    text-align: center;
+			    color: #767676;
+			    height: 52px;
+			    border-radius: 6px;
+			    background-color: #ffffff;
+			    border-bottom: solid 1px #d4d4d4;
+			    margin-top: 0px;
+			    border-top: none;
+			    margin-left: 0px;
+			    margin-right: 0px;
+			    padding-top: 13px;
 				}
 				.c-product-text {
 				    font-size: 15.36px;
@@ -195,7 +195,7 @@
 	}
 	.single-product-content {
 		border-top-right-radius: 6px;
-		border-top-left-radius: 6px;
+ 		border-top-left-radius: 6px;
 		background-color: #ffffff;
 		border: solid 1px #d4d4d4;
 		margin-left: 10px;
@@ -205,7 +205,7 @@
 		    text-align: left;
 		    color: #464646;
 		    margin-top: 8px;
-		    margin-left: 8px;
+		    margin-left: 0;
 		    margin-bottom: 8px;
 	    }
 	}
@@ -214,12 +214,12 @@
 		margin-bottom: 20px;
 	    height: 40px;
 	    border-bottom-right-radius: 6px;
-    	border-bottom-left-radius: 6px;
+     	border-bottom-left-radius: 6px;
 	    background-color: #f7f7f7;
 	    border: solid 1px #cccccc;
 	    padding-top: 9px;
 	    border-top: none;
-	    font-family:NunitoSemiBold;
+	    font-family:NunitoBold;
 	    &.active {
 		    background-color: #265fad;
 		    color: white;

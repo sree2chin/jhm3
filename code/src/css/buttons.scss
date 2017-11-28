@@ -5,13 +5,13 @@
     height: 44px!important;
     border-radius: 2px!important;
     background-color: $btn-passive-bg-color!important;
-    font-family: NunitoSemiBold;
     border: solid 1px #d4d4d4;
-    color: $btn-passive-color;
+    color: #ffffff;
+    font-family: NunitoBold;
     &:focus {
         background-color: $btn-hover-color!important;
         box-shadow: $btn-hover-box-shadow!important;
-        color: $btn-hover-color!important;;   
+        color: $btn-hover-color!important;   
     } 
     &:active {
         background-color: $btn-active-bg-color!important;
