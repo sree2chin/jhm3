@@ -85,7 +85,7 @@ export default class ProductContainer extends React.Component<Props, State> {
                   <Col key={product.ProductID} sm={productContainerWidth} className="single-product-container">
                     <Row className="single-product-content">
                       <Row className="header">
-                        <Col style={{textAlign: "center"}} sm={12}>
+                        <Col style={{textAlign: "left"}} sm={12}>
                           {product.ProductDisplayName}
                         </Col>  
                       </Row>

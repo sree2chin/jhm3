@@ -194,7 +194,8 @@
 		}
 	}
 	.single-product-content {
-		border-radius: 6px;
+		border-top-right-radius: 6px;
+ 		border-top-left-radius: 6px;
 		background-color: #ffffff;
 		border: solid 1px #d4d4d4;
 		margin-left: 10px;
@@ -203,21 +204,24 @@
 		    font-size: 26px;
 		    text-align: left;
 		    color: #464646;
-		    margin-top: 20px;
-		    margin-left: 8px;
+		    margin-top: 8px;
+		    margin-left: 0;
+		    margin-bottom: 8px;
 	    }
 	}
 	.quote-product {
 		margin-left: 10px;
 		margin-bottom: 20px;
 	    height: 40px;
-	    border-radius: 6px;
+	    border-bottom-right-radius: 6px;
+     	border-bottom-left-radius: 6px;
 	    background-color: #f7f7f7;
 	    border: solid 1px #cccccc;
 	    padding-top: 9px;
 	    border-top: none;
+	    font-family:NunitoBold;
 	    &.active {
-		    background-color: #317dbd;
+		    background-color: #265fad;
 		    color: white;
 	    }
 
