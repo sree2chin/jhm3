@@ -386,7 +386,7 @@ class PlansPage extends React.Component<Props, {}> {
               <Col sm={8} className="c-plans-product-text">
                 Selected Products
               </Col>
-              <Col sm={4} className="c-select-diff-product-link hidden-xs">
+              <Col sm={4} className="c-select-diff-product-link hidden-xs" onClick={this.redirectToProductPage.bind(this)}>
                 SELECT DIFFERENT PRODUCTS
               </Col>
             </Row>
