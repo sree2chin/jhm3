@@ -5,6 +5,7 @@ import { getStateObjects } from '../../utility/states';
 import DatePicker from 'react-datepicker';
 import CustomDatepicker from "../common/CustomDatepicker";
 var BootStrapDatePicker = require("react-bootstrap-date-picker");
+import {DateInput, MonthInput} from 'react-date-input';
 import Select from 'react-select';
 import Input from "../common/textInput";
 import ReactTooltip from 'react-tooltip';
@@ -27,7 +28,8 @@ export default class Person extends React.Component<Props, {}> {
   onDateChange(key, value, formattedDate) {
     this.setState({
       [key]: moment(value),
-      formattedDate
+      formattedDate,
+      dateInISOFormat: value
     });
     this.props.onChange(this.props.index, key, moment(value));
   },
@@ -172,10 +174,10 @@ export default class Person extends React.Component<Props, {}> {
                 </ControlLabel>
                 <BootStrapDatePicker 
                   onChange={this.handleChange} 
-                  placeholder={"YYYY-MM-DD"}
-                  value={this.state.formattedDate} 
-                  id={"change_handler_example_" + + this.props.personIndex} 
-                  dateFormat={"YYYY-MM-DD"}
+                  placeholder={"mm-dd-yyyy"}
+                  value={this.state.dateInISOFormat} 
+                  id={"change_handler_example_" + this.props.personIndex} 
+                  dateFormat="MM/DD/YYYY"
                   onChange={(date, formattedDate)=>{
                     this.onDateChange("s_birthDate", date, formattedDate)
                   }}/>
