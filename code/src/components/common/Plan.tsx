@@ -122,6 +122,10 @@ export default class Plan extends React.Component<Props, {}> {
     return plans;
   },
 
+  shouldShowPlanDropdowns() {
+    return this.getPlansDetailsForDropdown().length > 1;
+  },
+
   getPaymentSchedules() {
     if(isEmpty(this.props.premiums) || isEmpty(this.props.premiums.plans_data) || isEmpty(this.props.premiums.plans_data.QuoteRateGrid) || isEmpty(this.props.premiums.plans_data.QuoteRateGrid.Col1)) {
       return [];
@@ -243,7 +247,7 @@ export default class Plan extends React.Component<Props, {}> {
                   {(this.state.sFaceAmount && this.state.sFaceAmount !=0) ?
                     [<span key="2" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> of</span>] : null
                   }
-                  {this.isProductSPWL() ? <span key="3" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Premium </span> : <span key="3" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Coverage </span>}
+                  {this.isProductSPWL() || !this.shouldShowPlanDropdowns() ? <span key="3" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Premium </span> : <span key="3" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Coverage </span>}
                 </Row>
                 <Row>
                   {this.state.selectedPlan && 
@@ -280,7 +284,7 @@ export default class Plan extends React.Component<Props, {}> {
                   }
                 </Row>
               </Col>
-              {this.isProductSPWL() ? null : <Col sm={3} className="plan-length-container">
+              {this.isProductSPWL() || !this.shouldShowPlanDropdowns() ? null : <Col sm={3} className="plan-length-container">
                 <Row style={{ marginTop: "16px"}}  className="plan-length-container-text">
                   Plan Choice
                 </Row>
@@ -295,7 +299,7 @@ export default class Plan extends React.Component<Props, {}> {
                   />
                 </Row>
               </Col>}
-              {this.isProductSPWL() ? <Col sm={6} className="plan-cost-container">
+              {this.isProductSPWL() || !this.shouldShowPlanDropdowns() ? <Col sm={6} className="plan-cost-container">
                 <Row style={{marginTop: "30px"}}>
                   <Col sm={12}>
                     <Col xs={5} className="plan-cost-text">
@@ -303,7 +307,9 @@ export default class Plan extends React.Component<Props, {}> {
                     </Col>
                     <Col sm={7} className="plan-cost-amount">
                       {this.state.sliderSliding && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-                      {!this.state.sliderSliding && this.state.sFaceAmount}
+                      {!this.state.sliderSliding && this.isProductSPWL() && "$"}
+                      {!this.state.sliderSliding && this.isProductSPWL() && this.state.sFaceAmount}
+                      {!this.state.sliderSliding && !this.isProductSPWL() && this.props.selectedPaymentType && this.props.selectedPaymentType.label && this.props.premiums && this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.QuoteRateGrid && this.props.premiums.plans_data.QuoteRateGrid.Col1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium[this.props.selectedPaymentType.label]}
                     </Col>
                   </Col>
                 </Row>
