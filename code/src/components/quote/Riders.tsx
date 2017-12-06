@@ -10,27 +10,22 @@ interface Props extends React.Props<Plan> {
 export default class Plan extends React.Component<Props, {}> {
   constructor(){
     super();
+    this.selectRider.bind(this);
+  },
+  state={},
+  selectRider() {
+    this.setState({
+      selectedRiderName: this.props.rider.Name
+    });
+    this.props.selectRider(this.props.rider, this.props.index);
   },
   public render() {  
 
-    const riders = [
-      {
-        header: "Chronic Illiness",
-        text: "Accelerates a portion of base policy benefits at attained age 60, if insured is unable to perform at least 2 or 6 activites of daily living"
-      },
-      {
-        header: "Charitable Giving",
-        text: "An additional death benefit of 1% (up to $100,000) to a qualified charitable organization is provided at the policyholders choosing"
-      },
-      {
-        header: "Disability Waiver of Premium",
-        text: "Available thru age 55, coverage ends at age 60; if insured becomes totally disabled prior to age 60 for a period of 6 months or more, all premiums after that time will be waived until the earlier of the end of the disability or age 65"
-      }
-
-    ];
+    const riders = this.props.riders;
+    const person = this.props.person;
+    var self = this;
     return (
       <Row className="all-riders-info-container">
-        {map(this.props.persons, (person) =>
           <Col key={person.name} sm={12} className="c-one-person-container riders-outer-container">
             <Row>
               <Col sm={8} className="c-center rider-header-text">
@@ -38,13 +33,16 @@ export default class Plan extends React.Component<Props, {}> {
               </Col>
               <Col sm={8} className="riders-container c-center">
                   {map(riders, (rider) =>
-                     return <Rider key={rider.header}
+                     if(typeof rider !="string") {return <Rider key={rider.Name}
                         rider={rider}
                         person={person}
-                      />
+                        isActive={rider.Name == self.state.selectedRiderName}
+                        selectRider={self.selectRider.bind(self)}
+                      />} else {
+                        return null;
+                      }
                   )}
               </Col>
-            </Row>
           </Col>
         )}
       </Row>

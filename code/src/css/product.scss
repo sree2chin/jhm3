@@ -200,6 +200,9 @@
 		border: solid 1px #d4d4d4;
 		margin-left: 10px;
 	    min-height: 290px;
+	    &.rider-content {
+	    	min-height: 220px;
+	    }
 	    .header {
 		    font-size: 26px;
 		    text-align: left;

@@ -18,6 +18,13 @@
 		}
 	}
 	.product-pager-container {
+		.one-person-plan-container {
+			.single-plan-container {
+				&.two-persons-plan-container {
+					padding-right: 0px;
+				}
+			}
+		}
 		.plan-total-container {
 			width: 100%;
 		    background-color: #ffffff;

@@ -174,7 +174,7 @@ export default class Person extends React.Component<Props, {}> {
                 </ControlLabel>
                 <BootStrapDatePicker 
                   onChange={this.handleChange} 
-                  placeholder={"mm-dd-yyyy"}
+                  placeholder={"MM/DD/YYYY"}
                   value={this.state.dateInISOFormat} 
                   id={"change_handler_example_" + this.props.personIndex} 
                   dateFormat="MM/DD/YYYY"

@@ -21,16 +21,23 @@ export default class Plan extends React.Component<Props, {}> {
     this.stopSliderChanging.bind(this);
   },
   onPlanChange(key, obj) {
+    var sFaceAmount = this.state.sFaceAmount;
+
+    if (sFaceAmount >=  parseInt(obj.FaceMin) && sFaceAmount <=  parseInt(obj.FaceMax)) {
+      sFaceAmount = this.state.sFaceAmount;
+    } else {
+      sFaceAmount = parseInt(obj.FaceMin);
+    }
     this.setState({
       [key]: obj.value,
       selectedPlan: obj,
-      sFaceAmount: parseInt(obj.FaceMin)
+      sFaceAmount: sFaceAmount
     })
     this.props.submitPlansForm(this.props.personIndex, [{
       plan: obj,
-      sFaceAmount: obj.FaceMin,
+      sFaceAmount: String(sFaceAmount),
       productId: this.props.plans.plans_data.product_id
-    }]);
+    }], this.stopSliderChanging.bind(this));
   },
   onPaymentTypeChange(key, obj) {
     this.setState({
@@ -167,22 +174,30 @@ export default class Plan extends React.Component<Props, {}> {
       sliderSliding: false
     });
   },
-  handleChange(value) {
+  handleChange(value) { 
+    var sFaceAmount = parseInt(value);
+    if ( sFaceAmount > parseInt(this.state.selectedPlan.FaceMax)) {
+      sFaceAmount = parseInt(this.state.selectedPlan.FaceMax)
+    }
     this.setState({
-      sFaceAmount: parseInt(value)
+      sFaceAmount: sFaceAmount
     });
     var f = function() {
       this.props.submitPlansForm(this.props.personIndex, [{
         plan: this.state.selectedPlan,
-        sFaceAmount: parseInt(value),
+        sFaceAmount: sFaceAmount,
         productId: this.props.plans.plans_data.product_id
       }], this.stopSliderChanging.bind(this));
     }.bind(this);
     setTimeout(f);
   },
   duringSliderChanging(value) {
+    var sFaceAmount = parseInt(value);
+    if ( sFaceAmount > parseInt(this.state.selectedPlan.FaceMax)) {
+      sFaceAmount = parseInt(this.state.selectedPlan.FaceMax)
+    }
     this.setState({
-      sFaceAmount: parseInt(value),
+      sFaceAmount: sFaceAmount,
       sliderSliding: true
     });
   },
@@ -302,7 +317,7 @@ export default class Plan extends React.Component<Props, {}> {
               {this.isProductSPWL() || !this.shouldShowPlanDropdowns() ? <Col sm={6} className="plan-cost-container">
                 <Row style={{marginTop: "30px"}}>
                   <Col sm={12}>
-                    <Col xs={5} className="plan-cost-text">
+                    <Col xs={5} className="" style={{marginTop: "6px"}}>
                       Coverage
                     </Col>
                     <Col sm={7} className="plan-cost-amount">

@@ -94,12 +94,21 @@ class PlansPage extends React.Component<Props, {}> {
       if(personIndex ==0) {
         persons[0] = personOne;
         persons[1] = this.props.persons[1];
+        this.setState({
+          riders0: data[0].plan.Rider 
+        });
       } else {
         persons[0] = this.props.persons[0];
         persons[1] = personOne;
+        this.setState({
+          riders1: data[0].plan.Rider 
+        });
       }
     } else {
       persons.push(personOne);
+      this.setState({
+        riders0: data[0].plan.Rider 
+      });
     }
 
     this.props.setPersonsData(persons);
@@ -482,11 +491,26 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>
 
-        <Row>
-          <Riders 
-            persons={persons}
-          />
+        {this.state.riders0 && <Row>
+          <Col>
+            <Riders 
+              person={persons[0]}
+              riders={this.state.riders0}
+              index={0}
+            />
+          </Col>
         </Row>
+        }
+        {this.state.riders1 && <Row>
+          <Col>
+            <Riders 
+              person={persons[1]}
+              riders={this.state.riders1}
+              index={1}
+            />
+          </Col>
+        </Row>
+        }
 
         {this.props.noOfPersons==2 && <Row>
           <Col xs={12} className="c-center plan-total-container visible-xs">
