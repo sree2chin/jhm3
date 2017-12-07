@@ -22,20 +22,26 @@ import Select from 'react-select';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 
 interface Props {
-  plans: [any]
+  plans: [any],
+  persons: any,
+  noOfPersons: any,
+  premiums: any
 }
 
 class PlansPage extends React.Component<Props, {}> {
   constructor(){
     super();
-  },
-  state ={},
+  }
+
+  state ={}
+
   componentWillMount() {
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent" : "/";
       browserHistory.push(basePath);
     }
-  },
+  }
+
   componentDidMount () {
     var p;
 
@@ -63,18 +69,21 @@ class PlansPage extends React.Component<Props, {}> {
     });
 
     this.onPaymentTypeChange(p[0]);
-  },
+  }
+
   selectProduct(product) {
     this.setState({
       productId: product.ProductID
     });
-  },
+  }
+
   onPaymentTypeChange(ob) {
     this.setState({
       premium_type: ob.label,
       selectedPaymentType: ob
     });
-  },
+  }
+
   submitPlansForm(personIndex, data, successCb) {
     const persons = [];
 
@@ -119,7 +128,7 @@ class PlansPage extends React.Component<Props, {}> {
     }).catch(()=>{
       this.submmitedProductForm = false;
     });
-  },
+  }
 
   setPlanFormSubmissionErrorMsg() {
     if(this.productSubmissionBtnClicked) {
@@ -145,18 +154,18 @@ class PlansPage extends React.Component<Props, {}> {
         productSelectionErrorMsg: errorMsg
       });
     }
-  },
+  }
   validatePlansSelections() {
     if(this.props.noOfPersons == 2) {
       return (this.state.productIdPlan0 && this.state.productIdPlan1)
     } else {
       return this.state.productIdPlan0;
     }
-  },
+  }
   redirectToProductPage() {
     const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
     browserHistory.push(basePath + "products");
-  },
+  }
 
   redirectToNextSteps() {
     this.productSubmissionBtnClicked = true;
@@ -194,16 +203,16 @@ class PlansPage extends React.Component<Props, {}> {
     } else {
       this.setPlanFormSubmissionErrorMsg();
     }
-  },
+  }
   openEditPersonModal = (person, personIndex) => {
     this.props.openEditPersonModal(person, personIndex);
-  },
+  }
   handleEditChange(person) {
     this.props.handleEditChange(person);
     setTimeout(()=> {
       this.submitProductsFormOnEditPerson();
     });
-  },
+  }
 
   selectProductPlan(personIndex, productId) {
     this.setState({
@@ -213,7 +222,7 @@ class PlansPage extends React.Component<Props, {}> {
     setTimeout(function() {
       self.setPlanFormSubmissionErrorMsg();
     });
-  },
+  }
   submitProductsFormOnEditPerson() {
 
     const persons = [];
@@ -241,7 +250,7 @@ class PlansPage extends React.Component<Props, {}> {
     }).catch(()=>{
       this.submmitedProductForm = false;
     });
-  },
+  }
 
   getTotalPaymentAmount() {
     var total = 0;
@@ -260,11 +269,11 @@ class PlansPage extends React.Component<Props, {}> {
         total += parseFloat(this.props.premiums[1][sProductID1].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type].split("$")[1].replace(",", ""));
       }
     }
-    total = "$" + Math.round(total*100)/100;
+    total = "$" + String(Math.round(total*100)/100);
 
     return total;
 
-  },
+  }
   shouldShowTotal () {
     if(!this.props.persons) return true;
     if(this.props.noOfPersons ==1) {
@@ -285,7 +294,12 @@ class PlansPage extends React.Component<Props, {}> {
       }
     }
 
-  },
+  }
+  selectRider(rider, index) {
+    this.setState({
+      ["selectedRider" + index]: rider
+    });
+  }
   public render() {
 
     var {persons} = this.props;
@@ -497,6 +511,7 @@ class PlansPage extends React.Component<Props, {}> {
               person={persons[0]}
               riders={this.state.riders0}
               index={0}
+              selectRider={this.selectRider.bind(this)}
             />
           </Col>
         </Row>
@@ -507,12 +522,13 @@ class PlansPage extends React.Component<Props, {}> {
               person={persons[1]}
               riders={this.state.riders1}
               index={1}
+              selectRider={this.selectRider.bind(this)}
             />
           </Col>
         </Row>
         }
 
-        {this.props.noOfPersons==2 && <Row>
+        {<Row>
           <Col xs={12} className="c-center plan-total-container visible-xs">
             <Row className="plans-selector-container">
               <Col sm={8} className="c-center" style={{float: "right", marginRight: "15px"}}>

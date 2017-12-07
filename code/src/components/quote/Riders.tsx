@@ -5,20 +5,23 @@ import Rider from "./Rider";
 import {map} from "underscore";
 
 interface Props extends React.Props<Plan> {
+  index: any,
+  person: any,
+  riders: any
 }
 
 export default class Plan extends React.Component<Props, {}> {
   constructor(){
     super();
     this.selectRider.bind(this);
-  },
-  state={},
-  selectRider() {
+  }
+  state={}
+  selectRider(rider) {
     this.setState({
-      selectedRiderName: this.props.rider.Name
+      selectedRiderName: rider
     });
-    this.props.selectRider(this.props.rider, this.props.index);
-  },
+    this.props.selectRider(rider, this.props.index);
+  }
   public render() {  
 
     const riders = this.props.riders;
@@ -32,13 +35,28 @@ export default class Plan extends React.Component<Props, {}> {
                 Riders for {person.name}
               </Col>
               <Col sm={8} className="riders-container c-center">
-                  {map(riders, (rider) =>
-                     if(typeof rider !="string") {return <Rider key={rider.Name}
-                        rider={rider}
-                        person={person}
-                        isActive={rider.Name == self.state.selectedRiderName}
-                        selectRider={self.selectRider.bind(self)}
-                      />} else {
+                  {map(riders, (rider, key) =>
+                      if (typeof rider !="string"){ 
+                        if (key == "WP") {
+                          if (rider.plan && rider.Premium) {
+                            return <Rider key={rider.Name}
+                              rider={rider}
+                              person={person}
+                              isActive={rider.Name == self.state.selectedRiderName}
+                              selectRider={self.selectRider.bind(self)}
+                              />
+                          } else {
+                            return null;
+                          }
+                        } else {
+                          return <Rider key={rider.Name}
+                            rider={rider}
+                            person={person}
+                            isActive={rider.Name == self.state.selectedRiderName}
+                            selectRider={self.selectRider.bind(self)}
+                            />
+                        }
+                      } else {
                         return null;
                       }
                   )}

@@ -4,15 +4,20 @@ import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty, find} from "underscore";
 
 interface Props extends React.Props<Plan> {
+  rider: any
 }
 
 export default class Plan extends React.Component<Props, {}> {
   constructor(){
     super();
-  },
+  }
   selectRider(){
+    this.setState({
+      riderAdded: true
+    });
     this.props.selectRider(this.props.rider);
-  },
+  }
+  state={}
   public render() {
     const {rider} = this.props;
     if(!isEmpty(rider)) {
@@ -32,10 +37,24 @@ export default class Plan extends React.Component<Props, {}> {
               </Col>
             </Row>
           </Row>
-          <Row className={`text-center quote-product`} style={{paddingTop: "10px", marginLeft: "5px", height: "62px", fontFamily: "NunitoRegular!important"}} onClick={()=> this.selectRider(rider)}>
+          {rider.Name != "WP" && <Row className={`text-center quote-product`} style={{paddingTop: "10px", marginLeft: "5px", height: "62px", fontFamily: "NunitoRegular!important"}} onClick={()=> this.selectRider(rider)}>
             <div className="c-coverage-amount" style={{fontSize: "14px", color: "#317dbd"}}>included in policy</div>
             <div className="c-coverage-amount" style={{fontSize: "14px", color: "#999999"}}>(no additional premium)</div>
-          </Row>
+          </Row>}
+          {rider.Name == "WP" && <Row className={`text-center quote-product`} style={{paddingTop: "10px", marginLeft: "5px", height: "62px", fontFamily: "NunitoRegular!important"}}>
+            {!this.state.riderAdded && <Button style={{float: "right", width: "88%", marginRight: "6%", marginTop: "0px"}} className={`c-button-default circular ${this.state.riderAdded ? "active" : ""}`} onClick={(){
+                this.selectRider(rider)
+              }}
+            >
+              ADD TO QUOTE
+            </Button>}
+            {this.state.riderAdded && <Button style={{float: "right", width: "88%", marginRight: "6%", marginTop: "0px"}} className={`c-button-default circular ${this.state.riderAdded ? "active" : ""}`} onClick={(){
+                this.selectRider(rider)
+              }}
+            >
+              ADDED TO QUOTE
+            </Button>}
+          </Row>}
         </Col>
 
       );

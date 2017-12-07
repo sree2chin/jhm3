@@ -5,7 +5,8 @@ import * as moment from "moment";
 import {Button, Row, Col} from "react-bootstrap";
 
 interface Props extends React.Props<PersonInfo> {
-  location: any
+  location: any,
+  person: any
 }
 
 export default class PersonInfo extends React.Component<Props, {}> {

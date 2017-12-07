@@ -164,6 +164,9 @@
 	}
 	.single-product-container {
 		&.rider-container {
+			.single-product-content {
+				min-height: 272px;
+			}
 		    margin-left: -10px;
 		    margin-right: 10px;
 		    min-height: 200px;
