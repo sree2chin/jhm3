@@ -103,9 +103,6 @@ class PlansPage extends React.Component<Props, {}> {
       if(personIndex ==0) {
         persons[0] = personOne;
         persons[1] = this.props.persons[1];
-        this.setState({
-          riders0: data[0].plan.Rider 
-        });
       } else {
         persons[0] = this.props.persons[0];
         persons[1] = personOne;
@@ -115,9 +112,6 @@ class PlansPage extends React.Component<Props, {}> {
       }
     } else {
       persons.push(personOne);
-      this.setState({
-        riders0: data[0].plan.Rider 
-      });
     }
 
     this.props.setPersonsData(persons);
@@ -261,12 +255,20 @@ class PlansPage extends React.Component<Props, {}> {
       if (this.props.premiums[0][sProductID].QuoteRateGrid && this.props.premiums[0][sProductID].QuoteRateGrid.Col1 && this.props.premiums[0][sProductID].QuoteRateGrid.Col1.Face1 && this.props.premiums[0][sProductID].QuoteRateGrid.Col1.Face1.Premium) {
         total = parseFloat(this.props.premiums[0][sProductID].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type].split("$")[1].replace(",", ""));
       }
+      if (this.state.selectedRider0) {
+        var riderAmount = this.state.selectedRider0.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider0.Premium[this.state.premium_type].split("$")[1]) : 0;
+        total += riderAmount;
+      }
     }
 
 
     if (this.props.premiums && this.props.premiums[1] && this.props.premiums[1] && this.props.premiums[1][sProductID1] && sProductID1 && this.state.premium_type){
       if (this.props.premiums[1][sProductID1].QuoteRateGrid && this.props.premiums[1][sProductID1].QuoteRateGrid.Col1 && this.props.premiums[1][sProductID1].QuoteRateGrid.Col1.Face1 && this.props.premiums[1][sProductID1].QuoteRateGrid.Col1.Face1.Premium) {
         total += parseFloat(this.props.premiums[1][sProductID1].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type].split("$")[1].replace(",", ""));
+      }
+      if (this.state.selectedRider1) {
+        var riderAmount = this.state.selectedRider1.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider1.Premium[this.state.premium_type].split("$")[1])  : 0;
+        total += riderAmount;
       }
     }
     total = "$" + String(Math.round(total*100)/100);
@@ -505,24 +507,32 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>
 
-        {this.state.riders0 && <Row>
+        {this.props.premiums && this.props.premiums[0] && 
+          this.props.premiums[0][this.state.productIdPlan0] && 
+          this.props.premiums[0][this.state.productIdPlan0].Plan && 
+          this.props.premiums[0][this.state.productIdPlan0].Plan.Rider && <Row>
           <Col>
             <Riders 
               person={persons[0]}
-              riders={this.state.riders0}
+              riders={this.props.premiums[0][this.state.productIdPlan0].Plan.Rider}
               index={0}
               selectRider={this.selectRider.bind(this)}
+              premium_type={this.state.premium_type}
             />
           </Col>
         </Row>
         }
-        {this.state.riders1 && <Row>
+        {this.props.premiums && this.props.premiums[1] && 
+          this.props.premiums[1][this.state.productIdPlan1] && 
+          this.props.premiums[1][this.state.productIdPlan1].Plan && 
+          this.props.premiums[1][this.state.productIdPlan1].Plan.Rider && <Row>
           <Col>
             <Riders 
               person={persons[1]}
-              riders={this.state.riders1}
+              riders={this.props.premiums[1][this.state.productIdPlan1].Plan.Rider}
               index={1}
               selectRider={this.selectRider.bind(this)}
+              premium_type={this.state.premium_type}
             />
           </Col>
         </Row>

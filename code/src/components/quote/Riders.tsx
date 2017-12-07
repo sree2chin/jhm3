@@ -7,7 +7,9 @@ import {map} from "underscore";
 interface Props extends React.Props<Plan> {
   index: any,
   person: any,
-  riders: any
+  riders: any,
+  premium_type: any,
+  selectRider: any
 }
 
 export default class Plan extends React.Component<Props, {}> {
@@ -38,13 +40,14 @@ export default class Plan extends React.Component<Props, {}> {
                   {map(riders, (rider, key) =>
                       if (typeof rider !="string"){ 
                         if (key == "WP") {
-                          if (rider.plan && rider.Premium) {
+                          if (rider.Premium) {
                             return <Rider key={rider.Name}
                               rider={rider}
                               person={person}
                               isActive={rider.Name == self.state.selectedRiderName}
                               selectRider={self.selectRider.bind(self)}
-                              />
+                              premium_type={self.props.premium_type}
+                            />
                           } else {
                             return null;
                           }
@@ -61,6 +64,7 @@ export default class Plan extends React.Component<Props, {}> {
                       }
                   )}
               </Col>
+            </Row>
           </Col>
         )}
       </Row>
