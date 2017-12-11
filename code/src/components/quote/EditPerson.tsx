@@ -151,7 +151,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                     <Col sm={12} className={"c-subheader-text"} style={{marginTop: "0px", marginBottom: "3px"}}>
                       Birth date
                     </Col>
-                    <Col sm={12} className="birth-date-picker-container" >
+                    <Col sm={12} className="birth-date-picker-container edit-birth-date-picker-container" >
                         <span className="test-class">
                         </span>
                         <FormGroup controlId={"change_handler_" + this.props.personIndex}> 
