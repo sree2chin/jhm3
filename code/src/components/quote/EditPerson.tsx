@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Modal, Button, Row, Col, FormGroup } from "react-bootstrap";
+import { Modal, Button, Row, Col, FormGroup, ControlLabel } from "react-bootstrap";
 import Input from "../common/textInput";
 import DatePicker from 'react-datepicker';
 import {Tooltip} from 'react-lightweight-tooltip';
@@ -7,6 +7,7 @@ import Select from 'react-select';
 import { getStateObjects } from '../../utility/states';
 import {isEmpty} from 'underscore';
 import * as moment from "moment";
+import {DateInputComponent, DateFormats } from "react-controlled-date-input";
 
 interface Props extends React.Props<EditPerson> {
   personIndex: any,
@@ -26,6 +27,21 @@ export default class EditPerson extends React.Component<Props, {}> {
       [key]: val
     });
   }
+
+  onDateInputChange(year, month, date) {
+    this.setState({ year, month, date });
+    this.onDateChange("s_birthDate", month + "/" + date + "/" + year, month + "/" + date + "/" + year);
+  }
+  
+  onDateChange(key, value, formattedDate) {
+    var date = moment(new Date(value));
+    if (date.isValid()) {
+      this.setState({
+        [key]: date,
+        formattedDate
+      });
+    }
+  }
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.editablePerson)) {
       const person = JSON.parse(JSON.stringify(nextProps.editablePerson));
@@ -34,9 +50,10 @@ export default class EditPerson extends React.Component<Props, {}> {
     }
   }
   submitEditForm() {
-    this.props.handleChange(this.state);
+    this.props.handleChange(this.state, true);
     this.props.onCloseModal();
   }
+
 
   public render() {  
     var errors ={};
@@ -136,18 +153,19 @@ export default class EditPerson extends React.Component<Props, {}> {
                     </Col>
                     <Col sm={12} className="birth-date-picker-container" >
                         <span className="test-class">
-                         
                         </span>
-                        <DatePicker 
-                          selected={this.state.s_birthDate} 
-                          onChange={(date)=>{
-                            this.handleChange(personIndex, "s_birthDate", date)
-                          }}
-                          showMonthDropdown
-                          showYearDropdown
-                          dropdownMode="select"
-                          placeholderText="MM/DD/YYYY"
-                        />
+                        <FormGroup controlId={"change_handler_" + this.props.personIndex}> 
+                          <ControlLabel>      
+                            <div className="custom-date-picker-container">
+                              <span className="custom-date-picker" onClick={this.props.onClick}>
+                                <img src={"../images/calendar.svg"} />
+                              </span>
+                            </div>
+                          </ControlLabel>
+                          <DateInputComponent
+                            onChange={this.onDateInputChange.bind(this)}
+                            dateFormat={DateFormats.MMDDYYYY}/>
+                        </FormGroup>
                     </Col>
                     { errors.s_birthDateError && <Col sm={12} className={"c-subheader-text error"}>
                       Please select your birth date.

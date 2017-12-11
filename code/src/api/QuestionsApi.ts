@@ -26,11 +26,28 @@ class QuestionsApi {
             resolve(response)
           });
         })
-    }));
+    })
+  }
+
+  post(payload) : Promise<any> {
+    return fetch('/v1/post/questions/questions', {
+        method: "GET",
+
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      }).then(function(res) {
+        return res.json().then(function (response: any) {    
+          return new Promise(function(resolve, reject) {
+            resolve(response)
+          });
+        })
+    })
   };
 
   
-
 }
 
 export default new QuestionsApi();

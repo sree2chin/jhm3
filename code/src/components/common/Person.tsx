@@ -37,11 +37,15 @@ export default class Person extends React.Component<Props, {}> {
 
   onDateInputChange(year, month, date) {
     this.setState({ year, month, date });
-    this.onDateChange("s_birthDate", month + "/" + date + "/" + year, month + "/" + date + "/" + year);
+    var momentDate = moment(new Date(month + "/" + date + "/" + year));
+    if (momentDate.isValid()) {
+      this.onDateChange("s_birthDate", month + "/" + date + "/" + year, month + "/" + date + "/" + year);
+    } 
   }
+
   onDateChange(key, value, formattedDate) {
     this.setState({
-      [key]: moment(value),
+      [key]: moment(new Date(value)),
       formattedDate
     });
     this.props.onChange(this.props.index, key, moment(value));

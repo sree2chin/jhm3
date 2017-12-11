@@ -22,13 +22,17 @@ import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 interface Props {
   submitQuoteForm: ()=>void,
   submitProductsForm: ()=>void,
+  noOfPersons: any,
+  persons: any,
+  setPersonsData:(a: any)=>void,
+  submitEmailForm: any
 }
 
 class Main extends React.Component<Props, {}> {
   constructor(){
     super();
     this.submitQuoteForm.bind(this);
-  },
+  }
 
   setCookie(cname, cvalue, exdays) {
       var d = new Date();
@@ -55,7 +59,7 @@ class Main extends React.Component<Props, {}> {
         persons: persons
       });
     }
-  },
+  }
 
   validateQuoteForm() {
     var result = true;
@@ -87,8 +91,7 @@ class Main extends React.Component<Props, {}> {
     });
 
     return result;
-  },
-
+  }
   submitQuoteForm() {
     if(this.validateQuoteForm()) {
 
@@ -123,17 +126,17 @@ class Main extends React.Component<Props, {}> {
         });
       });
     } 
-  },
+  }
   submitEmailForm() {
     this.props.submitEmailForm(this.props);
-  }, 
+  } 
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.persons) && isEmpty(this.state.persons)) {
       this.setState({
         persons: nextProps.persons
       });
     }
-  },
+  }
   changePersonInfo(index, key, val) {
     if (this.state.persons[index]) {
       var person = JSON.parse(JSON.stringify(this.state.persons[index]));
@@ -162,12 +165,12 @@ class Main extends React.Component<Props, {}> {
     }
 
     this.setState({persons});
-  },
+  }
 
   state = {      
     persons: [{}, {}],
     errors: [{}, {}]
-  },
+  }
   getContinueBtnActiveClass() {
 
     var result = true;
@@ -186,14 +189,12 @@ class Main extends React.Component<Props, {}> {
         result = result && !(s_birthDateError || s_genderError || stateError || smokeError || healthError);
       }
     });
-
     if(result) {
       return "active";
     } else {
       return "";
     }
-
-  },
+  }
 
   getMobileContinueBtnActiveClass() {
 
@@ -202,7 +203,7 @@ class Main extends React.Component<Props, {}> {
     } 
     return "";
 
-  },
+  }
   public render() {
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
     const healthRatingObjects = [

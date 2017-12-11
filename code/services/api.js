@@ -114,6 +114,23 @@ module.exports = new function(){
     });
   };
 
+  this.postQuestions = function(req, cb){
+    var formData = {
+      applicants: JSON.stringify(data)
+    };
+    request({
+      url: restOptions.host + '/v1/questions/questions', 
+      headers: {
+        'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
+      },
+      method: 'POST',
+      formData: formData
+    }, function callback(err, httpResponse, body) {
+ 
+      cb(err, httpResponse);
+    });
+  };
+
   this.socialAuth = function(data, type, cb){
     restOptions.path = '/api/users/authenticate/'+type;
     rest.postJSON(_.clone(restOptions),data, function (statusCode, result) {

@@ -19,19 +19,25 @@ import NoProducts from "./NoProducts"
 
 
 interface Props {
-  persons: [any]
+  persons: [any],
+  noOfPersons: number,
+  products: any,
+  setPersonsData: any,
+  handleEditChange: any,
+  submitQuoteForm: any,
+  showModalEditPerson: any
 }
 
 class ProductsPage extends React.Component<Props, {}> {
   constructor(){
     super();
-  },
+  }
   componentDidMount () {
     console.log("DDFDSD");
     setTimeout(() => {
       this._scrollView.scrollTo({y: 100})
     }, 1)
-  },
+  }
   componentWillMount() {
     if (isEmpty(this.props.products) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent" : "/";
@@ -63,7 +69,7 @@ class ProductsPage extends React.Component<Props, {}> {
         productId1: productId1
       });
     }
-  },
+  }
 
   selectProductForIndex(personIndex, product) {
     var productsList = JSON.parse(JSON.stringify(this.state["productId" + personIndex]));
@@ -77,7 +83,7 @@ class ProductsPage extends React.Component<Props, {}> {
     setTimeout(function() {
       self.setProductFormSubmissionErrorMsg();
     }, 10);
-  },
+  }
 
   deSelectProductForIndex(personIndex, product) {
     var productsList = JSON.parse(JSON.stringify(this.state["productId" + personIndex]));
@@ -91,7 +97,7 @@ class ProductsPage extends React.Component<Props, {}> {
       self.setProductFormSubmissionErrorMsg();
     }, 10);
 
-  },
+  }
   setProductFormSubmissionErrorMsg() {
     if(this.productSubmissionBtnClicked) {
       var errorMsg = null;
@@ -116,28 +122,92 @@ class ProductsPage extends React.Component<Props, {}> {
         productSelectionErrorMsg: errorMsg
       });
     }
-  },
+  }
 
   state={
-    productId0: []
+    productId0: [],
     productId1: []
-  },
-  handleEditChange(person) {
+  }
+  handleEditChange(person, isFromEditModal) {
     this.props.handleEditChange(person);
     setTimeout(()=> {
-      this.submitProductsFormOnEditPerson();
+      this.submitProductsFormOnEditPerson(isFromEditModal);
     });
-  },
-  validateProductsFormSubmission () {
+  }
+  validateProductsFormSubmission (isFromEditModal) {
     if(this.props.noOfPersons == 2) {
       return (this.state.productId0.length > 0 && this.state.productId1.length > 0)
     } else {
       return this.state.productId0.length > 0;
     }
-  },
-  submitProductsFormOnEditPerson() {
+  }
+  validateQuoteForm() {
+    var result = true;
+    var errors = [];
+    each (this.props.persons, (person, index) => {
+      if(index < this.props.noOfPersons) {  
+        const {s_birthDate, s_gender, state, smoke, health, name} = person;
+
+        const s_birthDateError = !(s_birthDate && moment(s_birthDate).format("YYYY-MM-DD").length > 0);
+        const s_genderError = !(s_gender ==1 || s_gender ==2);
+        const stateError = !(state && state.length > 0);
+        const smokeError = !(smoke=="Yes" || smoke=="No");
+        const healthError = !(health);
+        const nameError = !(name && name.length > 0);
+
+        errors.push({
+          s_birthDateError, 
+          s_genderError,
+          stateError, 
+          smokeError, 
+          healthError,
+          nameError
+        });
+        result = result && !(s_birthDateError || s_genderError || stateError || smokeError || healthError);
+      }
+    });
+    this.setState({
+      errors
+    });
+
+    return result;
+  }
+  submitQuoteForm() {
+    if(this.validateQuoteForm()) {
+
+      const persons = [];
+      this.setState({
+        submittingUserInfo: true
+      });
+      const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
+      personOne.s_birthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
+      personOne.applicant = "1";
+      persons.push(personOne);
+
+      if(this.props.noOfPersons == 2) {
+        const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
+        personTwo.s_birthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
+        personTwo.applicant = "2";
+        persons.push(personTwo);
+      }
+
+      this.props.setPersonsData(persons);
+
+      this.props.submitQuoteForm(persons).then(() => {
+        this.setState({
+          submittingUserInfo: false
+        });
+      }).catch(()=>{
+        browserHistory.push("/products");
+        this.setState({
+          submittingUserInfo: false
+        });
+      });
+    } 
+  }
+  submitProductsFormOnEditPerson(isFromEditModal) {
     this.productSubmissionBtnClicked = true;
-    if(this.validateProductsFormSubmission()) {
+    if(this.validateProductsFormSubmission(isFromEditModal)) {
       this.setState({
         submittingProductsInfo: true
       });
@@ -146,6 +216,7 @@ class ProductsPage extends React.Component<Props, {}> {
 
       const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
       personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
+      personOne.s_birthDate = moment(personOne.s_birthDate);
       personOne.selected_products = this.state.productId0;
       personOne.applicant = "1";
       personOne.sGender = personOne.s_gender;
@@ -155,6 +226,7 @@ class ProductsPage extends React.Component<Props, {}> {
       if(this.props.noOfPersons == 2) {
         const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
         personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
+        personOne.s_birthDate = moment(personOne.s_birthDate);
         personTwo.selected_products = this.state.productId1;
         personTwo.applicant = "2";
         personTwo.sGender = personTwo.s_gender;
@@ -173,10 +245,12 @@ class ProductsPage extends React.Component<Props, {}> {
           submittingProductsInfo: false
         });
       });
+    } else if(isFromEditModal) {
+      this.submitQuoteForm();
     } else {
       this.setProductFormSubmissionErrorMsg();
     }
-  },
+  }
 
   getContinueBtnActiveClass() {
 
@@ -186,7 +260,7 @@ class ProductsPage extends React.Component<Props, {}> {
 
     return "";
 
-  },
+  }
   submitProductsForm() {
     this.productSubmissionBtnClicked = true;
     if(this.validateProductsFormSubmission()) {

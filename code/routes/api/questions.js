@@ -15,4 +15,12 @@ module.exports = function(app) {
       res.send(data);
     });
   });
+
+  app.get(prefix + '/post/questions/questions', function(req, res) {
+    QuestionsService.getQuestions(req, function(statusCode, data) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(data);
+    });
+  });
+  
 };

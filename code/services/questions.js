@@ -17,4 +17,14 @@ module.exports = new function() {
       }
     });
   };
+  this.postQuestions = function(req, callback) {
+    console.log("\n\n\n in questions post services\n\n\n");
+    ApiService.getQuestions(req, function(err, res) {
+      if (!err && res.statusCode == 200) {
+        callback(res.statusCode, res.body);
+      } else {
+        callback(res.statusCode, res.body);
+      }
+    });
+  };
 };

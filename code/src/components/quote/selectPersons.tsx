@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 
 interface Props {
   plans: Array<any>,
-  onSubmit : (event:any) => any;
+  onSubmit : (event:any) => any
 }
 
 interface State {
