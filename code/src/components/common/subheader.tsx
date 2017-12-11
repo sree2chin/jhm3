@@ -4,7 +4,6 @@ import { Navbar } from "react-bootstrap"
 import {Button, Row, Col} from "react-bootstrap";
 
 interface Props extends React.Props<cfooter> {
-  location: any
 }
 
 export default class cfooter extends React.Component<Props, {}> {

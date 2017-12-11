@@ -6,6 +6,7 @@ import DatePicker from 'react-datepicker';
 import CustomDatepicker from "../common/CustomDatepicker";
 var BootStrapDatePicker = require("react-bootstrap-date-picker");
 import {DateInput, MonthInput} from 'react-date-input';
+import {DateInputComponent, DateFormats } from "react-controlled-date-input";
 import Select from 'react-select';
 import Input from "../common/textInput";
 import ReactTooltip from 'react-tooltip';
@@ -14,32 +15,44 @@ import * as moment from "moment";
 
 
 interface Props extends React.Props<Person> {
+  onChange: any,
+  index: any,
+  onClick: any,
+  person: any,
+  errors: any
 }
 
 export default class Person extends React.Component<Props, {}> {
-  state = {},
+  state = {
+    year: "",
+    month: "",
+    date: ""
+  }
   onChange(key, value) {
     this.setState({
       [key]: value
     });
     this.props.onChange(this.props.index, key, value);
-  },
+  }
 
+  onDateInputChange(year, month, date) {
+    this.setState({ year, month, date });
+    this.onDateChange("s_birthDate", month + "/" + date + "/" + year, month + "/" + date + "/" + year);
+  }
   onDateChange(key, value, formattedDate) {
     this.setState({
       [key]: moment(value),
-      formattedDate,
-      dateInISOFormat: value
+      formattedDate
     });
     this.props.onChange(this.props.index, key, moment(value));
-  },
+  }
 
   getErrorsClassNames(errors, key) {
     if(errors[key]) {
       return "input-border-error";
     }
     
-  },
+  }
   public render() {
     const toolTipStyles = {
       wrapper: {
@@ -81,6 +94,11 @@ export default class Person extends React.Component<Props, {}> {
           {value: "Good", label: "Good"},
           {value: "Fair", label: "Fair"}
         ];
+
+    var {year, month, date} = this.state;
+        if(!!!year) {year = "YYYY"};
+        if(!!!month) {month = "MM"};
+        if(!!!date) {date = "DD"};
 
     return (
       <Col sm={12} className="c-one-person-container">
@@ -172,15 +190,9 @@ export default class Person extends React.Component<Props, {}> {
                     </span>
                   </div>
                 </ControlLabel>
-                <BootStrapDatePicker 
-                  onChange={this.handleChange} 
-                  placeholder={"MM/DD/YYYY"}
-                  value={this.state.dateInISOFormat} 
-                  id={"change_handler_example_" + this.props.personIndex} 
-                  dateFormat="MM/DD/YYYY"
-                  onChange={(date, formattedDate)=>{
-                    this.onDateChange("s_birthDate", date, formattedDate)
-                  }}/>
+                <DateInputComponent
+                  onChange={this.onDateInputChange.bind(this)}
+                  dateFormat={DateFormats.MMDDYYYY}/>
               </FormGroup>
 
           </Col>
@@ -202,9 +214,9 @@ export default class Person extends React.Component<Props, {}> {
               }}
               className={this.getErrorsClassNames(errors, "stateError")}
             />
-             <Col style={{ paddingLeft: "0px"}} sm={12} className={`c-subheader-text error ${errors.stateError ? "visibility-show" : "visibility-hidden"}`}>
-                  Please select your state.
-                </Col>
+            <Col style={{ paddingLeft: "0px"}} sm={12} className={`c-subheader-text error ${errors.stateError ? "visibility-show" : "visibility-hidden"}`}>
+              Please select your state.
+            </Col>
           </Col>
    
         </div>

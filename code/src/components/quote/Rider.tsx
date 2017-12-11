@@ -4,7 +4,11 @@ import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty, find} from "underscore";
 
 interface Props extends React.Props<Plan> {
-  rider: any
+  rider: any,
+  person: any,
+  isActive: Boolean,
+  selectRider: any,
+  premium_type: any
 }
 
 export default class Plan extends React.Component<Props, {}> {

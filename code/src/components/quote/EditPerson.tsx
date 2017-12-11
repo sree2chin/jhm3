@@ -8,42 +8,35 @@ import { getStateObjects } from '../../utility/states';
 import {isEmpty} from 'underscore';
 import * as moment from "moment";
 
-interface Props extends React.Props<Plan> {
+interface Props extends React.Props<EditPerson> {
+  personIndex: any,
+  showModalEditPerson: any,
+  handleChange: any,
+  onCloseModal: any,
+  editablePerson: any
 }
 
 export default class EditPerson extends React.Component<Props, {}> {
   constructor(){
     super();
-
-  },
-  state={},
-  saveQuote() {
-    this.props.saveQuote();
-  },
-  
-  state = {},
+  }
+  state={}
   handleChange(personIndex, key, val) {
-    //this.props.handleChange(personIndex, key, val);
     this.setState({
       [key]: val
     });
-  },
+  }
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.editablePerson)) {
       const person = JSON.parse(JSON.stringify(nextProps.editablePerson));
       person.s_birthDate = moment(person.s_birthDate);
       this.setState(person);
     }
-  },
-
-  onCloseModal() {
-
-  },
-
+  }
   submitEditForm() {
     this.props.handleChange(this.state);
     this.props.onCloseModal();
-  },
+  }
 
   public render() {  
     var errors ={};

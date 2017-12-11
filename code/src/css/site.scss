@@ -31,7 +31,7 @@
       color: #999999;
       min-height: 45px;
       .container {
-        padding-left: 29%;
+        padding-left: 30%;
         padding-right: 29%;
         margin-top: 11px;
         width: 100%;
@@ -61,8 +61,8 @@
     background-color: white;
     margin-bottom: 0px;
     .container {
-      padding-left: 12.5%;
-      padding-right: 12.5%;
+      padding-left: 12.92%;
+      padding-right: 12.92%;
       margin-left: 0px;
       margin-right: 0px;
       width: 100%;
@@ -94,6 +94,10 @@
 
 .cf-nav-main-header.navbar .navbar-header .navbar-brand{
  
+}
+
+.cf-nav-main-header.navbar > .container .navbar-brand {
+  margin-left: 0px;
 }
 
 @media(max-width:800px) {

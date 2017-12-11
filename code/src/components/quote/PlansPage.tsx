@@ -14,8 +14,6 @@ import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
 import Plan from "../common/Plan"
 import { browserHistory } from 'react-router';
-import {submitPlansForm } from '../../actions/Quote';
-import { browserHistory } from 'react-router';
 import EditPerson from "./EditPerson";
 import Riders from "./Riders";
 import Select from 'react-select';
@@ -106,9 +104,6 @@ class PlansPage extends React.Component<Props, {}> {
       } else {
         persons[0] = this.props.persons[0];
         persons[1] = personOne;
-        this.setState({
-          riders1: data[0].plan.Rider 
-        });
       }
     } else {
       persons.push(personOne);
@@ -316,15 +311,16 @@ class PlansPage extends React.Component<Props, {}> {
       <div className="product-pager-container">
         <ScrollToTopOnMount />
         <Subheader />
-        {this.props.noOfPersons==2 && <Row className="plans-product-header visible-xs">
-          <Col sm={8} className="c-center">
-            <Row>
-              <Col sm={8} className="c-plans-product-text">
-                Selected Products
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+        {this.props.noOfPersons==2 && 
+          <Row className="plans-product-header visible-xs">
+            <Col sm={8} className="c-center">
+              <Row>
+                <Col sm={8} className="c-plans-product-text">
+                  Selected Products
+                </Col>
+              </Row>
+            </Col>
+          </Row>
         }
 
         {this.props.noOfPersons==2 && <Row className="visible-xs">

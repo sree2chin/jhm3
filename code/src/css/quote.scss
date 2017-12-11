@@ -58,6 +58,21 @@
 			    margin-bottom: 0px;
 			}
 		}
+		.birth-date-picker-container {
+			.form-group {
+				.form-group {
+					display: inline-block;
+					width: 74%;
+					.input-group {
+						width: 100%;
+						display: inline-block;
+						input {
+							width: 100%;
+						}
+					}
+				}
+			}
+		}
 		box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
 		border: solid 1px #d4d4d4;
 		background-color: rgb(255, 255, 255); padding-left: 0px; 
@@ -179,7 +194,7 @@
 		    border-right: none;
 		    img {
 			    position: absolute;
-			    top: calc(21%);
+				top: calc(14.5%);
 			    left: 4.1%;
 		    }
 	    }

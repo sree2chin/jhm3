@@ -39,7 +39,7 @@ export default class Plan extends React.Component<Props, {}> {
               <Col sm={8} className="riders-container c-center">
                   {map(riders, (rider, key) =>
                       if (typeof rider !="string"){ 
-                        if (key == "WP") {
+                        if (String(key) == "WP") {
                           if (rider.Premium) {
                             return <Rider key={rider.Name}
                               rider={rider}
