@@ -11,6 +11,7 @@ const Handle = Slider.Handle;
 
 
 interface Props extends React.Props<Plan> {
+  premiums: any
 }
 
 export default class Plan extends React.Component<Props, {}> {
@@ -19,7 +20,7 @@ export default class Plan extends React.Component<Props, {}> {
     this.onFaceValChange.bind(this);
     this.handleChange.bind(this);
     this.stopSliderChanging.bind(this);
-  },
+  }
   onPlanChange(key, obj) {
     var sFaceAmount = this.state.sFaceAmount;
 
@@ -314,7 +315,14 @@ export default class Plan extends React.Component<Props, {}> {
                   />
                 </Row>
               </Col>}
-              {this.isProductSPWL() || !this.shouldShowPlanDropdowns() ? <Col sm={6} className="plan-cost-container">
+              {this.isProductSPWL() || !this.shouldShowPlanDropdowns() ? (this.isProductSPWL() ?<Col sm={3} className="plan-length-container">
+                 <Row className="plan-length-container-text death-benefit-key-text">
+                   Death Benefit
+                 </Row>
+                 <Row className="plan-length-container-selector death-benefit-key-value">
+                   { this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.Plan && this.props.premiums.plans_data.Plan.DeathBenefit}
+                 </Row>
+               </Col> : <Col sm={6} className="plan-cost-container">
                 <Row style={{marginTop: "30px"}}>
                   <Col sm={12}>
                     <Col xs={5} className="" style={{marginTop: "6px"}}>
@@ -328,7 +336,7 @@ export default class Plan extends React.Component<Props, {}> {
                     </Col>
                   </Col>
                 </Row>
-              </Col> : <Col sm={3} className="plan-cost-container">
+                </Col>) : <Col sm={3} className="plan-cost-container">
                 <Row style={{marginTop: "30px"}}>
                   <Col sm={12}>
                     <Col xs={4} className="plan-cost-text">

@@ -404,10 +404,10 @@ class PlansPage extends React.Component<Props, {}> {
         <Row className="plans-product-header hidden-xs">
           <Col className="c-center plans-product-header-text-container">
             <Row>
-              <Col sm={8} className="c-plans-product-text">
+              <Col sm={7} className="c-plans-product-text">
                 Selected Products
               </Col>
-              <Col sm={4} className="c-select-diff-product-link hidden-xs" onClick={this.redirectToProductPage.bind(this)}>
+              <Col sm={5} className="c-select-diff-product-link hidden-xs" onClick={this.redirectToProductPage.bind(this)}>
                 SELECT DIFFERENT PRODUCTS
               </Col>
             </Row>

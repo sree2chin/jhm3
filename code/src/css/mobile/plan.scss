@@ -167,7 +167,14 @@
 		.plan-length-container {
 		    border-left: none;
 		    border-bottom: solid 1px #d4d4d4;
-		    height: 78px;
+			height: 78px;
+			.death-benefit-key-text {
+				text-align: center;
+			}
+			.death-benefit-key-value {
+				padding-top: 15px;
+				text-align: center; 
+			}
 			.plan-length-container-text {
 				margin-left: 0px!important;
 			    width: 30%!important;
