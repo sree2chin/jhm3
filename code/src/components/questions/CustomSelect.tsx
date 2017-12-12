@@ -2,39 +2,44 @@ import * as React from 'react';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import Select from 'react-select';
 interface Props extends React.Props<CustomSelect> {
-  data: any
+  onChange: any,
+  question: any,
+  error: any
 }
 
 export default class CustomSelect extends React.Component<Props, {}> {
   constructor(props : Props){
     super(props);
-  },
-  state = {},
+  }
+  state = {}
   onChange(val) {
-    this.props.onChange(val);
-  },
+    this.setState({
+      state: val
+    });
+    this.props.onChange(this.props.question, val);
+  }
   getStateObjects() {
-    var options = [];
-
-    for(var i in this.props.options) {
+    var options = this.props.question.options
+    for(var i in options) {
       options.push(
-        { value: this.props.options[i].id, 
-        label:  this.props.options[i].label}
+        { value: options[i].id, 
+        label:  options[i].label}
       );
     }
     return options;
-  },
+  }
   public render() {
     var wrapperClass : string = 'form-group';
     if (this.props.error && this.props.error.length > 0) {
      wrapperClass += " " + 'has-error';
-    },
+    }
     var statesObjects = this.getStateObjects();
+    var question = this.props.question;
 
     return (
      <div className="row c-quote">
         <Col sm={12} className={"c-subheader-text"}>
-          {this.props.caption}
+          {question.caption}
         </Col>
           <Col sm={12} style={{paddingRight: "22px", marginBottom: "0px"}} className="person-gender-container">
             <Row>
@@ -43,14 +48,14 @@ export default class CustomSelect extends React.Component<Props, {}> {
               options={statesObjects}
               value={this.state.state}
               onChange={(stateObj)=>{
-                this.onChange("state", stateObj.value)
+                this.onChange(stateObj.id)
               }}
               className={""}
             />
             </Row>
 
             <Col sm={12} className={`c-subheader-text error`} style={{paddingLeft: "0px", marginTop: "0px"}}>
-              
+
             </Col> 
           </Col> 
       </div>

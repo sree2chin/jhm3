@@ -141,7 +141,7 @@ class Main extends React.Component<Props, {}> {
     if (this.state.persons[index]) {
       var person = JSON.parse(JSON.stringify(this.state.persons[index]));
     } else {
-      var person = {};
+      var person: any = {};
     }
     
 
