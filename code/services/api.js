@@ -114,11 +114,12 @@ module.exports = new function(){
     });
   };
 
-  this.postQuestions = function(data, cb){
+  this.postQuestions = function(reqObj, cb){
+    console.log("\n\ndata.data: " + reqObj.data.language +  "\n\n\n");
     var formData = {
-      input_json: JSON.stringify(data.data)
+      input_json: JSON.stringify(reqObj.data)
     };
-    
+    console.log("\n\n\nformDat: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/questions/questions', 
       headers: {

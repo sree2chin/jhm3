@@ -35,11 +35,8 @@ class Main extends React.Component<Props, {}> {
     this.props.getQuestions();
   }
   componentWillReceiveProps(nextProps) {
-    if(!isEmpty(nextProps.questions) && isEmpty(this.state.questions)) {
+    if(!isEmpty(nextProps.questions)) {
       this.questions = JSON.parse(JSON.stringify(nextProps.questions));
-      this.setState({
-        questions: nextProps.questions
-      });
     }
   }
   onChangeInput(q, answer) {
@@ -90,147 +87,6 @@ class Main extends React.Component<Props, {}> {
     }
   }
 
-  recursiveRender() {
-    if (!isEmpty(this.props.questions)) {
-      if (this.props.questions.data.questionnaire.questions) {
-        return map(this.props.questions.data.questionnaire.questions, (qe)=> {
-          var q = qe;
-          q.key = q.id;
-          if (q.type == "singleselection") {
-            if(q.options.length ==2) {           
-              return <SingleSelection 
-                    question={q}
-                    error={""}
-                    onChange={this.onChangeInput.bind(this)}
-                  />
-            } else {
-              return <CustomSelect
-                question={q}
-                error={""}
-                onChange={this.onChangeInput.bind(this)}
-              />
-            }
-          } else  if (q.type == "label") {
-            return <Label 
-                    {...q}
-                  />
-          } else if (q.type == "group" || q.type == "assessment-factor-group") {
-            return this.reRecursiveRender(q.questions)
-          } else if (q.type == "number" || q.type=="text") {
-            return <CustomInput 
-                    question={q}
-                    error={""}
-                    onChange={this.onChangeInput.bind(this)}
-                  />
-          } else if (q.type == "date") {
-            return <QuestionsCustomDatePicker 
-                    question={q}
-                    error={""}
-                    onChange={this.onChangeInput.bind(this)}
-                  />
-          }
-        });
-      };  
-    } else {
-      return null;
-    }
-  }
-
-  reRecursiveGetQuestions(data) {
-    if (!isEmpty(data)) {
-        return map(data, (qe)=> {
-          var q = qe;
-          q.key = q.id;
-          if (q.type == "singleselection") {
-            if(q.options.length ==2) {           
-              return <SingleSelection 
-                    question={q}
-                    error={""}
-                    onChange={this.onChangeInput.bind(this)}
-                  />
-            } else {
-              return <CustomSelect 
-                question={q}
-                error={""}
-                onChange={this.onChangeInput.bind(this)}
-              />
-            }
-
-          } else  if (q.type == "label") {
-            return <Label 
-                    {...q}
-                  />
-          } else if (q.type == "group" || q.type =="assessment-factor-group") {
-            return this.reRecursiveRender(q.questions);
-          } else if (q.type == "number" || q.type=="text") {
-            return <CustomInput 
-                    question={q}
-                    error={""}
-                    onChange={this.onChangeInput.bind(this)}
-                  />
-          } else if (q.type == "date") {
-            return <QuestionsCustomDatePicker 
-                    question={q}
-                    error={""}
-                    onChange={this.onChangeInput.bind(this)}
-                  />
-          }
-        });
-    } else {
-      return null;
-    }
-  }
-
-
-  recursiveGetQuestions() {
-    if (!isEmpty(this.questions)) {
-      if (this.questions.data.questionnaire.questions) {
-        var preQ = {};
-        return map(this.questions.data.questionnaire.questions, (qe)=> {
-          var q = qe;
-          q.key = q.id;
-          if (q.hasReflexive && !preQ) {
-            //this.setLastAnsweredQuestion(preQ);
-            return null;
-          }
-          if (q.type == "singleselection") {
-            if(q.options.length ==2) {           
-              return <SingleSelection 
-                    question={q}
-                    error={""}
-                    onChange={this.onChangeInput.bind(this)}
-                  />
-            } else {
-              return <CustomSelect {...q} />
-            }
-          } else  if (q.type == "label") {
-            return <Label 
-                    {...q}
-                  />
-          } else if (q.type == "group" || q.type == "assessment-factor-group") {
-            //this.setLastAnsweredQuestion(preQ);
-            return null;
-          } else if (q.type == "number" || q.type=="text") {
-            return <CustomInput 
-                    question={q}
-                    error={""}
-                    onChange={this.onChangeInput.bind(this)}
-                  />
-          } else if (q.type == "date") {
-            return <QuestionsCustomDatePicker 
-                    question={q}
-                    error={""}
-                    onChange={this.onChangeInput.bind(this)}
-                  />
-          }
-          preQ = q;
-        });
-      };  
-    } else {
-      return null;
-    }
-  }
-
   reRecursiveGetQuestions1(data, questionsList, preQ) {
     if (!isEmpty(data)) {
       var boundaryReached = false;
@@ -238,8 +94,10 @@ class Main extends React.Component<Props, {}> {
         var qe = data[i];
         var q = qe;
         q.key = q.id;
+        if (q.answerState == "valid") {
+          continue;
+        }
         if (preQ && preQ.hasReflexive) {
-          //this.setLastAnsweredQuestion(preQ);
           boundaryReached = true;
           break;
         }
@@ -264,11 +122,7 @@ class Main extends React.Component<Props, {}> {
                   {...q}
                 />)
         } else if (q.type == "group" || q.type == "assessment-factor-group") {
-          if (!preQ) {
             return this.reRecursiveGetQuestions1(q.questions, questionsList, preQ);
-          } else {
-            break;
-          }
         } else if (q.type == "number" || q.type=="text") {
           preQ = q;
           questionsList.push(<CustomInput 
@@ -301,6 +155,9 @@ class Main extends React.Component<Props, {}> {
           var qe = this.questions.data.questionnaire.questions[i];
           var q = qe;
           q.key = q.id;
+          if (q.answerState == "valid") {
+            continue;
+          }
           if (preQ && preQ.hasReflexive) {
             //this.setLastAnsweredQuestion(preQ);
             boundaryReached = true;
@@ -319,22 +176,20 @@ class Main extends React.Component<Props, {}> {
                 /> )
             }
           } else  if (q.type == "label") {
-            return questionsList.push( <Label 
+            questionsList.push( <Label 
                     {...q}
                   />)
           } else if (q.type == "group" || q.type == "assessment-factor-group") {
-            //this.setLastAnsweredQuestion(preQ);
-            if (!preQ) {
-              return this.reRecursiveGetQuestions1(q.questions, questionsList, preQ)
-            } else {
-              break;
-            }
+              var questionsFromGroup = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ)
+              if(questionsFromGroup.length > 0) {
+                return questionsFromGroup;
+              }
           } else if (q.type == "number" || q.type=="text") {
-            return questionsList.push(<CustomInput 
+            questionsList.push(<CustomInput 
                     {...q}
                   />)
           } else if (q.type == "date") {
-            return questionsList.push(<QuestionsCustomDatePicker 
+            questionsList.push(<QuestionsCustomDatePicker 
                       question={q}
                       error={""}
                       onChange={this.onChangeInput.bind(this)}
@@ -347,17 +202,18 @@ class Main extends React.Component<Props, {}> {
       return null;
     }
   }
+
   getQuestions(lastAnsweredQuestion) {
     if (lastAnsweredQuestion) {
 
     } else {
-      console.log(this.recursiveGetQuestions1());
       return this.recursiveGetQuestions1();
     }
   }
   onQuestionSubmit() {
+    console.log("ANKJHKJHK")
     this.props.postQuestions(this.questions).then(() => {
-      console.log(this.props.questions);
+      //this.questions = JSON.parse(JSON.stringify(this.props.questions));
     }).catch(()=>{
       console.log(this.props.questions);
     });
