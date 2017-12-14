@@ -39,10 +39,7 @@ class Main extends React.Component<Props, {}> {
       d.setTime(d.getTime() + (exdays*24*60*60*1000));
       var expires = "expires="+ d.toUTCString();
       document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  },
-  componentDidMount() {
-
-  },
+  }
   componentWillMount() {
     if(this.props.location.query.agent_id) {
       this.setCookie("agent_id", this.props.location.query.agent_id, 1)

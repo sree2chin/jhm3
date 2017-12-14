@@ -14,9 +14,9 @@ export default class CustomSelect extends React.Component<Props, {}> {
   state = {}
   onChange(val) {
     this.setState({
-      state: val
+      state: val.id
     });
-    this.props.onChange(this.props.question, val);
+    this.props.onChange(this.props.question, {id: val.id});
   }
   getStateObjects() {
     var options = this.props.question.options
@@ -48,7 +48,7 @@ export default class CustomSelect extends React.Component<Props, {}> {
               options={statesObjects}
               value={this.state.state}
               onChange={(stateObj)=>{
-                this.onChange(stateObj.id)
+                this.onChange(stateObj)
               }}
               className={""}
             />

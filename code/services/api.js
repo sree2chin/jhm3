@@ -114,10 +114,11 @@ module.exports = new function(){
     });
   };
 
-  this.postQuestions = function(req, cb){
+  this.postQuestions = function(data, cb){
     var formData = {
-      applicants: JSON.stringify(data)
+      input_json: JSON.stringify(data.data)
     };
+    
     request({
       url: restOptions.host + '/v1/questions/questions', 
       headers: {
@@ -126,7 +127,7 @@ module.exports = new function(){
       method: 'POST',
       formData: formData
     }, function callback(err, httpResponse, body) {
- 
+      console.log(JSON.stringify(err));
       cb(err, httpResponse);
     });
   };

@@ -30,7 +30,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
       [key]: moment(new Date(value)),
       formattedDate
     });
-    this.props.onChange( this.props.question, moment(value));
+    this.props.onChange( this.props.question, moment(value).format("YYYY-MM-DD"));
   }
 
   getClassName() {

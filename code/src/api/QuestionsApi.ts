@@ -11,7 +11,7 @@ interface QuotesApiI {
 class QuestionsApi {
 
 
-  get(payload) : Promise<any> {
+  get() : Promise<any> {
     return fetch('/v1/questions/questions', {
         method: "GET",
 
@@ -31,8 +31,8 @@ class QuestionsApi {
 
   post(payload) : Promise<any> {
     return fetch('/v1/post/questions/questions', {
-        method: "GET",
-
+        method: "POST",
+        body: JSON.stringify(payload),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'

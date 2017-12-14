@@ -14,9 +14,9 @@ export default class SingleSelection extends React.Component<Props, {}> {
   state={}
   onChange(val) {
     this.setState({
-      selectedId: val
+      selectedId: val.id
     });
-    this.props.onChange(this.props.question, val);
+    this.props.onChange(this.props.question, {id: val.id});
   }
 
   public render() {
@@ -34,8 +34,8 @@ export default class SingleSelection extends React.Component<Props, {}> {
           <Col sm={12} style={{paddingRight: "22px", marginBottom: "0px"}} className="person-gender-container">
             <Row>
               <Col xs={6}>
-                <Button className={`c-button-default circular ${this.state.selectedId == question.options[0].id ? "active" : ""}`}  className={`c-button-default circular`} onClick={(){
-                      this.onChange(question.options[0].id)
+                <Button className={`c-button-default circular ${this.state.selectedId == question.options[0].id ? "active" : ""}`} onClick={(){
+                      this.onChange(question.options[0])
                     }}
                   >
                     {question.options[0].label}
@@ -43,7 +43,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
               </Col>
               <Col xs={6}>
                 <Button style={{marginBottom: "0px"}} className={`c-button-default circular ${this.state.selectedId == question.options[1].id ? "active" : ""}`} onClick={(){
-                      this.onChange(question.options[1].id)
+                      this.onChange(question.options[1])
                     }}
                   >
                     {question.options[1].label}

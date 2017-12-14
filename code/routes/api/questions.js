@@ -16,8 +16,8 @@ module.exports = function(app) {
     });
   });
 
-  app.get(prefix + '/post/questions/questions', function(req, res) {
-    QuestionsService.getQuestions(req, function(statusCode, data) {
+  app.post(prefix + '/post/questions/questions', function(req, res) {
+    QuestionsService.postQuestions(req, function(statusCode, data) {
       res.setHeader('Content-Type', 'application/json');
       res.send(data);
     });

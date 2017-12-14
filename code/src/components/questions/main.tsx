@@ -12,7 +12,7 @@ import CustomSelect from "./CustomSelect";
 import QuestionsCustomDatePicker from "./QuestionsCustomDatePicker";
 import Subheader from "../common/subheader";
 import {each, isEmpty, map} from "underscore";
-import {getQuestions} from '../../actions/Questions';
+import {getQuestions, postQuestions} from '../../actions/Questions';
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
@@ -292,7 +292,7 @@ class Main extends React.Component<Props, {}> {
   }
 
   recursiveGetQuestions1() {
-    if (!isEmpty(this.questions)) {
+    if (!isEmpty(this.questions) && !isEmpty(this.questions.data)) {
       if (this.questions.data.questionnaire.questions) {
         var preQ = null;
         var questionsList = [];
@@ -356,7 +356,11 @@ class Main extends React.Component<Props, {}> {
     }
   }
   onQuestionSubmit() {
-
+    this.props.postQuestions(this.questions).then(() => {
+      console.log(this.props.questions);
+    }).catch(()=>{
+      console.log(this.props.questions);
+    });
   }
 
   getCurrentSetOfQuestions() {
@@ -377,7 +381,7 @@ class Main extends React.Component<Props, {}> {
         </Row>
         <Row>
           <Col sm={4} className="c-center">
-          <Button className={`c-button-default circular`}  onClick={(){
+          <Button className={`c-button-default circular`}  onClick={()=>{
                 this.onQuestionSubmit()
               }}
             >
@@ -393,7 +397,7 @@ class Main extends React.Component<Props, {}> {
 const mapStateToProps = (state: any): Props => {
   return {
     questions: state.questions.questions
-  };
+  }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): Props => {
@@ -402,7 +406,7 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
       return dispatch(getQuestions(data))
     },
     postQuestions: (data: any, moreInfo: any) => {
-      return ;//dispatch(postQuestions(data, moreInfo))
+      return dispatch(postQuestions(data, moreInfo));
     }
   };
 }
