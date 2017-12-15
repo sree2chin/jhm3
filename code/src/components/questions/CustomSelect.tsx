@@ -37,11 +37,11 @@ export default class CustomSelect extends React.Component<Props, {}> {
     var question = this.props.question;
 
     return (
-     <div className="row c-quote">
-        <Col sm={12} className={"c-subheader-text"}>
+     <div>
+        <Col sm={12} className={"c-subheader-text"} style={{marginTop: "5px", paddingLeft: "0px", marginBottom: "5px"}}>
           {question.caption}
         </Col>
-          <Col sm={12} style={{paddingRight: "22px", marginBottom: "0px"}} className="person-gender-container">
+          <Col sm={12} style={{paddingRight: "15px", marginBottom: "0px"}} className="person-gender-container">
             <Row>
             <Select
               name="form-field-name1"

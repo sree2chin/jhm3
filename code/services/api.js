@@ -114,8 +114,7 @@ module.exports = new function(){
     });
   };
 
-  this.postQuestions = function(reqObj, cb){
-    console.log("\n\ndata.data: " + reqObj.data.language +  "\n\n\n");
+  this.postQuestions = function(reqObj, cb){    
     var formData = {
       input_json: JSON.stringify(reqObj.data)
     };

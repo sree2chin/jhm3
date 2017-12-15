@@ -27,7 +27,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
     var question = this.props.question;
 
     return (
-     <div className="row c-quote">
+     <div className="row">
         <Col sm={12} className={"c-subheader-text"}>
           {question.caption}
         </Col>

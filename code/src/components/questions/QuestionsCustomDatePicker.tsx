@@ -49,7 +49,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
     var question = this.props.question;
     return (
         <Row style={{marginBottom: "10px", marginLeft: "0px"}}>
-          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "0px", marginBottom: "3px"}}>
+          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "20px", marginBottom: "5px", paddingLeft: "0px"}}>
             {question.caption}
           </Col>
           <Col sm={12} className="birth-date-picker-container" >
@@ -71,7 +71,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
 
           </Col>
           <Col sm={12} className={`c-subheader-text error`}>
-            Please select your birth date.
+            
           </Col> 
         </Row>
     );
