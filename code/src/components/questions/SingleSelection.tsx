@@ -4,7 +4,8 @@ import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 interface Props extends React.Props<SingleSelection> {
   question: any,
   onChange: any,
-  error: any
+  error: any,
+  alreadyOnceSubmitted: any
 }
 
 export default class SingleSelection extends React.Component<Props, {}> {
@@ -17,6 +18,19 @@ export default class SingleSelection extends React.Component<Props, {}> {
       selectedId: val.id
     });
     this.props.onChange(this.props.question, {id: val.id});
+  }
+
+  validate() {
+    if(!this.props.alreadyOnceSubmitted) {return true;}
+    if (this.props.question.constraints) {
+      var constraints = this.props.question.constraints;
+      if (constraints.required) {
+        return this.props.question.answer && this.props.question.answer.id && this.props.question.answer.id.length > 0;
+      }
+      return true;
+    } else {
+      return true;
+    }
   }
 
   public render() {
@@ -52,7 +66,11 @@ export default class SingleSelection extends React.Component<Props, {}> {
             </Row>
 
             <Col sm={12} className={`c-subheader-text error`} style={{paddingLeft: "0px", marginTop: "0px"}}>
-              
+              {!this.validate() && 
+                <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
+                  {question.constraints.patternViolationMessage || "Required"}
+                </div>
+              }
             </Col> 
           </Col> 
       </div>

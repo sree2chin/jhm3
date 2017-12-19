@@ -4,19 +4,44 @@ import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 interface Props extends React.Props<CustomInput> {
   question: any,
   onChange: any,
-  error: any
+  error: any,
+  alreadyOnceSubmitted: any
 }
 
 export default class CustomInput extends React.Component<Props, {}> {
   constructor(props : Props){
     super(props);
+    this.validate.bind(this);
   }
+  state = {};
   getClassName() {
     var className = "form-control ";
     /*if(this.props.className) {
       className = className + this.props.className;
     }*/
     return className;
+  }
+  validate() {
+    if(!this.props.alreadyOnceSubmitted) {return true;}
+    if (this.props.question.constraints) {
+      var constraints = this.props.question.constraints;
+      var isValid = true;
+
+      if (constraints.required) {
+        if (constraints.pattern) {
+          if (this.props.question.answer) {
+            return new RegExp(this.props.question.constraints.pattern).test(this.props.question.answer)
+          } else {
+            return false;
+          }
+        }
+        return this.props.question.answer && this.props.question.answer.length > 0;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
   }
   public render() {
     var wrapperClass : string = 'form-group';
@@ -34,11 +59,14 @@ export default class CustomInput extends React.Component<Props, {}> {
             className={this.getClassName()}
             placeholder={question.placeholder}
             ref={question.name}
-            value={question.value}
             onChange={(e)=>{
               this.props.onChange(question, e.target.value)
             }} />
-          <div className="input">{question.error}</div>
+          {!this.validate() && 
+            <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
+              {question.constraints.patternViolationMessage || "Required"}
+            </div>
+          }
         </div>
       </div>
     );

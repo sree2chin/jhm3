@@ -8,6 +8,7 @@ interface Props extends React.Props<QuestionsCustomDatePicker> {
   question: any,
   onChange : any,
   error : string,
+  alreadyOnceSubmitted: any
 }
 
 export default class QuestionsCustomDatePicker extends React.Component<Props, {}> {
@@ -40,7 +41,26 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
     }
     return className;
   }
+  validate(q) {
+    if(!this.props.alreadyOnceSubmitted) {return true;}
+    if (this.props.question.constraints) {
+      var constraints = this.props.question.constraints;
+      var isValid = true;
 
+      if (constraints.required) {
+        if (this.props.question.answer) {
+          if (constraints.minValue) {
+            return constraints.minValue<=this.props.question.answer;
+          } else {
+            return this.props.question.answer;
+          }
+        }
+        return false;
+      }
+    } else {
+      return true;
+    }
+  }
   public render() {
     var wrapperClass : string = 'form-group';
     if (this.props.error && this.props.error.length > 0) {
@@ -70,9 +90,11 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
               </FormGroup>
 
           </Col>
-          <Col sm={12} className={`c-subheader-text error`}>
-            
-          </Col> 
+            {!this.validate() && 
+              <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
+                {question.constraints.minValueViolationMessage}
+              </div>
+            }
         </Row>
     );
   }

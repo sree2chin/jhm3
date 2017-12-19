@@ -4,7 +4,8 @@ import Select from 'react-select';
 interface Props extends React.Props<CustomSelect> {
   onChange: any,
   question: any,
-  error: any
+  error: any,
+  alreadyOnceSubmitted: any
 }
 
 export default class CustomSelect extends React.Component<Props, {}> {
@@ -18,15 +19,31 @@ export default class CustomSelect extends React.Component<Props, {}> {
     });
     this.props.onChange(this.props.question, {id: val.id});
   }
+  
   getStateObjects() {
-    var options = this.props.question.options
-    for(var i in options) {
-      options.push(
-        { value: options[i].id, 
-        label:  options[i].label}
+    var options = JSON.parse(JSON.stringify(this.props.question.options));
+    var finalOptions = [];
+    for(var i=0; i<options.length; i++) {
+      finalOptions.push(
+        { id: options[i].id,
+          value: options[i].id, 
+          label:  options[i].label
+        }
       );
     }
-    return options;
+    return finalOptions;
+  }
+  validate() {
+    if(!this.props.alreadyOnceSubmitted) {return true;}
+    if (this.props.question.constraints) {
+      var constraints = this.props.question.constraints;
+      if (constraints.required) {
+        return this.props.question.answer && this.props.question.answer.id;
+      }
+      return true;
+    } else {
+      return true;
+    }
   }
   public render() {
     var wrapperClass : string = 'form-group';
@@ -54,8 +71,12 @@ export default class CustomSelect extends React.Component<Props, {}> {
             />
             </Row>
 
-            <Col sm={12} className={`c-subheader-text error`} style={{paddingLeft: "0px", marginTop: "0px"}}>
-
+            <Col sm={12} className={`c-subheader-text error`} style={{paddingLeft: "0px", marginTop: "0px", marginLeft: "-15px"}}>
+              {!this.validate() && 
+                <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
+                  {question.constraints.patternViolationMessage || "Required"}
+                </div>
+              }
             </Col> 
           </Col> 
       </div>

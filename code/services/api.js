@@ -102,6 +102,7 @@ module.exports = new function(){
   };
 
   this.getQuestions = function(req, cb){
+    console.log("IN GET QUESTIONS");
     request({
       url: restOptions.host + '/v1/questions/questions', 
       headers: {
@@ -109,7 +110,7 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
- 
+      
       cb(err, httpResponse);
     });
   };

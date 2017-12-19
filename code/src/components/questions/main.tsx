@@ -53,12 +53,14 @@ class Main extends React.Component<Props, {}> {
                     question={q}
                     error={""}
                     onChange={this.onChangeInput.bind(this)}
+                    alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
                   />
             } else {
               return <CustomSelect 
                 question={q}
                 error={""}
                 onChange={this.onChangeInput.bind(this)}
+                alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               />
             }
 
@@ -73,6 +75,7 @@ class Main extends React.Component<Props, {}> {
                     question={q}
                     error={""}
                     onChange={this.onChangeInput.bind(this)}
+                    alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
                   />
           } else if (q.type == "date") {
             return <QuestionsCustomDatePicker 
@@ -87,7 +90,7 @@ class Main extends React.Component<Props, {}> {
     }
   }
 
-  reRecursiveGetQuestions1(data, questionsList, preQ) {
+  reRecursiveGetQuestions1(data, questionsList, preQ, actualQuestionLists) {
     if (!isEmpty(data)) {
       var boundaryReached = false;
       for(var i=0; i<(data.length); i++) {
@@ -97,7 +100,7 @@ class Main extends React.Component<Props, {}> {
         if (q.answerState == "valid") {
           if (q.hasReflexive) {
             if (q.questions){
-              var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ);
+              var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists);
               if(reflexsiveQuestionList.length > 0){
                 return reflexsiveQuestionList;
               } else {
@@ -108,8 +111,11 @@ class Main extends React.Component<Props, {}> {
           continue;
         }
         if (preQ && preQ.hasReflexive) {
-          boundaryReached = true;
-          break;
+          if (questionsList.length > 0) {
+            this.actualQuestionLists = actualQuestionLists;
+            boundaryReached = true;
+            return questionsList;
+          } 
         }
         if (q.type == "singleselection") {
           preQ = q;
@@ -118,13 +124,19 @@ class Main extends React.Component<Props, {}> {
                   question={q}
                   error={""}
                   onChange={this.onChangeInput.bind(this)}
+                  alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                  key={q.id}
                 />);
+                actualQuestionLists.push(q);
           } else {
             questionsList.push( <CustomSelect 
               question={q}
               error={""}
               onChange={this.onChangeInput.bind(this)}
+              alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+              key={q.id}
               /> )
+              actualQuestionLists.push(q);
           }
         } else  if (q.type == "label") {
           /*preQ = q;
@@ -140,10 +152,11 @@ class Main extends React.Component<Props, {}> {
                 }
               }
               if(!allQuestionsAreLabels) {
+                this.actualQuestionLists = actualQuestionLists;
                 return questionsList;
               }
             }
-            var questionsFromGroup = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ)
+            var questionsFromGroup = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists)
             if(questionsFromGroup.length > 0) {
               var allQuestionsAreLabels = true;
               for(var i=0; i<questionsFromGroup.length; i++) {
@@ -166,10 +179,11 @@ class Main extends React.Component<Props, {}> {
               }
             }
             if(!allQuestionsAreLabels) {
+              this.actualQuestionLists = actualQuestionLists;
               return questionsList;
             }
           }
-          var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ)
+          var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ, actualQuestionLists)
           if(questionsFromGroup.length > 0) {
             var allQuestionsAreLabels = true;
             for(var i=0; i<questionsFromGroup.length; i++) {
@@ -189,18 +203,26 @@ class Main extends React.Component<Props, {}> {
                   question={q}
                   error={""}
                   onChange={this.onChangeInput.bind(this)}
+                  alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                  key={q.id}
                 />)
+                actualQuestionLists.push(q);
         } else if (q.type == "date") {
           preQ = q;
           questionsList.push(<QuestionsCustomDatePicker 
                   question={q}
                   error={""}
                   onChange={this.onChangeInput.bind(this)}
+                  alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                  key={q.id}
                 />)
+                actualQuestionLists.push(q);
         }
       };
+      this.actualQuestionLists = actualQuestionLists;
       return questionsList;
     } else {
+      this.actualQuestionLists = actualQuestionLists;
       return questionsList;
     }
   }
@@ -210,6 +232,7 @@ class Main extends React.Component<Props, {}> {
       if (this.questions.data.questionnaire.questions) {
         var preQ = null;
         var questionsList = [];
+        var actualQuestionLists = [];
         var boundaryReached = false;
         for(var i=0; i<(this.questions.data.questionnaire.questions.length); i++) {
           var qe = this.questions.data.questionnaire.questions[i];
@@ -218,7 +241,7 @@ class Main extends React.Component<Props, {}> {
           if (q.answerState == "valid") {
             if (q.hasReflexive) {
               if (q.questions){
-                var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ);
+                var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists);
                 if(reflexsiveQuestionList.length > 0){
                   return reflexsiveQuestionList;
                 } else {
@@ -232,24 +255,29 @@ class Main extends React.Component<Props, {}> {
             //this.setLastAnsweredQuestion(preQ);
             boundaryReached = true;
             if (questionsList.length > 0) {
+              this.actualQuestionLists = actualQuestionLists;
               return questionsList;
-            }
-            preQ = null;
-            break;
+            } 
           }
           if (q.type == "singleselection") {
-            if(q.options.length ==2) {           
+            if(q.options.length == 2) {           
               questionsList.push(<SingleSelection 
                     question={q}
                     error={""}
                     onChange={this.onChangeInput.bind(this)}
+                    alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                    key={q.id}
                   />);
+                  actualQuestionLists.push(q);
             } else {
               questionsList.push( <CustomSelect 
                   question={q}
                   error={""}
                   onChange={this.onChangeInput.bind(this)}
+                  alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                  key={q.id}
                 /> )
+                actualQuestionLists.push(q);
             }
           } else  if (q.type == "label") {
             /*questionsList.push( <Label 
@@ -264,10 +292,11 @@ class Main extends React.Component<Props, {}> {
                   }
                 }
                 if(!allQuestionsAreLabels) {
+                  this.actualQuestionLists = actualQuestionLists;
                   return questionsList;
                 }
               }
-              var questionsFromGroup = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ)
+              var questionsFromGroup = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists)
               if(questionsFromGroup.length > 0) {
                 var allQuestionsAreLabels = true;
                 for(var i=0; i<questionsFromGroup.length; i++) {
@@ -290,10 +319,11 @@ class Main extends React.Component<Props, {}> {
                 }
               }
               if(!allQuestionsAreLabels) {
+                this.actualQuestionLists = actualQuestionLists;
                 return questionsList;
               }
             }
-            var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ)
+            var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ, actualQuestionLists)
             if(questionsFromGroup.length > 0) {
               var allQuestionsAreLabels = true;
               for(var i=0; i<questionsFromGroup.length; i++) {
@@ -312,13 +342,19 @@ class Main extends React.Component<Props, {}> {
               question={q}
               error={""}
               onChange={this.onChangeInput.bind(this)}
+              alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+              key={q.id}
             />)
+            actualQuestionLists.push(q);
           } else if (q.type == "date") {
             questionsList.push(<QuestionsCustomDatePicker 
                       question={q}
                       error={""}
                       onChange={this.onChangeInput.bind(this)}
+                      alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                      key={q.id}
                   />)
+                  actualQuestionLists.push(q);
           }
           preQ = q;
         };
@@ -335,18 +371,96 @@ class Main extends React.Component<Props, {}> {
       return this.recursiveGetQuestions1();
     }
   }
+
+  validateTextField(q) {
+    if (q.constraints) {
+      var constraints = q.constraints;
+      var isValid = true;
+
+      if (constraints.required) {
+        if (constraints.pattern) {
+          if (q.answer) {
+            return new RegExp(q.constraints.pattern).test(q.answer)
+          } else {
+            return false;
+          }
+        }
+        return q.answer && q.answer.length > 0;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  }
+
+  validateSingleSelection(q) {
+    if (q.constraints) {
+      var constraints = q.constraints;
+      if (constraints.required) {
+        return q.answer && q.answer.id && q.answer.id.length > 0;
+      }
+      return true;
+    } else {
+      return true;
+    }
+  }
+
+  validateCustomDatePicker(q) {
+    if (q.constraints) {
+      var constraints = q.constraints;
+      var isValid = true;
+
+      if (constraints.required) {
+        if (q.answer) {
+          if (constraints.minValue) {
+            return constraints.minValue<=q.answer;
+          } else {
+            return q.answer;
+          }
+        }
+        return false;
+      }
+    } else {
+      return true;
+    }
+  }
   onQuestionSubmit() {
-    console.log("ANKJHKJHK")
-    this.props.postQuestions(this.questions).then(() => {
-      //this.questions = JSON.parse(JSON.stringify(this.props.questions));
-    }).catch(()=>{
-      console.log(this.props.questions);
+    var allQuestionsValid = true;
+    this.setState({
+      alreadyOnceSubmitted: true
+    })
+
+    each(this.actualQuestionLists, (q)=> {
+      if (q.type == "text") {
+        allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
+      } else if (q.type == "singleselection") {
+        allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q); 
+      } else if (q.type == "date") {
+        allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q); 
+      }
     });
+
+    if (allQuestionsValid) {
+      this.setState({
+        submittingQuestions: true
+      });
+      this.props.postQuestions(this.questions).then(() => {
+        this.setState({
+          alreadyOnceSubmitted: false,
+          submittingQuestions: false
+        })
+        //this.questions = JSON.parse(JSON.stringify(this.props.questions));
+      }).catch(()=>{
+        console.log(this.props.questions);
+      });
+    }
   }
 
   getCurrentSetOfQuestions() {
     if (this.questions) {
-      return this.getQuestions(null);
+      this.questionComponents = this.getQuestions(null);
+      return this.questionComponents;
     } else {
       return null;
     }
