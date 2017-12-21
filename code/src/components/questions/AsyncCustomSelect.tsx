@@ -125,10 +125,10 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
         <Col sm={12} className={"c-subheader-text"} style={{marginTop: "5px", paddingLeft: "0px", marginBottom: "5px"}}>
           {question.caption}
         </Col>
-          <Col sm={12} style={{paddingRight: "15px", marginBottom: "0px"}} className="person-gender-container">
+          <Col sm={12} style={{paddingRight: "15px", marginBottom: "15px"}} className="async-auto-suggest-container">
             <Row>
               <Autosuggest
-                datalist={this.state.items}
+                datalist={this.state.items || []}
                 datalistPartial
                 datalistMessage={this.state.reposMessage}
                 onDatalistMessageSelect={this.state.reposMore}

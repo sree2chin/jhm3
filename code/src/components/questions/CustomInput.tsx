@@ -35,7 +35,7 @@ export default class CustomInput extends React.Component<Props, {}> {
             return false;
           }
         }
-        return this.props.question.answer && this.props.question.answer.length > 0;
+        return this.props.question.answer && String(this.props.question.answer).length > 0;
       } else {
         return true;
       }

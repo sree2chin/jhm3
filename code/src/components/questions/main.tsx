@@ -406,7 +406,7 @@ class Main extends React.Component<Props, {}> {
             return false;
           }
         }
-        return q.answer && q.answer.length > 0;
+        return q.answer && String(q.answer).length > 0;
       } else {
         return true;
       }
