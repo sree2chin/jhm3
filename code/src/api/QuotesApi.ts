@@ -27,7 +27,7 @@ class QuotesApi {
             resolve(response)
           });
         })
-    }));
+    });
   };
 
   submitProductsForm(payload) : Promise<any> {
@@ -45,7 +45,7 @@ class QuotesApi {
             resolve(response)
           });
         })
-    }));
+    });
   };
 
   
@@ -64,7 +64,7 @@ class QuotesApi {
             resolve(response)
           });
         })
-    }));
+    });
   };
 
   saveQuoteForm(payload) : Promise<any> {
@@ -82,7 +82,7 @@ class QuotesApi {
             resolve(response)
           });
         })
-    }));
+    });
   };
 }
 

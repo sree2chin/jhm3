@@ -16,6 +16,7 @@ module.exports = new function() {
     }
     console.log("in questions -2 ")
     ApiService.getQuestions(req, function(err, res) {
+      console.log("in questions -3")
       if (!err && res.statusCode == 200) {
         callback(res.statusCode, res.body);
       } else {
@@ -23,6 +24,7 @@ module.exports = new function() {
       }
     });
   };
+
   this.postQuestions = function(req, callback) {
     ApiService.postQuestions(req.body, function(err, res) {
       if (!err && res.statusCode == 200) {
@@ -33,4 +35,17 @@ module.exports = new function() {
       }
     });
   };
+
+  this.getFactorsearch = function(req, callback) {
+    console.log("req.body: " + JSON.stringify(req.body));
+    ApiService.getFactorsearch(req.body, function(err, res) {
+      if (!err && res.statusCode == 200) {
+        callback(res.statusCode, res.body);
+      } else {
+        callback(res.statusCode, res.body);
+      }
+    });
+  };
+
+  
 };

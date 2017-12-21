@@ -18,7 +18,17 @@ function postQuestions(data) {
 	};
 }
 
+function getFactorsearch(data) {
+	return (dispatch) => {
+		return QuestionsApi.getFactorsearch(data).then(
+			data => dispatch({
+				type: 'GET_FACTOR_SEARCH_OPTIONS', questions: data
+			}));
+	};
+}
+
 export {
 	getQuestions,
-	postQuestions
+	postQuestions,
+	getFactorsearch
 }

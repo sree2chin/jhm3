@@ -22,5 +22,12 @@ module.exports = function(app) {
       res.send(data);
     });
   });
+
+  app.post(prefix + '/questions/factorsearch', function(req, res) {
+    QuestionsService.getFactorsearch(req, function(statusCode, data) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(data);
+    });
+  });
   
 };

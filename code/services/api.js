@@ -102,7 +102,6 @@ module.exports = new function(){
   };
 
   this.getQuestions = function(req, cb){
-    console.log("IN GET QUESTIONS");
     request({
       url: restOptions.host + '/v1/questions/questions', 
       headers: {
@@ -110,7 +109,6 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
-      
       cb(err, httpResponse);
     });
   };
@@ -132,6 +130,22 @@ module.exports = new function(){
       cb(err, httpResponse);
     });
   };
+
+  this.getFactorsearch = function(reqObj, cb){    
+    request({
+      url: restOptions.host + '/v1/questions/factorsearch', 
+      headers: {
+        'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
+      },
+      method: 'POST',
+      formData: reqObj
+    }, function callback(err, httpResponse, body) {
+      console.log(JSON.stringify(err));
+      cb(err, httpResponse);
+    });
+  };
+
+  
 
   this.socialAuth = function(data, type, cb){
     restOptions.path = '/api/users/authenticate/'+type;

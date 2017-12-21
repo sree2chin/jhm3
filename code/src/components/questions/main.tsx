@@ -9,10 +9,11 @@ import SingleSelection from "./SingleSelection";
 import Label from "./Label"
 import CustomInput from "./CustomInput";
 import CustomSelect from "./CustomSelect";
+import AsyncCustomSelect from "./AsyncCustomSelect";
 import QuestionsCustomDatePicker from "./QuestionsCustomDatePicker";
 import Subheader from "../common/subheader";
 import {each, isEmpty, map} from "underscore";
-import {getQuestions, postQuestions} from '../../actions/Questions';
+import {getQuestions, postQuestions, getFactorsearch} from '../../actions/Questions';
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
@@ -143,7 +144,7 @@ class Main extends React.Component<Props, {}> {
           questionsList.push( <Label 
                   {...q}
                 />)*/
-        } else if (q.type == "group" || q.type == "assessment-factor-group") {
+        } else if (q.type == "group" || q.type == "assessment-factor-group" || q.type == "list") {
             if (questionsList.length > 0) {
               var allQuestionsAreLabels = true;
               for(var i=0; i<questionsList.length; i++) {
@@ -217,6 +218,16 @@ class Main extends React.Component<Props, {}> {
                   key={q.id}
                 />)
                 actualQuestionLists.push(q);
+        } else if (q.type == "assessment-factor-search") {
+          questionsList.push(<AsyncCustomSelect 
+              question={q}
+              error={""}
+              onChange={this.onChangeInput.bind(this)}
+              alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+              getFactorsearch={this.props.getFactorsearch.bind(this)}
+              key={q.id}
+          />)
+          actualQuestionLists.push(q);
         }
       };
       this.actualQuestionLists = actualQuestionLists;
@@ -283,7 +294,7 @@ class Main extends React.Component<Props, {}> {
             /*questionsList.push( <Label 
                     {...q}
                   />)*/
-          } else if (q.type == "group" || q.type == "assessment-factor-group") {
+          } else if (q.type == "group" || q.type == "assessment-factor-group" || q.type == "list") {
               if (questionsList.length > 0) {
                 var allQuestionsAreLabels = true;
                 for(var i=0; i<questionsList.length; i++) {
@@ -355,6 +366,16 @@ class Main extends React.Component<Props, {}> {
                       key={q.id}
                   />)
                   actualQuestionLists.push(q);
+          } else if (q.type == "assessment-factor-search") {
+            questionsList.push(<AsyncCustomSelect 
+                question={q}
+                error={""}
+                onChange={this.onChangeInput.bind(this)}
+                alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                getFactorsearch={this.props.getFactorsearch.bind(this)}
+                key={q.id}
+            />)
+            actualQuestionLists.push(q);
           }
           preQ = q;
         };
@@ -502,6 +523,9 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     },
     postQuestions: (data: any, moreInfo: any) => {
       return dispatch(postQuestions(data, moreInfo));
+    },
+    getFactorsearch: (data: any, moreInfo: any) => {
+      return dispatch(getFactorsearch(data, moreInfo));
     }
   };
 }
