@@ -62,9 +62,9 @@ export default class Plan extends React.Component<Props, {}> {
     var tenYearPlanLengthProducts = ["Vantis Velocity Term".toLowerCase(), "Vantis Velocity Term with ROP".toLowerCase()];
     var straightLifeProducts = ["Vantis Velocity Whole Life".toLowerCase(), "Vantis Velocity Whole Life Plus".toLowerCase(), "Gauranteed Golden".toLowerCase()];
 
-    var productId = this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.product_id; 
+    var productId = this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.product_id;
     var productList = this.props.productInfo && this.props.productInfo.products_data && this.props.productInfo.products_data.products_list;
-    
+
     productList = productList || [];
     var product = find(productList, (product)=>{
       return product.ProductID == productId
@@ -86,7 +86,7 @@ export default class Plan extends React.Component<Props, {}> {
     if (isEmpty(plan)) {
       plan = JSON.parse(JSON.stringify(plansList[0]));
     }
-    
+
     return plan;
   },
 
@@ -149,7 +149,7 @@ export default class Plan extends React.Component<Props, {}> {
       sFaceAmount = this.state.sFaceAmount;
     }
     var face = find(paymentSchedules, (paymentSchedule)=>{
-      return (parseInt(paymentSchedule.FaceAmount) <= parseInt(sFaceAmount)) 
+      return (parseInt(paymentSchedule.FaceAmount) <= parseInt(sFaceAmount))
     });
     var p = [];
 
@@ -168,14 +168,14 @@ export default class Plan extends React.Component<Props, {}> {
 
     return p;
   },
-  
+
   state = {},
   stopSliderChanging() {
     this.setState({
       sliderSliding: false
     });
   },
-  handleChange(value) { 
+  handleChange(value) {
     var sFaceAmount = parseInt(value);
     if ( sFaceAmount > parseInt(this.state.selectedPlan.FaceMax)) {
       sFaceAmount = parseInt(this.state.selectedPlan.FaceMax)
@@ -221,9 +221,9 @@ export default class Plan extends React.Component<Props, {}> {
     }
   },
   getProductDisplayName() {
-    var productId = this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.product_id; 
+    var productId = this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.product_id;
     var productList = this.props.productInfo && this.props.productInfo.products_data && this.props.productInfo.products_data.products_list;
-    
+
     productList = productList || [];
     var product = find(productList, (product)=>{
       return product.ProductID == productId
@@ -237,15 +237,32 @@ export default class Plan extends React.Component<Props, {}> {
     const personIndex = this.props.personIndex;
     const plansObjs = this.getPlansDetailsForDropdown();
     const personsContainerWidth = this.props.noOfPersons == 2 ? 6 : 12;
-
+    const product_name = this.getProductDisplayName().toString().toLowerCase();
+    console.log('product name', product_name);
+    if(product_name == 'super ez complete' || product_name == 'super ez'){
+            const product_image = 'spwl_image';
+    }else if(product_name == 'vantis velocity whole life'){
+        const product_image = 'whole_life_image';
+    }else if(product_name == 'vantis velocity whole life plus'){
+        const product_image = 'whole_life_plus_image';
+    }else if(product_name == 'vantis velocity term' || product_name == "children's term"){
+        const product_image = 'term_image';
+    }else if(product_name == 'vantis velocity term with rop'){
+        const product_image = 'term_rop_image';
+    }else if(product_name == 'guarented golden'){
+        const product_image = 'guarented_golden_image';
+    }else{
+        const product_image = 'default_image';
+    }
     return (
       <Col sm={12} className={`single-plan-container ${this.props.noOfPersons==2 ? "two-persons-plan-container" : ""}`}>
         <Row className="plan-details-container">
           <Col sm={12} className="c-center">
             <Row>
-              <Col sm={2} style={{width: "16%", height: "90px", backgroundColor: "#317dbd", margin: "20px"}} className="blue-plan-container hidden-xs">
+              <Col sm={3}>
+                <center><div className={`hidden-xs ${product_image}`}></div></center>
               </Col>
-              <Col sm={8} className={`plan-product-info-text`}>
+              <Col sm={9} className={`plan-product-info-text`}>
                 <Row className={`plan-product-name ${window.location.pathname.indexOf("/agent")>=0 ? "agent-page" : ""}`}>
                   {this.getProductDisplayName()}
                 </Row>
@@ -257,8 +274,8 @@ export default class Plan extends React.Component<Props, {}> {
             <Row className="plan-sider-info-text">
               <Col sm={6} className="plan-sider-coverage-container">
                 <Row className="plan-coverage-container">
-                  {(this.state.sFaceAmount && this.state.sFaceAmount !=0) ? 
-                    [<span key="1" style={{fontSize: "26px", textAlign: "right", color: "#009c91"}}>${this.state.sFaceAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </span] : null 
+                  {(this.state.sFaceAmount && this.state.sFaceAmount !=0) ?
+                    [<span key="1" style={{fontSize: "26px", textAlign: "right", color: "#009c91"}}>${this.state.sFaceAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </span] : null
                   }
                   {(this.state.sFaceAmount && this.state.sFaceAmount !=0) ?
                     [<span key="2" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> of</span>] : null
@@ -266,12 +283,12 @@ export default class Plan extends React.Component<Props, {}> {
                   {this.isProductSPWL() || !this.shouldShowPlanDropdowns() ? <span key="3" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Premium </span> : <span key="3" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Coverage </span>}
                 </Row>
                 <Row>
-                  {this.state.selectedPlan && 
+                  {this.state.selectedPlan &&
                     <Col className="plan-faceMin" xs={2}>
                       ${this.getAmountFormat(this.state.selectedPlan.FaceMin)}
                     </Col>
                   }
-                  {this.state.selectedPlan && 
+                  {this.state.selectedPlan &&
                       <Col className="plan-face-val-slider" xs={8}>
                         <Slider
                           min={parseInt(this.state.selectedPlan.slider_min)}
@@ -293,7 +310,7 @@ export default class Plan extends React.Component<Props, {}> {
                         />
                       </Col>
                   }
-                  {this.state.selectedPlan && 
+                  {this.state.selectedPlan &&
                     <Col className="plan-faceMax" xs={2}>
                       ${this.getAmountFormat(this.state.selectedPlan.FaceMax)}
                     </Col>

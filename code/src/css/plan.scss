@@ -6,7 +6,7 @@
 		padding-left: 0px;
     	padding-right: 0px;
     	width: 54.21%;
-    	
+
 	}
 	.all-plans-main-container {
 		width: 54.17%;
@@ -134,9 +134,9 @@
 		.plans-product-header-text-container {
 			width: 54.17%;
 		}
-	}	
+	}
 	.plan-total-text {
-	    font-size: 14px;	
+	    font-size: 14px;
 	    color: #666666;
 	    margin-top: 18px;
 	}
@@ -269,4 +269,38 @@
 			}
 		}
   	}
+		.product_image{
+		    background-size: 100% 100%;
+		    width: 150px;
+		    height: 150px;
+		}
+		.spwl_image{
+		    background-image: url("/dist/images/spwl@2x.png");
+				@extend .product_image;
+		}
+		.whole_life_image{
+		    background-image: url("/dist/images/whole-life@2x.png");
+				@extend .product_image;
+		}
+		.whole_life_plus_image{
+		    background-image: url("/dist/images/whole-life-plus@2x.png");
+				@extend .product_image;
+		}
+		.term_image{
+		    background-image: url("/dist/images/term-life@2x.png");
+				@extend .product_image;
+		}
+		.term_rop_image{
+		    background-image: url("/dist/images/term-rop@2x.png");
+				@extend .product_image;
+		}
+		.guarented_golden_image{
+		    background-image: url("/dist/images/guarented_golden@2x.png");
+				@extend .product_image;
+		}
+		.default_image{
+		    background-image: url("/dist/images/timmer.png");
+		    width: 66px;
+		    height: 90px;
+		}
 }
