@@ -2,15 +2,19 @@ import * as React from 'react';
 import {Link} from 'react-router';
 import { Navbar } from "react-bootstrap"
 import {Button, Row, Col} from "react-bootstrap";
+import {map} from "underscore";
 
 interface Props extends React.Props<cfooter> {
+  breadCrumbs?: any
 }
 
 export default class cfooter extends React.Component<Props, {}> {
   public render() {
+    var breadCrumbs = this.props.breadCrumbs;
+
     return (
       <Navbar className={`cf-nav-main-header subheader`}>
-          <Row>
+          {!breadCrumbs && <Row>
             <Col className={`confirmation-header gather-information-container ${window.location.pathname=="/" || window.location.pathname=="/agent" || window.location.pathname=="/agent/" ? "active" : ""}`} style={{paddingRight: "0px"}}>
               <Row>
                 <Col className="gather-information">
@@ -30,6 +34,17 @@ export default class cfooter extends React.Component<Props, {}> {
                 Next steps
               </span>
             </Col>
+          </Row>}
+          <Row>
+          {breadCrumbs && map(breadCrumbs, (breadCrumb) => 
+            <Col className={`confirmation-header gather-information-container`} style={{paddingRight: "0px"}}>
+              <Row>
+                <Col className="gather-information">
+                  {breadCrumb}
+                </Col>
+              </Row>
+            </Col>
+          )}
           </Row>
       </Navbar>
     );

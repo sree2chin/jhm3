@@ -2,6 +2,7 @@
   "files": [
     "src/css/font.scss",
     "src/css/buttons.scss",
+    "src/css/CustomSelect.scss",
     "src/css/body.scss",
     "src/css/custom-checkbox.scss",
     "src/css/select-persons.scss",

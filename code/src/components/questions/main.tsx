@@ -49,7 +49,7 @@ class Main extends React.Component<Props, {}> {
           var q = qe;
           q.key = q.id;
           if (q.type == "singleselection") {
-            if(q.options.length ==2) {           
+            if(q.options && q.options.length ==2) {           
               return <SingleSelection 
                     question={q}
                     error={""}
@@ -64,8 +64,15 @@ class Main extends React.Component<Props, {}> {
                 alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               />
             }
-
-          } else  if (q.type == "label") {
+          } else if (q.type == "multiselection") {
+            return <CustomSelect 
+                question={q}
+                error={""}
+                onChange={this.onChangeInput.bind(this)}
+                alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                multi={true}
+              />
+          } else if (q.type == "label") {
             return <Label 
                     {...q}
                   />
@@ -97,6 +104,10 @@ class Main extends React.Component<Props, {}> {
       for(var i=0; i<(data.length); i++) {
         var qe = data[i];
         var q = qe;
+        if (q.type == "group") {
+          questionsList.groupHeader = questionsList.groupHeader || [];
+          questionsList.groupHeader.push(q.caption);
+        }
         q.key = q.id;
         if (q.answerState == "valid") {
           if (q.hasReflexive) {
@@ -136,10 +147,20 @@ class Main extends React.Component<Props, {}> {
               onChange={this.onChangeInput.bind(this)}
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               key={q.id}
-              /> )
+            /> )
               actualQuestionLists.push(q);
           }
-        } else  if (q.type == "label") {
+        } else if (q.type == "multiselection") {
+          questionsList.push(<CustomSelect 
+              question={q}
+              error={""}
+              onChange={this.onChangeInput.bind(this)}
+              alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+              multi={true}
+              key={q.id}
+            />)
+          actualQuestionLists.push(q);
+        } else if (q.type == "label") {
           /*preQ = q;
           questionsList.push( <Label 
                   {...q}
@@ -247,6 +268,10 @@ class Main extends React.Component<Props, {}> {
         var boundaryReached = false;
         for(var i=0; i<(this.questions.data.questionnaire.questions.length); i++) {
           var qe = this.questions.data.questionnaire.questions[i];
+          if (qe.type == "group") {
+            questionsList.groupHeader = questionsList.groupHeader || [];
+            questionsList.groupHeader.push(qe.caption);
+          }
           var q = qe;
           q.key = q.id;
           if (q.answerState == "valid") {
@@ -281,7 +306,7 @@ class Main extends React.Component<Props, {}> {
                   />);
                   actualQuestionLists.push(q);
             } else {
-              questionsList.push( <CustomSelect 
+              questionsList.push(<CustomSelect 
                   question={q}
                   error={""}
                   onChange={this.onChangeInput.bind(this)}
@@ -290,7 +315,17 @@ class Main extends React.Component<Props, {}> {
                 /> )
                 actualQuestionLists.push(q);
             }
-          } else  if (q.type == "label") {
+          } else if (q.type == "multiselection") {
+            questionsList.push(<CustomSelect 
+                question={q}
+                error={""}
+                onChange={this.onChangeInput.bind(this)}
+                alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                key={q.id}
+                multi={true}
+              />)
+            actualQuestionLists.push(q);
+          } else if (q.type == "label") {
             /*questionsList.push( <Label 
                     {...q}
                   />)*/
@@ -486,15 +521,41 @@ class Main extends React.Component<Props, {}> {
       return null;
     }
   }
-  public render() {
 
+  getBreadCrumbs() {
+    var breadCrumbs = [];
+    var questions = this.props.questions;
+
+    var questionsList = (questions && questions.data && questions.data.questionnaire && 
+      questions.data.questionnaire.questions) || [];
+
+    if (questionsList) {
+      for(var i=0; i<questionsList.length; i++) {
+        if(questionsList[i].type == "group") {
+          breadCrumbs.push(questionsList[i].caption);
+        }
+      }
+    }
+
+    return breadCrumbs;
+  }
+  public render() {
+    var breadCrumbs = this.getBreadCrumbs();
+    var questionsList = this.getCurrentSetOfQuestions() || [];
     return (
       <div>
         <ScrollToTopOnMount />
-        <Subheader />
+        <Subheader 
+          breadCrumbs={breadCrumbs}
+        />
         <Row className="questions-container c-center">
+          <Row>
+          {map(questionsList.groupHeader, (p)=>{
+            return p || "";        
+          })}
+          </Row>
           <div className="questions-content-container">
-            {this.getCurrentSetOfQuestions()}
+            {questionsList}
           </div>
           <Col style={{marginBottom: "21px!important", marginLeft: "21px!important"}} className="c-center">
             <Button style={{width: "91.5%", marginLeft: "4.5%"}} className={`c-button-default circular`}  onClick={()=>{
