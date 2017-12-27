@@ -13,9 +13,7 @@ var url = require("url");
 module.exports = function(app) {
 
   app.get('/', function(req, res, next) {
-    //res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
     var url_parts = url.parse(req.url, true);
-    console.log("url_parts: " + JSON.stringify(url_parts));
     if (req.session) {
       req.session.queryParams = url_parts.query;
     };
@@ -24,9 +22,7 @@ module.exports = function(app) {
   });
 
   app.get('/questions', function(req, res, next) {
-    //res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
     var url_parts = url.parse(req.url, true);
-    console.log("url_parts: " + JSON.stringify(url_parts));
     if (req.session) {
       req.session.queryParams = url_parts.query;
     };
@@ -35,9 +31,7 @@ module.exports = function(app) {
   });
 
   app.get('/agent', function(req, res, next) {
-    //res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
     var url_parts = url.parse(req.url, true);
-    console.log("url_parts: " + JSON.stringify(url_parts));
     if (req.session) {
       req.session.queryParams = url_parts.query;
     };

@@ -111,8 +111,6 @@ module.exports = new function(){
       input_json: JSON.stringify(req.body.data)
     };
     appendAgentInfo(req, formData);
-    console.log("formData.cfdskj: " + formData.cfdskj);
-    console.log("formData.kjhkjh: " + formData.kjhkjh);
     request({
       url: restOptions.host + '/v1/questions/questions',
       headers: {
@@ -121,7 +119,6 @@ module.exports = new function(){
       method: 'POST',
       formData: formData
     }, function callback(err, httpResponse, body) {
-      console.log(JSON.stringify(err));
       cb(err, httpResponse);
     });
   };
@@ -136,7 +133,6 @@ module.exports = new function(){
       method: 'POST',
       formData: req.body
     }, function callback(err, httpResponse, body) {
-      console.log(JSON.stringify(err));
       cb(err, httpResponse);
     });
   };
