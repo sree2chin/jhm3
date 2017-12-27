@@ -569,11 +569,6 @@ class Main extends React.Component<Props, {}> {
           breadCrumbs={breadCrumbs}
         />
         <Row className="questions-container c-center">
-          <Row>
-          {map(questionsList.groupHeader, (p)=>{
-            return p  + " >>";        
-          })}
-          </Row>
           <div className="questions-content-container">
             {questionsList}
           </div>
