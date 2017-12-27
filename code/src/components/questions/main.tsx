@@ -49,15 +49,15 @@ class Main extends React.Component<Props, {}> {
           var q = qe;
           q.key = q.id;
           if (q.type == "singleselection") {
-            if(q.options && q.options.length ==2) {           
-              return <SingleSelection 
+            if(q.options && q.options.length ==2) {
+              return <SingleSelection
                     question={q}
                     error={""}
                     onChange={this.onChangeInput.bind(this)}
                     alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
                   />
             } else {
-              return <CustomSelect 
+              return <CustomSelect
                 question={q}
                 error={""}
                 onChange={this.onChangeInput.bind(this)}
@@ -65,7 +65,7 @@ class Main extends React.Component<Props, {}> {
               />
             }
           } else if (q.type == "multiselection") {
-            return <CustomSelect 
+            return <CustomSelect
                 question={q}
                 error={""}
                 onChange={this.onChangeInput.bind(this)}
@@ -73,20 +73,20 @@ class Main extends React.Component<Props, {}> {
                 multi={true}
               />
           } else if (q.type == "label") {
-            return <Label 
+            return <Label
                     {...q}
                   />
           } else if (q.type == "group" || q.type =="assessment-factor-group") {
             return this.reRecursiveRender(q.questions);
           } else if (q.type == "number" || q.type=="text") {
-            return <CustomInput 
+            return <CustomInput
                     question={q}
                     error={""}
                     onChange={this.onChangeInput.bind(this)}
                     alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
                   />
           } else if (q.type == "date") {
-            return <QuestionsCustomDatePicker 
+            return <QuestionsCustomDatePicker
                     question={q}
                     error={""}
                     onChange={this.onChangeInput.bind(this)}
@@ -111,7 +111,7 @@ class Main extends React.Component<Props, {}> {
         q.key = q.id;
         if (q.answerState == "valid") {
           if (q.hasReflexive) {
-            if (q.questions){
+            if (q.questions) {
               var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists);
               if(reflexsiveQuestionList.length > 0){
                 questionsList.groupHeader = questionsList.groupHeader || [];
@@ -129,12 +129,12 @@ class Main extends React.Component<Props, {}> {
             this.actualQuestionLists = actualQuestionLists;
             boundaryReached = true;
             return questionsList;
-          } 
+          }
         }
         if (q.type == "singleselection") {
           preQ = q;
-          if(q.options.length ==2) {           
-            questionsList.push(<SingleSelection 
+          if(q.options.length ==2) {
+            questionsList.push(<SingleSelection
               question={q}
               error={""}
               onChange={this.onChangeInput.bind(this)}
@@ -143,7 +143,7 @@ class Main extends React.Component<Props, {}> {
             />);
             actualQuestionLists.push(q);
           } else {
-            questionsList.push(<CustomSelect 
+            questionsList.push(<CustomSelect
               question={q}
               error={""}
               onChange={this.onChangeInput.bind(this)}
@@ -153,7 +153,7 @@ class Main extends React.Component<Props, {}> {
             actualQuestionLists.push(q);
           }
         } else if (q.type == "multiselection") {
-          questionsList.push(<CustomSelect 
+          questionsList.push(<CustomSelect
               question={q}
               error={""}
               onChange={this.onChangeInput.bind(this)}
@@ -164,7 +164,7 @@ class Main extends React.Component<Props, {}> {
           actualQuestionLists.push(q);
         } else if (q.type == "label") {
           /*preQ = q;
-          questionsList.push( <Label 
+          questionsList.push( <Label
                   {...q}
                 />)*/
         } else if (q.type == "group" || q.type == "assessment-factor-group" || q.type == "list") {
@@ -231,7 +231,7 @@ class Main extends React.Component<Props, {}> {
           }
         } else if (q.type == "number" || q.type=="text") {
           preQ = q;
-          questionsList.push(<CustomInput 
+          questionsList.push(<CustomInput
                   question={q}
                   error={""}
                   onChange={this.onChangeInput.bind(this)}
@@ -241,7 +241,7 @@ class Main extends React.Component<Props, {}> {
                 actualQuestionLists.push(q);
         } else if (q.type == "date") {
           preQ = q;
-          questionsList.push(<QuestionsCustomDatePicker 
+          questionsList.push(<QuestionsCustomDatePicker
                   question={q}
                   error={""}
                   onChange={this.onChangeInput.bind(this)}
@@ -250,7 +250,7 @@ class Main extends React.Component<Props, {}> {
                 />)
                 actualQuestionLists.push(q);
         } else if (q.type == "assessment-factor-search") {
-          questionsList.push(<AsyncCustomSelect 
+          questionsList.push(<AsyncCustomSelect
               question={q}
               error={""}
               onChange={this.onChangeInput.bind(this)}
@@ -305,11 +305,11 @@ class Main extends React.Component<Props, {}> {
             if (questionsList.length > 0) {
               this.actualQuestionLists = actualQuestionLists;
               return questionsList;
-            } 
+            }
           }
           if (q.type == "singleselection") {
-            if(q.options.length == 2) {           
-              questionsList.push(<SingleSelection 
+            if(q.options.length == 2) {
+              questionsList.push(<SingleSelection
                     question={q}
                     error={""}
                     onChange={this.onChangeInput.bind(this)}
@@ -318,7 +318,7 @@ class Main extends React.Component<Props, {}> {
                   />);
                   actualQuestionLists.push(q);
             } else {
-              questionsList.push(<CustomSelect 
+              questionsList.push(<CustomSelect
                   question={q}
                   error={""}
                   onChange={this.onChangeInput.bind(this)}
@@ -328,7 +328,7 @@ class Main extends React.Component<Props, {}> {
                 actualQuestionLists.push(q);
             }
           } else if (q.type == "multiselection") {
-            questionsList.push(<CustomSelect 
+            questionsList.push(<CustomSelect
                 question={q}
                 error={""}
                 onChange={this.onChangeInput.bind(this)}
@@ -338,7 +338,7 @@ class Main extends React.Component<Props, {}> {
               />)
             actualQuestionLists.push(q);
           } else if (q.type == "label") {
-            /*questionsList.push( <Label 
+            /*questionsList.push( <Label
                     {...q}
                   />)*/
           } else if (q.type == "group" || q.type == "assessment-factor-group" || q.type == "list") {
@@ -404,7 +404,7 @@ class Main extends React.Component<Props, {}> {
               }
             }
           } else if (q.type == "number" || q.type=="text") {
-            questionsList.push(<CustomInput 
+            questionsList.push(<CustomInput
               question={q}
               error={""}
               onChange={this.onChangeInput.bind(this)}
@@ -413,7 +413,7 @@ class Main extends React.Component<Props, {}> {
             />)
             actualQuestionLists.push(q);
           } else if (q.type == "date") {
-            questionsList.push(<QuestionsCustomDatePicker 
+            questionsList.push(<QuestionsCustomDatePicker
                       question={q}
                       error={""}
                       onChange={this.onChangeInput.bind(this)}
@@ -422,7 +422,7 @@ class Main extends React.Component<Props, {}> {
                   />)
                   actualQuestionLists.push(q);
           } else if (q.type == "assessment-factor-search") {
-            questionsList.push(<AsyncCustomSelect 
+            questionsList.push(<AsyncCustomSelect
                 question={q}
                 error={""}
                 onChange={this.onChangeInput.bind(this)}
@@ -434,7 +434,7 @@ class Main extends React.Component<Props, {}> {
           }
           preQ = q;
         };
-      };  
+      };
     } else {
       return null;
     }
@@ -511,9 +511,9 @@ class Main extends React.Component<Props, {}> {
       if (q.type == "text") {
         allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
       } else if (q.type == "singleselection") {
-        allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q); 
+        allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
       } else if (q.type == "date") {
-        allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q); 
+        allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q);
       }
     });
 
@@ -546,7 +546,7 @@ class Main extends React.Component<Props, {}> {
     var breadCrumbs = [];
     var questions = this.props.questions;
 
-    var questionsList = (questions && questions.data && questions.data.questionnaire && 
+    var questionsList = (questions && questions.data && questions.data.questionnaire &&
       questions.data.questionnaire.questions) || [];
 
     if (questionsList) {
@@ -565,7 +565,7 @@ class Main extends React.Component<Props, {}> {
     return (
       <div>
         <ScrollToTopOnMount />
-        <Subheader 
+        <Subheader
           breadCrumbs={breadCrumbs}
         />
         <Row className="questions-container c-center">

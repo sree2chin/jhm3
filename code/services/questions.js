@@ -26,7 +26,8 @@ module.exports = new function() {
   };
 
   this.postQuestions = function(req, callback) {
-    ApiService.postQuestions(req.body, function(err, res) {
+    req.session = req.session || {};
+    ApiService.postQuestions(req, function(err, res) {
       if (!err && res.statusCode == 200) {
         req.session.questions = res.body;
         callback(res.statusCode, res.body);
@@ -37,8 +38,8 @@ module.exports = new function() {
   };
 
   this.getFactorsearch = function(req, callback) {
-    console.log("req.body: " + JSON.stringify(req.body));
-    ApiService.getFactorsearch(req.body, function(err, res) {
+    req.session = req.session || {};
+    ApiService.getFactorsearch(req, function(err, res) {
       if (!err && res.statusCode == 200) {
         callback(res.statusCode, res.body);
       } else {
@@ -47,5 +48,5 @@ module.exports = new function() {
     });
   };
 
-  
+
 };

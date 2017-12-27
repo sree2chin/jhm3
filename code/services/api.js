@@ -12,21 +12,12 @@ module.exports = new function(){
 
   var appendAgentInfo = function(req, data) {
     if(req.session) {
-      console.log("req.session: " + JSON.stringify(req.session));
-      if(req.session.agent_id) {
-        data.type_of_user = "2";
-        data.agent_id = req.session.agent_id;
-      } else {
-        data.type_of_user = "1";
+      if (req.session && req.session.queryParams) {
+        for(var k in req.session.queryParams) {
+          data[k] = req.session.queryParams[k];
+        }
       }
     }
-  };
-
-  this.register = function(data, cb){
-    restOptions.path = '/api/users/';
-      rest.postJSON(_.clone(restOptions),data, function (statusCode, result) {
-        cb(statusCode, result);
-      });
   };
 
   this.getQuotePremiums = function(req, cb){
@@ -37,8 +28,8 @@ module.exports = new function(){
     };
     appendAgentInfo(req, formData);
     request({
-      url: url, 
-      formData: formData, 
+      url: url,
+      formData: formData,
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },
@@ -56,8 +47,8 @@ module.exports = new function(){
     };
     appendAgentInfo(req, formData);
     request({
-      url: url, 
-      formData: formData, 
+      url: url,
+      formData: formData,
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },
@@ -74,8 +65,8 @@ module.exports = new function(){
     };
     appendAgentInfo(req, formData);
     request({
-      url: restOptions.host + '/v1/quote/productplans', 
-      formData: formData, 
+      url: restOptions.host + '/v1/quote/productplans',
+      formData: formData,
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },
@@ -87,11 +78,10 @@ module.exports = new function(){
 
   this.saveQuoteForm = function(req, cb){
     var data = req.body;
-
     appendAgentInfo(req, data);
     request({
-      url: restOptions.host + '/v1/quote/savequote', 
-      formData: data, 
+      url: restOptions.host + '/v1/quote/savequote',
+      formData: data,
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },
@@ -102,8 +92,11 @@ module.exports = new function(){
   };
 
   this.getQuestions = function(req, cb){
+    var data = {};
+    appendAgentInfo(req, data);
     request({
-      url: restOptions.host + '/v1/questions/questions', 
+      url: restOptions.host + '/v1/questions/questions',
+      formData: data,
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },
@@ -113,13 +106,15 @@ module.exports = new function(){
     });
   };
 
-  this.postQuestions = function(reqObj, cb){    
+  this.postQuestions = function(req, cb){
     var formData = {
-      input_json: JSON.stringify(reqObj.data)
+      input_json: JSON.stringify(req.body.data)
     };
-    console.log("\n\n\nformDat: " + JSON.stringify(formData) + "\n\n\n");
+    appendAgentInfo(req, formData);
+    console.log("formData.cfdskj: " + formData.cfdskj);
+    console.log("formData.kjhkjh: " + formData.kjhkjh);
     request({
-      url: restOptions.host + '/v1/questions/questions', 
+      url: restOptions.host + '/v1/questions/questions',
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },
@@ -131,33 +126,18 @@ module.exports = new function(){
     });
   };
 
-  this.getFactorsearch = function(reqObj, cb){    
+  this.getFactorsearch = function(req, cb) {
+    appendAgentInfo(req, req.body);
     request({
-      url: restOptions.host + '/v1/questions/factorsearch', 
+      url: restOptions.host + '/v1/questions/factorsearch',
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },
       method: 'POST',
-      formData: reqObj
+      formData: req.body
     }, function callback(err, httpResponse, body) {
       console.log(JSON.stringify(err));
       cb(err, httpResponse);
-    });
-  };
-
-  
-
-  this.socialAuth = function(data, type, cb){
-    restOptions.path = '/api/users/authenticate/'+type;
-    rest.postJSON(_.clone(restOptions),data, function (statusCode, result) {
-      cb(statusCode, result);
-    });
-  };
-
-  this.login = function(data, cb){
-    restOptions.path  = '/api/users/authenticate';
-      rest.postJSON(_.clone(restOptions),data, function (statusCode, result) {
-      cb(statusCode, result);
     });
   };
 };

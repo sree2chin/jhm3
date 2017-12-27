@@ -8,39 +8,39 @@ var appConfig = require('../config/service.js');
 var appConfig = require('../services/quotes.js');
 var fs = require('fs');
 var ejs = require('ejs');
+var url = require("url");
 
 module.exports = function(app) {
 
-  app.get("/favicon.ico", function(req, res, next) {
-    console.log("/favicon.ico");
-    res.send("../../dist/favicon.ico");
-  });
-
   app.get('/', function(req, res, next) {
     //res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
-    if(req.session) {
-      delete req.session.agent_id;
-    }
+    var url_parts = url.parse(req.url, true);
+    console.log("url_parts: " + JSON.stringify(url_parts));
+    if (req.session) {
+      req.session.queryParams = url_parts.query;
+    };
+    templatePath = "../../dist/";
+    res.render(templatePath);
+  });
 
+  app.get('/questions', function(req, res, next) {
+    //res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
+    var url_parts = url.parse(req.url, true);
+    console.log("url_parts: " + JSON.stringify(url_parts));
+    if (req.session) {
+      req.session.queryParams = url_parts.query;
+    };
     templatePath = "../../dist/";
     res.render(templatePath);
   });
 
   app.get('/agent', function(req, res, next) {
     //res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
-    if(req.session) {
-      if(!_.isEmpty(req.query)) {
-        req.session.agent_id = req.query.agent_id || req.query.agentId;
-      } else {
-        delete req.session.agent_id;
-      }
-    }
-    templatePath = "../../dist/";
-    res.render(templatePath);
-  });
-
-  app.get('/*', function(req, res, next) {
-    //res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
+    var url_parts = url.parse(req.url, true);
+    console.log("url_parts: " + JSON.stringify(url_parts));
+    if (req.session) {
+      req.session.queryParams = url_parts.query;
+    };
     templatePath = "../../dist/";
     res.render(templatePath);
   });
@@ -55,10 +55,4 @@ module.exports = function(app) {
         console.log('SITEMAP-REQUEST-SUCCESS');
     });
   });
-
-  app.get('/api/status', function(req, res) {
-    res.setHeader('Content-Type', 'application/json');
-    res.send({"status": 200});
-  });
-  
 };
