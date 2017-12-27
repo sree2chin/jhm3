@@ -17,6 +17,28 @@ interface Props extends React.Props<AsyncCustomSelect> {
   getFactorsearch: any
 }
 
+interface TagAdapter extends ItemAdapter {
+  instance: any
+}
+
+class TagAdapter extends ItemAdapter {
+  newFromValue(value) {
+    return { value }
+  }
+  renderSelected(item) {
+    console.log(item);
+    return <div className="tag">
+      {item.label}
+    </div>
+  }
+  renderSuggested(item) {
+    return <div className="tag-item">
+       {item.label}
+    </div>
+  }
+}
+TagAdapter.instance = new TagAdapter()
+
 export default class AsyncCustomSelect extends React.Component<Props, {selectedItem: any}> {
   constructor(props : Props){
     super(props);
@@ -28,17 +50,10 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
   };
   
   onItemChange(val) {
-    if (this.state.items) {
-      for(var i=0; i < this.state.items.length; i++) {
-        if (this.state.items[i].label == val) {
-          this.setState({
-            selectedItem: this.state.items[i]
-          });
-          this.props.onChange(this.props.question, [this.state.items[i]]);
-          break;
-        }
-      }
-    }
+    this.setState({
+      selectedItem: val
+    });
+    this.props.onChange(this.props.question, val);
   }
   lastSearch = null
   onTextSearch(search, page, prev) { 
@@ -136,8 +151,10 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
                 value={this.state.selectedItem}
                 itemValuePropName="label"
                 searchDebounce={500}
+                itemAdapter={TagAdapter.instance}
                 onSearch={this.onTextSearch.bind(this)}
-                onChange={this.onItemChange.bind(this)} />
+                onChange={this.onItemChange.bind(this)} 
+                multiple />
             </Row>
 
             <Col sm={12} className={`c-subheader-text error`} style={{paddingLeft: "0px", marginTop: "0px", marginLeft: "-15px"}}>

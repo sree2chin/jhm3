@@ -114,6 +114,8 @@ class Main extends React.Component<Props, {}> {
             if (q.questions){
               var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists);
               if(reflexsiveQuestionList.length > 0){
+                questionsList.groupHeader = questionsList.groupHeader || [];
+                questionsList.groupHeader.push(q.caption);
                 return reflexsiveQuestionList;
               } else {
                 continue;
@@ -133,22 +135,22 @@ class Main extends React.Component<Props, {}> {
           preQ = q;
           if(q.options.length ==2) {           
             questionsList.push(<SingleSelection 
-                  question={q}
-                  error={""}
-                  onChange={this.onChangeInput.bind(this)}
-                  alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
-                  key={q.id}
-                />);
-                actualQuestionLists.push(q);
-          } else {
-            questionsList.push( <CustomSelect 
               question={q}
               error={""}
               onChange={this.onChangeInput.bind(this)}
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               key={q.id}
-            /> )
-              actualQuestionLists.push(q);
+            />);
+            actualQuestionLists.push(q);
+          } else {
+            questionsList.push(<CustomSelect 
+              question={q}
+              error={""}
+              onChange={this.onChangeInput.bind(this)}
+              alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+              key={q.id}
+            />)
+            actualQuestionLists.push(q);
           }
         } else if (q.type == "multiselection") {
           questionsList.push(<CustomSelect 
@@ -178,7 +180,15 @@ class Main extends React.Component<Props, {}> {
                 return questionsList;
               }
             }
-            var questionsFromGroup = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists)
+            var qL = q.questions;
+            if (q.type == "list") {
+              if (q.prototype && q.prototype.elements) {
+                qL = q.prototype.elements
+              } else {
+                qL = [];
+              }
+            }
+            var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists)
             if(questionsFromGroup.length > 0) {
               var allQuestionsAreLabels = true;
               for(var i=0; i<questionsFromGroup.length; i++) {
@@ -269,7 +279,7 @@ class Main extends React.Component<Props, {}> {
         for(var i=0; i<(this.questions.data.questionnaire.questions.length); i++) {
           var qe = this.questions.data.questionnaire.questions[i];
           if (qe.type == "group") {
-            questionsList.groupHeader = questionsList.groupHeader || [];
+            questionsList.groupHeader = [];
             questionsList.groupHeader.push(qe.caption);
           }
           var q = qe;
@@ -279,6 +289,8 @@ class Main extends React.Component<Props, {}> {
               if (q.questions){
                 var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists);
                 if(reflexsiveQuestionList.length > 0){
+                  questionsList.groupHeader = questionsList.groupHeader || [];
+                  questionsList.groupHeader.push(qe.caption);
                   return reflexsiveQuestionList;
                 } else {
                   continue;
@@ -342,7 +354,15 @@ class Main extends React.Component<Props, {}> {
                   return questionsList;
                 }
               }
-              var questionsFromGroup = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists)
+              var qL = q.questions;
+              if (q.type == "list") {
+                if (q.prototype && q.prototype.elements) {
+                  qL = q.prototype.elements
+                } else {
+                  qL = [];
+                }
+              }
+              var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists)
               if(questionsFromGroup.length > 0) {
                 var allQuestionsAreLabels = true;
                 for(var i=0; i<questionsFromGroup.length; i++) {
@@ -551,7 +571,7 @@ class Main extends React.Component<Props, {}> {
         <Row className="questions-container c-center">
           <Row>
           {map(questionsList.groupHeader, (p)=>{
-            return p || "";        
+            return p  + " >>";        
           })}
           </Row>
           <div className="questions-content-container">

@@ -6,7 +6,7 @@ interface Props extends React.Props<CustomSelect> {
   question: any,
   error: any,
   alreadyOnceSubmitted: any,
-  multi: any
+  multi?: any
 }
 
 export default class CustomSelect extends React.Component<Props, {}> {
