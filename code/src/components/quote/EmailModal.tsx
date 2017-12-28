@@ -39,7 +39,7 @@ export default class EmailModal extends React.Component<Props, {}> {
                     </Row>
                     <Row>
                         <Col className="email-description email-description-on-modal c-center" sm={12}>
-                            Email the quote and fill it out at your best convience. Simply enter your email address below and we’ll mail you a copy of this quote and a link to continue your application.
+                            Fill out this info to email the quote to yourself for your records! Then you can click on the link to complete the application.
                         </Col>
                     </Row>
 
