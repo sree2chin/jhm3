@@ -24,7 +24,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
     if (momentDate.isValid()) {
       this.onDateChange("s_birthDate", month + "/" + date + "/" + year, month + "/" + date + "/" + year);
 
-    } 
+    }
   }
   onDateChange(key, value, formattedDate) {
     this.setState({
@@ -68,16 +68,16 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
     }
     var question = this.props.question;
     return (
-        <Row style={{marginBottom: "10px", marginLeft: "0px"}}>
-          <Col sm={12} className={"c-subheader-text"} style={{marginTop: "20px", marginBottom: "5px", paddingLeft: "0px"}}>
+        <Row style={{marginBottom: "25px", marginLeft: "0px"}}>
+          <Col sm={12} className={"c-subheader-text"} style={{marginBottom: "10px", paddingLeft: "0px"}}>
             {question.caption}
           </Col>
           <Col sm={12} className="birth-date-picker-container" >
               <span className="test-class">
-               
+
               </span>
-              <FormGroup controlId={"change_handler_" + question.personIndex}> 
-                <ControlLabel>      
+              <FormGroup controlId={"change_handler_" + question.personIndex}>
+                <ControlLabel>
                   <div className="custom-date-picker-container">
                     <span className="custom-date-picker" onClick={question.onClick}>
                       <img src={"../images/calendar.svg"} />
@@ -90,7 +90,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
               </FormGroup>
 
           </Col>
-            {!this.validate() && 
+            {!this.validate() &&
               <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
                 {question.constraints.minValueViolationMessage}
               </div>

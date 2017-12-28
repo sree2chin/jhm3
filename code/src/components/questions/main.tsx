@@ -581,15 +581,16 @@ class Main extends React.Component<Props, {}> {
         />
         <Row className="questions-container c-center">
           <Row>
-            {map(questionsList.groupHeader, (p)=>{
-              return p  + " >>";
-            })}
+            { // map(questionsList.groupHeader, (p)=>{
+              //  return p  + " >>";
+              // })
+            }
           </Row>
           <div className="questions-content-container">
             {questionsList}
           </div>
-          <Col style={{marginBottom: "21px!important", marginLeft: "21px!important"}} className="c-center">
-            <Button style={{width: "91.5%", marginLeft: "4.5%"}} className={`c-button-default circular`}  onClick={()=>{
+          <Col sm={12} style={{marginBottom: "21px!important", marginLeft: "21px!important"}} className="c-center">
+            <Button style={{width: "91.5%", marginLeft: "40px"}} className={`c-button-default circular`}  onClick={()=>{
                   this.onQuestionSubmit()
                 }}
               >

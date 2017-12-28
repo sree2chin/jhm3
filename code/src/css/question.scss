@@ -1,6 +1,6 @@
 .questions-container {
     padding-bottom: 60px;
-    width: 44.1%;
+    width: 65.23%;
     margin-top: 50px;
     border-radius: 3px;
     background-color: #ffffff;
@@ -8,14 +8,14 @@
     border: solid 1px #d4d4d4;
     margin-bottom: 70px;
     .questions-content-container {
-        margin: 21px;
+        margin: 42px;
         .Select-placeholder {
             padding-top: 4px;
         }
         .birth-date-picker-container {
             padding-left: 0px;
             span.test-class + div {
-                
+
             }
             .form-group {
                 width: 65%;
@@ -54,6 +54,6 @@
         }
     }
     .c-button-default.btn.circular {
-    	margin-top: 20px;
+    	margin-top: 10px;
     }
 }
