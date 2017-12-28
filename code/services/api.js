@@ -108,7 +108,8 @@ module.exports = new function(){
 
   this.postQuestions = function(req, cb){
     var formData = {
-      input_json: JSON.stringify(req.body.data)
+      input_json: JSON.stringify(req.body.questions.data),
+      answered_questions: JSON.stringify(req.body.answered_questions)
     };
     appendAgentInfo(req, formData);
     request({

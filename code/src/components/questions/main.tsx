@@ -183,7 +183,10 @@ class Main extends React.Component<Props, {}> {
             var qL = q.questions;
             if (q.type == "list") {
               if (q.prototype && q.prototype.elements) {
-                qL = q.prototype.elements
+                if (!q.answer) {
+                  q.answer = [q.prototype];
+                }
+                qL = q.answer[0].elements;
               } else {
                 qL = [];
               }
@@ -357,7 +360,10 @@ class Main extends React.Component<Props, {}> {
               var qL = q.questions;
               if (q.type == "list") {
                 if (q.prototype && q.prototype.elements) {
-                  qL = q.prototype.elements
+                  if (!q.answer) {
+                    q.answer = [q.prototype];
+                  }
+                  qL = q.answer[0].elements;
                 } else {
                   qL = [];
                 }
@@ -502,12 +508,14 @@ class Main extends React.Component<Props, {}> {
     }
   }
   onQuestionSubmit() {
+    var answered_questions = [];
     var allQuestionsValid = true;
     this.setState({
       alreadyOnceSubmitted: true
     })
 
     each(this.actualQuestionLists, (q)=> {
+      answered_questions.push(q.id)
       if (q.type == "text") {
         allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
       } else if (q.type == "singleselection") {
@@ -521,7 +529,10 @@ class Main extends React.Component<Props, {}> {
       this.setState({
         submittingQuestions: true
       });
-      this.props.postQuestions(this.questions).then(() => {
+      this.props.postQuestions({
+        answered_questions: answered_questions,
+        questions: this.questions
+      }).then(() => {
         this.setState({
           alreadyOnceSubmitted: false,
           submittingQuestions: false
@@ -569,6 +580,11 @@ class Main extends React.Component<Props, {}> {
           breadCrumbs={breadCrumbs}
         />
         <Row className="questions-container c-center">
+          <Row>
+            {map(questionsList.groupHeader, (p)=>{
+              return p  + " >>";
+            })}
+          </Row>
           <div className="questions-content-container">
             {questionsList}
           </div>
