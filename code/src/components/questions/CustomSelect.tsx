@@ -14,21 +14,21 @@ export default class CustomSelect extends React.Component<Props, {}> {
     super(props);
   }
   state = {}
-  
+
   onChange(val) {
     this.setState({
       state: val
     });
     this.props.onChange(this.props.question, val);
   }
-  
+
   getStateObjects() {
     var options = JSON.parse(JSON.stringify(this.props.question.options));
     var finalOptions = [];
     for(var i=0; i<options.length; i++) {
       finalOptions.push(
         { id: options[i].id,
-          value: options[i].id, 
+          value: options[i].id,
           label:  options[i].label
         }
       );
@@ -63,28 +63,28 @@ export default class CustomSelect extends React.Component<Props, {}> {
         <Col sm={12} className={"c-subheader-text"} style={{marginTop: "5px", paddingLeft: "0px", marginBottom: "5px"}}>
           {question.caption}
         </Col>
-          <Col sm={12} style={{paddingRight: "15px", marginBottom: "0px"}} className="person-gender-container c-custom-select">
+          <Col sm={12} style={{paddingRight: "15px", marginBottom: "20px"}} className="person-gender-container c-custom-select">
             <Row>
-            <Select
-              name="form-field-name1"
-              options={statesObjects}
-              value={this.state.state}
-              onChange={(stateObj)=>{
-                this.onChange(stateObj)
-              }}
-              className={""}
-              multi={this.props.multi || false}
-            />
+              <Select
+                name="form-field-name1"
+                options={statesObjects}
+                value={this.state.state}
+                onChange={(stateObj)=>{
+                  this.onChange(stateObj)
+                }}
+                className={""}
+                multi={this.props.multi || false}
+              />
             </Row>
 
             <Col sm={12} className={`c-subheader-text error`} style={{paddingLeft: "0px", marginTop: "0px", marginLeft: "-15px"}}>
-              {!this.validate() && 
+              {!this.validate() &&
                 <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
                   {question.constraints.patternViolationMessage || "Required"}
                 </div>
               }
-            </Col> 
-          </Col> 
+            </Col>
+          </Col>
       </div>
     );
   }

@@ -589,15 +589,19 @@ class Main extends React.Component<Props, {}> {
           <div className="questions-content-container">
             {questionsList}
           </div>
-          <Col sm={12} style={{marginBottom: "21px!important", marginLeft: "21px!important"}} className="c-center">
-            <Button style={{width: "91.5%", marginLeft: "40px"}} className={`c-button-default circular`}  onClick={()=>{
+          <div className="question-action-btn-container">
+            <Button className={`c-button-default circular action`}>
+                Previous Step
+                {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+            </Button>
+            <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                   this.onQuestionSubmit()
                 }}
               >
-                CONTINUE
+                Next Step
                 {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-              </Button>
-          </Col>
+            </Button>
+          </div>
         </Row>
       </div>);
   }

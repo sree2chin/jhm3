@@ -9,6 +9,7 @@ module.exports = new function() {
 
   this.getQuestions = function(req, callback) {
     req.session = req.session || {};
+    console.log("req.session.questions: " +  _.isEmpty(req.session.questions));
     if(req.session.questions) {
       callback(200, req.session.questions);
       return;
@@ -26,11 +27,10 @@ module.exports = new function() {
     req.session = req.session || {};
     req.session.answered_questions = req.session.answered_questions || [];
     req.session.answered_questions.push(req.body.answered_questions);
-    console.log("\n\n\nres.body.answered_questions: " + JSON.stringify(req.body.answered_questions) + "\n\n\n")
-    console.log("\n\n\nreq.session.answered_questions: " + JSON.stringify(req.session.answered_questions) + "\n\n\n");
     ApiService.postQuestions(req, function(err, res) {
       if (!err && res.statusCode == 200) {
-        req.session.questions = res.body.questions;
+        req.session.questions = res.body;
+        console.log("req.session.questions: " +  _.isEmpty(req.session.questions));
         callback(res.statusCode, res.body);
       } else {
         callback(res.statusCode, res.body);
@@ -39,7 +39,6 @@ module.exports = new function() {
   };
 
   this.getFactorsearch = function(req, callback) {
-    req.session = req.session || {};
     ApiService.getFactorsearch(req, function(err, res) {
       if (!err && res.statusCode == 200) {
         callback(res.statusCode, res.body);

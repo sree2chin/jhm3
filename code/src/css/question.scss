@@ -7,8 +7,15 @@
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14);
     border: solid 1px #d4d4d4;
     margin-bottom: 70px;
+    .question-action-btn-container {
+        margin-left: 40px;
+        button {
+            text-transform: uppercase;
+        }
+
+    }
     .questions-content-container {
-        margin: 42px;
+        margin: 40px;
         .Select-placeholder {
             padding-top: 4px;
         }
@@ -45,7 +52,8 @@
                     height: 44px;
                     border-radius: 2px;
                     background-color: #ffffff;
-                    border: solid 1px #cccccc;
+                    border-bottom: solid 1px #cccccc;
+                    box-shadow: none;
                 }
             }
         }
@@ -54,6 +62,14 @@
         }
     }
     .c-button-default.btn.circular {
-    	margin-top: 10px;
+        margin-top: 10px;
+        background-color: #4584c0!important;
+        &.action {
+            width: 30%;
+        }
+        &.next-step-btn {
+            background-color: #fb4d3d!important;
+            margin-left: 30px;
+        }
     }
 }

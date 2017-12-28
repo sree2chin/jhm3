@@ -45,7 +45,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
         <Col sm={12} className={"c-subheader-text"}>
           {question.caption}
         </Col>
-          <Col sm={12} style={{paddingRight: "22px", marginBottom: "0px"}} className="person-gender-container">
+          <Col sm={12} style={{paddingRight: "22px", marginBottom: "20px"}} className="person-gender-container">
             <Row>
               <Col xs={6}>
                 <Button className={`c-button-default circular ${this.state.selectedId == question.options[0].id ? "active" : ""}`} onClick={(){
@@ -66,13 +66,13 @@ export default class SingleSelection extends React.Component<Props, {}> {
             </Row>
 
             <Col sm={12} className={`c-subheader-text error`} style={{paddingLeft: "0px", marginTop: "0px"}}>
-              {!this.validate() && 
+              {!this.validate() &&
                 <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
                   {question.constraints.patternViolationMessage || "Required"}
                 </div>
               }
-            </Col> 
-          </Col> 
+            </Col>
+          </Col>
       </div>
     );
   }
