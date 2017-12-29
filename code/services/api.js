@@ -12,7 +12,7 @@ module.exports = new function(){
 
   var appendAgentInfo = function(req, data) {
     if(req.session) {
-      console.log("req.session.queryParams: " + JSON.stringify(req.session.queryParams));
+      console.log("req.session.queryParams: in append: " + JSON.stringify(req.session.queryParams));
       if (req.session && req.session.queryParams) {
         for(var k in req.session.queryParams) {
           data[k] = req.session.queryParams[k];
@@ -28,7 +28,7 @@ module.exports = new function(){
       applicants: JSON.stringify(data)
     };
     appendAgentInfo(req, formData);
-    console.log("getQuotePremiums: " + formData.user_id);
+    console.log("getQuotePremiums: " + formData.user);
     request({
       url: url,
       formData: formData,
@@ -48,7 +48,7 @@ module.exports = new function(){
       applicants: JSON.stringify(data)
     };
     appendAgentInfo(req, formData);
-    console.log("getQuoteProducts: " + formData.user_id);
+    console.log("getQuoteProducts: " + formData.user);
     request({
       url: url,
       formData: formData,
@@ -67,7 +67,7 @@ module.exports = new function(){
       applicants: JSON.stringify(data)
     };
     appendAgentInfo(req, formData);
-    console.log("getQuotePlans: " + formData.user_id);
+    console.log("getQuotePlans: " + formData.user);
     request({
       url: restOptions.host + '/v1/quote/productplans',
       formData: formData,
@@ -83,7 +83,7 @@ module.exports = new function(){
   this.saveQuoteForm = function(req, cb){
     var data = req.body;
     appendAgentInfo(req, data);
-    console.log("getQuotePlans: " + data.user_id);
+    console.log("getQuotePlans: " + data.user);
     request({
       url: restOptions.host + '/v1/quote/savequote',
       formData: data,
@@ -99,7 +99,7 @@ module.exports = new function(){
   this.getQuestions = function(req, cb){
     var data = {};
     appendAgentInfo(req, data);
-    console.log("getQuestions: " + data.user_id);
+    console.log("getQuestions: " + data.user);
     request({
       url: restOptions.host + '/v1/questions/questions',
       formData: data,
@@ -118,7 +118,7 @@ module.exports = new function(){
       answered_questions: JSON.stringify(req.body.answered_questions)
     };
     appendAgentInfo(req, formData);
-    console.log("postQuestions: " + formData.user_id);
+    console.log("postQuestions: " + formData.user);
     request({
       url: restOptions.host + '/v1/questions/questions',
       headers: {
@@ -133,7 +133,7 @@ module.exports = new function(){
 
   this.getFactorsearch = function(req, cb) {
     appendAgentInfo(req, req.body);
-    console.log("postQuestions: " + req.body.user_id);
+    console.log("postQuestions: " + req.body.user);
     request({
       url: restOptions.host + '/v1/questions/factorsearch',
       headers: {

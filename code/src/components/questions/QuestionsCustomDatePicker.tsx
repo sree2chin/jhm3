@@ -49,11 +49,14 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
 
       if (constraints.required) {
         if (this.props.question.answer) {
+          var isValid = !!this.props.question.answer;
           if (constraints.minValue) {
-            return constraints.minValue<=this.props.question.answer;
-          } else {
-            return this.props.question.answer;
+            isValid = isValid && constraints.minValue <= this.props.question.answer;
           }
+          if (constraints.maxValue) {
+            isValid = isValid && constraints.maxValue >= this.props.question.answer;
+          }
+          return isValid;
         }
         return false;
       }
