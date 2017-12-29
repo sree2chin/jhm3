@@ -14,7 +14,9 @@ module.exports = function(app) {
 
   app.get('/', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
-    if (req.session) {
+    console.log("url_parts: " + JSON.stringify(url_parts));
+    req.session = req.session || {};
+    if (!_.isEmpty(url_parts.query)) {
       req.session.queryParams = url_parts.query;
     };
     templatePath = "../../dist/";
@@ -23,7 +25,8 @@ module.exports = function(app) {
 
   app.get('/questions', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
-    if (req.session) {
+    req.session = req.session || {};
+    if (!_.isEmpty(url_parts.query)) {
       req.session.queryParams = url_parts.query;
     };
     templatePath = "../../dist/";
@@ -32,7 +35,8 @@ module.exports = function(app) {
 
   app.get('/agent', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
-    if (req.session) {
+    req.session = req.session || {};
+    if (!_.isEmpty(url_parts.query)) {
       req.session.queryParams = url_parts.query;
     };
     templatePath = "../../dist/";
