@@ -9,11 +9,11 @@ module.exports = new function() {
 
   this.getQuestions = function(req, callback) {
     req.session = req.session || {};
-    console.log("req.session.questions: " +  _.isEmpty(req.session.questions));
+    /* console.log("req.session.questions: " +  _.isEmpty(req.session.questions));
     if(req.session.questions) {
       callback(200, req.session.questions);
       return;
-    }
+    } */
     ApiService.getQuestions(req, function(err, res) {
       if (!err && res.statusCode == 200) {
         callback(res.statusCode, res.body);
