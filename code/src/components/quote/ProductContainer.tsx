@@ -58,7 +58,7 @@ export default class ProductContainer extends React.Component<Props, State> {
           productSelectionErrorMsg: this.props.productValidations.product_selection_error_message,
           productSelectionError: true
         });
-      }    
+      }
     }
 
 
@@ -79,15 +79,34 @@ export default class ProductContainer extends React.Component<Props, State> {
                 {this.state.productSelectionErrorMsg}
               </Col>
             </Row>}
-            <Row className="c-center">
-              {map(products, (product) =>
-                
+            <Row className="c-center mt50">
+              {map(products, (product) =>{
+                const product_name = product.ProductDisplayName.toString().toLowerCase();
+                if(product_name == 'super ez complete' || product_name == 'super ez'){
+                    const product_image = 'spwl_image';
+                }else if(product_name == 'vantis velocity whole life'){
+                    const product_image = 'whole_life_image';
+                }else if(product_name == 'vantis velocity whole life plus'){
+                    const product_image = 'whole_life_plus_image';
+                }else if(product_name == 'vantis velocity term' || product_name == "children's term"){
+                    const product_image = 'term_image';
+                }else if(product_name == 'vantis velocity term with rop'){
+                    const product_image = 'term_rop_image';
+                }else if(product_name == 'guarented golden'){
+                    const product_image = 'guarented_golden_image';
+                }else{
+                    const product_image = 'default_image';
+                }
+                return(
                   <Col key={product.ProductID} sm={productContainerWidth} className="single-product-container">
-                    <Row className="single-product-content">
+                    <Row className={`single-product-content ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`}>
+                      <Row className="product_img_div">
+                        <center><div className={`${product_image}`}></div></center>
+                      </Row>
                       <Row className="header">
                         <Col style={{textAlign: "left"}} sm={12}>
                           {product.ProductDisplayName}
-                        </Col>  
+                        </Col>
                       </Row>
                       <Row>
                         <Col sm={12} className="product-main-content">
@@ -105,14 +124,16 @@ export default class ProductContainer extends React.Component<Props, State> {
                           </Row>
                         </Col>
                       </Row>
-                    </Row>
-                    <Row className={`text-center quote-product ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`} onClick={()=> this.selectProduct(product)}>
-                      {this.state.productIds.indexOf(product.ProductID)>=0 && <div className="c-coverage-amount">PRODUCT SELECTED</div>}
-                      {this.state.productIds.indexOf(product.ProductID)<0 && <div className="c-coverage-amount">QUOTE THIS PRODUCT</div>}
+                      <Row className={`text-center quote-product col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`} onClick={()=> this.selectProduct(product)}>
+                        <Col md={12}>
+                          {this.state.productIds.indexOf(product.ProductID)>=0 && <div className="c-coverage-amount">PRODUCT SELECTED</div>}
+                          {this.state.productIds.indexOf(product.ProductID)<0 && <div className="c-coverage-amount">QUOTE THIS PRODUCT</div>}
+                        </Col>
+                      </Row>
                     </Row>
                   </Col>
-                
-              )}
+                )
+              })}
             </Row>
           </Col>
      );
