@@ -36,8 +36,8 @@ export default class cfooter extends React.Component<Props, {}> {
             </Col>
           </Row>}
           <Row>
-          {breadCrumbs && map(breadCrumbs, (breadCrumb) => 
-            <Col className={`confirmation-header gather-information-container`} style={{paddingRight: "0px"}}>
+          {breadCrumbs && map(breadCrumbs, (breadCrumb) =>
+            <Col key={breadCrumb} className={`confirmation-header gather-information-container`} style={{paddingRight: "0px"}}>
               <Row>
                 <Col className="gather-information">
                   {breadCrumb}

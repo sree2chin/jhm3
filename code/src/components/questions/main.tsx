@@ -19,12 +19,14 @@ import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 
 
-interface Props {
+interface Props  extends React.Props<Main> {
   submitQuoteForm: ()=>void,
   submitProductsForm: ()=>void,
   getQuestions: any,
   postQuestions: any,
-  questions: any
+  questions: any,
+  previousQuestionIds: any,
+  getFactorsearch: any
 }
 
 class Main extends React.Component<Props, {}> {
@@ -32,6 +34,10 @@ class Main extends React.Component<Props, {}> {
     super();
   }
   state = {};
+  questions:any = {};
+  actualQuestionLists: any = [];
+  questionComponents: any = [];
+
   componentWillMount() {
     this.props.getQuestions();
   }
@@ -99,6 +105,7 @@ class Main extends React.Component<Props, {}> {
   }
 
   reRecursiveGetQuestions1(data, questionsList, preQ, actualQuestionLists) {
+    questionsList.isQuestionsList = false;
     if (!isEmpty(data)) {
       var boundaryReached = false;
       for(var i=0; i<(data.length); i++) {
@@ -167,44 +174,53 @@ class Main extends React.Component<Props, {}> {
           questionsList.push( <Label
                   {...q}
                 />)*/
-        } else if (q.type == "group" || q.type == "assessment-factor-group" || q.type == "list") {
-            if (questionsList.length > 0) {
-              var allQuestionsAreLabels = true;
-              for(var i=0; i<questionsList.length; i++) {
-                if (questionsList[i].props.type != "label"){
-                  allQuestionsAreLabels = false;
-                }
-              }
-              if(!allQuestionsAreLabels) {
-                this.actualQuestionLists = actualQuestionLists;
-                return questionsList;
+        } else if (q.type == "list") {
+          var qL = q.questions;
+          if (q.prototype && q.prototype.elements) {
+            if (!q.answer) {
+              q.answer = [q.prototype];
+            }
+            questionsList.siblingAnswers = q.answer;
+            qL = q.answer[0].elements;
+          } else {
+            qL = [];
+          }
+
+          for(var i=0; i<qL.length; i++) {
+            questionsList.push(this.getQuestionComponent(qL[i]));
+            actualQuestionLists.push(qL[i]);
+          }
+          this.actualQuestionLists = actualQuestionLists;
+          questionsList.isQuestionsList = true;
+          return questionsList;
+
+        } else if (q.type == "group" || q.type == "assessment-factor-group") {
+          if (questionsList.length > 0) {
+            var allQuestionsAreLabels = true;
+            for(var i=0; i<questionsList.length; i++) {
+              if (questionsList[i].props.type != "label"){
+                allQuestionsAreLabels = false;
               }
             }
-            var qL = q.questions;
-            if (q.type == "list") {
-              if (q.prototype && q.prototype.elements) {
-                if (!q.answer) {
-                  q.answer = [q.prototype];
-                }
-                qL = q.answer[0].elements;
-              } else {
-                qL = [];
+            if(!allQuestionsAreLabels) {
+              this.actualQuestionLists = actualQuestionLists;
+              return questionsList;
+            }
+          }
+          var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists)
+          if(questionsFromGroup.length > 0) {
+            var allQuestionsAreLabels = true;
+            for(var i=0; i<questionsFromGroup.length; i++) {
+              if (questionsFromGroup[i].props.type != "label"){
+                allQuestionsAreLabels = false;
               }
             }
-            var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists)
-            if(questionsFromGroup.length > 0) {
-              var allQuestionsAreLabels = true;
-              for(var i=0; i<questionsFromGroup.length; i++) {
-                if (questionsFromGroup[i].props.type != "label"){
-                  allQuestionsAreLabels = false;
-                }
-              }
-              if(!allQuestionsAreLabels) {
-                return questionsFromGroup;
-              } else {
-                //questionsList = questionsFromGroup;
-              }
+            if(!allQuestionsAreLabels) {
+              return questionsFromGroup;
+            } else {
+              //questionsList = questionsFromGroup;
             }
+          }
         } else if (q.type == "struct") {
           if (questionsList.length > 0) {
             var allQuestionsAreLabels = true;
@@ -277,6 +293,7 @@ class Main extends React.Component<Props, {}> {
       if (this.questions.data.questionnaire.questions) {
         var preQ = null;
         var questionsList = [];
+        questionsList.isQuestionsList = false;
         var actualQuestionLists = [];
         var boundaryReached = false;
         for(var i=0; i<(this.questions.data.questionnaire.questions.length); i++) {
@@ -344,7 +361,26 @@ class Main extends React.Component<Props, {}> {
             /*questionsList.push( <Label
                     {...q}
                   />)*/
-          } else if (q.type == "group" || q.type == "assessment-factor-group" || q.type == "list") {
+          } else if (q.type=="list") {
+            var qL = q.questions;
+            if (q.prototype && q.prototype.elements) {
+              if (!q.answer) {
+                q.answer = [q.prototype];
+              }
+              questionsList.siblingAnswers = q.answer;
+              qL = q.answer[0].elements;
+            } else {
+              qL = [];
+            }
+
+            for(var i=0; i<qL.length; i++) {
+              questionsList.push(this.getQuestionComponent(qL[i]));
+              actualQuestionLists.push(qL[i]);
+            }
+            this.actualQuestionLists = actualQuestionLists;
+            questionsList.isQuestionsList = true
+            return questionsList;
+          } else if (q.type == "group" || q.type == "assessment-factor-group") {
               if (questionsList.length > 0) {
                 var allQuestionsAreLabels = true;
                 for(var i=0; i<questionsList.length; i++) {
@@ -358,16 +394,6 @@ class Main extends React.Component<Props, {}> {
                 }
               }
               var qL = q.questions;
-              if (q.type == "list") {
-                if (q.prototype && q.prototype.elements) {
-                  if (!q.answer) {
-                    q.answer = [q.prototype];
-                  }
-                  qL = q.answer[0].elements;
-                } else {
-                  qL = [];
-                }
-              }
               var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists)
               if(questionsFromGroup.length > 0) {
                 var allQuestionsAreLabels = true;
@@ -507,6 +533,7 @@ class Main extends React.Component<Props, {}> {
       return true;
     }
   }
+
   onQuestionSubmit() {
     var answered_questions = [];
     var allQuestionsValid = true;
@@ -529,24 +556,214 @@ class Main extends React.Component<Props, {}> {
       this.setState({
         submittingQuestions: true
       });
-      this.props.postQuestions({
-        answered_questions: answered_questions,
-        questions: this.questions
-      }).then(() => {
+      var data = {
+        questions: this.questions,
+        answered_questions: answered_questions
+      };
+
+      this.props.postQuestions(data).then(() => {
+        if (this.state.previousQuestionHanldingIndex || this.state.previousQuestionHanldingIndex == 0) {
+          if (this.props.questions && this.props.questions.extra_params &&
+            this.props.questions.extra_params.answered_questions &&
+            this.props.questions.extra_params.answered_questions.length > 0) {
+              if (this.props.questions.extra_params.answered_questions-1 == this.state.previousQuestionHanldingIndex) {
+                this.setState({
+                  previousQuestionHanldingIndex: null,
+                  previousQuestionIds: null
+                });
+              } else {
+                this.setState({
+                  previousQuestionHanldingIndex: this.state.previousQuestionHanldingIndex + 1,
+                }, ()=> {
+                  this.setState({
+                    previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
+                  });
+                });
+              }
+            }
+        }
+
         this.setState({
           alreadyOnceSubmitted: false,
           submittingQuestions: false
         })
-        //this.questions = JSON.parse(JSON.stringify(this.props.questions));
+
       }).catch(()=>{
         console.log(this.props.questions);
       });
     }
   }
 
+  findQuestionById(actualQuestions, questionId) : any {
+    if (!isEmpty(actualQuestions)) {
+      var targetQuestion = {};
+      for(var i=0; i<(actualQuestions.length); i++) {
+        var qe = actualQuestions[i];
+        var q = qe;
+        q.key = q.id;
+
+        if (q.id == questionId) {
+          return q;
+        }
+
+        if (qe.type == "group" || qe.type == "assessment-factor-group" || qe.hasReflexive) {
+          targetQuestion = this.findQuestionById(q.questions, questionId)
+        }
+
+        if (qe.type == "list" && q.answer && q.answer[0].elements) {
+          targetQuestion = this.findQuestionById(q.answer[0].elements, questionId)
+        }
+
+        if (qe.type == "struct") {
+          targetQuestion = this.findQuestionById(q.elements, questionId)
+        }
+
+
+
+        if (!isEmpty(targetQuestion)) {
+          return targetQuestion;
+        }
+      }
+
+      return {};
+    } else {
+      return {};
+    }
+  }
+  counter = 0;
+  getQuestionComponent(q): any {
+    var qComponent = {};
+    if (q.type == "singleselection") {
+      if(q.options.length == 2) {
+        qComponent = <SingleSelection
+              question={q}
+              error={""}
+              onChange={this.onChangeInput.bind(this)}
+              alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+              key={q.id}
+              counter={this.counter++}
+            />;
+      } else {
+        qComponent = <CustomSelect
+            question={q}
+            error={""}
+            onChange={this.onChangeInput.bind(this)}
+            alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+            key={q.id}
+            counter={this.counter++}
+          />;
+      }
+    } else if (q.type == "multiselection") {
+      qComponent = <CustomSelect
+          question={q}
+          error={""}
+          onChange={this.onChangeInput.bind(this)}
+          alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+          key={q.id}
+          multi={true}
+          counter={this.counter++}
+        />;
+    } else if (q.type == "label") {
+      /*questionsList.push( <Label
+              {...q}
+            />)*/
+    } else if (q.type == "number" || q.type=="text") {
+      qComponent = <CustomInput
+        question={q}
+        error={""}
+        onChange={this.onChangeInput.bind(this)}
+        alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+        key={q.id}
+        counter={this.counter++}
+      />;
+    } else if (q.type == "date") {
+      qComponent = <QuestionsCustomDatePicker
+                question={q}
+                error={""}
+                onChange={this.onChangeInput.bind(this)}
+                alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                key={q.id}
+                counter={this.counter++}
+            />
+    } else if (q.type == "assessment-factor-search") {
+      qComponent = <AsyncCustomSelect
+          question={q}
+          error={""}
+          onChange={this.onChangeInput.bind(this)}
+          alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+          getFactorsearch={this.props.getFactorsearch.bind(this)}
+          key={q.id}
+
+      />;
+    }
+    return qComponent;
+  }
+
+  getPreviousQuestionComponents() {
+    var previousQuestionIds = this.state.previousQuestionIds;
+    var qComps = [];
+    var aQuestions = [];
+    if (!isEmpty(this.questions) && !isEmpty(this.questions.data)) {
+      if (this.questions.data.questionnaire.questions) {
+        for(var i=0; i<previousQuestionIds.length; i++) {
+          var question = this.findQuestionById(this.questions.data.questionnaire.questions, previousQuestionIds[i]);
+          aQuestions.push(question);
+          qComps.push(this.getQuestionComponent(question));
+         }
+      }
+    }
+    this.actualQuestionLists = aQuestions;
+    return qComps;
+  }
+
+  deleteSibling() {
+    if (this.questionComponents.siblingAnswers.length >1) {
+      this.questionComponents.siblingAnswers.pop();
+      var siblingsCount = this.state.siblingsCount;
+      this.setState({
+        siblingsCount: siblingsCount - 1
+      });
+    }
+  }
+
+  addSibling() {
+    var siblingsCount = this.state.siblingsCount || 0;
+    if (this.questionComponents.isQuestionsList) {
+      if (this.questionComponents.siblingAnswers) {
+        var a = JSON.parse(JSON.stringify(this.questionComponents.siblingAnswers[0]));
+        this.questionComponents.siblingAnswers.push(a);
+      }
+    }
+    this.setState({
+      siblingsCount: siblingsCount + 1
+    });
+  };
+
   getCurrentSetOfQuestions() {
+    if (this.state.previousQuestionIds && this.state.previousQuestionIds.length > 0) {
+      this.questionComponents = this.getPreviousQuestionComponents();
+      if (this.questionComponents && this.questionComponents.isQuestionsList) {
+
+      }
+      return this.questionComponents;
+    }
     if (this.questions) {
       this.questionComponents = this.getQuestions(null);
+      if (this.questionComponents && this.questionComponents.isQuestionsList) {
+
+        var aQuestions = [];
+        var siblingComponents = [];
+        var qComps;
+        for(var i=0; i<this.questionComponents.siblingAnswers.length; i++) {
+          var answers = this.questionComponents.siblingAnswers[i].elements;
+          qComps = [];
+          for (var j=0; j<answers.length; j++) {
+            qComps.push(this.getQuestionComponent(answers[j]));
+          }
+          siblingComponents.push(qComps);
+         }
+         this.questionComponents.siblingComponents = siblingComponents;
+      }
       return this.questionComponents;
     } else {
       return null;
@@ -570,6 +787,60 @@ class Main extends React.Component<Props, {}> {
 
     return breadCrumbs;
   }
+
+  handleBackSubmit(): any {
+    console.log("sdfds");
+    if (this.state.previousQuestionsHandling) return;
+
+    if (this.props.questions && this.props.questions.extra_params &&
+      this.props.questions.extra_params.answered_questions &&
+      this.props.questions.extra_params.answered_questions.length > 0) {
+      if (this.state.previousQuestionHanldingIndex !=0) {
+        if (this.state.previousQuestionHanldingIndex) {
+          this.setState({
+            previousQuestionHanldingIndex: this.state.previousQuestionHanldingIndex - 1,
+            previousQuestionsHandling: true
+          }, ()=> {
+            console.log("sdfds");
+            console.log("sdfds");
+            console.log("sdfds");
+            this.setState({
+              previousQuestionsHandling: false,
+              previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
+            });
+          });
+        } else {
+          this.setState({
+            previousQuestionHanldingIndex: this.props.questions.extra_params.answered_questions.length - 1,
+            previousQuestionsHandling: true
+          }, ()=> {
+            console.log("sdfds");
+            console.log("sdfds");
+            console.log("sdfds");
+            this.setState({
+              previousQuestionsHandling: false,
+              previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
+            });
+          });
+        }
+      } else if (this.state.previousQuestionHanldingIndex == 0) {
+        this.setState({
+          previousQuestionsHandling: true
+        }, ()=> {
+          console.log("sdfds-1");
+          console.log("sdfds-1");
+          console.log("sdfds-1");
+          console.log("sdfds-1");
+          this.setState({
+            previousQuestionsHandling: false,
+            previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
+          });
+        });
+      }
+    }
+
+
+  }
   public render() {
     var breadCrumbs = this.getBreadCrumbs();
     var questionsList = this.getCurrentSetOfQuestions() || [];
@@ -581,16 +852,60 @@ class Main extends React.Component<Props, {}> {
         />
         <Row className="questions-container c-center">
           <Row>
-            { // map(questionsList.groupHeader, (p)=>{
-              //  return p  + " >>";
-              // })
+            { map(questionsList.groupHeader, (p)=>{
+               return p  + " >>";
+              })
             }
           </Row>
-          <div className="questions-content-container">
+          {!questionsList.isQuestionsList && <div className="questions-content-container">
             {questionsList}
-          </div>
-          <div className="question-action-btn-container">
-            <Button className={`c-button-default circular action`}>
+            {!questionsList.isQuestionsList && <div className="question-action-btn-container">
+              <Button className={`c-button-default circular action`} onClick={()=>{
+                    this.handleBackSubmit()
+                  }}>
+                  Previous Step
+                  {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+              </Button>
+              <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+                    this.onQuestionSubmit()
+                  }}
+                >
+                  Next Step
+                  {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+              </Button>
+            </div>}
+          </div>}
+          {questionsList.isQuestionsList &&
+            map(questionsList.siblingComponents, (s, i)=>{
+                return <div className="" key={i}>
+                  <div  className="siblings-container">
+                    {s}
+                    {questionsList.isQuestionsList && i==questionsList.siblingComponents.length-1 && <div className="question-action-btn-container">
+                      <Button className={`c-button-default circular action`} onClick={()=>{
+                            this.addSibling()
+                          }}>
+                          ADD SIBLING
+                          {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                      </Button>
+                      <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+                            this.deleteSibling()
+                          }}
+                        >
+                          DELETE ENTRY
+                          {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                      </Button>
+                    </div>}
+                  </div>
+                  <div>
+                  </div>
+              </div>
+            })}
+
+        </Row>
+        {questionsList.isQuestionsList && <Row className="questions-container c-center" style={{backgrounColor: "transparent", border: "none", boxShadow: "none"}}> <div className="question-action-btn-container">
+            <Button className={`c-button-default circular action`} onClick={()=>{
+                  this.handleBackSubmit()
+                }}>
                 Previous Step
                 {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
@@ -602,7 +917,7 @@ class Main extends React.Component<Props, {}> {
                 {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
           </div>
-        </Row>
+          </Row>}
       </div>);
   }
 }

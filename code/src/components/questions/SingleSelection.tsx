@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
+import {isEmpty} from "underscore";
 
 interface Props extends React.Props<SingleSelection> {
   question: any,
@@ -32,7 +33,20 @@ export default class SingleSelection extends React.Component<Props, {}> {
       return true;
     }
   }
-
+  componentWillReceiveProps(nextProps) {
+    if (!isEmpty(nextProps.question) && !isEmpty(nextProps.question.answer)) {
+      this.setState({
+        selectedId: this.props.question.answer.id
+      });
+    }
+  }
+  componentWillMount() {
+    if (!isEmpty(this.props.question) && !isEmpty(this.props.question.answer)) {
+      this.setState({
+        selectedId: this.props.question.answer.id
+      });
+    }
+  }
   public render() {
     var wrapperClass : string = 'form-group';
     if (this.props.error && this.props.error.length > 0) {

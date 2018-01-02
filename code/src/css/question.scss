@@ -1,65 +1,72 @@
 .questions-container {
+    .siblings-container {
+        border-radius: 3px;
+        background-color: #ffffff;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14);
+        border: solid 1px #d4d4d4;
+        padding: 40px;
+        margin-top: 50px;
+    }
     padding-bottom: 60px;
     width: 65.23%;
-    margin-top: 50px;
-    border-radius: 3px;
-    background-color: #ffffff;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14);
-    border: solid 1px #d4d4d4;
-    margin-bottom: 70px;
     .question-action-btn-container {
         margin-left: 40px;
         button {
             text-transform: uppercase;
         }
+    }
+    .Select-placeholder {
+        padding-top: 4px;
+    }
+    .birth-date-picker-container {
+        padding-left: 0px;
+        span.test-class + div {
 
+        }
+        .form-group {
+            width: 65%;
+        }
+        span.test-class + div label.control-label {
+            width: 15%;
+        }
+        .custom-date-picker-container {
+            .custom-date-picker {
+                img {
+                    left: 3.5%;
+                    top: 13px;
+                }
+            }
+        }
+    }
+    .form-group {
+        label {
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: left;
+            color: #666666;
+            font-weight: normal;
+        }
+        input {
+            &.form-control {
+                height: 44px;
+                border-radius: 2px;
+                background-color: #ffffff;
+                border-bottom: solid 1px #cccccc;
+                box-shadow: none;
+            }
+        }
+    }
+    .Select-input {
+        height: 44px;
     }
     .questions-content-container {
         margin: 40px;
-        .Select-placeholder {
-            padding-top: 4px;
-        }
-        .birth-date-picker-container {
-            padding-left: 0px;
-            span.test-class + div {
-
-            }
-            .form-group {
-                width: 65%;
-            }
-            span.test-class + div label.control-label {
-                width: 15%;
-            }
-            .custom-date-picker-container {
-                .custom-date-picker {
-                    img {
-                        left: 3.5%;
-                        top: 13px;
-                    }
-                }
-            }
-        }
-        .form-group {
-            label {
-                font-size: 14px;
-                line-height: 1.5;
-                text-align: left;
-                color: #666666;
-                font-weight: normal;
-            }
-            input {
-                &.form-control {
-                    height: 44px;
-                    border-radius: 2px;
-                    background-color: #ffffff;
-                    border-bottom: solid 1px #cccccc;
-                    box-shadow: none;
-                }
-            }
-        }
-        .Select-input {
-            height: 44px;
-        }
+        border-radius: 3px;
+        background-color: #ffffff;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14);
+        border: solid 1px #d4d4d4;
+        padding: 40px;
+        margin-top: 50px;
     }
     .c-button-default.btn.circular {
         margin-top: 10px;

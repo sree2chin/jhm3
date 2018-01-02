@@ -1,11 +1,13 @@
 import * as React from 'react';
-import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap"; 
+import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
+import {isEmpty} from "underscore";
 
 interface Props extends React.Props<CustomInput> {
   question: any,
   onChange: any,
   error: any,
-  alreadyOnceSubmitted: any
+  alreadyOnceSubmitted: any,
+  counter?: any
 }
 
 export default class CustomInput extends React.Component<Props, {}> {
@@ -20,6 +22,23 @@ export default class CustomInput extends React.Component<Props, {}> {
       className = className + this.props.className;
     }*/
     return className;
+  }
+  componentWillMount() {
+    if (!isEmpty(this.props.question) && !isEmpty(this.props.question.answer)) {
+      var answer = this.props.question.type=="number" ? parseInt(this.props.question.answer) : this.props.question.answer;
+      this.setState({
+        value: answer
+      });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!isEmpty(nextProps.question) && !isEmpty(nextProps.question.answer)) {
+      var answer = nextProps.question.type=="number" ? parseInt(nextProps.question.answer) : nextProps.question.answer
+      this.setState({
+        value: answer
+      });
+    }
   }
   validate() {
     if(!this.props.alreadyOnceSubmitted) {return true;}
@@ -43,6 +62,11 @@ export default class CustomInput extends React.Component<Props, {}> {
       return true;
     }
   }
+  onChange(val) {
+    this.setState({
+      value: val
+    });
+  }
   public render() {
     var wrapperClass : string = 'form-group';
     if (this.props.error && this.props.error.length > 0) {
@@ -59,10 +83,12 @@ export default class CustomInput extends React.Component<Props, {}> {
             className={this.getClassName()}
             placeholder={question.placeholder}
             ref={question.name}
+            value={this.state.value}
             onChange={(e)=>{
-              this.props.onChange(question, e.target.value)
+              this.onChange(e.target.value);
+              this.props.onChange(question, e.target.value);
             }} />
-          {!this.validate() && 
+          {!this.validate() &&
             <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
               {question.constraints.patternViolationMessage || "Required"}
             </div>
