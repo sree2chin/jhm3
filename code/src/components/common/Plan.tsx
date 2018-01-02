@@ -238,7 +238,6 @@ export default class Plan extends React.Component<Props, {}> {
     const plansObjs = this.getPlansDetailsForDropdown();
     const personsContainerWidth = this.props.noOfPersons == 2 ? 6 : 12;
     const product_name = this.getProductDisplayName().toString().toLowerCase();
-    console.log('product name', product_name);
     if(product_name == 'super ez complete' || product_name == 'super ez'){
             const product_image = 'spwl_image';
     }else if(product_name == 'vantis velocity whole life'){
@@ -259,7 +258,7 @@ export default class Plan extends React.Component<Props, {}> {
         <Row className="plan-details-container">
           <Col sm={12} className="c-center">
             <Row>
-              <Col sm={3}>
+              <Col sm={3} className={`${this.props.noOfPersons==2 ? "two_products_conainer_width" : ""}`}>
                 <center><div className={`hidden-xs ${product_image}`}></div></center>
               </Col>
               <Col sm={9} className={`plan-product-info-text`}>

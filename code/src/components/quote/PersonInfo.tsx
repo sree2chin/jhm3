@@ -25,17 +25,17 @@ export default class PersonInfo extends React.Component<Props, {}> {
     return (
           <Col sm={personsContainerWidth} className={`person-info-container  ${additionalClass}`}>
             <Row className="person-info-header-container">
-              <Col sm={10} xs={10} className="person-name-container">
-                {person.name} 
+              <Col sm={9} xs={9} className="person-name-container">
+                {person.name}
               </Col>
-              <Col sm={2} xs={2} className="person-edit-container" onClick={()=> this.props.openEditPersonModal(this.props.person, this.props.personIndex)}>
+              <Col sm={3} xs={3} className="person-edit-container" onClick={()=> this.props.openEditPersonModal(this.props.person, this.props.personIndex)}>
                 EDIT
               </Col>
             </Row>
             <Row className="person-content">
               <Col sm={4} className="person-info-columns">
                 <Row>
-                  <Col sm={12}>
+                  <Col sm={12} className="mb10">
                     <span className="person-label">State: </span>
                     <span className="person-label-content">{person.state}</span>
                   </Col>
@@ -47,9 +47,9 @@ export default class PersonInfo extends React.Component<Props, {}> {
               </Col>
               <Col sm={4} className="person-info-columns">
                 <Row>
-                  <Col sm={12}>
-                    <span className="person-label">D.O.B: </span> 
-                    <span className="person-label-content">{moment(person.s_birthDate).format("YYYY-MM-DD")}</span> 
+                  <Col sm={12} className="mb10">
+                    <span className="person-label">D.O.B: </span>
+                    <span className="person-label-content">{moment(person.s_birthDate).format("YYYY-MM-DD")}</span>
                   </Col>
                   <Col sm={12}>
                     <span className="person-label">Health: </span><span className="person-label-content">{person.health}</span>
@@ -58,8 +58,8 @@ export default class PersonInfo extends React.Component<Props, {}> {
               </Col>
               <Col sm={4} className="person-info-columns">
                 <Row>
-                  <Col sm={12}>
-                    <span className="person-label">Tobacco Use: </span> 
+                  <Col sm={12} className="mb10">
+                    <span className="person-label">Tobacco Use: </span>
                     <span className="person-label-content">{person.smoke} </span>
                   </Col>
                 </Row>
