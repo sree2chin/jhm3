@@ -7,6 +7,7 @@ import * as _MemberPage from "./components/member/memberPage";
 import * as _MembersPage from "./components/members/membersPage";
 import * as _QuotePage from "./components/quote/main";
 import * as _QuestionsPage from "./components/questions/main";
+import * as _AllQuestionsPage from "./components/questions/all";
 
 type LoadCallback = (error: any, component: React.ComponentClass<any>) => void;
 
@@ -42,6 +43,13 @@ function loadQuestionsPage(location: any, callback: LoadCallback) {
   require.ensure(
     [],
     () => callback(null, (require("./components/questions/main") as typeof _QuestionsPage).default),
+    "QuotePage");
+}
+
+function allQuestionsPage(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/questions/all") as typeof _QuestionsPage).default),
     "QuotePage");
 }
 
@@ -115,13 +123,14 @@ function loadEmailToQuoteSuccess(location: any, callback: LoadCallback) {
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route  path="/" component= {App} >
-      
+
       <IndexRoute getComponent={ loadQuotePage } />
       <Route path="/products" getComponent={ loadProductsPage } />
       <Route path="/plans" getComponent={ loadPlansPage } />
       <Route path="/next-steps" getComponent={ loadNextStepsPage } />
 
       <Route path="/questions" getComponent={ loadQuestionsPage } />
+      <Route path="/all-questions" getComponent={ allQuestionsPage } />
 
       <Route path="/agent" getComponent={ loadQuotePage } />
       <Route path="/agent/products" getComponent={ loadProductsPage } />
@@ -136,7 +145,7 @@ ReactDOM.render(
       <Route path="/connect-agent-success" getComponent={ loadContactAgentSuccess } />
       <Route path="/agent/connect-agent-success" getComponent={ loadContactAgentSuccess } />
 
-      
+
       <Route path="/email-to-quote" getComponent={ loadEmailToQuote } />
       <Route path="/agent/email-to-quote" getComponent={ loadEmailToQuote } />
       <Route path="/agent/connect-through-application" getComponent={ loadEmailCaptureToQuote } />

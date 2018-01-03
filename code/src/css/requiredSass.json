@@ -11,6 +11,7 @@
     "src/css/coverage.scss",
     "src/css/product.scss",
     "src/css/question.scss",
+    "src/css/all-questions.scss",
     "src/css/asynCustomSelect.scss",
     "src/css/plan.scss",
     "src/css/NextSteps.scss",

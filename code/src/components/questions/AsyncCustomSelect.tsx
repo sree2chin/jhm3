@@ -48,7 +48,7 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
     items: [],
     reposMessage: null
   };
-  
+
   onItemChange(val) {
     this.setState({
       selectedItem: val
@@ -56,7 +56,7 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
     this.props.onChange(this.props.question, val);
   }
   lastSearch = null
-  onTextSearch(search, page, prev) { 
+  onTextSearch(search, page, prev) {
     this.props.onChange(this.props.question, [  {
       "id": "Diabetes",
       "label": "diabetes",
@@ -84,7 +84,7 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
         return
       }
       this.lastSearch = search
-  
+
       this.setState({
         reposMessage: this.props.question.label,
         reposMore: null
@@ -140,7 +140,7 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
         <Col sm={12} className={"c-subheader-text"} style={{marginTop: "5px", paddingLeft: "0px", marginBottom: "5px"}}>
           {question.caption}
         </Col>
-          <Col sm={12} style={{paddingRight: "15px", marginBottom: "15px"}} className="async-auto-suggest-container">
+          <Col style={{paddingRight: "15px", marginBottom: "15px"}} className="async-auto-suggest-container">
             <Row>
               <Autosuggest
                 datalist={this.state.items || []}
@@ -153,18 +153,18 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
                 searchDebounce={500}
                 itemAdapter={TagAdapter.instance}
                 onSearch={this.onTextSearch.bind(this)}
-                onChange={this.onItemChange.bind(this)} 
+                onChange={this.onItemChange.bind(this)}
                 multiple />
             </Row>
 
-            <Col sm={12} className={`c-subheader-text error`} style={{paddingLeft: "0px", marginTop: "0px", marginLeft: "-15px"}}>
-              {!this.validate() && 
+            <Col className={`c-subheader-text error`} style={{paddingLeft: "0px", marginTop: "0px", marginLeft: "-15px"}}>
+              {!this.validate() &&
                 <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
                   {question.constraints.patternViolationMessage || "Required"}
                 </div>
               }
-            </Col> 
-          </Col> 
+            </Col>
+          </Col>
       </div>
     );
   }
