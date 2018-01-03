@@ -24,7 +24,7 @@ export default class CustomInput extends React.Component<Props, {}> {
     return className;
   }
   componentWillMount() {
-    if (!isEmpty(this.props.question) && !isEmpty(this.props.question.answer)) {
+    if (!isEmpty(this.props.question) && String(this.props.question.answer).length > 0) {
       var answer = this.props.question.type=="number" ? parseInt(this.props.question.answer) : this.props.question.answer;
       this.setState({
         value: answer
@@ -33,7 +33,7 @@ export default class CustomInput extends React.Component<Props, {}> {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!isEmpty(nextProps.question) && !isEmpty(nextProps.question.answer)) {
+    if (!isEmpty(nextProps.question) && String(this.props.question.answer).length > 0) {
       var answer = nextProps.question.type=="number" ? parseInt(nextProps.question.answer) : nextProps.question.answer
       this.setState({
         value: answer
