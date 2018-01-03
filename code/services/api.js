@@ -12,7 +12,6 @@ module.exports = new function(){
 
   var appendAgentInfo = function(req, data) {
     if(req.session) {
-      console.log("req.session.queryParams: in append: " + JSON.stringify(req.session.queryParams));
       if (req.session && req.session.queryParams) {
         for(var k in req.session.queryParams) {
           data[k] = req.session.queryParams[k];
@@ -21,14 +20,14 @@ module.exports = new function(){
     }
   };
 
-  this.getQuotePremiums = function(req, cb){
+  this.getQuotePremiums = function(req, cb) {
     var data = req.body;
     var url = restOptions.host + '/v1/quote/premiums';
     var formData = {
       applicants: JSON.stringify(data)
     };
     appendAgentInfo(req, formData);
-    console.log("getQuotePremiums: " + formData.user);
+
     request({
       url: url,
       formData: formData,
@@ -41,14 +40,13 @@ module.exports = new function(){
     });
   };
 
-  this.getQuoteProducts = function(req, cb){
+  this.getQuoteProducts = function(req, cb) {
     var data = req.body;
     var url = restOptions.host + '/v1/quote/products';
     var formData = {
       applicants: JSON.stringify(data)
     };
     appendAgentInfo(req, formData);
-    console.log("getQuoteProducts: " + formData.user);
     request({
       url: url,
       formData: formData,
@@ -67,7 +65,6 @@ module.exports = new function(){
       applicants: JSON.stringify(data)
     };
     appendAgentInfo(req, formData);
-    console.log("getQuotePlans: " + formData.user);
     request({
       url: restOptions.host + '/v1/quote/productplans',
       formData: formData,
@@ -115,10 +112,11 @@ module.exports = new function(){
   this.postQuestions = function(req, cb){
     var formData = {
       input_json: JSON.stringify(req.body.questions.data),
-      answered_questions: JSON.stringify(req.body.answered_questions)
     };
+    if (!_.isEmpty(req.body.answered_questions)) {
+      formData.answered_questions = JSON.stringify(req.body.answered_questions)
+    }
     appendAgentInfo(req, formData);
-    console.log("postQuestions: " + formData.user);
     request({
       url: restOptions.host + '/v1/questions/questions',
       headers: {
@@ -133,14 +131,20 @@ module.exports = new function(){
 
   this.getFactorsearch = function(req, cb) {
     appendAgentInfo(req, req.body);
-    console.log("postQuestions: " + req.body.user);
+    console.log("\n\n\ngetFactorsearch: " + JSON.stringify(req.body) + "\n\n\n");
+    var data = {
+      questionId: req.body.questionId,
+      assessment_factor_url: req.body.assessment_factor_url,
+      q: req.body.q
+    };
+    appendAgentInfo(req, data);
     request({
       url: restOptions.host + '/v1/questions/factorsearch',
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },
       method: 'POST',
-      formData: req.body
+      formData: data
     }, function callback(err, httpResponse, body) {
       cb(err, httpResponse);
     });

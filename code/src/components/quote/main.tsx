@@ -62,7 +62,7 @@ class Main extends React.Component<Props, {}> {
     var result = true;
     var errors = [];
     each (this.state.persons, (person, index) => {
-      if(index < this.state.noOfPersons) {  
+      if(index < this.props.noOfPersons) {
         const {s_birthDate, s_gender, state, smoke, health, name} = person;
 
         const s_birthDateError = !(s_birthDate && moment(s_birthDate).format("YYYY-MM-DD").length > 0);
@@ -73,10 +73,10 @@ class Main extends React.Component<Props, {}> {
         const nameError = !(name && name.length > 0);
 
         errors.push({
-          s_birthDateError, 
+          s_birthDateError,
           s_genderError,
-          stateError, 
-          smokeError, 
+          stateError,
+          smokeError,
           healthError,
           nameError
         });
@@ -122,11 +122,11 @@ class Main extends React.Component<Props, {}> {
           submittingUserInfo: false
         });
       });
-    } 
+    }
   }
   submitEmailForm() {
     this.props.submitEmailForm(this.props);
-  } 
+  }
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.persons) && isEmpty(this.state.persons)) {
       this.setState({
@@ -140,7 +140,7 @@ class Main extends React.Component<Props, {}> {
     } else {
       var person: any = {};
     }
-    
+
 
     if (person.s_birthDate) {
       person.s_birthDate = moment(person.s_birthDate);
@@ -164,7 +164,7 @@ class Main extends React.Component<Props, {}> {
     this.setState({persons});
   }
 
-  state = {      
+  state = {
     persons: [{}, {}],
     errors: [{}, {}]
   }
@@ -197,7 +197,7 @@ class Main extends React.Component<Props, {}> {
 
     if(this.props.noOfPersons > 0) {
       return "active";
-    } 
+    }
     return "";
 
   }
@@ -215,15 +215,15 @@ class Main extends React.Component<Props, {}> {
         <Subheader />
         <SelectPersons onSubmit={this.submitEmailForm.bind(this)} />
         <div className="row c-quote">
-          {this.props.noOfPersons && <div> 
+          {this.props.noOfPersons && <div>
             <div className="header hidden-xs">
               <div style={{textAlign: "center", fontSize: "26px"}} className="fwbold">
                 Application information
-              </div>  
+              </div>
             </div>
             <div className={this.props.noOfPersons==2 ? "two-person-outer-container c-center": "one-person-outer-container"}>
               <Col sm={personsContainerWidth} className="one-person-content">
-                <Person 
+                <Person
                   onChange={this.changePersonInfo.bind(this)}
                   index={0}
                   personIndex={0}
@@ -234,7 +234,7 @@ class Main extends React.Component<Props, {}> {
               </Col>
               { this.props.noOfPersons==2 &&
                 <Col sm={personsContainerWidth} className="second-person-content">
-                  <Person 
+                  <Person
                     onChange={this.changePersonInfo.bind(this)}
                     index={1}
                     personIndex={1}
@@ -288,8 +288,8 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     submitEmailForm: (data) => {
       return dispatch(submitEmailForm(data))
     },
-    loadStates: () => { 
-      return loadStates(); 
+    loadStates: () => {
+      return loadStates();
     }
   };
 }

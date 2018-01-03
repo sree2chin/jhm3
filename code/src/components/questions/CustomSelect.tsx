@@ -1,12 +1,14 @@
 import * as React from 'react';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import Select from 'react-select';
+import {isEmpty} from "underscore";
 interface Props extends React.Props<CustomSelect> {
   onChange: any,
   question: any,
   error: any,
   alreadyOnceSubmitted: any,
-  multi?: any
+  multi?: any,
+  counter?: any
 }
 
 export default class CustomSelect extends React.Component<Props, {}> {
@@ -20,6 +22,13 @@ export default class CustomSelect extends React.Component<Props, {}> {
       state: val
     });
     this.props.onChange(this.props.question, val);
+  }
+  componentWillMount() {
+    if(!isEmpty(this.props.question) && !isEmpty(this.props.question.answer)) {
+      this.setState({
+        state: this.props.question.answer
+      });
+    }
   }
 
   getStateObjects() {
@@ -48,6 +57,13 @@ export default class CustomSelect extends React.Component<Props, {}> {
       return true;
     } else {
       return true;
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if(!isEmpty(nextProps.question) && !isEmpty(nextProps.question.answer)) {
+      this.setState({
+        state: nextProps.question.answer
+      });
     }
   }
   public render() {
