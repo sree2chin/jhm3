@@ -97,6 +97,7 @@ module.exports = new function(){
     var data = {};
     appendAgentInfo(req, data);
     console.log("getQuestions: " + data.user);
+    console.log("getQuestionsData: " + JSON.stringify(data));
     request({
       url: restOptions.host + '/v1/questions/questions',
       formData: data,
@@ -117,6 +118,7 @@ module.exports = new function(){
       formData.answered_questions = JSON.stringify(req.body.answered_questions)
     }
     appendAgentInfo(req, formData);
+    console.log("postQuestionsData: " + formData.user);
     request({
       url: restOptions.host + '/v1/questions/questions',
       headers: {

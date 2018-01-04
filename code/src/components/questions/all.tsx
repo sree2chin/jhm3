@@ -4,7 +4,7 @@ import * as moment from "moment";
 import {Link} from 'react-router';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
+import {Button, Row, Col, FormGroup, Radio, NavItem, Nav} from "react-bootstrap";
 import SingleSelection from "./SingleSelection";
 import Label from "./Label"
 import CustomInput from "./CustomInput";
@@ -114,7 +114,6 @@ class Main extends React.Component<Props, {}> {
             questionsList.push(this.getQuestionComponent(qL[i]));
             actualQuestionLists.push(qL[i]);
           }
-          this.actualQuestionLists = actualQuestionLists;
 
         } else if (q.type == "group" || q.type == "assessment-factor-group") {
           this.reRecursiveGetQuestions1(qL, questionsList, actualQuestionLists)
@@ -166,7 +165,7 @@ class Main extends React.Component<Props, {}> {
             actualQuestionLists.push([]);
 
             questionsList[i].groupHeader = qe.caption;
-
+            actualQuestionLists[i].groupHeader = qe.caption;
             var q = qe;
 
             this.reRecursiveGetQuestions1(q.questions, questionsList[i], actualQuestionLists[i]);
@@ -523,50 +522,111 @@ class Main extends React.Component<Props, {}> {
 
 
   }
+  makeGroupActive(groupHeader) {
+    this.setState({
+        activeGroup: groupHeader
+    });
+  }
+
+  goToEditQuestionPage(q) {
+    browserHistory.push("/questions?fromEditablePage=true&questionId=" + q.id);
+  }
 
   public render() {
     var breadCrumbs = this.getBreadCrumbs();
     var questionsList = this.getCurrentSetOfQuestions() || [];
+    var actualQuestionLists = this.actualQuestionLists || [];
     return (
       <div>
         <ScrollToTopOnMount />
         <Subheader
           breadCrumbs={breadCrumbs}
         />
-        <Row className="questions-container c-center">
-          <Row>
-            { map(questionsList.groupHeader, (p)=>{
-               return p  + " >>";
-              })
-            }
-          </Row>
-            {
-                map(questionsList, (q)=>{
-                    return <div className="questions-content-container all-group-questions-container">
-                        <div className="all-group-header">
-                            {q.groupHeader}
-                        </div>
-                        {q}
-                    </div>
-                })
-            }
+        <div className="all-review-questions-container">
+            <Nav className="all-questions-side-bar" bsStyle="pills" stacked onSelect={()=>{}}>
+                <div className="all-questions-side-bar-header">
+                    APPLICATION SECTIONS
+                </div>
+                <div style={{height: "1px", backgroundColor: "#e2e2e2", marginRight: "20px"}}> </div>
+                {map(actualQuestionLists, (qL)=>{
+                        return <div>
+                                <NavItem className={`all-question-side-bar-link ${this.state.activeGroup == qL.groupHeader ? "active" : ""}`} eventKey={qL.groupHeader} onClick={()=>{
+                                        this.makeGroupActive(qL.groupHeader)
+                                    }}>
+                                    <div className="all-questions-side-bar-header-text">{qL.groupHeader}</div>
+                                </NavItem>
+                                <div style={{height: "1px", backgroundColor: "#e2e2e2", marginRight: "20px"}}> </div>
+                            </div>;
+                    })
+                }
+            </Nav>
+            <Row className="questions-container all-questions-container">
+                {
+                    map(actualQuestionLists, (qL)=>{
+                        var ans;
+                        return <div key={qL.groupHeader} className={`questions-content-container all-group-questions-container ${this.state.activeGroup == qL.groupHeader ? "active" : ""}`}>
+                            <div className="all-group-header">
+                                {qL.groupHeader}
+                            </div>
+                            <div className="question-answer-header">
+                                <div className="question-text">Question</div>
+                                <div className="answer-text">Answer</div>
+                            </div>
+                            {map(qL, (q)=>{
+                                ans = q.answer;
+                                if (Object.prototype.toString.call(q.answer) === '[object Array]') {
+                                    ans = q.answer[0].label;
+                                    for (var i=1; i<q.answer.length; i++) {
+                                        ans += ", " + q.answer[i].label;
+                                    }
+                                } else {
+                                    if (q.answer && q.answer.label) {
+                                        ans = q.answer.label;
+                                    } else if (q.answer) {
+                                        ans = q.answer.label;
+                                    }
+                                }
 
-          <div className="question-action-btn-container">
-              <Button className={`c-button-default circular action`} onClick={()=>{
-                    this.handleBackSubmit()
-                  }}>
-                  SUBMIT
-                  {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-              </Button>
-              <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
-                    this.onQuestionSubmit()
-                  }}
-                >
-                  Next Step
-                  {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-              </Button>
-            </div>
-        </Row>
+                                return <div className="individual-question">
+                                        <div className="question-text">
+                                            <span className="edit-img-container" onClick={()=>{
+                                                this.goToEditQuestionPage(q);
+                                            }}>
+                                                <img src={"../images/edit-pencil.svg"} />
+                                            </span>
+                                            <span className="question-actual-text">
+                                                {q.caption}
+                                            </span>
+                                        </div>
+                                        <div className="answer-text">
+                                            <span>
+                                                {ans}
+                                            </span>
+                                        </div>
+                                        <div style={{height: "2px", backgroundColor: "#e2e2e2", marginRight: "20px"}}> </div>
+                                    </div>
+                            })}
+                        </div>
+                    })
+                }
+
+            <div className="question-action-btn-container">
+                <Button className={`c-button-default circular action`} onClick={()=>{
+                        this.handleBackSubmit()
+                    }}>
+                    SUBMIT
+                    {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                </Button>
+                <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+                        this.onQuestionSubmit()
+                    }}
+                    >
+                    Next Step
+                    {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                </Button>
+                </div>
+            </Row>
+        </div>
       </div>);
   }
 }

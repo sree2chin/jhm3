@@ -80,7 +80,7 @@ export default class CustomSelect extends React.Component<Props, {}> {
           {question.caption}
         </Col>
           <Col style={{paddingRight: "15px", marginBottom: "20px"}} className="person-gender-container c-custom-select">
-            <Row>
+            <Row style={{marginLeft: "0px"}}>
               <Select
                 name="form-field-name1"
                 options={statesObjects}

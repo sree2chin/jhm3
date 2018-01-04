@@ -207,6 +207,7 @@ class Main extends React.Component<Props, {}> {
               return questionsList;
             }
           }
+          var qL = q.questions;
           var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists)
           if(questionsFromGroup.length > 0) {
             var allQuestionsAreLabels = true;
@@ -738,7 +739,23 @@ class Main extends React.Component<Props, {}> {
       siblingsCount: siblingsCount + 1
     });
   };
-
+  getCurrentPageIndex(questionId) {
+    var currentPageIndex = -1;
+    var answeredQuestions = [];
+    if (this.props.questions && this.props.questions.extra_params && this.props.questions.extra_params.answered_questions) {
+      answeredQuestions = this.props.questions.extra_params.answered_questions;
+    }
+    var pageQuestionsList = [];
+    for (var i=0; (i<answeredQuestions.length && currentPageIndex==-1); i++) {
+      pageQuestionsList = answeredQuestions[i];
+      for(var j=0; (j<pageQuestionsList.length && currentPageIndex==-1); j++){
+        if (questionId == pageQuestionsList[j]) {
+          currentPageIndex = i;
+        }
+      }
+    }
+    return currentPageIndex;
+  }
   getCurrentSetOfQuestions() {
     if (this.state.previousQuestionIds && this.state.previousQuestionIds.length > 0) {
       this.questionComponents = this.getPreviousQuestionComponents();
@@ -746,6 +763,16 @@ class Main extends React.Component<Props, {}> {
 
       }
       return this.questionComponents;
+    }
+    if (this.props.location.query && (this.props.location.query.fromEditablePage==true || this.props.location.query.fromEditablePage=="true")) {
+      var questionIdFromQuery = this.props.location.query.questionId;
+      var currentPageIndex = this.getCurrentPageIndex(this.props.location.query.questionId);
+      if (currentPageIndex>=0) {
+        this.setState({
+          previousQuestionIds: this.props.questions.extra_params.answered_questions[currentPageIndex]
+        });
+        return;
+      }
     }
     if (this.questions) {
       this.questionComponents = this.getQuestions(null);
