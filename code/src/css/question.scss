@@ -10,7 +10,6 @@
     padding-bottom: 60px;
     width: 65.23%;
     .question-action-btn-container {
-        margin-left: 40px;
         button {
             text-transform: uppercase;
         }
@@ -67,6 +66,10 @@
         margin-left: 0px;
         margin-right: 0px;
         margin-top: 50px;
+        .main-loader {
+            font-size: 150px;
+            margin-bottom: 70px;
+        }
         .c-custom-select {
             width: 50%;
         }
@@ -94,6 +97,22 @@
             background-color: #fb4d3d!important;
             margin-left: 30px;
         }
+        &.single-select-btn {
+            border-radius: 22px!important;
+            background-color: #ffffff!important;
+            border: solid 2px #c7c7c7;
+            font-family: ProximaNova-Semibold;
+            font-size: 14px;
+            font-weight: 600;
+            color: #c7c7c7;
+            &:hover {
+                color: #317dbd!important;
+            }
+            &.active  {
+                border: solid 2px #317dbd;
+                color: #317dbd!important;
+            }
+        }
     }
 }
 
@@ -101,6 +120,8 @@
     &.bread-crumb-container  {
         border: none;
         box-shadow: none;
+        margin-top: -3px;
+        min-height: 95px;
         .dynamic-bread-crumb.active {
             .gather-information {
                 font-family: Nunito;
@@ -110,6 +131,7 @@
         .container {
             padding-left: 18%;
             padding-right: 0px;
+            margin-top: 38px;
             .gather-information-container {
                 margin-right: 20px;
                 margin-left: 20px;

@@ -23,11 +23,18 @@ module.exports = function(app) {
     });
   });
 
+  app.post(prefix + '/questions/confirm', function(req, res) {
+    QuestionsService.confirmQuestions(req, function(statusCode, data) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(data);
+    });
+  });
+
   app.post(prefix + '/questions/factorsearch', function(req, res) {
     QuestionsService.getFactorsearch(req, function(statusCode, data) {
       res.setHeader('Content-Type', 'application/json');
       res.send(data);
     });
   });
-  
+
 };

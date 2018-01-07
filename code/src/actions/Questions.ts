@@ -18,6 +18,15 @@ function postQuestions(data) {
 	};
 }
 
+function confirmQuestions(data) {
+	return (dispatch) => {
+		return QuestionsApi.confirm(data).then(
+			data => dispatch({
+				type: 'CONFIRM_QUESTIONS', confirmationData: data
+			}));
+	};
+}
+
 function getFactorsearch(data) {
 	return (dispatch) => {
 		return QuestionsApi.getFactorsearch(data).then(
@@ -30,5 +39,6 @@ function getFactorsearch(data) {
 export {
 	getQuestions,
 	postQuestions,
-	getFactorsearch
+	getFactorsearch,
+	confirmQuestions
 }

@@ -53,7 +53,21 @@ function allQuestionsPage(location: any, callback: LoadCallback) {
     "QuotePage");
 }
 
+function getSignaturePage(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/questions/signature") as typeof _QuestionsPage).default),
+    "QuotePage");
+}
+
 function editQuestionsPage(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/questions/editQuestion") as typeof _QuestionsPage).default),
+    "QuotePage");
+}
+
+function editSignaturePage(location: any, callback: LoadCallback) {
   require.ensure(
     [],
     () => callback(null, (require("./components/questions/editQuestion") as typeof _QuestionsPage).default),
@@ -139,6 +153,7 @@ ReactDOM.render(
       <Route path="/questions" getComponent={ loadQuestionsPage } />
       <Route path="/all-questions" getComponent={ allQuestionsPage } />
       <Route path="/edit-questions" getComponent={ editQuestionsPage } />
+      <Route path="/signature" getComponent={ getSignaturePage } />
 
       <Route path="/agent" getComponent={ loadQuotePage } />
       <Route path="/agent/products" getComponent={ loadProductsPage } />

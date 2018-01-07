@@ -2,7 +2,7 @@ import * as _ from 'underscore';
 import * as fetch from "isomorphic-fetch";
 import { getStates } from '../utility/states';
 
-var QuestionsApiI; 
+var QuestionsApiI;
 
 interface QuotesApiI {
   get: any
@@ -21,7 +21,7 @@ class QuestionsApi {
         },
         credentials: 'include'
       }).then(function(res) {
-        return res.json().then(function (response: any) {    
+        return res.json().then(function (response: any) {
           return new Promise(function(resolve, reject) {
             resolve(response)
           });
@@ -39,7 +39,25 @@ class QuestionsApi {
         },
         credentials: 'include'
       }).then(function(res) {
-        return res.json().then(function (response: any) {    
+        return res.json().then(function (response: any) {
+          return new Promise(function(resolve, reject) {
+            resolve(response)
+          });
+        })
+    })
+  };
+
+  confirm(payload) : Promise<any> {
+    return fetch('/v1/questions/confirm', {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      }).then(function(res) {
+        return res.json().then(function (response: any) {
           return new Promise(function(resolve, reject) {
             resolve(response)
           });
@@ -57,7 +75,7 @@ class QuestionsApi {
         },
         credentials: 'include'
       }).then(function(res) {
-        return res.json().then(function (response: any) {    
+        return res.json().then(function (response: any) {
           return new Promise(function(resolve, reject) {
             resolve(response)
           });
@@ -65,7 +83,7 @@ class QuestionsApi {
     })
   };
 
-  
+
 }
 
 export default new QuestionsApi();

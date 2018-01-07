@@ -96,8 +96,6 @@ module.exports = new function(){
   this.getQuestions = function(req, cb){
     var data = {};
     appendAgentInfo(req, data);
-    console.log("getQuestions: " + data.user);
-    console.log("getQuestionsData: " + JSON.stringify(data));
     request({
       url: restOptions.host + '/v1/questions/questions',
       formData: data,
@@ -121,6 +119,30 @@ module.exports = new function(){
     console.log("postQuestionsData: " + formData.user);
     request({
       url: restOptions.host + '/v1/questions/questions',
+      headers: {
+        'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
+      },
+      method: 'POST',
+      formData: formData
+    }, function callback(err, httpResponse, body) {
+      cb(err, httpResponse);
+    });
+  };
+
+  this.confirmQuestions = function(req, cb){
+
+    var formData = {};
+    if(req.session.envelop_id)      {
+      formData.envelop_id = req.session.envelop_id
+    }
+    if (req.session.signature_status) {
+      formData.signature_status = req.session.signature_status;
+    }
+
+    appendAgentInfo(req, formData);
+    console.log("formData: " + JSON.stringify(formData));
+    request({
+      url: restOptions.host + '/v1/questions/confirm',
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },

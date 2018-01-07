@@ -65,6 +65,7 @@
     "react-dom": "^15.2.1",
     "react-infinite-autocomplete": "^2.0.2",
     "react-lightweight-tooltip": "0.0.4",
+    "react-pdf": "^2.5.2",
     "react-rangeslider": "^2.2.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.5.2",

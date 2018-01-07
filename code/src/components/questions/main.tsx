@@ -39,7 +39,14 @@ class Main extends React.Component<Props, {}> {
   questionComponents: any = [];
 
   componentWillMount() {
-    this.props.getQuestions();
+    this.setState({
+      gettingQuestions: true
+    });
+    this.props.getQuestions().then(()=>{
+      this.setState({
+        gettingQuestions: false
+      });
+    });
   }
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.questions)) {
@@ -304,7 +311,7 @@ class Main extends React.Component<Props, {}> {
             questionsList.groupHeader = [];
             questionsList.groupHeader.push(qe.caption);
           }
-          this.noFoGroupsCompleted++;
+          this.noFoGroupsCompleted = i;
           var q = qe;
           q.key = q.id;
           if (q.answerState == "valid") {
@@ -565,6 +572,10 @@ class Main extends React.Component<Props, {}> {
       };
 
       this.props.postQuestions(data).then(() => {
+        if (this.questions.data.completed ==true || this.questions.data.completed =="true") {
+          browserHistory.push("/all-questions");
+          return;
+        }
         if (this.state.previousQuestionHanldingIndex || this.state.previousQuestionHanldingIndex == 0) {
           if (this.props.questions && this.props.questions.extra_params &&
             this.props.questions.extra_params.answered_questions &&
@@ -891,6 +902,7 @@ class Main extends React.Component<Props, {}> {
             }
           </Row>
           {!questionsList.isQuestionsList && <div className="questions-content-container">
+            {this.state.gettingQuestions && <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>}
             {questionsList}
             {!questionsList.isQuestionsList && <div className="question-action-btn-container">
               <Button className={`c-button-default circular action`} onClick={()=>{

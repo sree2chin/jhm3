@@ -13,7 +13,7 @@ import AsyncCustomSelect from "./AsyncCustomSelect";
 import QuestionsCustomDatePicker from "./QuestionsCustomDatePicker";
 import Subheader from "../common/subheader";
 import {each, isEmpty, map} from "underscore";
-import {getQuestions, postQuestions, getFactorsearch} from '../../actions/Questions';
+import {getQuestions, postQuestions, getFactorsearch, confirmQuestions} from '../../actions/Questions';
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
@@ -24,6 +24,7 @@ interface Props  extends React.Props<Main> {
   submitProductsForm: ()=>void,
   getQuestions: any,
   postQuestions: any,
+  confirmQuestions: any,
   questions: any,
   previousQuestionIds: any,
   getFactorsearch: any
@@ -39,7 +40,14 @@ class Main extends React.Component<Props, {}> {
   questionComponents: any = [];
 
   componentWillMount() {
-    this.props.getQuestions();
+    this.setState({
+      gettingQuestions: true
+    });
+    this.props.getQuestions().then(()=>{
+      this.setState({
+        gettingQuestions: false
+      });
+    });
   }
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.questions)) {
@@ -240,64 +248,19 @@ class Main extends React.Component<Props, {}> {
     }
   }
 
-  onQuestionSubmit() {
-    var answered_questions = [];
-    var allQuestionsValid = true;
+  confirmQuestions() {
+
+    var data = {};
     this.setState({
-      alreadyOnceSubmitted: true
-    })
-
-    each(this.actualQuestionLists, (q)=> {
-      answered_questions.push(q.id)
-      if (q.type == "text") {
-        allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
-      } else if (q.type == "singleselection") {
-        allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
-      } else if (q.type == "date") {
-        allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q);
-      }
+      confirmingQuestions: true
     });
-
-    if (allQuestionsValid) {
-      this.setState({
-        submittingQuestions: true
-      });
-      var data = {
-        questions: this.questions,
-        answered_questions: answered_questions
-      };
-
-      this.props.postQuestions(data).then(() => {
-        if (this.state.previousQuestionHanldingIndex || this.state.previousQuestionHanldingIndex == 0) {
-          if (this.props.questions && this.props.questions.extra_params &&
-            this.props.questions.extra_params.answered_questions &&
-            this.props.questions.extra_params.answered_questions.length > 0) {
-              if (this.props.questions.extra_params.answered_questions-1 == this.state.previousQuestionHanldingIndex) {
-                this.setState({
-                  previousQuestionHanldingIndex: null,
-                  previousQuestionIds: null
-                });
-              } else {
-                this.setState({
-                  previousQuestionHanldingIndex: this.state.previousQuestionHanldingIndex + 1,
-                }, ()=> {
-                  this.setState({
-                    previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
-                  });
-                });
-              }
-            }
-        }
-
-        this.setState({
-          alreadyOnceSubmitted: false,
-          submittingQuestions: false
-        })
-
-      }).catch(()=>{
-        console.log(this.props.questions);
-      });
-    }
+    browserHistory.push("/signature");
+    return;
+    this.props.confirmQuestions(data).then(() => {
+      browserHistory.push("/signature");
+    }).catch(()=>{
+      console.log(this.props.questions);
+    });
   }
 
   findQuestionById(actualQuestions, questionId) : any {
@@ -568,6 +531,7 @@ class Main extends React.Component<Props, {}> {
                 }
             </Nav>
             <Row className="questions-container all-questions-container">
+              {this.state.gettingQuestions && <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>}
                 {
                     map(actualQuestionLists, (qL)=>{
                         var ans;
@@ -632,17 +596,10 @@ class Main extends React.Component<Props, {}> {
 
             <div className="question-action-btn-container">
                 <Button className={`c-button-default circular action`} onClick={()=>{
-                        this.handleBackSubmit()
+                        this.confirmQuestions()
                     }}>
-                    SUBMIT
-                    {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-                </Button>
-                <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
-                        this.onQuestionSubmit()
-                    }}
-                    >
-                    Next
-                    {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                    E SIGN AND SUBMIT
+                    {this.state.confirmingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                 </Button>
                 </div>
             </Row>
@@ -667,6 +624,9 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     },
     getFactorsearch: (data: any, moreInfo: any) => {
       return dispatch(getFactorsearch(data, moreInfo));
+    },
+    confirmQuestions: (data: any, moreInfo: any) =>  {
+      return dispatch(confirmQuestions(data, moreInfo));
     }
   };
 }
