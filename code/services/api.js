@@ -155,7 +155,6 @@ module.exports = new function(){
 
   this.getFactorsearch = function(req, cb) {
     appendAgentInfo(req, req.body);
-    console.log("\n\n\ngetFactorsearch: " + JSON.stringify(req.body) + "\n\n\n");
     var data = {
       questionId: req.body.questionId,
       assessment_factor_url: req.body.assessment_factor_url,
