@@ -37,18 +37,63 @@ class Main extends React.Component<Props, {}> {
   questions:any = {};
   actualQuestionLists: any = [];
   questionComponents: any = [];
+  currentlyAnsweredQuestions: any = [];
+  questionsSource: any = [];
 
   componentWillMount() {
-    this.props.getQuestions();
+    this.props.getQuestions().then(()=>{
+        if (!this.alreadyAnsweredQueryQuestion && this.props.location.query && (this.props.location.query.fromReviewPage==true || this.props.location.query.fromReviewPage=="true")) {
+            var questionIdFromQuery = this.props.location.query.questionId;
+            var currentPageIndex = this.getCurrentPageIndex(this.props.location.query.questionId);
+            if (currentPageIndex>=0) {
+              for (var i=0; i<this.questions.extra_params.answered_questions[currentPageIndex].length; i++) {
+                var qId = this.questions.extra_params.answered_questions[currentPageIndex][i];
+                var question = this.findQuestionById(this.questions.data.questionnaire.questions, qId);
+                if (question.hasReflexive) {
+                  this.reflexiveQuestioninPage = JSON.parse(JSON.stringify(question));
+                }
+              }
+              this.setState({
+                  previousQuestionIds: this.questions.extra_params.answered_questions[currentPageIndex]
+              });
+              return;
+            }
+        }
+    });
   }
+
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.questions)) {
       this.questions = JSON.parse(JSON.stringify(nextProps.questions));
+      if (!this.alreadyAnsweredQueryQuestion && this.props.location.query && (this.props.location.query.fromReviewPage==true || this.props.location.query.fromReviewPage=="true")) {
+          var questionIdFromQuery = this.props.location.query.questionId;
+          var currentPageIndex = this.getCurrentPageIndex(this.props.location.query.questionId);
+          if (currentPageIndex>=0) {
+            for (var i=0; i<this.questions.extra_params.answered_questions[currentPageIndex].length; i++) {
+              var qId = this.questions.extra_params.answered_questions[currentPageIndex][i];
+              var question = this.findQuestionById(this.questions.data.questionnaire.questions, qId);
+              if (question.hasReflexive) {
+                this.reflexiveQuestioninPage = JSON.parse(JSON.stringify(question));
+              }
+            }
+            this.setState({
+                previousQuestionIds: this.questions.extra_params.answered_questions[currentPageIndex]
+            });
+            return;
+          }
+      }
     }
   }
+
   onChangeInput(q, answer) {
     q.answer = answer;
+    if (q.hasReflexive) {
+      if (this.reflexiveQuestioninPage && this.reflexiveQuestioninPage.id==q.id && JSON.stringify(this.reflexiveQuestioninPage.answer) !=JSON.stringify(answer)) {
+        this.reflexiveQuestionModified = true;
+      }
+    }
   }
+
   reRecursiveRender(data) {
     if (!isEmpty(data)) {
         return map(data, (qe)=> {
@@ -116,7 +161,7 @@ class Main extends React.Component<Props, {}> {
           questionsList.groupHeader.push(q.caption);
         }
         q.key = q.id;
-        if (q.answerState == "valid") {
+        if (this.currentlyAnsweredQuestions.indexOf(q.id)>=0) {
           if (q.hasReflexive) {
             if (q.questions) {
               var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists);
@@ -170,10 +215,11 @@ class Main extends React.Component<Props, {}> {
             />)
           actualQuestionLists.push(q);
         } else if (q.type == "label") {
-          /*preQ = q;
+          preQ = q;
           questionsList.push( <Label
                   {...q}
-                />)*/
+                />)
+          actualQuestionLists.push(q);
         } else if (q.type == "list") {
           var qL = q.questions;
           if (q.prototype && q.prototype.elements) {
@@ -290,24 +336,22 @@ class Main extends React.Component<Props, {}> {
   }
 
   recursiveGetQuestions1() {
-    if (!isEmpty(this.questions) && !isEmpty(this.questions.data)) {
-      if (this.questions.data.questionnaire.questions) {
+    if (!isEmpty(this.questionsSource) && !isEmpty(this.questionsSource.questions)) {
+      if (this.questionsSource.questions) {
         var preQ = null;
         var questionsList = [];
         questionsList.isQuestionsList = false;
         var actualQuestionLists = [];
         var boundaryReached = false;
-        this.noFoGroupsCompleted = 0;
-        for(var i=0; i<(this.questions.data.questionnaire.questions.length); i++) {
-          var qe = this.questions.data.questionnaire.questions[i];
+        for(var i=0; i<(this.questionsSource.questions.length); i++) {
+          var qe = this.questionsSource.questions[i];
           if (qe.type == "group") {
             questionsList.groupHeader = [];
             questionsList.groupHeader.push(qe.caption);
           }
-          this.noFoGroupsCompleted++;
           var q = qe;
           q.key = q.id;
-          if (q.answerState == "valid") {
+          if (this.currentlyAnsweredQuestions.indexOf(q.id)>=0) {
             if (q.hasReflexive) {
               if (q.questions){
                 var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists);
@@ -361,9 +405,10 @@ class Main extends React.Component<Props, {}> {
               />)
             actualQuestionLists.push(q);
           } else if (q.type == "label") {
-            /*questionsList.push( <Label
+            questionsList.push( <Label
                     {...q}
-                  />)*/
+                  />)
+            actualQuestionLists.push(q);
           } else if (q.type=="list") {
             var qL = q.questions;
             if (q.prototype && q.prototype.elements) {
@@ -469,6 +514,8 @@ class Main extends React.Component<Props, {}> {
           }
           preQ = q;
         };
+        this.actualQuestionLists = actualQuestionLists;
+        return questionsList;
       };
     } else {
       return null;
@@ -545,6 +592,7 @@ class Main extends React.Component<Props, {}> {
     })
 
     each(this.actualQuestionLists, (q)=> {
+      this.currentlyAnsweredQuestions.push(q.id);
       answered_questions.push(q.id)
       if (q.type == "text") {
         allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
@@ -585,16 +633,52 @@ class Main extends React.Component<Props, {}> {
               }
             }
         }
-
+        this.alreadyAnsweredQueryQuestion = true;
         this.setState({
           alreadyOnceSubmitted: false,
-          submittingQuestions: false
-        })
+          submittingQuestions: false,
+          previousQuestionIds: null
+        }, ()=> {
+            if (this.reflexiveQuestionModified) {
+              setTimeout(()=>{
+                this.questionsSubmittedCount++;
+                if (this.questionsSubmittedCount>=0) {
+                  var reflexiveQuestion = this.findQuestionById(this.questions.data.questionnaire.questions, this.reflexiveQuestioninPage.id)
+                  if (isEmpty(reflexiveQuestion.questions)) {
+                    browserHistory.push("/all-questions");
+                  } else {
+                    this.questionsSource = reflexiveQuestion;
+                    this.setState({
+                      questionsSource: this.questionsSource
+                    });
+                    if (this.getQuestions(null).length ==0) {
+                      browserHistory.push("/all-questions");
+                    }
+                  }
+                } else {
+
+                }
+              }, 200)
+            } else {
+              browserHistory.push("/all-questions");
+            }
+        });
+
 
       }).catch(()=>{
         console.log(this.props.questions);
       });
     }
+  }
+  questionsSubmittedCount = -1;
+
+  setDuplicateQuestions(questions) {
+    for(var i=0; i<questions.length; i++) {
+      var duplicateQuestions = JSON.parse(JSON.stringify(questions))
+
+    }
+
+
   }
 
   findQuestionById(actualQuestions, questionId) : any {
@@ -604,6 +688,10 @@ class Main extends React.Component<Props, {}> {
         var qe = actualQuestions[i];
         var q = qe;
         q.key = q.id;
+
+        if (qe.type == "group") {
+          this.noFoGroupsCompleted = i;
+        }
 
         if (q.id == questionId) {
           return q;
@@ -620,8 +708,6 @@ class Main extends React.Component<Props, {}> {
         if (qe.type == "struct") {
           targetQuestion = this.findQuestionById(q.elements, questionId)
         }
-
-
 
         if (!isEmpty(targetQuestion)) {
           return targetQuestion;
@@ -745,8 +831,8 @@ class Main extends React.Component<Props, {}> {
   getCurrentPageIndex(questionId) {
     var currentPageIndex = -1;
     var answeredQuestions = [];
-    if (this.props.questions && this.props.questions.extra_params && this.props.questions.extra_params.answered_questions) {
-      answeredQuestions = this.props.questions.extra_params.answered_questions;
+    if (this.questions && this.questions.extra_params && this.questions.extra_params.answered_questions) {
+      answeredQuestions = this.questions.extra_params.answered_questions;
     }
     var pageQuestionsList = [];
     for (var i=0; (i<answeredQuestions.length && currentPageIndex==-1); i++) {
@@ -763,25 +849,12 @@ class Main extends React.Component<Props, {}> {
   getCurrentSetOfQuestions() {
     if (this.state.previousQuestionIds && this.state.previousQuestionIds.length > 0) {
       this.questionComponents = this.getPreviousQuestionComponents();
-      if (this.questionComponents && this.questionComponents.isQuestionsList) {
-
-      }
       return this.questionComponents;
     }
-    if (this.props.location.query && (this.props.location.query.fromEditablePage==true || this.props.location.query.fromEditablePage=="true")) {
-      var questionIdFromQuery = this.props.location.query.questionId;
-      var currentPageIndex = this.getCurrentPageIndex(this.props.location.query.questionId);
-      if (currentPageIndex>=0) {
-        this.setState({
-          previousQuestionIds: this.props.questions.extra_params.answered_questions[currentPageIndex]
-        });
-        return;
-      }
-    }
-    if (this.questions) {
+
+    if (this.questionsSource) {
       this.questionComponents = this.getQuestions(null);
       if (this.questionComponents && this.questionComponents.isQuestionsList) {
-
         var aQuestions = [];
         var siblingComponents = [];
         var qComps;
@@ -819,59 +892,6 @@ class Main extends React.Component<Props, {}> {
     return breadCrumbs;
   }
 
-  handleBackSubmit(): any {
-    console.log("sdfds");
-    if (this.state.previousQuestionsHandling) return;
-
-    if (this.props.questions && this.props.questions.extra_params &&
-      this.props.questions.extra_params.answered_questions &&
-      this.props.questions.extra_params.answered_questions.length > 0) {
-      if (this.state.previousQuestionHanldingIndex !=0) {
-        if (this.state.previousQuestionHanldingIndex) {
-          this.setState({
-            previousQuestionHanldingIndex: this.state.previousQuestionHanldingIndex - 1,
-            previousQuestionsHandling: true
-          }, ()=> {
-            console.log("sdfds");
-            console.log("sdfds");
-            console.log("sdfds");
-            this.setState({
-              previousQuestionsHandling: false,
-              previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
-            });
-          });
-        } else {
-          this.setState({
-            previousQuestionHanldingIndex: this.props.questions.extra_params.answered_questions.length - 1,
-            previousQuestionsHandling: true
-          }, ()=> {
-            console.log("sdfds");
-            console.log("sdfds");
-            console.log("sdfds");
-            this.setState({
-              previousQuestionsHandling: false,
-              previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
-            });
-          });
-        }
-      } else if (this.state.previousQuestionHanldingIndex == 0) {
-        this.setState({
-          previousQuestionsHandling: true
-        }, ()=> {
-          console.log("sdfds-1");
-          console.log("sdfds-1");
-          console.log("sdfds-1");
-          console.log("sdfds-1");
-          this.setState({
-            previousQuestionsHandling: false,
-            previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
-          });
-        });
-      }
-    }
-
-
-  }
   public render() {
     var breadCrumbs = this.getBreadCrumbs();
     var questionsList = this.getCurrentSetOfQuestions() || [];
@@ -883,7 +903,7 @@ class Main extends React.Component<Props, {}> {
           breadCrumbs={breadCrumbs}
           noFoGroupsCompleted={[noFoGroupsCompleted]}
         />
-        <Row className="questions-container c-center">
+        <Row className="questions-container c-center edit-questions-container">
           <Row>
             { map(questionsList.groupHeader, (p)=>{
                return p  + " >>";
@@ -893,17 +913,11 @@ class Main extends React.Component<Props, {}> {
           {!questionsList.isQuestionsList && <div className="questions-content-container">
             {questionsList}
             {!questionsList.isQuestionsList && <div className="question-action-btn-container">
-              <Button className={`c-button-default circular action`} onClick={()=>{
-                    this.handleBackSubmit()
-                  }}>
-                  Previous
-                  {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-              </Button>
               <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                     this.onQuestionSubmit()
                   }}
                 >
-                  Next
+                  Submit
                   {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>
             </div>}

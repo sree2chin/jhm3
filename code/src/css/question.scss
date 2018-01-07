@@ -63,10 +63,26 @@
         margin: 40px;
         border-radius: 3px;
         background-color: #ffffff;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14);
-        border: solid 1px #d4d4d4;
         padding: 40px;
+        margin-left: 0px;
+        margin-right: 0px;
         margin-top: 50px;
+        .c-custom-select {
+            width: 50%;
+        }
+        .form-group {
+            .form-control {
+                &.question-with-bottom-border {
+                    border: none;
+                    border-bottom: 1px solid rgb(204, 204, 204);
+                    width: 50%;
+                    transition: width border-bottom 500ms ease-out;
+                    &:focus {
+                        border-bottom: 2px solid #317dbd;
+                    }
+                }
+            }
+        }
     }
     .c-button-default.btn.circular {
         margin-top: 10px;
@@ -77,6 +93,54 @@
         &.next-step-btn {
             background-color: #fb4d3d!important;
             margin-left: 30px;
+        }
+    }
+}
+
+.cf-nav-main-header.navbar {
+    &.bread-crumb-container  {
+        border: none;
+        box-shadow: none;
+        .dynamic-bread-crumb.active {
+            .gather-information {
+                font-family: Nunito;
+                font-weight: 800;
+            }
+        }
+        .container {
+            padding-left: 18%;
+            padding-right: 0px;
+            .gather-information-container {
+                margin-right: 20px;
+                margin-left: 20px;
+                &:first-child {
+                    margin-left: 0px;
+                }
+                .gather-information {
+                    position: relative;
+                    font-size: 13px;
+                    &:after {
+                        content: "";
+                        display: block;
+                        border-top: solid 1px #ececec;
+                        width: 20px;
+                        height: 1px;
+                        position: absolute;
+                        top: 50%;
+                        z-index: 1;
+                        left: calc( 100% + 9px );
+                    }
+                    &.last-child:after {
+                        content: "";
+                        display: block;
+                        border-top: solid 0px #ececec;
+                        width: 0px;
+                        height: 1px;
+                        position: absolute;
+                        z-index: 1;
+                    }
+                }
+            }
         }
     }
 }

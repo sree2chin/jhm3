@@ -17,7 +17,7 @@ export default class CustomInput extends React.Component<Props, {}> {
   }
   state = {};
   getClassName() {
-    var className = "form-control ";
+    var className = "form-control question-with-bottom-border";
     /*if(this.props.className) {
       className = className + this.props.className;
     }*/

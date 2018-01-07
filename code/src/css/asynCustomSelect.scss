@@ -1,4 +1,15 @@
 .async-auto-suggest-container {
+    .dropdown-menu {
+        margin-left: 15px;
+    }
+    .input-group.input-group-toggle {
+        padding-left: 15px;
+    }
+    .input-group-btn {
+        button {
+            height: 44px;
+        }
+    }
     input {
         height: 44px;
         border-radius: 2px;

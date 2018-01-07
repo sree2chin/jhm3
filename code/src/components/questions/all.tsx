@@ -58,12 +58,6 @@ class Main extends React.Component<Props, {}> {
 
         q.key = q.id;
 
-        if (q.hasReflexive) {
-            if (q.questions) {
-                this.reRecursiveGetQuestions1(q.questions, questionsList, actualQuestionLists);
-            }
-        }
-
         if (q.type == "singleselection") {
           if(q.options.length==2) {
             questionsList.push(<SingleSelection
@@ -116,7 +110,7 @@ class Main extends React.Component<Props, {}> {
           }
 
         } else if (q.type == "group" || q.type == "assessment-factor-group") {
-          this.reRecursiveGetQuestions1(qL, questionsList, actualQuestionLists)
+          this.reRecursiveGetQuestions1(q.questions, questionsList, actualQuestionLists)
         } else if (q.type == "struct") {
           this.reRecursiveGetQuestions1(q.elements, questionsList, actualQuestionLists)
         } else if (q.type == "number" || q.type=="text") {
@@ -148,6 +142,11 @@ class Main extends React.Component<Props, {}> {
             />)
             actualQuestionLists.push(q);
         }
+        if (q.hasReflexive) {
+          if (q.questions) {
+              this.reRecursiveGetQuestions1(q.questions, questionsList, actualQuestionLists);
+          }
+        }
       };
     }
   }
@@ -158,16 +157,17 @@ class Main extends React.Component<Props, {}> {
 
         var questionsList = [];
         var actualQuestionLists = [];
-
+        this.noFoGroupsCompleted = [];
         for(var i=0; i<(this.questions.data.questionnaire.questions.length); i++) {
             var qe = this.questions.data.questionnaire.questions[i];
             questionsList.push([]);
             actualQuestionLists.push([]);
-
             questionsList[i].groupHeader = qe.caption;
             actualQuestionLists[i].groupHeader = qe.caption;
             var q = qe;
-
+            if (q.questions && q.questions.length > 0) {
+              this.noFoGroupsCompleted.push(i);
+            }
             this.reRecursiveGetQuestions1(q.questions, questionsList[i], actualQuestionLists[i]);
         };
         this.actualQuestionLists = actualQuestionLists;
@@ -529,34 +529,41 @@ class Main extends React.Component<Props, {}> {
   }
 
   goToEditQuestionPage(q) {
-    browserHistory.push("/questions?fromEditablePage=true&questionId=" + q.id);
+    browserHistory.push("/edit-questions?fromReviewPage=true&questionId=" + q.id);
   }
 
   public render() {
     var breadCrumbs = this.getBreadCrumbs();
     var questionsList = this.getCurrentSetOfQuestions() || [];
     var actualQuestionLists = this.actualQuestionLists || [];
+    var noFoGroupsCompleted = this.noFoGroupsCompleted;
     return (
       <div>
         <ScrollToTopOnMount />
         <Subheader
           breadCrumbs={breadCrumbs}
+          noFoGroupsCompleted={noFoGroupsCompleted}
         />
         <div className="all-review-questions-container">
             <Nav className="all-questions-side-bar" bsStyle="pills" stacked onSelect={()=>{}}>
                 <div className="all-questions-side-bar-header">
                     APPLICATION SECTIONS
                 </div>
-                <div style={{height: "1px", backgroundColor: "#e2e2e2", marginRight: "20px"}}> </div>
+                <hr/>
+
                 {map(actualQuestionLists, (qL)=>{
-                        return <div>
-                                <NavItem className={`all-question-side-bar-link ${this.state.activeGroup == qL.groupHeader ? "active" : ""}`} eventKey={qL.groupHeader} onClick={()=>{
-                                        this.makeGroupActive(qL.groupHeader)
-                                    }}>
-                                    <div className="all-questions-side-bar-header-text">{qL.groupHeader}</div>
-                                </NavItem>
-                                <div style={{height: "1px", backgroundColor: "#e2e2e2", marginRight: "20px"}}> </div>
-                            </div>;
+                        if (qL.length > 0) {
+                          return (<div>
+                              <NavItem className={`all-question-side-bar-link ${this.state.activeGroup == qL.groupHeader ? "active" : ""}`} eventKey={qL.groupHeader} onClick={()=>{
+                                    this.makeGroupActive(qL.groupHeader)
+                                  }}>
+                                  <div className="all-questions-side-bar-header-text">{qL.groupHeader}</div>
+                              </NavItem>
+                              <hr/>
+                            </div>)
+                          } else {
+                            return null;
+                          }
                     })
                 }
             </Nav>
@@ -564,7 +571,8 @@ class Main extends React.Component<Props, {}> {
                 {
                     map(actualQuestionLists, (qL)=>{
                         var ans;
-                        return <div key={qL.groupHeader} className={`questions-content-container all-group-questions-container ${this.state.activeGroup == qL.groupHeader ? "active" : ""}`}>
+                        if(qL.length >0) {
+                          return (<div key={qL.groupHeader} className={`questions-content-container all-group-questions-container ${this.state.activeGroup == qL.groupHeader ? "active" : ""}`}>
                             <div className="all-group-header">
                                 {qL.groupHeader}
                             </div>
@@ -582,10 +590,18 @@ class Main extends React.Component<Props, {}> {
                                 } else {
                                     if (q.answer && q.answer.label) {
                                         ans = q.answer.label;
+                                    } else if (q.answer && q.answer.id) {
+                                        ans = q.answer.id;
                                     } else if (q.answer) {
-                                        ans = q.answer.label;
+                                      ans = q.answer;
                                     }
                                 }
+                                if (typeof ans == "object") {
+                                  console.log(ans);
+                                } else {
+                                  console.log(ans);
+                                }
+
 
                                 return <div className="individual-question">
                                         <div className="question-text">
@@ -603,10 +619,14 @@ class Main extends React.Component<Props, {}> {
                                                 {ans}
                                             </span>
                                         </div>
-                                        <div style={{height: "2px", backgroundColor: "#e2e2e2", marginRight: "20px"}}> </div>
+                                        <hr/>
+                                        <div> </div>
                                     </div>
                             })}
-                        </div>
+                          </div>)
+                        } else {
+                          return null;
+                        }
                     })
                 }
 
@@ -621,7 +641,7 @@ class Main extends React.Component<Props, {}> {
                         this.onQuestionSubmit()
                     }}
                     >
-                    Next Step
+                    Next
                     {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                 </Button>
                 </div>

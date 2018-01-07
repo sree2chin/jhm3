@@ -8,7 +8,8 @@ interface Props extends React.Props<QuestionsCustomDatePicker> {
   question: any,
   onChange : any,
   error : string,
-  alreadyOnceSubmitted: any
+  alreadyOnceSubmitted: any,
+  counter?: any
 }
 
 export default class QuestionsCustomDatePicker extends React.Component<Props, {}> {

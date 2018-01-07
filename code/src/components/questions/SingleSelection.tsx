@@ -18,7 +18,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
     this.setState({
       selectedId: val.id
     });
-    this.props.onChange(this.props.question, {id: val.id});
+    this.props.onChange(this.props.question, val);
   }
 
   validate() {
@@ -47,6 +47,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
       });
     }
   }
+
   public render() {
     var wrapperClass : string = 'form-group';
     if (this.props.error && this.props.error.length > 0) {
