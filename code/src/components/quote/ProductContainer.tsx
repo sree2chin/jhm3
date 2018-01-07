@@ -98,7 +98,7 @@ export default class ProductContainer extends React.Component<Props, State> {
                     const product_image = 'default_image';
                 }
                 return(
-                  <Col key={product.ProductID} sm={productContainerWidth} className="single-product-container">
+                  <Col key={product.ProductID} sm={productContainerWidth} className="single-product-container product-custom-container">
                     <Row className={`single-product-content ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`}>
                       <Row className="product_img_div">
                         <center><div className={`${product_image}`}></div></center>

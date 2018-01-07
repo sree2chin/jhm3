@@ -15,12 +15,6 @@
 	    margin-right: 20px;
 	}
 	.product-pager-container {
-		.product-main-content {
-		    height: 235px;
-		}
-		.single-product-content {
-	    height: 420px;
-		}
 		.product-selection-error-msg {
 			margin-top: 20px;
 		}
@@ -115,4 +109,12 @@
 	    margin-left: 40px;
 	    padding-right: 90px;
 	}
+}
+.product-pager-container .product-custom-container{
+		.product-main-content {
+		    height: 235px;
+		}
+		.single-product-content {
+	    height: 420px;
+		}
 }
