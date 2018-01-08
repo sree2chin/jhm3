@@ -40,6 +40,8 @@ module.exports = function(app) {
     res.render(templatePath);
   });
 
+
+
   app.get('/questions', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};

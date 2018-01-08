@@ -58,7 +58,7 @@ class Signature extends React.Component<Props, {}> {
       //browserHistory.push("/signature");
       var link = this.props.confirmationData && this.props.confirmationData.data &&
       this.props.confirmationData.data.current_document_data && this.props.confirmationData.data.current_document_data.sign_url;
-      if isEmpty(this.props.confirmationData.data.current_document_data) {
+      if (isEmpty(this.props.confirmationData.data.current_document_data)) {
         this.setState({
             allDone: true
         });
@@ -107,12 +107,12 @@ class Signature extends React.Component<Props, {}> {
             </Col>
         </Row> }
         <Row className="questions-container c-center">
-            {~this.state.allDone && <div className="questions-content-container">
-                {this.state.confirmingQuestions && <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>}
+            {!this.state.allDone && <div className="questions-content-container final-loading-messages">
                 <div>Loading PDF .... </div>
+                <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>
             </div>}
-            {this.state.allDone && <div className="questions-content-container">
-                <div>Thank you. We will contact you shortly.</div>
+            {this.state.allDone && <div className="questions-content-container final-thank-you-messages">
+                <div>{this.props.confirmationData.data.message}</div>
             </div>}
         </Row>
       </div>);
