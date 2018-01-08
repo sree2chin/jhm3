@@ -135,7 +135,7 @@ module.exports = new function(){
     if(req.session.envelop_id)      {
       formData.envelop_id = req.session.envelop_id
     }
-    if (req.query.event == "signing_complete") {
+    if (req.session.queryParams && req.session.queryParams.event == "signing_complete") {
       formData.signature_status = "1";
     } else {
       formData.signature_status = "0";
