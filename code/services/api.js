@@ -135,8 +135,10 @@ module.exports = new function(){
     if(req.session.envelop_id)      {
       formData.envelop_id = req.session.envelop_id
     }
-    if (req.session.signature_status) {
-      formData.signature_status = req.session.signature_status;
+    if (req.query.event == "signing_complete") {
+      formData.signature_status = "1";
+    } else {
+      formData.signature_status = "0";
     }
 
     appendAgentInfo(req, formData);
