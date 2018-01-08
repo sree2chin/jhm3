@@ -18,7 +18,7 @@ module.exports = function(app) {
     req.session = req.session || {};
     if (!_.isEmpty(url_parts.query)) {
       req.session.queryParams = req.session.queryParams || {};
-      for(var k in req.session.queryParams) {
+      for(var k in url_parts.query) {
         req.session.queryParams[k] = url_parts.query[k];
       }
     };
@@ -32,7 +32,7 @@ module.exports = function(app) {
     console.log("in questions url: " + !_.isEmpty(url_parts.query));
     if (!_.isEmpty(url_parts.query)) {
       req.session.queryParams = req.session.queryParams || {};
-      for(var k in req.session.queryParams) {
+      for(var k in url_parts.query) {
         req.session.queryParams[k] = url_parts.query[k];
       }
     };
@@ -45,7 +45,7 @@ module.exports = function(app) {
     req.session = req.session || {};
     if (!_.isEmpty(url_parts.query)) {
       req.session.queryParams = req.session.queryParams || {};
-      for(var k in req.session.queryParams) {
+      for(var k in url_parts.query) {
         req.session.queryParams[k] = url_parts.query[k];
       }
     };
