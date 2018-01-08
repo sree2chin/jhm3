@@ -17,7 +17,10 @@ module.exports = function(app) {
     console.log("in normal url: " + JSON.stringify(url_parts));
     req.session = req.session || {};
     if (!_.isEmpty(url_parts.query)) {
-      req.session.queryParams = url_parts.query;
+      req.session.queryParams = req.session.queryParams || {};
+      for(var k in req.session.queryParams) {
+        req.session.queryParams[k] = url_parts.query[k];
+      }
     };
     templatePath = "../../dist/";
     res.render(templatePath);
@@ -28,10 +31,11 @@ module.exports = function(app) {
     req.session = req.session || {};
     console.log("in questions url: " + !_.isEmpty(url_parts.query));
     if (!_.isEmpty(url_parts.query)) {
-      console.log("in if loop" + JSON.stringify(url_parts.query));
-      req.session.queryParams = url_parts.query;
+      req.session.queryParams = req.session.queryParams || {};
+      for(var k in req.session.queryParams) {
+        req.session.queryParams[k] = url_parts.query[k];
+      }
     };
-    console.log(": " + !_.isEmpty(req.session.queryParams));
     templatePath = "../../dist/";
     res.render(templatePath);
   });
@@ -39,9 +43,11 @@ module.exports = function(app) {
   app.get('/agent', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};
-    console.log("in agent url: " + !_.isEmpty(url_parts.query));
     if (!_.isEmpty(url_parts.query)) {
-      req.session.queryParams = url_parts.query;
+      req.session.queryParams = req.session.queryParams || {};
+      for(var k in req.session.queryParams) {
+        req.session.queryParams[k] = url_parts.query[k];
+      }
     };
     templatePath = "../../dist/";
     res.render(templatePath);
