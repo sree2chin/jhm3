@@ -249,7 +249,7 @@
 .product-custom-container .single-product-content {
 		background-color: #317dbd;
 		border:2px solid #317dbd;
-		height: 350px;
+		height: 360px !important;
     margin-bottom: 70px;
     padding-top: 40px;
 		border-radius: 0 !important;
@@ -295,6 +295,7 @@
 		    border-radius: 6px;
 		    font-weight: bold;
 		    padding: 10px;
+				height: 44px;
 		    text-transform: uppercase;
 			  font-family:NunitoBold;
 				cursor: pointer;
@@ -318,7 +319,7 @@
 				  color: #ffffff;
 			  }
 				.product-main-content{
-					height: 190px;
+					height: 205px !important;
 				}
 }
 .product-custom-container .single-product-content .quote-product.active{
