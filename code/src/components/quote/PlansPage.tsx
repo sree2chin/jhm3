@@ -552,9 +552,9 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
           <Col sm={3} xs={12} className="c-center plan-total-container hidden-xs">
             <Row className="plans-selector-container">
-              <Col sm={4} className="" style={{float: "right", marginRight: "15px"}}>
+              <Col md={4} sm={5} className="" style={{float: "right", marginRight: "15px"}}>
                 <Row>
-                  <Col sm={7} xs={6} className="plan-total-text">
+                  <Col sm={7} md={6} className="plan-total-text">
                     {this.state.premium_type} Total
                   </Col>
                   {this.shouldShowTotal() && <Col sm={5} xs={6} className="plan-total-amount">
