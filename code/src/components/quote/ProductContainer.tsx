@@ -124,11 +124,13 @@ export default class ProductContainer extends React.Component<Props, State> {
                           </Row>
                         </Col>
                       </Row>
-                      <Row className={`text-center quote-product col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`} onClick={()=> this.selectProduct(product)}>
-                        <Col md={12}>
-                          {this.state.productIds.indexOf(product.ProductID)>=0 && <div className="c-coverage-amount">PRODUCT SELECTED</div>}
-                          {this.state.productIds.indexOf(product.ProductID)<0 && <div className="c-coverage-amount">QUOTE THIS PRODUCT</div>}
-                        </Col>
+                      <Row style={{marginLeft: "0px", marginRight: "0px"}}>
+                        <Row style={{width: "90%", marginLeft: "auto", marginRight: "auto"}} className={`text-center ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`} onClick={()=> this.selectProduct(product)}>
+                          <Col className="quote-this-product-container">
+                            {this.state.productIds.indexOf(product.ProductID)>=0 && <div className="c-coverage-amount quote-product">PRODUCT SELECTED</div>}
+                            {this.state.productIds.indexOf(product.ProductID)<0 && <div className="c-coverage-amount quote-product">QUOTE THIS PRODUCT</div>}
+                          </Col>
+                        </Row>
                       </Row>
                     </Row>
                   </Col>
