@@ -40,6 +40,7 @@ class Main extends React.Component<Props, {}> {
       var expires = "expires="+ d.toUTCString();
       document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
+
   componentWillMount() {
     if(this.props.location.query.agent_id) {
       this.setCookie("agent_id", this.props.location.query.agent_id, 1)
@@ -89,6 +90,7 @@ class Main extends React.Component<Props, {}> {
 
     return result;
   }
+
   submitQuoteForm() {
     if(this.validateQuoteForm()) {
 
@@ -124,9 +126,11 @@ class Main extends React.Component<Props, {}> {
       });
     }
   }
+
   submitEmailForm() {
     this.props.submitEmailForm(this.props);
   }
+
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.persons) && isEmpty(this.state.persons)) {
       this.setState({
@@ -134,6 +138,7 @@ class Main extends React.Component<Props, {}> {
       });
     }
   }
+
   changePersonInfo(index, key, val) {
     if (this.state.persons[index]) {
       var person = JSON.parse(JSON.stringify(this.state.persons[index]));
@@ -168,6 +173,7 @@ class Main extends React.Component<Props, {}> {
     persons: [{}, {}],
     errors: [{}, {}]
   }
+
   getContinueBtnActiveClass() {
 
     var result = true;
@@ -201,6 +207,7 @@ class Main extends React.Component<Props, {}> {
     return "";
 
   }
+
   public render() {
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
     const healthRatingObjects = [

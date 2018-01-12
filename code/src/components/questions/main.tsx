@@ -110,7 +110,23 @@ class Main extends React.Component<Props, {}> {
       return null;
     }
   }
-
+  questionsAlreadySubmitted(q) {
+    var shouldInclude = !q.required;
+    if (shouldInclude && this.props.questions && this.props.questions.extra_params && this.props.questions.extra_params.answered_questions) {
+      var i=0, j=0;
+      var qs = this.props.questions.extra_params.answered_questions;
+      for(i=0; i < qs.length; i++) {
+        var iqs = qs[i];
+        for (j=0; j<iqs.length; j++) {
+          if (iqs[j].id == q.id) {
+            console.log(" q.id: " +  q.id);
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
   reRecursiveGetQuestions1(data, questionsList, preQ, actualQuestionLists) {
     questionsList.isQuestionsList = false;
     if (!isEmpty(data)) {
@@ -123,7 +139,7 @@ class Main extends React.Component<Props, {}> {
           questionsList.groupHeader.push(q.caption);
         }
         q.key = q.id;
-        if (q.answerState == "valid") {
+        if (q.answerState == "valid" || this.questionsAlreadySubmitted(q)) {
           if (q.hasReflexive) {
             if (q.questions) {
               var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists);

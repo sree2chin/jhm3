@@ -95,7 +95,7 @@ class PlansPage extends React.Component<Props, {}> {
     personOne.duration = data[0].plan.PlanName.split(" ")[0];
     personOne.sWP="1";
     persons.push(personOne);
-    
+
     var persons = [];
     if(this.props.noOfPersons ==2) {
       if(personIndex ==0) {
@@ -284,9 +284,9 @@ class PlansPage extends React.Component<Props, {}> {
           return this.state.productIdPlan1 && this.state.productIdPlan1.length>0;
         }
       } else {
-        if(this.props.persons[1].selected_products.length==1) { 
+        if(this.props.persons[1].selected_products.length==1) {
           return this.state.productIdPlan0 && this.state.productIdPlan0.length > 0;
-        } 
+        }
         return this.state.productIdPlan0 && this.state.productIdPlan0.length>0 && this.state.productIdPlan1 && this.state.productIdPlan1.length>0;
       }
     }
@@ -311,7 +311,7 @@ class PlansPage extends React.Component<Props, {}> {
       <div className="product-pager-container">
         <ScrollToTopOnMount />
         <Subheader />
-        {this.props.noOfPersons==2 && 
+        {this.props.noOfPersons==2 &&
           <Row className="plans-product-header visible-xs">
             <Col sm={8} className="c-center">
               <Row>
@@ -348,7 +348,7 @@ class PlansPage extends React.Component<Props, {}> {
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
           <Col className={`person-info-main-container ${additionalPersonClass}`} style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
             { this.props.noOfPersons>=1 &&
-              <PersonInfo 
+              <PersonInfo
                 person={persons[0]}
                 noOfPersons={this.props.noOfPersons}
                 personIndex={0}
@@ -390,7 +390,7 @@ class PlansPage extends React.Component<Props, {}> {
             }
             <div className="hidden-xs">
               { this.props.noOfPersons==2 &&
-                <PersonInfo 
+                <PersonInfo
                   person={persons[1]}
                   noOfPersons={this.props.noOfPersons}
                   personIndex={1}
@@ -417,7 +417,7 @@ class PlansPage extends React.Component<Props, {}> {
         <Row className="hidden-xs">
           <Col className="c-center plan-selector-outer-container" style={{paddingLeft: "15px", paddingRight: "15px", marginBottom: "15px"}}>
             <Row className="plans-selector-container">
-              <Col sm={6} className="c-center" style={{paddingTop: "0px"}}>
+              <Col lg={6} sm={10} md={8} className="c-center" style={{paddingTop: "0px"}}>
                 <Col sm={6} className="payment-schedule-text" style={{paddingTop: "20px", paddingRight: "0px"}}>
                   Payment schedule
                 </Col>
@@ -446,7 +446,7 @@ class PlansPage extends React.Component<Props, {}> {
                   };
                   var premiums =  this.props.premiums && this.props.premiums[0] &&  this.props.premiums[0][p.product_id] ? this.props.premiums[0][p.product_id] : {};
                   premiums = {plans_data: premiums};
-                  return <Plan 
+                  return <Plan
                     plans={pl}
                     submitPlansForm={self.submitPlansForm.bind(self)}
                     premiums={premiums}
@@ -465,7 +465,7 @@ class PlansPage extends React.Component<Props, {}> {
             <Row style={{backgroundColor: "rgb(247, 247, 247)"}} className="visible-xs mobile-second-person-info-in-plan-container">
               <Col className={`person-info-main-container ${additionalPersonClass}`} style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
                 { this.props.noOfPersons==2 &&
-                  <PersonInfo 
+                  <PersonInfo
                     person={persons[1]}
                     noOfPersons={this.props.noOfPersons}
                     personIndex={1}
@@ -483,7 +483,7 @@ class PlansPage extends React.Component<Props, {}> {
                   };
                   var premiums =  this.props.premiums && this.props.premiums[1] &&  this.props.premiums[1][p.product_id] ? this.props.premiums[1][p.product_id] : {};
                   premiums = {plans_data: premiums};
-                  return <Plan 
+                  return <Plan
                     plans={pl}
                     submitPlansForm={self.submitPlansForm.bind(self)}
                     premiums={premiums}
@@ -503,12 +503,12 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>
 
-        {this.props.premiums && this.props.premiums[0] && 
-          this.props.premiums[0][this.state.productIdPlan0] && 
-          this.props.premiums[0][this.state.productIdPlan0].Plan && 
+        {this.props.premiums && this.props.premiums[0] &&
+          this.props.premiums[0][this.state.productIdPlan0] &&
+          this.props.premiums[0][this.state.productIdPlan0].Plan &&
           this.props.premiums[0][this.state.productIdPlan0].Plan.Rider && <Row>
           <Col>
-            <Riders 
+            <Riders
               person={persons[0]}
               riders={this.props.premiums[0][this.state.productIdPlan0].Plan.Rider}
               index={0}
@@ -518,12 +518,12 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>
         }
-        {this.props.premiums && this.props.premiums[1] && 
-          this.props.premiums[1][this.state.productIdPlan1] && 
-          this.props.premiums[1][this.state.productIdPlan1].Plan && 
+        {this.props.premiums && this.props.premiums[1] &&
+          this.props.premiums[1][this.state.productIdPlan1] &&
+          this.props.premiums[1][this.state.productIdPlan1].Plan &&
           this.props.premiums[1][this.state.productIdPlan1].Plan.Rider && <Row>
           <Col>
-            <Riders 
+            <Riders
               person={persons[1]}
               riders={this.props.premiums[1][this.state.productIdPlan1].Plan.Rider}
               index={1}
@@ -546,7 +546,7 @@ class PlansPage extends React.Component<Props, {}> {
                     {this.getTotalPaymentAmount()}
                   </Col>
                 </Row>
-                
+
               </Col>
             </Row>
           </Col>
@@ -561,7 +561,7 @@ class PlansPage extends React.Component<Props, {}> {
                     {this.getTotalPaymentAmount()}
                   </Col> }
                 </Row>
-                
+
               </Col>
             </Row>
           </Col>
@@ -590,7 +590,7 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>
 
-        <EditPerson 
+        <EditPerson
           showModalEditPerson={this.props.showModalEditPerson}
           onCloseModal={this.props.closeEditPersonModal.bind(this)}
           editablePerson={this.props.editablePerson}
@@ -627,7 +627,7 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     },
     closeEditPersonModal: () => {
       return dispatch(closeEditPersonModal())
-    }, 
+    },
     submitPlansForm: (data) => {
       return dispatch(submitPlansForm(data))
     },

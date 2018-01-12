@@ -49,7 +49,7 @@ export default class PersonInfo extends React.Component<Props, {}> {
                 <Row>
                   <Col sm={12} className="mb10">
                     <span className="person-label">D.O.B: </span>
-                    <span className="person-label-content">{moment(person.s_birthDate).format("YYYY-MM-DD")}</span>
+                    <span className="person-label-content">{moment(person.s_birthDate).format("MM-DD-YYYY")}</span>
                   </Col>
                   <Col sm={12}>
                     <span className="person-label">Health: </span><span className="person-label-content">{person.health}</span>
