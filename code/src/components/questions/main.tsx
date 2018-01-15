@@ -588,6 +588,10 @@ class Main extends React.Component<Props, {}> {
       };
 
       this.props.postQuestions(data).then(() => {
+        if (this.questions.data.valid_user == 0) {
+          browserHistory.push("/authorize");
+          return;
+        }
         if (this.questions.data.completed ==true || this.questions.data.completed =="true") {
           browserHistory.push("/all-questions");
           return;

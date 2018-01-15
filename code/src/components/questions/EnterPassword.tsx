@@ -6,7 +6,8 @@ interface Props extends React.Props<EmailModal> {
     submitPassword: any,
     handleChange: any,
     showModalPassword: any,
-    onCloseModal: any
+    onCloseModal: any,
+    errorMsg?: any
 }
 
 export default class EmailModal extends React.Component<Props, {}> {
@@ -18,7 +19,11 @@ export default class EmailModal extends React.Component<Props, {}> {
     this.setState({
         submittingPassword: true
     });
-    this.props.submitPassword();
+    this.props.submitPassword(()=>{
+      this.setState({
+          submittingPassword: false
+      });
+    });
   }
 
   state = {}
@@ -61,6 +66,9 @@ export default class EmailModal extends React.Component<Props, {}> {
                           }}
                         />
                       </Col>
+                      { this.props.errorMsg && this.props.errorMsg.length > 0 && <Col style={{ paddingLeft: "0px", marginLeft: "auto", color: "red", fontSize: "15px"}} sm={12} className={"c-subheader-text error"}>
+                        {this.props.errorMsg}
+                      </Col> }
                     </Row>
 
                 </Modal.Body>

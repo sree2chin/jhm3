@@ -19,7 +19,11 @@ export default class ResetPasswordModal extends React.Component<Props, {}> {
     this.setState({
         resettingPassword: true
     });
-    this.props.resetPassword();
+    this.props.resetPassword(()=>{
+        this.setState({
+          resettingPassword: false
+        });
+      });
   }
 
   state = {}
@@ -78,8 +82,8 @@ export default class ResetPasswordModal extends React.Component<Props, {}> {
                           }}
                         />
                       </Col>
-                      { this.props.confirmPasswordError && <Col style={{ paddingLeft: "0px", marginLeft: "30px", color: "red"}} sm={12} className={"c-subheader-text error"}  style={{paddingLeft: "0px"}}>
-                        Please select the number of person
+                      { this.props.confirmPasswordError && <Col style={{ paddingLeft: "0px", marginLeft: "auto", color: "red", fontSize: "15px"}} sm={12} className={"c-subheader-text error"}>
+                        Password and confirm password must be same.
                       </Col> }
                     </Row>
                 </Modal.Body>

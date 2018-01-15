@@ -61,23 +61,38 @@ class Signature extends React.Component<Props, {}> {
     }
   }
 
-  authenticateUser() {
+  authenticateUser(cb) {
     var data = {};
     data.password = this.state.password;
     this.props.authenticateUser(data).then(() => {
+      if (cb) { cb();}
+      if (this.props.user.data.valid_user==1) {
         if (this.props.user.data.change_password==0) {
+          if (this.props.user.data.access_token) {
             return browserHistory.push("/questions");
-        }
-        this.setState({
+          } else {
+            this.setState({
+              enterPasswordErroMsg: this.props.user.message
+            });
+          }
+        } else {
+          this.setState({
             showResetPassword: true,
             showEnterPassword: false
+          });
+        }
+      } else {
+        this.setState({
+          enterPasswordErroMsg: this.props.user.message
         });
+      }
+
     }).catch(()=>{
       console.log(this.questions);
     });
   }
 
-  resetPassword() {
+  resetPassword(cb) {
     var data = {};
     data.password = this.state.password;
     data.new_password = this.state.new_password;
@@ -85,13 +100,15 @@ class Signature extends React.Component<Props, {}> {
       this.setState({
         confirmPasswordError: true
       });
+      if (cb) { cb(); }
       return;
     }
     this.setState({
       confirmPasswordError: false
     });
     this.props.changePassword(data).then(() => {
-        return browserHistory.push("/questions");
+      if (cb) { cb(); }
+      return browserHistory.push("/questions");
     }).catch(()=>{
       console.log(this.questions);
     });
@@ -141,6 +158,7 @@ class Signature extends React.Component<Props, {}> {
                 handleChange={this.handlePasswordChange.bind(this)}
                 showModalPassword={true}
                 onCloseModal={()=>{}}
+                errorMsg={this.props.user && this.props.user.message}
             />
         )
       } else {
