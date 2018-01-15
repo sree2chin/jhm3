@@ -588,7 +588,7 @@ class Main extends React.Component<Props, {}> {
       };
 
       this.props.postQuestions(data).then(() => {
-        if (this.questions.data.valid_user == 0) {
+        if (this.questions.valid_user == 0) {
           browserHistory.push("/authorize");
           return;
         }
