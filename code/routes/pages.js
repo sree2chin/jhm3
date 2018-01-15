@@ -40,7 +40,19 @@ module.exports = function(app) {
     res.render(templatePath);
   });
 
-
+  app.get('/authorize', function(req, res, next) {
+    var url_parts = url.parse(req.url, true);
+    req.session = req.session || {};
+    console.log("\n\n\n in authorise \n\n\n");
+    if (!_.isEmpty(url_parts.query)) {
+      req.session.queryParams = req.session.queryParams || {};
+      for(var k in url_parts.query) {
+        req.session.queryParams[k] = url_parts.query[k];
+      }
+    };
+    templatePath = "../../dist/";
+    res.render(templatePath);
+  });
 
   app.get('/questions', function(req, res, next) {
     var url_parts = url.parse(req.url, true);

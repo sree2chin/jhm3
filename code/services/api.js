@@ -116,7 +116,7 @@ module.exports = new function(){
       formData.answered_questions = JSON.stringify(req.body.answered_questions)
     }
     appendAgentInfo(req, formData);
-    console.log("postQuestionsData: " + formData.user);
+
     request({
       url: restOptions.host + '/v1/questions/questions',
       headers: {
@@ -145,6 +145,44 @@ module.exports = new function(){
     console.log("formData: " + JSON.stringify(formData));
     request({
       url: restOptions.host + '/v1/questions/confirm',
+      headers: {
+        'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
+      },
+      method: 'POST',
+      formData: formData
+    }, function callback(err, httpResponse, body) {
+      cb(err, httpResponse);
+    });
+  };
+
+
+  this.authenticateUser = function(req, cb){
+
+    var formData = {};
+    formData.password = req.body.password;
+    appendAgentInfo(req, formData);
+
+    request({
+      url: restOptions.host + '/v1/auth/user',
+      headers: {
+        'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
+      },
+      method: 'POST',
+      formData: formData
+    }, function callback(err, httpResponse, body) {
+      cb(err, httpResponse);
+    });
+  };
+
+  this.changePassword = function(req, cb){
+
+    var formData = {};
+    formData.password = req.body.password;
+    formData.new_password = req.body.new_password;
+    appendAgentInfo(req, formData);
+    console.log("\n\n\nformData: " + JSON.stringify(formData) +  "\n\n\n");
+    request({
+      url: restOptions.host + '/v1/auth/setpassword',
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },

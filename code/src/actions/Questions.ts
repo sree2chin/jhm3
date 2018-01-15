@@ -27,6 +27,24 @@ function confirmQuestions(data) {
 	};
 }
 
+function authenticateUser(data) {
+	return (dispatch) => {
+		return QuestionsApi.authenticateUser(data).then(
+			data => dispatch({
+				type: 'AUTHENTICATE_USER', user: data
+			}));
+	};
+}
+
+function changePassword(data) {
+	return (dispatch) => {
+		return QuestionsApi.changePassword(data).then(
+			data => dispatch({
+				type: 'PASSWORD_RESET', user: data
+			}));
+	};
+}
+
 function getFactorsearch(data) {
 	return (dispatch) => {
 		return QuestionsApi.getFactorsearch(data).then(
@@ -40,5 +58,7 @@ export {
 	getQuestions,
 	postQuestions,
 	getFactorsearch,
-	confirmQuestions
+	confirmQuestions,
+	authenticateUser,
+	changePassword
 }

@@ -8,6 +8,10 @@ export default (state: Array<any> = [], action) => {
     return objectAssign({}, state, {questions: action.questions});
     case "CONFIRM_QUESTIONS":
     return objectAssign({}, state, {confirmationData: action.confirmationData});
+    case "AUTHENTICATE_USER":
+    return objectAssign({}, state, {user: action.user});
+    case "PASSWORD_RESET":
+    return objectAssign({}, state, {user: action.user});
     default:
       return state;
   }

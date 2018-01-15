@@ -6,7 +6,8 @@ interface Props extends React.Props<Input> {
   onChange : any;
   placeholder? : string;
   value: string;
-  error : string;
+  error : string,
+  type?: any
 }
 
 export default class Input extends React.Component<Props, {}> {
@@ -31,7 +32,7 @@ export default class Input extends React.Component<Props, {}> {
      <div className={wrapperClass}>
         <label htmlFor={this.props.name}>{this.props.label}</label>
         <div className="field">
-          <input type="text"
+          <input type={this.props.type || "text"}
             name={this.props.name}
             className={this.getClassName()}
             placeholder={this.props.placeholder}

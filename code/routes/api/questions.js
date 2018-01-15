@@ -37,4 +37,18 @@ module.exports = function(app) {
     });
   });
 
+  app.post(prefix + '/auth/user', function(req, res) {
+    QuestionsService.authenticateUser(req, function(statusCode, data) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(data);
+    });
+  });
+
+  app.post(prefix + '/auth/setpassword', function(req, res) {
+    QuestionsService.changePassword(req, function(statusCode, data) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(data);
+    });
+  });
+
 };

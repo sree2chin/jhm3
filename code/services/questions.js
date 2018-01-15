@@ -48,6 +48,41 @@ module.exports = new function() {
     });
   };
 
+
+  this.authenticateUser = function(req, callback) {
+    ApiService.authenticateUser(req, function(err, res) {
+
+      if (!err && res.statusCode == 200) {
+        var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
+        console.log("\n\n\n" + JSON.stringify(res.body) + "\n\n\n");
+        if (responseBody.data && responseBody.data.access_token) {
+          req.session.queryParams = req.session.queryParams || {};
+          req.session.queryParams.access_token = responseBody.data.access_token;
+        }
+        callback(res.statusCode, res.body);
+      } else {
+        callback(res.statusCode, res.body);
+      }
+    });
+  };
+
+  this.changePassword = function(req, callback) {
+    ApiService.changePassword(req, function(err, res) {
+
+      if (!err && res.statusCode == 200) {
+        console.log("\n\n\n" + JSON.stringify(res.body) + "\n\n\n");
+        var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
+        if (responseBody.data && responseBody.data.access_token) {
+          req.session.queryParams = req.session.queryParams || {};
+          req.session.queryParams.access_token = responseBody.data.access_token;
+        }
+        callback(res.statusCode, res.body);
+      } else {
+        callback(res.statusCode, res.body);
+      }
+    });
+  };
+
   this.getFactorsearch = function(req, callback) {
     ApiService.getFactorsearch(req, function(err, res) {
       if (!err && res.statusCode == 200) {

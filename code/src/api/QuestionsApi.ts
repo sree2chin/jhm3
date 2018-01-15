@@ -65,6 +65,42 @@ class QuestionsApi {
     })
   };
 
+  authenticateUser(payload) : Promise<any> {
+    return fetch('/v1/auth/user', {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      }).then(function(res) {
+        return res.json().then(function (response: any) {
+          return new Promise(function(resolve, reject) {
+            resolve(response)
+          });
+        })
+    })
+  };
+
+  changePassword(payload) : Promise<any> {
+    return fetch('/v1/auth/setpassword', {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      }).then(function(res) {
+        return res.json().then(function (response: any) {
+          return new Promise(function(resolve, reject) {
+            resolve(response)
+          });
+        })
+    })
+  };
+
   getFactorsearch(payload) : Promise<any> {
     return fetch('/v1/questions/factorsearch', {
         method: "POST",
