@@ -932,9 +932,9 @@ class Main extends React.Component<Props, {}> {
         />
         <Row className="questions-container c-center">
           <Row>
-            { map(questionsList.groupHeader, (p)=>{
-               return p  + " >>";
-              })
+            { //map(questionsList.groupHeader, (p)=>{
+               //return p  + " >>";
+              //})
             }
           </Row>
           {!questionsList.isQuestionsList && <div className="questions-content-container">

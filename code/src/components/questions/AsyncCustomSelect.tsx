@@ -137,7 +137,7 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
 
     return (
      <div>
-        <Col sm={12} className={"c-subheader-text"} style={{marginTop: "5px", paddingLeft: "0px", marginBottom: "5px"}}>
+        <Col sm={12} className={"c-subheader-text fs18"} style={{marginTop: "5px", paddingLeft: "0px", marginBottom: "5px"}}>
           {question.caption}
         </Col>
           <Col style={{paddingRight: "15px", marginBottom: "15px"}} className="async-auto-suggest-container">
@@ -157,7 +157,7 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
                 multiple />
             </Row>
 
-            <Col className={`c-subheader-text error`} style={{paddingLeft: "0px", marginTop: "0px", marginLeft: "-15px"}}>
+            <Col className={`c-subheader-text error fs16`} style={{paddingLeft: "0px", marginTop: "0px", marginLeft: "-15px"}}>
               {!this.validate() &&
                 <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
                   {question.constraints.patternViolationMessage || "Required"}

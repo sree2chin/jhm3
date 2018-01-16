@@ -17,7 +17,7 @@ export default class CustomInput extends React.Component<Props, {}> {
   }
   state = {};
   getClassName() {
-    var className = "form-control question-with-bottom-border";
+    var className = "form-control question-with-bottom-border fs16";
     /*if(this.props.className) {
       className = className + this.props.className;
     }*/
@@ -76,7 +76,7 @@ export default class CustomInput extends React.Component<Props, {}> {
 
     return (
      <div className={wrapperClass}>
-        <label htmlFor={question.name}>{question.caption}</label>
+        <label className="fs18" htmlFor={question.name}>{question.caption}</label>
         <div className="field">
           <input type={question.type || "text"}
             name={question.name}
