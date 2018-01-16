@@ -42,7 +42,15 @@ class Main extends React.Component<Props, {}> {
     this.setState({
       gettingQuestions: true
     });
-    this.props.getQuestions().then(()=>{
+    this.props.getQuestions().then(()=> {
+      if (this.questions && this.questions.data && this.questions.data.completed) {
+        browserHistory.push("/all-questions");
+        return;
+      }
+      if (this.questions && this.questions.valid_user == 0) {
+        browserHistory.push("/authorize");
+        return;
+      }
       this.setState({
         gettingQuestions: false
       });
@@ -51,6 +59,14 @@ class Main extends React.Component<Props, {}> {
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.questions)) {
       this.questions = JSON.parse(JSON.stringify(nextProps.questions));
+    }
+    if (this.questions && this.questions.data && this.questions.data.completed) {
+      browserHistory.push("/all-questions");
+      return;
+    }
+    if (this.questions.valid_user == 0) {
+      browserHistory.push("/authorize");
+      return;
     }
   }
   onChangeInput(q, answer) {
