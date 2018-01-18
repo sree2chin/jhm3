@@ -59,7 +59,7 @@ class SelectPersons extends React.Component<Props, State> {
 
     if(this.state.noOfPersons > 0) {
       return "active";
-    } 
+    }
     return "";
 
   },
@@ -77,9 +77,15 @@ class SelectPersons extends React.Component<Props, State> {
                 </Row>
                 <Row style={{marginTop: "15px"}} className="quotation-msg-text-container">
                   <Col sm={12} className="confirmation-msg confirmation-msg-first-line">
-                    Welcome! We're glad you're here. Please answer a few questions to determine which product(s) are a good match. 
+                    Welcome! We're glad you're here. Please answer a few questions to determine which product(s) are a good match.
                   </Col>
                 </Row>
+              </Col>
+
+              <Col sm={3} className={`c-select-two-person ${this.state.noOfPersons==2 ? "active" : ""}`}  onClick={()=> this.selectNoOfPersons(2)} >
+                {(!this.state.noOfPersons || this.state.noOfPersons==1) && <img src="./images/two-people.svg" /> }
+                {this.state.noOfPersons==2 && <img src="./images/two-people-active.png" /> }
+                <p> Two persons</p>
               </Col>
 
               <Col sm={3} className={`c-select-one-person ${this.state.noOfPersons==1 ? "active" : ""}`} onClick={()=> this.selectNoOfPersons(1)} >
@@ -88,11 +94,7 @@ class SelectPersons extends React.Component<Props, State> {
                 <p> One person</p>
               </Col>
 
-              <Col sm={3} className={`c-select-two-person ${this.state.noOfPersons==2 ? "active" : ""}`}  onClick={()=> this.selectNoOfPersons(2)} >
-                {(!this.state.noOfPersons || this.state.noOfPersons==1) && <img src="./images/two-people.svg" /> }
-                {this.state.noOfPersons==2 && <img src="./images/two-people-active.png" /> }
-                <p> Two persons</p>
-              </Col>
+
 
               { this.state.selectNoOfPersonsError && <Col style={{ paddingLeft: "0px", marginLeft: "30px", color: "red"}} sm={12} className={"c-subheader-text error"}  style={{paddingLeft: "0px"}}>
                 Please select the number of person
@@ -112,8 +114,8 @@ class SelectPersons extends React.Component<Props, State> {
             </Row>
           </Col>
         </Row>
-      </div> 
-     )   
+      </div>
+     )
     } else {
       return null;
     }
