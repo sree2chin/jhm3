@@ -30,6 +30,7 @@
 		}
 	}
 	.two-person-outer-container {
+		max-width: $container-max-width;
 		.c-submit-person-info-btn  {
 			width: 36%;
 		}
@@ -320,7 +321,8 @@
 		    background-color: #fff;
 			width: 54.2%;
 		    padding-left: 0px;
-		    padding-right: 0px;
+			padding-right: 0px;
+			max-width: $container-max-width;
     	}
     }
     .person-name-container {

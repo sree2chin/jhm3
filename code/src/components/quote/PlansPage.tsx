@@ -346,7 +346,7 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
         }
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
-          <Col className={`person-info-main-container ${additionalPersonClass}`} style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
+          <Col className={`person-info-main-container container-max-width ${additionalPersonClass}`} style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
             { this.props.noOfPersons>=1 &&
               <PersonInfo
                 person={persons[0]}
@@ -402,7 +402,7 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>
         <Row className="plans-product-header hidden-xs">
-          <Col className="c-center plans-product-header-text-container">
+          <Col className="c-center plans-product-header-text-container container-max-width">
             <Row>
               <Col sm={7} className="c-plans-product-text">
                 Selected Products
@@ -415,7 +415,7 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
 
         <Row className="hidden-xs">
-          <Col className="c-center plan-selector-outer-container" style={{paddingLeft: "15px", paddingRight: "15px", marginBottom: "15px"}}>
+          <Col className="c-center plan-selector-outer-container container-max-width" style={{paddingLeft: "15px", paddingRight: "15px", marginBottom: "15px"}}>
             <Row className="plans-selector-container">
               <Col lg={6} sm={10} md={8} className="c-center" style={{paddingTop: "0px"}}>
                 <Col sm={6} className="payment-schedule-text" style={{paddingTop: "20px", paddingRight: "0px"}}>
@@ -437,7 +437,7 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
 
         <Row>
-          <Col className="c-center all-plans-main-container">
+          <Col className="c-center all-plans-main-container container-max-width">
             <Col sm={individualPlanContainerWidth} className="one-person-plan-container">
               { this.props.noOfPersons>=1 &&
                 map(this.props.plans[0].plans_data, (p)=>{
@@ -550,7 +550,7 @@ class PlansPage extends React.Component<Props, {}> {
               </Col>
             </Row>
           </Col>
-          <Col sm={3} xs={12} className="c-center plan-total-container hidden-xs">
+          <Col sm={3} xs={12} className="c-center plan-total-container hidden-xs container-max-width">
             <Row className="plans-selector-container">
               <Col md={4} sm={5} className="" style={{float: "right", marginRight: "15px"}}>
                 <Row>

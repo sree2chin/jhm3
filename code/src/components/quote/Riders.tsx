@@ -24,7 +24,7 @@ export default class Plan extends React.Component<Props, {}> {
     });
     this.props.selectRider(rider, this.props.index);
   }
-  public render() {  
+  public render() {
 
     const riders = this.props.riders;
     const person = this.props.person;
@@ -33,12 +33,12 @@ export default class Plan extends React.Component<Props, {}> {
       <Row className="all-riders-info-container">
           <Col key={person.name} sm={12} className="c-one-person-container riders-outer-container">
             <Row>
-              <Col sm={8} className="c-center rider-header-text">
+              <Col sm={8} className="c-center rider-header-text container-max-width">
                 Riders for {person.name}
               </Col>
-              <Col sm={8} className="riders-container c-center">
+              <Col sm={8} className="riders-container c-center container-max-width">
                   {map(riders, (rider, key) =>
-                      if (typeof rider !="string"){ 
+                      if (typeof rider !="string"){
                         if (String(key) == "WP") {
                           if (rider.Premium) {
                             return <Rider key={rider.Name}

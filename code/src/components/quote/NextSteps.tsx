@@ -13,7 +13,7 @@ import EmailModal from "./EmailModal";
 import EmailModalCapture from "./EmailModalCapture";
 import ThanksEmail from "./ThanksEmail";
 import ThanksPhone from "./ThanksPhone";
-import LicensedModal from "./LicensedModal"; 
+import LicensedModal from "./LicensedModal";
 import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
@@ -54,7 +54,7 @@ class PlansPage extends React.Component<Props, {}> {
 
   submitQuote() {
     this.props.submitQuote();
-  }, 
+  },
 
   openEmailPopup() {
     this.setState({
@@ -113,7 +113,7 @@ class PlansPage extends React.Component<Props, {}> {
     } else {
       personOne.email = "TEST@co.COM";
     }
-    
+
     this.getExtraInfo(personOne);
 
     persons.push(personOne);
@@ -126,7 +126,7 @@ class PlansPage extends React.Component<Props, {}> {
       } else {
         personTwo.email = "TEST@co.COM";
       }
-      
+
       this.getExtraInfo(personOne);
       persons.push(personTwo);
     }
@@ -244,7 +244,7 @@ class PlansPage extends React.Component<Props, {}> {
         <Subheader />
 
         <Row>
-          <Col className="c-center customer-next-steps-container">
+          <Col className="c-center customer-next-steps-container container-max-width">
             <Row>
               <Col sm={6} className="c-center next-steps-header">
                 OK... Let's Take Some Action
@@ -256,7 +256,7 @@ class PlansPage extends React.Component<Props, {}> {
               </Col>
             </Row>
             <Row>
-              <Col sm={12}> 
+              <Col sm={12}>
                 <Col sm={4} className="next-action-application-img-container" onClick={()=>{
                   this.selectNextStep("continueToApplication")
                 }} style={{}}>
@@ -328,7 +328,7 @@ class PlansPage extends React.Component<Props, {}> {
               </Col>
             </Row>
             <Row className="hidden-xs">
-              <Col sm={12} className="next-steps-footer"> 
+              <Col sm={12} className="next-steps-footer">
                 <Col sm={4}  onClick={()=>{
                   this.selectNextStep("continueToApplication")
                 }}>
@@ -366,7 +366,7 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>
 
-        <EmailModal 
+        <EmailModal
           showModalEmail={this.state.showModalEmail}
           saveQuote={this.saveQuote.bind(this)}
           handleChange={this.handleEmailChange.bind(this)}
@@ -374,21 +374,21 @@ class PlansPage extends React.Component<Props, {}> {
           noOfPersons={this.props.noOfPersons}
         />
 
-        <EmailModalCapture 
+        <EmailModalCapture
           showModalEmail={this.state.showModalEmailCapture}
           saveQuote={this.saveQuote.bind(this)}
           handleChange={this.handleEmailChange.bind(this)}
           onCloseModal={this.closeEmailCaptureModal.bind(this)}
           noOfPersons={this.props.noOfPersons}
         />
-        <LicensedModal 
+        <LicensedModal
           showModalPhone={this.state.showModalPhone}
           saveQuote={this.saveQuote.bind(this)}
           handlePhoneChange={this.handlePhoneChange.bind(this)}
           handleSlotChange={this.handleSlotChange.bind(this)}
           onCloseModal={this.closeLicensedModal.bind(this)}
           keyValueChange={this.keyValueChange.bind(this)}
-        /> 
+        />
 
         <ThanksEmail
           showModalEmailThanks={this.state.showModalEmailThanks}

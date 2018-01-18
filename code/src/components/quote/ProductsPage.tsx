@@ -145,7 +145,7 @@ class ProductsPage extends React.Component<Props, {}> {
     var result = true;
     var errors = [];
     each (this.props.persons, (person, index) => {
-      if(index < this.props.noOfPersons) {  
+      if(index < this.props.noOfPersons) {
         const {s_birthDate, s_gender, state, smoke, health, name} = person;
 
         const s_birthDateError = !(s_birthDate && moment(s_birthDate).format("YYYY-MM-DD").length > 0);
@@ -156,10 +156,10 @@ class ProductsPage extends React.Component<Props, {}> {
         const nameError = !(name && name.length > 0);
 
         errors.push({
-          s_birthDateError, 
+          s_birthDateError,
           s_genderError,
-          stateError, 
-          smokeError, 
+          stateError,
+          smokeError,
           healthError,
           nameError
         });
@@ -203,7 +203,7 @@ class ProductsPage extends React.Component<Props, {}> {
           submittingUserInfo: false
         });
       });
-    } 
+    }
   }
   submitProductsFormOnEditPerson(isFromEditModal) {
     this.productSubmissionBtnClicked = true;
@@ -255,7 +255,7 @@ class ProductsPage extends React.Component<Props, {}> {
   getContinueBtnActiveClass() {
 
     if(this.props.noOfPersons == 2) {
-      if(this.state.productId0.length > 0 && this.state.productId1.length > 0) return "active"; 
+      if(this.state.productId0.length > 0 && this.state.productId1.length > 0) return "active";
     } else if(this.state.productId0.length > 0) {return "active";}
 
     return "";
@@ -349,7 +349,7 @@ class ProductsPage extends React.Component<Props, {}> {
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
           <Col className="all-persons-info-container" style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
             { this.props.noOfPersons>=1 &&
-              <PersonInfo 
+              <PersonInfo
                 person={persons[0]}
                 noOfPersons={this.props.noOfPersons}
                 personIndex={0}
@@ -359,7 +359,7 @@ class ProductsPage extends React.Component<Props, {}> {
             }
             <div className="hidden-xs">
               { this.props.noOfPersons==2 &&
-                <PersonInfo 
+                <PersonInfo
                   person={persons[1]}
                   noOfPersons={this.props.noOfPersons}
                   personIndex={1}
@@ -372,10 +372,10 @@ class ProductsPage extends React.Component<Props, {}> {
         </Row>
         <div className="hidden-xs"><ProductHeader /> </div>
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}} className={this.props.noOfPersons==2 ? "two-product-outer-container": "one-product-outer-container"}>
-          <Col className="c-center all-products-info-container">
+          <Col className="c-center all-products-info-container container-max-width">
             <Row>
-              { this.props.products && this.props.products.length >=1 && this.props.products[0] ? 
-                <ProductContainer 
+              { this.props.products && this.props.products.length >=1 && this.props.products[0] ?
+                <ProductContainer
                   productInfo={this.props.products[0]}
                   selectProduct={this.selectProductForIndex.bind(this)}
                   deSelectProduct={this.deSelectProductForIndex.bind(this)}
@@ -391,7 +391,7 @@ class ProductsPage extends React.Component<Props, {}> {
                 <Col className="all-persons-info-container" className="visible-xs" style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
                   <div className="hidden-xs">
                   { this.props.noOfPersons>=1 &&
-                    <PersonInfo 
+                    <PersonInfo
                       person={persons[0]}
                       noOfPersons={this.props.noOfPersons}
                       personIndex={0}
@@ -401,7 +401,7 @@ class ProductsPage extends React.Component<Props, {}> {
                   }
                   </div>
                   { this.props.noOfPersons==2 &&
-                    <PersonInfo 
+                    <PersonInfo
                       person={persons[1]}
                       noOfPersons={this.props.noOfPersons}
                       personIndex={1}
@@ -412,7 +412,7 @@ class ProductsPage extends React.Component<Props, {}> {
                 </Col>
               </Row>
               { this.props.products && this.props.products.length==2 && this.props.products[1] ?
-                  <ProductContainer 
+                  <ProductContainer
                     productInfo={this.props.products[1]}
                     selectProduct={this.selectProductForIndex.bind(this)}
                     deSelectProduct={this.deSelectProductForIndex.bind(this)}
@@ -421,7 +421,7 @@ class ProductsPage extends React.Component<Props, {}> {
                     noOfPersons={this.props.noOfPersons}
                     productValidations={this.props.productValidations}
                     productIds={this.state.productId1}
-                  />  : this.props.products && this.props.products.length==2 ? <NoProducts /> : null 
+                  />  : this.props.products && this.props.products.length==2 ? <NoProducts /> : null
               }
             </Row>
           </Col>
@@ -468,7 +468,7 @@ class ProductsPage extends React.Component<Props, {}> {
           }
         </Row>
 
-        <EditPerson 
+        <EditPerson
           showModalEditPerson={this.props.showModalEditPerson}
           onCloseModal={this.props.closeEditPersonModal.bind(this)}
           editablePerson={this.props.editablePerson}
@@ -506,7 +506,7 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     },
     closeEditPersonModal: () => {
       return dispatch(closeEditPersonModal())
-    }, 
+    },
     handleEditChange: (person) => {
       return dispatch(handleEditChange(person));
     }

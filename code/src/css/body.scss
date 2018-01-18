@@ -16,6 +16,10 @@
     visibility: visible;
 }
 
+.container-max-width {
+    max-width: $container-max-width!important;
+}
+
 .input-border-error {
     border: solid 1.1px #ff4949!important;
 }

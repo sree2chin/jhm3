@@ -11,8 +11,8 @@ export default class ProductHeader extends React.Component<Props, {}> {
   public render() {
     return (
       <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
-        <Col sm={7} className="c-center">
-          <Col sm={12} className="select-product-header">
+        <Col sm={7} className="c-center container-max-width">
+          <Col sm={12} className="select-product-header ">
             Select a product
           </Col>
           <Col sm={12}  className="select-product-header-content">

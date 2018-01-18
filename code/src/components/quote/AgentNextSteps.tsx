@@ -12,7 +12,7 @@ import ProductHeader from "./ProductHeader";
 import EmailModal from "./EmailModal";
 import ThanksEmail from "./ThanksEmail";
 import ThanksPhone from "./ThanksPhone";
-import AgentLicensedModal from "./AgentLicensedModal"; 
+import AgentLicensedModal from "./AgentLicensedModal";
 import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
@@ -54,8 +54,8 @@ class PlansPage extends React.Component<Props, {}> {
 
   submitQuote() {
     this.props.submitQuote();
-  }, 
-  
+  },
+
   openEmailCapturePopup() {
     this.setState({
       showModalEmailCapture: true,
@@ -110,7 +110,7 @@ class PlansPage extends React.Component<Props, {}> {
     } else {
       personOne.email = "TEST@co.COM";
     }
-    
+
     this.getExtraInfo(personOne);
 
     persons.push(personOne);
@@ -123,7 +123,7 @@ class PlansPage extends React.Component<Props, {}> {
       } else {
         personTwo.email = "TEST@co.COM";
       }
-      
+
       this.getExtraInfo(personOne);
       persons.push(personTwo);
     }
@@ -231,9 +231,9 @@ class PlansPage extends React.Component<Props, {}> {
                     <div className="c-radio l-next-step-container" onClick={()=>{
                       this.selectNextStep("continueToApplication")
                     }}>
-                      <input 
-                        type="radio" 
-                        name={"nextStep-continueToApplication"} 
+                      <input
+                        type="radio"
+                        name={"nextStep-continueToApplication"}
                         checked={this.state.nextStep == "continueToApplication"}
                       />
                       <span></span>
@@ -244,9 +244,9 @@ class PlansPage extends React.Component<Props, {}> {
                     <div className="c-radio l-next-step-container" onClick={()=>{
                       this.selectNextStep("ticketToVantisLifeSales")
                     }}>
-                      <input 
-                        type="radio" 
-                        name={"person_s_gender_"} 
+                      <input
+                        type="radio"
+                        name={"person_s_gender_"}
                         checked={this.state.nextStep=="ticketToVantisLifeSales"}
                       />
                       <span></span>
@@ -257,9 +257,9 @@ class PlansPage extends React.Component<Props, {}> {
                     <div className="c-radio l-next-step-container" onClick={()=>{
                       this.selectNextStep("ticketToInternalAgent")
                     }}>
-                      <input 
-                        type="radio" 
-                        name={"person_s_gender_"} 
+                      <input
+                        type="radio"
+                        name={"person_s_gender_"}
                         checked={this.state.nextStep=="ticketToInternalAgent"}
                       />
                       <span></span>
@@ -270,9 +270,9 @@ class PlansPage extends React.Component<Props, {}> {
                     <div className="c-radio l-next-step-container" onClick={()=>{
                       this.selectNextStep("emailApplicationLink")
                     }}>
-                      <input 
-                        type="radio" 
-                        name={"person_s_gender_"} 
+                      <input
+                        type="radio"
+                        name={"person_s_gender_"}
                         checked={this.state.nextStep=="emailApplicationLink"}
                       />
                       <span></span>
@@ -284,9 +284,9 @@ class PlansPage extends React.Component<Props, {}> {
                     <div className="c-radio l-next-step-container" onClick={()=>{
                       this.selectNextStep("printTheQuote")
                     }}>
-                      <input 
-                        type="radio" 
-                        name={"person_s_gender_"} 
+                      <input
+                        type="radio"
+                        name={"person_s_gender_"}
                         checked={this.state.nextStep=="printTheQuote"}
                       />
                       <span></span>
@@ -316,7 +316,7 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>
 
-        <EmailModalCapture 
+        <EmailModalCapture
           showModalEmail={this.state.showModalEmailCapture}
           saveQuote={this.saveQuote.bind(this)}
           handleChange={this.handleEmailChange.bind(this)}
@@ -324,21 +324,21 @@ class PlansPage extends React.Component<Props, {}> {
           noOfPersons={this.props.noOfPersons}
         />
 
-        <EmailModal 
+        <EmailModal
           showModalEmail={this.state.showModalEmail}
           saveQuote={this.saveQuote.bind(this)}
           handleChange={this.handleEmailChange.bind(this)}
           onCloseModal={this.closeEmailModal.bind(this)}
           noOfPersons={this.props.noOfPersons}
         />
-        <AgentLicensedModal 
+        <AgentLicensedModal
           showModalPhone={this.state.showModalPhone}
           saveQuote={this.saveQuote.bind(this)}
           handlePhoneChange={this.handlePhoneChange.bind(this)}
           handleSlotChange={this.handleSlotChange.bind(this)}
           onCloseModal={this.closeAgentLicensedModal.bind(this)}
           keyValueChange={this.keyValueChange.bind(this)}
-        /> 
+        />
 
         <ThanksEmail
           showModalEmailThanks={this.state.showModalEmailThanks}

@@ -1,15 +1,20 @@
+@import "./commonMixins";
 .product-pager-container {
 	.product-main-content{
 		height: 205px !important;
 		overflow-y: scroll;
 	}
 	.all-persons-info-container {
-	    width: 54.17%;
+		width: 54.17%;
+		max-width: $container-max-width;
 	    padding-left: 0px;
 	    padding-right: 0px;
 	}
 	.all-products-info-container {
 		width: 54.17%;
+		.first-product-container {
+			padding-right: 0px;
+		}
 	}
 	.product-selection-error-msg {
 	    text-align: center;
@@ -17,13 +22,19 @@
 	    margin-bottom: 20px;
 	}
 	.riders-outer-container {
+		div:nth-child(3n+3) {
+			padding-right: 15px;
+		}
 		.rider-header-text {
 			width: 54.17%;
+			&.container-max-width {
+				padding-left: 0px;
+			}
 		}
 		.riders-container {
 		    width: 54.17%;
 		    padding-left: 0px!important;
-		    padding-right: 0px;
+			padding-right: 0px;
 		}
 		.c-center {
 		    padding-left: 10px;
@@ -36,12 +47,16 @@
 	}
    .two-product-outer-container {
    		.first-product-container {
-   			padding-right: 0px;
+   			padding-right: 5px;
    			padding-left: 0px;
    		}
    		.second-product-container {
 			   padding-left: 0px;
-			   padding-right: 0px
+			   padding-right: 0px;
+			   .single-product-container {
+					padding-left: 10px;
+					padding-right: 28px;
+			   }
    		}
    		.single-product-content{
    			margin-left: 0px;
@@ -169,14 +184,19 @@
 	}
 	.single-product-container {
 		&.rider-container {
+			:nth-child(3n+2) {
+				padding-right: 8px;
+			}
 			.single-product-content {
 				min-height: 272px;
 			}
-		    margin-left: -10px;
-		    margin-right: 10px;
+			margin-left: 0px;
+			margin-right: 0px;
+			padding-left: 0px;
+			padding-right: 30px;
 		    min-height: 200px;
 			.single-product-content {
-				margin-left: 5px;
+				margin-left: 0px;
 				padding-left: 0px;
 				.header {
 				    font-size: 18px;
