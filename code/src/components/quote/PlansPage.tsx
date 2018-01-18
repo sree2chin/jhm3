@@ -175,7 +175,7 @@ class PlansPage extends React.Component<Props, {}> {
 
       if(this.props.noOfPersons == 2) {
         const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-        if(this.props.premiums && this.props.premiums[1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium ) {
+        if(this.props.premiums && this.props.premiums[0] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium ) {
           var amount = this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
           amount = amount ? parseFloat(amount.split("$")[1]) : 0;
 
@@ -550,8 +550,8 @@ class PlansPage extends React.Component<Props, {}> {
               </Col>
             </Row>
           </Col>
-          <Col sm={3} xs={12} className="c-center plan-total-container hidden-xs container-max-width">
-            <Row className="plans-selector-container">
+          <Col sm={3} xs={12} className="c-center plan-total-container hidden-xs container-max-width" style={{paddingLeft: "19px"}}>
+            <Row className="plans-selector-container" style={{marginLeft: "0px"}}>
               <Col md={4} sm={5} className="" style={{float: "right", marginRight: "15px"}}>
                 <Row>
                   <Col sm={7} md={6} className="plan-total-text">

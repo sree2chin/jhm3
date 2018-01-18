@@ -274,7 +274,7 @@ export default class Plan extends React.Component<Props, {}> {
               <Col sm={6} className="plan-sider-coverage-container">
                 <Row className="plan-coverage-container">
                   {(this.state.sFaceAmount && this.state.sFaceAmount !=0) ?
-                    [<span classNam="s-face-amount" key="1" style={{fontSize: "26px", textAlign: "right", color: "#009c91"}}>${this.state.sFaceAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </span] : null
+                    [<span className="s-face-amount" key="1" style={{fontSize: "26px", textAlign: "right", color: "#009c91"}}>${this.state.sFaceAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </span] : null
                   }
                   {(this.state.sFaceAmount && this.state.sFaceAmount !=0) ?
                     [<span key="2" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> of</span>] : null

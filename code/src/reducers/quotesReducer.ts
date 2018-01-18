@@ -8,12 +8,16 @@ export default (state: Array<any> = [], action) => {
       return objectAssign({}, state, {plans: action.plans});
     case 'SUMBMITTED_PLANS_INFO':
       var premiums;
-      if(state.premiums) {  
-        premiums= JSON.parse(JSON.stringify(state.premiums));
+      if(state.premiums) {
+        premiums = JSON.parse(JSON.stringify(state.premiums));
       } else {
         premiums = action.premiums;
       }
-       
+
+      if (!premiums[1] && action.premiums[1]) {
+        premiums[1] = action.premiums[1];
+      }
+
       if(premiums[0] && action.premiums[0]) {
         premiums[0].input_data = action.premiums[0].input_data;
         if (action.premiums[0].plans_data && action.premiums[0].plans_data.ProductID) {
