@@ -147,7 +147,7 @@
 			padding-left: 15px;
 	    }
 	    .person-edit-container {
-				font-size: 15.36px;
+			font-size: 15.36px;
 		    text-align: center;
 		    color: #fff;
 		    /* padding-right: 20px; */
@@ -156,11 +156,11 @@
 		    /* padding-left: 0px; */
 		    float: right;
 		    margin-right: 15px !important;
-		    background-color: #265fad;
+		    background-color: $btn-passive-bg-color;
 		    font-weight: bold;
 		    border-radius: 6px;
 		    padding: 5px;
-				width: 60px;
+			width: 60px;
 	    }
 	    .person-content {
 				font-size: 14px;
@@ -175,7 +175,7 @@
 	    margin-top: 30px;
 	}
 	.select-product-header-content {
-	    font-size: 14.36px;
+	    font-size: 16.36px;
 	    line-height: 1.38;
 	    text-align: center;
 	    color: #2D2D2D;
