@@ -74,6 +74,9 @@ export default class ProductContainer extends React.Component<Props, State> {
 
       return (
           <Col sm={personsContainerWidth} className={this.props.personIndex==0 ? "first-product-container": "second-product-container"}>
+            <Col className="select-product-header" style={{textAlign: "center", paddingBottom:"22px"}}>
+              Products for {this.props.person.name}
+            </Col>
             {this.state.productSelectionError && <Row>
               <Col sm={8} className="c-center product-selection-error-msg">
                 {this.state.productSelectionErrorMsg}
