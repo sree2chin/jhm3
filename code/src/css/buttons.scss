@@ -9,20 +9,20 @@
     color: #ffffff;
     font-family: NunitoBold;
     &:focus {
-        background-color: $btn-hover-color!important;
+        background-color: $btn-hover-bg-color!important;
         box-shadow: $btn-hover-box-shadow!important;
-        color: $btn-hover-color!important;   
-    } 
+        color: $btn-hover-color!important;
+    }
     &:active {
         background-color: $btn-active-bg-color!important;
         color: $btn-active-color!important;
         box-shadow: $btn-active-box-shadow!important;
-    } 
+    }
     &:hover {
         background-color: $btn-hover-bg-color!important;
         box-shadow: $btn-hover-box-shadow!important;
         color: $btn-hover-color!important;
-    } 
+    }
     &.big {
         width: 100%;
         border-radius: 0px!important;
@@ -31,12 +31,12 @@
         border-radius: 6px!important;
         width: 100%;
         margin-top: 30px;
-        &.active{ 
+        &.active{
             background-color: #317dbd!important;
         }
         &:active {
             box-shadow: none;
-        } 
+        }
     }
     &.active{
         background-color: $btn-default-bg-color!important;
