@@ -122,7 +122,7 @@
 		}
 	}
 	.plans-product-header{
-		margin-top: 53px;
+		margin-top: 48px;
 		margin-bottom: 15px;
 		.c-plans-product-text {
 		    font-size: 22px;
@@ -174,7 +174,6 @@
 	    background-color: #ffffff;
 	    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
 	    border: solid 1px #d4d4d4;
-	    margin-top: 32px;
 	    .c-center {
 			font-size: 14px;
 		    text-align: left;
@@ -188,6 +187,8 @@
 		.select-this-product-container {
 			height: 40px;
 			border-radius: 6px;
+			border-top-left-radius: 0px;
+    		border-top-right-radius: 0px;
 			background-color: #ffffff;
  			font-size: 14px;
 			font-weight: 500;
@@ -198,10 +199,14 @@
 			&:hover {
 				background-color: #f7f7f7;
 				border: solid 2px #317dbd;
+				border-top-left-radius: 0px;
+    			border-top-right-radius: 0px;
 				padding-top: 8px;
 			}
 			&.active {
 				background-color: #317dbd;
+				border-top-left-radius: 0px;
+    			border-top-right-radius: 0px;
 				color: #ffffff;
 			}
 		}
