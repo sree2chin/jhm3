@@ -100,7 +100,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                 </Modal.Header>
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                   <Row>
-                  <Col sm={12} style={{marginBottom: "15px"}} className="person-name-container">
+                  <Col sm={12} style={{marginBottom: "11px"}} className="person-name-container">
                     <Input
                       name={"first-applicant-name-" + personIndex}
                       label="Name"
@@ -117,7 +117,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                   <Col sm={12} className={"c-subheader-text"}>
                     Gender
                   </Col>
-                  <Col sm={12} style={{paddingRight: "22px", marginBottom: "15px"}} className="person-gender-container">
+                  <Col sm={12} style={{paddingRight: "22px", marginBottom: "20px"}} className="person-gender-container">
                     <FormGroup className="radio-group">
                       <div className="c-radio" onClick={ ()=> {
                               this.handleChange(personIndex, "s_gender", "1")
@@ -147,7 +147,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                     </Col> }
                   </Col>
                   </Row>
-                  <Row style={{marginBottom: "25px", marginLeft: "-15px"}}>
+                  <Row style={{marginBottom: "27px", marginLeft: "-15px"}}>
                     <Col sm={12} className={"c-subheader-text"} style={{marginTop: "0px", marginBottom: "3px"}}>
                       Birth date
                     </Col>
@@ -171,7 +171,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                       Please select your birth date.
                     </Col> }
                   </Row>
-                  <div style={{marginBottom: "12px", marginLeft: "-15px"}}>
+                  <Row style={{marginBottom: "12px", marginLeft: "-15px"}}>
                     <Col sm={12} className={"c-subheader-text"} style={{marginBottom: "2px"}}>
                       State
                     </Col>
@@ -189,8 +189,8 @@ export default class EditPerson extends React.Component<Props, {}> {
                           </Col> }
                     </Col>
 
-                  </div>
-                  <Row  style={{marginBottom: "0px", marginLeft: "-15px"}}>
+                  </Row>
+                  <Row  style={{marginBottom: "11px", marginLeft: "-15px"}}>
                     <Col sm={12} className={"c-subheader-text c-subheader-overall-health"} style={{marginTop: "15px"}}>
                       Overall health
                     </Col>
@@ -214,7 +214,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                     </Col>
 
                   </Row>
-                  <Row style={{ marginLeft: "-15px"}}>
+                  <Row style={{marginBottom: "25px", marginLeft: "-15px"}}>
                     <Col sm={12} className={"c-subheader-text"}  style={{marginTop: "5px"}}>
                       Tobacco use
                     </Col>
@@ -249,8 +249,8 @@ export default class EditPerson extends React.Component<Props, {}> {
                     </Col>
                   </Row>
                   <div>
-                    <Col style={{marginLeft: "-15px", marginRight: "-15px", marginBottom: "-15px"}}>
-                      <Button className="c-button-default active" onClick={(){
+                    <Col style={{marginLeft: "-20px", marginRight: "-20px", marginBottom: "-15px"}}>
+                      <Button style={{border: "solid 1px #4584c0"}} className="c-button-default" onClick={(){
                           this.submitEditForm()
                         }}
                         style={{borderRadius: "5px!important"}}

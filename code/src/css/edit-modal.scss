@@ -35,13 +35,27 @@
 			border-right: none;
 			img {
 				position: absolute;
-				top: calc(31.5%);
+				top: 12px;
 				left: 10.1%;
 			}
 		}
 	}
 }
 .edit-modal-container {
+	font-family: NunitoRegular;
+	.modal-header {
+		padding-top: 24px;
+	}
+	.modal-header, .modal-body {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	.c-button-default.btn {
+		border: solid 1px #4584c0;
+	}
+	.c-button-default.btn:hover {
+		border: solid 1px #4584c0;
+	}
 	.person-name-container {
 		.form-group {
 			label {
@@ -74,8 +88,9 @@
 		    color: #666666;
 		    font-weight: 400;
 		    margin-top: 0px;
-		    top: -5px;
-		    position: relative;
+		    top: -4px;
+			position: relative;
+			margin-bottom: 0px;
 		}
 	}
     .c-subheader-text {
@@ -95,7 +110,7 @@
 	    float: left;
 	    font-size: 16px;
     }
-    .birth-date-picker-container span.test-class + div{ 
+    .birth-date-picker-container span.test-class + div{
         display: inline-block;
     	width: 70%;
     	float: left;
@@ -118,11 +133,22 @@
 	    }
     }
     .Select--single {
-    	width: 74%;
+    	width: 78.94%;
     	display: inline-block;
     	float: left;
     }
 	.Select-menu-outer {
 		font-size:16px;
+	}
+}
+
+@media (min-width: 768px) {
+	.edit-modal-container {
+		.modal-sm {
+			width: 28.39%;
+			.birth-date-picker-container .custom-date-picker-container .custom-date-picker img {
+
+			}
+		}
 	}
 }
