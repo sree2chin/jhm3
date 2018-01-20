@@ -1,9 +1,9 @@
-@media only screen 
-and (min-device-width: 768px) 
-and (max-device-width: 1024px) 
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
 and (-webkit-min-device-pixel-ratio: 1) {
   .c-select-persons-container {
-    
+
   }
 }
 @media(max-width:768px) {
@@ -18,7 +18,8 @@ and (-webkit-min-device-pixel-ratio: 1) {
     .c-select-one-person, .c-select-two-person {
       margin-left: 27px;
       margin-right: 28px;
-      width: auto;
+      width: 86%;
+      max-width: 100%;
     }
     .quotation-msg-text-container {
       padding-left: 23px;
@@ -37,9 +38,13 @@ and (-webkit-min-device-pixel-ratio: 1) {
       padding-left: 5px;
     }
     #select-no-of-persons-mobile-btn {
-      margin-left: 14px;
       margin-right: 14px;
-      margin-top: 93px;
+      margin-top: 10px;
+      float: right;
+      width: 93%;
+      button {
+        margin-top: 20px;
+      }
     }
   }
   .c-select-persons-container .c-select-one-person img {
