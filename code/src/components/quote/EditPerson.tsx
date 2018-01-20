@@ -32,7 +32,7 @@ export default class EditPerson extends React.Component<Props, {}> {
     this.setState({ year, month, date });
     this.onDateChange("s_birthDate", month + "/" + date + "/" + year, month + "/" + date + "/" + year);
   }
-  
+
   onDateChange(key, value, formattedDate) {
     var date = moment(new Date(value));
     if (date.isValid()) {
@@ -55,7 +55,7 @@ export default class EditPerson extends React.Component<Props, {}> {
   }
 
 
-  public render() {  
+  public render() {
     var errors ={};
     const {personIndex} = this.props;
     const toolTipStyles = {
@@ -94,14 +94,14 @@ export default class EditPerson extends React.Component<Props, {}> {
     toolTipStylesBirthData.wrapper.top = "0px";
 
     return (
-       <Modal bsSize="small" show={this.props.showModalEditPerson} className="edit-modal-container"  onHide={this.props.onCloseModal} className="edit-modal-container">
+       <Modal bsSize="small" show={this.props.showModalEditPerson} className="edit-modal-container"  onHide={this.props.onCloseModal}>
                 <Modal.Header closeButton>
                   {"Applicant " + (personIndex + 1)}
                 </Modal.Header>
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                   <Row>
                   <Col sm={12} style={{marginBottom: "15px"}} className="person-name-container">
-                    <Input 
+                    <Input
                       name={"first-applicant-name-" + personIndex}
                       label="Name"
                       placeholder="Name"
@@ -122,9 +122,9 @@ export default class EditPerson extends React.Component<Props, {}> {
                       <div className="c-radio" onClick={ ()=> {
                               this.handleChange(personIndex, "s_gender", "1")
                             }}>
-                        <input 
-                          type="radio" 
-                          name={"person_s_gender_" + personIndex} 
+                        <input
+                          type="radio"
+                          name={"person_s_gender_" + personIndex}
                           checked={this.state.s_gender == "1"}
                         />
                         <span></span>
@@ -133,9 +133,9 @@ export default class EditPerson extends React.Component<Props, {}> {
                       <div className="c-radio" onClick={ ()=> {
                               this.handleChange(personIndex, "s_gender", "2")
                             }}>
-                        <input 
-                          type="radio" 
-                          name={"person_s_gender_" + personIndex} 
+                        <input
+                          type="radio"
+                          name={"person_s_gender_" + personIndex}
                           checked={this.state.s_gender == "2"}
                         />
                         <span></span>
@@ -145,7 +145,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                     { errors.s_genderError && <Col sm={12} className={"c-subheader-text error"} style={{paddingLeft: "0px"}}>
                       Please select your gender.
                     </Col> }
-                  </Col> 
+                  </Col>
                   </Row>
                   <Row style={{marginBottom: "25px", marginLeft: "-15px"}}>
                     <Col sm={12} className={"c-subheader-text"} style={{marginTop: "0px", marginBottom: "3px"}}>
@@ -154,8 +154,8 @@ export default class EditPerson extends React.Component<Props, {}> {
                     <Col sm={12} className="birth-date-picker-container edit-birth-date-picker-container" >
                         <span className="test-class">
                         </span>
-                        <FormGroup controlId={"change_handler_" + this.props.personIndex}> 
-                          <ControlLabel>      
+                        <FormGroup controlId={"change_handler_" + this.props.personIndex}>
+                          <ControlLabel>
                             <div className="custom-date-picker-container">
                               <span className="custom-date-picker" onClick={this.props.onClick}>
                                 <img src={"../images/calendar.svg"} />
@@ -188,7 +188,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                             Please select your state.
                           </Col> }
                     </Col>
-             
+
                   </div>
                   <Row  style={{marginBottom: "0px", marginLeft: "-15px"}}>
                     <Col sm={12} className={"c-subheader-text c-subheader-overall-health"} style={{marginTop: "15px"}}>
@@ -223,8 +223,8 @@ export default class EditPerson extends React.Component<Props, {}> {
                         <div className="c-radio" onClick={ ()=> {
                                 this.handleChange(personIndex, "smoke", "Yes")
                               }}>
-                          <input 
-                            type="radio" 
+                          <input
+                            type="radio"
                             name={"person1_smoke_" + personIndex}
                             checked={this.state.smoke == "Yes"}
                           />
@@ -234,8 +234,8 @@ export default class EditPerson extends React.Component<Props, {}> {
                         <div className="c-radio" onClick={ ()=> {
                                 this.handleChange(personIndex, "smoke", "No")
                               }}>
-                          <input 
-                            type="radio" 
+                          <input
+                            type="radio"
                             name={"person1_smoke_" + personIndex}
                             checked={this.state.smoke == "No"}
                           />
@@ -258,12 +258,12 @@ export default class EditPerson extends React.Component<Props, {}> {
                         SAVE CHANGES
                       </Button>
                     </Col>
-                  </div>   
+                  </div>
 
                 </Modal.Body>
 
 
-                
+
             </Modal>
     );
   }

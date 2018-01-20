@@ -493,7 +493,6 @@ class PlansPage extends React.Component<Props, {}> {
                     selectedPaymentType={self.state.selectedPaymentType}
                     personIndex={1}
                     productInfo={self.props.products[1]}
-                    person={persons[0]}
                     selectProductPlan={self.selectProductPlan.bind(self)}
                     key={p.product_id + "1"}
                   />

@@ -388,7 +388,7 @@ class ProductsPage extends React.Component<Props, {}> {
               }
 
               <Row style={{backgroundColor: "rgb(247, 247, 247)"}} className="visible-xs">
-                <Col className="all-persons-info-container" className="visible-xs" style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
+                <Col className="all-persons-info-container" style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
                   <div className="hidden-xs">
                   { this.props.noOfPersons>=1 &&
                     <PersonInfo
