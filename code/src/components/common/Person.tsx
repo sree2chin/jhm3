@@ -131,7 +131,7 @@ export default class Person extends React.Component<Props, {}> {
           </Col>
           <Col sm={12} style={{paddingRight: "22px", marginBottom: "0px"}} className="person-gender-container">
             <FormGroup className="radio-group hidden-xs">
-              <div className="c-radio" onClick={ ()=> {
+              <div className="c-radio" style={{marginBottom: "0px"}} onClick={ ()=> {
                       this.onChange("s_gender", "1")
                     }}>
                 <input

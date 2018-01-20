@@ -123,7 +123,7 @@
 	}
 	.plans-product-header{
 		margin-top: 48px;
-		margin-bottom: 15px;
+		margin-bottom: 7px;
 		.c-plans-product-text {
 		    font-size: 22px;
     		text-align: left;
@@ -133,7 +133,8 @@
 		    font-size: 14px;
 		    text-align: right;
 		    color: #317dbd;
-		    cursor: pointer;
+			cursor: pointer;
+			line-height: 29px;
 		}
 		.plans-product-header-text-container {
 			width: 54.17%;
@@ -186,7 +187,7 @@
 	    margin-right: 0px;
 		.select-this-product-container {
 			height: 40px;
-			border-radius: 6px;
+			border-radius: 5px;
 			border-top-left-radius: 0px;
     		border-top-right-radius: 0px;
 			background-color: #ffffff;
@@ -236,7 +237,9 @@
 		    text-align: left;
 		    color: #666666;
 		    background-color: #f7f7f7;
-		    border: solid 1px #d4d4d4;
+			border: solid 1px #d4d4d4;
+			border-left: 0px;
+			border-right: 0px;
 		    .plan-coverage-container {
 		    	text-align: center;
 		    	margin-top: 15px;
