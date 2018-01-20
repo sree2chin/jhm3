@@ -40,7 +40,7 @@ export default class Person extends React.Component<Props, {}> {
     var momentDate = moment(new Date(month + "/" + date + "/" + year));
     if (momentDate.isValid()) {
       this.onDateChange("s_birthDate", month + "/" + date + "/" + year, month + "/" + date + "/" + year);
-    } 
+    }
   }
 
   onDateChange(key, value, formattedDate) {
@@ -55,7 +55,7 @@ export default class Person extends React.Component<Props, {}> {
     if(errors[key]) {
       return "input-border-error";
     }
-    
+
   }
   public render() {
     const toolTipStyles = {
@@ -111,7 +111,7 @@ export default class Person extends React.Component<Props, {}> {
             {"Applicant " + (personIndex + 1)}
           </Col>
           <Col sm={12} style={{marginBottom: "0px"}} className="person-name-container">
-            <Input 
+            <Input
               name={"first-applicant-name-" + personIndex}
               label="Name"
               placeholder="Name"
@@ -134,9 +134,9 @@ export default class Person extends React.Component<Props, {}> {
               <div className="c-radio" onClick={ ()=> {
                       this.onChange("s_gender", "1")
                     }}>
-                <input 
-                  type="radio" 
-                  name={"person_s_gender_" + personIndex} 
+                <input
+                  type="radio"
+                  name={"person_s_gender_" + personIndex}
                   checked={person.s_gender == "1"}
                 />
                 <span></span>
@@ -145,9 +145,9 @@ export default class Person extends React.Component<Props, {}> {
               <div className="c-radio" style={{marginBottom: "0px"}} onClick={ ()=> {
                       this.onChange("s_gender", "2")
                     }}>
-                <input 
-                  type="radio" 
-                  name={"person_s_gender_" + personIndex} 
+                <input
+                  type="radio"
+                  name={"person_s_gender_" + personIndex}
                   checked={person.s_gender == "2"}
                 />
                 <span></span>
@@ -156,7 +156,7 @@ export default class Person extends React.Component<Props, {}> {
             </FormGroup>
             <Row className="visible-xs">
               <Col xs={6}>
-                <Button className="c-button-default circular" className={`c-button-default circular ${person.s_gender == "1" ? "active" : ""}`} onClick={(){
+                <Button className={`c-button-default circular ${person.s_gender == "1" ? "active" : ""}`} onClick={(){
                       this.onChange("s_gender", "1")
                     }}
                   >
@@ -175,8 +175,8 @@ export default class Person extends React.Component<Props, {}> {
 
             <Col sm={12} className={`c-subheader-text error ${errors.s_genderError ? "visibility-show" : "visibility-hidden"}`} style={{paddingLeft: "0px", marginTop: "0px"}}>
               Please select your gender.
-            </Col> 
-          </Col> 
+            </Col>
+          </Col>
         </div>
         <Row style={{marginBottom: "10px", marginLeft: "0px"}}>
           <Col sm={12} className={"c-subheader-text"} style={{marginTop: "0px", marginBottom: "3px"}}>
@@ -184,10 +184,10 @@ export default class Person extends React.Component<Props, {}> {
           </Col>
           <Col sm={12} className="birth-date-picker-container" >
               <span className="test-class">
-               
+
               </span>
-              <FormGroup controlId={"change_handler_" + this.props.personIndex}> 
-                <ControlLabel>      
+              <FormGroup controlId={"change_handler_" + this.props.personIndex}>
+                <ControlLabel>
                   <div className="custom-date-picker-container">
                     <span className="custom-date-picker" onClick={this.props.onClick}>
                       <img src={"../images/calendar.svg"} />
@@ -202,7 +202,7 @@ export default class Person extends React.Component<Props, {}> {
           </Col>
           <Col sm={12} className={`c-subheader-text error ${errors.s_birthDateError ? "visibility-show" : "visibility-hidden"}`}>
             Please select your birth date.
-          </Col> 
+          </Col>
         </Row>
         <div style={{marginBottom: "12px"}}>
           <Col sm={12} className={"c-subheader-text"} style={{marginBottom: "2px"}}>
@@ -222,7 +222,7 @@ export default class Person extends React.Component<Props, {}> {
               Please select your state.
             </Col>
           </Col>
-   
+
         </div>
         <div  style={{marginBottom: "0px"}}>
           <Col sm={12} className={"c-subheader-text"} style={{marginTop: "5px"}}>
@@ -258,8 +258,8 @@ export default class Person extends React.Component<Props, {}> {
               <div className="c-radio" style={{marginBottom: "0px"}} onClick={ ()=> {
                       this.onChange("smoke", "Yes")
                     }}>
-                <input 
-                  type="radio" 
+                <input
+                  type="radio"
                   name={"person1_smoke_" + personIndex}
                   checked={person.smoke == "Yes"}
                 />
@@ -269,8 +269,8 @@ export default class Person extends React.Component<Props, {}> {
               <div className="c-radio" style={{marginBottom: "0px"}} onClick={ ()=> {
                       this.onChange("smoke", "No")
                     }}>
-                <input 
-                  type="radio" 
+                <input
+                  type="radio"
                   name={"person1_smoke_" + personIndex}
                   checked={person.smoke == "No"}
                 />
