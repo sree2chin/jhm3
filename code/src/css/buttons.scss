@@ -8,6 +8,7 @@
     border: solid 1px #d4d4d4;
     color: #ffffff;
     font-family: NunitoBold;
+    overflow: hidden;
     &:focus {
         background-color: $btn-hover-bg-color!important;
         box-shadow: $btn-hover-box-shadow!important;
