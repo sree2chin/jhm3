@@ -96,7 +96,7 @@ class SelectPersons extends React.Component<Props, State> {
 
 
 
-              { this.state.selectNoOfPersonsError && <Col style={{ paddingLeft: "0px", marginLeft: "30px", color: "red"}} sm={12} className={"c-subheader-text error"}  style={{paddingLeft: "0px"}}>
+              { this.state.selectNoOfPersonsError && <Col style={{ paddingLeft: "0px", marginLeft: "30px", color: "red"}} sm={12} className={"c-subheader-text error"}>
                 Please select the number of person
               </Col> }
 
