@@ -74,7 +74,7 @@ class ContactAgent extends React.Component<Props, {}> {
     } else {
       personOne.email = "TEST@co.COM";
     }
-    
+
     this.getExtraInfo(personOne);
 
     persons.push(personOne);
@@ -87,7 +87,7 @@ class ContactAgent extends React.Component<Props, {}> {
       } else {
         personTwo.email = "TEST@co.COM";
       }
-      
+
       this.getExtraInfo(personOne);
       persons.push(personTwo);
     }
@@ -116,19 +116,19 @@ class ContactAgent extends React.Component<Props, {}> {
   },
   public render() {
     const timingSlots = [
-      { 
+      {
         value: "Morning",
         label: "Morning"
       },
-      { 
+      {
         value: "Afternoon",
         label: "Afternoon"
       },
-      { 
+      {
         value: "Evening",
         label: "Evening"
       },
-      { 
+      {
         value: "Night",
         label: "Night"
       }
@@ -148,7 +148,7 @@ class ContactAgent extends React.Component<Props, {}> {
         </Row>
           <Row>
           <Col xs={11} className="c-center agent-success-go-back-btn">
-            <Button  style={{float: "right"}} className="c-button-default active" onClick={(){
+            <Button  style={{float: "right"}} className="c-button-default active" onClick={()=>{
                 this.goBack()
               }}
             >
