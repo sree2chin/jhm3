@@ -418,7 +418,7 @@ class PlansPage extends React.Component<Props, {}> {
           <Col className="c-center plan-selector-outer-container container-max-width" style={{paddingLeft: "15px", paddingRight: "15px", marginBottom: "15px"}}>
             <Row className="plans-selector-container">
               <Col lg={6} sm={10} md={8} className="c-center" style={{paddingTop: "0px"}}>
-                <Col sm={6} className="payment-schedule-text" style={{paddingTop: "20px", paddingRight: "0px"}}>
+                <Col sm={6} className="payment-schedule-text" style={{paddingTop: "20px", paddingRight: "30px", textAlign: "right"}}>
                   Payment schedule
                 </Col>
                 <Col sm={6} className="plan-schedule-container" style={{paddingTop: "10px", paddingLeft: "0px"}}>
