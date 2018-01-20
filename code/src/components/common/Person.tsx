@@ -280,7 +280,7 @@ export default class Person extends React.Component<Props, {}> {
             </FormGroup>
             <Row className="visible-xs">
               <Col xs={6}>
-                <Button className="c-button-default circular" className={`c-button-default circular ${person.smoke == "Yes" ? "active" : ""}`} onClick={(){
+                <Button className={`c-button-default circular ${person.smoke == "Yes" ? "active" : ""}`} onClick={(){
                       this.onChange("smoke", "Yes")
                     }}
                   >
@@ -288,7 +288,7 @@ export default class Person extends React.Component<Props, {}> {
                 </Button>
               </Col>
               <Col xs={6}>
-                <Button className="c-button-default circular" className={`c-button-default circular ${person.smoke == "No" ? "active" : ""}`} onClick={(){
+                <Button className={`c-button-default circular ${person.smoke == "No" ? "active" : ""}`} onClick={(){
                       this.onChange("smoke", "No")
                     }}
                   >
