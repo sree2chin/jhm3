@@ -178,7 +178,7 @@ export default class Person extends React.Component<Props, {}> {
             </Col>
           </Col>
         </div>
-        <Row style={{marginBottom: "10px", marginLeft: "0px"}}>
+        <Row style={{marginLeft: "0px"}}>
           <Col sm={12} className={"c-subheader-text"} style={{marginTop: "0px", marginBottom: "3px"}}>
             Birth date
           </Col>
@@ -218,7 +218,7 @@ export default class Person extends React.Component<Props, {}> {
               }}
               className={this.getErrorsClassNames(errors, "stateError")}
             />
-            <Col style={{ paddingLeft: "0px"}} sm={12} className={`c-subheader-text error ${errors.stateError ? "visibility-show" : "visibility-hidden"}`}>
+            <Col style={{ paddingLeft: "0px", marginTop: "-5px"}} sm={12} className={`c-subheader-text error ${errors.stateError ? "visibility-show" : "visibility-hidden"}`}>
               Please select your state.
             </Col>
           </Col>

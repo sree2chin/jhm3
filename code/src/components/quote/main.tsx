@@ -225,7 +225,7 @@ class Main extends React.Component<Props, {}> {
           {this.props.noOfPersons && <div>
             <div className="header hidden-xs">
               <div style={{textAlign: "center", fontSize: "26px"}} className="fwbold">
-                Application information
+                Applicant information
               </div>
             </div>
             <div className={this.props.noOfPersons==2 ? "two-person-outer-container c-center": "one-person-outer-container"}>
