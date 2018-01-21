@@ -150,7 +150,7 @@ class Offer extends React.Component<Props, {}> {
                     <Col className="offer-product-name" style={{textAlign: "left"}} sm={12}>
                         {product.product_name}
                     </Col>
-                    <Col sm={12} className="product-main-content" style={{paddingLeft: "20px"}}>
+                    <Col sm={12} className="product-main-content offer-product-description" style={{paddingLeft: "20px"}}>
                     <Row className="text-left">
                         <ul className="c-product-desc-line">
                         {map(product.product_description.split("."), (descLine, index)=>{

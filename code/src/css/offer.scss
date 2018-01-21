@@ -11,15 +11,6 @@
             line-height: 1.18;
             color: #515151;
         }
-        .offer-product-info {
-            .offer-product-header-text {
-                font-size: 24px;
-                font-weight: 800;
-                line-height: 1.18;
-                text-align: left;
-                color: #515151;
-            }
-        }
         .offer-price-amount {
             font-size: 64px;
             line-height: normal;
@@ -53,7 +44,22 @@
             font-size: 16px;
         }
     }
+    .offer-product-info {
+        padding-right: 45px;
+        padding-left: 40px;
+        .offer-product-header-text {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.18;
+            text-align: left;
+            color: #515151;
+        }
+    }
     .offer-product-info-container {
+        border: solid 1px #d4d4d4;
+        padding: 20px;
+        margin-top: 15px;
+        height: 344px;
         .offer-product-name {
             color: #464646;
             padding-left: 0px;
@@ -63,7 +69,10 @@
         .offer-product-description {
             color: #666666;
             font-size: 13px;
-            padding-left: 0px;
+            padding-left: 0px!important;
+            .c-product-desc-line {
+                padding-left: 35px;
+            }
         }
     }
 }
