@@ -38,14 +38,14 @@ export default class cfooter extends React.Component<Props, {}> {
           <Col className={`confirmation-header gather-information-container ${window.location.pathname=="/" || window.location.pathname=="/agent" || window.location.pathname=="/agent/" ? "active" : ""}`} style={{paddingRight: "0px"}}>
             <Row>
               <Col className="gather-information">
-                Gather information
+                Gather info
               </Col>
             </Row>
           </Col>
           <Col className={`confirmation-header product-selection-text-container ${window.location.pathname.indexOf("products") >-1 ? "active" : ""}`}>
             <div className="product-selection-container">
               <div className='product-selection'>
-                Production selection
+                Product selection
               </div>
             </div>
           </Col>
