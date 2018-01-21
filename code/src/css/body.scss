@@ -128,7 +128,8 @@ input.form-control:focus {
   margin-bottom: 0px;
   position: relative;
   bottom: 0px;
-  z-index: 1000;
+  z-index: 9999;
+  margin-top: 46px;
   .c-footer-content {
       font-size: 12px;
       text-align: left;

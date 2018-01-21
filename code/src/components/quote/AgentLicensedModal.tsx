@@ -9,51 +9,58 @@ interface Props extends React.Props<Plan> {
 export default class AgentLicensedModal extends React.Component<Props, {}> {
   constructor(){
     super();
-  },
+  }
 
   saveQuote() {
-    this.setState({
-      savingQuote: true
-    });
-    this.props.saveQuote();
-  },
+    var phoneError = !/^[2-9]\d{2}-\d{3}-\d{4}$/.test(this.state.phone);
+    if (phoneError) {
+      this.setState({
+        phoneError: true
+      });
+    } else {
+      this.setState({
+        savingQuote: true
+      });
+      this.props.saveQuote();
+    }
+  }
 
-  state = {},
+  state = {}
 
   handlePhoneChange(e) {
     this.props.handlePhoneChange(e.target.value);
     this.setState({
       phone: e.target.value
     });
-  },
+  }
 
   onSlotChange(key, obj) {
     this.setState({
       [key]: obj.value
     });
     this.props.handleSlotChange(obj.value);
-  },
+  }
 
   onTextAllowedChange(k, v) {
     this.setState({[k]: v});
     this.props.keyValueChange(k, v);
   };
 
-  public render() {  
+  public render() {
     const timingSlots = [
-      { 
+      {
         value: "Morning",
         label: "Morning"
       },
-      { 
+      {
         value: "Afternoon",
         label: "Afternoon"
       },
-      { 
+      {
         value: "Evening",
         label: "Evening"
       },
-      { 
+      {
         value: "Night",
         label: "Night"
       }
@@ -91,7 +98,7 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
                           Phone number
                         </Col>
                         <Col sm={12} className={"email-input-container"}>
-                          <Input 
+                          <Input
                             name={"phone-number"}
                             placeholder={"555-555-5555"}
                             value={this.state.phone}
@@ -99,15 +106,18 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
                           />
                         </Col>
                       </Col>
+                      {this.state.phoneError && <Col style={{textAlign: "right", color: "red", paddingRight: "33px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
+                        Please enter valid phone number.
+                      </Col> }
                     </Row>
                     <Row className="okay-to-text-number">
                       <FormGroup className="radio-group">
                         <div className="c-radio" onClick={ ()=> {
                                 this.onTextAllowedChange("okay_to_text", "Yes")
                               }}>
-                          <input 
-                            type="radio" 
-                            name={"okay_to_text"} 
+                          <input
+                            type="radio"
+                            name={"okay_to_text"}
                             checked={this.state.okay_to_text == "Yes"}
                           />
                           <span style={{top: "3px"}}></span>
@@ -132,7 +142,7 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
                       <Col sm={10} className="c-center" style={{marginTop: "20px"}}>
                         <Row>
                           <Col className="free-toll-no-text">
-                            Vantis Life Call Center toll free number  |  M-F 8am to 7pm PST: 
+                            Vantis Life Call Center toll free number  |  M-F 8am to 7pm PST:
                           </Col>
                           <Col className="free-toll-no center">
                             555-555-5555

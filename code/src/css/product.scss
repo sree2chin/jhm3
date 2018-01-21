@@ -1,5 +1,8 @@
 @import "./commonMixins";
 .product-pager-container {
+	.product-continue-btn-main-container {
+		margin-top: -56px;
+	}
 	.product-main-content{
 		height: 205px !important;
 		overflow-y: scroll;

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Modal, Button, Row, Col } from "react-bootstrap";
 import Input from "../common/textInput";
+import {isEmpty} from "underscore";
 
 interface Props extends React.Props<EmailModal> {
 }
@@ -12,17 +13,59 @@ export default class EmailModal extends React.Component<Props, {}> {
   }
   saveQuote() {
     this.setState({
-      savingQuote: true
+      alreadySubmittedOnce: true
     });
-    this.props.saveQuote();
+    var emailRegex =  /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    var input1Valid = true, input2Valid = true;
+    if (this.props.noOfPersons==2) {
+      input1Valid = emailRegex.test(this.state.email0);
+      input2Valid = emailRegex.test(this.state.email1);
+    } else {
+      input1Valid = emailRegex.test(this.state.email0);
+    }
+
+    if (input1Valid && input2Valid) {
+      this.setState({
+        savingQuote: true
+      });
+      this.props.saveQuote();
+    } else {
+      if (!input1Valid && !input2Valid) {
+        this.setState({
+          bothInputsInvalid: true
+        });
+      } else if (!input1Valid) {
+        this.setState({
+          input0Invalid: true
+        });
+      } else {
+        this.setState({
+          input1Invalid: true
+        });
+      }
+    }
   }
 
   state = {}
   handleChange(personIndex, e) {
+    var emailRegex =  /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
     this.props.handleChange(personIndex, e.target.value);
     this.setState({
       personIndex: personIndex,
       ["email" + personIndex]: e.target.value
+    }, ()=>{
+      var input1Valid = emailRegex.test(this.state.email0);
+      var input2Valid = emailRegex.test(this.state.email1);
+
+      if (!input1Valid && !input2Valid && this.state.alreadySubmittedOnce) {
+        this.setState({
+          bothInputsInvalid: true
+        });
+      } else if (this.state.alreadySubmittedOnce) {
+        this.setState({
+          ["input" + personIndex + "Invalid"]: !emailRegex.test(this.state["email" + personIndex])
+        });
+      }
     });
   }
   onCloseModal() {
@@ -58,13 +101,16 @@ export default class EmailModal extends React.Component<Props, {}> {
                         />
                       </Col>
                     </Row>
-                    {this.props.noOfPersons ==2 && <Row style={{marginTop: "35px"}}>
+                    {this.state.input0Invalid && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px", fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
+                      Please enter valid email.
+                    </Col> }
+                    {this.props.noOfPersons ==2 && <Row style={{marginTop: "15px"}}>
                         <Col sm={12} className="email-label">
                           Applicant Email address 2
                         </Col>
                         <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
                           <Input
-                            name={"email-1"}
+                            name={"email-2" }
                             placeholder={"Enter your email"}
                             value={this.state.email1}
                             onChange={(e)=>{
@@ -74,6 +120,12 @@ export default class EmailModal extends React.Component<Props, {}> {
                         </Col>
                       </Row>
                     }
+                    {this.state.input1Invalid && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
+                      Please enter valid email.
+                    </Col> }
+                    {this.state.bothInputsInvalid && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
+                      Please enter valid emails.
+                    </Col> }
                 </Modal.Body>
                 <Modal.Footer>
                     <Row>

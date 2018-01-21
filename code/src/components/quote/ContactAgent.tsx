@@ -31,28 +31,28 @@ class ContactAgent extends React.Component<Props, {}> {
     this.setState({
       type_of_submission: 10003
     });
-  },
-  state={},
+  }
+  state={}
   componentWillMount() {
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("/agent") > 1 ? "/agent" : "/";
       browserHistory.push(basePath);
     }
-  },
+  }
 
   handlePhoneChange(e) {
     this.setState({
       phone: e.target.value
     });
-  },
+  }
   handleSlotChange(v) {
     this.setState({
       slot: v
     });
-  },
+  }
   onTextAllowedChange(k, v) {
     this.setState({[k]: v});
-  };
+  }
   directToCorrespondingPage() {
     const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
     if (this.state.nextStep == "continueToApplication") {
@@ -62,11 +62,11 @@ class ContactAgent extends React.Component<Props, {}> {
     } else {
       browserHistory.push(basePath + "/agent/email-to-quote");
     }
-  },
+  }
   getExtraInfo(data) {
       data.contact_time = this.state.slot;
       data.phone_number = this.state.phone;
-  },
+  }
   saveQuote() {
     const persons = [];
 
@@ -78,7 +78,7 @@ class ContactAgent extends React.Component<Props, {}> {
     } else {
       personOne.email = "TEST@co.COM";
     }
-    
+
     this.getExtraInfo(personOne);
 
     persons.push(personOne);
@@ -91,7 +91,7 @@ class ContactAgent extends React.Component<Props, {}> {
       } else {
         personTwo.email = "TEST@co.COM";
       }
-      
+
       this.getExtraInfo(personOne);
       persons.push(personTwo);
     }
@@ -111,27 +111,27 @@ class ContactAgent extends React.Component<Props, {}> {
     }).catch(()=>{
       this.submmitedProductForm = false;
     });
-  },
+  }
   onSlotChange(key, obj) {
     this.setState({
       [key]: obj.value
     });
-  },
+  }
   public render() {
     const timingSlots = [
-      { 
+      {
         value: "Morning",
         label: "Morning"
       },
-      { 
+      {
         value: "Afternoon",
         label: "Afternoon"
       },
-      { 
+      {
         value: "Evening",
         label: "Evening"
       },
-      { 
+      {
         value: "Night",
         label: "Night"
       }
@@ -169,7 +169,7 @@ class ContactAgent extends React.Component<Props, {}> {
               Phone number
             </Col>
             <Col sm={12} className={"email-input-container"}>
-              <Input 
+              <Input
                 name={"phone-number"}
                 placeholder={"555-555-5555"}
                 value={this.state.phone}
@@ -183,9 +183,9 @@ class ContactAgent extends React.Component<Props, {}> {
             <div className="c-radio" onClick={ ()=> {
                     this.onTextAllowedChange("okay_to_text", "Yes")
                   }}>
-              <input 
-                type="radio" 
-                name={"okay_to_text"} 
+              <input
+                type="radio"
+                name={"okay_to_text"}
                 checked={this.state.okay_to_text == "Yes"}
               />
               <span style={{top: "3px"}}></span>
@@ -199,7 +199,7 @@ class ContactAgent extends React.Component<Props, {}> {
               <Row>
                 <Col style={{marginBottom: "15px"}}>
                   <span className="free-toll-no-text">
-                    Vantis Life Call Center toll free number  |  M-F 8am to 7pm PST: 
+                    Vantis Life Call Center toll free number  |  M-F 8am to 7pm PST:
                   </span>
                   <span className="free-toll-no center">
                     555-555-5555

@@ -430,13 +430,10 @@ class ProductsPage extends React.Component<Props, {}> {
 
         <Row className="product-continue-btn-main-container">
           {!this.shouldDisplayBackBtn() && <Col sm={3} xs={12} className="product-continue-btn-container" style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
-            {this.state.productSelectionErrorMsg && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "15px"}} sm={12} className={"c-subheader-text error"}>
-                      {this.state.productSelectionErrorMsg}
-                    </Col> }
             <Button className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
                 this.submitProductsForm()
               }}
-              style={{ marginTop: "0px", marginBottom: "60px"}}
+              style={{ marginTop: "0px", marginBottom: "15px"}}
             >
               CONTINUE
               {this.state.submittingProductsInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
@@ -448,6 +445,9 @@ class ProductsPage extends React.Component<Props, {}> {
               CONTINUE
               {this.state.submittingProductsInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
+            {this.state.productSelectionErrorMsg && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "15px"}} sm={12} className={"c-subheader-text error"}>
+                      {this.state.productSelectionErrorMsg}
+                    </Col> }
           </Col>
           }
           {this.shouldDisplayBackBtn() && <Col sm={3} xs={11} className="product-page-continue-btn" style={{ marginTop: "15px", marginLeft: "auto", marginRight: "auto", float: "none"}}>
