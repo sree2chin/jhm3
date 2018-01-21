@@ -30,6 +30,9 @@ export default class EmailModal extends React.Component<Props, {}> {
       });
       this.props.saveQuote();
     } else {
+      this.setState({
+        bothInputsInvalid: false
+      });
       if (!input1Valid && !input2Valid) {
         this.setState({
           bothInputsInvalid: true
@@ -62,6 +65,9 @@ export default class EmailModal extends React.Component<Props, {}> {
           bothInputsInvalid: true
         });
       } else if (this.state.alreadySubmittedOnce) {
+        this.setState({
+          bothInputsInvalid: false
+        });
         this.setState({
           ["input" + personIndex + "Invalid"]: !emailRegex.test(this.state["email" + personIndex])
         });
@@ -123,7 +129,7 @@ export default class EmailModal extends React.Component<Props, {}> {
                     {this.state.input1Invalid && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
                       Please enter valid email.
                     </Col> }
-                    {this.state.bothInputsInvalid && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
+                    {(!this.state.input0Invalid && !this.state.input1Invalid && this.state.bothInputsInvalid) && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
                       Please enter valid emails.
                     </Col> }
                 </Modal.Body>
