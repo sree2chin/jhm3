@@ -58,15 +58,18 @@ class Signature extends React.Component<Props, {}> {
       //browserHistory.push("/signature");
       var link = this.props.confirmationData && this.props.confirmationData.data &&
       this.props.confirmationData.data.current_document_data && this.props.confirmationData.data.current_document_data.sign_url;
+      if (this.props.confirmationData.valid_user == 0) {
+        browserHistory.push("/authorize");
+        return;
+      }
       if (isEmpty(this.props.confirmationData.data.current_document_data)) {
-        this.setState({
-            allDone: true
-        });
+        browserHistory.push("/offer");
       } else {
         window.location.href = link;
       }
 
     }).catch(()=>{
+      browserHistory.push("/authorize");
       console.log(this.questions);
     });
   }

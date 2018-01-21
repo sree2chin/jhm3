@@ -1,0 +1,69 @@
+.offer-container {
+    border-radius: 3px;
+    background-color: #ffffff;
+    margin-top: 30px;
+    padding: 42px 28px;
+    .offer-product-payment-info {
+        padding-right: 30px;
+        .offer-price-text {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.18;
+            color: #515151;
+        }
+        .offer-product-info {
+            .offer-product-header-text {
+                font-size: 24px;
+                font-weight: 800;
+                line-height: 1.18;
+                text-align: left;
+                color: #515151;
+            }
+        }
+        .offer-price-amount {
+            font-size: 64px;
+            line-height: normal;
+            color: #515151;
+        }
+        .offer-per-month {
+            font-size: 16px;
+            line-height: 1.31;
+            color: #464646;
+        }
+        .offer-start-coverage-btn {
+            font-size: 14px;
+            font-weight: bold;
+            line-height: normal;
+            letter-spacing: 1.3px;
+            color: #ffffff;
+
+
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-bottom: 30px;
+            &.c-button-default.btn.circular {
+                background-color: #fb4d3d!important;
+                width: auto;
+            }
+        }
+        p {
+            color: #464646;
+            margin-bottom: 30px;
+            line-height: 1.31;
+            font-size: 16px;
+        }
+    }
+    .offer-product-info-container {
+        .offer-product-name {
+            color: #464646;
+            padding-left: 0px;
+            margin-top: 15px;
+            font-size: 26px;
+        }
+        .offer-product-description {
+            color: #666666;
+            font-size: 13px;
+            padding-left: 0px;
+        }
+    }
+}

@@ -18,6 +18,7 @@
     "src/css/input.scss",
     "src/css/plan.scss",
     "src/css/NextSteps.scss",
+    "src/css/offer.scss",
     "src/css/pdfModal.scss",
     "src/css/email-modal.scss",
     "src/css/email-modal-capture.scss",

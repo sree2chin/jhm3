@@ -67,6 +67,13 @@ function getSignaturePage(location: any, callback: LoadCallback) {
     "QuotePage");
 }
 
+function getOfferPage(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/questions/offer") as typeof _QuestionsPage).default),
+    "QuotePage");
+}
+
 function editQuestionsPage(location: any, callback: LoadCallback) {
   require.ensure(
     [],
@@ -144,8 +151,12 @@ function loadEmailToQuoteSuccess(location: any, callback: LoadCallback) {
     "QuotePage");
 }
 
-
-
+function loadPaymentSuccessPage(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/questions/PaymentSuccess") as typeof _QuestionsPage).default),
+    "QuotePage");
+}
 
 
 ReactDOM.render(
@@ -163,6 +174,8 @@ ReactDOM.render(
       <Route path="/all-questions" getComponent={ allQuestionsPage } />
       <Route path="/edit-questions" getComponent={ editQuestionsPage } />
       <Route path="/signature" getComponent={ getSignaturePage } />
+      <Route path="/offer" getComponent={ getOfferPage } />
+      <Route path="/payment_success" getComponent={ loadPaymentSuccessPage } />
 
       <Route path="/agent" getComponent={ loadQuotePage } />
       <Route path="/agent/products" getComponent={ loadProductsPage } />
