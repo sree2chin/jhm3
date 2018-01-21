@@ -96,10 +96,13 @@ class Offer extends React.Component<Props, {}> {
     return breadCrumbs;
   }
   onPayment() {
-    var order_id = "123123";
-    var amount = 0.01;
+    var offerData = this.props.confirmationData && this.props.confirmationData.data && this.props.confirmationData.data.offer_data;
+    var {premium} = offerData;
+    var order_id = premium.order_id;
+    var amount = premium.premium_amount;
     window.location.href = `https://devlifeco.sureifylife.com/elevon/index.php?order_id=${order_id}&amount=${amount}`;
   }
+
   public render() {
     var breadCrumbs = this.getBreadCrumbs();
     var offerData = this.props.confirmationData && this.props.confirmationData.data && this.props.confirmationData.data.offer_data;
