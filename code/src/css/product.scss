@@ -260,6 +260,9 @@
 	    border-top: none;
 		font-family:NunitoBold;
 		overflow-y: scroll;
+		&.product-selection-btn {
+			overflow-y: hidden;
+		}
 	    &.active {
 		    background-color: #265fad;
 		    color: white;
