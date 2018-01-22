@@ -42,6 +42,9 @@ export default class EditPerson extends React.Component<Props, {}> {
       });
     }
   }
+  onChangeRaw(v, a, c) {
+    console.log(v);
+  }
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.editablePerson)) {
       const person = JSON.parse(JSON.stringify(nextProps.editablePerson));
@@ -162,9 +165,16 @@ export default class EditPerson extends React.Component<Props, {}> {
                               </span>
                             </div>
                           </ControlLabel>
-                          <DateInputComponent
-                            onChange={this.onDateInputChange.bind(this)}
-                            dateFormat={DateFormats.MMDDYYYY}/>
+                          <DatePicker
+                            selected={this.state.s_birthDate}
+                            onChange={(date)=>{
+                              this.handleChange(personIndex, "s_birthDate", date)
+                            }}
+                            showMonthDropdown
+                            showYearDropdown
+                            dropdownMode="select"
+                            placeholderText="MM/DD/YYYY"
+                          />
                         </FormGroup>
                     </Col>
                     { errors.s_birthDateError && <Col sm={12} className={"c-subheader-text error"}>

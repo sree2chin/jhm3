@@ -43,10 +43,10 @@ export default class Person extends React.Component<Props, {}> {
     }
   }
 
-  onDateChange(key, value, formattedDate) {
+  onDateChange(key, value) {
     this.setState({
-      [key]: moment(new Date(value)),
-      formattedDate
+      [key]: moment(value),
+      formattedDate: moment(value).format("MM/DD/YYYY")
     });
     this.props.onChange(this.props.index, key, moment(value));
   }
@@ -54,6 +54,24 @@ export default class Person extends React.Component<Props, {}> {
   getErrorsClassNames(errors, key) {
     if(errors[key]) {
       return "input-border-error";
+    }
+
+  }
+  onChangeRaw(e) {
+    if (e.target.value) {
+      var val = e.target.value;
+      if (val.length == 1) {
+        if (!isNaN(val)) return;
+        if (val > 1) return;
+      }
+      if (val.length <=2) {
+        if (!isNaN(val)) return;
+        if (parseInt(val)>12) return;
+      }
+      if (e.target.value && e.target.value.length ==2 || e.target.value && e.target.value.length ==5) {
+        document.getElementsByClassName("react-datepicker__input-container")[0].getElementsByTagName("input")[0].value =
+        document.getElementsByClassName("react-datepicker__input-container")[0].getElementsByTagName("input")[0].value + "/"
+      }
     }
 
   }
@@ -92,6 +110,7 @@ export default class Person extends React.Component<Props, {}> {
     var {errors, person} = this.props;
     errors = errors || {};
     person = person || {};
+    var s_birthDate = this.state.s_birthDate || person.s_birthDate;
     const healthRatingObjects = [
           {value: "Excellent", label: "Excellent"},
           {value: "Very Good", label: "Very Good"},
@@ -194,9 +213,17 @@ export default class Person extends React.Component<Props, {}> {
                     </span>
                   </div>
                 </ControlLabel>
-                <DateInputComponent
-                  onChange={this.onDateInputChange.bind(this)}
-                  dateFormat={DateFormats.MMDDYYYY}/>
+                <DatePicker
+                      selected={s_birthDate}
+                      onChange={(date)=>{
+                        this.onDateChange("s_birthDate", date)
+                      }}
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                      placeholderText="MM/DD/YYYY"
+                      onChangeRaw={this.onChangeRaw.bind(this)}
+                  />
               </FormGroup>
 
           </Col>

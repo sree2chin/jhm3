@@ -4,7 +4,34 @@
 		display: none;
 	}
 }
+.react-datepicker__day-name, .react-datepicker__day {
+	width: 2.7rem;
+}
 .c-quote {
+	.react-datepicker {
+		font-size: 1.4rem;
+	}
+	.react-datepicker__month {
+		margin: 1rem;
+	}
+	.react-datepicker-popper {
+
+	}
+	.react-datepicker-wrapper {
+		width: 80%;
+	}
+	.react-datepicker__input-container input {
+		padding-left: 15px;
+	}
+	.birth-date-picker-container span.test-class + div{
+		display: inline-block;
+		width: 40%;
+		label.control-label {
+			width: 54px;
+			margin-top: 0px;
+			margin-bottom: 0px;
+		}
+	}
 	background-color: #fcfcfc;
     padding-bottom: 60px;
 	.header {
@@ -54,15 +81,6 @@
 	    padding-top: 21px;
 	}
 	.c-one-person-container {
-		.birth-date-picker-container span.test-class + div{
-			display: inline-block;
-			width: 27%;
-			label.control-label {
-				width: 23%;
-			    margin-top: 0px;
-			    margin-bottom: 0px;
-			}
-		}
 		.birth-date-picker-container {
 			.form-group {
 				.form-group {
@@ -304,10 +322,6 @@
 		    .Select--single {
 		    	width: 85%;
 		    }
-			.birth-date-picker-container span.test-class + div{
-				display: inline-block;
-				width: 54%;
-			}
 		}
 		.react-datepicker__input-container input {
 			padding-left: 9%;
