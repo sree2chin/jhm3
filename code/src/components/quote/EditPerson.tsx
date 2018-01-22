@@ -158,13 +158,6 @@ export default class EditPerson extends React.Component<Props, {}> {
                         <span className="test-class">
                         </span>
                         <FormGroup controlId={"change_handler_" + this.props.personIndex}>
-                          <ControlLabel>
-                            <div className="custom-date-picker-container">
-                              <span className="custom-date-picker" onClick={this.props.onClick}>
-                                <img src={"../images/calendar.svg"} />
-                              </span>
-                            </div>
-                          </ControlLabel>
                           <DatePicker
                             selected={this.state.s_birthDate}
                             onChange={(date)=>{

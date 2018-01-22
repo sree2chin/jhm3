@@ -4,10 +4,13 @@
 		display: none;
 	}
 }
-.react-datepicker__day-name, .react-datepicker__day {
-	width: 2.7rem;
+.react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range {
+	background-color: $btn-default-bg-color!important;
 }
 .c-quote {
+	.react-datepicker__day-name, .react-datepicker__day {
+		width: 2.7rem!important;
+	}
 	.react-datepicker {
 		font-size: 1.4rem;
 	}
