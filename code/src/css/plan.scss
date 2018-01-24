@@ -283,47 +283,17 @@
 			}
 		}
   	}
-		.product_image{
-		    background-size: 100% 100%;
-		    width: 100%;
-		    height: 150px;
-		}
-		.spwl_image{
-		    background-image: url("/dist/images/spwl@2x.png");
-				@extend .product_image;
-		}
-		.whole_life_image{
-		    background-image: url("/dist/images/whole-life@2x.png");
-				@extend .product_image;
-		}
-		.whole_life_plus_image{
-		    background-image: url("/dist/images/whole-life-plus@2x.png");
-				@extend .product_image;
-		}
-		.term_image{
-		    background-image: url("/dist/images/term-life@2x.png");
-				@extend .product_image;
-		}
-		.term_rop_image{
-		    background-image: url("/dist/images/term-rop@2x.png");
-				@extend .product_image;
-		}
-		.guarented_golden_image{
-		    background-image: url("/dist/images/guarented_golden@2x.png");
-				@extend .product_image;
-		}
-		.default_image{
-		    background-image: url("/dist/images/timmer.png");
-		    width: 66px;
-		    height: 90px;
-		}
+	.plan-product-image {
+		height: 90px;
+		margin-top: 30px;
+		width: 100%;
+		max-width: 90px;
+	}
 }
 
 .product-pager-container .second-person-plan-container .single-plan-container.two-persons-plan-container {
-	.default_image {
-		background-size: 100% 100%;
-    	width: 100%;
-    	height: 150px;
+	.plan-product-image {
+    	display: none;
 	}
 }
 @media (min-width: 750px) and (max-width: 1200px) {

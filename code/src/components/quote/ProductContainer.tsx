@@ -86,14 +86,14 @@ export default class ProductContainer extends React.Component<Props, State> {
               {map(products, (product) =>{
                 const product_name = product.ProductDisplayName.toString().toLowerCase();
                 if(product_name == 'super ez complete' || product_name == 'super ez'){
-                    const product_image = 'spwl_image';
-                }else if(product_name == 'vantis velocity whole life'){
+                  const product_image = 'spwl_image';
+                }else if(product_name == 'vantis velocity whole life' || product_name == "vantisvalue permanent life"){
                     const product_image = 'whole_life_image';
-                }else if(product_name == 'vantis velocity whole life plus'){
+                }else if(product_name == 'vantis velocity whole life plus' || product_name == "vantisvalue plus permanent life"){
                     const product_image = 'whole_life_plus_image';
-                }else if(product_name == 'vantis velocity term' || product_name == "children's term"){
+                }else if(product_name == 'vantis velocity term' || product_name == "children's term" || product_name == "level term"){
                     const product_image = 'term_image';
-                }else if(product_name == 'vantis velocity term with rop'){
+                }else if(product_name == 'vantis velocity term with rop' || product_name == "level term with rop"){
                     const product_image = 'term_rop_image';
                 }else if(product_name == 'guarented golden'){
                     const product_image = 'guarented_golden_image';
@@ -104,7 +104,10 @@ export default class ProductContainer extends React.Component<Props, State> {
                   <Col key={product.ProductID} sm={productContainerWidth} className="single-product-container product-custom-container">
                     <Row className={`single-product-content ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`}>
                       <Row className="product_img_div">
-                        <center><div className={`${product_image}`}></div></center>
+                      <img
+                        className={`plan-product-image ${product_image}`}
+                        src={`../images/${product_image}.png`}
+                      />
                       </Row>
                       <Row className="header">
                         <Col style={{textAlign: "left"}} sm={12}>

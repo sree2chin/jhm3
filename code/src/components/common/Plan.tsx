@@ -229,10 +229,10 @@ export default class Plan extends React.Component<Props, {}> {
       return product.ProductID == productId
     });
     return product && product.ProductDisplayName;
-  },
+  }
   isProductSPWL() {
     return this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.spwl_flag==1;
-  },
+  }
   public render() {
     const personIndex = this.props.personIndex;
     const plansObjs = this.getPlansDetailsForDropdown();
@@ -240,26 +240,30 @@ export default class Plan extends React.Component<Props, {}> {
     const product_name = this.getProductDisplayName().toString().toLowerCase();
     if(product_name == 'super ez complete' || product_name == 'super ez'){
             const product_image = 'spwl_image';
-    }else if(product_name == 'vantis velocity whole life'){
+    }else if(product_name == 'vantis velocity whole life' || product_name == "vantisvalue permanent life"){
         const product_image = 'whole_life_image';
-    }else if(product_name == 'vantis velocity whole life plus'){
+    }else if(product_name == 'vantis velocity whole life plus' || product_name == "vantisvalue plus permanent life"){
         const product_image = 'whole_life_plus_image';
-    }else if(product_name == 'vantis velocity term' || product_name == "children's term"){
+    }else if(product_name == 'vantis velocity term' || product_name == "children's term" || product_name == "level term"){
         const product_image = 'term_image';
-    }else if(product_name == 'vantis velocity term with rop'){
+    }else if(product_name == 'vantis velocity term with rop' || product_name == "level term with rop"){
         const product_image = 'term_rop_image';
     }else if(product_name == 'guarented golden'){
         const product_image = 'guarented_golden_image';
     }else{
         const product_image = 'default_image';
     }
+
     return (
       <Col sm={12} className={`single-plan-container ${this.props.noOfPersons==2 ? "two-persons-plan-container" : ""}`}>
         <Row className="plan-details-container">
           <Col sm={12} className="c-center">
             <Row>
-              <Col sm={3} className={`${this.props.noOfPersons==2 ? "two_products_conainer_width" : ""}`}>
-                <center><div className={`hidden-xs ${product_image}`}></div></center>
+              <Col sm={2} style={{textAlign: "center"}} className={`${this.props.noOfPersons==2 ? "two_products_conainer_width" : ""}`}>
+                  <img
+                    className={`plan-product-image hidden-xs ${product_image}`}
+                    src={`../images/${product_image}.png`}
+                  />
               </Col>
               <Col sm={9} className={`plan-product-info-text`}>
                 <Row className={`plan-product-name ${window.location.pathname.indexOf("/agent")>=0 ? "agent-page" : ""}`}>

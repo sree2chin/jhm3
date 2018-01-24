@@ -389,10 +389,11 @@
 		left: 40%;
 	}
 	.product_image1{
-		background-size: 100% 100%;
-		width: 80px;
-		height: 80px;
+		width: 100%;
+		height: 75px;
 		margin-top: 10px;
+		border-radius: 100%;
+		margin-left: 3px;
 	}
 	.product_img_div .spwl_image{
 		background-image: url("/dist/images/spwl-transparent@2x.png");
