@@ -21,14 +21,15 @@
 
 	}
 	.react-datepicker-wrapper {
-		width: 80%;
+		width: 30%;
 	}
 	.react-datepicker__input-container input {
 		padding-left: 15px;
+		width: 100%;
 	}
 	.birth-date-picker-container span.test-class + div{
 		display: inline-block;
-		width: 40%;
+		width: 80%;
 		label.control-label {
 			width: 54px;
 			margin-top: 0px;
@@ -63,6 +64,10 @@
 		max-width: $container-max-width;
 		.c-submit-person-info-btn  {
 			width: 36%;
+		}
+		.react-datepicker-wrapper {
+			width: 68%;
+			max-width: 197px;
 		}
 	}
 	.c-submit-person-info-btn  {
@@ -196,7 +201,7 @@
 	    .custom-date-picker-container {
 		    .custom-date-picker {
 			    img {
-				    left: 8.1%!important;
+				    left: 35px!important;
 			    }
 		    }
 	    }
@@ -327,7 +332,7 @@
 		    }
 		}
 		.react-datepicker__input-container input {
-			padding-left: 9%;
+			padding-left: 15%;
 		}
     }
    .one-person-outer-container {
