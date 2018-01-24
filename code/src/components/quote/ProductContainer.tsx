@@ -105,8 +105,8 @@ export default class ProductContainer extends React.Component<Props, State> {
                     <Row className={`single-product-content ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`}>
                       <Row className="product_img_div">
                       <img
-                        className={`plan-product-image ${product_image}`}
-                        src={`../images/${product_image}.png`}
+                        className={`plan-product-image ${product_image}_transparent`}
+                        src={`../images/${product_image}_transparent.png`}
                       />
                       </Row>
                       <Row className="header">
