@@ -161,7 +161,12 @@ class PlansPage extends React.Component<Props, {}> {
     this.setState({
       ["email" + personIndex]: v
     });
-  },
+  }
+  closeEmailThanksModal() {
+    this.setState({
+      showModalEmailThanks: false
+    });
+  }
   closeEmailModal() {
     this.setState({
       showModalEmail: false
@@ -342,6 +347,7 @@ class PlansPage extends React.Component<Props, {}> {
 
         <ThanksEmail
           showModalEmailThanks={this.state.showModalEmailThanks}
+          onCloseModal={this.closeEmailThanksModal.bind(this)}
         />
 
         <ThanksPhone

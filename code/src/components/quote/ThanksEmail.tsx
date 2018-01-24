@@ -9,10 +9,10 @@ export default class ThanksEmail extends React.Component<Props, {}> {
   constructor(){
     super();
 
-  },
+  }
   saveQuote() {
     this.props.saveQuote();
-  },
+  }
   getAmountFormat(amount) {
     var a = parseInt(amount);
 
@@ -21,14 +21,14 @@ export default class ThanksEmail extends React.Component<Props, {}> {
     } else {
       return (a/1000) + "k";
     }
-  },
-
-  
-  state = {},
-  public render() {  
+  }
+  state = {}
+  public render() {
 
     return (
-          <Modal show={this.props.showModalEmailThanks} onHide={()=>{}} bsSize="small">
+          <Modal show={this.props.showModalEmailThanks} onHide={this.props.onCloseModal} bsSize="small">
+                <Modal.Header closeButton>
+                </Modal.Header>
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     <Row>
                       <img style={{marginBottom: "34px", marginTop: "54px"}} src={"../images/thanks-email.svg"} />

@@ -4,6 +4,9 @@ import Input from "../common/textInput";
 import {isEmpty} from "underscore";
 
 interface Props extends React.Props<EmailModal> {
+  onCloseModal: any,
+  showModalEmail: any,
+  saveQuote: any
 }
 
 export default class EmailModal extends React.Component<Props, {}> {
@@ -28,7 +31,11 @@ export default class EmailModal extends React.Component<Props, {}> {
       this.setState({
         savingQuote: true
       });
-      this.props.saveQuote();
+      this.props.saveQuote().then(()=>{
+        this.setState({
+          savingQuote: false
+        });
+      });
     } else {
       this.setState({
         bothInputsInvalid: false

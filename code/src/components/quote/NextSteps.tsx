@@ -24,37 +24,38 @@ import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 import { browserHistory } from 'react-router';
 
 interface Props {
-  plans: [any]
+  plans: [any],
+  persons: any
 }
 
 class PlansPage extends React.Component<Props, {}> {
   constructor(){
     super();
-  },
-  state={},
+  }
+  state={}
   componentWillMount() {
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent" : "/";
       browserHistory.push(basePath);
     }
-  },
+  }
 
   selectProduct(product) {
     this.setState({
       productId: product.ProductID
     });
-  },
+  }
 
   changeTypeOfSubmission(val) {
     this.setState({
       type_of_submission: val
     });
     this.props.setTypeOfSubmission(val);
-  },
+  }
 
   submitQuote() {
     this.props.submitQuote();
-  },
+  }
 
   openEmailPopup() {
     this.setState({
@@ -63,7 +64,7 @@ class PlansPage extends React.Component<Props, {}> {
       showModalPhone: false,
       showModalEmailCapture: false
     });
-  },
+  }
 
   openEmailCapturePopup() {
     this.setState({
@@ -72,13 +73,13 @@ class PlansPage extends React.Component<Props, {}> {
       showModalPhone: false,
       showModalEmail: false,
     });
-  },
+  }
 
   selectNextStep (nextStep) {
     this.setState({
       nextStep
     });
-  },
+  }
 
   openAgentInputPopup() {
     this.setState({
@@ -87,23 +88,23 @@ class PlansPage extends React.Component<Props, {}> {
       type_of_submission: 10003,
       showModalEmailCapture: false
     });
-  },
+  }
   handlePhoneChange(v) {
     this.setState({
       phone: v
     });
-  },
+  }
   handleSlotChange(v) {
     this.setState({
       slot: v
     });
-  },
+  }
   getExtraInfo(data) {
     if ( this.state.type_of_submission == 10003) {
       data.contact_time = this.state.slot;
       data.phone_number = this.state.phone;
     }
-  },
+  }
   constructPersonsInfo(persons) {
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
@@ -130,7 +131,7 @@ class PlansPage extends React.Component<Props, {}> {
       this.getExtraInfo(personOne);
       persons.push(personTwo);
     }
-  },
+  }
   saveQuote() {
     const persons = [];
     this.constructPersonsInfo(persons);
@@ -161,34 +162,37 @@ class PlansPage extends React.Component<Props, {}> {
     }).catch(()=>{
       this.submmitedProductForm = false;
     });
-  },
+  }
   handleEmailChange(personIndex, v) {
     this.setState({
       ["email" + personIndex]: v
     });
-  },
+  }
   closeEmailModal() {
     this.setState({
       showModalEmail: false
     });
-  },
-
+  }
+  closeEmailThanksModal() {
+    this.setState({
+      showModalEmailThanks: false
+    });
+  }
   closeEmailCaptureModal() {
     this.setState({
       showModalEmailCapture: false
     });
-  },
-
+  }
   closeLicensedModal() {
     this.setState({
       showModalPhone: false
     });
-  },
+  }
   keyValueChange(k, v) {
     this.setState({
       [k]: v
     });
-  },
+  }
   openCorrespondingPopup() {
     if (this.state.nextStep == "continueToApplication") {
       this.openEmailCapturePopup();
@@ -197,7 +201,7 @@ class PlansPage extends React.Component<Props, {}> {
     } else {
       this.openEmailPopup();
     }
-  },
+  }
   directToCorrespondingPage() {
     if (this.state.nextStep == "continueToApplication") {
       browserHistory.push("/connect-through-application");
@@ -206,7 +210,7 @@ class PlansPage extends React.Component<Props, {}> {
     } else {
       browserHistory.push("/email-to-quote");
     }
-  },
+  }
   public render() {
 
     const toolTipStyles = {
@@ -392,6 +396,7 @@ class PlansPage extends React.Component<Props, {}> {
 
         <ThanksEmail
           showModalEmailThanks={this.state.showModalEmailThanks}
+          onCloseModal={this.closeEmailThanksModal.bind(this)}
         />
 
         <ThanksPhone

@@ -88,17 +88,17 @@ export default class ProductContainer extends React.Component<Props, State> {
                 if(product_name == 'super ez complete' || product_name == 'super ez'){
                   const product_image = 'spwl_image';
                 }else if(product_name == 'vantis velocity whole life' || product_name == "vantisvalue permanent life"){
-                    const product_image = 'whole_life_image';
+                  const product_image = 'whole_life_image';
                 }else if(product_name == 'vantis velocity whole life plus' || product_name == "vantisvalue plus permanent life"){
-                    const product_image = 'whole_life_plus_image';
+                  const product_image = 'whole_life_plus_image';
                 }else if(product_name == 'vantis velocity term' || product_name == "children's term" || product_name == "level term"){
-                    const product_image = 'term_image';
+                  const product_image = 'term_image';
                 }else if(product_name == 'vantis velocity term with rop' || product_name == "level term with rop"){
-                    const product_image = 'term_rop_image';
-                }else if(product_name == 'guarented golden'){
-                    const product_image = 'guarented_golden_image';
+                  const product_image = 'term_rop_image';
+                }else if(product_name == 'guarented golden' || product_name == "guaranteed golden"){
+                  const product_image = 'guarented_golden_image';
                 }else{
-                    const product_image = 'default_image';
+                  const product_image = 'default_image';
                 }
                 return(
                   <Col key={product.ProductID} sm={productContainerWidth} className="single-product-container product-custom-container">
