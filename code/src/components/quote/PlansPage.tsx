@@ -571,7 +571,7 @@ class PlansPage extends React.Component<Props, {}> {
                     {this.state.productSelectionErrorMsg}
                   </Col> }
           <Col sm={3} className="continue-to-next-steps" style={{ }}>
-            <Button className="c-button-default circular hidden-xs" onClick={(){
+            <Button style={{marginTop: "0px"}} className="c-button-default circular hidden-xs" onClick={(){
                 this.redirectToNextSteps()
               }}
             >
