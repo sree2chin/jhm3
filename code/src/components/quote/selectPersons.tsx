@@ -12,8 +12,7 @@ import {selectNoOfPersons} from '../../actions/selectPersons';
 import { connect } from 'react-redux';
 
 interface Props {
-  plans: Array<any>,
-  onSubmit : (event:any) => any
+  plans: Array<any>
 }
 
 interface State {
@@ -31,7 +30,7 @@ class SelectPersons extends React.Component<Props, State> {
         selectNoOfPersonsError: false
       });
     }
-  },
+  }
 
   selectNoOfPersons = (value) => {
     this.setState({
@@ -62,7 +61,7 @@ class SelectPersons extends React.Component<Props, State> {
     }
     return "";
 
-  },
+  }
 
   public render() {
     if(!this.state.noOfPersonsSelectedForMobileAndSubmitted) {

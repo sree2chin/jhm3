@@ -1,5 +1,8 @@
 @media(max-width: 768px) {
   .c-quote {
+    .react-datepicker-wrapper {
+      width: 68%;
+    }
     .birth-date-picker-container .custom-date-picker-container .custom-date-picker img {
       left: 8%!important;
     }
@@ -15,7 +18,7 @@
         }
     }
     .two-person-outer-container {
-      .c-submit-person-info-btn  { 
+      .c-submit-person-info-btn  {
         width: 92%;
         margin-left: 30px!important;
       }
