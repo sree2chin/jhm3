@@ -29,7 +29,10 @@ export default class Plan extends React.Component<Props, {}> {
     const riders = this.props.riders;
     const person = this.props.person;
     var self = this;
-    return (
+    if (riders && riders.RiderCount == "0") {
+      return null;
+    }
+    if (riders && riders.length > 0) {return (
       <Row className="all-riders-info-container">
           <Col key={person.name} sm={12} className="c-one-person-container riders-outer-container">
             <Row>
@@ -68,6 +71,9 @@ export default class Plan extends React.Component<Props, {}> {
           </Col>
         )}
       </Row>
-    );
+      );
+    } else {
+      return null
+    }
   }
 }
