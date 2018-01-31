@@ -423,33 +423,40 @@ class Main extends React.Component<Props, {}> {
             questionsList.isQuestionsList = true
             return questionsList;
           } else if (q.type == "group" || q.type == "assessment-factor-group") {
-              if (questionsList.length > 0) {
-                var allQuestionsAreLabels = true;
-                for(var i=0; i<questionsList.length; i++) {
-                  if (questionsList[i].props.type != "label"){
-                    allQuestionsAreLabels = false;
-                  }
-                }
-                if(!allQuestionsAreLabels) {
-                  this.actualQuestionLists = actualQuestionLists;
-                  return questionsList;
+            if (questionsList.length > 0) {
+              var allQuestionsAreLabels = true;
+              for(var i=0; i<questionsList.length; i++) {
+                if (questionsList[i].props.type != "label"){
+                  allQuestionsAreLabels = false;
                 }
               }
-              var qL = q.questions;
-              var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists)
-              if(questionsFromGroup.length > 0) {
-                var allQuestionsAreLabels = true;
-                for(var i=0; i<questionsFromGroup.length; i++) {
-                  if (questionsFromGroup[i].props.type != "label"){
-                    allQuestionsAreLabels = false;
-                  }
-                }
-                if(!allQuestionsAreLabels) {
-                  return questionsFromGroup;
-                } else {
-                  questionsList = questionsFromGroup;
+              if(!allQuestionsAreLabels) {
+                this.actualQuestionLists = actualQuestionLists;
+                return questionsList;
+              }
+            }
+            var qL = q.questions;
+            if (q.id == "Velocity.BeneficiaryInformation") {
+              questionsList.isQuestionsBeneficiaries = true;
+              actualQuestionLists.primaryBeneficiariesMainQuestion = qL[0];
+              actualQuestionLists.contingencyBeneficiariesMainQuestion = qL[1];
+              this.actualQuestionLists = actualQuestionLists;
+              return questionsList;
+            }
+            var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists)
+            if(questionsFromGroup.length > 0) {
+              var allQuestionsAreLabels = true;
+              for(var i=0; i<questionsFromGroup.length; i++) {
+                if (questionsFromGroup[i].props.type != "label"){
+                  allQuestionsAreLabels = false;
                 }
               }
+              if(!allQuestionsAreLabels) {
+                return questionsFromGroup;
+              } else {
+                questionsList = questionsFromGroup;
+              }
+            }
           } else if (q.type == "struct") {
             if (questionsList.length > 0) {
               var allQuestionsAreLabels = true;
@@ -842,6 +849,33 @@ class Main extends React.Component<Props, {}> {
          }
          this.questionComponents.siblingComponents = siblingComponents;
       }
+
+      if (this.questionComponents && this.questionComponents.isQuestionsBeneficiaries) {
+
+        var aQuestions = [];
+        var beneficiaryQuestions = [];
+        var qComps;
+        for(var i=0; i<this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions.length; i++) {
+          var answers = this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions[i].questions;
+          qComps = [];
+          for (var j=0; j<answers.length; j++) {
+            qComps.push(this.getQuestionComponent(answers[j]));
+          }
+          beneficiaryQuestions.push(qComps);
+        }
+        this.questionComponents.primaryBeneficiaryQuestionsComps = beneficiaryQuestions;
+
+        beneficiaryQuestions = [];
+        for(var i=0; i<this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions.length; i++) {
+          var answers = this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions[i].questions;
+          qComps = [];
+          for (var j=0; j<answers.length; j++) {
+            qComps.push(this.getQuestionComponent(answers[j]));
+          }
+          beneficiaryQuestions.push(qComps);
+        }
+         this.questionComponents.contingencyBeneficiaryQuestionsComps = beneficiaryQuestions;
+      }
       return this.questionComponents;
     } else {
       return null;
@@ -919,6 +953,56 @@ class Main extends React.Component<Props, {}> {
 
 
   }
+  addPrimaryBeneficiary(): any {
+    var qs = this.actualQuestionLists.primaryBeneficiariesMainQuestion;
+    var data = {};
+    data.questionId = qs.links[0].params.questionId;
+    data.assessment_factor_url = qs.links[0].href;
+    data.q = "*";
+    var self = this;
+    self.props.getFactorsearch(data).then(response => {
+      if (response && response.questions && response.questions.data) {
+        self.beneficiariesIds = self.beneficiariesIds || {};
+        self.beneficiariesIds[qs.id] = response.questions.data;
+        if (qs.answerState == "valid" && qs.questions && qs.questions.length > 0) {
+          this.onChangeInput(qs, self.beneficiariesIds[qs.id][qs.questions.length]);
+        } else {
+          this.onChangeInput(qs, self.beneficiariesIds[qs.id][0]);
+        }
+        this.onQuestionSubmit();
+      }
+    }, err => {
+      self.setState({
+        beneficiariesIdsLoaded: self.state.beneficiariesIdsLoaded ? self.state.beneficiariesIdsLoaded++ : 1
+      });
+    })
+  }
+
+  addContingencyBeneficiary(): any {
+    var qs = this.actualQuestionLists.contingencyBeneficiariesMainQuestion;
+    var data = {};
+    data.questionId = qs.links[0].params.questionId;
+    data.assessment_factor_url = qs.links[0].href;
+    data.q = "*";
+    var self = this;
+    self.props.getFactorsearch(data).then(response => {
+      if (response && response.questions && response.questions.data) {
+        self.beneficiariesIds = self.beneficiariesIds || {};
+        self.beneficiariesIds[qs.id] = response.questions.data;
+        if (qs.answerState == "valid" && qs.questions && qs.questions.length > 0) {
+          this.onChangeInput(qs, self.beneficiariesIds[qs.id][qs.questions.length]);
+        } else {
+          this.onChangeInput(qs, self.beneficiariesIds[qs.id][0]);
+        }
+        this.onQuestionSubmit();
+      }
+    }, err => {
+      self.setState({
+        beneficiariesIdsLoaded: self.state.beneficiariesIdsLoaded ? self.state.beneficiariesIdsLoaded++ : 1
+      });
+    })
+
+  }
   public render() {
     var breadCrumbs = this.getBreadCrumbs();
     var questionsList = this.getCurrentSetOfQuestions() || [];
@@ -937,6 +1021,76 @@ class Main extends React.Component<Props, {}> {
               //})
             }
           </Row>
+          {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
+              PRIMARY BENEFICIARY
+              <Button className={`c-button-default circular action`} onClick={()=>{
+                    this.addPrimaryBeneficiary()
+                  }}>
+                  ADD
+                  {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+              </Button>
+            </div>
+          }
+          {questionsList.isQuestionsBeneficiaries &&
+            map(questionsList.primaryBeneficiaryQuestionsComps, (s, i)=>{
+                return <div className="" key={i}>
+                  <div  className="siblings-container">
+                    {s}
+                    {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
+                      <Button className={`c-button-default circular action`} onClick={()=>{
+                            this.addPrimaryBeneficiary()
+                          }}>
+                          ADD PRIMARY BENEFICIARY
+                          {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                      </Button>
+                      <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+                            this.deleteSibling(i)
+                          }}
+                        >
+                          DELETE  PRIMARY BENEFICIARY
+                          {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                      </Button>
+                    </div>}
+                  </div>
+                  <div>
+                  </div>
+              </div>
+            })}
+          {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
+              CONTINGENT BENEFICIARY
+              <Button className={`c-button-default circular action`} onClick={()=>{
+                  this.addContingencyBeneficiary()
+                }}>
+                ADD
+                {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+              </Button>
+            </div>
+          }
+          {questionsList.isQuestionsBeneficiaries &&
+            map(questionsList.contingencyBeneficiaryQuestionsComps, (s, i)=>{
+                return <div className="" key={i}>
+                  <div  className="siblings-container">
+                    {s}
+                    {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
+                      <Button className={`c-button-default circular action`} onClick={()=>{
+                            this.addContingencyBeneficiary()
+                          }}>
+                          ADD
+                          {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                      </Button>
+                      <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+                            this.deleteSibling(i)
+                          }}
+                        >
+                          DELETE
+                          {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                      </Button>
+                    </div>}
+                  </div>
+                  <div>
+                  </div>
+              </div>
+            })}
           {!questionsList.isQuestionsList && <div className="questions-content-container">
             {this.state.gettingQuestions && <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>}
             {questionsList}
@@ -981,7 +1135,6 @@ class Main extends React.Component<Props, {}> {
                   </div>
               </div>
             })}
-
         </Row>
         {questionsList.isQuestionsList && <Row className="questions-container c-center" style={{backgrounColor: "transparent", border: "none", boxShadow: "none"}}> <div className="question-action-btn-container">
             <Button className={`c-button-default circular action`} onClick={()=>{
