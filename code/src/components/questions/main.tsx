@@ -855,24 +855,28 @@ class Main extends React.Component<Props, {}> {
         var aQuestions = [];
         var beneficiaryQuestions = [];
         var qComps;
-        for(var i=0; i<this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions.length; i++) {
-          var answers = this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions[i].questions;
-          qComps = [];
-          for (var j=0; j<answers.length; j++) {
-            qComps.push(this.getQuestionComponent(answers[j]));
+        if (this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions) {
+          for(var i=0; i<this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions.length; i++) {
+            var answers = this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions[i].questions;
+            qComps = [];
+            for (var j=0; j<answers.length; j++) {
+              qComps.push(this.getQuestionComponent(answers[j]));
+            }
+            beneficiaryQuestions.push(qComps);
           }
-          beneficiaryQuestions.push(qComps);
         }
         this.questionComponents.primaryBeneficiaryQuestionsComps = beneficiaryQuestions;
 
         beneficiaryQuestions = [];
-        for(var i=0; i<this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions.length; i++) {
-          var answers = this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions[i].questions;
-          qComps = [];
-          for (var j=0; j<answers.length; j++) {
-            qComps.push(this.getQuestionComponent(answers[j]));
+        if (this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions) {
+          for(var i=0; i<this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions.length; i++) {
+            var answers = this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions[i].questions;
+            qComps = [];
+            for (var j=0; j<answers.length; j++) {
+              qComps.push(this.getQuestionComponent(answers[j]));
+            }
+            beneficiaryQuestions.push(qComps);
           }
-          beneficiaryQuestions.push(qComps);
         }
          this.questionComponents.contingencyBeneficiaryQuestionsComps = beneficiaryQuestions;
       }
@@ -965,9 +969,20 @@ class Main extends React.Component<Props, {}> {
         self.beneficiariesIds = self.beneficiariesIds || {};
         self.beneficiariesIds[qs.id] = response.questions.data;
         if (qs.answerState == "valid" && qs.questions && qs.questions.length > 0) {
-          this.onChangeInput(qs, self.beneficiariesIds[qs.id][qs.questions.length]);
+          var notFound = false, rq={};
+          var i;
+
+          for(var j=0; j< qs.answer.length && !notFound; j++) {
+            for (i=0; (!notFound && i<self.beneficiariesIds[qs.id].length); i++) {
+              notFound = true;
+              if (qs.answer[j].id == self.beneficiariesIds[qs.id][i].id) {
+                notFound = false;
+              }
+            }
+          }
+          qs.answer.push(self.beneficiariesIds[qs.id][i-1])
         } else {
-          this.onChangeInput(qs, self.beneficiariesIds[qs.id][0]);
+          this.onChangeInput(qs, [self.beneficiariesIds[qs.id][0]]);
         }
         this.onQuestionSubmit();
       }
@@ -975,7 +990,7 @@ class Main extends React.Component<Props, {}> {
       self.setState({
         beneficiariesIdsLoaded: self.state.beneficiariesIdsLoaded ? self.state.beneficiariesIdsLoaded++ : 1
       });
-    })
+    });
   }
 
   addContingencyBeneficiary(): any {
@@ -990,9 +1005,20 @@ class Main extends React.Component<Props, {}> {
         self.beneficiariesIds = self.beneficiariesIds || {};
         self.beneficiariesIds[qs.id] = response.questions.data;
         if (qs.answerState == "valid" && qs.questions && qs.questions.length > 0) {
-          this.onChangeInput(qs, self.beneficiariesIds[qs.id][qs.questions.length]);
+          var notFound = false, rq={};
+          var i;
+
+          for(var j=0; j< qs.answer.length && !notFound; j++) {
+            for (i=0; (!notFound && i<self.beneficiariesIds[qs.id].length); i++) {
+              notFound = true;
+              if (qs.answer[j].id == self.beneficiariesIds[qs.id][i].id) {
+                notFound = false;
+              }
+            }
+          }
+          qs.answer.push(self.beneficiariesIds[qs.id][i-1])
         } else {
-          this.onChangeInput(qs, self.beneficiariesIds[qs.id][0]);
+          this.onChangeInput(qs, [self.beneficiariesIds[qs.id][0]]);
         }
         this.onQuestionSubmit();
       }
@@ -1000,7 +1026,7 @@ class Main extends React.Component<Props, {}> {
       self.setState({
         beneficiariesIdsLoaded: self.state.beneficiariesIdsLoaded ? self.state.beneficiariesIdsLoaded++ : 1
       });
-    })
+    });
 
   }
   public render() {
