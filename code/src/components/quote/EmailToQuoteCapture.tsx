@@ -31,20 +31,20 @@ class EmailToQuote extends React.Component<Props, {}> {
     this.setState({
       type_of_submission: 10002
     });
-  },
-  state={},
+  };
+  state={};
   componentWillMount() {
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("/agent") > 1 ? "/agent" : "/";
       browserHistory.push(basePath);
     }
-  },
+  };
 
   handlePhoneChange(e) {
     this.setState({
       phone: e.target.value
     });
-  },
+  }
   validateEmailForm() {
     var isError = false;
     if(!this.state.email0) {
@@ -58,16 +58,17 @@ class EmailToQuote extends React.Component<Props, {}> {
       });
     }
     if(this.state.noOfPersons == 2) {
-      if(!this.state.email0) {
+      if(!this.state.email1) {
         this.setState({
           emailError1: true
         });
+        isError = true;
       } else {
         this.setState({
           emailError1: false
         });
       }
-      isError = true;
+
     }
     if(isError) {
       this.setState({
@@ -76,7 +77,10 @@ class EmailToQuote extends React.Component<Props, {}> {
     }
 
     return !isError;
-  },
+  }
+  appendRequestType(person) {
+
+  }
   saveQuote() {
     const persons = [];
 
@@ -84,6 +88,7 @@ class EmailToQuote extends React.Component<Props, {}> {
       const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
       personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
       personOne.type_of_submission = this.state.type_of_submission;
+      personOne.request_type = 2;
       if(this.state.email0) {
         personOne.email = this.state.email0;
       } else {
@@ -95,12 +100,13 @@ class EmailToQuote extends React.Component<Props, {}> {
       if(this.props.noOfPersons == 2) {
         const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
         personTwo.type_of_submission = this.state.type_of_submission;
+        personTwo.request_type = 2;
         if(this.state.email1) {
           personTwo.email = this.state.email1;
         } else {
           personTwo.email = "TEST@co.COM";
         }
-        
+
         persons.push(personTwo);
       }
 
@@ -116,13 +122,13 @@ class EmailToQuote extends React.Component<Props, {}> {
       }).catch(()=>{
         this.submmitedProductForm = false;
       });
-    } 
-  },
+    }
+  }
   onSlotChange(key, obj) {
     this.setState({
       [key]: obj.value
     });
-  },
+  }
 
   handleChange(personIndex, e) {
     if(this.state.emailErrorExists) {
@@ -136,18 +142,18 @@ class EmailToQuote extends React.Component<Props, {}> {
       personIndex: personIndex,
       ["email" + personIndex]: e.target.value
     });
-  },
+  }
   getErrorsClassNames(errors, key) {
     if(errors[key]) {
       return "input-border-error";
     }
-  },
+  }
   getSecondPersonName() {
     if (this.props.persons && this.props.persons[1]) {
       return 'and ' + this.props.persons[1].name;
-    } 
+    }
     return "";
-  },
+  }
 
   public render() {
     return (
@@ -167,7 +173,7 @@ class EmailToQuote extends React.Component<Props, {}> {
             Applicant Email address 1
           </Col>
           <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
-            <Input 
+            <Input
               name={"email-1"}
               placeholder={"Enter your email"}
               value={this.state.email0}
@@ -186,7 +192,7 @@ class EmailToQuote extends React.Component<Props, {}> {
               Applicant Email address 2
             </Col>
             <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
-              <Input 
+              <Input
                 name={"email-1"}
                 placeholder={"Enter your email"}
                 value={this.state.email1}
