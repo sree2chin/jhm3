@@ -65,6 +65,46 @@ class QuestionsApi {
     })
   };
 
+  postPayment(payload) : Promise<any> {
+    var errRes;
+    return fetch('/v1/questions/post-payment', {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      }).then(function(res) {
+        errRes = res;
+        console.log("sdfs");
+        console.log("sdfs");
+        var r;
+        try {
+           r = res.text().then(function (response: any) {
+            return new Promise(function(resolve, reject) {
+              resolve(response)
+            });
+          });
+        }
+        catch(e) {
+          console.log(e);
+          r = res.text().then(function (response: any) {
+            return new Promise(function(resolve, reject) {
+              resolve(response)
+            });
+          });
+        }
+        return r;
+    })/*.catch(function() {
+      return errRes.text().then(function (response: any) {
+        return new Promise(function(resolve, reject) {
+          resolve(response)
+        });
+      });
+    })*/
+  };
+
   authenticateUser(payload) : Promise<any> {
     return fetch('/v1/auth/user', {
         method: "POST",

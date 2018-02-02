@@ -54,11 +54,21 @@ function getFactorsearch(data) {
 	};
 }
 
+function postPayment(data) {
+	return (dispatch) => {
+		return QuestionsApi.postPayment(data).then(
+			data => dispatch({
+				type: 'POST_PAYMENT_DONE', paymentInfo: data
+			}));
+	};
+}
+
 export {
 	getQuestions,
 	postQuestions,
 	getFactorsearch,
 	confirmQuestions,
 	authenticateUser,
-	changePassword
+	changePassword,
+	postPayment
 }

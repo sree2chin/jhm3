@@ -12,6 +12,8 @@ export default (state: Array<any> = [], action) => {
     return objectAssign({}, state, {user: action.user});
     case "PASSWORD_RESET":
     return objectAssign({}, state, {user: action.user});
+    case "POST_PAYMENT_DONE":
+    return objectAssign({}, state, {paymentInfo: action.paymentInfo});
     default:
       return state;
   }

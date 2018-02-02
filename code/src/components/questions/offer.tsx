@@ -13,7 +13,7 @@ import AsyncCustomSelect from "./AsyncCustomSelect";
 import QuestionsCustomDatePicker from "./QuestionsCustomDatePicker";
 import Subheader from "../common/subheader";
 import {each, isEmpty, map} from "underscore";
-import {getQuestions, postQuestions, getFactorsearch, confirmQuestions} from '../../actions/Questions';
+import {getQuestions, postQuestions, getFactorsearch, confirmQuestions, postPayment} from '../../actions/Questions';
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
@@ -98,9 +98,13 @@ class Offer extends React.Component<Props, {}> {
   onPayment() {
     var offerData = this.props.confirmationData && this.props.confirmationData.data && this.props.confirmationData.data.offer_data;
     var {premium} = offerData;
-    var order_id = premium.order_id;
-    var amount = premium.premium_amount;
-    window.location.href = `https://devlifeco.sureifylife.com/elevon/index.php?order_id=${order_id}&amount=${amount}`;
+    var data = {};
+    data.order_id = premium.order_id;
+    data.amount = premium.premium_amount;
+    this.props.postPayment(data).then(()=>{
+      browserHistory.push("/payment")
+    });
+    //window.location.href = `https://devlifeco.sureifylife.com/elevon/index.php?order_id=${order_id}&amount=${amount}`;
   }
 
   public render() {
@@ -189,6 +193,9 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     },
     confirmQuestions: (data: any, moreInfo: any) =>  {
       return dispatch(confirmQuestions(data, moreInfo));
+    },
+    postPayment: (data) => {
+      return dispatch(postPayment(data));
     }
   };
 }

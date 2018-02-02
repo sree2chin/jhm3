@@ -16,16 +16,17 @@ const store = createStore(
 
 export default class App extends React.Component<Props, {}> {
   public render() {
+    var isPaymentPage = this.props.location.pathname == "/payment";
     return (
      <Provider store={store}>
         <div className="">
-          <Header
+          {!isPaymentPage && <Header
             logoImgSrc={"../images/logo.svg"}
-          />
+          />}
           <div className="c-body">
             {this.props.children}
           </div>
-          <Row className="c-footer hidden-xs" style={{marginBottom: "0px"}}>
+          {!isPaymentPage && <Row className="c-footer hidden-xs" style={{marginBottom: "0px"}}>
             <Col xs={8} className="c-footer-content c-center">
             <Row>
             <Col>
@@ -42,7 +43,7 @@ export default class App extends React.Component<Props, {}> {
             </Col>
             </Row>
             </Col>
-          </Row>
+          </Row>}
         </div>
      </Provider>
     );

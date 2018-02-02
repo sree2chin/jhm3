@@ -129,6 +129,21 @@ module.exports = new function(){
     });
   };
 
+  this.postPayment = function(req, cb){
+    var paymentConfig = JSON.parse(JSON.stringify(appConfig.getProperty("payment")));
+    paymentConfig.amount = req.body.amount;
+    paymentConfig.order_id = req.body.order_id;
+    console.log("\n\n\npaymentConfig: " + JSON.stringify(paymentConfig) + "\n\n\n");
+    request({
+      url: paymentConfig.url,
+      method: 'POST',
+      form: paymentConfig
+    }, function callback(err, httpResponse, body) {
+      console.log("httpResponse in response: " + JSON.stringify(httpResponse));
+      cb(err, httpResponse);
+    });
+  };
+
   this.confirmQuestions = function(req, cb){
 
     var formData = {};

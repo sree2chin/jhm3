@@ -31,6 +31,16 @@ module.exports = new function() {
     });
   };
 
+  this.postPayment = function(req, callback) {
+    ApiService.postPayment(req, function(err, res) {
+      if (!err && res.statusCode == 200) {
+        callback(res.statusCode, res.body);
+      } else {
+        callback(res.statusCode, res.body);
+      }
+    });
+  };
+
   this.confirmQuestions = function(req, callback) {
     ApiService.confirmQuestions(req, function(err, res) {
 

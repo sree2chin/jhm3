@@ -158,6 +158,13 @@ function loadPaymentSuccessPage(location: any, callback: LoadCallback) {
     "QuotePage");
 }
 
+function loadPaymentPage(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/questions/payment") as typeof _QuestionsPage).default),
+    "QuotePage");
+}
+
 
 ReactDOM.render(
   <Router history={browserHistory}>
@@ -176,6 +183,7 @@ ReactDOM.render(
       <Route path="/signature" getComponent={ getSignaturePage } />
       <Route path="/offer" getComponent={ getOfferPage } />
       <Route path="/payment_success" getComponent={ loadPaymentSuccessPage } />
+      <Route path="/payment" getComponent={ loadPaymentPage } />
 
       <Route path="/agent" getComponent={ loadQuotePage } />
       <Route path="/agent/products" getComponent={ loadProductsPage } />
