@@ -32,7 +32,7 @@ class ContactAgent extends React.Component<Props, {}> {
   state={},
   componentWillMount() {
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
-      const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent" : "/";
+      const basePath = this.props.location.pathname.indexOf("agent") > 1 || this.props.is_agent ? "/agent" : "/";
       browserHistory.push(basePath);
     }
   },
@@ -60,7 +60,7 @@ class ContactAgent extends React.Component<Props, {}> {
     }
   },
   goBack() {
-      const basePath = this.props.location.pathname.indexOf("/agent") > 1 ? "/agent/" : "/";
+      const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent/" : "/";
       browserHistory.push(basePath);
   },
   saveQuote() {
@@ -74,7 +74,7 @@ class ContactAgent extends React.Component<Props, {}> {
     } else {
       personOne.email = "TEST@co.COM";
     }
-    
+
     this.getExtraInfo(personOne);
 
     persons.push(personOne);
@@ -87,7 +87,7 @@ class ContactAgent extends React.Component<Props, {}> {
       } else {
         personTwo.email = "TEST@co.COM";
       }
-      
+
       this.getExtraInfo(personOne);
       persons.push(personTwo);
     }
@@ -102,7 +102,7 @@ class ContactAgent extends React.Component<Props, {}> {
     this.props.setPersonsData(persons);
 
     this.props.saveQuoteForm(data).then(() => {
-      const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent/" : "/";
+      const basePath = this.props.location.pathname.indexOf("agent") > 1  || this.props.is_agent ? "/agent/" : "/";
       browserHistory.push(basePath + "connect-agent-success");
     }).catch(()=>{
       this.submmitedProductForm = false;
@@ -116,19 +116,19 @@ class ContactAgent extends React.Component<Props, {}> {
   },
   public render() {
     const timingSlots = [
-      { 
+      {
         value: "Morning",
         label: "Morning"
       },
-      { 
+      {
         value: "Afternoon",
         label: "Afternoon"
       },
-      { 
+      {
         value: "Evening",
         label: "Evening"
       },
-      { 
+      {
         value: "Night",
         label: "Night"
       }
@@ -170,7 +170,8 @@ const mapStateToProps = (state: any): Props => {
     products: state.quotes.products,
     noOfPersons: state.selectPersons.noOfPersons,
     plans: state.quotes.plans,
-    premiums: state.quotes.premiums
+    premiums: state.quotes.premiums,
+    is_agent: state.quotes.is_agent
   };
 }
 

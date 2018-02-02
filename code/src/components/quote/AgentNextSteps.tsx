@@ -30,31 +30,31 @@ class PlansPage extends React.Component<Props, {}> {
     this.changeTypeOfSubmission.bind(this);
     this.openAgentInputPopup.bind(this);
     this.openEmailPopup.bind(this);
-  },
-  state={},
+  }
+  state={}
   componentWillMount() {
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
-      const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent" : "/";
+      const basePath = this.props.location.pathname.indexOf("agent") > 1 || this.props.is_agent ? "/agent" : "/";
       browserHistory.push(basePath);
     }
-  },
+  }
 
   selectProduct(product) {
     this.setState({
       productId: product.ProductID
     });
-  },
+  }
 
   changeTypeOfSubmission(val) {
     this.setState({
       type_of_submission: val
     })
     this.props.setTypeOfSubmission(val);
-  },
+  }
 
   submitQuote() {
     this.props.submitQuote();
-  },
+  }
 
   openEmailCapturePopup() {
     this.setState({
@@ -63,7 +63,7 @@ class PlansPage extends React.Component<Props, {}> {
       showModalPhone: false,
       showModalEmail: false,
     });
-  },
+  }
 
   openEmailPopup() {
     this.setState({
@@ -72,7 +72,7 @@ class PlansPage extends React.Component<Props, {}> {
       showModalEmailCapture: false,
       type_of_submission: 10002
     });
-  },
+  }
 
   openAgentInputPopup() {
     this.setState({
@@ -81,24 +81,24 @@ class PlansPage extends React.Component<Props, {}> {
       showModalEmailCapture: false,
       type_of_submission: 10005
     });
-  },
+  }
 
   handlePhoneChange(v) {
     this.setState({
       phone: v
     });
-  },
+  }
   handleSlotChange(v) {
     this.setState({
       slot: v
     });
-  },
+  }
   getExtraInfo(data) {
     if ( this.state.type_of_submission == 10003) {
       data.contact_time = this.state.slot;
       data.phone_number = this.state.phone;
     }
-  },
+  }
   saveQuote() {
     const persons = [];
 
@@ -156,7 +156,7 @@ class PlansPage extends React.Component<Props, {}> {
     }).catch(()=>{
       this.submmitedProductForm = false;
     });
-  },
+  }
   handleEmailChange(personIndex, v) {
     this.setState({
       ["email" + personIndex]: v
@@ -171,17 +171,17 @@ class PlansPage extends React.Component<Props, {}> {
     this.setState({
       showModalEmail: false
     });
-  },
+  }
   closeAgentLicensedModal() {
     this.setState({
       showModalPhone: false
     });
-  },
+  }
   keyValueChange(k, v) {
     this.setState({
       [k]: v
     });
-  },
+  }
   openCorrespondingPopup() {
     if (this.state.nextStep == "continueToApplication") {
       this.openEmailCapturePopup();
@@ -190,12 +190,12 @@ class PlansPage extends React.Component<Props, {}> {
     } else {
       this.openEmailPopup();
     }
-  },
+  }
   closeEmailCaptureModal() {
     this.setState({
       showModalEmailCapture: false
     });
-  },
+  }
   directToCorrespondingPage() {
     if (this.state.nextStep == "continueToApplication") {
       browserHistory.push("/agent/connect-to-agent");
@@ -204,12 +204,12 @@ class PlansPage extends React.Component<Props, {}> {
     } else {
       browserHistory.push("/agent/email-to-quote");
     }
-  },
+  }
   selectNextStep (nextStep) {
     this.setState({
       nextStep
     });
-  },
+  }
   public render() {
 
     var {persons} = this.props;
@@ -364,7 +364,8 @@ const mapStateToProps = (state: any): Props => {
     products: state.quotes.products,
     noOfPersons: state.selectPersons.noOfPersons,
     plans: state.quotes.plans,
-    premiums: state.quotes.premiums
+    premiums: state.quotes.premiums,
+    is_agent: state.quotes.is_agent
   };
 }
 

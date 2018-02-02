@@ -35,7 +35,7 @@ class PlansPage extends React.Component<Props, {}> {
 
   componentWillMount() {
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
-      const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent" : "/";
+      const basePath = this.props.location.pathname.indexOf("agent") > 1 || this.props.is_agent ? "/agent" : "/";
       browserHistory.push(basePath);
     }
   }
@@ -152,7 +152,7 @@ class PlansPage extends React.Component<Props, {}> {
     }
   }
   redirectToProductPage() {
-    const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
+    const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
     browserHistory.push(basePath + "products");
   }
 
@@ -187,7 +187,7 @@ class PlansPage extends React.Component<Props, {}> {
 
       this.props.setPersonsData(persons);
 
-      const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
+      const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
       browserHistory.push(basePath + "next-steps");
     } else {
       this.setPlanFormSubmissionErrorMsg();
@@ -234,7 +234,7 @@ class PlansPage extends React.Component<Props, {}> {
     this.props.setPersonsData(persons);
 
     this.props.submitQuoteForm(persons).then(() => {
-      const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
+      const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
       browserHistory.push(basePath + "products");
     }).catch(()=>{
       this.submmitedProductForm = false;
@@ -611,7 +611,8 @@ const mapStateToProps = (state: any): Props => {
     plans: state.quotes.plans,
     editablePerson: state.quotes.editablePerson,
     editablePersonIndex: state.quotes.editablePersonIndex,
-    premiums: state.quotes.premiums
+    premiums: state.quotes.premiums,
+    is_agent: state.quotes.is_agent
   };
 }
 

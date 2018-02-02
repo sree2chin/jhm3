@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
-import {each, isEmpty, uniq, each, intersection, map, without} from "underscore";
+import {each, isEmpty, uniq, intersection, map, without} from "underscore";
 import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm, setPersonsData, openEditPersonModal, closeEditPersonModal, handleEditChange} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
@@ -40,7 +40,7 @@ class ProductsPage extends React.Component<Props, {}> {
   }
   componentWillMount() {
     if (isEmpty(this.props.products) && isEmpty(this.props.persons)) {
-      const basePath = this.props.location.pathname.indexOf("agent") > 1 ? "/agent" : "/";
+      const basePath = this.props.location.pathname.indexOf("agent") > 1 || this.props.is_agent ? "/agent" : "/";
       browserHistory.push(basePath);
     }
     if(this.props.persons && this.props.persons[0] && this.props.products && this.props.products[0] && this.props.products[0].products_data) {
@@ -290,7 +290,7 @@ class ProductsPage extends React.Component<Props, {}> {
       this.props.setPersonsData(persons);
 
       this.props.submitProductsForm(persons).then(() => {
-        const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
+        const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
         browserHistory.push(basePath + "plans");
         this.setState({
           submittingProductsInfo: true
@@ -322,21 +322,21 @@ class ProductsPage extends React.Component<Props, {}> {
         productSelectionErrorMsg: errorMsg
       })
     }
-  },
+  }
   openEditPersonModal = (person, personIndex) => {
     this.props.openEditPersonModal(person, personIndex);
-  },
+  }
   shouldDisplayBackBtn() {
     var shouldRedirect = isEmpty(this.props.products) || isEmpty(this.props.products[0]);
     if(this.props.noOfPersons == 2) {
       shouldRedirect = isEmpty(this.props.products) || isEmpty(this.props.products[1]);
     }
     return shouldRedirect;
-  },
+  }
   redirectToMainPage() {
-    const basePath = this.props.location.pathname.indexOf("agent") >=0 ? "/agent/" : "/";
+    const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
     browserHistory.push(basePath);
-  },
+  }
   public render() {
     var {persons} = this.props;
     persons = persons || [];
@@ -488,7 +488,8 @@ const mapStateToProps = (state: any): Props => {
     noOfPersons: state.selectPersons.noOfPersons,
     editablePerson: state.quotes.editablePerson,
     editablePersonIndex: state.quotes.editablePersonIndex,
-    productValidations: state.quotes.productValidations
+    productValidations: state.quotes.productValidations,
+    is_agent: state.quotes.is_agent
   };
 }
 

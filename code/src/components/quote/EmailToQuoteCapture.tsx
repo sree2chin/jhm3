@@ -35,7 +35,7 @@ class EmailToQuote extends React.Component<Props, {}> {
   state={};
   componentWillMount() {
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
-      const basePath = this.props.location.pathname.indexOf("/agent") > 1 ? "/agent" : "/";
+      const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent" : "/";
       browserHistory.push(basePath);
     }
   };
@@ -117,7 +117,7 @@ class EmailToQuote extends React.Component<Props, {}> {
       this.props.setPersonsData(persons);
 
       this.props.saveQuoteForm(data).then(() => {
-        const basePath = this.props.location.pathname.indexOf("/agent") > 1 ? "/agent/" : "/";
+        const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent/" : "/";
         browserHistory.push(basePath + "email-quote-success");
       }).catch(()=>{
         this.submmitedProductForm = false;
@@ -233,7 +233,8 @@ const mapStateToProps = (state: any): Props => {
     noOfPersons: state.selectPersons.noOfPersons,
     plans: state.quotes.plans,
     premiums: state.quotes.premiums,
-    typeOfSubmission: state.quotes.typeOfSubmission
+    typeOfSubmission: state.quotes.typeOfSubmission,
+    is_agent: state.quotes.is_agent
   };
 }
 

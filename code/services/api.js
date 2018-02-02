@@ -47,6 +47,7 @@ module.exports = new function(){
       applicants: JSON.stringify(data)
     };
     appendAgentInfo(req, formData);
+    console.log("formData: " + JSON.stringify(formData));
     request({
       url: url,
       formData: formData,
@@ -133,7 +134,6 @@ module.exports = new function(){
     var paymentConfig = JSON.parse(JSON.stringify(appConfig.getProperty("payment")));
     paymentConfig.amount = req.body.amount;
     paymentConfig.order_id = req.body.order_id;
-    console.log("\n\n\npaymentConfig: " + JSON.stringify(paymentConfig) + "\n\n\n");
     request({
       url: paymentConfig.url,
       method: 'POST',

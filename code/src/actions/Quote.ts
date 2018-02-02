@@ -5,7 +5,8 @@ function submitQuoteForm(postData) {
 		return SubmitQuoteApi.submit(postData).then(
 			data => dispatch({
 				type: 'SUMBMITTED_PERSONAL_INFO', products: data.data.applicants,
-				productValidations: data.data.validations
+				productValidations: data.data.validations,
+				is_agent: data.extra_params && data.extra_params.is_agent==1 ? true : false
 			}))
 		);
 	};
