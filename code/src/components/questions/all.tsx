@@ -173,7 +173,7 @@ class Main extends React.Component<Props, {}> {
             questionsList[i].groupHeader = qe.caption;
             actualQuestionLists[i].groupHeader = qe.caption;
             var q = qe;
-            if (q.questions && q.questions.length > 0) {
+            if (q.questions && q.questions.length > 0 && i<this.questions.data.questionnaire.questions.length-2) {
               this.noFoGroupsCompleted.push(i);
             }
             this.reRecursiveGetQuestions1(q.questions, questionsList[i], actualQuestionLists[i]);
