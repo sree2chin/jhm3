@@ -50,7 +50,10 @@
    .two-product-outer-container {
    		.first-product-container {
    			padding-right: 5px;
-   			padding-left: 0px;
+			padding-left: 0px;
+			.single-product-container:nth-child(2n) {
+
+			}
    		}
    		.second-product-container {
 			   padding-left: 0px;
