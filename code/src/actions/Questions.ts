@@ -27,6 +27,15 @@ function confirmQuestions(data) {
 	};
 }
 
+function makePayment(data) {
+	return (dispatch) => {
+		return QuestionsApi.makePayment(data).then(
+			data => dispatch({
+				type: 'MADE_PAYMENT', paymentData: data
+			}));
+	};
+}
+
 function authenticateUser(data) {
 	return (dispatch) => {
 		return QuestionsApi.authenticateUser(data).then(
@@ -70,5 +79,6 @@ export {
 	confirmQuestions,
 	authenticateUser,
 	changePassword,
-	postPayment
+	postPayment,
+	makePayment
 }

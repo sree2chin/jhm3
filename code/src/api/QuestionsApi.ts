@@ -65,6 +65,24 @@ class QuestionsApi {
     })
   };
 
+  makePayment(payload) : Promise<any> {
+    return fetch('/v1/questions/make-payment', {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      }).then(function(res) {
+        return res.json().then(function (response: any) {
+          return new Promise(function(resolve, reject) {
+            resolve(response)
+          });
+        })
+    })
+  };
+
   postPayment(payload) : Promise<any> {
     var errRes;
     return fetch('/v1/questions/post-payment', {
