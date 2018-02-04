@@ -103,18 +103,19 @@ class PlansPage extends React.Component<Props, {}> {
     if ( this.state.type_of_submission == 10003) {
       data.contact_time = this.state.slot;
       data.phone_number = this.state.phone;
+      data.request_type = 3;
     } else if (this.state.type_of_submission == 10001) {
-
+      data.request_type = 1;
     } else if (this.state.type_of_submission == 10002) {
-
+      data.request_type = 2;
     } else if (this.state.type_of_submission == 10004) {
-
+      data.request_type = 4;
     } else if (this.state.type_of_submission == 10005) {
-
+      data.request_type = 5;
     } else if (this.state.type_of_submission == 10006) {
-
+      data.request_type = 6;
     } else if (this.state.type_of_submission == 10007) {
-
+      data.request_type = 6;
     }
   }
   constructPersonsInfo(persons) {
@@ -404,6 +405,7 @@ class PlansPage extends React.Component<Props, {}> {
           handleSlotChange={this.handleSlotChange.bind(this)}
           onCloseModal={this.closeLicensedModal.bind(this)}
           keyValueChange={this.keyValueChange.bind(this)}
+          noOfPersons={this.props.noOfPersons}
         />
 
         <ThanksEmail

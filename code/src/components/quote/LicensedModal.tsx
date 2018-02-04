@@ -57,6 +57,12 @@ export default class LicensedModal extends React.Component<Props, {}> {
     this.props.keyValueChange(k, v);
   };
 
+  getErrorsClassNames(errors, key) {
+    if(errors[key]) {
+      return "input-border-error";
+    }
+  }
+
   public render() {
     const timingSlots = [
       {
@@ -136,6 +142,45 @@ export default class LicensedModal extends React.Component<Props, {}> {
                         </div>
                       </FormGroup>
                     </Row>
+                    <Row style={{marginTop: "35px"}}>
+                      <Col sm={12} className="email-label email-label-on-modal">
+                        Applicant Email address 1
+                      </Col>
+                      <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
+                        <Input
+                          name={"email-1"}
+                          placeholder={"Enter your email"}
+                          value={this.state.email0}
+                          onChange={(e)=>{
+                            this.handleChange(0, e)
+                          }}
+                          className={this.getErrorsClassNames(this.state, "emailError0")}
+                        />
+                        { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
+                          Please enter email address of applicant 1.
+                        </Col> }
+                      </Col>
+                    </Row>
+                    {this.props.noOfPersons ==2 && <Row style={{marginTop: "35px"}}>
+                        <Col sm={12} className="email-label" style={{paddingLeft: "15px"}}>
+                          Applicant Email address 2
+                        </Col>
+                        <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
+                          <Input
+                            name={"email-1"}
+                            placeholder={"Enter your email"}
+                            value={this.state.email1}
+                            onChange={(e)=>{
+                              this.handleChange(1, e)
+                            }}
+                            className={this.getErrorsClassNames(this.state, "emailError1")}
+                          />
+                        { this.state.emailError1 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
+                          Please enter email address of applicant 2.
+                        </Col> }
+                        </Col>
+                      </Row>
+                    }
                 </Modal.Body>
                 <Modal.Footer>
                     <Row>
