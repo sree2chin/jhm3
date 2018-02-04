@@ -139,6 +139,7 @@ module.exports = new function(){
       method: 'POST',
       form: paymentConfig
     }, function callback(err, httpResponse, body) {
+      req.session.postPayment = JSON.stringify(httpResponse);
       console.log("httpResponse in response: " + JSON.stringify(httpResponse));
       cb(err, httpResponse);
     });
@@ -170,13 +171,34 @@ module.exports = new function(){
     });
   };
 
+  this.makePayment = function(req, cb){
+
+    var formData = {};
+    formData.payment_response_data = JSON.stringify(req.body);
+    formData.transaction_id = req.body.ssl_txn_id;
+    formData.amount = req.body.ssl_amount;
+
+    appendAgentInfo(req, formData);
+    console.log("formData: " + JSON.stringify(formData));
+    request({
+      url: restOptions.host + '/v1/questions/makepayment',
+      headers: {
+        'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
+      },
+      method: 'POST',
+      formData: formData
+    }, function callback(err, httpResponse, body) {
+      cb(err, httpResponse);
+    });
+  };
+
 
   this.authenticateUser = function(req, cb){
 
     var formData = {};
     formData.password = req.body.password;
     appendAgentInfo(req, formData);
-
+    console.log("authenticateUser formData: " + JSON.stringify(formData));
     request({
       url: restOptions.host + '/v1/auth/user',
       headers: {

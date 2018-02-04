@@ -24,8 +24,16 @@ class paymentSuccess extends React.Component<Props, {}> {
     let amount = this.props.location.query.ssl_amount;
     let transaction_id = this.props.location.query.ssl_txn_id;
     let card_number = this.props.location.query.ssl_card_number;
-    this.props.makePayment(this.props.location).then((res)=>{
+    this.setState ({
+      invoice_number: invoice_number,
+      amount: amount,
+      transaction_id: transaction_id,
+      card_number: card_number
+    });
+    this.props.makePayment(this.props.location.query).then((res)=>{
+      if (this.props.paymentData && this.props.paymentData.valid_user==0) {
 
+      }
     });
   }
   public render() {

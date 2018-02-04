@@ -9,7 +9,7 @@ export default (state: Array<any> = [], action) => {
     case "CONFIRM_QUESTIONS":
       return objectAssign({}, state, {confirmationData: action.confirmationData});
     case "MADE_PAYMENT":
-      return objectAssign({}, state, {paymentData: action.confirmationData});
+      return objectAssign({}, state, {paymentData: action.paymentData});
     case "AUTHENTICATE_USER":
       return objectAssign({}, state, {user: action.user});
     case "PASSWORD_RESET":

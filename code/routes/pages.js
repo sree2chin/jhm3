@@ -40,6 +40,20 @@ module.exports = function(app) {
     res.render(templatePath);
   });
 
+  app.get('/payment', function(req, res, next) {
+    req.session = req.session || {};
+
+    var html = JSON.parse(req.session.postPayment).body;
+    var htmlP = html.split("<head>")
+    htmlP[0] = htmlP[0] + "<base href='https://api.demo.convergepay.com/VirtualMerchantDemo/process.do'></base>"
+
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(htmlP[0] + htmlP[1]);
+    req.session.postPayment = null;
+    res.end();
+  });
+
+
   app.get('/authorize', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};

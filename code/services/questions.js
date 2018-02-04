@@ -58,6 +58,19 @@ module.exports = new function() {
     });
   };
 
+  this.makePayment = function(req, callback) {
+    ApiService.makePayment(req, function(err, res) {
+
+      if (!err && res.statusCode == 200) {
+        var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
+
+        callback(res.statusCode, res.body);
+      } else {
+        callback(res.statusCode, res.body);
+      }
+    });
+  };
+
 
   this.authenticateUser = function(req, callback) {
     ApiService.authenticateUser(req, function(err, res) {

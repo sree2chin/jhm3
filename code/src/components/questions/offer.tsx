@@ -102,9 +102,11 @@ class Offer extends React.Component<Props, {}> {
     data.order_id = premium.order_id;
     data.amount = premium.premium_amount;
     this.props.postPayment(data).then(()=>{
-      browserHistory.push("/payment")
+      window.location.href = `/payment?order_id=${data.order_id}&amount=${data.amount}`;
+      //browserHistory.push("/payment")
     });
-    //window.location.href = `https://devlifeco.sureifylife.com/elevon/index.php?order_id=${order_id}&amount=${amount}`;
+
+    //window.location.href = `https://devlifeco.sureifylife.com/elevon/index.php?order_id=${data.order_id}&amount=${data.amount}`;
   }
 
   public render() {
