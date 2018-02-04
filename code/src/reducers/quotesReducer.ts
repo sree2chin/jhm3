@@ -47,7 +47,7 @@ export default (state: Array<any> = [], action) => {
       persons[parseInt(person["applicant"]) - 1 ] = person;
       return objectAssign({}, state, {editablePerson: person, persons: persons});
     case "SUMBMITTED_SAVE_QUOTE":
-      return objectAssign({}, state, {quoteResponse: action.persons});
+      return objectAssign({}, state, {quoteResponse: action.quoteResponse});
     case "SUMBMITTED_EMAIL_INFO":
     	return objectAssign({}, state, {isSubmmitedEmailForm: action.isSubmmitedPlansForm});
     default:
