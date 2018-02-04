@@ -103,12 +103,24 @@ class PlansPage extends React.Component<Props, {}> {
     if ( this.state.type_of_submission == 10003) {
       data.contact_time = this.state.slot;
       data.phone_number = this.state.phone;
+    } else if (this.state.type_of_submission == 10001) {
+
+    } else if (this.state.type_of_submission == 10002) {
+
+    } else if (this.state.type_of_submission == 10004) {
+
+    } else if (this.state.type_of_submission == 10005) {
+
+    } else if (this.state.type_of_submission == 10006) {
+
+    } else if (this.state.type_of_submission == 10007) {
+
     }
   }
   constructPersonsInfo(persons) {
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
-    personOne.type_of_submission = this.state.type_of_submission;
+
     if(this.state.email0) {
       personOne.email = this.state.email0;
     } else {
@@ -128,7 +140,7 @@ class PlansPage extends React.Component<Props, {}> {
         personTwo.email = "TEST@co.COM";
       }
 
-      this.getExtraInfo(personOne);
+      this.getExtraInfo(personTwo);
       persons.push(personTwo);
     }
   }

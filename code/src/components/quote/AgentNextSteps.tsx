@@ -59,9 +59,9 @@ class PlansPage extends React.Component<Props, {}> {
   openEmailCapturePopup() {
     this.setState({
       showModalEmailCapture: true,
-      type_of_submission: 10001,
+      type_of_submission: 10004,
       showModalPhone: false,
-      showModalEmail: false,
+      showModalEmail: false
     });
   }
 
@@ -70,9 +70,19 @@ class PlansPage extends React.Component<Props, {}> {
       showModalEmail: true,
       showModalPhone: false,
       showModalEmailCapture: false,
-      type_of_submission: 10002
+      type_of_submission: 10007
     });
   }
+
+  openPrintPdf() {
+    this.setState({
+      showModalPhone: false,
+      showModalEmail: false,
+      showModalEmailCapture: false,
+      type_of_submission: 10006
+    });
+  }
+
 
   openAgentInputPopup() {
     this.setState({
@@ -93,10 +103,28 @@ class PlansPage extends React.Component<Props, {}> {
       slot: v
     });
   }
+  handleKeyChange(k, v) {
+    this.setState({
+      [k]: v
+    });
+  }
   getExtraInfo(data) {
     if ( this.state.type_of_submission == 10003) {
       data.contact_time = this.state.slot;
       data.phone_number = this.state.phone;
+      data.request_type = 3;
+    } else if (this.state.type_of_submission == 10001) {
+      data.request_type = 1;
+    } else if (this.state.type_of_submission == 10002) {
+      data.request_type = 2;
+    } else if (this.state.type_of_submission == 10004) {
+      data.request_type = 4;
+    } else if (this.state.type_of_submission == 10005) {
+      data.request_type = 5;
+    } else if (this.state.type_of_submission == 10006) {
+      data.request_type = 6;
+    } else if (this.state.type_of_submission == 10007) {
+      data.request_type = 6;
     }
   }
   saveQuote() {
@@ -104,7 +132,6 @@ class PlansPage extends React.Component<Props, {}> {
 
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
-    personOne.type_of_submission = this.state.type_of_submission;
     if(this.state.email0) {
       personOne.email = this.state.email0;
     } else {
@@ -117,14 +144,14 @@ class PlansPage extends React.Component<Props, {}> {
 
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-      personTwo.type_of_submission = this.state.type_of_submission;
+
       if(this.state.email1) {
         personTwo.email = this.state.email1;
       } else {
         personTwo.email = "TEST@co.COM";
       }
 
-      this.getExtraInfo(personOne);
+      this.getExtraInfo(personTwo);
       persons.push(personTwo);
     }
 
@@ -137,17 +164,20 @@ class PlansPage extends React.Component<Props, {}> {
 
     this.props.setPersonsData(persons);
 
-    this.props.saveQuoteForm(data).then(() => {
+    return this.props.saveQuoteForm(data).then(() => {
       var k1, k2;
-      if(this.state.type_of_submission == 10002) {
+      if(this.state.type_of_submission == 10006) {
         k1 = "showModalEmailThanks";
         k2 = "showModalEmail";
-      } else if(this.state.type_of_submission == 10001) {
+      } else if(this.state.type_of_submission == 10004) {
         k1 = "showModalEmailThanks";
         k2 = "showModalEmailCapture";
-      } else {
+      } else if(this.state.type_of_submission == 10005) {
         k1 = "showModalPhoneThanks";
         k2 = "showModalPhone";
+      } else {
+        k1 = "showModalEmailThanks";
+        k2 = "showModalEmail";
       }
       this.setState({
         [k1]: true,
@@ -183,9 +213,9 @@ class PlansPage extends React.Component<Props, {}> {
     });
   }
   openCorrespondingPopup() {
-    if (this.state.nextStep == "continueToApplication") {
+    if (this.state.nextStep == "continueToApplication" || this.state.nextStep=="completeTheApplication") {
       this.openEmailCapturePopup();
-    } else if (this.state.nextStep == "ticketToInternalAgent") {
+    } else if (this.state.nextStep == "ticketToInternalAgent" || this.state.nextStep=="ticketToVantisLifeSales") {
       this.openAgentInputPopup();
     } else {
       this.openEmailPopup();
@@ -197,9 +227,9 @@ class PlansPage extends React.Component<Props, {}> {
     });
   }
   directToCorrespondingPage() {
-    if (this.state.nextStep == "continueToApplication") {
+    if (this.state.nextStep == "continueToApplication" || this.state.nextStep == "directToCorrespondingPage") {
       browserHistory.push("/agent/connect-to-agent");
-    } else if (this.state.nextStep == "ticketToInternalAgent") {
+    } else if (this.state.nextStep == "ticketToInternalAgent" || this.state.nextStep=="ticketToVantisLifeSales") {
       browserHistory.push("/agent/connect-to-agent");
     } else {
       browserHistory.push("/agent/email-to-quote");
@@ -234,12 +264,12 @@ class PlansPage extends React.Component<Props, {}> {
                 <FormGroup className="radio-group">
                   <div className="agent-next-step-container">
                     <div className="c-radio l-next-step-container" onClick={()=>{
-                      this.selectNextStep("continueToApplication")
+                      this.selectNextStep("completeTheApplication")
                     }}>
                       <input
                         type="radio"
                         name={"nextStep-continueToApplication"}
-                        checked={this.state.nextStep == "continueToApplication"}
+                        checked={this.state.nextStep == "completeTheApplication"}
                       />
                       <span></span>
                       <label htmlFor={"person_s_gender_"}> Complete the application </label >
@@ -260,15 +290,15 @@ class PlansPage extends React.Component<Props, {}> {
                   </div>
                   <div className="agent-next-step-container">
                     <div className="c-radio l-next-step-container" onClick={()=>{
-                      this.selectNextStep("ticketToInternalAgent")
+                      this.selectNextStep("printTheQuote")
                     }}>
                       <input
                         type="radio"
                         name={"person_s_gender_"}
-                        checked={this.state.nextStep=="ticketToInternalAgent"}
+                        checked={this.state.nextStep=="printTheQuote"}
                       />
                       <span></span>
-                      <label htmlFor={"person_s_gender_"}> Ticket to internal agent to complete application </label >
+                      <label htmlFor={"person_s_gender_"}> Print Quote </label >
                     </div>
                   </div>
                   <div className="agent-next-step-container">
@@ -285,19 +315,6 @@ class PlansPage extends React.Component<Props, {}> {
                     </div>
                   </div>
 
-                  <div className="agent-next-step-container">
-                    <div className="c-radio l-next-step-container" onClick={()=>{
-                      this.selectNextStep("printTheQuote")
-                    }}>
-                      <input
-                        type="radio"
-                        name={"person_s_gender_"}
-                        checked={this.state.nextStep=="printTheQuote"}
-                      />
-                      <span></span>
-                      <label htmlFor={"printTheQuote"}> Print this quote </label >
-                    </div>
-                  </div>
                 </FormGroup>
               </Col>
 
@@ -343,6 +360,7 @@ class PlansPage extends React.Component<Props, {}> {
           handleSlotChange={this.handleSlotChange.bind(this)}
           onCloseModal={this.closeAgentLicensedModal.bind(this)}
           keyValueChange={this.keyValueChange.bind(this)}
+          noOfPersons={this.props.noOfPersons}
         />
 
         <ThanksEmail

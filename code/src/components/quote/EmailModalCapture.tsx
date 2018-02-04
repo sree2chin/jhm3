@@ -115,7 +115,7 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
                       </Col>
                     </Row>
                     {this.props.noOfPersons ==2 && <Row style={{marginTop: "35px"}}>
-                        <Col sm={12} className="email-label">
+                        <Col sm={12} style={{paddingLeft: "15px"}} className="email-label">
                           Applicant 2 Email
                         </Col>
                         <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
