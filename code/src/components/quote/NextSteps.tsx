@@ -18,7 +18,6 @@ import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
 import Plan from "../common/Plan"
-import { browserHistory } from 'react-router';
 import {Tooltip} from 'react-lightweight-tooltip';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 import { browserHistory } from 'react-router';
@@ -156,7 +155,7 @@ class PlansPage extends React.Component<Props, {}> {
 
     this.props.setPersonsData(persons);
 
-    this.props.saveQuoteForm(data).then(() => {
+    return this.props.saveQuoteForm(data).then(() => {
       var k1, k2;
       if(this.state.type_of_submission == 10002) {
         k1 = "showModalEmailThanks";

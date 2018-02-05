@@ -112,7 +112,7 @@ class Main extends React.Component<Props, {}> {
 
       this.props.setPersonsData(persons);
 
-      this.props.submitQuoteForm(persons).then(() => {
+      return this.props.submitQuoteForm(persons).then(() => {
         const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
         browserHistory.push(basePath + "products");
         this.setState({
