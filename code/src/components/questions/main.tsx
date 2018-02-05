@@ -601,6 +601,57 @@ class Main extends React.Component<Props, {}> {
       }
     });
 
+
+    if (this.questionComponents && this.questionComponents.isQuestionsList) {
+      for(var i=0; i<this.questionComponents.siblingAnswers.length; i++) {
+        var answers = this.questionComponents.siblingAnswers[i].elements;
+        each(answers, (q)=> {
+          answered_questions.push(q.id)
+          if (q.type == "text") {
+            allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
+          } else if (q.type == "singleselection") {
+            allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
+          } else if (q.type == "date") {
+            allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q);
+          }
+        });
+       }
+    }
+
+    if (this.questionComponents.isQuestionsBeneficiaries) {
+      if (this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions) {
+        for(var i=0; i<this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions.length; i++) {
+          var answers = this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions[i].questions;
+          each(answers, (q)=> {
+            answered_questions.push(q.id)
+            if (q.type == "text") {
+              allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
+            } else if (q.type == "singleselection") {
+              allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
+            } else if (q.type == "date") {
+              allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q);
+            }
+          });
+        }
+      }
+
+      if (this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions) {
+        for(var i=0; i<this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions.length; i++) {
+          var answers = this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions[i].questions;
+          each(answers, (q)=> {
+            answered_questions.push(q.id)
+            if (q.type == "text") {
+              allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
+            } else if (q.type == "singleselection") {
+              allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
+            } else if (q.type == "date") {
+              allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q);
+            }
+          });
+        }
+      }
+    }
+
     if (allQuestionsValid) {
       this.setState({
         submittingQuestions: true
