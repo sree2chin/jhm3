@@ -1049,7 +1049,7 @@ class Main extends React.Component<Props, {}> {
           </Row>
           {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
               PRIMARY BENEFICIARY
-              <Button className={`c-button-default circular action`} onClick={()=>{
+              <Button className={`c-button-default circular action`} style={{marginLeft: "20px"}} onClick={()=>{
                     this.addPrimaryBeneficiary()
                   }}>
                   ADD
@@ -1069,13 +1069,6 @@ class Main extends React.Component<Props, {}> {
                           ADD PRIMARY BENEFICIARY
                           {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                       </Button>
-                      <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
-                            this.deleteSibling(i)
-                          }}
-                        >
-                          DELETE  PRIMARY BENEFICIARY
-                          {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-                      </Button>
                     </div>}
                   </div>
                   <div>
@@ -1084,7 +1077,7 @@ class Main extends React.Component<Props, {}> {
             })}
           {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
               CONTINGENT BENEFICIARY
-              <Button className={`c-button-default circular action`} onClick={()=>{
+              <Button className={`c-button-default circular action`} style={{marginLeft: "20px"}} onClick={()=>{
                   this.addContingencyBeneficiary()
                 }}>
                 ADD
@@ -1103,13 +1096,6 @@ class Main extends React.Component<Props, {}> {
                           }}>
                           ADD
                           {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-                      </Button>
-                      <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
-                            this.deleteSibling(i)
-                          }}
-                        >
-                          DELETE
-                          {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                       </Button>
                     </div>}
                   </div>
