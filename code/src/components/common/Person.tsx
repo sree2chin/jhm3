@@ -58,39 +58,45 @@ export default class Person extends React.Component<Props, {}> {
 
   }
   onChangeRaw(e) {
+    var parentClass = "";
+    if (this.props.index==0) {
+      parentClass=".one-person-content ";
+    } else {
+      parentClass=".second-person-content ";
+    }
     if (e.target.value) {
       var val = e.target.value;
       if (val.length == 1) {
         if (isNaN(val) || parseInt(val) > 1) {
-          document.getElementsByClassName("react-datepicker__input-container")[0].getElementsByTagName("input")[0].value = "";
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = "";
         };
       } else if (val.length == 2) {
         if (isNaN(val) || parseInt(val)>12) {
           val = val.substr(0, 1);
-          document.getElementsByClassName("react-datepicker__input-container")[0].getElementsByTagName("input")[0].value = val;
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
         } else {
-          document.getElementsByClassName("react-datepicker__input-container")[0].getElementsByTagName("input")[0].value = val + "/";
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val + "/";
         }
       } else if (val.length == 4) {
         var tempVal = val.substr(3, 1);
         if (isNaN(tempVal) || parseInt(tempVal) > 3) {
-          document.getElementsByClassName("react-datepicker__input-container")[0].getElementsByTagName("input")[0].value = val.substring(0, 3);
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 3);
         } else {
-          document.getElementsByClassName("react-datepicker__input-container")[0].getElementsByTagName("input")[0].value = val;
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
         }
       } else if (val.length == 5) {
         var tempVal = val.substr(3, 2);
         if (isNaN(tempVal) || parseInt(tempVal) > 31) {
-          document.getElementsByClassName("react-datepicker__input-container")[0].getElementsByTagName("input")[0].value = val.substring(0, 4);
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 4);
         } else {
-          document.getElementsByClassName("react-datepicker__input-container")[0].getElementsByTagName("input")[0].value = val + "/";
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val + "/";
         }
       } else if (val.length > 6) {
-        document.getElementsByClassName("react-datepicker__input-container")[0].getElementsByTagName("input")[0].value = val;
+        document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
         return;
         var tempVal = val.substr(5, 4);
         if (isNaN(tempVal) || parseInt(tempVal) > 31) {
-          document.getElementsByClassName("react-datepicker__input-container")[0].getElementsByTagName("input")[0].value = val.substring(0, 4);
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 4);
         }
       }
     }
