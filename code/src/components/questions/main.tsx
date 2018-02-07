@@ -1158,13 +1158,13 @@ class Main extends React.Component<Props, {}> {
             {this.state.gettingQuestions && <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>}
             {questionsList}
             {!questionsList.isQuestionsList && <div className="question-action-btn-container">
-              <Button className={`c-button-default circular action`} onClick={()=>{
+              <Button className={`c-button-default circular next-step-btn action`} onClick={()=>{
                     this.handleBackSubmit()
                   }}>
                   Previous
                   {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>
-              <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+              <Button className={`c-button-default circular  action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                     this.onQuestionSubmit()
                   }}
                 >

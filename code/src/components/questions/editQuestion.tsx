@@ -913,7 +913,7 @@ class Main extends React.Component<Props, {}> {
           {!questionsList.isQuestionsList && <div className="questions-content-container">
             {questionsList}
             {!questionsList.isQuestionsList && <div className="question-action-btn-container">
-              <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+              <Button className={`c-button-default circular action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                     this.onQuestionSubmit()
                   }}
                 >
@@ -950,13 +950,13 @@ class Main extends React.Component<Props, {}> {
 
         </Row>
         {questionsList.isQuestionsList && <Row className="questions-container c-center" style={{backgrounColor: "transparent", border: "none", boxShadow: "none"}}> <div className="question-action-btn-container">
-            <Button className={`c-button-default circular action`} onClick={()=>{
+            <Button className={`c-button-default circular next-step-btn action`} onClick={()=>{
                   this.handleBackSubmit()
                 }}>
                 Previous Step
                 {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
-            <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+            <Button className={`c-button-default circular action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                   this.onQuestionSubmit()
                 }}
               >
