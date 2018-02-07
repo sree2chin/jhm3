@@ -261,7 +261,7 @@ class PlansPage extends React.Component<Props, {}> {
                   OK... Let's Take Some Action!
                 </Row>
                 <Row sm={8} className="next-steps-text">
-                  This where the rubber hits the road. You're well on your way on getting covered with life insurance! Click on the appropriate button to take the next step.
+                You can start the application right away or choose one of the other options.
                 </Row>
               </Col>
               <Col sm={8} className="agent-next-steps-container">
@@ -289,7 +289,8 @@ class PlansPage extends React.Component<Props, {}> {
                         checked={this.state.nextStep=="ticketToVantisLifeSales"}
                       />
                       <span></span>
-                      <label htmlFor={"person_s_gender_"}> Ticket to Vantis Life sales rep to complete application </label >
+                      <label htmlFor={"person_s_gender_"}> Drop ticket to Vantis Life call center
+                      </label >
                     </div>
                   </div>
                   <div className="agent-next-step-container">
@@ -302,7 +303,7 @@ class PlansPage extends React.Component<Props, {}> {
                         checked={this.state.nextStep=="printTheQuote"}
                       />
                       <span></span>
-                      <label htmlFor={"person_s_gender_"}> Print Quote </label >
+                      <label htmlFor={"person_s_gender_"}> Print and email quote </label >
                     </div>
                   </div>
                   <div className="agent-next-step-container">
