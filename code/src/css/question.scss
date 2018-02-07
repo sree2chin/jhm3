@@ -103,6 +103,11 @@
             }
         }
     }
+    .single-select-btn-container {
+        display: inline;
+        padding-right: 15px;
+        margin-left: 15px;
+    }
     .c-button-default.btn.circular {
         margin-top: 10px;
         background-color: #4584c0!important;
@@ -113,6 +118,7 @@
             background-color: #fb4d3d!important;
             margin-right: 30px;
         }
+
         &.single-select-btn {
             border-radius: 22px!important;
             background-color: #ffffff!important;
@@ -121,7 +127,7 @@
             font-size: 14px;
             font-weight: 600;
             color: #c7c7c7;
-            width: auto;
+            width: 200px;
             padding-left: 20px;
             padding-right: 20px;
             &:hover {

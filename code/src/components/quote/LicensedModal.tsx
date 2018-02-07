@@ -117,7 +117,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
                         <Col sm={12} className={"email-input-container"}>
                           <Input
                             name={"phone-number"}
-                            placeholder={"555-555-5555"}
+                            placeholder={"1-800-252-7254"}
                             value={this.state.phone}
                             onChange={this.handlePhoneChange.bind(this)}
                           />
@@ -206,7 +206,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
                             Vantis Life Call Center toll free number  |  M-F 8am to 7pm PST:
                           </Col>
                           <Col className="free-toll-no center">
-                            555-555-5555
+                            1-800-252-7254
                           </Col>
                         </Row>
                       </Col>
