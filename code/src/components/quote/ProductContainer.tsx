@@ -117,9 +117,9 @@ export default class ProductContainer extends React.Component<Props, State> {
                       <Row>
                         <Col sm={12} className="product-main-content">
                           <Row className="text-center">
-                            <div className="c-product-text">{product.ProductDisplayDescription.split(".")[0]}</div>
+                            <div className="c-product-text">{product.ProductDisplayDescription.split && product.ProductDisplayDescription.split(".")[0]}</div>
                             <ul className="c-product-desc-line">
-                              {map(product.ProductDisplayDescription.split("."), (descLine, index)=>{
+                              {product.ProductDisplayDescription.split && map(product.ProductDisplayDescription.split("."), (descLine, index)=>{
                                 if(index!=0 && descLine && descLine.trim().length >0) {
                                   return <li key={"desc-" + index}>{descLine.trim()}</li>
                                 } else {
