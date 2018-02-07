@@ -62,7 +62,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
         </Col>
           <Col sm={12} style={{paddingRight: "22px", marginBottom: "20px"}} className="person-gender-container">
             <Row>
-              <Col xs={4}>
+              <Col xs={2}>
                 <Button className={`c-button-default circular single-select-btn ${this.state.selectedId == question.options[0].id ? "active" : ""}`} onClick={(){
                       this.onChange(question.options[0])
                     }}
@@ -70,7 +70,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
                     {question.options[0].label}
                 </Button>
               </Col>
-              <Col xs={4}>
+              <Col xs={2}>
                 <Button style={{marginBottom: "0px"}} className={`c-button-default circular single-select-btn ${this.state.selectedId == question.options[1].id ? "active" : ""}`} onClick={(){
                       this.onChange(question.options[1])
                     }}
