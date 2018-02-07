@@ -1232,6 +1232,10 @@ input.form-control:focus {
       transition: width border-bottom 500ms ease-out; }
       .questions-container .questions-content-container .form-group .form-control.question-with-bottom-border:focus {
         border-bottom: 2px solid #317dbd; }
+  .questions-container .single-select-btn-container {
+    display: inline;
+    padding-right: 15px;
+    margin-left: 15px; }
   .questions-container .c-button-default.btn.circular {
     margin-top: 10px;
     background-color: #4584c0 !important; }
@@ -1248,7 +1252,7 @@ input.form-control:focus {
       font-size: 14px;
       font-weight: 600;
       color: #c7c7c7;
-      width: auto;
+      width: 200px;
       padding-left: 20px;
       padding-right: 20px; }
       .questions-container .c-button-default.btn.circular.single-select-btn:hover {
