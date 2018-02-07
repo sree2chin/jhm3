@@ -1239,7 +1239,7 @@ input.form-control:focus {
       width: 30%; }
     .questions-container .c-button-default.btn.circular.next-step-btn {
       background-color: #fb4d3d !important;
-      margin-left: 30px; }
+      margin-right: 30px; }
     .questions-container .c-button-default.btn.circular.single-select-btn {
       border-radius: 22px !important;
       background-color: #ffffff !important;
@@ -1455,7 +1455,8 @@ input.form-control:focus {
   visibility: hidden; }
 
 .async-auto-suggest-container .autosuggest .dropdown-menu {
-  font-size: 16px; }
+  font-size: 16px;
+  z-index: 1200; }
 
 .async-auto-suggest-container .autosuggest-choice-label .tag {
   font-size: 16px; }
