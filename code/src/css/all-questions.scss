@@ -60,7 +60,7 @@
             .question-text {
                 .edit-img-container {
                     /*visibility: visible; */
-                    background-color: #3498db;
+                    //background-color: #3498db;
                 }
             }
         }
@@ -80,6 +80,17 @@
             padding-left: 10px;
             color: #464646;
             font-size: 14px;
+            .edit-img-container {
+                background-image: url("images/edit-pencil.svg");
+                float: right;
+                background-repeat: no-repeat;
+                height: 17px;
+                font-size: 31px;
+                padding-right: 38px;
+                &:hover {
+                    background-image: url("images/edit-pencil-icon.svg");
+                }
+            }
         }
         .question-text {
             color: #999999;

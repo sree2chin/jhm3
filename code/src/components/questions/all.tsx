@@ -577,11 +577,6 @@ class Main extends React.Component<Props, {}> {
 
                                 return <div className="individual-question">
                                         <div className="question-text">
-                                            <span className="edit-img-container" onClick={()=>{
-                                                this.goToEditQuestionPage(q);
-                                            }}>
-                                                <img src={"../images/edit-pencil.svg"} />
-                                            </span>
                                             <span className="question-actual-text">
                                                 {q.caption}
                                             </span>
@@ -589,6 +584,10 @@ class Main extends React.Component<Props, {}> {
                                         <div className="answer-text">
                                             <span>
                                                 {ans}
+                                            </span>
+                                            <span className="edit-img-container" onClick={()=>{
+                                                this.goToEditQuestionPage(q);
+                                            }}>
                                             </span>
                                         </div>
                                         <hr/>
