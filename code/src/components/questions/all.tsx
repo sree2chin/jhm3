@@ -52,6 +52,14 @@ class Main extends React.Component<Props, {}> {
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.questions)) {
       this.questions = JSON.parse(JSON.stringify(nextProps.questions));
+      if (this.questions && this.questions.data && this.questions.data.questionnaire &&
+        this.questions.data.questionnaire.questions && this.questions.data.questionnaire.questions[0] &&
+        this.questions.data.questionnaire.questions[0].caption) {
+        this.setState({
+          activeGroup: this.questions.data.questionnaire.questions[0].caption
+        })
+      }
+
     }
   }
   onChangeInput(q, answer) {
