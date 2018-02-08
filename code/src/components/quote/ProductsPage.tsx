@@ -345,7 +345,12 @@ class ProductsPage extends React.Component<Props, {}> {
       <div className="product-pager-container" ref={(c) => { this._scrollView = c; }}>
         <ScrollToTopOnMount />
         <Subheader />
-        <div className="visible-xs"><ProductHeader /> </div>
+        <div className="visible-xs">
+        { this.props.products && this.props.products.length >=1 && this.props.products[0] &&
+                this.props.products[0].products_data && this.props.products[0].products_data.no_of_products!="0" &&
+                <ProductHeader />
+        }
+        </div>
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}}>
           <Col className="all-persons-info-container" style={{marginLeft: "auto",marginRight: "auto", float: "none"}}>
             { this.props.noOfPersons>=1 &&
@@ -370,11 +375,17 @@ class ProductsPage extends React.Component<Props, {}> {
             </div>
           </Col>
         </Row>
-        <div className="hidden-xs"><ProductHeader /> </div>
+        <div className="hidden-xs">
+          { this.props.products && this.props.products.length >=1 && this.props.products[0] &&
+                  this.props.products[0].products_data && this.props.products[0].products_data.no_of_products!="0" &&
+                  <ProductHeader />
+          }
+         </div>
         <Row style={{backgroundColor: "rgb(247, 247, 247)"}} className={this.props.noOfPersons==2 ? "two-product-outer-container": "one-product-outer-container"}>
           <Col className="c-center all-products-info-container container-max-width">
             <Row>
-              { this.props.products && this.props.products.length >=1 && this.props.products[0] ?
+              { this.props.products && this.props.products.length >=1 && this.props.products[0] &&
+                this.props.products[0].products_data && this.props.products[0].products_data.no_of_products!="0" ?
                 <ProductContainer
                   productInfo={this.props.products[0]}
                   selectProduct={this.selectProductForIndex.bind(this)}
@@ -384,7 +395,7 @@ class ProductsPage extends React.Component<Props, {}> {
                   noOfPersons={this.props.noOfPersons}
                   productValidations={this.props.productValidations}
                   productIds={this.state.productId0}
-                /> : <NoProducts />
+                /> : <NoProducts noOfPersons={this.props.noOfPersons} />
               }
 
               <Row style={{backgroundColor: "rgb(247, 247, 247)"}} className="visible-xs">
@@ -411,7 +422,8 @@ class ProductsPage extends React.Component<Props, {}> {
                   }
                 </Col>
               </Row>
-              { this.props.products && this.props.products.length==2 && this.props.products[1] ?
+              { this.props.products && this.props.products.length >=1 && this.props.products[1] &&
+                this.props.products[1].products_data && this.props.products[1].products_data.no_of_products!="0" ?
                   <ProductContainer
                     productInfo={this.props.products[1]}
                     selectProduct={this.selectProductForIndex.bind(this)}
@@ -421,7 +433,7 @@ class ProductsPage extends React.Component<Props, {}> {
                     noOfPersons={this.props.noOfPersons}
                     productValidations={this.props.productValidations}
                     productIds={this.state.productId1}
-                  />  : this.props.products && this.props.products.length==2 ? <NoProducts /> : null
+                  />  : this.props.products && this.props.products.length==2 ? <NoProducts noOfPersons={this.props.noOfPersons} /> : null
               }
             </Row>
           </Col>

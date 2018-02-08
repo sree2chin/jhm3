@@ -147,8 +147,8 @@ class Offer extends React.Component<Props, {}> {
                     </Button>
                 </Row>
                 <Row>
-                    <p>Your final pricing is based on your application answers and health check results. How does this compare to my quote?</p>
-                    <p>By starting your coverage, you agree to the offered plan and will be billed from the payment method you set up.</p>
+                    <p>Congratulations! Based on underwriting information received, here is your offer of coverage. If you accept this offer, you will not be required to have a medical exam!</p>
+                    <p>The offer may be different than the initial quote due to information received during the underwriting process.</p>
                 </Row>
             </Col>
             <Col sm={5} className="offer-product-info">
