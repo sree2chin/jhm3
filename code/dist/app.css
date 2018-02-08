@@ -2355,6 +2355,12 @@ input.form-control:focus {
       margin-right: 60px;
       margin-top: 15px; } }
 
+.product-pager-container .no-product-outer-container {
+  margin-top: 50px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 75px; }
+
 .next-steps-container .customer-next-steps-container.agent-next-steps-outer-container {
   width: 65.28%;
   margin-top: 60px;

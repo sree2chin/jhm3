@@ -167,6 +167,7 @@ module.exports = new function(){
       method: 'POST',
       formData: formData
     }, function callback(err, httpResponse, body) {
+      console.log("\n\n\nhttpResponse: " + JSON.stringify(httpResponse) + "\n\n\n");
       cb(err, httpResponse);
     });
   };
