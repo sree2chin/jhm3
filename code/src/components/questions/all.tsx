@@ -528,7 +528,10 @@ class Main extends React.Component<Props, {}> {
                               <NavItem className={`all-question-side-bar-link ${this.state.activeGroup == qL.groupHeader ? "active" : ""}`} eventKey={qL.groupHeader} onClick={()=>{
                                     this.makeGroupActive(qL.groupHeader)
                                   }}>
-                                  <div className="all-questions-side-bar-header-text">{qL.groupHeader}</div>
+                                  <div className="all-questions-side-bar-header-text">
+                                    <span>{qL.groupHeader}
+                                    </span>
+                                  </div>
                               </NavItem>
                               <hr/>
                             </div>)
@@ -547,6 +550,9 @@ class Main extends React.Component<Props, {}> {
                           return (<div key={qL.groupHeader} className={`questions-content-container all-group-questions-container ${this.state.activeGroup == qL.groupHeader ? "active" : ""}`}>
                             <div className="all-group-header">
                                 {qL.groupHeader}
+                                {qL.groupHeader!=this.state.activeGroup && <span className="down-arrow-container">
+                                      <img src="../images/down-arrow.svg"/>
+                                    </span>}
                             </div>
                             <div className="question-answer-header">
                                 <div className="question-text">Question</div>
