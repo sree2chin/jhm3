@@ -19,7 +19,7 @@ export default class NoProducts extends React.Component<Props, {}> {
         <Col sm={12} className="no-product-container">
           <div className="inner-no-product-container">
             <Row className="" style={{fontSize: "26px", color: "#999999"}}>
-              No Eligible products
+              No products available
             </Row>
             <Row style={{fontSize: "13px", color: "#999999"}}>
               We're sorry, we couldn't find any eligible products for you.
