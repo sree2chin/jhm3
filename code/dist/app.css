@@ -1176,6 +1176,8 @@ input.form-control:focus {
 .questions-container {
   padding-bottom: 60px;
   width: 65.23%; }
+  .questions-container .question-action-btn-container button {
+    letter-spacing: 1.3px; }
   .questions-container .Select-control .Select-placeholder {
     font-size: 16px !important; }
   .questions-container .Select-value-label {
