@@ -45,10 +45,10 @@ export default class CustomSelect extends React.Component<Props, {}> {
     return finalOptions;
   }
   validate() {
+    if(!this.props.alreadyOnceSubmitted) {return true;}
     if (this.props.multi) {
       return this.props.question.answer && this.props.question.answer.length > 0;
     }
-    if(!this.props.alreadyOnceSubmitted) {return true;}
     if (this.props.question.constraints) {
       var constraints = this.props.question.constraints;
       if (constraints.required) {

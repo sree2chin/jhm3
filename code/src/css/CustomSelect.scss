@@ -7,3 +7,14 @@
         }
     }
 }
+
+.c-custom-select {
+    .Select {
+        .Select-control{
+            .Select-multi-value-wrapper .Select-value{
+                height: 49px;
+                margin-bottom: 5px;
+            }
+        }
+    }
+}

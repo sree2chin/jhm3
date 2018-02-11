@@ -84,13 +84,23 @@ class Main extends React.Component<Props, {}> {
       }
     }
   }
-
+  isOnlyQuestionSingleSelection() {
+    if (this.actualQuestionLists.length==1) {
+      if (this.actualQuestionLists[0] && this.actualQuestionLists[0].options && this.actualQuestionLists[0].options.length==2){
+        return true;
+      }
+    };
+    return false;
+  }
   onChangeInput(q, answer) {
     q.answer = answer;
     if (q.hasReflexive) {
       if (this.reflexiveQuestioninPage && this.reflexiveQuestioninPage.id==q.id && JSON.stringify(this.reflexiveQuestioninPage.answer) !=JSON.stringify(answer)) {
         this.reflexiveQuestionModified = true;
       }
+    }
+    if (this.isOnlyQuestionSingleSelection()) {
+      this.onQuestionSubmit();
     }
   }
 
@@ -912,7 +922,7 @@ class Main extends React.Component<Props, {}> {
           </Row>
           {!questionsList.isQuestionsList && <div className="questions-content-container">
             {questionsList}
-            {!questionsList.isQuestionsList && <div className="question-action-btn-container">
+            {!questionsList.isQuestionsList && !this.isOnlyQuestionSingleSelection() && <div className="question-action-btn-container">
               <Button className={`c-button-default circular action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                     this.onQuestionSubmit()
                   }}
@@ -956,13 +966,13 @@ class Main extends React.Component<Props, {}> {
                 Previous Step
                 {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
-            <Button className={`c-button-default circular action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+            {!this.isOnlyQuestionSingleSelection() && <Button className={`c-button-default circular action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                   this.onQuestionSubmit()
                 }}
               >
                 Next Step
                 {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-            </Button>
+            </Button>}
           </div>
           </Row>}
       </div>);
