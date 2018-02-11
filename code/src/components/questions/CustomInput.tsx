@@ -81,7 +81,7 @@ export default class CustomInput extends React.Component<Props, {}> {
           <input type={question.type || "text"}
             name={question.name}
             className={this.getClassName()}
-            placeholder={question.placeholder}
+            placeholder={question.hint}
             ref={question.name}
             value={this.state.value}
             onChange={(e)=>{

@@ -94,7 +94,7 @@
                 &.question-with-bottom-border {
                     border: none;
                     border-bottom: 1px solid rgb(204, 204, 204);
-                    width: 50%;
+                    width: 100%;
                     transition: width border-bottom 500ms ease-out;
                     &:focus {
                         border-bottom: 2px solid #317dbd;

@@ -90,6 +90,7 @@ export default class CustomSelect extends React.Component<Props, {}> {
                 }}
                 className={""}
                 multi={this.props.multi || false}
+                placeholder={question.hint || "Select..."}
               />
             </Row>
 
