@@ -57,7 +57,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
 
     return (
      <div className="row">
-        <Col sm={12} className={"c-subheader-text"}>
+        <Col sm={12} className={"c-subheader-text fs18"}>
           {question.caption}
         </Col>
           <Col sm={12} style={{paddingRight: "22px", marginBottom: "20px"}} className="person-gender-container">
