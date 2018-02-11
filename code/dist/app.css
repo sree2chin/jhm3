@@ -66,6 +66,10 @@
 .c-custom-select .Select .Select-control .Select-value {
   line-height: 43px; }
 
+.c-custom-select .Select .Select-control .Select-multi-value-wrapper .Select-value {
+  height: 49px;
+  margin-bottom: 5px; }
+
 .fullwidth {
   width: 100%; }
 
@@ -1228,7 +1232,7 @@ input.form-control:focus {
     .questions-container .questions-content-container .form-group .form-control.question-with-bottom-border {
       border: none;
       border-bottom: 1px solid #cccccc;
-      width: 50%;
+      width: 100%;
       transition: width border-bottom 500ms ease-out; }
       .questions-container .questions-content-container .form-group .form-control.question-with-bottom-border:focus {
         border-bottom: 2px solid #317dbd; }
