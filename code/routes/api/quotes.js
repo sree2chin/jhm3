@@ -12,6 +12,7 @@ module.exports = function(app) {
   app.post(prefix + '/quote/premiums', function(req, res) {
     QuotesService.getQuotePremiums(req, function(statusCode, data){
       res.statusCode = statusCode;
+      res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
       res.send(data);
     });
@@ -20,6 +21,7 @@ module.exports = function(app) {
   app.post(prefix + '/quote/products', function(req, res) {
     QuotesService.getQuoteProducts(req, function(statusCode, data){
       res.statusCode = statusCode;
+      res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
       res.send(data);
     });
@@ -28,6 +30,7 @@ module.exports = function(app) {
   app.post(prefix + '/quote/plans', function(req, res) {
     QuotesService.getQuotePlans(req, function(statusCode, data){
       res.statusCode = statusCode;
+      res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
       res.send(data);
     });
@@ -36,6 +39,7 @@ module.exports = function(app) {
   app.post(prefix + '/quote/savequote', function(req, res) {
     QuotesService.saveQuoteForm(req, function(statusCode, data){
       res.statusCode = statusCode;
+      res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
       res.send(data);
     });
@@ -44,6 +48,7 @@ module.exports = function(app) {
   app.post(prefix + '/quote/submit', function(req, res) {
     QuotesService.getQuoteProducts(req, function(statusCode, data){
       res.statusCode = statusCode;
+      res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
       res.send(data);
     });
@@ -51,6 +56,7 @@ module.exports = function(app) {
 
   app.get(prefix, function(req, res) {
     UserService.get(req, function(data) {
+      res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify(data));
     });
