@@ -66,22 +66,23 @@
 .c-custom-select .Select .Select-control .Select-value {
   line-height: 43px; }
 
-.c-custom-select .Select .Select-control {
-  /*.Select-multi-value-wrapper .Select-value{
-                background-color: #eee;
-                border: 1px solid #aaa;
-                border-radius: 3px;
-                cursor: default;
-                line-height: 12px;
-                padding: 0;
-                vertical-align: top;
-                white-space: nowrap;
-                height: 28px;
-                padding-top: 5px;
-                color: #555;
-                margin-top: 8px;
-                margin-left: 8px;
-            }*/ }
+.c-custom-select .Select.Select--multi .Select-control .Select-multi-value-wrapper .Select-value {
+  background-color: #eee;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  cursor: default;
+  line-height: 12px;
+  padding: 0;
+  vertical-align: top;
+  white-space: nowrap;
+  height: 28px;
+  padding-top: 5px;
+  color: #555;
+  margin-top: 8px;
+  margin-left: 8px; }
+
+.c-custom-select .Select.Select--multi .Select-control .Select-multi-value-wrapper .Select-input input {
+  padding-top: 13px; }
 
 .fullwidth {
   width: 100%; }
@@ -1515,7 +1516,9 @@ input.form-control:focus {
 
 .async-auto-suggest-container .autosuggest .dropdown-menu {
   font-size: 16px;
-  z-index: 1200; }
+  z-index: 1200;
+  width: 50%;
+  max-width: 300px; }
 
 .async-auto-suggest-container .autosuggest-choice-label .tag {
   font-size: 16px; }
@@ -1528,7 +1531,9 @@ input.form-control:focus {
 
 .async-auto-suggest-container .autosuggest-choices {
   padding-top: 0px;
-  height: 44px; }
+  height: 44px;
+  width: 50%;
+  max-width: 300px; }
   .async-auto-suggest-container .autosuggest-choices .autosuggest-input-choice input {
     font-size: 16px;
     padding-top: 8px; }
