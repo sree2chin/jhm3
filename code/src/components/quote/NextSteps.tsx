@@ -190,6 +190,11 @@ class PlansPage extends React.Component<Props, {}> {
       showModalEmailThanks: false
     });
   }
+  closePhoneThanksModal() {
+    this.setState({
+      showModalPhoneThanks: false
+    });
+  }
   closeEmailCaptureModal() {
     this.setState({
       showModalEmailCapture: false
@@ -405,6 +410,7 @@ class PlansPage extends React.Component<Props, {}> {
           onCloseModal={this.closeLicensedModal.bind(this)}
           keyValueChange={this.keyValueChange.bind(this)}
           noOfPersons={this.props.noOfPersons}
+          handleChange={this.handleEmailChange.bind(this)}
         />
 
         <ThanksEmail
@@ -414,6 +420,7 @@ class PlansPage extends React.Component<Props, {}> {
 
         <ThanksPhone
           showModalPhoneThanks={this.state.showModalPhoneThanks}
+          onCloseModal={this.closePhoneThanksModal.bind(this)}
         />
 
       </div>);

@@ -201,6 +201,11 @@ class PlansPage extends React.Component<Props, {}> {
       showModalEmailThanks: false
     });
   }
+  closePhoneThanksModal() {
+    this.setState({
+      showModalPhoneThanks: false
+    });
+  }
   closeEmailModal() {
     this.setState({
       showModalEmail: false
@@ -375,6 +380,7 @@ class PlansPage extends React.Component<Props, {}> {
 
         <ThanksPhone
           showModalPhoneThanks={this.state.showModalPhoneThanks}
+          onCloseModal={this.closePhoneThanksModal.bind(this)}
         />
 
       </div>);

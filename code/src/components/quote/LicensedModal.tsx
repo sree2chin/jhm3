@@ -63,6 +63,31 @@ export default class LicensedModal extends React.Component<Props, {}> {
     }
   }
 
+  handleChange(personIndex, e) {
+    var emailRegex =  /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    this.props.handleChange(personIndex, e.target.value);
+    this.setState({
+      personIndex: personIndex,
+      ["email" + personIndex]: e.target.value
+    }, ()=>{
+      var input1Valid = emailRegex.test(this.state.email0);
+      var input2Valid = emailRegex.test(this.state.email1);
+
+      if (!input1Valid && !input2Valid && this.state.alreadySubmittedOnce) {
+        this.setState({
+          bothInputsInvalid: true
+        });
+      } else if (this.state.alreadySubmittedOnce) {
+        this.setState({
+          bothInputsInvalid: false
+        });
+        this.setState({
+          ["input" + personIndex + "Invalid"]: !emailRegex.test(this.state["email" + personIndex])
+        });
+      }
+    });
+  }
+
   public render() {
     const timingSlots = [
       {
