@@ -66,20 +66,22 @@
 .c-custom-select .Select .Select-control .Select-value {
   line-height: 43px; }
 
-.c-custom-select .Select .Select-control .Select-multi-value-wrapper .Select-value {
-  background-color: #eee;
-  border: 1px solid #aaa;
-  border-radius: 3px;
-  cursor: default;
-  line-height: 12px;
-  padding: 0;
-  vertical-align: top;
-  white-space: nowrap;
-  height: 28px;
-  padding-top: 5px;
-  color: #555;
-  margin-top: 8px;
-  margin-left: 8px; }
+.c-custom-select .Select .Select-control {
+  /*.Select-multi-value-wrapper .Select-value{
+                background-color: #eee;
+                border: 1px solid #aaa;
+                border-radius: 3px;
+                cursor: default;
+                line-height: 12px;
+                padding: 0;
+                vertical-align: top;
+                white-space: nowrap;
+                height: 28px;
+                padding-top: 5px;
+                color: #555;
+                margin-top: 8px;
+                margin-left: 8px;
+            }*/ }
 
 .fullwidth {
   width: 100%; }
@@ -1247,7 +1249,7 @@ input.form-control:focus {
     .questions-container .questions-content-container .form-group .form-control.question-with-bottom-border {
       border: none;
       border-bottom: 1px solid #cccccc;
-      width: 100%;
+      width: 50%;
       transition: width border-bottom 500ms ease-out; }
       .questions-container .questions-content-container .form-group .form-control.question-with-bottom-border:focus {
         border-bottom: 2px solid #317dbd; }
