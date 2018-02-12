@@ -594,12 +594,14 @@ class Main extends React.Component<Props, {}> {
     }
   }
 
-  onQuestionSubmit() {
+  onQuestionSubmit(notAddingOrDeletingBeneficiary) {
     var answered_questions = [];
     var allQuestionsValid = true;
-    this.setState({
-      alreadyOnceSubmitted: true
-    })
+    if (!notAddingOrDeletingBeneficiary) {
+      this.setState({
+        alreadyOnceSubmitted: true
+      })
+    }
 
     each(this.actualQuestionLists, (q)=> {
       answered_questions.push(q.id)
@@ -629,7 +631,7 @@ class Main extends React.Component<Props, {}> {
        }
     }
 
-    if (this.questionComponents.isQuestionsBeneficiaries) {
+    if (this.questionComponents.isQuestionsBeneficiaries && !notAddingOrDeletingBeneficiary) {
       if (this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions) {
         for(var i=0; i<this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions.length; i++) {
           var answers = this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions[i].questions;
@@ -1019,6 +1021,24 @@ class Main extends React.Component<Props, {}> {
 
 
   }
+  deletePrimaryBeneficiary(i) {
+      if (this.questionComponents.primaryBeneficiaryQuestionsComps.length >1) {
+        this.questionComponents.primaryBeneficiaryQuestionsComps.pop();
+        this.actualQuestionLists.primaryBeneficiariesMainQuestion &&
+        this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer &&
+        this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer.splice(i, 1);
+        this.onQuestionSubmit(true);
+      }
+  }
+  deleteContingencyBeneficiary(i) {
+    if (this.questionComponents.contingencyBeneficiaryQuestionsComps.length >1) {
+      this.questionComponents.contingencyBeneficiaryQuestionsComps.splice(i, 1);
+      this.actualQuestionLists.primaryBeneficiariesMainQuestion &&
+      this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer &&
+      this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer.splice(i, 1);
+      this.onQuestionSubmit(true);
+    }
+  }
   addPrimaryBeneficiary(): any {
     var qs = this.actualQuestionLists.primaryBeneficiariesMainQuestion;
     var data = {};
@@ -1046,7 +1066,7 @@ class Main extends React.Component<Props, {}> {
         } else {
           this.onChangeInput(qs, [self.beneficiariesIds[qs.id][0]]);
         }
-        this.onQuestionSubmit();
+        this.onQuestionSubmit(true);
       }
     }, err => {
       self.setState({
@@ -1082,7 +1102,7 @@ class Main extends React.Component<Props, {}> {
         } else {
           this.onChangeInput(qs, [self.beneficiariesIds[qs.id][0]]);
         }
-        this.onQuestionSubmit();
+        this.onQuestionSubmit(true);
       }
     }, err => {
       self.setState({
@@ -1109,12 +1129,12 @@ class Main extends React.Component<Props, {}> {
               //})
             }
           </Row>
-          {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
-              PRIMARY BENEFICIARY
+          {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container questions-content-container Add-a-Primary-Benefi">
+              Add a Primary Beneficiary
               <Button className={`c-button-default circular action`} style={{marginLeft: "20px"}} onClick={()=>{
                     this.addPrimaryBeneficiary()
                   }}>
-                  ADD
+                  ADD PRIMARY BENEFICIARY
                   {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>
             </div>
@@ -1123,26 +1143,26 @@ class Main extends React.Component<Props, {}> {
             map(questionsList.primaryBeneficiaryQuestionsComps, (s, i)=>{
                 return <div className="" key={i}>
                   <div  className="siblings-container">
-                    {s}
                     {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
                       <Button className={`c-button-default circular action`} onClick={()=>{
-                            this.addPrimaryBeneficiary()
+                            this.deletePrimaryBeneficiary(i)
                           }}>
-                          ADD PRIMARY BENEFICIARY
+                          DELETE BENEFICIARY
                           {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                       </Button>
                     </div>}
+                    {s}
                   </div>
                   <div>
                   </div>
               </div>
             })}
-          {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
-              CONTINGENT BENEFICIARY
+          {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container questions-content-container Add-a-Primary-Benefi">
+              Add a Contingent Beneficiary
               <Button className={`c-button-default circular action`} style={{marginLeft: "20px"}} onClick={()=>{
                   this.addContingencyBeneficiary()
                 }}>
-                ADD
+                ADD CONTINGENT BENEFICIARY
                 {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>
             </div>
@@ -1154,9 +1174,9 @@ class Main extends React.Component<Props, {}> {
                     {s}
                     {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
                       <Button className={`c-button-default circular action`} onClick={()=>{
-                            this.addContingencyBeneficiary()
+                            this.deleteContingencyBeneficiary(i)
                           }}>
-                          ADD
+                          DELETE BENEFICIARY
                           {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                       </Button>
                     </div>}
