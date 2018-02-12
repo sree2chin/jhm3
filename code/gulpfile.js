@@ -16,23 +16,23 @@ var gulpUtil = require('gulp-util');
 var pump = require('pump');
 
 gulp.task("default", function () {
-  runSequence("clean:dist", ["scss", "image"], ["build", "font", "font-awesome"], 'start_server');
+  runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"], 'start_server');
 });
 
 gulp.task("prod", function () {
-  runSequence("clean:dist", ["scss", "image"], ["build", "font", "font-awesome"], ["compress"]);
+  runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"], ["compress"]);
 });
 
 gulp.task("watch", function () {
   return gulp.watch([
-    "src/**/*.*", "src/**/**/*.*"], 
+    "src/**/*.*", "src/**/**/*.*"],
    runSequence(["scss"], ["build"])
   );
 });
 
 gulp.task("watchscss", function () {
     return gulp.watch([
-        "src/**/*.scss"], 
+        "src/**/*.scss"],
        runSequence(["scss"], ["build"])
     );
 });
@@ -67,6 +67,13 @@ gulp.task('scss', function () {
         .pipe(sass().on('error', sass.logError))
         .pipe(concat('app.css'))
         .pipe(gulp.dest("dist/"))
+});
+
+gulp.task('css', function () {
+    return gulp.src([
+            "src/css/*.css"
+        ])
+        .pipe(gulp.dest("dist/css/"))
 });
 
 gulp.task('css_admin', function () {
