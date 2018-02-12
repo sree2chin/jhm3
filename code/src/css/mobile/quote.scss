@@ -1,4 +1,7 @@
 @media(max-width: 768px) {
+  .c-body {
+    overflow-y: scroll;
+  }
   .c-quote {
     .react-datepicker-wrapper {
       width: 68%;
