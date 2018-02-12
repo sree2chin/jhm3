@@ -1143,8 +1143,8 @@ class Main extends React.Component<Props, {}> {
             map(questionsList.primaryBeneficiaryQuestionsComps, (s, i)=>{
                 return <div className="" key={i}>
                   <div  className="siblings-container">
-                    {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
-                      <Button className={`c-button-default circular action`} onClick={()=>{
+                    {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container" style={{height: "75px"}}>
+                      <Button style={{float: "right", marginBottom: "25px"}} className={`c-button-default circular action`} onClick={()=>{
                             this.deletePrimaryBeneficiary(i)
                           }}>
                           DELETE BENEFICIARY
@@ -1172,8 +1172,8 @@ class Main extends React.Component<Props, {}> {
                 return <div className="" key={i}>
                   <div  className="siblings-container">
                     {s}
-                    {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
-                      <Button className={`c-button-default circular action`} onClick={()=>{
+                    {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container" style={{height: "75px"}}>
+                      <Button style={{float: "right", marginBottom: "25px"}} className={`c-button-default circular action`} onClick={()=>{
                             this.deleteContingencyBeneficiary(i)
                           }}>
                           DELETE BENEFICIARY

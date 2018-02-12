@@ -90,8 +90,11 @@ export default class CustomSelect extends React.Component<Props, {}> {
                 }}
                 className={""}
                 multi={this.props.multi || false}
-                placeholder={question.hint || "Select..."}
+                placeholder={"Select..."}
               />
+              <Col>
+                {question.hint}
+              </Col>
             </Row>
 
             <Col sm={12} className={`c-subheader-text error`} style={{paddingLeft: "0px", marginTop: "0px"}}>
