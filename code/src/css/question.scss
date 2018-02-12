@@ -6,6 +6,13 @@
 }
 
 .questions-container {
+    .help-text {
+        margin-top: 12px;
+        max-width: 555px;
+        letter-spacing: 1.3px;
+        text-align: left;
+        color: #9999a3;
+    }
     .question-action-btn-container {
         button {
             letter-spacing: 1.3px;
@@ -105,7 +112,8 @@
                     border: none;
                     border-bottom: 1px solid rgb(204, 204, 204);
                     width: 50%;
-                    transition: width border-bottom 500ms ease-out;
+                    max-width: 300px;
+                    transition: border-bottom 500ms ease-out;
                     &:focus {
                         border-bottom: 2px solid #317dbd;
                     }

@@ -155,6 +155,10 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
                 onSearch={this.onTextSearch.bind(this)}
                 onChange={this.onItemChange.bind(this)}
                 multiple />
+                {question.hint && <Col className="help-text" style={{marginTop: "12px"}}>
+                  {question.hint}
+                  </Col>
+                }
             </Row>
 
             <Col className={`c-subheader-text error fs16`} style={{paddingLeft: "0px", marginTop: "0px", marginLeft: "-15px"}}>

@@ -40,6 +40,10 @@ form[name="form1"] > table > tbody > tr > td > table > tbody > tr:first-child > 
     text-align: right;
 }
 
+p[align="center"] {
+    font-size: 24px;
+}
+
 input[type="button"] {
     height: 44px !important;
     border-radius: 2px !important;

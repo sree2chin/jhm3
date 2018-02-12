@@ -78,6 +78,10 @@ export default class SingleSelection extends React.Component<Props, {}> {
                     {question.options[1].label}
                 </Button>
               </Col>
+              {question.hint && <div className="help-text" style={{marginTop: "12px"}}>
+                {question.hint}
+                </div>
+              }
             </Row>
 
             <Col sm={12} className={`c-subheader-text error`} style={{paddingLeft: "0px", marginTop: "0px"}}>

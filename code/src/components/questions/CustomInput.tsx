@@ -88,9 +88,10 @@ export default class CustomInput extends React.Component<Props, {}> {
               this.onChange(e.target.value);
               this.props.onChange(question, e.target.value);
             }} />
-            <div style={{marginTop: "12px"}}>
+            {question.hint && <div className="help-text" style={{marginTop: "12px"}}>
               {question.hint}
-            </div>
+              </div>
+            }
           {!this.validate() &&
             <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
               {question.constraints.patternViolationMessage || "Required"}
