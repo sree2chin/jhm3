@@ -3089,6 +3089,8 @@ input.form-control:focus {
     float: left; } }
 
 @media (max-width: 768px) {
+  .c-body {
+    overflow-y: scroll; }
   .c-quote .react-datepicker-wrapper {
     width: 68%; }
   .c-quote .birth-date-picker-container .custom-date-picker-container .custom-date-picker img {
