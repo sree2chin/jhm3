@@ -67,8 +67,19 @@
   line-height: 43px; }
 
 .c-custom-select .Select .Select-control .Select-multi-value-wrapper .Select-value {
-  height: 49px;
-  margin-bottom: 5px; }
+  background-color: #eee;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  cursor: default;
+  line-height: 12px;
+  padding: 0;
+  vertical-align: top;
+  white-space: nowrap;
+  height: 28px;
+  padding-top: 5px;
+  color: #555;
+  margin-top: 8px;
+  margin-left: 8px; }
 
 .fullwidth {
   width: 100%; }
@@ -1216,6 +1227,8 @@ input.form-control:focus {
     background-color: #ffffff;
     border-bottom: solid 1px #cccccc;
     box-shadow: none; }
+  .questions-container .Select-multi-value-wrapper .Select-input {
+    height: 44px; }
   .questions-container .Select-input {
     height: 44px; }
   .questions-container .questions-content-container {
@@ -1305,6 +1318,22 @@ input.form-control:focus {
           height: 1px;
           position: absolute;
           z-index: 1; }
+
+.question-action-btn-container.questions-content-container.Add-a-Primary-Benefi {
+  font-size: 24px;
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.18;
+  letter-spacing: normal;
+  text-align: left;
+  color: #515151;
+  font-family: Nunito-ExtraBold; }
+  .question-action-btn-container.questions-content-container.Add-a-Primary-Benefi button {
+    float: right;
+    font-family: Nunito-Bold;
+    line-height: normal;
+    letter-spacing: 1.3px; }
 
 .all-group-header {
   color: #515151;
