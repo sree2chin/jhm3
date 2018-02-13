@@ -208,7 +208,7 @@ class EmailToQuote extends React.Component<Props, {}> {
         }
 
         <Row className="contact-agent-text-submit-btn-container email-text-submit-btn-container">
-          <Row>
+          <Row className="email-quote-btn-container">
             <Col xs={11} className="c-center">
               <Button  style={{float: "right"}} className={`c-button-default ${this.state.savingQuote ? "active" : ""}`} onClick={(){
                   this.saveQuote()
