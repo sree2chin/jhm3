@@ -2455,11 +2455,15 @@ input.form-control:focus {
     .agent-page-container .okay-to-text-number {
       margin-top: 0px; }
     .agent-page-container .contact-agent-text-submit-btn-container {
-      position: absolute;
       bottom: 15px;
-      margin-right: 4px; }
+      margin-right: 4px;
+      margin-top: 10vh;
+      padding-bottom: 15px; }
+      .agent-page-container .contact-agent-text-submit-btn-container .email-quote-btn-container {
+        margin-right: -42px; }
       .agent-page-container .contact-agent-text-submit-btn-container.email-text-submit-btn-container {
-        width: 100%; } }
+        width: 100%;
+        margin-top: 37vh; } }
 
 @media (max-width: 768px) {
   .agent-success-page-container {
