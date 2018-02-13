@@ -145,7 +145,7 @@ class Main extends React.Component<Props, {}> {
       for(i=0; i < qs.length; i++) {
         var iqs = qs[i];
         for (j=0; j<iqs.length; j++) {
-          if (iqs[j].id == q.id) {
+          if (iqs[j] == q.id) {
             console.log(" q.id: " +  q.id);
             return true;
           }
