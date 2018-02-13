@@ -2455,7 +2455,7 @@ input.form-control:focus {
     .agent-page-container .okay-to-text-number {
       margin-top: 0px; }
     .agent-page-container .contact-agent-text-submit-btn-container {
-      position: fixed;
+      position: absolute;
       bottom: 15px;
       margin-right: 4px; }
       .agent-page-container .contact-agent-text-submit-btn-container.email-text-submit-btn-container {
