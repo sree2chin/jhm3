@@ -80,6 +80,9 @@ class Main extends React.Component<Props, {}> {
   onChangeInput(q, answer) {
     q.answer = answer;
     if (this.isOnlyQuestionSingleSelection()) {
+      this.setState({
+        singleselectionQuestionsSubmitting: true
+      });
       this.onQuestionSubmit();
     }
   }
@@ -594,7 +597,7 @@ class Main extends React.Component<Props, {}> {
     }
   }
 
-  onQuestionSubmit(notAddingOrDeletingBeneficiary) {
+  onQuestionSubmit(notAddingOrDeletingBeneficiary, noOfBeneficiaryDeleted) {
     var answered_questions = [];
     var allQuestionsValid = true;
     if (!notAddingOrDeletingBeneficiary) {
@@ -675,6 +678,19 @@ class Main extends React.Component<Props, {}> {
       };
 
       this.props.postQuestions(data).then(() => {
+        this.setState({
+          addingPrimaryBeneficiary: false,
+          addingContingencyBeneficiary: false,
+          singleselectionQuestionsSubmitting: false,
+          deletingContingencyBeneficiary: false,
+          deletingPrimaryBeneficiary: false
+        });
+        if (noOfBeneficiaryDeleted) {
+          this.setState({
+            ["deletingContingencyBeneficiary_" +  noOfBeneficiaryDeleted]: false,
+            ["deletingPrimaryBeneficiary_" +  noOfBeneficiaryDeleted]: false
+          });
+        }
         if (this.questions.valid_user == 0) {
           browserHistory.push("/authorize");
           return;
@@ -981,9 +997,6 @@ class Main extends React.Component<Props, {}> {
             previousQuestionHanldingIndex: this.state.previousQuestionHanldingIndex - 1,
             previousQuestionsHandling: true
           }, ()=> {
-            console.log("sdfds");
-            console.log("sdfds");
-            console.log("sdfds");
             this.setState({
               previousQuestionsHandling: false,
               previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
@@ -994,9 +1007,6 @@ class Main extends React.Component<Props, {}> {
             previousQuestionHanldingIndex: this.props.questions.extra_params.answered_questions.length - 1,
             previousQuestionsHandling: true
           }, ()=> {
-            console.log("sdfds");
-            console.log("sdfds");
-            console.log("sdfds");
             this.setState({
               previousQuestionsHandling: false,
               previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
@@ -1007,10 +1017,6 @@ class Main extends React.Component<Props, {}> {
         this.setState({
           previousQuestionsHandling: true
         }, ()=> {
-          console.log("sdfds-1");
-          console.log("sdfds-1");
-          console.log("sdfds-1");
-          console.log("sdfds-1");
           this.setState({
             previousQuestionsHandling: false,
             previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
@@ -1022,21 +1028,27 @@ class Main extends React.Component<Props, {}> {
 
   }
   deletePrimaryBeneficiary(i) {
-      if (this.questionComponents.primaryBeneficiaryQuestionsComps.length >1) {
+      if (this.questionComponents.primaryBeneficiaryQuestionsComps.length >0) {
+        this.setState({
+          ["deletingPrimaryBeneficiary_" + i] : true
+        });
         this.questionComponents.primaryBeneficiaryQuestionsComps.pop();
         this.actualQuestionLists.primaryBeneficiariesMainQuestion &&
         this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer &&
         this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer.splice(i, 1);
-        this.onQuestionSubmit(true);
+        this.onQuestionSubmit(true, i);
       }
   }
   deleteContingencyBeneficiary(i) {
-    if (this.questionComponents.contingencyBeneficiaryQuestionsComps.length >1) {
+    if (this.questionComponents.contingencyBeneficiaryQuestionsComps.length >0) {
+      this.setState({
+        ["deletingContingencyBeneficiary_" + i]: true
+      });
       this.questionComponents.contingencyBeneficiaryQuestionsComps.splice(i, 1);
-      this.actualQuestionLists.primaryBeneficiariesMainQuestion &&
-      this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer &&
-      this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer.splice(i, 1);
-      this.onQuestionSubmit(true);
+      this.actualQuestionLists.contingencyBeneficiariesMainQuestion &&
+      this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer &&
+      this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer.splice(i, 1);
+      this.onQuestionSubmit(true, i);
     }
   }
   addPrimaryBeneficiary(): any {
@@ -1046,23 +1058,28 @@ class Main extends React.Component<Props, {}> {
     data.assessment_factor_url = qs.links[0].href;
     data.q = "*";
     var self = this;
+    this.setState({
+      addingPrimaryBeneficiary: true,
+      addingContingencyBeneficiary: false
+    });
     self.props.getFactorsearch(data).then(response => {
       if (response && response.questions && response.questions.data) {
         self.beneficiariesIds = self.beneficiariesIds || {};
         self.beneficiariesIds[qs.id] = response.questions.data;
         if (qs.answerState == "valid" && qs.questions && qs.questions.length > 0) {
-          var notFound = false, rq={};
-          var i;
-
-          for(var j=0; j< qs.answer.length && !notFound; j++) {
-            for (i=0; (!notFound && i<self.beneficiariesIds[qs.id].length); i++) {
-              notFound = true;
+          var notFound = false, done=false, rq={};
+          var i, foundIndex;
+          for (i=0; (i<self.beneficiariesIds[qs.id].length && !done); i++) {
+            foundIndex = i;
+            notFound = false;
+            for(var j=0; (j<qs.answer.length && !notFound); j++) {
               if (qs.answer[j].id == self.beneficiariesIds[qs.id][i].id) {
-                notFound = false;
+                notFound = true;
               }
             }
+            done = !notFound;
           }
-          qs.answer.push(self.beneficiariesIds[qs.id][i-1])
+          qs.answer.push(self.beneficiariesIds[qs.id][foundIndex]);
         } else {
           this.onChangeInput(qs, [self.beneficiariesIds[qs.id][0]]);
         }
@@ -1082,23 +1099,28 @@ class Main extends React.Component<Props, {}> {
     data.assessment_factor_url = qs.links[0].href;
     data.q = "*";
     var self = this;
+    this.setState({
+      addingPrimaryBeneficiary: false,
+      addingContingencyBeneficiary: true
+    });
     self.props.getFactorsearch(data).then(response => {
       if (response && response.questions && response.questions.data) {
         self.beneficiariesIds = self.beneficiariesIds || {};
         self.beneficiariesIds[qs.id] = response.questions.data;
         if (qs.answerState == "valid" && qs.questions && qs.questions.length > 0) {
-          var notFound = false, rq={};
-          var i;
-
-          for(var j=0; j< qs.answer.length && !notFound; j++) {
-            for (i=0; (!notFound && i<self.beneficiariesIds[qs.id].length); i++) {
-              notFound = true;
+          var notFound = false, done=false, rq={};
+          var i, foundIndex;
+          for (i=0; (i<self.beneficiariesIds[qs.id].length && !done); i++) {
+            foundIndex = i;
+            notFound = false;
+            for(var j=0; (j<qs.answer.length && !notFound); j++) {
               if (qs.answer[j].id == self.beneficiariesIds[qs.id][i].id) {
-                notFound = false;
+                notFound = true;
               }
             }
+            done = !notFound;
           }
-          qs.answer.push(self.beneficiariesIds[qs.id][i-1])
+          qs.answer.push(self.beneficiariesIds[qs.id][foundIndex]);
         } else {
           this.onChangeInput(qs, [self.beneficiariesIds[qs.id][0]]);
         }
@@ -1129,27 +1151,49 @@ class Main extends React.Component<Props, {}> {
               //})
             }
           </Row>
+          {questionsList.isQuestionsBeneficiaries && <div className="primary-beneficiary-main-header">Primary beneficiaries</div>}
+          {questionsList.isQuestionsBeneficiaries &&
+            map(questionsList.primaryBeneficiaryQuestionsComps, (s, i)=>{
+                return <div className="" key={i}>
+                  <div  className="siblings-container generic-beneficiary-container">
+                    {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
+                      <div className="single-add-primary-beneficiary-text">
+                        Add Primary Beneficiary
+                        {!this.state["deletingPrimaryBeneficiary_" + i] && <img style={{float: "right", marginBottom: "25px", width: "24px", height: "24px"}} src={"../images/delete_beneficiary.svg"} onClick={()=>{
+                              this.deletePrimaryBeneficiary(i)
+                        }}/>}
+                        {this.state["deletingPrimaryBeneficiary_" + i] && <i className="fa fa-circle-o-notch fa-spin fa-fw fa-3x" style={{float: "right"}}></i> }
+                      </div>
+                    </div>}
+                    {s}
+                  </div>
+                  <div>
+                  </div>
+              </div>
+            })}
           {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container questions-content-container Add-a-Primary-Benefi">
               Add a Primary Beneficiary
               <Button className={`c-button-default circular action`} style={{marginLeft: "20px"}} onClick={()=>{
                     this.addPrimaryBeneficiary()
                   }}>
                   ADD PRIMARY BENEFICIARY
-                  {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                  {this.state.addingPrimaryBeneficiary && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>
             </div>
           }
+          {questionsList.isQuestionsBeneficiaries && <div className="primary-beneficiary-main-header">Contingent beneficiaries</div>}
           {questionsList.isQuestionsBeneficiaries &&
-            map(questionsList.primaryBeneficiaryQuestionsComps, (s, i)=>{
+            map(questionsList.contingencyBeneficiaryQuestionsComps, (s, i)=>{
                 return <div className="" key={i}>
-                  <div  className="siblings-container">
-                    {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container" style={{height: "75px"}}>
-                      <Button style={{float: "right", marginBottom: "25px"}} className={`c-button-default circular action`} onClick={()=>{
-                            this.deletePrimaryBeneficiary(i)
-                          }}>
-                          DELETE BENEFICIARY
-                          {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-                      </Button>
+                  <div  className="siblings-container generic-beneficiary-container">
+                  {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
+                    <div className="single-add-primary-beneficiary-text">
+                      Add Contingency Beneficiary
+                      {!this.state["deletingContingencyBeneficiary_" + i] && <img style={{float: "right", marginBottom: "25px", width: "24px", height: "24px"}} src={"../images/delete_beneficiary.svg"} onClick={()=>{
+                            this.deleteContingencyBeneficiary(i)
+                      }}/>}
+                      {this.state["deletingContingencyBeneficiary_" + i] && <i className="fa fa-circle-o-notch fa-spin fa-fw fa-3x" style={{float: "right"}}></i> }
+                    </div>
                     </div>}
                     {s}
                   </div>
@@ -1163,28 +1207,10 @@ class Main extends React.Component<Props, {}> {
                   this.addContingencyBeneficiary()
                 }}>
                 ADD CONTINGENT BENEFICIARY
-                {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                {this.state.addingContingencyBeneficiary && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>
             </div>
           }
-          {questionsList.isQuestionsBeneficiaries &&
-            map(questionsList.contingencyBeneficiaryQuestionsComps, (s, i)=>{
-                return <div className="" key={i}>
-                  <div  className="siblings-container">
-                    {s}
-                    {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container" style={{height: "75px"}}>
-                      <Button style={{float: "right", marginBottom: "25px"}} className={`c-button-default circular action`} onClick={()=>{
-                            this.deleteContingencyBeneficiary(i)
-                          }}>
-                          DELETE BENEFICIARY
-                          {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-                      </Button>
-                    </div>}
-                  </div>
-                  <div>
-                  </div>
-              </div>
-            })}
           {!questionsList.isQuestionsList && <div className="questions-content-container">
             {this.state.gettingQuestions && <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>}
             {questionsList}
@@ -1195,6 +1221,7 @@ class Main extends React.Component<Props, {}> {
                   Previous
                   {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>
+              {this.state.singleselectionQuestionsSubmitting && <i className="fa fa-circle-o-notch fa-spin fa-fw fa-3x" style={{position: "relative", top: "14px"}}></i>}
               {!this.isOnlyQuestionSingleSelection() && <Button className={`c-button-default circular  action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                     this.onQuestionSubmit()
                   }}

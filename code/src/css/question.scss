@@ -6,6 +6,22 @@
 }
 
 .questions-container {
+    .single-add-primary-beneficiary-text {
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 1.18;
+        text-align: left;
+        color: #515151;
+        font-family: Nunito-ExtraBold;
+        margin-bottom: 20px;
+        cursor: pointer;
+    }
+    .primary-beneficiary-main-header {
+        font-size: 30px;
+        line-height: 1.5;
+        color: #333333;
+        margin-top: 30px;
+    }
     .help-text {
         margin-top: 12px;
         max-width: 555px;
@@ -33,6 +49,9 @@
         border: solid 1px #d4d4d4;
         padding: 40px;
         margin-top: 50px;
+        &.generic-beneficiary-container {
+            margin-top: 20px;
+        }
     }
     padding-bottom: 60px;
     width: 65.23%;
@@ -103,6 +122,25 @@
             font-size: 150px;
             margin-bottom: 70px;
         }
+        .c-custom-select {
+            width: 50%;
+        }
+        .form-group {
+            .form-control {
+                &.question-with-bottom-border {
+                    border: none;
+                    border-bottom: 1px solid rgb(204, 204, 204);
+                    width: 50%;
+                    max-width: 300px;
+                    transition: border-bottom 500ms ease-out;
+                    &:focus {
+                        border-bottom: 2px solid #317dbd;
+                    }
+                }
+            }
+        }
+    }
+    .siblings-container {
         .c-custom-select {
             width: 50%;
         }
@@ -222,7 +260,7 @@
     font-family: Nunito-ExtraBold;
     button {
         float: right;
-        font-family: Nunito-Bold;
+        font-family: NunitoRegular;
         line-height: normal;
         letter-spacing: 1.3px;
     }
