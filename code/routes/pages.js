@@ -42,10 +42,9 @@ module.exports = function(app) {
 
   app.get('/payment', function(req, res, next) {
     req.session = req.session || {};
-    console.log("\n\n\nin payment\n\n\n")
     var html = JSON.parse(req.session.postPayment).body;
     var htmlP = html.split("<head>")
-    console.log(htmlP);
+
     htmlP[0] = htmlP[0] + "<base href='https://api.demo.convergepay.com/VirtualMerchantDemo/process.do'></base>";
     htmlP[0] = htmlP[0] + " <link href='http://ec2-54-158-63-166.compute-1.amazonaws.com/dist/css/elavon_payment.css' rel='stylesheet'>";
     res.writeHead(200, { 'Content-Type': 'text/html' });
