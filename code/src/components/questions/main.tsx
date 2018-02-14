@@ -159,6 +159,7 @@ class Main extends React.Component<Props, {}> {
   }
   reRecursiveGetQuestions1(data, questionsList, preQ, actualQuestionLists) {
     questionsList.isQuestionsList = false;
+
     if (!isEmpty(data)) {
       var boundaryReached = false;
       for(var i=0; i<(data.length); i++) {
@@ -297,6 +298,7 @@ class Main extends React.Component<Props, {}> {
               }
             }
             if(!allQuestionsAreLabels) {
+              questionsFromGroup.questionStructCaption = q.caption;
               return questionsFromGroup;
             } else {
               //questionsList = questionsFromGroup;
@@ -493,6 +495,7 @@ class Main extends React.Component<Props, {}> {
                 }
               }
               if(!allQuestionsAreLabels) {
+                questionsFromGroup.questionStructCaption = q.caption;
                 return questionsFromGroup;
               } else {
                 questionsList = questionsFromGroup;
@@ -1213,6 +1216,11 @@ class Main extends React.Component<Props, {}> {
           }
           {!questionsList.isQuestionsList && <div className="questions-content-container">
             {this.state.gettingQuestions && <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>}
+            <Row className="questions-sub-group-header">
+            {
+              questionsList.questionStructCaption
+            }
+            </Row>
             {questionsList}
             {!questionsList.isQuestionsList && <div className="question-action-btn-container">
               <Button className={`c-button-default circular next-step-btn action`} onClick={()=>{
