@@ -1190,6 +1190,20 @@ input.form-control:focus {
 .questions-container {
   padding-bottom: 60px;
   width: 65.23%; }
+  .questions-container .single-add-primary-beneficiary-text {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.18;
+    text-align: left;
+    color: #515151;
+    font-family: Nunito-ExtraBold;
+    margin-bottom: 20px;
+    cursor: pointer; }
+  .questions-container .primary-beneficiary-main-header {
+    font-size: 30px;
+    line-height: 1.5;
+    color: #333333;
+    margin-top: 30px; }
   .questions-container .help-text {
     margin-top: 12px;
     max-width: 555px;
@@ -1209,6 +1223,8 @@ input.form-control:focus {
     border: solid 1px #d4d4d4;
     padding: 40px;
     margin-top: 50px; }
+    .questions-container .siblings-container.generic-beneficiary-container {
+      margin-top: 20px; }
   .questions-container .question-action-btn-container {
     padding-top: 15px; }
     .questions-container .question-action-btn-container button {
@@ -1261,6 +1277,16 @@ input.form-control:focus {
       transition: border-bottom 500ms ease-out; }
       .questions-container .questions-content-container .form-group .form-control.question-with-bottom-border:focus {
         border-bottom: 2px solid #317dbd; }
+  .questions-container .siblings-container .c-custom-select {
+    width: 50%; }
+  .questions-container .siblings-container .form-group .form-control.question-with-bottom-border {
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    width: 50%;
+    max-width: 300px;
+    transition: border-bottom 500ms ease-out; }
+    .questions-container .siblings-container .form-group .form-control.question-with-bottom-border:focus {
+      border-bottom: 2px solid #317dbd; }
   .questions-container .single-select-btn-container {
     display: inline;
     padding-right: 15px;
@@ -1341,7 +1367,7 @@ input.form-control:focus {
   font-family: Nunito-ExtraBold; }
   .question-action-btn-container.questions-content-container.Add-a-Primary-Benefi button {
     float: right;
-    font-family: Nunito-Bold;
+    font-family: NunitoRegular;
     line-height: normal;
     letter-spacing: 1.3px; }
 
