@@ -101,8 +101,14 @@ class Offer extends React.Component<Props, {}> {
     var data = {};
     data.order_id = premium.order_id;
     data.amount = premium.premium_amount;
+    this.setState({
+      onPaymentGoingTo: true
+    });
     this.props.postPayment(data).then(()=>{
       window.location.href = `/payment?order_id=${data.order_id}&amount=${data.amount}`;
+      this.setState({
+        onPaymentGoingTo: false
+      });
       //browserHistory.push("/payment")
     });
 
@@ -143,7 +149,7 @@ class Offer extends React.Component<Props, {}> {
                         }}
                     >
                         START COVERAGE
-                        {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                        {this.state.onPaymentGoingTo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                     </Button>
                 </Row>
                 <Row>
