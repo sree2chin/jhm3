@@ -1175,13 +1175,22 @@ class Main extends React.Component<Props, {}> {
               </div>
             })}
           {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container questions-content-container Add-a-Primary-Benefi">
-              Add a Primary Beneficiary
-              <Button className={`c-button-default circular action`} style={{marginLeft: "20px"}} onClick={()=>{
-                    this.addPrimaryBeneficiary()
-                  }}>
-                  ADD PRIMARY BENEFICIARY
-                  {this.state.addingPrimaryBeneficiary && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-              </Button>
+              <Row>
+                Add a Primary Beneficiary
+              </Row>
+              <Row>
+                <Col sm="7" className="Add-a-Primary-Benefi-description-text">
+                  You must add at least one primary beneficiary to your policy.
+                </Col>
+                <Col sm="5">
+                <Button className={`c-button-default circular action`} style={{marginLeft: "20px"}} onClick={()=>{
+                      this.addPrimaryBeneficiary()
+                    }}>
+                    ADD PRIMARY BENEFICIARY
+                    {this.state.addingPrimaryBeneficiary && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                </Button>
+              </Col>
+              </Row>
             </div>
           }
           {questionsList.isQuestionsBeneficiaries && <div className="primary-beneficiary-main-header">Contingent beneficiaries</div>}
@@ -1205,13 +1214,22 @@ class Main extends React.Component<Props, {}> {
               </div>
             })}
           {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container questions-content-container Add-a-Primary-Benefi">
-              Add a Contingent Beneficiary
-              <Button className={`c-button-default circular action`} style={{marginLeft: "20px"}} onClick={()=>{
-                  this.addContingencyBeneficiary()
-                }}>
-                ADD CONTINGENT BENEFICIARY
-                {this.state.addingContingencyBeneficiary && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-              </Button>
+              <Row>
+                Add a Contingent Beneficiary
+              </Row>
+              <Row>
+                <Col sm="7" className="Add-a-Primary-Benefi-description-text">
+                  Adding a contingent beneficiary is optional.
+                </Col>
+                <Col sm="5">
+                <Button className={`c-button-default circular action`} style={{marginLeft: "20px"}} onClick={()=>{
+                    this.addContingencyBeneficiary()
+                  }}>
+                  ADD CONTINGENT BENEFICIARY
+                  {this.state.addingContingencyBeneficiary && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                </Button>
+              </Col>
+              </Row>
             </div>
           }
           {!questionsList.isQuestionsList && <div className="questions-content-container">
