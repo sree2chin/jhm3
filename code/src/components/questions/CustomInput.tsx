@@ -88,6 +88,9 @@ export default class CustomInput extends React.Component<Props, {}> {
               this.onChange(e.target.value);
               this.props.onChange(question, e.target.value);
             }} />
+            {question.defaultUnit && question.defaultUnit.label &&
+              <span className="custom-input-unit-label"> {question.defaultUnit.label} </span>
+            }
             {question.hint && <div className="help-text" style={{marginTop: "12px"}}>
               {question.hint}
               </div>

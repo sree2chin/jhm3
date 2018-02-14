@@ -6,6 +6,9 @@
 }
 
 .questions-container {
+    .custom-input-unit-label {
+
+    }
     .questions-sub-group-header {
         font-family: Nunito;
         font-size: 24px;
@@ -134,6 +137,10 @@
         .c-custom-select {
             width: 50%;
         }
+        .custom-input-unit-label {
+            font-size: 20px;
+            padding-left: 5px;
+        }
         .form-group {
             .form-control {
                 &.question-with-bottom-border {
@@ -142,6 +149,7 @@
                     width: 50%;
                     max-width: 300px;
                     transition: border-bottom 500ms ease-out;
+                    display: inline-block;
                     &:focus {
                         border-bottom: 2px solid #317dbd;
                     }
@@ -161,6 +169,7 @@
                     width: 50%;
                     max-width: 300px;
                     transition: border-bottom 500ms ease-out;
+                    display: inline-block;
                     &:focus {
                         border-bottom: 2px solid #317dbd;
                     }
