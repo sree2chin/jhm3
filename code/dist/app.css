@@ -1277,12 +1277,16 @@ input.form-control:focus {
       margin-bottom: 70px; }
     .questions-container .questions-content-container .c-custom-select {
       width: 50%; }
+    .questions-container .questions-content-container .custom-input-unit-label {
+      font-size: 20px;
+      padding-left: 5px; }
     .questions-container .questions-content-container .form-group .form-control.question-with-bottom-border {
       border: none;
       border-bottom: 1px solid #cccccc;
       width: 50%;
       max-width: 300px;
-      transition: border-bottom 500ms ease-out; }
+      transition: border-bottom 500ms ease-out;
+      display: inline-block; }
       .questions-container .questions-content-container .form-group .form-control.question-with-bottom-border:focus {
         border-bottom: 2px solid #317dbd; }
   .questions-container .siblings-container .c-custom-select {
@@ -1292,7 +1296,8 @@ input.form-control:focus {
     border-bottom: 1px solid #cccccc;
     width: 50%;
     max-width: 300px;
-    transition: border-bottom 500ms ease-out; }
+    transition: border-bottom 500ms ease-out;
+    display: inline-block; }
     .questions-container .siblings-container .form-group .form-control.question-with-bottom-border:focus {
       border-bottom: 2px solid #317dbd; }
   .questions-container .single-select-btn-container {
