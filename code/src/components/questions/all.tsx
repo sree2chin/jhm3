@@ -547,10 +547,13 @@ class Main extends React.Component<Props, {}> {
                     map(actualQuestionLists, (qL)=>{
                         var ans;
                         if(qL.length >0) {
-                          return (<div key={qL.groupHeader} className={`questions-content-container all-group-questions-container ${this.state.activeGroup == qL.groupHeader ? "active" : ""}`}>
+                          return (<div key={qL.groupHeader} onClick={()=>{
+                                    this.makeGroupActive(qL.groupHeader)
+                                  }}
+                            className={`questions-content-container all-group-questions-container ${this.state.activeGroup == qL.groupHeader ? "active" : ""}`}>
                             <div className="all-group-header">
                                 {qL.groupHeader}
-                                {qL.groupHeader!=this.state.activeGroup && <span className="down-arrow-container">
+                                {<span className="down-arrow-container">
                                       <img src="../images/down-arrow.svg"/>
                                     </span>}
                             </div>
