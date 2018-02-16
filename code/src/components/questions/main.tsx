@@ -708,7 +708,7 @@ class Main extends React.Component<Props, {}> {
           deletingContingencyBeneficiary: false,
           deletingPrimaryBeneficiary: false
         });
-        if (noOfBeneficiaryDeleted) {
+        if (noOfBeneficiaryDeleted || noOfBeneficiaryDeleted==0) {
           this.setState({
             ["deletingContingencyBeneficiary_" +  noOfBeneficiaryDeleted]: false,
             ["deletingPrimaryBeneficiary_" +  noOfBeneficiaryDeleted]: false

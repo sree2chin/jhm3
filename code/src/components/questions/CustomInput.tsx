@@ -67,6 +67,7 @@ export default class CustomInput extends React.Component<Props, {}> {
       val = val.replace(/[^0-9]/g,'');
       //val = val.replace(/[`~!@#$%^&*()_|+\-=÷¿?;:'",.<>\{\}\[\]\\\/]/gi, '');
       //val = val.replace(/[^\w\s]/gi, '');
+      this.props.onChange(this.props.question, val);
       this.setState({
         value: val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
       });
@@ -96,7 +97,6 @@ export default class CustomInput extends React.Component<Props, {}> {
             value={this.state.value}
             onChange={(e)=>{
               this.onChange(e.target.value);
-              this.props.onChange(question, e.target.value);
             }} />
             {question.defaultUnit && question.defaultUnit.label &&
               <span className="custom-input-unit-label"> {question.defaultUnit.label} </span>
