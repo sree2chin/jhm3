@@ -24,8 +24,8 @@ export default class CustomInput extends React.Component<Props, {}> {
     return className;
   }
   componentWillMount() {
-    if (!isEmpty(this.props.question) && String(this.props.question.answer).length > 0) {
-      var answer = this.props.question.type=="number" ? parseInt(this.props.question.answer) : this.props.question.answer;
+    if (!isEmpty(this.props.question) && !isEmpty(this.props.question.answer) && String(this.props.question.answer).length > 0) {
+      var answer = this.props.question.type=="number" ? this.props.question.answer.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : this.props.question.answer;
       this.setState({
         value: answer
       });
@@ -33,8 +33,8 @@ export default class CustomInput extends React.Component<Props, {}> {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!isEmpty(nextProps.question) && String(this.props.question.answer).length > 0) {
-      var answer = nextProps.question.type=="number" ? parseInt(nextProps.question.answer) : nextProps.question.answer
+    if (!isEmpty(nextProps.question) && !isEmpty(this.props.question.answer) && String(this.props.question.answer).length > 0) {
+      var answer = nextProps.question.type=="number" ? nextProps.question.answer.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : nextProps.question.answer
       this.setState({
         value: answer
       });
@@ -63,9 +63,19 @@ export default class CustomInput extends React.Component<Props, {}> {
     }
   }
   onChange(val) {
-    this.setState({
-      value: val
-    });
+    if (this.props.question.type == "number") {
+      val = val.replace(/[^0-9]/g,'');
+      //val = val.replace(/[`~!@#$%^&*()_|+\-=÷¿?;:'",.<>\{\}\[\]\\\/]/gi, '');
+      //val = val.replace(/[^\w\s]/gi, '');
+      this.setState({
+        value: val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      });
+    } else {
+      this.setState({
+        value: val
+      });
+    }
+
   }
   public render() {
     var wrapperClass : string = 'form-group';
@@ -78,7 +88,7 @@ export default class CustomInput extends React.Component<Props, {}> {
      <div className={wrapperClass}>
         <label className="fs18" htmlFor={question.name}>{question.caption}</label>
         <div className="field">
-          <input type={question.type || "text"}
+          <input type={"text"}
             name={question.name}
             className={this.getClassName()}
             placeholder={""}
