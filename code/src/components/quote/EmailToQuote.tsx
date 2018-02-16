@@ -31,20 +31,30 @@ class EmailToQuote extends React.Component<Props, {}> {
     this.setState({
       type_of_submission: 10002
     });
-  },
-  state={},
+  };
+  state={};
   componentWillMount() {
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent" : "/";
-      browserHistory.push(basePath);
+      browserHistory.push(basePath + queryParamsString);
     }
-  },
+  };
 
   handlePhoneChange(e) {
     this.setState({
       phone: e.target.value
     });
-  },
+  };
   validateEmailForm() {
     var isError = false;
     if(!this.state.email0) {
@@ -76,7 +86,7 @@ class EmailToQuote extends React.Component<Props, {}> {
     }
 
     return !isError;
-  },
+  };
   saveQuote() {
     const persons = [];
 
@@ -109,20 +119,29 @@ class EmailToQuote extends React.Component<Props, {}> {
       };
 
       this.props.setPersonsData(persons);
-
+      var queryParams = this.props.location.query;
+      var queryParamsString = "?";
+      for(var k in queryParams) {
+        if (queryParams[k]) {
+          queryParamsString += k + "=" + queryParams[k] + "&";
+        } else {
+          queryParamsString += k + "&";
+        }
+      }
+      queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
       this.props.saveQuoteForm(data).then(() => {
         const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent/" : "/";
-        browserHistory.push(basePath + "email-quote-success");
+        browserHistory.push(basePath + "email-quote-success" + queryParamsString);
       }).catch(()=>{
         this.submmitedProductForm = false;
       });
     }
-  },
+  };
   onSlotChange(key, obj) {
     this.setState({
       [key]: obj.value
     });
-  },
+  };
 
   handleChange(personIndex, e) {
     if(this.state.emailErrorExists) {
@@ -136,12 +155,12 @@ class EmailToQuote extends React.Component<Props, {}> {
       personIndex: personIndex,
       ["email" + personIndex]: e.target.value
     });
-  },
+  };
   getErrorsClassNames(errors, key) {
     if(errors[key]) {
       return "input-border-error";
     }
-  },
+  };
   public render() {
     return (
       <div className="email-modal-container agent-modal-container agent-page-container">

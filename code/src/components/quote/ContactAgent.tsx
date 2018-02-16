@@ -34,9 +34,19 @@ class ContactAgent extends React.Component<Props, {}> {
   }
   state={}
   componentWillMount() {
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent" : "/";
-      browserHistory.push(basePath);
+      browserHistory.push(basePath + queryParamsString);
     }
   }
 
@@ -54,13 +64,23 @@ class ContactAgent extends React.Component<Props, {}> {
     this.setState({[k]: v});
   }
   directToCorrespondingPage() {
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
     if (this.state.nextStep == "continueToApplication") {
-      browserHistory.push(basePath + "/connect-to-agent");
-    } else if (this.state.nextStep == "connectMeToAgent") {
-      browserHistory.push(basePath + "/agent/connect-to-agent");
+      browserHistory.push(basePath + "/connect-to-agent" + queryParamsString);
+    } else if (this.state.nextStep == "connectMeToAgent" + queryParamsString) {
+      browserHistory.push(basePath + "/agent/connect-to-agent" + queryParamsString);
     } else {
-      browserHistory.push(basePath + "/agent/email-to-quote");
+      browserHistory.push(basePath + "/agent/email-to-quote" + queryParamsString);
     }
   }
   getExtraInfo(data) {
@@ -104,10 +124,20 @@ class ContactAgent extends React.Component<Props, {}> {
 
 
     this.props.setPersonsData(persons);
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
 
     this.props.saveQuoteForm(data).then(() => {
       const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent/" : "/";
-      browserHistory.push(basePath + "connect-agent-success");
+      browserHistory.push(basePath + "connect-agent-success" + queryParamsString);
     }).catch(()=>{
       this.submmitedProductForm = false;
     });

@@ -16,10 +16,11 @@ module.exports = function(app) {
     var url_parts = url.parse(req.url, true);
     console.log("in normal url: " + JSON.stringify(url_parts));
     req.session = req.session || {};
+    req.session.queryParams = {};
     if (!_.isEmpty(url_parts.query)) {
       req.session.queryParams = req.session.queryParams || {};
       for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k];
+        req.session.queryParams[k] = url_parts.query[k] || "";
       }
     };
     templatePath = "../../dist/";
@@ -30,10 +31,11 @@ module.exports = function(app) {
     var url_parts = url.parse(req.url, true);
     console.log("in normal url: " + JSON.stringify(url_parts));
     req.session = req.session || {};
+    req.session.queryParams = {};
     if (!_.isEmpty(url_parts.query)) {
       req.session.queryParams = req.session.queryParams || {};
       for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k];
+        req.session.queryParams[k] = url_parts.query[k] || "";
       }
     };
     templatePath = "../../dist/";
@@ -42,6 +44,7 @@ module.exports = function(app) {
 
   app.get('/payment', function(req, res, next) {
     req.session = req.session || {};
+    req.session.queryParams = {};
     var html = JSON.parse(req.session.postPayment).body;
     var htmlP = html.split("<head>")
 
@@ -56,12 +59,13 @@ module.exports = function(app) {
 
   app.get('/authorize', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
-    req.session = req.session || {};
+    req.session.queryParams = {};
+
     console.log("\n\n\n in authorise \n\n\n");
     if (!_.isEmpty(url_parts.query)) {
       req.session.queryParams = req.session.queryParams || {};
       for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k];
+        req.session.queryParams[k] = url_parts.query[k] || "";
       }
     };
     templatePath = "../../dist/";
@@ -71,11 +75,12 @@ module.exports = function(app) {
   app.get('/questions', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};
+    req.session.queryParams = {};
     console.log("in questions url: " + !_.isEmpty(url_parts.query));
     if (!_.isEmpty(url_parts.query)) {
       req.session.queryParams = req.session.queryParams || {};
       for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k];
+        req.session.queryParams[k] = url_parts.query[k] || "";
       }
     };
     templatePath = "../../dist/";
@@ -85,10 +90,11 @@ module.exports = function(app) {
   app.get('/agent', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};
+    req.session.queryParams = {};
     if (!_.isEmpty(url_parts.query)) {
       req.session.queryParams = req.session.queryParams || {};
       for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k];
+        req.session.queryParams[k] = url_parts.query[k] || "";
       }
     };
     templatePath = "../../dist/";
@@ -104,5 +110,20 @@ module.exports = function(app) {
       else
         console.log('SITEMAP-REQUEST-SUCCESS');
     });
+  });
+  app.get('*', function(req, res, next) {
+    var url_parts = url.parse(req.url, true);
+    console.log("in * url string: " + req.url);
+    console.log("in * url: " + JSON.stringify(url_parts));
+    req.session = req.session || {};
+    req.session.queryParams = {};
+    if (!_.isEmpty(url_parts.query)) {
+      req.session.queryParams = req.session.queryParams || {};
+      for(var k in url_parts.query) {
+        req.session.queryParams[k] = url_parts.query[k] || "";
+      }
+    };
+    templatePath = "../../dist/";
+    res.render(templatePath);
   });
 };

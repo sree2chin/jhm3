@@ -34,8 +34,19 @@ class PlansPage extends React.Component<Props, {}> {
   state={}
   componentWillMount() {
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
+      var queryParams = this.props.location.query;
+      var queryParamsString = "?";
+      for(var k in queryParams) {
+        if (queryParams[k]) {
+          queryParamsString += k + "=" + queryParams[k] + "&";
+        } else {
+          queryParamsString += k + "&";
+        }
+      }
+      queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+
       const basePath = this.props.location.pathname.indexOf("agent") > 1 || this.props.is_agent ? "/agent" : "/";
-      browserHistory.push(basePath);
+      browserHistory.push(basePath + queryParamsString);
     }
   }
 
@@ -236,12 +247,22 @@ class PlansPage extends React.Component<Props, {}> {
     });
   }
   directToCorrespondingPage() {
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     if (this.state.nextStep == "continueToApplication" || this.state.nextStep == "directToCorrespondingPage") {
-      browserHistory.push("/agent/connect-to-agent");
+      browserHistory.push("/agent/connect-to-agent" + queryParamsString);
     } else if (this.state.nextStep == "ticketToInternalAgent" || this.state.nextStep=="ticketToVantisLifeSales") {
-      browserHistory.push("/agent/connect-to-agent");
+      browserHistory.push("/agent/connect-to-agent" + queryParamsString);
     } else {
-      browserHistory.push("/agent/email-to-quote");
+      browserHistory.push("/agent/email-to-quote" + queryParamsString);
     }
   }
   selectNextStep (nextStep) {
