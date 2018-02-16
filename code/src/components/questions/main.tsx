@@ -1062,27 +1062,60 @@ class Main extends React.Component<Props, {}> {
   }
   deletePrimaryBeneficiary(i) {
       if (this.questionComponents.primaryBeneficiaryQuestionsComps.length >0) {
-        this.setState({
+        /* this.setState({
           ["deletingPrimaryBeneficiary_" + i] : true
+        }); */
+        this.setState({
+          ["deletingPrimaryBeneficiary_" + i] : this.state["deletingPrimaryBeneficiary_" + i]
         });
         this.questionComponents.primaryBeneficiaryQuestionsComps.pop();
         this.actualQuestionLists.primaryBeneficiariesMainQuestion &&
         this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer &&
         this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer.splice(i, 1);
-        this.onQuestionSubmit(true, i);
+        this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions.splice(i, 1);
+        //this.onQuestionSubmit(true, i);
       }
   }
   deleteContingencyBeneficiary(i) {
     if (this.questionComponents.contingencyBeneficiaryQuestionsComps.length >0) {
-      this.setState({
+      /* this.setState({
         ["deletingContingencyBeneficiary_" + i]: true
+      }); */
+      this.setState({
+        ["deletingContingencyBeneficiary_" + i] : this.state["deletingContingencyBeneficiary_" + i]
       });
       this.questionComponents.contingencyBeneficiaryQuestionsComps.splice(i, 1);
       this.actualQuestionLists.contingencyBeneficiariesMainQuestion &&
       this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer &&
       this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer.splice(i, 1);
-      this.onQuestionSubmit(true, i);
+      this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions.splice(i, 1);
+      //this.onQuestionSubmit(true, i);
     }
+  }
+
+  isDeletingBeneficiaryGoingOn() {
+    var r = false;
+
+    if(this.questionComponents && this.questionComponents.primaryBeneficiaryQuestionsComps && this.questionComponents.primaryBeneficiaryQuestionsComps.length > 0) {
+      var l = this.questionComponents.primaryBeneficiaryQuestionsComps.length;
+      for(var i=0; i<l; i++){
+        r = r || this.state["deletingPrimaryBeneficiary_" + i];
+      }
+    }
+
+    if(this.questionComponents && this.questionComponents.contingencyBeneficiaryQuestionsComps && this.questionComponents.contingencyBeneficiaryQuestionsComps.length > 0) {
+      var l = this.questionComponents.contingencyBeneficiaryQuestionsComps.length;
+      for(var i=0; i<l; i++){
+        r = r || this.state["deletingContingencyBeneficiary_" + i];
+      }
+    }
+
+    return r;
+  }
+  isSubmitBtnDisabled() {
+
+    return this.state.addingPrimaryBeneficiary || this.state.addingContingencyBeneficiary ||
+            this.state.submittingQuestions || this.isDeletingBeneficiaryGoingOn();
   }
   addPrimaryBeneficiary(): any {
     var qs = this.actualQuestionLists.primaryBeneficiariesMainQuestion;
@@ -1213,7 +1246,7 @@ class Main extends React.Component<Props, {}> {
                   You must add at least one primary beneficiary to your policy.
                 </Col>
                 <Col sm="5">
-                <Button className={`c-button-default circular action`} style={{marginLeft: "20px"}} onClick={()=>{
+                <Button className={`c-button-default circular action`} disabled={this.isSubmitBtnDisabled()} style={{marginLeft: "20px"}} onClick={()=>{
                       this.addPrimaryBeneficiary()
                     }}>
                     ADD PRIMARY BENEFICIARY
@@ -1231,7 +1264,7 @@ class Main extends React.Component<Props, {}> {
                   {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
                     <div className="single-add-primary-beneficiary-text">
                       Add Contingency Beneficiary
-                      {!this.state["deletingContingencyBeneficiary_" + i] && <img style={{float: "right", marginBottom: "25px", width: "24px", height: "24px"}} src={"../images/delete_beneficiary.svg"} onClick={()=>{
+                      {!this.state["deletingContingencyBeneficiary_" + i] && <img disabled={this.isSubmitBtnDisabled()} style={{float: "right", marginBottom: "25px", width: "24px", height: "24px"}} src={"../images/delete_beneficiary.svg"} onClick={()=>{
                             this.deleteContingencyBeneficiary(i)
                       }}/>}
                       {this.state["deletingContingencyBeneficiary_" + i] && <i className="fa fa-circle-o-notch fa-spin fa-fw fa-3x" style={{float: "right"}}></i> }
@@ -1252,7 +1285,7 @@ class Main extends React.Component<Props, {}> {
                   Adding a contingent beneficiary is optional.
                 </Col>
                 <Col sm="5">
-                <Button className={`c-button-default circular action`} style={{marginLeft: "20px"}} onClick={()=>{
+                <Button className={`c-button-default circular action`} disabled={this.isSubmitBtnDisabled()} style={{marginLeft: "20px"}} onClick={()=>{
                     this.addContingencyBeneficiary()
                   }}>
                   ADD CONTINGENT BENEFICIARY
@@ -1271,14 +1304,14 @@ class Main extends React.Component<Props, {}> {
             </Row>
             {questionsList}
             {!questionsList.isQuestionsList && <div className="question-action-btn-container">
-              <Button className={`c-button-default circular next-step-btn action`} onClick={()=>{
+              <Button className={`c-button-default circular next-step-btn action`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
                     this.handleBackSubmit()
                   }}>
                   Previous
                   {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>
               {this.state.singleselectionQuestionsSubmitting && <i className="fa fa-circle-o-notch fa-spin fa-fw fa-3x" style={{position: "relative", top: "14px"}}></i>}
-              {!this.isOnlyQuestionSingleSelection() && <Button className={`c-button-default circular  action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+              {!this.isOnlyQuestionSingleSelection() && <Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular  action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                     this.onQuestionSubmit()
                   }}
                 >
@@ -1293,13 +1326,13 @@ class Main extends React.Component<Props, {}> {
                   <div  className="siblings-container">
                     {s}
                     {questionsList.isQuestionsList && i==questionsList.siblingComponents.length-1 && <div className="question-action-btn-container">
-                      <Button className={`c-button-default circular action`} onClick={()=>{
+                      <Button className={`c-button-default circular action`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
                             this.addSibling()
                           }}>
                           ADD SIBLING
                           {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                       </Button>
-                      <Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+                      <Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                             this.deleteSibling()
                           }}
                         >
@@ -1314,13 +1347,13 @@ class Main extends React.Component<Props, {}> {
             })}
         </Row>
         {questionsList.isQuestionsList && <Row className="questions-container c-center" style={{backgrounColor: "transparent", border: "none", boxShadow: "none"}}> <div className="question-action-btn-container">
-            <Button className={`c-button-default circular action`} onClick={()=>{
+            <Button className={`c-button-default circular action`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
                   this.handleBackSubmit()
                 }}>
                 Previous Step
                 {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
-            {<Button className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+            {<Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                   this.onQuestionSubmit()
                 }}
               >

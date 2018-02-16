@@ -44,6 +44,7 @@ class Main extends React.Component<Props, {}> {
       gettingQuestions: true
     });
     this.props.getQuestions().then(()=>{
+      console.log("dddd");
       this.setState({
         gettingQuestions: false
       });
@@ -518,7 +519,6 @@ class Main extends React.Component<Props, {}> {
       } else {
         queryParamsString += k + "&";
       }
-
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     browserHistory.push("/edit-questions?fromReviewPage=true&questionId=" + q.id + queryParamsString);
