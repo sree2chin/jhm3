@@ -262,7 +262,7 @@ export default class Plan extends React.Component<Props, {}> {
               <Col sm={2} style={{textAlign: "center"}} className={`${this.props.noOfPersons==2 ? "two_products_conainer_width" : ""}`}>
                   <img
                     className={`plan-product-image hidden-xs ${product_image}`}
-                    src={`../images/${product_image}.png`}
+                    src={`../images/${product_image}.svg`}
                   />
               </Col>
               <Col sm={9} className={`plan-product-info-text`}>

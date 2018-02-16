@@ -106,7 +106,7 @@ export default class ProductContainer extends React.Component<Props, State> {
                       <Row className="product_img_div">
                       <img
                         className={`plan-product-image ${product_image}_transparent`}
-                        src={`../images/${product_image}_transparent.png`}
+                        src={`../images/${product_image}.svg`}
                       />
                       </Row>
                       <Row className="header">
