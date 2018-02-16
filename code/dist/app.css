@@ -1286,7 +1286,8 @@ input.form-control:focus {
       width: 50%;
       max-width: 300px;
       transition: border-bottom 500ms ease-out;
-      display: inline-block; }
+      display: inline-block;
+      margin-bottom: 15px; }
       .questions-container .questions-content-container .form-group .form-control.question-with-bottom-border:focus {
         border-bottom: 2px solid #317dbd; }
   .questions-container .siblings-container .c-custom-select {
@@ -1297,7 +1298,8 @@ input.form-control:focus {
     width: 50%;
     max-width: 300px;
     transition: border-bottom 500ms ease-out;
-    display: inline-block; }
+    display: inline-block;
+    margin-bottom: 15px; }
     .questions-container .siblings-container .form-group .form-control.question-with-bottom-border:focus {
       border-bottom: 2px solid #317dbd; }
   .questions-container .single-select-btn-container {
@@ -1320,9 +1322,11 @@ input.form-control:focus {
       font-size: 14px;
       font-weight: 600;
       color: #c7c7c7;
-      width: 200px;
+      min-width: 200px;
       padding-left: 20px;
-      padding-right: 20px; }
+      padding-right: 20px;
+      display: inline-block;
+      width: auto; }
       .questions-container .c-button-default.btn.circular.single-select-btn:hover {
         color: #317dbd !important; }
       .questions-container .c-button-default.btn.circular.single-select-btn.active {
@@ -1579,11 +1583,11 @@ input.form-control:focus {
 .async-auto-suggest-container .autosuggest-choices {
   padding-top: 0px;
   height: 44px;
-  width: 50%;
-  max-width: 300px; }
+  min-width: 300px;
+  max-width: max-content;
+  margin-bottom: 15px; }
   .async-auto-suggest-container .autosuggest-choices .autosuggest-input-choice input {
-    font-size: 16px;
-    padding-top: 8px; }
+    font-size: 16px; }
   .async-auto-suggest-container .autosuggest-choices .autosuggest-choice {
     margin-top: 12px;
     margin-left: 10px; }
