@@ -137,7 +137,7 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
 
     return (
      <div>
-        <Col sm={12} className={"c-subheader-text fs18"} style={{marginTop: "5px", paddingLeft: "0px", marginBottom: "5px"}}>
+        <Col sm={12} className={"c-subheader-text fs18"} style={{marginTop: "5px", paddingLeft: "0px", marginBottom: "18px"}}>
           {question.caption}
         </Col>
           <Col style={{paddingRight: "15px", marginBottom: "15px"}} className="async-auto-suggest-container">

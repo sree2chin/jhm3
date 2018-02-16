@@ -76,10 +76,10 @@ export default class CustomSelect extends React.Component<Props, {}> {
 
     return (
      <div>
-        <Col className={"c-subheader-text fs18"} style={{marginTop: "5px", paddingLeft: "0px", marginBottom: "5px"}}>
+        <Col className={"c-subheader-text fs18"} style={{marginTop: "5px", paddingLeft: "0px", marginBottom: "18px"}}>
           {question.caption}
         </Col>
-          <Col style={{paddingRight: "15px", marginBottom: "20px"}} className="person-gender-container c-custom-select">
+          <Col style={{paddingRight: "15px", marginBottom: "30px"}} className="person-gender-container c-custom-select">
             <Row style={{marginLeft: "0px"}}>
               <Select
                 name="form-field-name1"

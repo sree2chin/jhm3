@@ -42,13 +42,23 @@ class Main extends React.Component<Props, {}> {
     this.setState({
       gettingQuestions: true
     });
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     this.props.getQuestions().then(()=> {
       if (this.questions && this.questions.data && this.questions.data.completed) {
-        browserHistory.push("/all-questions");
+        browserHistory.push("/all-questions" + queryParamsString);
         return;
       }
       if (this.questions && this.questions.valid_user == 0) {
-        browserHistory.push("/authorize");
+        browserHistory.push("/authorize" + queryParamsString);
         return;
       }
       this.setState({
@@ -60,12 +70,22 @@ class Main extends React.Component<Props, {}> {
     if(!isEmpty(nextProps.questions)) {
       this.questions = JSON.parse(JSON.stringify(nextProps.questions));
     }
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     if (this.questions && this.questions.data && this.questions.data.completed) {
-      browserHistory.push("/all-questions");
+      browserHistory.push("/all-questions" + queryParamsString);
       return;
     }
     if (this.questions.valid_user == 0) {
-      browserHistory.push("/authorize");
+      browserHistory.push("/authorize" + queryParamsString);
       return;
     }
   }
@@ -694,12 +714,22 @@ class Main extends React.Component<Props, {}> {
             ["deletingPrimaryBeneficiary_" +  noOfBeneficiaryDeleted]: false
           });
         }
+        var queryParams = this.props.location.query;
+        var queryParamsString = "?";
+        for(var k in queryParams) {
+          if (queryParams[k]) {
+            queryParamsString += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString += k + "&";
+          }
+        }
+        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
         if (this.questions.valid_user == 0) {
-          browserHistory.push("/authorize");
+          browserHistory.push("/authorize" + queryParamsString);
           return;
         }
         if (this.questions.data.completed ==true || this.questions.data.completed =="true") {
-          browserHistory.push("/all-questions");
+          browserHistory.push("/all-questions" +queryParamsString);
           return;
         }
         if (this.state.previousQuestionHanldingIndex || this.state.previousQuestionHanldingIndex == 0) {

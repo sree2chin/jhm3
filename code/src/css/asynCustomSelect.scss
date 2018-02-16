@@ -38,13 +38,14 @@
         .autosuggest-input-choice {
             input {
                 font-size: 16px;
-                padding-top: 8px;
+                //padding-top: 8px;
             }
         }
         padding-top: 0px;
         height: 44px;
-        width: 50%;
-        max-width: 300px;
+        min-width: 300px;
+        max-width: max-content;
+        margin-bottom: 15px;
         .autosuggest-choice {
             margin-top: 12px;
             margin-left: 10px;
