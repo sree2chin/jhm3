@@ -196,16 +196,18 @@
         }
 
         &.single-select-btn {
-            border-radius: 22px!important;
-            background-color: #ffffff!important;
+            border-radius: 22px !important;
+            background-color: #ffffff !important;
             border: solid 2px #c7c7c7;
             font-family: ProximaNova-Semibold;
             font-size: 14px;
             font-weight: 600;
             color: #c7c7c7;
-            width: 200px;
+            min-width: 200px;
             padding-left: 20px;
             padding-right: 20px;
+            display: inline-block;
+            width: auto;
             &:hover {
                 color: #317dbd!important;
             }
