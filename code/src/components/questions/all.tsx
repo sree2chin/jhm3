@@ -262,10 +262,20 @@ class Main extends React.Component<Props, {}> {
     this.setState({
       confirmingQuestions: true
     });
-    browserHistory.push("/signature");
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+    browserHistory.push("/signature" + queryParamsString);
     return;
     this.props.confirmQuestions(data).then(() => {
-      browserHistory.push("/signature");
+      browserHistory.push("/signature" + queryParamsString);
     }).catch(()=>{
       console.log(this.props.questions);
     });
@@ -500,7 +510,18 @@ class Main extends React.Component<Props, {}> {
   }
 
   goToEditQuestionPage(q) {
-    browserHistory.push("/edit-questions?fromReviewPage=true&questionId=" + q.id);
+    var queryParams = this.props.location.query;
+    var queryParamsString = "&";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+    browserHistory.push("/edit-questions?fromReviewPage=true&questionId=" + q.id + queryParamsString);
   }
 
   public render() {

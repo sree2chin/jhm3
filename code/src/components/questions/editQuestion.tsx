@@ -667,20 +667,30 @@ class Main extends React.Component<Props, {}> {
           submittingQuestions: false,
           previousQuestionIds: null
         }, ()=> {
+          var queryParams = this.props.location.query;
+          var queryParamsString = "?";
+          for(var k in queryParams) {
+            if (queryParams[k]) {
+              queryParamsString += k + "=" + queryParams[k] + "&";
+            } else {
+              queryParamsString += k + "&";
+            }
+          }
+          queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
             if (this.reflexiveQuestionModified) {
               setTimeout(()=>{
                 this.questionsSubmittedCount++;
                 if (this.questionsSubmittedCount>=0) {
                   var reflexiveQuestion = this.findQuestionById(this.questions.data.questionnaire.questions, this.reflexiveQuestioninPage.id)
                   if (isEmpty(reflexiveQuestion.questions)) {
-                    browserHistory.push("/all-questions");
+                    browserHistory.push("/all-questions" + queryParamsString);
                   } else {
                     this.questionsSource = reflexiveQuestion;
                     this.setState({
                       questionsSource: this.questionsSource
                     });
                     if (this.getQuestions(null).length ==0) {
-                      browserHistory.push("/all-questions");
+                      browserHistory.push("/all-questions" + queryParamsString);
                     }
                   }
                 } else {
@@ -688,7 +698,7 @@ class Main extends React.Component<Props, {}> {
                 }
               }, 200)
             } else {
-              browserHistory.push("/all-questions");
+              browserHistory.push("/all-questions" + queryParamsString);
             }
         });
 

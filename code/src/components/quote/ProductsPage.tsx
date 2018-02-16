@@ -39,9 +39,19 @@ class ProductsPage extends React.Component<Props, {}> {
     }, 1)
   }
   componentWillMount() {
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&"
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     if (isEmpty(this.props.products) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("agent") > 1 || this.props.is_agent ? "/agent" : "/";
-      browserHistory.push(basePath);
+      browserHistory.push(basePath + queryParamsString);
     }
     if(this.props.persons && this.props.persons[0] && this.props.products && this.props.products[0] && this.props.products[0].products_data) {
       const productList = this.props.products[0].products_data.products_list;
@@ -198,7 +208,17 @@ class ProductsPage extends React.Component<Props, {}> {
           submittingUserInfo: false
         });
       }).catch(()=>{
-        browserHistory.push("/products");
+        var queryParams = this.props.location.query;
+        var queryParamsString = "?";
+        for(var k in queryParams) {
+          if (queryParams[k]) {
+            queryParamsString += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString += k + "&";
+          }
+        }
+        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+        browserHistory.push("/products" + queryParamsString);
         this.setState({
           submittingUserInfo: false
         });
@@ -290,8 +310,18 @@ class ProductsPage extends React.Component<Props, {}> {
       this.props.setPersonsData(persons);
 
       this.props.submitProductsForm(persons).then(() => {
+        var queryParams = this.props.location.query;
+        var queryParamsString = "?";
+        for(var k in queryParams) {
+          if (queryParams[k]) {
+            queryParamsString += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString += k + "&";
+          }
+        }
+        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
         const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
-        browserHistory.push(basePath + "plans");
+        browserHistory.push(basePath + "plans" + queryParamsString);
         this.setState({
           submittingProductsInfo: true
         });
@@ -334,8 +364,18 @@ class ProductsPage extends React.Component<Props, {}> {
     return shouldRedirect;
   }
   redirectToMainPage() {
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
-    browserHistory.push(basePath);
+    browserHistory.push(basePath + queryParamsString);
   }
   public render() {
     var {persons} = this.props;

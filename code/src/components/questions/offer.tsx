@@ -47,33 +47,53 @@ class Offer extends React.Component<Props, {}> {
   }
 
   componentWillReceiveProps(nextProps) {
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     if(!isEmpty(nextProps.questions)) {
       this.questions = JSON.parse(JSON.stringify(nextProps.questions));
     }
     if (nextProps.confirmationData.valid_user == 0) {
-      browserHistory.push("/authorize");
+      browserHistory.push("/authorize" + queryParamsString);
       return;
     }
   }
 
   confirmQuestions() {
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     var data = {};
     this.props.confirmQuestions(data).then(() => {
       //browserHistory.push("/signature");
       var link = this.props.confirmationData && this.props.confirmationData.data &&
       this.props.confirmationData.data.current_document_data && this.props.confirmationData.data.current_document_data.sign_url;
       if (this.props.confirmationData.valid_user == 0) {
-        browserHistory.push("/authorize");
+        browserHistory.push("/authorize" + queryParamsString);
         return;
       }
       if (isEmpty(this.props.confirmationData.data.current_document_data)) {
-        browserHistory.push("/offer");
+        browserHistory.push("/offer" + queryParamsString);
       } else {
         window.location.href = link;
       }
 
     }).catch(()=>{
-      browserHistory.push("/authorize");
+      browserHistory.push("/authorize" + queryParamsString);
       console.log(this.questions);
     });
   }

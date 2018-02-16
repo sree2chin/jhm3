@@ -35,7 +35,17 @@ class PlansPage extends React.Component<Props, {}> {
   componentWillMount() {
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("agent") > 1 || this.props.is_agent ? "/agent" : "/";
-      browserHistory.push(basePath);
+      var queryParams = this.props.location.query;
+      var queryParamsString = "?";
+      for(var k in queryParams) {
+        if (queryParams[k]) {
+          queryParamsString += k + "=" + queryParams[k] + "&";
+        } else {
+          queryParamsString += k + "&";
+        }
+      }
+      queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+      browserHistory.push(basePath + queryParamsString);
     }
   }
 
@@ -220,12 +230,22 @@ class PlansPage extends React.Component<Props, {}> {
     }
   }
   directToCorrespondingPage() {
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     if (this.state.nextStep == "continueToApplication") {
-      browserHistory.push("/connect-through-application");
+      browserHistory.push("/connect-through-application" + queryParamsString);
     } else if (this.state.nextStep == "connectMeToAgent") {
-      browserHistory.push("/connect-to-agent");
+      browserHistory.push("/connect-to-agent" + queryParamsString);
     } else {
-      browserHistory.push("/email-to-quote");
+      browserHistory.push("/email-to-quote" + queryParamsString);
     }
   }
   public render() {

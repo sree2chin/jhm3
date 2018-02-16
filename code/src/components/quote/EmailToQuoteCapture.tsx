@@ -33,9 +33,19 @@ class EmailToQuote extends React.Component<Props, {}> {
   };
   state={};
   componentWillMount() {
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent" : "/";
-      browserHistory.push(basePath);
+      browserHistory.push(basePath + queryParamsString);
     }
   };
 
@@ -114,10 +124,19 @@ class EmailToQuote extends React.Component<Props, {}> {
       };
 
       this.props.setPersonsData(persons);
-
+      var queryParams = this.props.location.query;
+      var queryParamsString = "?";
+      for(var k in queryParams) {
+        if (queryParams[k]) {
+          queryParamsString += k + "=" + queryParams[k] + "&";
+        } else {
+          queryParamsString += k + "&";
+        }
+      }
+      queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
       this.props.saveQuoteForm(data).then(() => {
         const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent/" : "/";
-        browserHistory.push(basePath + "email-quote-success");
+        browserHistory.push(basePath + "email-quote-success" + queryParamsString);
       }).catch(()=>{
         this.submmitedProductForm = false;
       });

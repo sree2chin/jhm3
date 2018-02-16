@@ -69,7 +69,17 @@ class Signature extends React.Component<Props, {}> {
       if (this.props.user.data.valid_user==1) {
         if (this.props.user.data.change_password==0) {
           if (this.props.user.data.access_token) {
-            return browserHistory.push("/questions");
+            var queryParams = this.props.location.query;
+            var queryParamsString = "?";
+            for(var k in queryParams) {
+              if (queryParams[k]) {
+                queryParamsString += k + "=" + queryParams[k] + "&";
+              } else {
+                queryParamsString += k + "&";
+              }
+            }
+            queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+            return browserHistory.push("/questions" + queryParamsString);
           } else {
             this.setState({
               enterPasswordErroMsg: this.props.user.message
@@ -108,7 +118,17 @@ class Signature extends React.Component<Props, {}> {
     });
     this.props.changePassword(data).then(() => {
       if (cb) { cb(); }
-      return browserHistory.push("/questions");
+      var queryParams = this.props.location.query;
+      var queryParamsString = "?";
+      for(var k in queryParams) {
+        if (queryParams[k]) {
+          queryParamsString += k + "=" + queryParams[k] + "&";
+        } else {
+          queryParamsString += k + "&";
+        }
+      }
+      queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+      return browserHistory.push("/questions" + queryParamsString);
     }).catch(()=>{
       console.log(this.questions);
     });

@@ -114,12 +114,32 @@ class Main extends React.Component<Props, {}> {
 
       return this.props.submitQuoteForm(persons).then(() => {
         const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
-        browserHistory.push(basePath + "products");
+        var queryParams = this.props.location.query;
+        var queryParamsString = "?";
+        for(var k in queryParams) {
+          if (queryParams[k]) {
+            queryParamsString += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString += k + "&";
+          }
+        }
+        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+        browserHistory.push(basePath + "products" + queryParamsString);
         this.setState({
           submittingUserInfo: false
         });
       }).catch(()=>{
-        browserHistory.push("/products");
+        var queryParams = this.props.location.query;
+        var queryParamsString = "?";
+        for(var k in queryParams) {
+          if (queryParams[k]) {
+            queryParamsString += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString += k + "&";
+          }
+        }
+        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+        browserHistory.push("/products" + queryParamsString);
         this.setState({
           submittingUserInfo: false
         });
