@@ -561,23 +561,34 @@ class Main extends React.Component<Props, {}> {
   validateTextField(q) {
     if (q.constraints) {
       var constraints = q.constraints;
-      var isValid = true;
-
-      if (constraints.required) {
-        if (constraints.pattern) {
-          if (q.answer) {
-            return new RegExp(q.constraints.pattern).test(q.answer)
+        var isValid = true;
+        if (constraints.required) {
+          if (constraints.pattern) {
+            if (q.answer) {
+              return new RegExp(q.constraints.pattern).test(q.answer)
+            } else {
+              return false;
+            }
+          }
+          return q.answer && String(q.answer).length > 0;
+        } else {
+          if (q.answer && String(q.answer).length > 0) {
+            if (constraints.pattern) {
+              if (q.answer) {
+                return new RegExp(q.constraints.pattern).test(q.answer)
+              } else {
+                return false;
+              }
+            } else {
+              return true;
+            }
           } else {
-            return false;
+            return true;
           }
         }
-        return q.answer && String(q.answer).length > 0;
       } else {
         return true;
       }
-    } else {
-      return true;
-    }
   }
 
   validateSingleSelection(q) {

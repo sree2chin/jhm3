@@ -11,6 +11,7 @@ import CustomInput from "./CustomInput";
 import CustomSelect from "./CustomSelect";
 import AsyncCustomSelect from "./AsyncCustomSelect";
 import QuestionsCustomDatePicker from "./QuestionsCustomDatePicker";
+import InstantIdCheckPopup from "./InstantIdCheckPopup";
 import Subheader from "../common/subheader";
 import {each, isEmpty, map} from "underscore";
 import {getQuestions, postQuestions, getFactorsearch} from '../../actions/Questions';
@@ -53,6 +54,12 @@ class Main extends React.Component<Props, {}> {
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     this.props.getQuestions().then(()=> {
+      if (this.questions && this.questions.instant_id_check && this.questions.instant_id_check.status==false) {
+        this.setState({
+          showInstantIdCheckPopup: true,
+          instantIdCheckData: this.questions.instant_id_check
+        });
+      };
       if (this.questions && this.questions.data && this.questions.data.completed) {
         browserHistory.push("/all-questions" + queryParamsString);
         return;
@@ -606,23 +613,34 @@ class Main extends React.Component<Props, {}> {
   validateTextField(q) {
     if (q.constraints) {
       var constraints = q.constraints;
-      var isValid = true;
-
-      if (constraints.required) {
-        if (constraints.pattern) {
-          if (q.answer) {
-            return new RegExp(q.constraints.pattern).test(q.answer)
+        var isValid = true;
+        if (constraints.required) {
+          if (constraints.pattern) {
+            if (q.answer) {
+              return new RegExp(q.constraints.pattern).test(q.answer)
+            } else {
+              return false;
+            }
+          }
+          return q.answer && String(q.answer).length > 0;
+        } else {
+          if (q.answer && String(q.answer).length > 0) {
+            if (constraints.pattern) {
+              if (q.answer) {
+                return new RegExp(q.constraints.pattern).test(q.answer)
+              } else {
+                return false;
+              }
+            } else {
+              return true;
+            }
           } else {
-            return false;
+            return true;
           }
         }
-        return q.answer && String(q.answer).length > 0;
       } else {
         return true;
       }
-    } else {
-      return true;
-    }
   }
 
   validateSingleSelection(q) {
@@ -738,6 +756,13 @@ class Main extends React.Component<Props, {}> {
       };
 
       this.props.postQuestions(data).then(() => {
+        if (this.questions && this.questions.instant_id_check && this.questions.instant_id_check.status==false) {
+
+          this.setState({
+            showInstantIdCheckPopup: true,
+            instantIdCheckData: this.questions.instant_id_check
+          });
+        };
         this.setState({
           addingPrimaryBeneficiary: false,
           addingContingencyBeneficiary: false,
@@ -1195,6 +1220,12 @@ class Main extends React.Component<Props, {}> {
     });
   }
 
+  closeInstantIdCheckPopup(): any {
+    this.setState({
+      showInstantIdCheckPopup: false
+    });
+  };
+
   addContingencyBeneficiary(): any {
     var qs = this.actualQuestionLists.contingencyBeneficiariesMainQuestion;
     var data = {};
@@ -1242,6 +1273,11 @@ class Main extends React.Component<Props, {}> {
     var noFoGroupsCompleted = this.noFoGroupsCompleted;
     return (
       <div>
+        <InstantIdCheckPopup
+          showInstantIdCheckPopup={this.state.showInstantIdCheckPopup}
+          onCloseModal={this.closeInstantIdCheckPopup.bind(this)}
+          instantIdCheckData={this.state.instantIdCheckData}
+        />
         <ScrollToTopOnMount />
         <Subheader
           breadCrumbs={breadCrumbs}

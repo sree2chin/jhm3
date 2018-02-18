@@ -587,7 +587,7 @@ class PlansPage extends React.Component<Props, {}> {
               </Col>
             </Row>
           </Col>
-          <Col sm={3} xs={12} className="c-center plan-total-container hidden-xs container-max-width" style={{paddingLeft: "0px"}}>
+          <Col sm={3} xs={12} className="c-center plan-total-container hidden-xs container-max-width">
             <Row className="plans-selector-container" style={{marginLeft: "0px"}}>
               <Col md={4} sm={5} className="" style={{float: "right", marginRight: "15px"}}>
                 <Row>
@@ -608,7 +608,7 @@ class PlansPage extends React.Component<Props, {}> {
           {this.state.productSelectionErrorMsg && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "-15px"}} sm={12} className={"c-subheader-text error"}>
                     {this.state.productSelectionErrorMsg}
                   </Col> }
-          <Col sm={3} className="continue-to-next-steps" style={{ }}>
+          <Col className="continue-to-next-steps c-center" style={{ }}>
             <Button style={{marginTop: "0px"}} className="c-button-default circular hidden-xs" onClick={(){
                 this.redirectToNextSteps()
               }}
