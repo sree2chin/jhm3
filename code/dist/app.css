@@ -1814,18 +1814,18 @@ input.form-control:focus {
   margin-top: 12px; }
 
 .product-pager-container .plan-total-container {
-  width: 54.17%;
-  padding-left: 0px;
+  width: 54.17vw;
   position: fixed;
   bottom: 50px;
-  z-index: 40;
-  margin-right: 25% !important;
-  margin-left: 23.5% !important; }
+  left: 50%;
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-left: calc(-27.085% + 7.5px) !important; }
   .product-pager-container .plan-total-container.hidden-xs {
     z-index: 10100; }
   .product-pager-container .plan-total-container .plans-selector-container {
     margin-left: 20px;
-    margin-right: -30px; }
+    margin-right: 0px; }
     .product-pager-container .plan-total-container .plans-selector-container .plan-total-text {
       color: #999999; }
 
@@ -1935,6 +1935,40 @@ input.form-control:focus {
     padding-left: 5px;
     font-size: 14px;
     margin-top: 6px; } }
+
+/*@media (min-width: 768px) {
+	.product-pager-container .plan-total-container.hidden-xs {
+		width: 55.57vw;
+		margin-left: calc(-27.085% - 7.5px)!important;
+	}
+}*/
+@media (min-width: 768px) {
+  .product-pager-container .plan-total-container.hidden-xs {
+    width: 55.57vw;
+    margin-left: calc(-27.085% - 7.5px) !important; } }
+
+@media (min-width: 768px) and (max-width: 1225px) {
+  .product-pager-container .plan-total-container.hidden-xs {
+    width: 55.57vw;
+    margin-left: calc(-27.085% - 7.5px) !important; } }
+
+/*
+@media(min-width: 1225px) {
+	.product-pager-container .plan-total-container.hidden-xs {
+		width: 54.17vw;
+		position: fixed;
+		bottom: 50px;
+		left: 50%;
+		padding-right: 0px;
+		padding-left: 0px;
+		margin-left: calc(-27.085% + 7.5px) !important;
+	}
+}
+*/
+@media (max-width: 1225px) {
+  .product-pager-container .plan-total-container.hidden-xs {
+    width: 55.57vw;
+    margin-left: calc(-27.085% - 7.5px) !important; } }
 
 @media (min-width: 750px) and (max-width: 1100px) {
   .product-pager-container .plan-details-container .plan-sider-info-text .plan-face-val-slider {
@@ -2117,6 +2151,22 @@ input.form-control:focus {
   height: 100vh; }
   .pdf-modal-container .modal-body #pdf-iframe {
     height: 100%; }
+
+.instant-id-check-popup-container {
+  color: #515151; }
+  .instant-id-check-popup-container .instant-id-check-header {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: left; }
+  .instant-id-check-popup-container .instant-id-check-desc {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    text-align: left; }
+  .instant-id-check-popup-container .c-button-default.btn.circular {
+    width: 30%;
+    float: left; }
 
 .email-modal-container.agent-modal-container .email-input-container {
   margin-top: -2px; }
@@ -2828,6 +2878,10 @@ input.form-control:focus {
     left: 0%; } }
 
 @media (max-width: 768px) {
+  .questions-container {
+    width: 100%; } }
+
+@media (max-width: 768px) {
   .before-select-persons {
     margin-bottom: 0px;
     padding-bottom: 0px; }
@@ -3022,8 +3076,9 @@ input.form-control:focus {
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
     border: solid 1px #d4d4d4;
     padding-left: 0% !important;
-    margin-left: 4% !important;
-    bottom: 80px; }
+    margin-left: 0% !important;
+    bottom: 80px;
+    left: 0px; }
     .product-pager-container .plan-total-container .plans-selector-container .plan-total-text {
       text-align: right;
       margin-top: 2px;
