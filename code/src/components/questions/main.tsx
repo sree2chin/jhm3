@@ -176,6 +176,25 @@ class Main extends React.Component<Props, {}> {
       }
     }
     return false;
+  };
+  checkIfRemaingQuestionsAreLabels(qs: any, startIndex: number) {
+    var onlyLabelsPresent = true;
+    var i=0;
+    for (i=startIndex; (i<qs.length && onlyLabelsPresent); i++) {
+      onlyLabelsPresent = onlyLabelsPresent && qs[i].type == "label";
+    }
+
+    return onlyLabelsPresent;
+  };
+  insertRemainingQuestionLabels(qs: any, startIndex: number, actualQuestionLists: any, questionsList: any) {
+    var i=0;
+    for (i=startIndex; i<qs.length; i++) {
+      var q = qs[i];
+      actualQuestionLists.push(q);
+      questionsList.push( <Label
+              {...q}
+            />);
+    }
   }
   reRecursiveGetQuestions1(data, questionsList, preQ, actualQuestionLists) {
     questionsList.isQuestionsList = false;
@@ -188,6 +207,11 @@ class Main extends React.Component<Props, {}> {
         if (q.type == "group") {
           questionsList.groupHeader = questionsList.groupHeader || [];
           questionsList.groupHeader.push(q.caption);
+          if (q.tags && q.tags.SubgroupRendering) {
+            questionsList.prefixOfGroupForLabelGroup = q.caption;
+          } else {
+            questionsList.prefixOfGroupForLabelGroup = "";
+          }
         }
         q.key = q.id;
         if (q.answerState == "valid" || this.questionsAlreadySubmitted(q)) {
@@ -209,6 +233,9 @@ class Main extends React.Component<Props, {}> {
           if (questionsList.length > 0) {
             this.actualQuestionLists = actualQuestionLists;
             boundaryReached = true;
+            if (this.checkIfRemaingQuestionsAreLabels(data, i+1)) {
+              this.insertRemainingQuestionLabels(data, i+1, questionsList, actualQuestionLists);
+            }
             return questionsList;
           }
         }
@@ -221,6 +248,7 @@ class Main extends React.Component<Props, {}> {
               onChange={this.onChangeInput.bind(this)}
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               key={q.id}
+              prefixOfGroupForLabelGroup={questionsList.prefixOfGroupForLabelGroup}
             />);
             actualQuestionLists.push(q);
           } else {
@@ -230,6 +258,7 @@ class Main extends React.Component<Props, {}> {
               onChange={this.onChangeInput.bind(this)}
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               key={q.id}
+              prefixOfGroupForLabelGroup={questionsList.prefixOfGroupForLabelGroup}
             />)
             actualQuestionLists.push(q);
           }
@@ -241,13 +270,15 @@ class Main extends React.Component<Props, {}> {
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               multi={true}
               key={q.id}
+              prefixOfGroupForLabelGroup={questionsList.prefixOfGroupForLabelGroup}
             />)
           actualQuestionLists.push(q);
         } else if (q.type == "label") {
-          /*preQ = q;
-          questionsList.push( <Label
+          preQ = q;
+          actualQuestionLists.push(q);
+          questionsList.push(<Label
                   {...q}
-                />)*/
+                />)
         } else if (q.type == "list") {
           var qL = q.questions;
           if (q.prototype && q.prototype.elements) {
@@ -332,6 +363,7 @@ class Main extends React.Component<Props, {}> {
                   onChange={this.onChangeInput.bind(this)}
                   alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
                   key={q.id}
+                  prefixOfGroupForLabelGroup={questionsList.prefixOfGroupForLabelGroup}
                 />)
                 actualQuestionLists.push(q);
         } else if (q.type == "date") {
@@ -378,6 +410,11 @@ class Main extends React.Component<Props, {}> {
           if (qe.type == "group") {
             questionsList.groupHeader = [];
             questionsList.groupHeader.push(qe.caption);
+            if (qe.tags && qe.tags.SubgroupRendering) {
+              questionsList.prefixOfGroupForLabelGroup = qe.caption;
+            } else {
+              questionsList.prefixOfGroupForLabelGroup = "";
+            }
           }
           this.noFoGroupsCompleted = i;
           var q = qe;
@@ -436,9 +473,9 @@ class Main extends React.Component<Props, {}> {
               />)
             actualQuestionLists.push(q);
           } else if (q.type == "label") {
-            /*questionsList.push( <Label
+            questionsList.push( <Label
                     {...q}
-                  />)*/
+                  />)
           } else if (q.type=="list") {
             var qL = q.questions;
             if (q.prototype && q.prototype.elements) {
@@ -834,9 +871,9 @@ class Main extends React.Component<Props, {}> {
           counter={this.counter++}
         />;
     } else if (q.type == "label") {
-      /*questionsList.push( <Label
+      qComponent = <Label
               {...q}
-            />)*/
+            />;
     } else if (q.type == "number" || q.type=="text") {
       qComponent = <CustomInput
         question={q}
@@ -1302,6 +1339,12 @@ class Main extends React.Component<Props, {}> {
               questionsList.questionStructCaption
             }
             </Row>
+            {questionsList.prefixOfGroupForLabelGroup && <Row>
+              <Col sm={12} className={"c-subheader-text fs18"} style={{marginBottom: "10px", marginLeft: "0px"}}>
+                {questionsList.prefixOfGroupForLabelGroup}
+              </Col>
+            </Row>}
+
             {questionsList}
             {!questionsList.isQuestionsList && <div className="question-action-btn-container">
               <Button className={`c-button-default circular next-step-btn action`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
@@ -1310,7 +1353,7 @@ class Main extends React.Component<Props, {}> {
                   Previous
                   {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>
-              {this.state.singleselectionQuestionsSubmitting && <i className="fa fa-circle-o-notch fa-spin fa-fw fa-3x" style={{position: "relative", top: "14px"}}></i>}
+              {this.state.singleselectionQuestionsSubmitting && <i className="fa fa-circle-o-notch fa-spin fa-fw fa-2x" style={{position: "relative", top: "14px"}}></i>}
               {!this.isOnlyQuestionSingleSelection() && <Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular  action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                     this.onQuestionSubmit()
                   }}

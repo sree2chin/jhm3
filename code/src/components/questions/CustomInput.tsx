@@ -24,8 +24,8 @@ export default class CustomInput extends React.Component<Props, {}> {
     return className;
   }
   componentWillMount() {
-    if (!isEmpty(this.props.question) && !isEmpty(this.props.question.answer) && String(this.props.question.answer).length > 0) {
-      var answer = this.props.question.type=="number" ? parseInt(this.props.question.answer) : this.props.question.answer;
+    if (!isEmpty(this.props.question) && !isEmpty(String(this.props.question.answer)) && String(this.props.question.answer).length > 0) {
+      var answer = this.props.question.type=="number" ? String(this.props.question.answer).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : this.props.question.answer;
       this.setState({
         value: answer
       });
@@ -33,8 +33,8 @@ export default class CustomInput extends React.Component<Props, {}> {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!isEmpty(nextProps.question) && !isEmpty(this.props.question.answer) && String(this.props.question.answer).length > 0) {
-      var answer = nextProps.question.type=="number" ? parseInt(nextProps.question.answer) : nextProps.question.answer
+    if (!isEmpty(nextProps.question) && !isEmpty(String(nextProps.question.answer)) && String(nextProps.question.answer).length > 0) {
+      var answer = nextProps.question.type=="number" ? String(nextProps.question.answer).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : nextProps.question.answer
       this.setState({
         value: answer
       });
@@ -56,7 +56,19 @@ export default class CustomInput extends React.Component<Props, {}> {
         }
         return this.props.question.answer && String(this.props.question.answer).length > 0;
       } else {
-        return true;
+        if (this.props.question.answer && String(this.props.question.answer).length > 0) {
+          if (constraints.pattern) {
+            if (this.props.question.answer) {
+              return new RegExp(this.props.question.constraints.pattern).test(this.props.question.answer)
+            } else {
+              return false;
+            }
+          } else {
+            return true;
+          }
+        } else {
+          return true;
+        }
       }
     } else {
       return true;
@@ -72,6 +84,7 @@ export default class CustomInput extends React.Component<Props, {}> {
         value: val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
       });
     } else {
+      this.props.onChange(this.props.question, val);
       this.setState({
         value: val
       });

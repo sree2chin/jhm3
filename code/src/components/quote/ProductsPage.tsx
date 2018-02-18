@@ -35,7 +35,7 @@ class ProductsPage extends React.Component<Props, {}> {
   componentDidMount () {
     console.log("DDFDSD");
     setTimeout(() => {
-      this._scrollView.scrollTo({y: 100})
+      //this._scrollView.scrollTo({y: 100})
     }, 1)
   }
   componentWillMount() {
