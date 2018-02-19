@@ -32,7 +32,7 @@ export default class InstantIdCheckPopup extends React.Component<Props, {}> {
                         {this.props.instantIdCheckData && this.props.instantIdCheckData.message_data}
                       </Col>
                       <Col>
-                        <Button className={`c-button-default circular action`} style={{marginLeft: "15px"}} onClick={()=>{
+                        <Button className={`c-button-default circular action`} style={{marginLeft: "15px", marginTop: "15px"}} onClick={()=>{
                             this.props.onCloseModal()
                           }}>
                             CLOSE
