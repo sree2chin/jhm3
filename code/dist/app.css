@@ -2172,10 +2172,10 @@ input.form-control:focus {
     width: 30%;
     float: left; }
   .instant-id-check-popup-container .modal-big.modal-dialog {
-    width: 54.24%;
-    transform: translate(0, 25%) !important; }
+    width: 54.24%; }
     .instant-id-check-popup-container .modal-big.modal-dialog .modal-header {
-      border-bottom: 0px; }
+      border-bottom: 0px;
+      padding-bottom: 0px; }
     .instant-id-check-popup-container .modal-big.modal-dialog .modal-body {
       padding: 0px 130px 64px 71px; }
 
