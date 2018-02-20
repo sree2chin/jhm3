@@ -38,7 +38,11 @@
   .c-button-default.btn:focus {
     background-color: #5091c7 !important;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14) !important;
-    color: #ffffff !important; }
+    color: #ffffff !important;
+    outline: -webkit-focus-ring-color auto 5px;
+    outline-color: -webkit-focus-ring-color;
+    outline-style: none;
+    outline-width: 0px; }
   .c-button-default.btn:active {
     background-color: #317dbd !important;
     color: #ffffff !important;
@@ -1314,6 +1318,11 @@ input.form-control:focus {
     .questions-container .c-button-default.btn.circular.next-step-btn {
       background-color: #fb4d3d !important;
       margin-right: 30px; }
+    .questions-container .c-button-default.btn.circular:focus {
+      outline: -webkit-focus-ring-color auto 5px;
+      outline-color: -webkit-focus-ring-color;
+      outline-style: none;
+      outline-width: 0px; }
     .questions-container .c-button-default.btn.circular.single-select-btn {
       border-radius: 22px !important;
       background-color: #ffffff !important;
