@@ -255,7 +255,6 @@ class Main extends React.Component<Props, {}> {
               onChange={this.onChangeInput.bind(this)}
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               key={q.id}
-              prefixOfGroupForLabelGroup={questionsList.prefixOfGroupForLabelGroup}
             />);
             actualQuestionLists.push(q);
           } else {
@@ -265,7 +264,6 @@ class Main extends React.Component<Props, {}> {
               onChange={this.onChangeInput.bind(this)}
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               key={q.id}
-              prefixOfGroupForLabelGroup={questionsList.prefixOfGroupForLabelGroup}
             />)
             actualQuestionLists.push(q);
           }
@@ -277,7 +275,6 @@ class Main extends React.Component<Props, {}> {
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               multi={true}
               key={q.id}
-              prefixOfGroupForLabelGroup={questionsList.prefixOfGroupForLabelGroup}
             />)
           actualQuestionLists.push(q);
         } else if (q.type == "label") {
@@ -370,7 +367,6 @@ class Main extends React.Component<Props, {}> {
                   onChange={this.onChangeInput.bind(this)}
                   alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
                   key={q.id}
-                  prefixOfGroupForLabelGroup={questionsList.prefixOfGroupForLabelGroup}
                 />)
                 actualQuestionLists.push(q);
         } else if (q.type == "date") {

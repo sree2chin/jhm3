@@ -72,10 +72,12 @@ class Signature extends React.Component<Props, {}> {
         browserHistory.push("/authorize" + queryParamsString);
         return;
       }
-      if (isEmpty(this.props.confirmationData.data.current_document_data)) {
-        browserHistory.push("/offer" + queryParamsString);
-      } else {
+      if (!isEmpty(link)){
         window.location.href = link;
+      } else if (isEmpty(this.props.confirmationData.data.current_document_data)) {
+        browserHistory.push("/offer" + queryParamsString);
+      } else if(isEmpty(this.props.confirmationData.data.offer_data)) {
+        browserHistory.push("/payment_success" + queryParamsString);
       }
 
     }).catch(()=>{
@@ -124,7 +126,7 @@ class Signature extends React.Component<Props, {}> {
                   }
                 }
                 queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-                browserHistory.push("/all-questions" + queryParamsString);
+                //browserHistory.push("/all-questions" + queryParamsString);
               }
             }>
                 Redirect to review page

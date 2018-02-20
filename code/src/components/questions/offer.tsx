@@ -86,10 +86,12 @@ class Offer extends React.Component<Props, {}> {
         browserHistory.push("/authorize" + queryParamsString);
         return;
       }
-      if (isEmpty(this.props.confirmationData.data.current_document_data)) {
-        browserHistory.push("/offer" + queryParamsString);
-      } else {
+      if (!isEmpty(link)){
         window.location.href = link;
+      } else if (isEmpty(this.props.confirmationData.data.current_document_data)) {
+        browserHistory.push("/offer" + queryParamsString);
+      } else if(isEmpty(this.props.confirmationData.data.offer_data)) {
+        browserHistory.push("/payment_success" + queryParamsString);
       }
 
     }).catch(()=>{

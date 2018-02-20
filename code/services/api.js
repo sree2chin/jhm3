@@ -180,9 +180,9 @@ module.exports = new function(){
     formData.amount = req.body.ssl_amount;
 
     appendAgentInfo(req, formData);
-    console.log("formData: " + JSON.stringify(formData));
+    console.log("\n\n\nformData in makePayment: " + JSON.stringify(formData) + "\n\n\n");
     request({
-      url: restOptions.host + '/v1/questions/makepayment',
+      url: restOptions.host + '/v1/questions/confirm',
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },

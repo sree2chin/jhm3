@@ -74,7 +74,7 @@ module.exports = function(app) {
 
   app.get('/payment', function(req, res, next) {
     req.session = req.session || {};
-    req.session.queryParams = {};
+    req.session.queryParams = req.session.queryParams || {};
     var html = JSON.parse(req.session.postPayment).body;
     var htmlP = html.split("<head>")
 
