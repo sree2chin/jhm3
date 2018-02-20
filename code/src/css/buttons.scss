@@ -13,6 +13,10 @@
         background-color: $btn-hover-bg-color!important;
         box-shadow: $btn-hover-box-shadow!important;
         color: $btn-hover-color!important;
+        outline: -webkit-focus-ring-color auto 5px;
+        outline-color: -webkit-focus-ring-color;
+        outline-style: none;
+        outline-width: 0px;
     }
     &:active {
         background-color: $btn-active-bg-color!important;

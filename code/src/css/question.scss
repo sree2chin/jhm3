@@ -194,6 +194,12 @@
             background-color: #fb4d3d!important;
             margin-right: 30px;
         }
+        &:focus {
+            outline: -webkit-focus-ring-color auto 5px;
+            outline-color: -webkit-focus-ring-color;
+            outline-style: none;
+            outline-width: 0px;
+        }
 
         &.single-select-btn {
             border-radius: 22px !important;
