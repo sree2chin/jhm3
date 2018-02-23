@@ -150,6 +150,7 @@ class Offer extends React.Component<Props, {}> {
         <Subheader
           breadCrumbs={breadCrumbs}
           noFoGroupsCompleted={[]}
+          location={this.props.location}
         />
         <Row className="questions-container c-center offer-container">
             <Col sm={6} className="offer-product-payment-info">

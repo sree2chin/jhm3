@@ -113,6 +113,7 @@ class Signature extends React.Component<Props, {}> {
         <Subheader
           breadCrumbs={breadCrumbs}
           noFoGroupsCompleted={[breadCrumbs.length-2]}
+          location={this.props.location}
         />
         {this.props.confirmationData && this.props.confirmationData.data && this.props.confirmationData.data.no_of_signed_documents == 0 && <Row>
             <Col onClick={()=>{

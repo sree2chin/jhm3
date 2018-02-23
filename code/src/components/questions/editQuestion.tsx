@@ -951,6 +951,7 @@ class Main extends React.Component<Props, {}> {
         <Subheader
           breadCrumbs={breadCrumbs}
           noFoGroupsCompleted={[noFoGroupsCompleted]}
+          location={this.props.location}
         />
         <Row className="questions-container c-center edit-questions-container">
           <Row>

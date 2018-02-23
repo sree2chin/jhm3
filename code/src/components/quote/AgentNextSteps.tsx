@@ -277,7 +277,9 @@ class PlansPage extends React.Component<Props, {}> {
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
     return (
       <div className="next-steps-container">
-        <Subheader />
+        <Subheader
+          location={this.props.location}
+        />
 
         <Row>
           <Col sm={8} className="c-center customer-next-steps-container agent-next-steps-outer-container">

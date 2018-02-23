@@ -41,9 +41,14 @@ export default class CustomInput extends React.Component<Props, {}> {
     }
   }
   validate() {
-    if(!this.props.alreadyOnceSubmitted) {return true;}
+    //if(!this.props.alreadyOnceSubmitted) {return true;}
+    if (!this.state.onceChanged) {
+      if (!this.props.alreadyOnceSubmitted) {
+        return true;
+      }
+    }
+    var constraints = this.props.question.constraints;
     if (this.props.question.constraints) {
-      var constraints = this.props.question.constraints;
       var isValid = true;
 
       if (constraints.required) {
@@ -81,12 +86,14 @@ export default class CustomInput extends React.Component<Props, {}> {
       //val = val.replace(/[^\w\s]/gi, '');
       this.props.onChange(this.props.question, val);
       this.setState({
-        value: val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        value: val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+        onceChanged: true
       });
     } else {
       this.props.onChange(this.props.question, val);
       this.setState({
-        value: val
+        value: val,
+        onceChanged: true
       });
     }
 
@@ -100,7 +107,10 @@ export default class CustomInput extends React.Component<Props, {}> {
 
     return (
      <div className={wrapperClass}>
-        <label className="fs18" htmlFor={question.name}>{question.caption}</label>
+        <label className="fs18" htmlFor={question.name}>
+          {question.constraints && question.constraints.required && <span style={{color: "rgb(255, 73, 73)", marginRight: "9px"}}>*</span>}
+          {question.caption}
+        </label>
         <div className="field">
           <input type={"text"}
             name={question.name}

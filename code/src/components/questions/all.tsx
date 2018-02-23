@@ -535,6 +535,7 @@ class Main extends React.Component<Props, {}> {
         <Subheader
           breadCrumbs={breadCrumbs}
           noFoGroupsCompleted={noFoGroupsCompleted}
+          location={this.props.location}
         />
         <div className="all-review-questions-container">
             <Nav className="all-questions-side-bar" bsStyle="pills" stacked onSelect={()=>{}}>

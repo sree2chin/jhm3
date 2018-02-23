@@ -32,7 +32,7 @@ export default class Plan extends React.Component<Props, {}> {
     if (riders && riders.RiderCount == "0") {
       return null;
     }
-    if (riders && riders.length > 0) {return (
+    return (
       <Row className="all-riders-info-container">
           <Col key={person.name} sm={12} className="c-one-person-container riders-outer-container">
             <Row>
@@ -40,8 +40,8 @@ export default class Plan extends React.Component<Props, {}> {
                 Riders for {person.name}
               </Col>
               <Col sm={8} className="riders-container c-center container-max-width">
-                  {map(riders, (rider, key) =>
-                      if (typeof rider !="string"){
+                  {map(riders, (rider, key) => {
+                      if (typeof rider !="string") {
                         if (String(key) == "WP") {
                           if (rider.Premium) {
                             return <Rider key={rider.Name}
@@ -65,15 +65,13 @@ export default class Plan extends React.Component<Props, {}> {
                       } else {
                         return null;
                       }
-                  )}
+                  })}
               </Col>
             </Row>
           </Col>
         )}
       </Row>
-      );
-    } else {
-      return null
-    }
+    );
+
   }
 }

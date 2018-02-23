@@ -16,13 +16,19 @@ export default class SingleSelection extends React.Component<Props, {}> {
   state={}
   onChange(val) {
     this.setState({
-      selectedId: val.id
+      selectedId: val.id,
+      onceChanged: true
     });
     this.props.onChange(this.props.question, val);
   }
 
   validate() {
-    if(!this.props.alreadyOnceSubmitted) {return true;}
+    //if(!this.props.alreadyOnceSubmitted) {return true;}
+    if (!this.state.onceChanged) {
+      if (!this.props.alreadyOnceSubmitted) {
+        return true;
+      }
+    }
     if (this.props.question.constraints) {
       var constraints = this.props.question.constraints;
       if (constraints.required) {
@@ -58,6 +64,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
     return (
      <div className="row">
         <Col sm={12} className={"c-subheader-text fs18"}>
+        {question.constraints && question.constraints.required && <span style={{color: "rgb(255, 73, 73)", marginRight: "9px"}}>*</span>}
           {question.caption}
         </Col>
           <Col sm={12} style={{paddingRight: "22px", marginBottom: "20px"}} className="person-gender-container">

@@ -282,7 +282,9 @@ class PlansPage extends React.Component<Props, {}> {
     return (
       <div className="next-steps-container">
         <ScrollToTopOnMount />
-        <Subheader />
+        <Subheader
+          location={this.props.location}
+        />
 
         <Row>
           <Col className="c-center customer-next-steps-container container-max-width">

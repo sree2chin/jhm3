@@ -239,7 +239,9 @@ class Main extends React.Component<Props, {}> {
     return (
       <div>
         <ScrollToTopOnMount />
-        <Subheader />
+        <Subheader
+          location={this.props.location}
+        />
         <SelectPersons onSubmit={this.submitEmailForm.bind(this)} />
         <div className="row c-quote">
           {this.props.noOfPersons && <div>

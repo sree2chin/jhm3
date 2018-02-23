@@ -24,6 +24,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
     }
     return (
      <div className="label-container" style={{marginTop: "30px", marginBottom: "30px"}}>
+      {question.constraints && question.constraints.required && <span>*</span>}
         <label> {this.props.caption} </label >
       </div>
     );

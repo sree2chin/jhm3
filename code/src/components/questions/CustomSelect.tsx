@@ -19,7 +19,8 @@ export default class CustomSelect extends React.Component<Props, {}> {
 
   onChange(val) {
     this.setState({
-      state: val
+      state: val,
+      onceChanged: true
     });
     this.props.onChange(this.props.question, val);
   }
@@ -45,7 +46,12 @@ export default class CustomSelect extends React.Component<Props, {}> {
     return finalOptions;
   }
   validate() {
-    if(!this.props.alreadyOnceSubmitted) {return true;}
+    //if(!this.props.alreadyOnceSubmitted) {return true;}
+    if (!this.state.onceChanged) {
+      if (!this.props.alreadyOnceSubmitted) {
+        return true;
+      }
+    }
     if (this.props.multi) {
       return this.props.question.answer && this.props.question.answer.length > 0;
     }
@@ -77,6 +83,7 @@ export default class CustomSelect extends React.Component<Props, {}> {
     return (
      <div>
         <Col className={"c-subheader-text fs18"} style={{marginTop: "5px", paddingLeft: "0px", marginBottom: "18px"}}>
+        {question.constraints && question.constraints.required && <span style={{color: "rgb(255, 73, 73)", marginRight: "9px"}}>*</span>}
           {question.caption}
         </Col>
           <Col style={{paddingRight: "15px", marginBottom: "30px"}} className="person-gender-container c-custom-select">

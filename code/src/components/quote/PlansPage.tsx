@@ -348,7 +348,9 @@ class PlansPage extends React.Component<Props, {}> {
     return (
       <div className="product-pager-container">
         <ScrollToTopOnMount />
-        <Subheader />
+        <Subheader
+          location={this.props.location}
+        />
         {this.props.noOfPersons==2 &&
           <Row className="plans-product-header visible-xs">
             <Col sm={8} className="c-center">

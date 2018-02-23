@@ -384,7 +384,9 @@ class ProductsPage extends React.Component<Props, {}> {
     return (
       <div className="product-pager-container" ref={(c) => { this._scrollView = c; }}>
         <ScrollToTopOnMount />
-        <Subheader />
+        <Subheader
+          location={this.props.location}
+        />
         <div className="visible-xs">
         { this.props.products && this.props.products.length >=1 && this.props.products[0] &&
                 this.props.products[0].products_data && this.props.products[0].products_data.no_of_products!="0" &&

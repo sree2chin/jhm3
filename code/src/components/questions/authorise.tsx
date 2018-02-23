@@ -201,6 +201,7 @@ class Signature extends React.Component<Props, {}> {
         <Subheader
           breadCrumbs={breadCrumbs}
           noFoGroupsCompleted={[breadCrumbs.length-2]}
+          location={this.props.location}
         />
         <Row className="questions-container c-center">
             {this.getMainComponenets()}

@@ -609,8 +609,8 @@ class Main extends React.Component<Props, {}> {
   validateTextField(q) {
     if (q.constraints) {
       var constraints = q.constraints;
-        var isValid = true;
-        if (constraints.required) {
+      var isValid = true;
+      if (constraints.required) {
           if (constraints.pattern) {
             if (q.answer) {
               return new RegExp(q.constraints.pattern).test(q.answer)
@@ -636,7 +636,7 @@ class Main extends React.Component<Props, {}> {
         }
       } else {
         return true;
-      }
+    }
   }
 
   validateSingleSelection(q) {
@@ -1278,6 +1278,7 @@ class Main extends React.Component<Props, {}> {
         <Subheader
           breadCrumbs={breadCrumbs}
           noFoGroupsCompleted={[noFoGroupsCompleted]}
+          location={this.props.location}
         />
         <Row className="questions-container c-center">
           <Row>
