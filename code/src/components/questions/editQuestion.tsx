@@ -635,6 +635,8 @@ class Main extends React.Component<Props, {}> {
       answered_questions.push(q.id)
       if (q.type == "text") {
         allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
+      } else if (q.type == "number") {
+        allQuestionsValid = allQuestionsValid && !!this.validateTextField(String(q));
       } else if (q.type == "singleselection") {
         allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
       } else if (q.type == "date") {
@@ -681,10 +683,12 @@ class Main extends React.Component<Props, {}> {
           var queryParams = this.props.location.query;
           var queryParamsString = "?";
           for(var k in queryParams) {
-            if (queryParams[k]) {
-              queryParamsString += k + "=" + queryParams[k] + "&";
-            } else {
-              queryParamsString += k + "&";
+            if (k!="fromReviewPage" && k!="questionId") {
+              if (queryParams[k]) {
+                queryParamsString += k + "=" + queryParams[k] + "&";
+              } else {
+                queryParamsString += k + "&";
+              }
             }
           }
           queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);

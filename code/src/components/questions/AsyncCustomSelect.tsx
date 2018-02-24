@@ -4,6 +4,7 @@ import { Async } from 'react-select';
 import Autosuggest, { ItemAdapter } from 'react-bootstrap-autosuggest';
 import * as fetch from "isomorphic-fetch";
 import {getFactorsearch} from '../../actions/Questions';
+import {isEmpty} from "underscore";
 
 interface question {
   label: any
@@ -48,6 +49,21 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
     items: [],
     reposMessage: null
   };
+  componentWillMount() {
+    if (!isEmpty(this.props.question) && this.props.question.answer) {
+      this.setState({
+        selectedItem: this.props.question.answer
+      });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!isEmpty(nextProps.question) && this.props.question.answer && !isEmpty(String(nextProps.question.answer))) {
+      this.setState({
+        selectedItem: this.props.question.answer
+      });
+    }
+  }
 
   onItemChange(val) {
     this.setState({

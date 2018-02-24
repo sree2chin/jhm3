@@ -684,6 +684,8 @@ class Main extends React.Component<Props, {}> {
       answered_questions.push(q.id)
       if (q.type == "text") {
         allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
+      } else if (q.type == "number") {
+        allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
       } else if (q.type == "singleselection") {
         allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
       } else if (q.type == "date") {
@@ -698,6 +700,8 @@ class Main extends React.Component<Props, {}> {
         each(answers, (q)=> {
           answered_questions.push(q.id)
           if (q.type == "text") {
+            allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
+          } else if (q.type == "number") {
             allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
           } else if (q.type == "singleselection") {
             allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
@@ -716,6 +720,8 @@ class Main extends React.Component<Props, {}> {
             answered_questions.push(q.id)
             if (q.type == "text") {
               allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
+            } else if (q.type == "number") {
+              allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
             } else if (q.type == "singleselection") {
               allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
             } else if (q.type == "date") {
@@ -731,6 +737,8 @@ class Main extends React.Component<Props, {}> {
           each(answers, (q)=> {
             answered_questions.push(q.id)
             if (q.type == "text") {
+              allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
+            } else if (q.type == "number") {
               allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
             } else if (q.type == "singleselection") {
               allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
@@ -836,6 +844,9 @@ class Main extends React.Component<Props, {}> {
 
         if (qe.type == "group" || qe.type == "assessment-factor-group" || qe.hasReflexive) {
           targetQuestion = this.findQuestionById(q.questions, questionId)
+          if (qe.tags && qe.tags.SubgroupRendering && !isEmpty(targetQuestion)) {
+            this.previousQuestionsPrefixOfGroupForLabelGroup = qe.caption;
+          }
         }
 
         if (qe.type == "list" && q.answer && q.answer[0].elements) {
@@ -844,6 +855,9 @@ class Main extends React.Component<Props, {}> {
 
         if (qe.type == "struct") {
           targetQuestion = this.findQuestionById(q.elements, questionId)
+          if (!isEmpty(targetQuestion)) {
+            this.previousQuestionStructCaption = qe.caption;
+          }
         }
 
 
@@ -931,6 +945,9 @@ class Main extends React.Component<Props, {}> {
     var previousQuestionIds = this.state.previousQuestionIds;
     var qComps = [];
     var aQuestions = [];
+    this.previousQuestionsPrefixOfGroupForLabelGroup = "";
+    this.previousQuestionStructCaption = "";
+
     if (!isEmpty(this.questions) && !isEmpty(this.questions.data)) {
       if (this.questions.data.questionnaire.questions) {
         for(var i=0; i<previousQuestionIds.length; i++) {
@@ -940,6 +957,8 @@ class Main extends React.Component<Props, {}> {
          }
       }
     }
+
+    qComps.prefixOfGroupForLabelGroup = this.previousQuestionsPrefixOfGroupForLabelGroup;
     this.actualQuestionLists = aQuestions;
     return qComps;
   }
