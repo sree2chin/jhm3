@@ -505,9 +505,15 @@ class Main extends React.Component<Props, {}> {
 
   }
   makeGroupActive(groupHeader) {
-    this.setState({
+    if (this.state.activeGroup == groupHeader) {
+      this.setState({
+        activeGroup: null
+      });
+    } else {
+      this.setState({
         activeGroup: groupHeader
-    });
+      });
+    }
   }
 
   goToEditQuestionPage(q) {
