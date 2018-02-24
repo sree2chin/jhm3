@@ -1392,7 +1392,7 @@ input.form-control:focus {
   color: #515151;
   font-family: Nunito-ExtraBold; }
   .question-action-btn-container.questions-content-container.Add-a-Primary-Benefi .Add-a-Primary-Benefi-description-text {
-    font-family: Nunito;
+    font-family: NunitoRegular;
     font-size: 16px;
     font-weight: normal;
     color: #464646;
@@ -1414,7 +1414,8 @@ input.form-control:focus {
   margin-left: 30px; }
   .all-group-header .down-arrow-container {
     float: right;
-    padding-right: 25px; }
+    padding-right: 25px;
+    cursor: pointer; }
 
 .all-review-questions-container .all-questions-container {
   padding-bottom: 60px;
