@@ -18,6 +18,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
   }
 
   public render() {
+    var question = this.props.question || {};
     var wrapperClass : string = 'form-group';
     if (this.props.error && this.props.error.length > 0) {
      wrapperClass += " " + 'has-error';
