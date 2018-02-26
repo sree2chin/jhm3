@@ -221,7 +221,7 @@ class Main extends React.Component<Props, {}> {
           }
         }
         q.key = q.id;
-        if (q.answerState == "valid" || this.questionsAlreadySubmitted(q)) {
+        if ((q.answerState == "valid" || this.questionsAlreadySubmitted(q)) && q.answerState!="invalid") {
           if (q.hasReflexive) {
             if (q.questions) {
               var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists);
