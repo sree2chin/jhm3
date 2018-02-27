@@ -48,10 +48,36 @@ class Main extends React.Component<Props, {}> {
       this.setState({
         gettingQuestions: false
       });
+      var queryParams = this.props.location.query;
+      var queryParamsString = "?";
+      for(var k in queryParams) {
+        if (queryParams[k]) {
+          queryParamsString += k + "=" + queryParams[k] + "&";
+        } else {
+          queryParamsString += k + "&";
+        }
+      }
+      if (this.questions && this.questions.valid_user == 0) {
+        browserHistory.push("/authorize" + queryParamsString);
+        return;
+      }
     });
   }
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.questions)) {
+      var queryParams = this.props.location.query;
+      var queryParamsString = "?";
+      for(var k in queryParams) {
+        if (queryParams[k]) {
+          queryParamsString += k + "=" + queryParams[k] + "&";
+        } else {
+          queryParamsString += k + "&";
+        }
+      }
+      if (nextProps.questions.valid_user == 0) {
+        browserHistory.push("/authorize" + queryParamsString);
+        return;
+      }
       this.questions = JSON.parse(JSON.stringify(nextProps.questions));
       if (this.questions && this.questions.data && this.questions.data.questionnaire &&
         this.questions.data.questionnaire.questions && this.questions.data.questionnaire.questions[0] &&
