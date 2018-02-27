@@ -74,6 +74,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
     return (
         <Row style={{marginBottom: "25px", marginLeft: "0px"}}>
           <Col sm={12} className={"c-subheader-text fs18"} style={{marginBottom: "10px", paddingLeft: "0px"}}>
+          {question.constraints && question.constraints.required && <span style={{color: "rgb(255, 73, 73)", marginRight: "9px"}}>*</span>}
             {question.caption}
           </Col>
           <Col sm={12} className="birth-date-picker-container" >

@@ -143,6 +143,9 @@ module.exports = function(app) {
     });
   });
 
+  app.get('*.map', function(req, res, next) {
+    res.rend("");
+  });
   app.get('*', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     console.log("in * url: " + JSON.stringify(url_parts));
@@ -156,8 +159,5 @@ module.exports = function(app) {
     };
     templatePath = "../../dist/";
     res.render(templatePath);
-  });
-  app.get('*.map', function(req, res, next) {
-    res.rend("");
   });
 };
