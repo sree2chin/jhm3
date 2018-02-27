@@ -97,6 +97,11 @@ export default class SingleSelection extends React.Component<Props, {}> {
                   {question.constraints.patternViolationMessage || "Required"}
                 </div>
               }
+              {question.answerState=="invalid" &&
+                <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
+                  {"Required"}
+                </div>
+              }
             </Col>
           </Col>
       </div>

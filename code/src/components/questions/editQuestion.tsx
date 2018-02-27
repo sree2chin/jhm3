@@ -692,6 +692,10 @@ class Main extends React.Component<Props, {}> {
             }
           }
           queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+          if (this.questions.valid_user == 0) {
+            browserHistory.push("/authorize" + queryParamsString + "fromEditPage=true");
+            return;
+          }
             if (this.reflexiveQuestionModified) {
               setTimeout(()=>{
                 this.questionsSubmittedCount++;

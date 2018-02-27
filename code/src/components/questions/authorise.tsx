@@ -117,18 +117,36 @@ class Signature extends React.Component<Props, {}> {
       confirmPasswordError: false
     });
     this.props.changePassword(data).then(() => {
+      var fromEditPage = false, fromReviewPage=true;
+
       if (cb) { cb(); }
       var queryParams = this.props.location.query;
       var queryParamsString = "?";
       for(var k in queryParams) {
-        if (queryParams[k]) {
-          queryParamsString += k + "=" + queryParams[k] + "&";
+        if (k =="fromEditPage") {
+          fromEditPage = true;
+        } if (k=="fromReviewPage") {
+          fromReviewPage = true;
         } else {
-          queryParamsString += k + "&";
+          if (queryParams[k]) {
+            queryParamsString += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString += k + "&";
+          }
         }
       }
+
       queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-      return browserHistory.push("/questions" + queryParamsString);
+      if (fromEditPage == true) {
+        return browserHistory.push("/edit-questions" + queryParamsString);
+      } if (fromReviewPage == true) {
+        return browserHistory.push("/all-questions" + queryParamsString);
+      } else {
+        return browserHistory.push("/questions" + queryParamsString);
+      }
+
+
+
     }).catch(()=>{
       console.log(this.questions);
     });

@@ -133,6 +133,11 @@ export default class CustomInput extends React.Component<Props, {}> {
               {question.constraints.patternViolationMessage || "Required"}
             </div>
           }
+          {question.answerState=="invalid" &&
+            <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
+              {"Required"}
+            </div>
+          }
         </div>
       </div>
     );

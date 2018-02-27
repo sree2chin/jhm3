@@ -99,6 +99,11 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
                 {question.constraints.minValueViolationMessage}
               </div>
             }
+            {question.answerState=="invalid" &&
+              <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
+                {"Required"}
+              </div>
+            }
         </Row>
     );
   }
