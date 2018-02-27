@@ -157,4 +157,7 @@ module.exports = function(app) {
     templatePath = "../../dist/";
     res.render(templatePath);
   });
+  app.get('*.map', function(req, res, next) {
+    res.rend("");
+  });
 };
