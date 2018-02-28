@@ -221,7 +221,7 @@ class Main extends React.Component<Props, {}> {
           }
         }
         q.key = q.id;
-        if ((q.answerState == "valid" || this.questionsAlreadySubmitted(q)) && q.answerState!="invalid") {
+        if ((q.answerState == "valid" || this.questionsAlreadySubmitted(q)) && q.answerState!="invalid" &&  q.answerState!="missing") {
           if (q.hasReflexive) {
             if (q.questions) {
               var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists);
@@ -422,7 +422,7 @@ class Main extends React.Component<Props, {}> {
           this.noFoGroupsCompleted = i;
           var q = qe;
           q.key = q.id;
-          if (q.answerState == "valid") {
+          if ((q.answerState == "valid" || this.questionsAlreadySubmitted(q)) && q.answerState!="invalid" &&  q.answerState!="missing") {
             if (q.hasReflexive) {
               if (q.questions){
                 var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists);
@@ -796,7 +796,12 @@ class Main extends React.Component<Props, {}> {
           return;
         }
         if (this.questions.data.completed ==true || this.questions.data.completed =="true") {
-          browserHistory.push("/all-questions" +queryParamsString);
+          if (this.questions.data.application_confirm_status == 1) {
+            browserHistory.push("/signature" + queryParamsString);
+          } else {
+            browserHistory.push("/all-questions" +queryParamsString);
+          }
+
           return;
         }
         if (this.state.previousQuestionHanldingIndex || this.state.previousQuestionHanldingIndex == 0) {

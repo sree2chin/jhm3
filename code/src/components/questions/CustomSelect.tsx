@@ -116,6 +116,11 @@ export default class CustomSelect extends React.Component<Props, {}> {
                   {"Required"}
                 </div>
               }
+              {question.answerState=="missing" &&
+                <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
+                  {"Required"}
+                </div>
+              }
             </Col>
           </Col>
       </div>
