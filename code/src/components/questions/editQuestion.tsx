@@ -636,7 +636,7 @@ class Main extends React.Component<Props, {}> {
       if (q.type == "text") {
         allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
       } else if (q.type == "number") {
-        allQuestionsValid = allQuestionsValid && !!this.validateTextField(String(q));
+        allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
       } else if (q.type == "singleselection") {
         allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
       } else if (q.type == "date") {
