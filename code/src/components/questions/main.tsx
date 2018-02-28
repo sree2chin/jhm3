@@ -631,6 +631,7 @@ class Main extends React.Component<Props, {}> {
               return true;
             }
           } else {
+            delete q.answer;
             return true;
           }
         }
