@@ -117,7 +117,7 @@ class Signature extends React.Component<Props, {}> {
       confirmPasswordError: false
     });
     this.props.changePassword(data).then(() => {
-      var fromEditPage = false, fromReviewPage=true;
+      var fromEditPage = false, fromReviewPage=false;
 
       if (cb) { cb(); }
       var queryParams = this.props.location.query;
@@ -125,7 +125,7 @@ class Signature extends React.Component<Props, {}> {
       for(var k in queryParams) {
         if (k =="fromEditPage") {
           fromEditPage = true;
-        } if (k=="fromReviewPage") {
+        } else if (k=="fromReviewPage") {
           fromReviewPage = true;
         } else {
           if (queryParams[k]) {

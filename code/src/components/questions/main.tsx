@@ -60,12 +60,12 @@ class Main extends React.Component<Props, {}> {
           instantIdCheckData: this.questions.instant_id_check
         });
       };
-      if (this.questions && this.questions.data && this.questions.data.completed) {
-        browserHistory.push("/all-questions" + queryParamsString);
-        return;
-      }
       if (this.questions && this.questions.valid_user == 0) {
         browserHistory.push("/authorize" + queryParamsString);
+        return;
+      }
+      if (this.questions && this.questions.data && this.questions.data.completed) {
+        browserHistory.push("/all-questions" + queryParamsString);
         return;
       }
       this.setState({
