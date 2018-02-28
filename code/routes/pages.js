@@ -150,11 +150,12 @@ module.exports = function(app) {
   app.get('*.map', function(req, res, next) {
     res.rend("");
   });
+
   app.get('*', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     console.log("in * url: " + JSON.stringify(url_parts));
     req.session = req.session || {};
-    req.session.queryParams = {};
+    //req.session.queryParams = {};
     if (!_.isEmpty(url_parts.query)) {
       req.session.queryParams = req.session.queryParams || {};
       for(var k in url_parts.query) {
