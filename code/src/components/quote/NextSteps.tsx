@@ -181,6 +181,9 @@ class PlansPage extends React.Component<Props, {}> {
         [k1]: true,
         [k2]: false
       });
+      if (this.props.quoteResponse && this.props.quoteResponse.redirect_url && this.props.quoteResponse.redirect_url.length>0) {
+        window.location.href = this.props.quoteResponse.redirect_url;
+      }
     }).catch(()=>{
       this.submmitedProductForm = false;
     });
@@ -456,7 +459,8 @@ const mapStateToProps = (state: any): Props => {
     noOfPersons: state.selectPersons.noOfPersons,
     plans: state.quotes.plans,
     premiums: state.quotes.premiums,
-    is_agent: state.quotes.is_agent
+    is_agent: state.quotes.is_agent,
+    quoteResponse: state.quotes.quoteResponse
   };
 }
 

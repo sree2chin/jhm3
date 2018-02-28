@@ -198,6 +198,9 @@ class PlansPage extends React.Component<Props, {}> {
         [k1]: true,
         [k2]: false
       });
+      if (this.props.quoteResponse && this.props.quoteResponse.redirect_url && this.props.quoteResponse.redirect_url.length>0) {
+        window.location.href = this.props.quoteResponse.redirect_url;
+      }
     }).catch(()=>{
       this.submmitedProductForm = false;
     });
