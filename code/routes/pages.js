@@ -143,6 +143,10 @@ module.exports = function(app) {
     });
   });
 
+  app.get('/favicon.ico', function(req, res, next) {
+    res.rend("");
+  });
+
   app.get('*.map', function(req, res, next) {
     res.rend("");
   });
