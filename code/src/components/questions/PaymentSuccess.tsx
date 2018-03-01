@@ -46,24 +46,30 @@ class paymentSuccess extends React.Component<Props, {}> {
       }
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-    this.props.makePayment(this.props.location.query).then((res)=>{
-      var link = this.props.paymentData && this.props.paymentData.data &&
-      this.props.paymentData.data.current_document_data && this.props.paymentData.data.current_document_data.sign_url;
-      if (this.props.paymentData.valid_user == 0) {
-        browserHistory.push("/authorize" + queryParamsString);
-        return;
-      }
-      if (!isEmpty(link)){
-        window.location.href = link;
-      } else if (isEmpty(this.props.confirmationData.data.current_document_data) && !isEmpty(this.props.confirmationData.data.offer_data)) {
-        browserHistory.push("/offer" + queryParamsString);
-      } else if(isEmpty(this.props.confirmationData.data.offer_data) && isEmpty(this.props.confirmationData.data.offer_data)) {
-        this.setState({
-          allDone: true
-        });
-        //browserHistory.push("/payment_success" + queryParamsString);
-      }
-    });
+    if (this.props.location && this.props.location.query && this.props.location.query.transaction_id) {
+      this.props.makePayment(this.props.location.query).then((res)=>{
+        var link = this.props.paymentData && this.props.paymentData.data &&
+        this.props.paymentData.data.current_document_data && this.props.paymentData.data.current_document_data.sign_url;
+        if (this.props.paymentData.valid_user == 0) {
+          browserHistory.push("/authorize" + queryParamsString);
+          return;
+        }
+        if (!isEmpty(link)){
+          window.location.href = link;
+        } else if (isEmpty(this.props.confirmationData.data.current_document_data) && !isEmpty(this.props.confirmationData.data.offer_data)) {
+          browserHistory.push("/offer" + queryParamsString);
+        } else if(isEmpty(this.props.confirmationData.data.offer_data) && isEmpty(this.props.confirmationData.data.offer_data)) {
+          this.setState({
+            allDone: true
+          });
+          //browserHistory.push("/payment_success" + queryParamsString);
+        }
+      });
+    } else {
+      this.setState({
+        allDone: true
+      });
+    }
   }
   public render() {
        return (
@@ -76,9 +82,12 @@ class paymentSuccess extends React.Component<Props, {}> {
           </Row>
            <Row>
              <Col lg={3} md={3} sm={3}> </Col>
-             <Col lg={6} md={6} sm={6} xs={12} className="text-center payment_styles pt10 pb20" >
-                <h1 className="pb20">{this.props.paymentData && this.props.paymentData.data && this.props.paymentData.data.message}</h1>
-              </Col>
+              {this.state.this.state.allDone &&
+                <Col lg={6} md={6} sm={6} xs={12} className="text-center payment_styles pt10 pb20" >
+                  <h1 className="pb20">{this.props.paymentData && this.props.paymentData.data && this.props.paymentData.data.message}</h1>
+                  <h1 className="pb20">{this.props.confirmationData && this.props.confirmationData.data && this.props.confirmationData.data.message}</h1>
+                </Col>
+              }
            </Row>
         </div>
        );
@@ -87,7 +96,8 @@ class paymentSuccess extends React.Component<Props, {}> {
 
 const mapStateToProps = (state: any): Props => {
   return {
-    paymentData:  state.questions.paymentData
+    paymentData:  state.questions.paymentData,
+    confirmationData: state.questions.confirmationData
   };
 }
 
