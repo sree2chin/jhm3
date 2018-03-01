@@ -66,6 +66,7 @@ class paymentSuccess extends React.Component<Props, {}> {
              <Col lg={3} md={3} sm={3}> </Col>
              <Col lg={6} md={6} sm={6} xs={12} className="text-center payment_styles pt10 pb20" >
                 <h1 className="pb20">{this.props.paymentData && this.props.paymentData.data && this.props.paymentData.data.message}</h1>
+              </Col>
            </Row>
         </div>
        );
