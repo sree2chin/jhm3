@@ -46,7 +46,7 @@ class paymentSuccess extends React.Component<Props, {}> {
       }
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-    if (this.props.location && this.props.location.query && this.props.location.query.transaction_id) {
+    if (this.props.location && this.props.location.query && this.props.location.query.ssl_txn_id) {
       this.props.makePayment(this.props.location.query).then((res)=>{
         var link = this.props.paymentData && this.props.paymentData.data &&
         this.props.paymentData.data.current_document_data && this.props.paymentData.data.current_document_data.sign_url;
