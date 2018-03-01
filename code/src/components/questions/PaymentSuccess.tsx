@@ -21,6 +21,9 @@ class paymentSuccess extends React.Component<Props, {}> {
   transaction_id: any = [];
   card_number: any = [];
   componentWillMount() {
+    this.setState({
+      allDone: false
+    });
     console.log('query', this.props.location.query);
     let invoice_number = this.props.location.query.ssl_invoice_number;
     let amount = this.props.location.query.ssl_amount;
@@ -55,13 +58,22 @@ class paymentSuccess extends React.Component<Props, {}> {
       } else if (isEmpty(this.props.confirmationData.data.current_document_data) && !isEmpty(this.props.confirmationData.data.offer_data)) {
         browserHistory.push("/offer" + queryParamsString);
       } else if(isEmpty(this.props.confirmationData.data.offer_data) && isEmpty(this.props.confirmationData.data.offer_data)) {
-        browserHistory.push("/payment_success" + queryParamsString);
+        this.setState({
+          allDone: true
+        });
+        //browserHistory.push("/payment_success" + queryParamsString);
       }
     });
   }
   public render() {
        return (
          <div className="payment_styles_div">
+          <Row className="questions-container c-center">
+            {!this.state.allDone && <div className="questions-content-container final-loading-messages">
+                <div>Loading .... </div>
+                <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>
+            </div>}
+          </Row>
            <Row>
              <Col lg={3} md={3} sm={3}> </Col>
              <Col lg={6} md={6} sm={6} xs={12} className="text-center payment_styles pt10 pb20" >
