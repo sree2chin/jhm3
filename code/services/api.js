@@ -168,7 +168,7 @@ module.exports = new function(){
     }
 
     appendAgentInfo(req, formData);
-    console.log("formData: " + JSON.stringify(formData));
+    console.log("\n\n\nin confirmQuestions formData: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/questions/confirm',
       headers: {
@@ -229,7 +229,7 @@ module.exports = new function(){
     formData.password = req.body.password;
     formData.new_password = req.body.new_password;
     appendAgentInfo(req, formData);
-    console.log("\n\n\nformData: " + JSON.stringify(formData) +  "\n\n\n");
+    console.log("\n\n\n changePassword formData: " + JSON.stringify(formData) +  "\n\n\n");
     request({
       url: restOptions.host + '/v1/auth/setpassword',
       headers: {
