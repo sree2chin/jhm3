@@ -66,24 +66,6 @@ class paymentSuccess extends React.Component<Props, {}> {
              <Col lg={3} md={3} sm={3}> </Col>
              <Col lg={6} md={6} sm={6} xs={12} className="text-center payment_styles pt10 pb20" >
                 <h1 className="pb20">{this.props.paymentData && this.props.paymentData.data && this.props.paymentData.data.message}</h1>
-                <Row className="mb10">
-                  <Col lg={6} md={6} sm={6} xs={12} className="text-right"><h4>Your Card number : </h4></Col>
-                  <Col lg={6} md={6} sm={6} xs={12} className="text-left"><h4> {this.state.card_number}</h4></Col>
-                </Row>
-                <Row className="mb10">
-                  <Col lg={6} md={6} sm={6} xs={12} className="text-right"><h4>Transaction ID : </h4></Col>
-                  <Col lg={6} md={6} sm={6} xs={12} className="text-left"><h4> {this.state.transaction_id}</h4></Col>
-                </Row>
-                <Row className="mb10">
-                  <Col lg={6} md={6} sm={6} xs={12} className="text-right"><h4>Invoice number : </h4></Col>
-                  <Col lg={6} md={6} sm={6} xs={12} className="text-left"><h4> {this.state.invoice_number}</h4></Col>
-                </Row>
-                <Row className="mb10">
-                  <Col lg={6} md={6} sm={6} xs={12} className="text-right"><h4>Amount for order : </h4></Col>
-                  <Col lg={6} md={6} sm={6} xs={12} className="text-left"><h4> {this.state.amount}</h4></Col>
-                </Row>
-              </Col>
-              <Col lg={3} md={3} sm={3}> </Col>
            </Row>
         </div>
        );

@@ -114,7 +114,7 @@ export default class CustomSelect extends React.Component<Props, {}> {
               }
               {question.answerState=="invalid" &&
                 <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
-                  {"Required"}
+                  {"Invalid"}
                 </div>
               }
             </Col>

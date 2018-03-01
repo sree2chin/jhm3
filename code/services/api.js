@@ -20,6 +20,16 @@ module.exports = new function(){
     }
   };
 
+  var appendAgentPaymentInfo = function(req, data) {
+    if(req.session) {
+      if (req.session && req.session.paymentQueryParams) {
+        for(var k in req.session.paymentQueryParams) {
+          data[k] = req.session.paymentQueryParams[k];
+        }
+      }
+    }
+  };
+
   this.getQuotePremiums = function(req, cb) {
     var data = req.body;
     var url = restOptions.host + '/v1/quote/premiums';
@@ -179,7 +189,7 @@ module.exports = new function(){
     formData.transaction_id = req.body.ssl_txn_id;
     formData.amount = req.body.ssl_amount;
 
-    appendAgentInfo(req, formData);
+    appendAgentPaymentInfo(req, formData);
     console.log("\n\n\nformData in makePayment: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/questions/confirm',

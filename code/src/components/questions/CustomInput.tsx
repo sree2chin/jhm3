@@ -135,7 +135,7 @@ export default class CustomInput extends React.Component<Props, {}> {
           }
           {question.answerState=="invalid" &&
             <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
-              {"Required"}
+              {"Invalid"}
             </div>
           }
         </div>

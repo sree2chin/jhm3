@@ -192,7 +192,7 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
               }
               {question.answerState=="invalid" &&
                 <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
-                  {"Required"}
+                  {"Invalid"}
                 </div>
               }
             </Col>

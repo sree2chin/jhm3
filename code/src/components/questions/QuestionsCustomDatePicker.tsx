@@ -102,7 +102,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
             }
             {question.answerState=="invalid" &&
               <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
-                {"Required"}
+                {"Invalid"}
               </div>
             }
         </Row>

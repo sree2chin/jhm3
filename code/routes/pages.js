@@ -62,10 +62,11 @@ module.exports = function(app) {
     console.log("in normal url: " + JSON.stringify(url_parts));
     req.session = req.session || {};
     //req.session.queryParams = req.session.queryParams || {};
+    req.session.paymentQueryParams = {};
     if (!_.isEmpty(url_parts.query)) {
-      req.session.queryParams = req.session.queryParams || {};
+      req.session.paymentQueryParams = req.session.paymentQueryParams || {};
       for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k] || "";
+        req.session.paymentQueryParams[k] = url_parts.query[k] || "";
       }
     };
     templatePath = "../../dist/";
