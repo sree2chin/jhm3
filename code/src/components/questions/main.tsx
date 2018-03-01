@@ -671,6 +671,17 @@ class Main extends React.Component<Props, {}> {
       return true;
     }
   }
+  validateMultiSelection(q) {
+    if (q.constraints) {
+      var constraints = q.constraints;
+      if (constraints.required) {
+        return q.answer && q.answer.length > 0;
+      }
+      return true;
+    } else {
+      return true;
+    }
+  }
 
   onQuestionSubmit(notAddingOrDeletingBeneficiary, noOfBeneficiaryDeleted) {
     var answered_questions = [];
@@ -689,6 +700,8 @@ class Main extends React.Component<Props, {}> {
         allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
       } else if (q.type == "singleselection") {
         allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
+      } else if (q.type == "multiselection") {
+        allQuestionsValid = allQuestionsValid && !!this.validateMultiSelection(q);
       } else if (q.type == "date") {
         allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q);
       }
@@ -706,6 +719,8 @@ class Main extends React.Component<Props, {}> {
             allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
           } else if (q.type == "singleselection") {
             allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
+          } else if (q.type == "multiselection") {
+            allQuestionsValid = allQuestionsValid && !!this.validateMultiSelection(q);
           } else if (q.type == "date") {
             allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q);
           }
@@ -725,6 +740,8 @@ class Main extends React.Component<Props, {}> {
               allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
             } else if (q.type == "singleselection") {
               allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
+            } else if (q.type == "multiselection") {
+              allQuestionsValid = allQuestionsValid && !!this.validateMultiSelection(q);
             } else if (q.type == "date") {
               allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q);
             }
@@ -743,6 +760,8 @@ class Main extends React.Component<Props, {}> {
               allQuestionsValid = allQuestionsValid && !!this.validateTextField(q);
             } else if (q.type == "singleselection") {
               allQuestionsValid = allQuestionsValid && !!this.validateSingleSelection(q);
+            } else if (q.type == "multiselection") {
+              allQuestionsValid = allQuestionsValid && !!this.validateMultiSelection(q);
             } else if (q.type == "date") {
               allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q);
             }
