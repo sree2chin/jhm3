@@ -190,6 +190,7 @@ module.exports = new function(){
     formData.amount = req.body.ssl_amount;
 
     appendAgentPaymentInfo(req, formData);
+    appendAgentInfo(req, formData);
     console.log("\n\n\nformData in makePayment: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/questions/confirm',
