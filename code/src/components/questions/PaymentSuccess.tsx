@@ -52,9 +52,9 @@ class paymentSuccess extends React.Component<Props, {}> {
       }
       if (!isEmpty(link)){
         window.location.href = link;
-      } else if (isEmpty(this.props.paymentData.data.current_document_data)) {
-        //browserHistory.push("/offer" + queryParamsString);
-      } else if(isEmpty(this.props.paymentData.data.offer_data)) {
+      } else if (isEmpty(this.props.confirmationData.data.current_document_data) && !isEmpty(this.props.confirmationData.data.offer_data)) {
+        browserHistory.push("/offer" + queryParamsString);
+      } else if(isEmpty(this.props.confirmationData.data.offer_data) && isEmpty(this.props.confirmationData.data.offer_data)) {
         browserHistory.push("/payment_success" + queryParamsString);
       }
     });
