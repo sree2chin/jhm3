@@ -506,8 +506,9 @@ input.form-control:focus {
 .Select-control .Select-clear {
   display: none; }
 
-.react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range {
-  background-color: #317dbd !important; }
+.react-datepicker__input-container input {
+  padding-left: 15px;
+  width: 100%; }
 
 .c-quote {
   background-color: #fcfcfc;
@@ -1194,6 +1195,16 @@ input.form-control:focus {
 .questions-container {
   padding-bottom: 60px;
   width: 65.23%; }
+  .questions-container .react-datepicker__day--selected, .questions-container .react-datepicker__day--in-selecting-range, .questions-container .react-datepicker__day--in-range {
+    background-color: #317dbd !important; }
+  .questions-container .react-datepicker__day-name, .questions-container .react-datepicker__day {
+    width: 2.7rem !important; }
+  .questions-container .react-datepicker {
+    font-size: 1.4rem; }
+  .questions-container .react-datepicker__month {
+    margin: 1rem; }
+  .questions-container .react-datepicker-wrapper {
+    width: 30%; }
   .questions-container .questions-sub-group-header {
     font-family: Nunito;
     font-size: 24px;
@@ -1248,7 +1259,7 @@ input.form-control:focus {
     .questions-container .birth-date-picker-container .form-group {
       width: 65%; }
     .questions-container .birth-date-picker-container span.test-class + div label.control-label {
-      width: 15%; }
+      width: 13%; }
     .questions-container .birth-date-picker-container .custom-date-picker-container .custom-date-picker img {
       left: 3.5%;
       top: 13px; }

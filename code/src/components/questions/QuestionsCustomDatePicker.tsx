@@ -3,6 +3,8 @@ import {Button, Row, Col, FormGroup, Radio, ControlLabel} from "react-bootstrap"
 var BootStrapDatePicker = require("react-bootstrap-date-picker");
 import {DateInputComponent, DateFormats } from "react-controlled-date-input";
 import * as moment from "moment";
+import DatePicker from 'react-datepicker';
+import {isEmpty} from "underscore";
 
 interface Props extends React.Props<QuestionsCustomDatePicker> {
   question: any,
@@ -18,19 +20,35 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
   }
 
   state={}
+  componentWillMount() {
+    if (!isEmpty(this.props.question) && this.props.question.answer) {
+      this.setState({
+        s_birthDate: moment(this.props.question.answer)
+      });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!isEmpty(nextProps.question) && this.props.question.answer) {
+      this.setState({
+        s_birthDate: moment(nextProps.question.answer)
+      });
+    }
+  }
 
   onDateInputChange(year, month, date) {
     this.setState({ year, month, date });
     var momentDate = moment(new Date(month + "/" + date + "/" + year));
     if (momentDate.isValid()) {
-      this.onDateChange("s_birthDate", month + "/" + date + "/" + year, month + "/" + date + "/" + year);
+      //this.onDateChange("s_birthDate", month + "/" + date + "/" + year, month + "/" + date + "/" + year);
 
     }
   }
-  onDateChange(key, value, formattedDate) {
+
+  onDateChange(key, value) {
     this.setState({
-      [key]: moment(new Date(value)),
-      formattedDate
+      [key]: moment(value),
+      formattedDate: moment(value).format("MM/DD/YYYY")
     });
     this.props.onChange( this.props.question, moment(value).format("YYYY-MM-DD"));
   }
@@ -65,6 +83,51 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
       return true;
     }
   }
+  onChangeRaw(e) {
+    var parentClass = "";
+    /*if (this.props.index==0) {
+      parentClass=".first- ";
+    } else {
+      parentClass=".second-person-content ";
+    }*/
+    if (e.target.value) {
+      var val = e.target.value;
+      if (val.length == 1) {
+        if (isNaN(val) || parseInt(val) > 1) {
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = "";
+        };
+      } else if (val.length == 2) {
+        if (isNaN(val) || parseInt(val)>12) {
+          val = val.substr(0, 1);
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
+        } else {
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val + "/";
+        }
+      } else if (val.length == 4) {
+        var tempVal = val.substr(3, 1);
+        if (isNaN(tempVal) || parseInt(tempVal) > 3) {
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 3);
+        } else {
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
+        }
+      } else if (val.length == 5) {
+        var tempVal = val.substr(3, 2);
+        if (isNaN(tempVal) || parseInt(tempVal) > 31) {
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 4);
+        } else {
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val + "/";
+        }
+      } else if (val.length > 6) {
+        document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
+        return;
+        var tempVal = val.substr(5, 4);
+        if (isNaN(tempVal) || parseInt(tempVal) > 31) {
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 4);
+        }
+      }
+    }
+  }
+
   public render() {
     var wrapperClass : string = 'form-group';
     if (this.props.error && this.props.error.length > 0) {
@@ -81,17 +144,25 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
               <span className="test-class">
 
               </span>
-              <FormGroup controlId={"change_handler_" + question.personIndex}>
+              <FormGroup controlId={"change_handler_" + this.props.personIndex}>
                 <ControlLabel>
                   <div className="custom-date-picker-container">
-                    <span className="custom-date-picker" onClick={question.onClick}>
+                    <span className="custom-date-picker" onClick={this.props.onClick}>
                       <img src={"../images/calendar.svg"} />
                     </span>
                   </div>
                 </ControlLabel>
-                <DateInputComponent
-                  onChange={this.onDateInputChange.bind(this)}
-                  dateFormat={DateFormats.MMDDYYYY}/>
+                <DatePicker
+                      selected={this.state.s_birthDate}
+                      onChange={(date)=>{
+                        this.onDateChange("s_birthDate", date)
+                      }}
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                      placeholderText="MM/DD/YYYY"
+                      onChangeRaw={this.onChangeRaw.bind(this)}
+                  />
               </FormGroup>
 
           </Col>

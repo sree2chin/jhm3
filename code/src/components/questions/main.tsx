@@ -203,7 +203,7 @@ class Main extends React.Component<Props, {}> {
             />);
     }
   }
-  reRecursiveGetQuestions1(data, questionsList, preQ, actualQuestionLists) {
+  reRecursiveGetQuestions1(data, questionsList, preQ, actualQuestionLists, isPrefixGroup) {
     questionsList.isQuestionsList = false;
 
     if (!isEmpty(data)) {
@@ -214,17 +214,27 @@ class Main extends React.Component<Props, {}> {
         if (q.type == "group") {
           questionsList.groupHeader = questionsList.groupHeader || [];
           questionsList.groupHeader.push(q.caption);
+
+          if (!isPrefixGroup) {
+            questionsList.prefixOfGroupForLabelGroup = "";
+          }
+
           if (q.tags && q.tags.SubgroupRendering) {
+            isPrefixGroup = true;
             questionsList.prefixOfGroupForLabelGroup = q.caption;
           } else {
             questionsList.prefixOfGroupForLabelGroup = "";
+            isPrefixGroup = false;
           }
+        } else {
+          questionsList.prefixOfGroupForLabelGroup = "";
+          isPrefixGroup = false;
         }
         q.key = q.id;
         if ((q.answerState == "valid" || this.questionsAlreadySubmitted(q)) && q.answerState!="invalid" &&  q.answerState!="missing") {
           if (q.hasReflexive) {
             if (q.questions) {
-              var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists);
+              var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists, isPrefixGroup);
               if(reflexsiveQuestionList.length > 0){
                 questionsList.groupHeader = questionsList.groupHeader || [];
                 questionsList.groupHeader.push(q.caption);
@@ -410,11 +420,13 @@ class Main extends React.Component<Props, {}> {
         this.noFoGroupsCompleted = 0;
         for(var i=0; i<(this.questions.data.questionnaire.questions.length); i++) {
           var qe = this.questions.data.questionnaire.questions[i];
+          var isPrefixGroup = false;
           if (qe.type == "group") {
             questionsList.groupHeader = [];
             questionsList.groupHeader.push(qe.caption);
             if (qe.tags && qe.tags.SubgroupRendering) {
               questionsList.prefixOfGroupForLabelGroup = qe.caption;
+              isPrefixGroup = true;
             } else {
               questionsList.prefixOfGroupForLabelGroup = "";
             }
@@ -425,7 +437,7 @@ class Main extends React.Component<Props, {}> {
           if ((q.answerState == "valid" || this.questionsAlreadySubmitted(q)) && q.answerState!="invalid" &&  q.answerState!="missing") {
             if (q.hasReflexive) {
               if (q.questions){
-                var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists);
+                var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists, isPrefixGroup);
                 if(reflexsiveQuestionList.length > 0){
                   questionsList.groupHeader = questionsList.groupHeader || [];
                   questionsList.groupHeader.push(qe.caption);
@@ -519,7 +531,7 @@ class Main extends React.Component<Props, {}> {
               this.actualQuestionLists = actualQuestionLists;
               return questionsList;
             }
-            var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists)
+            var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists, isPrefixGroup)
             if(questionsFromGroup.length > 0) {
               var allQuestionsAreLabels = true;
               for(var i=0; i<questionsFromGroup.length; i++) {
@@ -1423,7 +1435,8 @@ class Main extends React.Component<Props, {}> {
             </Row>}
 
             {questionsList}
-            {!questionsList.isQuestionsList && <div className="question-action-btn-container">
+          </div>}
+          {!questionsList.isQuestionsList && <div className="question-action-btn-container">
               <Button className={`c-button-default circular next-step-btn action`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
                     this.handleBackSubmit()
                   }}>
@@ -1439,7 +1452,6 @@ class Main extends React.Component<Props, {}> {
                   {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>}
             </div>}
-          </div>}
           {questionsList.isQuestionsList &&
             map(questionsList.siblingComponents, (s, i)=>{
                 return <div className="" key={i}>
