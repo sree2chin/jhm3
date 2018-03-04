@@ -205,36 +205,33 @@ class Main extends React.Component<Props, {}> {
   }
   reRecursiveGetQuestions1(data, questionsList, preQ, actualQuestionLists, isPrefixGroup) {
     questionsList.isQuestionsList = false;
-
+    var currentIsPrefixGroup = false;
     if (!isEmpty(data)) {
       var boundaryReached = false;
       for(var i=0; i<(data.length); i++) {
         var qe = data[i];
         var q = qe;
+
         if (q.type == "group") {
           questionsList.groupHeader = questionsList.groupHeader || [];
           questionsList.groupHeader.push(q.caption);
-
-          if (!isPrefixGroup) {
-            questionsList.prefixOfGroupForLabelGroup = "";
-          }
-
           if (q.tags && q.tags.SubgroupRendering) {
-            isPrefixGroup = true;
+            currentIsPrefixGroup = true;
             questionsList.prefixOfGroupForLabelGroup = q.caption;
           } else {
             questionsList.prefixOfGroupForLabelGroup = "";
-            isPrefixGroup = false;
           }
         } else {
-          questionsList.prefixOfGroupForLabelGroup = "";
-          isPrefixGroup = false;
+          if (!isPrefixGroup) {
+            questionsList.prefixOfGroupForLabelGroup = "";
+          }
         }
+
         q.key = q.id;
         if ((q.answerState == "valid" || this.questionsAlreadySubmitted(q)) && q.answerState!="invalid" &&  q.answerState!="missing") {
           if (q.hasReflexive) {
             if (q.questions) {
-              var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists, isPrefixGroup);
+              var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists, currentIsPrefixGroup);
               if(reflexsiveQuestionList.length > 0){
                 questionsList.groupHeader = questionsList.groupHeader || [];
                 questionsList.groupHeader.push(q.caption);
@@ -327,7 +324,7 @@ class Main extends React.Component<Props, {}> {
             }
           }
           var qL = q.questions;
-          var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists)
+          var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists, currentIsPrefixGroup)
           if(questionsFromGroup.length > 0) {
             var allQuestionsAreLabels = true;
             for(var i=0; i<questionsFromGroup.length; i++) {
@@ -354,7 +351,7 @@ class Main extends React.Component<Props, {}> {
               return questionsList;
             }
           }
-          var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ, actualQuestionLists)
+          var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ, actualQuestionLists, currentIsPrefixGroup)
           if(questionsFromGroup.length > 0) {
             var allQuestionsAreLabels = true;
             for(var i=0; i<questionsFromGroup.length; i++) {
@@ -558,7 +555,7 @@ class Main extends React.Component<Props, {}> {
                 return questionsList;
               }
             }
-            var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ, actualQuestionLists)
+            var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ, actualQuestionLists, isPrefixGroup)
             if(questionsFromGroup.length > 0) {
               var allQuestionsAreLabels = true;
               for(var i=0; i<questionsFromGroup.length; i++) {
@@ -827,7 +824,7 @@ class Main extends React.Component<Props, {}> {
           return;
         }
         if (this.questions.data.completed ==true || this.questions.data.completed =="true") {
-          if (this.questions.data.application_confirm_status == 1) {
+          if (this.questions.application_confirm_status == 1) {
             browserHistory.push("/signature" + queryParamsString);
           } else {
             browserHistory.push("/all-questions" +queryParamsString);
@@ -1423,13 +1420,13 @@ class Main extends React.Component<Props, {}> {
           }
           {!questionsList.isQuestionsList && <div className="questions-content-container">
             {this.state.gettingQuestions && <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>}
-            <Row className="questions-sub-group-header">
+            <Row className="questions-sub-group-header fs18">
             {
               questionsList.questionStructCaption
             }
             </Row>
             {questionsList.prefixOfGroupForLabelGroup && <Row>
-              <Col sm={12} className={"c-subheader-text fs18"} style={{marginBottom: "10px", marginLeft: "0px"}}>
+              <Col sm={12} className={"c-subheader-text fs18 questions-sub-group-header"} style={{marginBottom: "10px", marginLeft: "0px"}}>
                 {questionsList.prefixOfGroupForLabelGroup}
               </Col>
             </Row>}
