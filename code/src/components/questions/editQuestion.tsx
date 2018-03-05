@@ -696,29 +696,50 @@ class Main extends React.Component<Props, {}> {
             browserHistory.push("/authorize" + queryParamsString + "fromEditPage=true");
             return;
           }
-            if (this.reflexiveQuestionModified) {
-              setTimeout(()=>{
-                this.questionsSubmittedCount++;
-                if (this.questionsSubmittedCount>=0) {
-                  var reflexiveQuestion = this.findQuestionById(this.questions.data.questionnaire.questions, this.reflexiveQuestioninPage.id)
-                  if (isEmpty(reflexiveQuestion.questions)) {
-                    browserHistory.push("/all-questions" + queryParamsString);
-                  } else {
-                    this.questionsSource = reflexiveQuestion;
-                    this.setState({
-                      questionsSource: this.questionsSource
-                    });
-                    if (this.getQuestions(null).length ==0) {
-                      browserHistory.push("/all-questions" + queryParamsString);
+          if (this.reflexiveQuestionModified) {
+            setTimeout(()=>{
+              this.questionsSubmittedCount++;
+              if (this.questionsSubmittedCount>=0) {
+                var reflexiveQuestion = this.findQuestionById(this.questions.data.questionnaire.questions, this.reflexiveQuestioninPage.id)
+                if (isEmpty(reflexiveQuestion.questions)) {
+                  if (this.questions && this.questions.data && this.questions.data.completed) {
+                    if (this.questions.application_confirm_status == 1) {
+                      browserHistory.push("/signature" + queryParamsString);
+                    } else {
+                      browserHistory.push("/all-questions" +queryParamsString);
                     }
+                    return;
                   }
                 } else {
-
+                  this.questionsSource = reflexiveQuestion;
+                  this.setState({
+                    questionsSource: this.questionsSource
+                  });
+                  if (this.getQuestions(null).length ==0) {
+                    if (this.questions && this.questions.data && this.questions.data.completed) {
+                      if (this.questions.application_confirm_status == 1) {
+                        browserHistory.push("/signature" + queryParamsString);
+                      } else {
+                        browserHistory.push("/all-questions" +queryParamsString);
+                      }
+                      return;
+                    }
+                  }
                 }
-              }, 200)
-            } else {
-              browserHistory.push("/all-questions" + queryParamsString);
+              } else {
+
+              }
+            }, 200)
+          } else {
+            if (this.questions && this.questions.data && this.questions.data.completed) {
+              if (this.questions.application_confirm_status == 1) {
+                browserHistory.push("/signature" + queryParamsString);
+              } else {
+                browserHistory.push("/all-questions" +queryParamsString);
+              }
+              return;
             }
+          }
         });
 
 

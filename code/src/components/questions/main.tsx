@@ -65,7 +65,11 @@ class Main extends React.Component<Props, {}> {
         return;
       }
       if (this.questions && this.questions.data && this.questions.data.completed) {
-        browserHistory.push("/all-questions" + queryParamsString);
+        if (this.questions.application_confirm_status == 1) {
+          browserHistory.push("/signature" + queryParamsString);
+        } else {
+          browserHistory.push("/all-questions" +queryParamsString);
+        }
         return;
       }
       this.setState({
@@ -88,9 +92,14 @@ class Main extends React.Component<Props, {}> {
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     if (this.questions && this.questions.data && this.questions.data.completed) {
-      browserHistory.push("/all-questions" + queryParamsString);
+      if (this.questions.application_confirm_status == 1) {
+        browserHistory.push("/signature" + queryParamsString);
+      } else {
+        browserHistory.push("/all-questions" +queryParamsString);
+      }
       return;
     }
+
     if (this.questions.valid_user == 0) {
       browserHistory.push("/authorize" + queryParamsString);
       return;
