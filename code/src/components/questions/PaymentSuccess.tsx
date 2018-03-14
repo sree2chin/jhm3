@@ -66,19 +66,11 @@ class paymentSuccess extends React.Component<Props, {}> {
         }
       });
     } else {
-      if (this.props.confirmationData && this.props.confirmationData.data && this.props.confirmationData.data.message) {
-        this.setState({
-          allDone: true
-        });
-        return;
-      }
-      if (this.props.paymentData && this.props.paymentData.data && this.props.paymentData.data.message) {
-        this.setState({
-          allDone: true
-        });
-        return;
-      }
-      browserHistory.push("/signature" + queryParamsString);
+      this.setState({
+        allDone: true
+      });
+
+      //browserHistory.push("/signature" + queryParamsString);
     }
   }
   shouldShowDefaultMessage() {

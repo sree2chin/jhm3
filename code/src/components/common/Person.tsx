@@ -91,13 +91,30 @@ export default class Person extends React.Component<Props, {}> {
         } else {
           document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val + "/";
         }
-      } else if (val.length > 6) {
+      } else if (val.length == 7) {
         document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
-        return;
-        var tempVal = val.substr(5, 4);
-        if (isNaN(tempVal) || parseInt(tempVal) > 31) {
-          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 4);
+        var tempVal = val.substr(6, 1);
+        if (isNaN(tempVal) || !(parseInt(tempVal)>=1 && parseInt(tempVal)<=2)) {
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 6);
         }
+      } else if (val.length == 8) {
+        var tempVal = val.substr(6, 2);
+        if (isNaN(tempVal) || !(parseInt(tempVal)>=19 && parseInt(tempVal)<=20)) {
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 7);
+        }
+      } else if (val.length == 9) {
+        var tempVal = val.substr(6, 3);
+        if (isNaN(tempVal)) {
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 8);
+        }
+      } else if (val.length == 10) {
+        var tempVal = val.substr(6, 4);
+        if (isNaN(tempVal)) {
+          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 9);
+        }
+      } else if (val.length > 10) {
+        var tempVal = val.substr(6, 4);
+        document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 10);
       }
     }
   }
