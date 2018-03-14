@@ -37,7 +37,7 @@ module.exports = new function(){
       applicants: JSON.stringify(data)
     };
     appendAgentInfo(req, formData);
-
+    console.log("\n\n\n in getQuotePremiums formData: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: url,
       formData: formData,
@@ -57,7 +57,7 @@ module.exports = new function(){
       applicants: JSON.stringify(data)
     };
     appendAgentInfo(req, formData);
-    console.log("formData: " + JSON.stringify(formData));
+    console.log("\n\n\nin getQuoteProducts formData: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: url,
       formData: formData,
@@ -76,6 +76,7 @@ module.exports = new function(){
       applicants: JSON.stringify(data)
     };
     appendAgentInfo(req, formData);
+    console.log("\n\n\nin getQuotePlans formData: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/quote/productplans',
       formData: formData,
@@ -91,7 +92,7 @@ module.exports = new function(){
   this.saveQuoteForm = function(req, cb){
     var data = req.body;
     appendAgentInfo(req, data);
-    console.log("getQuotePlans: " + data.user);
+    console.log("\n\n\nin saveQuoteForm formData: " + JSON.stringify(data) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/quote/savequote',
       formData: data,
@@ -107,6 +108,9 @@ module.exports = new function(){
   this.getQuestions = function(req, cb){
     var data = {};
     appendAgentInfo(req, data);
+
+    console.log("\n\n\nin getQuestions formData: " + JSON.stringify(data) + "\n\n\n");
+
     request({
       url: restOptions.host + '/v1/questions/questions',
       formData: data,
@@ -150,7 +154,6 @@ module.exports = new function(){
       form: paymentConfig
     }, function callback(err, httpResponse, body) {
       req.session.postPayment = JSON.stringify(httpResponse);
-      console.log("httpResponse in response: " + JSON.stringify(httpResponse));
       cb(err, httpResponse);
     });
   };

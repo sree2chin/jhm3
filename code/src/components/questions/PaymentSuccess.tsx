@@ -56,9 +56,9 @@ class paymentSuccess extends React.Component<Props, {}> {
         }
         if (!isEmpty(link)){
           window.location.href = link;
-        } else if (isEmpty(this.props.confirmationData.data.current_document_data) && !isEmpty(this.props.confirmationData.data.offer_data)) {
+        } else if (isEmpty(this.props.paymentData.data.current_document_data) && !isEmpty(this.props.paymentData.data.offer_data)) {
           browserHistory.push("/offer" + queryParamsString);
-        } else if(isEmpty(this.props.confirmationData.data.offer_data) && isEmpty(this.props.confirmationData.data.offer_data)) {
+        } else if(isEmpty(this.props.paymentData.data.offer_data) && isEmpty(this.props.paymentData.data.offer_data)) {
           this.setState({
             allDone: true
           });
@@ -66,10 +66,25 @@ class paymentSuccess extends React.Component<Props, {}> {
         }
       });
     } else {
-      this.setState({
-        allDone: true
-      });
+      if (this.props.confirmationData && this.props.confirmationData.data && this.props.confirmationData.data.message) {
+        this.setState({
+          allDone: true
+        });
+        return;
+      }
+      if (this.props.paymentData && this.props.paymentData.data && this.props.paymentData.data.message) {
+        this.setState({
+          allDone: true
+        });
+        return;
+      }
+      browserHistory.push("/signature" + queryParamsString);
     }
+  }
+  shouldShowDefaultMessage() {
+    this.state.allDone &&
+    !((this.props.paymentData && this.props.paymentData.data && this.props.paymentData.data.message) ||
+      (this.props.confirmationData && this.props.confirmationData.data && this.props.confirmationData.data.message))
   }
   public render() {
        return (
@@ -86,6 +101,8 @@ class paymentSuccess extends React.Component<Props, {}> {
                 <Col lg={6} md={6} sm={6} xs={12} className="text-center payment_styles pt10 pb20" >
                   <h1 className="pb20">{this.props.paymentData && this.props.paymentData.data && this.props.paymentData.data.message}</h1>
                   <h1 className="pb20">{this.props.confirmationData && this.props.confirmationData.data && this.props.confirmationData.data.message}</h1>
+                  {this.shouldShowDefaultMessage() &&
+                    <h1 className="pb20">{"Thanks for contacting us. We will reach you in sometime."}</h1>}
                 </Col>
               }
            </Row>

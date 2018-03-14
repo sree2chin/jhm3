@@ -84,7 +84,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
     }
   }
   onChangeRaw(e) {
-    var parentClass = "";
+    var parentClass = this.props.question.id;
     /*if (this.props.index==0) {
       parentClass=".first- ";
     } else {
@@ -135,7 +135,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
     }
     var question = this.props.question;
     return (
-        <Row style={{marginBottom: "25px", marginLeft: "0px"}}>
+        <Row className={question.id} style={{marginBottom: "25px", marginLeft: "0px"}}>
           <Col sm={12} className={"c-subheader-text fs18"} style={{marginBottom: "10px", paddingLeft: "0px"}}>
           {question.constraints && question.constraints.required && <span style={{color: "rgb(255, 73, 73)", marginRight: "9px"}}>*</span>}
             {question.caption}

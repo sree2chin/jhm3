@@ -530,7 +530,7 @@ class Main extends React.Component<Props, {}> {
               }
             }
             var qL = q.questions;
-            if (q.id == "Velocity.BeneficiaryInformation") {
+            if (q.caption.toLowerCase() == "beneficiaries") {
               questionsList.isQuestionsBeneficiaries = true;
               actualQuestionLists.primaryBeneficiariesMainQuestion = qL[0];
               actualQuestionLists.contingencyBeneficiariesMainQuestion = qL[1];
