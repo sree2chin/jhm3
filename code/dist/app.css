@@ -1927,13 +1927,12 @@ input.form-control:focus {
   .product-pager-container .plan-details-container .plan-length-container, .product-pager-container .plan-details-container .plan-cost-container {
     border-left: solid 1px #d4d4d4;
     height: 94px; }
-  .product-pager-container .plan-details-container .plan-length-container .plan-length-container-text {
-    margin-left: 5px; }
   .product-pager-container .plan-details-container .plan-length-container .death-benefit-key-text {
     padding-top: 40px; }
   .product-pager-container .plan-details-container .plan-length-container .death-benefit-key-value {
-    text-align: left;
-    margin-left: 5px; }
+    padding-top: 35px;
+    text-align: right;
+    font-size: 22px; }
   .product-pager-container .plan-details-container .plan-cost-container .plan-cost-text {
     padding-top: 7px; }
   .product-pager-container .plan-details-container .plan-cost-container .plan-cost-amount {
