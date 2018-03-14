@@ -52,6 +52,7 @@ export default class Plan extends React.Component<Props, {}> {
 
   },
   getPlan(plansData) {
+    if (isEmpty(plansData.plans_list)) { return {};}
     var plansList = plansData.plans_list;
     if (plansData.plans_list.constructor.toString().indexOf("Array") == -1) {
       plansList = [plansList];
@@ -88,7 +89,7 @@ export default class Plan extends React.Component<Props, {}> {
     }
 
     return plan;
-  },
+  };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps && nextProps.plans && nextProps.plans.plans_data) {
@@ -132,7 +133,7 @@ export default class Plan extends React.Component<Props, {}> {
 
   shouldShowPlanDropdowns() {
     return this.getPlansDetailsForDropdown().length > 1;
-  },
+  }
 
   getPaymentSchedules() {
     if(isEmpty(this.props.premiums) || isEmpty(this.props.premiums.plans_data) || isEmpty(this.props.premiums.plans_data.QuoteRateGrid) || isEmpty(this.props.premiums.plans_data.QuoteRateGrid.Col1)) {
@@ -321,7 +322,7 @@ export default class Plan extends React.Component<Props, {}> {
                 </Row>
               </Col>
               {this.isProductSPWL() || !this.shouldShowPlanDropdowns() ? null : <Col sm={3} className="plan-length-container">
-                <Row style={{ marginTop: "16px"}}  className="plan-length-container-text">
+                <Row style={{ marginTop: "16px", marginLeft: "5px"}}  className="plan-length-container-text">
                   Plan Choice
                 </Row>
                 <Row className="plan-length-container-selector">
@@ -335,12 +336,14 @@ export default class Plan extends React.Component<Props, {}> {
                   />
                 </Row>
               </Col>}
-              {this.isProductSPWL() || !this.shouldShowPlanDropdowns() ? (this.isProductSPWL() ?<Col sm={3} className="plan-length-container">
-                 <Row className="plan-length-container-text death-benefit-key-text">
-                   Death Benefit
-                 </Row>
-                 <Row className="plan-length-container-selector death-benefit-key-value">
-                   { this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.Plan && this.props.premiums.plans_data.Plan.DeathBenefit}
+              {this.isProductSPWL() || !this.shouldShowPlanDropdowns() ? (this.isProductSPWL() ? <Col sm={6} className="plan-length-container">
+                 <Row>
+                  <Col sm={6} className="plan-length-container-text death-benefit-key-text">
+                    Death Benefit
+                  </Col>
+                  <Col sm={6} className="plan-length-container-selector death-benefit-key-value">
+                    { this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.Plan && this.props.premiums.plans_data.Plan.DeathBenefit}
+                  </Col>
                  </Row>
                </Col> : <Col sm={6} className="plan-cost-container">
                 <Row style={{marginTop: "30px"}}>

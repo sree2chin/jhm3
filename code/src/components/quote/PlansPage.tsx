@@ -100,10 +100,19 @@ class PlansPage extends React.Component<Props, {}> {
     personOne.sPlanID = data[0].plan.PlanID;
     personOne.sProductID = data[0].productId;
     personOne.sFaceAmount = data[0].sFaceAmount;
+
+    if (data[0].plan.SpwlFlag == "1") {
+      personOne.sFaceAmount = 0;
+      personOne.sPremiumAmount = data[0].sFaceAmount;
+      personOne.sWP = "1";
+    } else {
+      personOne.sWP = "0";
+    }
+
     personOne.sClassNum="2";
     personOne.sDividendNum = "1";
     personOne.duration = data[0].plan.PlanName.split(" ")[0];
-    personOne.sWP="1";
+
     persons.push(personOne);
 
     var persons = [];
