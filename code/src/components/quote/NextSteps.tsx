@@ -154,6 +154,20 @@ class PlansPage extends React.Component<Props, {}> {
       persons.push(personTwo);
     }
   }
+  redirectToPlanPage() {
+    const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
+    var queryParams = this.props.location.query;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+    browserHistory.push(basePath + "plans" + queryParamsString);
+  }
   saveQuote() {
     const persons = [];
     this.constructPersonsInfo(persons);
@@ -287,6 +301,8 @@ class PlansPage extends React.Component<Props, {}> {
         <ScrollToTopOnMount />
         <Subheader
           location={this.props.location}
+          products={this.props.products}
+          plans={this.props.plans}
         />
 
         <Row>
@@ -403,11 +419,23 @@ class PlansPage extends React.Component<Props, {}> {
             >
               CONTINUE
             </Button>
+            <Button className={`hidden-xs c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
+                this.redirectToPlanPage()
+              }}
+            >
+              BACK
+            </Button>
             <Button className={`visible-xs c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
                 this.directToCorrespondingPage()
               }}
             >
               CONTINUE
+            </Button>
+            <Button className={`visible-xs c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
+                this.redirectToPlanPage()
+              }}
+            >
+              BACK
             </Button>
           </Col>
         </Row>

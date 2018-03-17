@@ -241,6 +241,9 @@ class Main extends React.Component<Props, {}> {
         <ScrollToTopOnMount />
         <Subheader
           location={this.props.location}
+          products={this.props.products}
+          plans={this.props.plans}
+          premiums={this.props.premiums}
         />
         <SelectPersons onSubmit={this.submitEmailForm.bind(this)} />
         <div className="row c-quote">
@@ -302,7 +305,8 @@ const mapStateToProps = (state: any): Props => {
     plans: state.quotes.plans,
     persons: state.quotes.persons,
     noOfPersons: state.selectPersons.noOfPersons,
-    is_agent: state.quotes.is_agent
+    is_agent: state.quotes.is_agent,
+    premiums: state.quotes.premiums
   };
 }
 

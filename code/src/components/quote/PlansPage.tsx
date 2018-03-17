@@ -313,8 +313,10 @@ class PlansPage extends React.Component<Props, {}> {
         total += riderAmount;
       }
     }
-    total = "$" + String(Math.round(total*100)/100);
-
+    total = "$" + String(Math.round(total*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    if (total.split(".") && total.split(".")[1] && total.split(".")[1].length==1) {
+      total += "0";
+    }
     return total;
 
   }
@@ -359,6 +361,9 @@ class PlansPage extends React.Component<Props, {}> {
         <ScrollToTopOnMount />
         <Subheader
           location={this.props.location}
+          products={this.props.products}
+          plans={this.props.plans}
+          premiums={this.props.premiums}
         />
         {this.props.noOfPersons==2 &&
           <Row className="plans-product-header visible-xs">
@@ -620,11 +625,19 @@ class PlansPage extends React.Component<Props, {}> {
                     {this.state.productSelectionErrorMsg}
                   </Col> }
           <Col className="continue-to-next-steps c-center" style={{ }}>
-            <Button style={{marginTop: "0px"}} className="c-button-default circular hidden-xs" onClick={(){
+            <Button style={{marginTop: "0px", marginRight: "14px"}} className="c-button-default circular hidden-xs" onClick={(){
                 this.redirectToNextSteps()
               }}
             >
               CONTINUE TO THE NEXT STEP
+              {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+            </Button>
+
+            <Button style={{marginTop: "0px"}} className="c-button-default circular hidden-xs" onClick={(){
+                this.redirectToProductPage()
+              }}
+            >
+              BACK
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
 
@@ -633,6 +646,13 @@ class PlansPage extends React.Component<Props, {}> {
               }}
             >
               CONTINUE TO THE NEXT STEP
+              {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+            </Button>
+            <Button className="c-button-default visible-xs" onClick={(){
+                this.redirectToProductPage()
+              }}
+            >
+              BACK
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
           </Col>

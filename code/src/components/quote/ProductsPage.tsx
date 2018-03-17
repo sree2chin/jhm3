@@ -357,6 +357,7 @@ class ProductsPage extends React.Component<Props, {}> {
     this.props.openEditPersonModal(person, personIndex);
   }
   shouldDisplayBackBtn() {
+    return true;
     var shouldRedirect = isEmpty(this.props.products) || isEmpty(this.props.products[0]);
     if(this.props.noOfPersons == 2) {
       shouldRedirect = isEmpty(this.props.products) || isEmpty(this.props.products[1]);
@@ -386,6 +387,9 @@ class ProductsPage extends React.Component<Props, {}> {
         <ScrollToTopOnMount />
         <Subheader
           location={this.props.location}
+          products={this.props.products}
+          plans={this.props.plans}
+          premiums={this.props.premiums}
         />
         <div className="visible-xs">
         { this.props.products && this.props.products.length >=1 && this.props.products[0] &&
@@ -483,41 +487,39 @@ class ProductsPage extends React.Component<Props, {}> {
 
 
         <Row className="product-continue-btn-main-container">
-          {!this.shouldDisplayBackBtn() && <Col sm={3} xs={12} className="product-continue-btn-container" style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
-            <Button className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
-                this.submitProductsForm()
-              }}
-              style={{ marginTop: "0px", marginBottom: "15px"}}
-            >
-              CONTINUE
-              {this.state.submittingProductsInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-            </Button>
-            <Button className={`c-button-default visible-xs ${this.getContinueBtnActiveClass()}`} style={{marginBottom: "15px"}} onClick={(){
-                this.submitProductsForm()
-              }}
-            >
-              CONTINUE
-              {this.state.submittingProductsInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-            </Button>
+          {<Col sm={3} xs={12} className="product-continue-btn-container" style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
+            <div style={{width: "91%"}}>
+              <Button style={{ marginTop: "0px", marginBottom: "15px", marginRight: "14px"}} className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
+                  this.submitProductsForm()
+                }}
+              >
+                CONTINUE
+                {this.state.submittingProductsInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+              </Button>
+              <Button className={`c-button-default visible-xs ${this.getContinueBtnActiveClass()}`} style={{marginBottom: "15px"}} onClick={()=>{
+                  this.submitProductsForm()
+                }}
+              >
+                CONTINUE
+                {this.state.submittingProductsInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+              </Button>
+              <Button className="c-button-default circular hidden-xs" onClick={()=>{
+                  this.redirectToMainPage()
+                }}
+                style={{ marginTop: "0px", marginBottom: "16px"}}
+              >
+                BACK
+              </Button>
+              <Button className="c-button-default visible-xs" style={{marginBottom: "15px"}} onClick={(){
+                  this.redirectToMainPage()
+                }}
+              >
+                BACK
+              </Button>
+            </div>
             {this.state.productSelectionErrorMsg && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "15px"}} sm={12} className={"c-subheader-text error"}>
                       {this.state.productSelectionErrorMsg}
                     </Col> }
-          </Col>
-          }
-          {this.shouldDisplayBackBtn() && <Col sm={3} xs={11} className="product-page-continue-btn" style={{ marginTop: "15px", marginLeft: "auto", marginRight: "auto", float: "none"}}>
-            <Button className="c-button-default circular hidden-xs" onClick={(){
-                this.redirectToMainPage()
-              }}
-              style={{ marginTop: "0px", marginBottom: "60px"}}
-            >
-              BACK
-            </Button>
-            <Button className="c-button-default visible-xs" style={{marginBottom: "15px"}} onClick={(){
-                this.redirectToMainPage()
-              }}
-            >
-              BACK
-            </Button>
           </Col>
           }
         </Row>
@@ -543,7 +545,8 @@ const mapStateToProps = (state: any): Props => {
     editablePerson: state.quotes.editablePerson,
     editablePersonIndex: state.quotes.editablePersonIndex,
     productValidations: state.quotes.productValidations,
-    is_agent: state.quotes.is_agent
+    is_agent: state.quotes.is_agent,
+    premiums: state.quotes.premiums
   };
 }
 

@@ -377,9 +377,10 @@
 	    padding-left: 0px;
 	    padding-right: 0px;
 	    display: inline-block;
-	    margin-left: 3.3%;
+		margin-left: 3.3%;
+		cursor: pointer;
 	}
-    &.col-xs-4, &.gather-information-container, &.next-steps {
+    &.col-xs-4, &.gather-information-container, &.product-selection-text-container, &.next-steps {
     	font-weight: 500;
     	color: #999999;
     	&.active {
@@ -414,7 +415,8 @@
 		    text-align: center;
 		    display: inline-block;
 		    padding-left: 5.5%!important;
-		    padding-right: 5.5%!important;
+			padding-right: 5.5%!important;
+			cursor: pointer;
 		}
 		&:before {
 			content: "";

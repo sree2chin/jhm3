@@ -2,12 +2,15 @@ import * as React from 'react';
 import {Link} from 'react-router';
 import { Navbar } from "react-bootstrap"
 import {Button, Row, Col} from "react-bootstrap";
-import {map} from "underscore";
+import {map, isEmpty} from "underscore";
 import { browserHistory } from 'react-router';
 
 interface Props extends React.Props<cfooter> {
   breadCrumbs?: any,
-  noFoGroupsCompleted?: any
+  noFoGroupsCompleted?: any,
+  products?: any,
+  plans?: any,
+  premiums?: any
 }
 
 export default class cfooter extends React.Component<Props, {}> {
@@ -25,7 +28,14 @@ export default class cfooter extends React.Component<Props, {}> {
         queryParamsString += k + "&";
       }
     }
-    browserHistory.push(basePath + page + queryParamsString);
+    if (page.indexOf("products") > -1 && !isEmpty(this.props.products)) {
+      browserHistory.push(basePath + page + queryParamsString);
+    } else if (page.indexOf("next-steps") > -1 && !isEmpty(this.props.premiums)) {
+      browserHistory.push(basePath + page + queryParamsString);
+    } else if (page.indexOf("products") <=-1 && page.indexOf("next-steps") <=-1) {
+      browserHistory.push(basePath + page + queryParamsString);
+    }
+
   }
   public render() {
     var breadCrumbs = this.props.breadCrumbs;
@@ -65,7 +75,7 @@ export default class cfooter extends React.Component<Props, {}> {
             </Row>
           </Col>
           <Col
-            className={`confirmation-header product-selection-text-container ${window.location.pathname.indexOf("products") >-1 ? "active" : ""}`}
+            className={`confirmation-header product-selection-text-container ${window.location.pathname.indexOf("products") >-1 || window.location.pathname.indexOf("plans") >-1 ? "active" : ""}`}
             onClick={()=>{
               this.goToPage("products")
             }}>
@@ -77,9 +87,9 @@ export default class cfooter extends React.Component<Props, {}> {
           </Col>
           <Col
             style={{}}
-            className={`confirmation-header next-steps ${window.location.pathname=="/next-steps" ? "active" : ""}`}
+            className={`confirmation-header next-steps ${window.location.pathname.indexOf("next-steps")>-1 ? "active" : ""}`}
             onClick={()=>{
-              this.goToPage("plans")
+              this.goToPage("next-steps")
             }}>
             <span>
               Next steps
