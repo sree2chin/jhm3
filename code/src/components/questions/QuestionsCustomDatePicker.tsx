@@ -84,7 +84,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
     }
   }
   onChangeRaw(e) {
-    var parentClass = this.props.question.id;
+    var parentClass = "." + this.props.question.id.replace(/[^a-zA-Z ]/g, "");
     /*if (this.props.index==0) {
       parentClass=".first- ";
     } else {
@@ -94,53 +94,53 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
       var val = e.target.value;
       if (val.length == 1) {
         if (isNaN(val) || parseInt(val) > 1) {
-          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = "";
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = "";
         };
       } else if (val.length == 2) {
         if (isNaN(val) || parseInt(val)>12) {
           val = val.substr(0, 1);
-          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
         } else {
-          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val + "/";
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val + "/";
         }
       } else if (val.length == 4) {
         var tempVal = val.substr(3, 1);
         if (isNaN(tempVal) || parseInt(tempVal) > 3) {
-          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 3);
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 3);
         } else {
-          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
         }
       } else if (val.length == 5) {
         var tempVal = val.substr(3, 2);
         if (isNaN(tempVal) || parseInt(tempVal) > 31) {
-          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 4);
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 4);
         } else {
-          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val + "/";
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val + "/";
         }
       } else if (val.length == 7) {
-        document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
+        document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
         var tempVal = val.substr(6, 1);
         if (isNaN(tempVal) || !(parseInt(tempVal)>=1 && parseInt(tempVal)<=2)) {
-          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 6);
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 6);
         }
       } else if (val.length == 8) {
         var tempVal = val.substr(6, 2);
         if (isNaN(tempVal) || !(parseInt(tempVal)>=19 && parseInt(tempVal)<=20)) {
-          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 7);
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 7);
         }
       } else if (val.length == 9) {
         var tempVal = val.substr(6, 3);
         if (isNaN(tempVal)) {
-          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 8);
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 8);
         }
       } else if (val.length == 10) {
         var tempVal = val.substr(6, 4);
         if (isNaN(tempVal)) {
-          document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 9);
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 9);
         }
       } else if (val.length > 10) {
         var tempVal = val.substr(6, 4);
-        document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 10);
+        document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 10);
       }
     }
   }
@@ -152,7 +152,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
     }
     var question = this.props.question;
     return (
-        <Row className={question.id} style={{marginBottom: "25px", marginLeft: "0px"}}>
+        <Row className={question.id.replace(/[^a-zA-Z ]/g, "")} style={{marginBottom: "25px", marginLeft: "0px"}}>
           <Col sm={12} className={"c-subheader-text fs18"} style={{marginBottom: "10px", paddingLeft: "0px"}}>
           {question.constraints && question.constraints.required && <span style={{color: "rgb(255, 73, 73)", marginRight: "9px"}}>*</span>}
             {question.caption}
