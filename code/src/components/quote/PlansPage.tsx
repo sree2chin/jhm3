@@ -625,34 +625,34 @@ class PlansPage extends React.Component<Props, {}> {
                     {this.state.productSelectionErrorMsg}
                   </Col> }
           <Col className="continue-to-next-steps c-center" style={{ }}>
+
             <Button style={{marginTop: "0px", marginRight: "14px"}} className="c-button-default circular hidden-xs" onClick={(){
-                this.redirectToNextSteps()
+                this.redirectToProductPage()
               }}
             >
-              CONTINUE TO THE NEXT STEP
+              BACK
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
-
             <Button style={{marginTop: "0px"}} className="c-button-default circular hidden-xs" onClick={(){
-                this.redirectToProductPage()
-              }}
-            >
-              BACK
-              {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-            </Button>
-
-            <Button className="c-button-default visible-xs" onClick={(){
                 this.redirectToNextSteps()
               }}
             >
               CONTINUE TO THE NEXT STEP
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
+
             <Button className="c-button-default visible-xs" onClick={(){
                 this.redirectToProductPage()
               }}
             >
               BACK
+              {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+            </Button>
+            <Button className="c-button-default visible-xs" onClick={(){
+                this.redirectToNextSteps()
+              }}
+            >
+              CONTINUE TO THE NEXT STEP
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
           </Col>

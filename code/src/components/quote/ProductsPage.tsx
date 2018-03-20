@@ -489,7 +489,20 @@ class ProductsPage extends React.Component<Props, {}> {
         <Row className="product-continue-btn-main-container">
           {<Col sm={3} xs={12} className="product-continue-btn-container" style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
             <div style={{width: "91%"}}>
-              <Button style={{ marginTop: "0px", marginBottom: "15px", marginRight: "14px"}} className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
+              <Button className="c-button-default circular hidden-xs" onClick={()=>{
+                  this.redirectToMainPage()
+                }}
+                style={{ marginTop: "0px", marginBottom: "16px", marginLeft: "63px"}}
+              >
+                BACK
+              </Button>
+              <Button className="c-button-default visible-xs" style={{marginBottom: "15px"}} onClick={(){
+                  this.redirectToMainPage()
+                }}
+              >
+                BACK
+              </Button>
+              <Button style={{ marginTop: "0px", marginBottom: "15px", marginLeft: "17px"}} className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
                   this.submitProductsForm()
                 }}
               >
@@ -502,19 +515,6 @@ class ProductsPage extends React.Component<Props, {}> {
               >
                 CONTINUE
                 {this.state.submittingProductsInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-              </Button>
-              <Button className="c-button-default circular hidden-xs" onClick={()=>{
-                  this.redirectToMainPage()
-                }}
-                style={{ marginTop: "0px", marginBottom: "16px"}}
-              >
-                BACK
-              </Button>
-              <Button className="c-button-default visible-xs" style={{marginBottom: "15px"}} onClick={(){
-                  this.redirectToMainPage()
-                }}
-              >
-                BACK
               </Button>
             </div>
             {this.state.productSelectionErrorMsg && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "15px"}} sm={12} className={"c-subheader-text error"}>
