@@ -2043,9 +2043,9 @@ input.form-control:focus {
 .next-steps-container .next-step-submit-btn-container {
   margin-top: 0px;
   padding-top: 0px;
-  width: 20.2%; }
+  width: 26.2%; }
   .next-steps-container .next-step-submit-btn-container .next-step-submit-btn {
-    width: 45%;
+    width: 40%;
     margin-top: 16px;
     margin-bottom: 124px;
     margin-left: 14px; }
@@ -3291,6 +3291,7 @@ input.form-control:focus {
     border-radius: 2px !important;
     background-color: white; }
     .next-steps-container .next-step-submit-btn-container .next-step-submit-btn {
+      width: 93%;
       margin-bottom: 15px;
       margin-top: 15px; }
   .next-steps-container .customer-next-steps-container {
