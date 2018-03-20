@@ -492,7 +492,7 @@ class ProductsPage extends React.Component<Props, {}> {
               <Button className="c-button-default circular hidden-xs" onClick={()=>{
                   this.redirectToMainPage()
                 }}
-                style={{ marginTop: "0px", marginBottom: "16px", marginLeft: "63px"}}
+                style={{ marginTop: "0px", marginBottom: "16px", marginLeft: "54px"}}
               >
                 BACK
               </Button>
