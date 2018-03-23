@@ -135,7 +135,7 @@ class PlansPage extends React.Component<Props, {}> {
     } else if (this.state.type_of_submission == 10006) {
       data.request_type = 6;
     } else if (this.state.type_of_submission == 10007) {
-      data.request_type = 6;
+      data.request_type = 7;
     }
   }
   saveQuote() {

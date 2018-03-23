@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Link} from 'react-router';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty, find} from "underscore";
+import RawHtml from "react-raw-html"
 
 interface Props extends React.Props<Plan> {
   rider: any,
@@ -24,6 +25,7 @@ export default class Plan extends React.Component<Props, {}> {
   state={}
   public render() {
     const {rider} = this.props;
+    RawHtml.addTag("mycooltag");
     if(!isEmpty(rider)) {
       return (
         <Col key={rider.Name} sm={4} className="rider-container single-product-container">
@@ -36,7 +38,11 @@ export default class Plan extends React.Component<Props, {}> {
             <Row>
               <Col sm={12} className="product-main-content">
                 <Row className="text-center">
-                  <div className="c-product-text">{rider.Description}</div>
+                  <div className="c-product-text">
+                    <RawHtml.mycooltag>
+                      {rider.Description}
+                    </RawHtml.mycooltag>
+                  </div>
                 </Row>
               </Col>
             </Row>
