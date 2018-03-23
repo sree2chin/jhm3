@@ -84,7 +84,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
     }
   }
   onChangeRaw(e) {
-    var parentClass = "." + this.props.question.id.replace(/[^a-zA-Z ]/g, "");
+    var parentClass = "." + this.props.question.id.replace(/[^a-zA-Z0-9]/g, "");
     /*if (this.props.index==0) {
       parentClass=".first- ";
     } else {
@@ -155,7 +155,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
     var minDate = moment('1900-01-01');
 
     return (
-        <Row className={question.id.replace(/[^a-zA-Z ]/g, "")} style={{marginBottom: "25px", marginLeft: "0px"}}>
+        <Row className={question.id.replace(/[^a-zA-Z0-9]/g, "")} style={{marginBottom: "25px", marginLeft: "0px"}}>
           <Col sm={12} className={"c-subheader-text fs18"} style={{marginBottom: "10px", paddingLeft: "0px"}}>
           {question.constraints && question.constraints.required && <span style={{color: "rgb(255, 73, 73)", marginRight: "9px"}}>*</span>}
             {question.caption}
