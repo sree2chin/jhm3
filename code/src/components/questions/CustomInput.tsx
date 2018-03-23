@@ -90,6 +90,12 @@ export default class CustomInput extends React.Component<Props, {}> {
         onceChanged: true
       });
     } else {
+      /*var sampleVal = "123-123-123-123";//this.props.question.sampleValue;
+
+      if (val.length > 0 && (sampleVal.length > val.length) && new RegExp(/^[a-zA-Z0-9_.-]*$/).test(sampleVal[val.length])) {
+        val = val + sampleVal[val.length];
+      }*/
+
       this.props.onChange(this.props.question, val);
       this.setState({
         value: val,
