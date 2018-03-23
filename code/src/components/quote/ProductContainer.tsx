@@ -95,7 +95,7 @@ export default class ProductContainer extends React.Component<Props, State> {
                   const product_image = 'term_image';
                 }else if(product_name == 'vantis velocity term with rop' || product_name == "level term with rop"){
                   const product_image = 'term_rop_image';
-                }else if(product_name == 'guarented golden' || product_name == "guaranteed golden"){
+                } else if(product_name == 'guarented golden' || product_name == "guaranteed golden"){
                   const product_image = 'guarented_golden_image';
                 }else{
                   const product_image = 'default_image';
