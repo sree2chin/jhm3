@@ -95,7 +95,7 @@ class Main extends React.Component<Props, {}> {
   onChangeInput(q, answer) {
     q.answer = answer;
     if (q.hasReflexive) {
-      if (this.reflexiveQuestioninPage && this.reflexiveQuestioninPage.id==q.id && JSON.stringify(this.reflexiveQuestioninPage.answer) !=JSON.stringify(answer)) {
+      if (this.reflexiveQuestioninPage && this.reflexiveQuestioninPage.id==q.id) {
         this.reflexiveQuestionModified = true;
       }
     }

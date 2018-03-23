@@ -65,22 +65,32 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
     }
   }
 
+  isSelectedItemPresentInList(selectedVal) {
+    if (isEmpty(selectedVal) || isEmpty(this.state.items)) return false;
+    var isPresent = false;
+    for(var i=0; i<this.state.items.length; i++) {
+      if (this.state.items[i].id == selectedVal.id) {
+        isPresent = true;
+      }
+    }
+    return isPresent;
+  }
+
   onItemChange(val) {
-    this.setState({
-      selectedItem: val,
-      onceChanged: true
-    });
-    this.props.onChange(this.props.question, val);
+    if (this.isSelectedItemPresentInList(val)) {
+      this.setState({
+        selectedItem: val,
+        onceChanged: true
+      });
+      this.props.onChange(this.props.question, val);
+    } else {
+      this.setState({
+        showInvalidAnswerSelectedMsg: true
+      });
+    }
   }
   lastSearch = null
   onTextSearch(search, page, prev) {
-    this.props.onChange(this.props.question, [  {
-      "id": "Diabetes",
-      "label": "diabetes",
-      "inferred": false,
-      "addedBySearchVariable": true,
-      "category": "Medical"
-  }]);
     var data = {
       questionId: String,
       assessment_factor_url: String,
@@ -112,11 +122,19 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
           this.setState({
             items: response.questions.data
           });
+          if (isEmpty(response.questions.data)) {
+            this.setState({
+              showInvalidAnswerSelectedMsg: true
+            });
+          }
         } else {
           this.setState({
             reposMessage: this.props.question.label,
             reposMore: null
-          })
+          });
+          this.setState({
+            showInvalidAnswerSelectedMsg: true
+          });
         }
       }, err => {
         this.setState({
@@ -177,14 +195,15 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
                 itemAdapter={TagAdapter.instance}
                 onSearch={this.onTextSearch.bind(this)}
                 onChange={this.onItemChange.bind(this)}
-                multiple />
+                multiple
+                datalistOnly={true} />
                 {question.hint && <Col className="help-text" style={{marginTop: "12px"}}>
                   {question.hint}
                   </Col>
                 }
             </Row>
 
-            <Col className={`c-subheader-text error fs16`} style={{paddingLeft: "0px", marginTop: "0px", marginLeft: "-15px"}}>
+            <Col className={`c-subheader-text error fs16`} style={{paddingLeft: "0px", marginTop: "0px"}}>
               {!this.validate() &&
                 <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
                   {question.constraints.patternViolationMessage || "Required"}
@@ -193,6 +212,11 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
               {question.answerState=="invalid" &&
                 <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
                   {"Invalid"}
+                </div>
+              }
+              {this.state.showInvalidAnswerSelectedMsg &&
+                <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
+                  {"Please search and select the answer from the list of items."}
                 </div>
               }
             </Col>
