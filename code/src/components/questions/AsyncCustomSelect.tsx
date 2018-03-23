@@ -77,7 +77,7 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
   }
 
   onItemChange(val) {
-    if (this.isSelectedItemPresentInList(val)) {
+    if (true) {//this.isSelectedItemPresentInList(val)) {
       this.setState({
         selectedItem: val,
         onceChanged: true
@@ -125,6 +125,10 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
           if (isEmpty(response.questions.data)) {
             this.setState({
               showInvalidAnswerSelectedMsg: true
+            });
+          } else {
+            this.setState({
+              showInvalidAnswerSelectedMsg: false
             });
           }
         } else {
