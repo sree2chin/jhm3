@@ -122,6 +122,13 @@ class Main extends React.Component<Props, {}> {
       this.onQuestionSubmit();
     }
   }
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+  componentDidUpdate() {
+    //ReactDOM.findDOMNode(this).scrollTop = 0;
+    //window.scrollTo(0, 0);
+  }
   reRecursiveRender(data) {
     if (!isEmpty(data)) {
         return map(data, (qe)=> {
@@ -807,6 +814,7 @@ class Main extends React.Component<Props, {}> {
       };
 
       this.props.postQuestions(data).then(() => {
+        window.scrollTo(0, 0);
         if (this.questions && this.questions.instant_id_check && this.questions.instant_id_check.status==false) {
 
           this.setState({

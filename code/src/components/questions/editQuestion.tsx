@@ -654,6 +654,7 @@ class Main extends React.Component<Props, {}> {
       };
 
       this.props.postQuestions(data).then(() => {
+        window.scrollTo(0, 0);
         if (this.state.previousQuestionHanldingIndex || this.state.previousQuestionHanldingIndex == 0) {
           if (this.props.questions && this.props.questions.extra_params &&
             this.props.questions.extra_params.answered_questions &&
@@ -757,6 +758,10 @@ class Main extends React.Component<Props, {}> {
     }
 
 
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
 
   findQuestionById(actualQuestions, questionId) : any {
