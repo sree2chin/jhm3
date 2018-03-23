@@ -166,6 +166,8 @@ export default class Person extends React.Component<Props, {}> {
         if(!!!month) {month = "MM"};
         if(!!!date) {date = "DD"};
 
+    var currentDate = moment.now();
+    var minDate = moment('1900-01-01');
     return (
       <Col sm={12} className="c-one-person-container">
         <div>
@@ -266,6 +268,8 @@ export default class Person extends React.Component<Props, {}> {
                       dropdownMode="select"
                       placeholderText="MM/DD/YYYY"
                       onChangeRaw={this.onChangeRaw.bind(this)}
+                      minDate={moment().subtract(120, "year")}
+                      maxDate={moment().add(0, "month")}
                   />
               </FormGroup>
 

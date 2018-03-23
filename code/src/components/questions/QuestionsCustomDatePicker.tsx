@@ -151,6 +151,9 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
      wrapperClass += " " + 'has-error';
     }
     var question = this.props.question;
+    var currentDate = moment();
+    var minDate = moment('1900-01-01');
+
     return (
         <Row className={question.id.replace(/[^a-zA-Z ]/g, "")} style={{marginBottom: "25px", marginLeft: "0px"}}>
           <Col sm={12} className={"c-subheader-text fs18"} style={{marginBottom: "10px", paddingLeft: "0px"}}>
@@ -179,6 +182,8 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
                       dropdownMode="select"
                       placeholderText="MM/DD/YYYY"
                       onChangeRaw={this.onChangeRaw.bind(this)}
+                      minDate={moment().subtract(120, "year")}
+                      maxDate={moment().add(0, "month")}
                   />
               </FormGroup>
 

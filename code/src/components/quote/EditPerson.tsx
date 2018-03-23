@@ -167,6 +167,8 @@ export default class EditPerson extends React.Component<Props, {}> {
                             showYearDropdown
                             dropdownMode="select"
                             placeholderText="MM/DD/YYYY"
+                            minDate={moment().subtract(120, "year")}
+                            maxDate={moment().add(0, "month")}
                           />
                         </FormGroup>
                     </Col>
