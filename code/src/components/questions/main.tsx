@@ -221,21 +221,6 @@ class Main extends React.Component<Props, {}> {
         var qe = data[i];
         var q = qe;
 
-        if (q.type == "group") {
-          questionsList.groupHeader = questionsList.groupHeader || [];
-          questionsList.groupHeader.push(q.caption);
-          if (q.tags && q.tags.SubgroupRendering) {
-            currentIsPrefixGroup = true;
-            questionsList.prefixOfGroupForLabelGroup = q.caption;
-          } else {
-            questionsList.prefixOfGroupForLabelGroup = "";
-          }
-        } else {
-          if (!isPrefixGroup) {
-            questionsList.prefixOfGroupForLabelGroup = "";
-          }
-        }
-
         q.key = q.id;
         if ((q.answerState == "valid" || this.questionsAlreadySubmitted(q)) && q.answerState!="invalid" &&  q.answerState!="missing") {
           if (q.hasReflexive) {
@@ -262,6 +247,26 @@ class Main extends React.Component<Props, {}> {
             return questionsList;
           }
         }
+
+        if (q.type == "group") {
+          questionsList.groupHeader = questionsList.groupHeader || [];
+          questionsList.groupHeader.push(q.caption);
+          if (q.tags && q.tags.SubgroupRendering) {
+            currentIsPrefixGroup = true;
+            questionsList.prefixOfGroupForLabelGroup = q.caption;
+            if (actualQuestionLists.length > 0 && actualQuestionLists[actualQuestionLists.length-1].reflexiveOn[0] == "Yes") {
+              questionsList.prefixOfGroupForLabelGroup = "";
+              isPrefixGroup = false;
+            }
+          } else {
+            questionsList.prefixOfGroupForLabelGroup = "";
+          }
+        } else {
+          if (!isPrefixGroup) {
+            questionsList.prefixOfGroupForLabelGroup = "";
+          }
+        }
+
         if (q.type == "singleselection") {
           preQ = q;
           if(q.options.length ==2) {
@@ -433,6 +438,10 @@ class Main extends React.Component<Props, {}> {
             if (qe.tags && qe.tags.SubgroupRendering) {
               questionsList.prefixOfGroupForLabelGroup = qe.caption;
               isPrefixGroup = true;
+              if (actualQuestionLists.length > 0 && actualQuestionLists[actualQuestionLists.length-1].reflexiveOn[0] == "Yes") {
+                questionsList.prefixOfGroupForLabelGroup = "";
+                isPrefixGroup = false;
+              }
             } else {
               questionsList.prefixOfGroupForLabelGroup = "";
             }

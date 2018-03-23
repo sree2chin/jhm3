@@ -122,7 +122,8 @@ export default class Person extends React.Component<Props, {}> {
     const toolTipStyles = {
       wrapper: {
         marginLeft: "15px",
-        top: "-16px"
+        top: "-16px",
+        zIndex: "none"
       },
       content: {
         background: 'none',
@@ -145,8 +146,8 @@ export default class Person extends React.Component<Props, {}> {
       }
     };
 
-    const toolTipStylesBirthData = JSON.parse(JSON.stringify(toolTipStyles));
-    toolTipStylesBirthData.wrapper.top = "0px";
+    const toolTipStylesTobaccoUsage = JSON.parse(JSON.stringify(toolTipStyles));
+    toolTipStylesTobaccoUsage.tooltip.width = "250px";
 
     var statesObjects = getStateObjects();
     const personIndex = this.props.index;
@@ -313,7 +314,7 @@ export default class Person extends React.Component<Props, {}> {
               className={this.getErrorsClassNames(errors, "healthError")}
             />
             <div style={{display: 'inline-block'}}>
-            <Tooltip content="Please select your health status" styles={toolTipStyles}>
+            <Tooltip content="How would you rate your overall health?" styles={toolTipStyles}>
               <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
             </Tooltip>
             </div>
@@ -325,7 +326,12 @@ export default class Person extends React.Component<Props, {}> {
         </div>
         <div>
           <Col sm={12} className={"c-subheader-text"}  style={{marginTop: "0px"}}>
-            Tobacco use
+            <span>Tobacco use</span>
+            <div style={{display: 'inline-block'}}>
+            <Tooltip content="If you use of any tobacco-based products, e-cigarettes, vaping, or marijuana you are a tobacco user" styles={toolTipStylesTobaccoUsage}>
+              <img style={{marginBottom: "-30px"}} src={"../images/question-mark.svg"} />
+            </Tooltip>
+          </div>
           </Col>
           <Col sm={12} style={{paddingRight: "22px"}} className="person-tobacco-container">
             <FormGroup className="radio-group hidden-xs">

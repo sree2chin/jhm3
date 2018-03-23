@@ -64,7 +64,8 @@ export default class EditPerson extends React.Component<Props, {}> {
     const toolTipStyles = {
       wrapper: {
         marginLeft: "15px",
-        top: "5px"
+        top: "5px",
+        zIndex: "none"
       },
       content: {
         background: 'none',
@@ -95,7 +96,9 @@ export default class EditPerson extends React.Component<Props, {}> {
         ];
     const toolTipStylesBirthData = JSON.parse(JSON.stringify(toolTipStyles));
     toolTipStylesBirthData.wrapper.top = "0px";
-
+    const toolTipStylesTobaccoUsage = JSON.parse(JSON.stringify(toolTipStyles));
+    toolTipStylesTobaccoUsage.tooltip.width = "250px";
+    toolTipStylesTobaccoUsage.wrapper.top = "0px";
     return (
        <Modal bsSize="small" show={this.props.showModalEditPerson} className="edit-modal-container"  onHide={this.props.onCloseModal}>
                 <Modal.Header closeButton>
@@ -209,9 +212,9 @@ export default class EditPerson extends React.Component<Props, {}> {
                         }}
                       />
                       <div style={{display: 'inline-block', float: "left"}}>
-                      <Tooltip content="Please select your health status" styles={toolTipStyles}>
-                        <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
-                      </Tooltip>
+                        <Tooltip content="How would you rate your overall health?" styles={toolTipStyles}>
+                          <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
+                        </Tooltip>
                       </div>
                       { errors.person1_healthError && <Col sm={12} className={"c-subheader-text error"}>
                         Please select your person1_health status.
@@ -221,7 +224,12 @@ export default class EditPerson extends React.Component<Props, {}> {
                   </Row>
                   <Row style={{marginBottom: "25px", marginLeft: "-15px"}}>
                     <Col sm={12} className={"c-subheader-text"}  style={{marginTop: "5px"}}>
-                      Tobacco use
+                      <span>Tobacco use </span>
+                      <div style={{display: 'inline-block'}}>
+                        <Tooltip content="If you use of any tobacco-based products, e-cigarettes, vaping, or marijuana you are a tobacco user" styles={toolTipStylesTobaccoUsage}>
+                          <img style={{marginBottom: "0px"}} src={"../images/question-mark.svg"} />
+                        </Tooltip>
+                      </div>
                     </Col>
                     <Col sm={12} style={{paddingRight: "22px"}} className="person-tobacco-container">
                       <FormGroup className="radio-group">
