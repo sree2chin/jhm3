@@ -99,6 +99,8 @@ export default class CustomSelect extends React.Component<Props, {}> {
                 className={""}
                 multi={this.props.multi || false}
                 placeholder={"Select..."}
+                removeSelected={true}
+                closeOnSelect={this.props.multi ? false:true}
               />
               {question.hint && <Col className="help-text" style={{marginTop: "12px"}}>
                 {question.hint}
