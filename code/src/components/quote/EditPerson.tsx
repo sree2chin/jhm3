@@ -42,8 +42,75 @@ export default class EditPerson extends React.Component<Props, {}> {
       });
     }
   }
-  onChangeRaw(v, a, c) {
-    console.log(v);
+  onKeyDown(e) {
+    if (e.keyCode == 13) {
+      if (e.target.value && e.target.value.length ==10) {
+      } else {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }
+  }
+  onChangeRaw(e) {
+    var parentClass = ".edit-modal-container"
+    /*if (this.props.index==0) {
+      parentClass=".first- ";
+    } else {
+      parentClass=".second-person-content ";
+    }*/
+    if (e.target.value) {
+      var val = e.target.value;
+      if (val.length == 1) {
+        if (isNaN(val) || parseInt(val) > 1) {
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = "";
+        };
+      } else if (val.length == 2) {
+        if (isNaN(val) || parseInt(val)>12) {
+          val = val.substr(0, 1);
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
+        } else {
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val + "/";
+        }
+      } else if (val.length == 4) {
+        var tempVal = val.substr(3, 1);
+        if (isNaN(tempVal) || parseInt(tempVal) > 3) {
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 3);
+        } else {
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
+        }
+      } else if (val.length == 5) {
+        var tempVal = val.substr(3, 2);
+        if (isNaN(tempVal) || parseInt(tempVal) > 31) {
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 4);
+        } else {
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val + "/";
+        }
+      } else if (val.length == 7) {
+        document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
+        var tempVal = val.substr(6, 1);
+        if (isNaN(tempVal) || !(parseInt(tempVal)>=1 && parseInt(tempVal)<=2)) {
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 6);
+        }
+      } else if (val.length == 8) {
+        var tempVal = val.substr(6, 2);
+        if (isNaN(tempVal) || !(parseInt(tempVal)>=19 && parseInt(tempVal)<=20)) {
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 7);
+        }
+      } else if (val.length == 9) {
+        var tempVal = val.substr(6, 3);
+        if (isNaN(tempVal)) {
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 8);
+        }
+      } else if (val.length == 10) {
+        var tempVal = val.substr(6, 4);
+        if (isNaN(tempVal)) {
+          document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 9);
+        }
+      } else if (val.length > 10) {
+        var tempVal = val.substr(6, 4);
+        document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 10);
+      }
+    }
   }
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.editablePerson)) {
@@ -161,18 +228,29 @@ export default class EditPerson extends React.Component<Props, {}> {
                         <span className="test-class">
                         </span>
                         <FormGroup controlId={"change_handler_" + this.props.personIndex}>
-                          <DatePicker
-                            selected={this.state.s_birthDate}
-                            onChange={(date)=>{
-                              this.handleChange(personIndex, "s_birthDate", date)
-                            }}
-                            showMonthDropdown
-                            showYearDropdown
-                            dropdownMode="select"
-                            placeholderText="MM/DD/YYYY"
-                            minDate={moment().subtract(120, "year")}
-                            maxDate={moment().add(0, "month")}
-                          />
+                          <ControlLabel>
+                            <div className="custom-date-picker-container">
+                              <span className="custom-date-picker" onClick={this.props.onClick}>
+                                <img src={"../images/calendar.svg"} />
+                              </span>
+                            </div>
+                          </ControlLabel>
+                          <div style={{float: 'left'}}>
+                            <DatePicker
+                                selected={this.state.s_birthDate}
+                                onChange={(date)=>{
+                                  this.onDateChange("s_birthDate", date)
+                                }}
+                                showMonthDropdown
+                                showYearDropdown
+                                dropdownMode="select"
+                                placeholderText="MM/DD/YYYY"
+                                onChangeRaw={this.onChangeRaw.bind(this)}
+                                minDate={moment().subtract(120, "year")}
+                                maxDate={moment().add(0, "month")}
+                                onKeyDown={this.onKeyDown.bind(this)}
+                            />
+                          </div>
                         </FormGroup>
                     </Col>
                     { errors.s_birthDateError && <Col sm={12} className={"c-subheader-text error"}>

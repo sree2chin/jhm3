@@ -1,3 +1,5 @@
+@import "./commonMixins";
+
 .birth-date-picker-container {
 	.form-group > .form-group {
 		margin-bottom: 0px;
@@ -99,16 +101,30 @@
 	    color: #666666;
 	    width: 100%;
 	    text-align: left;
-    }
+	}
+	.react-datepicker-wrapper {
+		float: left;
+	}
+	.react-datepicker__input-container {
+
+	}
     .react-datepicker__input-container input {
 	    color: #333333;
-	    background-repeat: no-repeat;
-	    background-image: url("./images/calendar.svg");
-	    background-position: 20px 11px;
 	    width: 100%;
-	    padding-left: 24%;
 	    float: left;
 	    font-size: 16px;
+	}
+	.react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range {
+        background-color: $btn-default-bg-color!important;
+    }
+    .react-datepicker__day-name, .react-datepicker__day {
+        width: 2.7rem!important;
+    }
+    .react-datepicker {
+        font-size: 1.4rem;
+    }
+    .react-datepicker__month {
+        margin: 1rem;
     }
     .birth-date-picker-container span.test-class + div{
         display: inline-block;

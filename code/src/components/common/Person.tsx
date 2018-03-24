@@ -57,6 +57,15 @@ export default class Person extends React.Component<Props, {}> {
     }
 
   }
+  onKeyDown(e) {
+    if (e.keyCode == 13) {
+      if (e.target.value && e.target.value.length ==10) {
+      } else {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }
+  }
   onChangeRaw(e) {
     var parentClass = "";
     if (this.props.index==0) {
@@ -65,7 +74,7 @@ export default class Person extends React.Component<Props, {}> {
       parentClass=".second-person-content ";
     }
     if (e.target.value) {
-      var val = e.target.value;
+      var val = e.target.value;//
       if (val.length == 1) {
         if (isNaN(val) || parseInt(val) > 1) {
           document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = "";
@@ -271,6 +280,7 @@ export default class Person extends React.Component<Props, {}> {
                       onChangeRaw={this.onChangeRaw.bind(this)}
                       minDate={moment().subtract(120, "year")}
                       maxDate={moment().add(0, "month")}
+                      onKeyDown={this.onKeyDown.bind(this)}
                   />
               </FormGroup>
 
