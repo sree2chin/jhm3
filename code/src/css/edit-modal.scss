@@ -104,6 +104,9 @@
 	}
 	.react-datepicker-wrapper {
 		float: left;
+		.react-datepicker__input-container {
+			float: left;
+		}
 	}
 	.react-datepicker__input-container {
 
@@ -128,9 +131,12 @@
     }
     .birth-date-picker-container span.test-class + div{
         display: inline-block;
-    	width: 70%;
+    	width: 100%;
     	float: left;
-    }
+	}
+	.birth-date-picker-container span.test-class + div label.control-label {
+		width: 17%;
+	}
     .Select-control {
 	    border-radius: 2px;
 	    background-color: #ffffff;

@@ -1444,7 +1444,7 @@ class Main extends React.Component<Props, {}> {
               </Row>
             </div>
           }
-          {!questionsList.isQuestionsList && <div className="questions-content-container">
+          {!questionsList.isQuestionsList && !questionsList.isQuestionsBeneficiaries && <div className="questions-content-container">
             {this.state.gettingQuestions && <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>}
             <Row className="questions-sub-group-header fs18">
             {
