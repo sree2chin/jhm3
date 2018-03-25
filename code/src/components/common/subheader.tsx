@@ -15,7 +15,7 @@ interface Props extends React.Props<cfooter> {
 
 export default class cfooter extends React.Component<Props, {}> {
   goToPage(page) {
-    const basePath = this.props.location.pathname.indexOf("agent") > -1 || this.props.is_agent ? "/agent" : "/";
+    const basePath = this.props.location.pathname.indexOf("agent") > -1 || this.props.is_agent ? "/agent/" : "/";
     var queryParams = this.props.location.query;
     var queryParamsString = "?";
     if (page == "/") {
