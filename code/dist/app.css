@@ -1074,6 +1074,8 @@ input.form-control:focus {
     width: auto;
     padding-left: 20px;
     padding-right: 20px; }
+    .product-continue-btn-container .c-button-default.btn.circular.back-btn {
+      background-color: #fb4d3d !important; }
 
 .product-custom-container .single-product-content {
   background-color: #317dbd;
@@ -1734,6 +1736,8 @@ input.form-control:focus {
   .product-pager-container .continue-to-next-steps .c-button-default.btn.circular {
     margin-top: 0px;
     width: auto; }
+    .product-pager-container .continue-to-next-steps .c-button-default.btn.circular.back-btn {
+      background-color: #fb4d3d !important; }
 
 .product-pager-container .plan-cost-text-two-person {
   display: none; }
@@ -2049,6 +2053,8 @@ input.form-control:focus {
     margin-top: 16px;
     margin-bottom: 124px;
     margin-left: 14px; }
+    .next-steps-container .next-step-submit-btn-container .next-step-submit-btn.back-btn {
+      background-color: #fb4d3d !important; }
 
 .next-steps-container .customer-next-steps-container {
   width: 54.17%;
@@ -3304,6 +3310,8 @@ input.form-control:focus {
       width: 93%;
       margin-bottom: 15px;
       margin-top: 15px; }
+      .next-steps-container .next-step-submit-btn-container .next-step-submit-btn.back-btn {
+        background-color: #fb4d3d !important; }
   .next-steps-container .customer-next-steps-container {
     width: 100%;
     margin-top: 0px; }
