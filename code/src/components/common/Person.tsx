@@ -164,6 +164,7 @@ export default class Person extends React.Component<Props, {}> {
     errors = errors || {};
     person = person || {};
     var s_birthDate = this.state.s_birthDate || person.s_birthDate;
+    s_birthDate = s_birthDate && s_birthDate.isValid() ? s_birthDate: "";
     const healthRatingObjects = [
           {value: "Excellent", label: "Excellent"},
           {value: "Very Good", label: "Very Good"},
@@ -280,7 +281,6 @@ export default class Person extends React.Component<Props, {}> {
                       onChangeRaw={this.onChangeRaw.bind(this)}
                       minDate={moment().subtract(120, "year")}
                       maxDate={moment().add(0, "month")}
-                      onKeyDown={this.onKeyDown.bind(this)}
                   />
               </FormGroup>
 

@@ -146,6 +146,7 @@ class Main extends React.Component<Props, {}> {
                     error={""}
                     onChange={this.onChangeInput.bind(this)}
                     alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                    submittingQuestions={this.state.submittingQuestions}
                   />
             } else {
               return <CustomSelect
@@ -288,6 +289,7 @@ class Main extends React.Component<Props, {}> {
               onChange={this.onChangeInput.bind(this)}
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               key={q.id}
+              submittingQuestions={this.state.submittingQuestions}
             />);
             actualQuestionLists.push(q);
           } else {
@@ -492,6 +494,7 @@ class Main extends React.Component<Props, {}> {
                     onChange={this.onChangeInput.bind(this)}
                     alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
                     key={q.id}
+                    submittingQuestions={this.state.submittingQuestions}
                   />);
                   actualQuestionLists.push(q);
             } else {
@@ -949,6 +952,7 @@ class Main extends React.Component<Props, {}> {
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               key={q.id}
               counter={this.counter++}
+              submittingQuestions={this.state.submittingQuestions}
             />;
       } else {
         qComponent = <CustomSelect
@@ -1255,7 +1259,6 @@ class Main extends React.Component<Props, {}> {
     return r;
   }
   isSubmitBtnDisabled() {
-
     return this.state.addingPrimaryBeneficiary || this.state.addingContingencyBeneficiary ||
             this.state.submittingQuestions || this.isDeletingBeneficiaryGoingOn();
   }

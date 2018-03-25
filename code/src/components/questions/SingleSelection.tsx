@@ -6,7 +6,8 @@ interface Props extends React.Props<SingleSelection> {
   question: any,
   onChange: any,
   error: any,
-  alreadyOnceSubmitted: any
+  alreadyOnceSubmitted: any,
+  submittingQuestions?: any
 }
 
 export default class SingleSelection extends React.Component<Props, {}> {
@@ -70,7 +71,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
           <Col sm={12} style={{paddingRight: "22px", marginBottom: "20px"}} className="person-gender-container">
             <Row>
               <Col className="single-select-btn-container">
-                <Button className={`c-button-default circular single-select-btn ${this.state.selectedId == question.options[0].id ? "active" : ""}`} onClick={(){
+                <Button disabled={this.props.submittingQuestions} className={`c-button-default circular single-select-btn ${this.state.selectedId == question.options[0].id ? "active" : ""}`} onClick={(){
                       this.onChange(question.options[0])
                     }}
                   >
@@ -78,7 +79,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
                 </Button>
               </Col>
               <Col style={{display: "inline"}}>
-                <Button style={{marginBottom: "0px"}} className={`c-button-default circular single-select-btn ${this.state.selectedId == question.options[1].id ? "active" : ""}`} onClick={(){
+                <Button style={{marginBottom: "0px"}} disabled={this.props.submittingQuestions}  className={`c-button-default circular single-select-btn ${this.state.selectedId == question.options[1].id ? "active" : ""}`} onClick={(){
                       this.onChange(question.options[1])
                     }}
                   >

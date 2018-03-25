@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Modal, Button, Row, Col } from "react-bootstrap";
 import Input from "../common/textInput";
+import {each, isEmpty} from "underscore";
 
 interface Props extends React.Props<Plan> {
 }
@@ -13,32 +14,43 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
 
   validateEmailForm() {
     var isError = false;
-    if(!this.state.email0) {
+    var emailRegex =  /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
+    var input1Valid = emailRegex.test(this.state.email0);
+    var input2Valid = emailRegex.test(this.state.email1);
+
+    if ((!input1Valid && isEmpty(this.state.email0)) && (!input2Valid && isEmpty(this.state.email1))) {
+      isError = true;
       this.setState({
+        emailErrorExists: true,
         emailError0: true
       });
-      isError = true;
     } else {
+      isError = false;
       this.setState({
-        emailError0: false
+        emailErrorExists: false
       });
-    }
-    if(this.state.noOfPersons == 2) {
-      if(!this.state.email1) {
-        this.setState({
-          emailError1: true
-        });
+      if (!input2Valid && !isEmpty(this.state.email1)) {
         isError = true;
+        this.setState({
+          ["emailError1"]: true
+        });
       } else {
         this.setState({
-          emailError1: false
+          ["emailError1"]: false
         });
       }
-    }
-    if(isError) {
-      this.setState({
-        emailErrorExists: true
-      });
+      if (!input1Valid && !isEmpty(this.state.email0)) {
+        isError = true;
+        this.setState({
+          ["emailError0"]: true
+        });
+      } else {
+        this.setState({
+          ["emailError0"]: false
+        });
+      }
+
     }
 
     return !isError;
