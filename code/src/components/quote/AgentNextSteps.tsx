@@ -89,9 +89,12 @@ class PlansPage extends React.Component<Props, {}> {
     this.setState({
       showModalEmail: false,
       showModalEmailCapture: false,
-      type_of_submission: 10006
+      type_of_submission: 10006,
+      openingPdf: true
+    }, ()=>{
+      this.saveQuote();
     });
-    this.saveQuote();
+
   }
 
 
@@ -389,6 +392,7 @@ class PlansPage extends React.Component<Props, {}> {
               }}
             >
               CONTINUE
+              {this.state.openingPdf && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
             <Button className={`visible-xs c-button-default back-btn next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
                 this.redirectToPlanPage()
@@ -402,6 +406,7 @@ class PlansPage extends React.Component<Props, {}> {
               }}
             >
               CONTINUE
+              {this.state.openingPdf && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
           </Col>
         </Row>
