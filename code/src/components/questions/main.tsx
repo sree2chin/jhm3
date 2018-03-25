@@ -123,7 +123,12 @@ class Main extends React.Component<Props, {}> {
     }
   }
   componentDidMount() {
+    if (this.questionComponents && this.questionComponents.isQuestionsBeneficiaries) {
+      window.scrollTo(0, 100);
+      return;
+    }
     window.scrollTo(0, 0);
+
   }
   componentDidUpdate() {
     //ReactDOM.findDOMNode(this).scrollTop = 0;
