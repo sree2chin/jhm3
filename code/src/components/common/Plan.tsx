@@ -231,6 +231,17 @@ export default class Plan extends React.Component<Props, {}> {
     });
     return product && product.ProductDisplayName;
   }
+
+  getProductImage() {
+    var productId = this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.product_id;
+    var productList = this.props.productInfo && this.props.productInfo.products_data && this.props.productInfo.products_data.products_list;
+
+    productList = productList || [];
+    var product = find(productList, (product)=>{
+      return product.ProductID == productId
+    });
+    return product && product.product_image;
+  }
   isProductSPWL() {
     return this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.spwl_flag==1;
   }
@@ -245,7 +256,7 @@ export default class Plan extends React.Component<Props, {}> {
     const personIndex = this.props.personIndex;
     const plansObjs = this.getPlansDetailsForDropdown();
     const personsContainerWidth = this.props.noOfPersons == 2 ? 6 : 12;
-    const product_name = this.getProductDisplayName().toString().toLowerCase();
+    /*const product_name = this.getProductDisplayName().toString().toLowerCase();
     if(product_name == 'super ez complete' || product_name == 'super ez'){
             const product_image = 'spwl_image';
     }else if(product_name == 'vantis velocity whole life' || product_name == "vantisvalue permanent life"){
@@ -260,8 +271,9 @@ export default class Plan extends React.Component<Props, {}> {
         const product_image = 'guarented_golden_image';
     }else{
         const product_image = 'default_image';
-    }
-
+    }*/
+    const product_image_name = this.getProductImage();
+    const product_image = "http://ec2-107-23-131-50.compute-1.amazonaws.com/assets/img/" + product_image_name;
     return (
       <Col sm={12} className={`single-plan-container ${this.props.noOfPersons==2 ? "two-persons-plan-container" : ""}`}>
         <Row className="plan-details-container">
@@ -269,8 +281,8 @@ export default class Plan extends React.Component<Props, {}> {
             <Row>
               <Col sm={2} style={{textAlign: "center"}} className={`${this.props.noOfPersons==2 ? "two_products_conainer_width" : ""}`}>
                   <img
-                    className={`plan-product-image hidden-xs ${product_image}`}
-                    src={`../images/${product_image}.svg`}
+                    className={`plan-product-image hidden-xs ${product_image_name}`}
+                    src={`${product_image}`}
                   />
               </Col>
               <Col sm={9} className={`plan-product-info-text`}>

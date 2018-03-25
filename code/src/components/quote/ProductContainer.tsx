@@ -84,7 +84,7 @@ export default class ProductContainer extends React.Component<Props, State> {
             </Row>}
             <Row className="c-center mt50">
               {map(products, (product) =>{
-                const product_name = product.ProductDisplayName.toString().toLowerCase();
+                /*const product_name = product.ProductDisplayName.toString().toLowerCase();
                 if(product_name == 'super ez complete' || product_name == 'super ez'){
                   const product_image = 'spwl_image';
                 }else if(product_name == 'vantis velocity whole life' || product_name == "vantisvalue permanent life"){
@@ -99,14 +99,17 @@ export default class ProductContainer extends React.Component<Props, State> {
                   const product_image = 'guarented_golden_image';
                 }else{
                   const product_image = 'default_image';
-                }
+                }*/
+                const product_image_name = product.product_image;
+                const product_image = "http://ec2-107-23-131-50.compute-1.amazonaws.com/assets/img/" + product.product_image;
+
                 return(
                   <Col key={product.ProductID} sm={productContainerWidth} className="single-product-container product-custom-container">
                     <Row className={`single-product-content ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`}>
                       <Row className="product_img_div">
                       <img
-                        className={`plan-product-image ${product_image}_transparent`}
-                        src={`../images/${product_image}.svg`}
+                        className={`plan-product-image ${product_image_name}_transparent`}
+                        src={`${product_image}`}
                       />
                       </Row>
                       <Row className="header">
