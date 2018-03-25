@@ -56,7 +56,7 @@ export default class Plan extends React.Component<Props, {}> {
                 this.selectRider(rider)
               }}
             >
-              ADD TO QUOTE
+              ADD TO QUOTE +{this.props.rider.Premium[this.props.premium_type] ? parseFloat(this.props.rider.Premium[this.props.premium_type].split("$")[1]) : 0}/{this.props.premium_type.substring(0, 2).toUpperCase()}
             </Button>}
             {this.state.riderAdded && <Button style={{float: "right", width: "88%", marginRight: "6%", marginTop: "0px"}} className={`c-button-default circular ${this.state.riderAdded ? "active" : ""}`} onClick={(){
                 this.selectRider(rider)
