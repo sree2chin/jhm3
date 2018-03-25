@@ -91,6 +91,12 @@ class Main extends React.Component<Props, {}> {
     return result;
   }
 
+  componentDidMount() {
+    setTimeout(function() {
+      window.scrollTo(0, 0);
+    }, 300);
+  }
+
   submitQuoteForm() {
     if(this.validateQuoteForm()) {
 
