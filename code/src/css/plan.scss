@@ -31,6 +31,9 @@
 		.c-button-default.btn.circular {
 			margin-top: 0px;
 			width: auto;
+			&.back-btn {
+				background-color: #fb4d3d!important;
+			}
 		}
 	}
 	.plan-cost-text-two-person {

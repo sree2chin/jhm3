@@ -293,6 +293,9 @@
 		width: auto;
 		padding-left: 20px;
 		padding-right: 20px;
+		&.back-btn {
+			background-color: #fb4d3d!important;
+		}
 	}
 }
 .product-custom-container .single-product-content {

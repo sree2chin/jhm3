@@ -626,7 +626,7 @@ class PlansPage extends React.Component<Props, {}> {
                   </Col> }
           <Col className="continue-to-next-steps c-center" style={{ }}>
 
-            <Button style={{marginTop: "0px", marginRight: "14px"}} className="c-button-default circular hidden-xs" onClick={(){
+            <Button style={{marginTop: "0px", marginRight: "14px", backgroundColor: "#fb4d3d!important"}} className="c-button-default circular hidden-xs back-btn" onClick={(){
                 this.redirectToProductPage()
               }}
             >
@@ -641,9 +641,10 @@ class PlansPage extends React.Component<Props, {}> {
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
 
-            <Button className="c-button-default visible-xs" onClick={(){
+            <Button className="c-button-default visible-xs back-btn" onClick={(){
                 this.redirectToProductPage()
               }}
+              style={{backgroundColor: "#fb4d3d!important"}}
             >
               BACK
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
