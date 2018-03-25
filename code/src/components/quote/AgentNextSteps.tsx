@@ -87,11 +87,11 @@ class PlansPage extends React.Component<Props, {}> {
 
   openPrintPdf() {
     this.setState({
-      showModalPhone: false,
       showModalEmail: false,
       showModalEmailCapture: false,
       type_of_submission: 10006
     });
+    this.saveQuote();
   }
 
 
@@ -240,6 +240,8 @@ class PlansPage extends React.Component<Props, {}> {
       this.openEmailCapturePopup();
     } else if (this.state.nextStep == "ticketToInternalAgent" || this.state.nextStep=="ticketToVantisLifeSales") {
       this.openAgentInputPopup();
+    } else if (this.state.nextStep == "printTheQuote") {
+      this.openPrintPdf();
     } else {
       this.openEmailPopup();
     }

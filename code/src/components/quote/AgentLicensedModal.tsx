@@ -2,6 +2,7 @@ import * as React from "react";
 import { Modal, Button, Row, Col, Radio, FormGroup } from "react-bootstrap";
 import Input from "../common/textInput";
 import Select from 'react-select';
+import {each, isEmpty} from "underscore";
 
 interface Props extends React.Props<Plan> {
 }
@@ -12,14 +13,15 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
   }
 
   saveQuote() {
-    var phoneError = !/^[2-9]\d{2}-\d{3}-\d{4}$/.test(this.state.phone);
+    var phoneError = isEmpty(this.state.phone);
     if (phoneError) {
       this.setState({
         phoneError: true
       });
     } else {
       this.setState({
-        savingQuote: true
+        savingQuote: true,
+        phoneError: false
       });
       this.props.saveQuote();
     }

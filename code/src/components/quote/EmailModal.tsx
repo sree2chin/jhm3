@@ -27,7 +27,8 @@ export default class EmailModal extends React.Component<Props, {}> {
       input1Valid = emailRegex.test(this.state.email0);
     }
 
-    if (input1Valid && input2Valid) {
+    if ((input1Valid && isEmpty(this.state.email1)) || (input2Valid && isEmpty(this.state.email0)) ||
+        (input1Valid && input2Valid)) {
       this.setState({
         savingQuote: true
       });
@@ -37,20 +38,17 @@ export default class EmailModal extends React.Component<Props, {}> {
         });
       });
     } else {
-      this.setState({
-        bothInputsInvalid: false
-      });
-      if (!input1Valid && !input2Valid) {
+      if ((!input1Valid && !isEmpty(this.state.email1)) && (!input2Valid && !isEmpty(this.state.email1))) {
         this.setState({
           bothInputsInvalid: true
         });
-      } else if (!input1Valid) {
+      } else if (!input2Valid && !isEmpty(this.state.email1)) {
         this.setState({
-          input0Invalid: true
+          input1Invalid: true
         });
       } else {
         this.setState({
-          input1Invalid: true
+          input0Invalid: true
         });
       }
     }
@@ -67,7 +65,7 @@ export default class EmailModal extends React.Component<Props, {}> {
       var input1Valid = emailRegex.test(this.state.email0);
       var input2Valid = emailRegex.test(this.state.email1);
 
-      if (!input1Valid && !input2Valid && this.state.alreadySubmittedOnce) {
+      if ((!input1Valid && !isEmpty(this.state.email1)) && (!input2Valid && !isEmpty(this.state.email1)) && this.state.alreadySubmittedOnce) {
         this.setState({
           bothInputsInvalid: true
         });
@@ -76,7 +74,7 @@ export default class EmailModal extends React.Component<Props, {}> {
           bothInputsInvalid: false
         });
         this.setState({
-          ["input" + personIndex + "Invalid"]: !emailRegex.test(this.state["email" + personIndex])
+          ["input" + personIndex + "Invalid"]: !emailRegex.test(this.state["email" + personIndex]) && !isEmpty(this.state["email" + personIndex])
         });
       }
     });
