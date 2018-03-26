@@ -9,9 +9,9 @@
 		"minify" : false,
 		"static_root" : "/pages",
 		"payment" : {
-			"ssl_merchant_id": "005463",
+			"ssl_merchant_id": "004582",
 			"ssl_user_id": "webpage",
-			"ssl_pin": "SHZTUV",
+			"ssl_pin": "8F9ZPG",
 			"ssl_show_form": "true",
 			"ssl_result_format": "HTML",
 			"ssl_test_mode": "true",
