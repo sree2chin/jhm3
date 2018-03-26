@@ -338,7 +338,7 @@ export default class Person extends React.Component<Props, {}> {
           <Col sm={12} className={"c-subheader-text"}  style={{marginTop: "0px"}}>
             <span>Tobacco use</span>
             <div style={{display: 'inline-block'}}>
-            <Tooltip content="If you use of any tobacco-based products, e-cigarettes, vaping, or marijuana you are a tobacco user" styles={toolTipStylesTobaccoUsage}>
+            <Tooltip content="If you use any tobacco-based products, e-cigarettes, vapes, or marijuana, you are a tobacco user." styles={toolTipStylesTobaccoUsage}>
               <img style={{marginBottom: "-30px"}} src={"../images/question-mark.svg"} />
             </Tooltip>
           </div>
