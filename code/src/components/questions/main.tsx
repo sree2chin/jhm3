@@ -554,7 +554,7 @@ class Main extends React.Component<Props, {}> {
               }
             }
             var qL = q.questions;
-            if (q.caption.toLowerCase() == "beneficiaries") {
+            if (q.tags && q.tags.BeneficiaryRendering) {
               questionsList.isQuestionsBeneficiaries = true;
               actualQuestionLists.primaryBeneficiariesMainQuestion = qL[0];
               actualQuestionLists.contingencyBeneficiariesMainQuestion = qL[1];
