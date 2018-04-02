@@ -378,6 +378,9 @@ class ProductsPage extends React.Component<Props, {}> {
     const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
     browserHistory.push(basePath + queryParamsString);
   }
+  isEmptyProducts() {
+
+  }
   public render() {
     var {persons} = this.props;
     persons = persons || [];
@@ -393,7 +396,8 @@ class ProductsPage extends React.Component<Props, {}> {
         />
         <div className="visible-xs">
         { this.props.products && this.props.products.length >=1 && this.props.products[0] &&
-                this.props.products[0].products_data && this.props.products[0].products_data.no_of_products!="0" &&
+                this.props.products[0].products_data && this.props.products[0].products_data.products_list &&
+                this.props.products[0].products_data.products_list.length > 0 &&
                 <ProductHeader />
         }
         </div>
@@ -423,7 +427,8 @@ class ProductsPage extends React.Component<Props, {}> {
         </Row>
         <div className="hidden-xs">
           { this.props.products && this.props.products.length >=1 && this.props.products[0] &&
-                  this.props.products[0].products_data && this.props.products[0].products_data.no_of_products!="0" &&
+                  this.props.products[0].products_data && this.props.products[0].products_data.products_list &&
+                  this.props.products[0].products_data.products_list.length > 0 &&
                   <ProductHeader />
           }
          </div>
@@ -431,7 +436,8 @@ class ProductsPage extends React.Component<Props, {}> {
           <Col className="c-center all-products-info-container container-max-width">
             <Row>
               { this.props.products && this.props.products.length >=1 && this.props.products[0] &&
-                this.props.products[0].products_data && this.props.products[0].products_data.no_of_products!="0" ?
+                this.props.products[0].products_data && this.props.products[0].products_data.products_list &&
+                this.props.products[0].products_data.products_list.length > 0 ?
                 <ProductContainer
                   productInfo={this.props.products[0]}
                   selectProduct={this.selectProductForIndex.bind(this)}
@@ -469,7 +475,8 @@ class ProductsPage extends React.Component<Props, {}> {
                 </Col>
               </Row>
               { this.props.products && this.props.products.length >=1 && this.props.products[1] &&
-                this.props.products[1].products_data && this.props.products[1].products_data.no_of_products!="0" ?
+                this.props.products[1].products_data && this.props.products[1].products_data.products_list &&
+                this.props.products[0].products_data.products_list.length > 0 ?
                   <ProductContainer
                     productInfo={this.props.products[1]}
                     selectProduct={this.selectProductForIndex.bind(this)}
