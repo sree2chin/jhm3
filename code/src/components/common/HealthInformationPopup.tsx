@@ -22,28 +22,36 @@ export default class HealthInformationPopup extends React.Component<Props, {}> {
 
   public render() {
     return (
-       <Modal bsSize="small" show={this.props.show} className="edit-modal-container"  onHide={this.props.onCloseModal}>
+       <Modal bsSize="large" show={this.props.show} className="health-information-popup-modal"  onHide={this.props.onCloseModal}>
                 <Modal.Header closeButton>
                     Attention
                 </Modal.Header>
-                <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
+                <Modal.Body style={{}}>
                   <Row>
-                    <Col sm={12} className={"c-subheader-text"}>
+                    <Col sm={12} className={""} style={{marginBottom: "12px"}}>
                         If you have any of the following conditions, an offer of coverage may not be available:
                     </Col>
                     <Col sm={12} style={{marginBottom: "11px"}} className="person-name-container">
-                        <ul className="list-group">
-                            <li className="list-group-item">Alcohol and/or drug abuse or treatment</li>
-                            <li className="list-group-item">Cancer diagnosed or treated in the last 10 years (with the exception of Basal or Squamous cell carcinoma)</li>
+                        <ul className="">
+                            <li className="">Alcohol and/or drug abuse or treatment</li>
+                            <li className="">Cancer diagnosed or treated in the last 10 years (with the exception of Basal or Squamous cell carcinoma)</li>
+                            <li className="">Heart Disease or heart rhythm abnormality</li>
+                            <li className="">Major Depression or Bi-polar disorder, dementia or Alzheimer’s</li>
+                            <li className="">Chronic Obstructive Lung disease or a history of hospitilizations for a lung disorder</li>
+                            <li className="">Insulin Dependent Diabetes or a chronic Kidney Disease or Disorder</li>
+                            <li className="">A chronic liver disease or disorder</li>
+                            <li className="">Stroke or mini-stroke (TIA), Parkinson’s, Multiple Sclerosis or seizures</li>
+                            <li className="">A disease or disorder of the immune system requiring hospitalization or chronic treatment</li>
+                            <li className="">A history of a felony, incarceration, multiple DUI’s or license suspension</li>
                         </ul>
                     </Col>
 
 
                   </Row>
-
-                  <div>
-                    <Col style={{marginLeft: "-20px", marginRight: "-20px", marginBottom: "-15px", borderRadius: "5px!important"}}>
-                      <Button style={{border: "solid 1px #4584c0"}} className="c-button-default" onClick={()=>{
+                </Modal.Body>
+                <div>
+                    <Col style={{textAlign: "center"}}>
+                      <Button style={{border: "solid 1px #4584c0", width: "30%", marginBottom: "36px"}} className="c-button-default" onClick={()=>{
                           this.props.onCloseModal()
                         }}
                       >
@@ -51,9 +59,6 @@ export default class HealthInformationPopup extends React.Component<Props, {}> {
                       </Button>
                     </Col>
                   </div>
-
-                </Modal.Body>
-
 
 
             </Modal>

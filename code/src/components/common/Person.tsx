@@ -9,6 +9,7 @@ import {DateInput, MonthInput} from 'react-date-input';
 import {DateInputComponent, DateFormats } from "react-controlled-date-input";
 import Select from 'react-select';
 import Input from "../common/textInput";
+import HealthInformationPopup from "./HealthInformationPopup";
 import ReactTooltip from 'react-tooltip';
 import {Tooltip} from 'react-lightweight-tooltip';
 import * as moment from "moment";
@@ -132,6 +133,11 @@ export default class Person extends React.Component<Props, {}> {
       this.previousDateVal = document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value;
     }
   }
+  closeHealthInformationPopup() {
+    this.setState({
+      showHealthPopup: false
+    });
+  };
   public render() {
     const toolTipStyles = {
       wrapper: {
@@ -328,16 +334,21 @@ export default class Person extends React.Component<Props, {}> {
               }}
               className={this.getErrorsClassNames(errors, "healthError")}
             />
-            <div style={{display: 'inline-block'}}>
-            <Tooltip content="How would you rate your overall health?" styles={toolTipStyles}>
-              <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
-            </Tooltip>
+            <div style={{display: 'inline-block'}} onClick={ ()=> {
+              this.setState({
+                showHealthPopup: true
+              })
+            }}>
+              <img style={{marginTop: "-38px", marginLeft: "15px"}} src={"../images/question-mark.svg"} />
             </div>
             <Col sm={12} style={{marginTop: "-5px", paddingLeft: "0px"}} className={`c-subheader-text error ${errors.healthError ? "visibility-show" : "visibility-hidden"}`}>
               Please select your health status.
             </Col>
           </Col>
-
+            <HealthInformationPopup
+              show={this.state.showHealthPopup}
+              onCloseModal={this.closeHealthInformationPopup.bind(this)}
+            />
         </div>
         <div>
           <Col sm={12} className={"c-subheader-text"}  style={{marginTop: "0px"}}>
