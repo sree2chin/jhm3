@@ -183,7 +183,7 @@ export default class Person extends React.Component<Props, {}> {
       <Col sm={12} className="c-one-person-container">
         <div>
           <Col sm={12} className={"c-person-header-text fwbold"}>
-            {"Applicant " + (personIndex + 1)}
+            {"Quote " + (personIndex + 1)}
           </Col>
           <Col sm={12} style={{marginBottom: "0px"}} className="person-name-container">
             <Input
