@@ -225,7 +225,7 @@ class Main extends React.Component<Props, {}> {
             />);
     }
   }
-  reRecursiveGetQuestions1(data, questionsList, preQ, actualQuestionLists, isPrefixGroup) {
+  reRecursiveGetQuestions1(data, questionsList, preQ, actualQuestionLists, isPrefixGroup, isPrefixGroupCounter) {
     questionsList.isQuestionsList = false;
     var currentIsPrefixGroup = false;
     if (!isEmpty(data)) {
@@ -238,7 +238,7 @@ class Main extends React.Component<Props, {}> {
         if ((q.answerState == "valid" || this.questionsAlreadySubmitted(q)) && q.answerState!="invalid" &&  q.answerState!="missing") {
           if (q.hasReflexive) {
             if (q.questions) {
-              var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists, currentIsPrefixGroup);
+              var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists, currentIsPrefixGroup, isPrefixGroupCounter + 1);
               if(reflexsiveQuestionList.length > 0){
                 questionsList.groupHeader = questionsList.groupHeader || [];
                 questionsList.groupHeader.push(q.caption);
@@ -266,6 +266,7 @@ class Main extends React.Component<Props, {}> {
           questionsList.groupHeader.push(q.caption);
           if (q.tags && q.tags.SubgroupRendering) {
             currentIsPrefixGroup = true;
+            isPrefixGroupCounter = -1;
             questionsList.prefixOfGroupForLabelGroup = q.caption;
             if (actualQuestionLists.length > 0 && actualQuestionLists[actualQuestionLists.length-1].reflexiveOn[0] == "Yes") {
               questionsList.prefixOfGroupForLabelGroup = "";
@@ -275,13 +276,19 @@ class Main extends React.Component<Props, {}> {
             questionsList.prefixOfGroupForLabelGroup = "";
           }
         } else {
-          if (!isPrefixGroup) {
-            questionsList.prefixOfGroupForLabelGroup = "";
+          if (isPrefixGroup && isPrefixGroupCounter == 0) {
+          } else {
+            if (!this.gotQuestionsFromPrefixFirstLevel) {
+              questionsList.prefixOfGroupForLabelGroup = "";
+            }
           }
         }
 
         if (q.type == "singleselection") {
           preQ = q;
+          if (isPrefixGroup && isPrefixGroupCounter == 0) {
+            this.gotQuestionsFromPrefixFirstLevel = true;
+          }
           if(q.options.length ==2) {
             questionsList.push(<SingleSelection
               question={q}
@@ -352,7 +359,7 @@ class Main extends React.Component<Props, {}> {
             }
           }
           var qL = q.questions;
-          var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists, currentIsPrefixGroup)
+          var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists, currentIsPrefixGroup, isPrefixGroupCounter + 1)
           if(questionsFromGroup.length > 0) {
             var allQuestionsAreLabels = true;
             for(var i=0; i<questionsFromGroup.length; i++) {
@@ -379,7 +386,7 @@ class Main extends React.Component<Props, {}> {
               return questionsList;
             }
           }
-          var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ, actualQuestionLists, currentIsPrefixGroup)
+          var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ, actualQuestionLists, currentIsPrefixGroup, isPrefixGroupCounter + 1)
           if(questionsFromGroup.length > 0) {
             var allQuestionsAreLabels = true;
             for(var i=0; i<questionsFromGroup.length; i++) {
@@ -466,7 +473,7 @@ class Main extends React.Component<Props, {}> {
           if ((q.answerState == "valid" || this.questionsAlreadySubmitted(q)) && q.answerState!="invalid" &&  q.answerState!="missing") {
             if (q.hasReflexive) {
               if (q.questions){
-                var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists, isPrefixGroup);
+                var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists, isPrefixGroup, 0);
                 if(reflexsiveQuestionList.length > 0){
                   questionsList.groupHeader = questionsList.groupHeader || [];
                   questionsList.groupHeader.push(qe.caption);
@@ -561,7 +568,7 @@ class Main extends React.Component<Props, {}> {
               this.actualQuestionLists = actualQuestionLists;
               return questionsList;
             }
-            var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists, isPrefixGroup)
+            var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists, isPrefixGroup, 0)
             if(questionsFromGroup.length > 0) {
               var allQuestionsAreLabels = true;
               for(var i=0; i<questionsFromGroup.length; i++) {
@@ -588,7 +595,7 @@ class Main extends React.Component<Props, {}> {
                 return questionsList;
               }
             }
-            var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ, actualQuestionLists, isPrefixGroup)
+            var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ, actualQuestionLists, isPrefixGroup, 0)
             if(questionsFromGroup.length > 0) {
               var allQuestionsAreLabels = true;
               for(var i=0; i<questionsFromGroup.length; i++) {
@@ -898,31 +905,53 @@ class Main extends React.Component<Props, {}> {
     }
   }
 
-  findQuestionById(actualQuestions, questionId) : any {
+  findQuestionById(actualQuestions, questionId, isPrefixGroup, isPrefixGroupCounter) : any {
     if (!isEmpty(actualQuestions)) {
       var targetQuestion = {};
+      var currentIsPrefixGroup = false;
+
       for(var i=0; i<(actualQuestions.length); i++) {
+        currentIsPrefixGroup = false;
         var qe = actualQuestions[i];
         var q = qe;
         q.key = q.id;
+        if (isPrefixGroup && isPrefixGroupCounter == 0) {
 
+        } else {
+          if (!this.gotQuestionsFromPrefixGroupWhileBack || this.previousQuestionIdForPrefixGroup!= questionId) {
+            this.previousQuestionsPrefixOfGroupForLabelGroup = "";
+          }
+        }
         if (q.id == questionId) {
+          if (isPrefixGroup && isPrefixGroupCounter == 0) {
+            this.gotQuestionsFromPrefixGroupWhileBack = true;
+            this.previousQuestionIdForPrefixGroup = questionId;
+          }
           return q;
         }
 
         if (qe.type == "group" || qe.type == "assessment-factor-group" || qe.hasReflexive) {
-          targetQuestion = this.findQuestionById(q.questions, questionId)
-          if (qe.tags && qe.tags.SubgroupRendering && !isEmpty(targetQuestion)) {
+          if (q.tags && q.tags.SubgroupRendering) {
+            currentIsPrefixGroup = true;
+            isPrefixGroupCounter = -1;
             this.previousQuestionsPrefixOfGroupForLabelGroup = qe.caption;
+          } else {
+            //this.previousQuestionsPrefixOfGroupForLabelGroup = "";
           }
+          targetQuestion = this.findQuestionById(q.questions, questionId, currentIsPrefixGroup, isPrefixGroupCounter+1)
+         /* if (!isEmpty(targetQuestion) && this.gotQuestionsFromPrefixGroupWhileBack) {
+
+          } else {
+            this.previousQuestionsPrefixOfGroupForLabelGroup = "";
+          }*/
         }
 
         if (qe.type == "list" && q.answer && q.answer[0].elements) {
-          targetQuestion = this.findQuestionById(q.answer[0].elements, questionId)
+          targetQuestion = this.findQuestionById(q.answer[0].elements, questionId, false, 1);
         }
 
         if (qe.type == "struct") {
-          targetQuestion = this.findQuestionById(q.elements, questionId)
+          targetQuestion = this.findQuestionById(q.elements, questionId, false, 1);
           if (!isEmpty(targetQuestion)) {
             this.previousQuestionStructCaption = qe.caption;
           }
@@ -1020,7 +1049,7 @@ class Main extends React.Component<Props, {}> {
     if (!isEmpty(this.questions) && !isEmpty(this.questions.data)) {
       if (this.questions.data.questionnaire.questions) {
         for(var i=0; i<previousQuestionIds.length; i++) {
-          var question = this.findQuestionById(this.questions.data.questionnaire.questions, previousQuestionIds[i]);
+          var question = this.findQuestionById(this.questions.data.questionnaire.questions, previousQuestionIds[i], false, 1);
           aQuestions.push(question);
           qComps.push(this.getQuestionComponent(question));
          }

@@ -73,6 +73,10 @@ export default class Person extends React.Component<Props, {}> {
     } else {
       parentClass=".second-person-content ";
     }
+    if (this.previousDateVal && this.previousDateVal.length > e.target.value.length) {
+      this.previousDateVal = e.target.value;
+      return;
+    }
     if (e.target.value) {
       var val = e.target.value;//
       if (val.length == 1) {
@@ -125,6 +129,7 @@ export default class Person extends React.Component<Props, {}> {
         var tempVal = val.substr(6, 4);
         document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 10);
       }
+      this.previousDateVal = document.querySelector(parentClass + ".react-datepicker__input-container").getElementsByTagName("input")[0].value;
     }
   }
   public render() {
