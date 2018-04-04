@@ -111,7 +111,7 @@ class PlansPage extends React.Component<Props, {}> {
 
     personOne.sClassNum="2";
     personOne.sDividendNum = "1";
-    personOne.duration = data[0].plan.PlanName.split(" ")[0];
+    personOne.duration = data[0].plan && data[0].plan.PlanName && data[0].plan.PlanName.split(" ")[0] ? data[0].plan.PlanName.split(" ")[0] : "";
 
     persons.push(personOne);
 
@@ -345,6 +345,22 @@ class PlansPage extends React.Component<Props, {}> {
       ["selectedRider" + index]: rider
     });
   }
+  containsOnlySPWL() {
+    var containOnlySPWLProducts = false;
+    if (this.props.plans) {
+      if (this.props.noOfPersons == 2) {
+        if (this.props.plans[0] && this.props.plans[0].plans_data && this.props.plans[1] && this.props.plans[1].plans_data) {
+          containOnlySPWLProducts = this.props.plans[0].plans_data.length == 1 && this.props.plans[0].plans_data[0].spwl_flag == 1 &&
+          this.props.plans[1].plans_data.length == 1 && this.props.plans[1].plans_data[0].spwl_flag == 1;
+        }
+      } else {
+        if (this.props.plans[0] && this.props.plans[0].plans_data) {
+          containOnlySPWLProducts = this.props.plans[0].plans_data.length == 1 && this.props.plans[0].plans_data[0].spwl_flag == 1;
+        }
+      }
+    }
+    return containOnlySPWLProducts;
+  }
   public render() {
 
     var {persons} = this.props;
@@ -376,7 +392,7 @@ class PlansPage extends React.Component<Props, {}> {
           </Row>
         }
 
-        {this.props.noOfPersons==2 && <Row className="visible-xs">
+        {this.props.noOfPersons==2 && !this.containsOnlySPWL() && <Row className="visible-xs">
           <Col className="c-center plan-selector-outer-container" style={{paddingLeft: "28px", paddingRight: "30px", marginBottom: "15px"}}>
             <Row className="plans-selector-container">
               <Col sm={6} className="c-center" style={{paddingTop: "0px"}}>
@@ -419,7 +435,7 @@ class PlansPage extends React.Component<Props, {}> {
               </Col>
             </Row>
             }
-            {this.props.noOfPersons==1 && <Row className="visible-xs">
+            {this.props.noOfPersons==1 && !this.containsOnlySPWL() && <Row className="visible-xs">
               <Col className="c-center plan-selector-outer-container" style={{paddingLeft: "28px", paddingRight: "30px", marginBottom: "15px"}}>
                 <Row className="plans-selector-container plans-selector-container-below-personinfo">
                   <Col sm={6} className="c-center" style={{paddingTop: "0px"}}>
@@ -467,7 +483,7 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>
 
-        <Row className="hidden-xs">
+        {!this.containsOnlySPWL() && <Row className="hidden-xs">
           <Col className="c-center plan-selector-outer-container container-max-width" style={{paddingLeft: "15px", paddingRight: "15px", marginBottom: "15px"}}>
             <Row className="plans-selector-container">
               <Col lg={6} sm={10} md={8} className="c-center" style={{paddingTop: "0px"}}>
@@ -487,7 +503,7 @@ class PlansPage extends React.Component<Props, {}> {
               </Col>
             </Row>
           </Col>
-        </Row>
+        </Row>}
 
         <Row>
           <Col className="c-center all-plans-main-container container-max-width">
