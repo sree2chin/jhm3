@@ -122,19 +122,12 @@ export default class ProductContainer extends React.Component<Props, State> {
                       <Row>
                         <Col sm={12} className="product-main-content">
                           <Row className="text-center">
-                            <div className="c-product-text">{product.ProductDisplayDescription.split && product.ProductDisplayDescription.split(".")[0]}</div>
                             <ul className="c-product-desc-line">
-                              {product.ProductDisplayDescription.split && map(product.ProductDisplayDescription.split("."), (descLine, index)=>{
-                                if(index!=0 && descLine && descLine.trim().length >0) {
-                                  return <li key={"desc-" + index}>
-                                      <RawHtml.mycooltag>
-                                        {descLine.trim()}
-                                      </RawHtml.mycooltag>
-                                  </li>
-                                } else {
-                                  return null
-                                }
-                              })}
+                              {product.ProductDisplayDescription && product.ProductDisplayDescription.trim && product.ProductDisplayDescription.trim().length > 0 &&
+                                <RawHtml.mycooltag>
+                                  {product.ProductDisplayDescription.trim()}
+                                </RawHtml.mycooltag>
+                              }
                             </ul>
                           </Row>
                         </Col>
