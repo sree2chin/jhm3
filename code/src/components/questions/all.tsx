@@ -542,7 +542,7 @@ class Main extends React.Component<Props, {}> {
     }
   }
 
-  goToEditQuestionPage(q) {
+  goToEditQuestionPage(q, groupHeader) {
     var queryParams = this.props.location.query;
     var queryParamsString = "&";
     for(var k in queryParams) {
@@ -553,6 +553,10 @@ class Main extends React.Component<Props, {}> {
       }
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+    if (groupHeader.toLowerCase().indexOf("beneficiaries") >-1) {
+      browserHistory.push("/edit-questions/beneficiaries?" + queryParamsString);
+      return;
+    }
     browserHistory.push("/edit-questions?fromReviewPage=true&questionId=" + q.id + queryParamsString);
   }
 
@@ -639,7 +643,7 @@ class Main extends React.Component<Props, {}> {
 
 
                                 return <div className="individual-question"  onClick={()=>{
-                                            this.goToEditQuestionPage(q);
+                                            this.goToEditQuestionPage(q, qL.groupHeader);
                                         }}>
                                         <div className="question-text">
                                             <span className="question-actual-text">

@@ -81,6 +81,13 @@ function editQuestionsPage(location: any, callback: LoadCallback) {
     "QuotePage");
 }
 
+function editBeneficiaryQuestionsPage(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/questions/editBeneficiaryQuestion") as typeof _QuestionsPage).default),
+    "QuotePage");
+}
+
 function editSignaturePage(location: any, callback: LoadCallback) {
   require.ensure(
     [],
@@ -180,6 +187,7 @@ ReactDOM.render(
 
       <Route path="/all-questions" getComponent={ allQuestionsPage } />
       <Route path="/edit-questions" getComponent={ editQuestionsPage } />
+      <Route path="/edit-questions/beneficiaries" getComponent={ editBeneficiaryQuestionsPage } />
       <Route path="/signature" getComponent={ getSignaturePage } />
       <Route path="/offer" getComponent={ getOfferPage } />
       <Route path="/payment_success" getComponent={ loadPaymentSuccessPage } />

@@ -3,6 +3,7 @@ import Input from './../common/textInput';
 import {Button, Row, Col} from "react-bootstrap";
 import Tooltip from 'rc-tooltip';
 import {map, isEmpty, uniq, intersection, without} from "underscore";
+import RawHtml from "react-raw-html";
 
 interface Props {
   product: any,
@@ -69,6 +70,7 @@ export default class ProductContainer extends React.Component<Props, State> {
     const products = productInfo && productInfo.products_data && productInfo.products_data.products_list;
     const personsContainerWidth = this.props.noOfPersons == 2 ? 6 : 12;
     const productContainerWidth = this.props.noOfPersons == 2 ? 12 : 6;
+    RawHtml.addTag("mycooltag");
 
     if(!isEmpty(products)) {
 
@@ -124,7 +126,11 @@ export default class ProductContainer extends React.Component<Props, State> {
                             <ul className="c-product-desc-line">
                               {product.ProductDisplayDescription.split && map(product.ProductDisplayDescription.split("."), (descLine, index)=>{
                                 if(index!=0 && descLine && descLine.trim().length >0) {
-                                  return <li key={"desc-" + index}>{descLine.trim()}</li>
+                                  return <li key={"desc-" + index}>
+                                      <RawHtml.mycooltag>
+                                        {descLine.trim()}
+                                      </RawHtml.mycooltag>
+                                  </li>
                                 } else {
                                   return null
                                 }
