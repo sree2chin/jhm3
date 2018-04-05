@@ -1,4 +1,7 @@
 @media(max-width: 768px) {
+	.product-pager-container .plans-continue-to-next-steps-container {
+		margin-left: 0px;
+	}
 	.product-pager-container .plan-details-container .plan-length-container .death-benefit-key-text {
 		padding-top: 0px;
 	}
@@ -41,7 +44,7 @@
 		    border: solid 1px #d4d4d4;
 		    padding-left: 0%!important;
 		    margin-left: 0%!important;
-			bottom: 80px;
+			/*bottom: 80px;*/
 			left: 0px;
 		    .plans-selector-container {
 		    	.plan-total-text {
@@ -119,11 +122,11 @@
 		.person-info-main-container {
 			width: auto;
 		}
+		.plans-continue-to-next-steps-container {
+
+		}
 		.continue-to-next-steps {
-		    margin-right: 15px;
-		    float: right;
-		    width: 100%;
-		    padding-left: 45px;
+		    width: 90%;
 		}
 		.riders-outer-container .c-center {
 			padding-left: 41px;

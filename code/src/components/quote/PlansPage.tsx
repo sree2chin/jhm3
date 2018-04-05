@@ -115,7 +115,7 @@ class PlansPage extends React.Component<Props, {}> {
 
     persons.push(personOne);
 
-    if(this.props.noOfPersons ==2) {
+    if (this.props.noOfPersons == 2) {
       if(personIndex ==0) {
         persons[0] = personOne;
         persons[1] = this.props.persons[1];
@@ -123,8 +123,6 @@ class PlansPage extends React.Component<Props, {}> {
         persons[0] = this.props.persons[0];
         persons[1] = personOne;
       }
-    } else {
-      persons.push(personOne);
     }
 
     this.props.setPersonsData(persons);
@@ -635,8 +633,8 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>}
 
-        <Row>
-          {this.state.productSelectionErrorMsg && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "-15px"}} sm={12} className={"c-subheader-text error"}>
+        <Row className="plans-continue-to-next-steps-container">
+          {this.state.productSelectionErrorMsg && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "15px"}} sm={12} className={"c-subheader-text error"}>
                     {this.state.productSelectionErrorMsg}
                   </Col> }
           <Col className="continue-to-next-steps c-center" style={{ }}>
@@ -656,15 +654,15 @@ class PlansPage extends React.Component<Props, {}> {
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
 
-            <Button className="c-button-default visible-xs back-btn" onClick={(){
+            <Button className="c-button-default visible-xs back-btn" onClick={() => {
                 this.redirectToProductPage()
               }}
-              style={{backgroundColor: "#fb4d3d!important"}}
+              style={{backgroundColor: "#fb4d3d!important", marginBottom: "15px"}}
             >
               BACK
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
-            <Button className="c-button-default visible-xs" onClick={(){
+            <Button  style={{marginBottom: "15px"}} className="c-button-default visible-xs" onClick={(){
                 this.redirectToNextSteps()
               }}
             >

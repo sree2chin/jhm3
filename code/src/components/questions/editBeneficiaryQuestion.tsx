@@ -123,6 +123,7 @@ class Main extends React.Component<Props, {}> {
     }
   }
   componentDidMount() {
+    window.scrollTo(0, 100);return;
     if (this.questionComponents && this.questionComponents.isQuestionsBeneficiaries) {
       window.scrollTo(0, 100);
       return;
