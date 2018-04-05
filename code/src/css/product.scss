@@ -288,7 +288,11 @@
     }
 }
 .product-continue-btn-container {
-	text-align: center;
+	margin-left: auto;
+    margin-right: auto;
+    float: none;
+    width: 54.17%;
+    text-align: left;
 	.c-button-default.btn.circular {
 		width: auto;
 		padding-left: 20px;
