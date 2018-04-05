@@ -992,7 +992,7 @@ input.form-control:focus {
   .product-pager-container .single-product-container.rider-container .single-product-content {
     min-height: 272px; }
   .product-pager-container .single-product-container.rider-container .single-product-content {
-    margin-left: 10px;
+    margin-left: 0px;
     padding-left: 0px; }
     .product-pager-container .single-product-container.rider-container .single-product-content .header {
       font-size: 18px;
@@ -1730,6 +1730,11 @@ input.form-control:focus {
     padding-left: 0px;
     padding-right: 0px; }
 
+.product-pager-container .plans-continue-to-next-steps-container {
+  margin-left: 15px;
+  margin-right: 0px;
+  margin-top: 30px; }
+
 .product-pager-container .continue-to-next-steps {
   margin-right: 21.7%;
   float: right;
@@ -1845,13 +1850,15 @@ input.form-control:focus {
   margin-top: 12px; }
 
 .product-pager-container .plan-total-container {
-  width: 54.17vw;
-  position: fixed;
-  bottom: 50px;
-  left: 50%;
+  width: 54.17%;
+  /*position: fixed;
+		bottom: 50px;
+		left: 50%;*/
   padding-right: 0px;
   padding-left: 0px;
-  margin-left: calc(-27.085% + 7.5px) !important; }
+  margin-left: auto;
+  margin-right: auto;
+  float: none; }
   .product-pager-container .plan-total-container.hidden-xs {
     z-index: 10100; }
   .product-pager-container .plan-total-container .plans-selector-container {
@@ -1972,16 +1979,6 @@ input.form-control:focus {
 		margin-left: calc(-27.085% - 7.5px)!important;
 	}
 }*/
-@media (min-width: 768px) {
-  .product-pager-container .plan-total-container.hidden-xs {
-    width: 55.57vw;
-    margin-left: calc(-27.085% - 7.5px) !important; } }
-
-@media (min-width: 768px) and (max-width: 1225px) {
-  .product-pager-container .plan-total-container.hidden-xs {
-    width: 55.57vw;
-    margin-left: calc(-27.085% - 7.5px) !important; } }
-
 /*
 @media(min-width: 1225px) {
 	.product-pager-container .plan-total-container.hidden-xs {
@@ -1995,11 +1992,6 @@ input.form-control:focus {
 	}
 }
 */
-@media (max-width: 1225px) {
-  .product-pager-container .plan-total-container.hidden-xs {
-    width: 55.57vw;
-    margin-left: calc(-27.085% - 7.5px) !important; } }
-
 @media (min-width: 750px) and (max-width: 1100px) {
   .product-pager-container .plan-details-container .plan-sider-info-text .plan-face-val-slider {
     padding-left: 35px;
@@ -3106,6 +3098,8 @@ input.form-control:focus {
     font-size: 18px; } }
 
 @media (max-width: 768px) {
+  .product-pager-container .plans-continue-to-next-steps-container {
+    margin-left: 0px; }
   .product-pager-container .plan-details-container .plan-length-container .death-benefit-key-text {
     padding-top: 0px; }
   .product-pager-container .plan-details-container .plan-length-container .death-benefit-key-value {
@@ -3135,7 +3129,7 @@ input.form-control:focus {
     border: solid 1px #d4d4d4;
     padding-left: 0% !important;
     margin-left: 0% !important;
-    bottom: 80px;
+    /*bottom: 80px;*/
     left: 0px; }
     .product-pager-container .plan-total-container .plans-selector-container .plan-total-text {
       text-align: right;
@@ -3190,10 +3184,7 @@ input.form-control:focus {
   .product-pager-container .person-info-main-container {
     width: auto; }
   .product-pager-container .continue-to-next-steps {
-    margin-right: 15px;
-    float: right;
-    width: 100%;
-    padding-left: 45px; }
+    width: 90%; }
   .product-pager-container .riders-outer-container .c-center {
     padding-left: 41px; }
   .product-pager-container .plan-details-container .plan-length-container {
