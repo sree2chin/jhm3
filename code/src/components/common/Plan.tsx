@@ -175,6 +175,11 @@ export default class Plan extends React.Component<Props, {}> {
     this.setState({
       sliderSliding: false
     });
+    if (!this.props.shouldShowSelectProductBtn) {
+      setTimeout(()=> {
+        this.selectThisProduct();
+      }, 200);
+    }
   },
   handleChange(value) {
     var sFaceAmount = parseInt(value);
@@ -220,7 +225,7 @@ export default class Plan extends React.Component<Props, {}> {
         productId: this.props.plans.plans_data.product_id
       }]);
     }
-  },
+  }
   getProductDisplayName() {
     var productId = this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.product_id;
     var productList = this.props.productInfo && this.props.productInfo.products_data && this.props.productInfo.products_data.products_list;
@@ -251,6 +256,8 @@ export default class Plan extends React.Component<Props, {}> {
       faceAmount += "0";
     }
     return faceAmount;
+  }
+  componentDidMount () {
   }
   public render() {
     const personIndex = this.props.personIndex;
@@ -395,9 +402,9 @@ export default class Plan extends React.Component<Props, {}> {
                 </Row>
               </Col>}
             </Row>
-            <Row className={"select-this-product-container" + (this.props.productIdPlan == this.props.plans.plans_data.product_id ? " active" : "")} onClick={this.selectThisProduct.bind(this)}>
+            {this.props.shouldShowSelectProductBtn && <Row className={"select-this-product-container" + (this.props.productIdPlan == this.props.plans.plans_data.product_id ? " active" : "")} onClick={this.selectThisProduct.bind(this)}>
               SELECT THIS PRODUCT
-            </Row>
+            </Row>}
           </Col>
         </Row>
       </Col>

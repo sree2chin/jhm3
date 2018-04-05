@@ -525,6 +525,7 @@ class PlansPage extends React.Component<Props, {}> {
                     productInfo={self.props.products[0]}
                     person={persons[0]}
                     key={p.product_id + "0"}
+                    shouldShowSelectProductBtn={self.props.plans[0].plans_data && self.props.plans[0].plans_data.length > 1}
                   />
                 })
               }
@@ -562,6 +563,7 @@ class PlansPage extends React.Component<Props, {}> {
                     productInfo={self.props.products[1]}
                     selectProductPlan={self.selectProductPlan.bind(self)}
                     key={p.product_id + "1"}
+                    shouldShowSelectProductBtn={self.props.plans[1].plans_data && self.props.plans[1].plans_data.length > 1}
                   />
                 })
               }
