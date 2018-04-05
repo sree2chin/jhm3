@@ -494,7 +494,7 @@ class ProductsPage extends React.Component<Props, {}> {
 
 
         <Row className="product-continue-btn-main-container">
-          {<Col sm={3} xs={12} className="product-continue-btn-container" style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
+          {<Col sm={4} xs={12} className="product-continue-btn-container" style={{ marginLeft: "auto", marginRight: "auto", float: "none"}}>
             <div style={{width: "100%"}}>
               <Button className="c-button-default circular hidden-xs back-btn" onClick={()=>{
                   this.redirectToMainPage()
