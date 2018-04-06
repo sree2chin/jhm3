@@ -1720,8 +1720,7 @@ input.form-control:focus {
     letter-spacing: normal;
     text-align: left;
     color: #515151;
-    margin-top: 0px;
-    margin-bottom: 25px; }
+    margin-top: 0px; }
   .enter-password-modal-container.email-modal-unique-container .form-control.question-with-bottom-border {
     border: 0px;
     border-bottom: solid 1px #86868a;
@@ -2968,9 +2967,11 @@ input.form-control:focus {
     .questions-container .c-button-default.btn.circular.single-select-btn {
       min-width: 120px; }
     .questions-container .questions-content-container {
-      padding: 15px; }
+      padding: 15px;
+      margin-top: 15px;
+      margin-bottom: 0px; }
       .questions-container .questions-content-container .form-group .form-control.question-with-bottom-border {
-        width: 100%; }
+        width: 88%; }
       .questions-container .questions-content-container .c-custom-select {
         width: 100%; } }
 
