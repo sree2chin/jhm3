@@ -1710,6 +1710,42 @@ input.form-control:focus {
     width: 0;
     background: transparent; } }
 
+.enter-password-modal-container.email-modal-unique-container {
+  font-family: NunitoRegular; }
+  .enter-password-modal-container.email-modal-unique-container .modal-body {
+    padding: 78px 300px 25px 71px; }
+  .enter-password-modal-container.email-modal-unique-container .email-quote-text.email-quote-text-on-modal {
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: normal;
+    text-align: left;
+    color: #515151;
+    margin-top: 0px;
+    margin-bottom: 25px; }
+  .enter-password-modal-container.email-modal-unique-container .form-control.question-with-bottom-border {
+    border: 0px;
+    border-bottom: solid 1px #86868a;
+    box-shadow: none;
+    width: 60%; }
+  .enter-password-modal-container.email-modal-unique-container .modal-footer {
+    padding-bottom: 64px;
+    padding-left: 71px !important; }
+  .enter-password-modal-container.email-modal-unique-container .email-label.email-label-on-modal {
+    color: #515151;
+    font-size: 16px; }
+  .enter-password-modal-container.email-modal-unique-container .modal-footer .c-button-default.btn.circular {
+    float: left !important;
+    width: 36% !important;
+    margin-left: 0px !important; }
+
+@media (max-width: 768px) {
+  .enter-password-modal-container.email-modal-unique-container .modal-body {
+    padding: 28px 25px 25px 25px !important; }
+  .enter-password-modal-container.email-modal-unique-container .email-quote-text.email-quote-text-on-modal {
+    font-size: 26px; }
+  .enter-password-modal-container.email-modal-unique-container .modal-footer {
+    padding-left: 31px !important; } }
+
 .product-pager-container .two_products_conainer_width {
   width: 100% !important; }
   .product-pager-container .two_products_conainer_width .plan-product-image {
