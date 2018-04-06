@@ -33,6 +33,8 @@ interface Props  extends React.Props<Main> {
 class Main extends React.Component<Props, {}> {
   constructor(){
     super();
+    this.keyDownTextField.bind(this);
+    this.onQuestionSubmit.bind(this);
   }
   state = {};
   questions:any = {};
@@ -77,6 +79,7 @@ class Main extends React.Component<Props, {}> {
       });
     });
   }
+
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.questions)) {
       this.questions = JSON.parse(JSON.stringify(nextProps.questions));
@@ -128,7 +131,17 @@ class Main extends React.Component<Props, {}> {
       return;
     }
     window.scrollTo(0, 0);
-
+    document.addEventListener("keydown", this.keyDownTextField.bind(this), false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.keyDownTextField.bind(this), false);
+  }
+  keyDownTextField(e){
+    var keyCode = e.keyCode;
+    if(keyCode==13) {
+      this.onQuestionSubmit();
+    } else {
+    }
   }
   componentDidUpdate() {
     //ReactDOM.findDOMNode(this).scrollTop = 0;
@@ -1379,6 +1392,11 @@ class Main extends React.Component<Props, {}> {
     });
 
   }
+  shouldShowPreviousBtn() {
+    return !(this.actualQuestionLists && this.actualQuestionLists[0] &&
+    this.props.questions && this.props.questions.extra_params && this.props.questions.extra_params.answered_questions &&
+      this.props.questions.extra_params.answered_questions[0] && this.props.questions.extra_params.answered_questions[0][0] == this.actualQuestionLists[0].id);
+  }
   public render() {
     var breadCrumbs = this.getBreadCrumbs();
     var questionsList = this.getCurrentSetOfQuestions() || [];
@@ -1497,12 +1515,13 @@ class Main extends React.Component<Props, {}> {
             {questionsList}
           </div>}
           {!questionsList.isQuestionsList && <div className="question-action-btn-container">
-              <Button className={`c-button-default circular next-step-btn action`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
+              {this.shouldShowPreviousBtn() && <Button className={`c-button-default circular next-step-btn action`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
                     this.handleBackSubmit()
                   }}>
                   Previous
                   {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-              </Button>
+                </Button>
+              }
               {this.state.singleselectionQuestionsSubmitting && <i className="fa fa-circle-o-notch fa-spin fa-fw fa-2x" style={{position: "relative", top: "14px"}}></i>}
               {!this.isOnlyQuestionSingleSelection() && <Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular  action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                     this.onQuestionSubmit()
@@ -1539,12 +1558,13 @@ class Main extends React.Component<Props, {}> {
             })}
         </Row>
         {questionsList.isQuestionsList && <Row className="questions-container c-center" style={{backgrounColor: "transparent", border: "none", boxShadow: "none"}}> <div className="question-action-btn-container">
-            <Button className={`c-button-default circular action`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
+            {this.shouldShowPreviousBtn() && <Button className={`c-button-default circular action`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
                   this.handleBackSubmit()
                 }}>
                 Previous Step
                 {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
+            }
             {<Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                   this.onQuestionSubmit()
                 }}

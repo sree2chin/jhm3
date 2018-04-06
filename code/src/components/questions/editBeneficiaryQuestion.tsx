@@ -33,6 +33,8 @@ interface Props  extends React.Props<Main> {
 class Main extends React.Component<Props, {}> {
   constructor(){
     super();
+    this.keyDownTextField.bind(this);
+    this.onQuestionSubmit.bind(this);
   }
   state = {};
   questions:any = {};
@@ -129,7 +131,17 @@ class Main extends React.Component<Props, {}> {
       return;
     }
     window.scrollTo(0, 0);
-
+    document.addEventListener("keydown", this.keyDownTextField, false);
+  }
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.keyDownTextField, false);
+  }
+  keyDownTextField(e){
+    var keyCode = e.keyCode;
+    if(keyCode==13) {
+      this.onQuestionSubmit();
+    } else {
+    }
   }
   componentDidUpdate() {
     //ReactDOM.findDOMNode(this).scrollTop = 0;
