@@ -40,8 +40,8 @@ export default class EmailModal extends React.Component<Props, {}> {
   public render() {
 
     return (
-       <Modal bsSize="small" bsStyle="primary" show={this.props.showModalPassword} onHide={this.props.onCloseModal} className="email-modal-container email-modal-unique-container">
-                <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
+       <Modal bsSize="large" bsStyle="primary" show={this.props.showModalPassword} onHide={this.props.onCloseModal} className="email-modal-container email-modal-unique-container enter-password-modal-container">
+                <Modal.Body style={{ fontSize: "16px", textAlign: "left"}}>
                     <Row className="email-quote-text email-quote-text-on-modal">
                       Enter your password
                     </Row>
@@ -53,9 +53,9 @@ export default class EmailModal extends React.Component<Props, {}> {
 
                     <Row style={{marginTop: "35px"}}>
                       <Col sm={12} className="email-label email-label-on-modal">
-                      We sent you a unique one-time password in an email. Please enter it below.
+                        Please enter your password below.
                       </Col>
-                      <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
+                      <Col sm={12} className={"email-input-container email-input-container-on-modal"}>
                         <Input
                           name={"password-1"}
                           type={"password"}
@@ -64,6 +64,7 @@ export default class EmailModal extends React.Component<Props, {}> {
                           onChange={(e)=>{
                             this.handleChange(e)
                           }}
+                          className="question-with-bottom-border"
                         />
                       </Col>
                       { this.props.errorMsg && this.props.errorMsg.length > 0 && <Col style={{ paddingLeft: "0px", marginLeft: "auto", color: "red", fontSize: "15px"}} sm={12} className={"c-subheader-text error"}>

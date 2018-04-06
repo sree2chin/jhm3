@@ -39,21 +39,32 @@ export default class ResetPasswordModal extends React.Component<Props, {}> {
 
   public render() {
 
-    return (
-       <Modal bsSize="small" show={this.props.showModalResetPassword} onHide={this.props.onCloseModal} className="email-modal-container email-modal-unique-container">
-                <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
-                    <Row className="email-quote-text email-quote-text-on-modal">
-                        Reset your password
-                    </Row>
-                    <Row>
-                        <Col className="email-description email-description-on-modal c-center" sm={12}>
 
-                        </Col>
+
+
+
+
+    return (
+       <Modal bsSize="large" show={this.props.showModalResetPassword} onHide={this.props.onCloseModal} className="email-modal-container email-modal-unique-container enter-password-modal-container">
+                <Modal.Body style={{ fontSize: "16px", textAlign: "left"}}>
+                    <Row className="email-quote-text email-quote-text-on-modal">
+                      Reset password
                     </Row>
+                    <Col sm={12} className={""} style={{marginBottom: "12px", paddingLeft: "0px"}}>
+                      Reset your own password so you can save and return later. Your password must
+                    </Col>
+                    <Col sm={12} style={{marginBottom: "11px", paddingLeft: "0px"}} className="person-name-container">
+                        <ul className="">
+                            <li className="">Be at least 8 characters in length.</li>
+                            <li className="">Contain at least 1 lowercase and 1 uppercase letter.</li>
+                            <li className="">Contain at least 1 special character (!@#$%^&*)</li>
+                            <li className="">Contain at least 1 number (0–9)</li>
+                        </ul>
+                    </Col>
 
                     <Row style={{marginTop: "35px"}}>
                       <Col sm={12} className="email-label email-label-on-modal">
-                        Password
+                        Enter Password
                       </Col>
                       <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
                         <Input
@@ -64,22 +75,21 @@ export default class ResetPasswordModal extends React.Component<Props, {}> {
                           onChange={(e)=>{
                             this.handleChange("new_password", e)
                           }}
+                          className="question-with-bottom-border"
                         />
                       </Col>
                     </Row>
                     <Row style={{marginTop: "35px"}}>
-                      <Col sm={12} className="email-label email-label-on-modal">
-                        Confirm Password
-                      </Col>
                       <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
                         <Input
                           name={"password-2"}
                           type={"password"}
-                          placeholder={"Confirm your password"}
+                          placeholder={"Re-enter password"}
                           value={this.state.email0}
                           onChange={(e)=>{
                             this.handleChange("confirm_password", e)
                           }}
+                          className="question-with-bottom-border"
                         />
                       </Col>
                       { this.props.confirmPasswordError && <Col style={{ paddingLeft: "0px", marginLeft: "auto", color: "red", fontSize: "15px"}} sm={12} className={"c-subheader-text error"}>

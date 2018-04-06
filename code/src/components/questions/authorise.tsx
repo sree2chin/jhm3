@@ -48,10 +48,13 @@ class Signature extends React.Component<Props, {}> {
         gettingQuestions: true
     });
     this.props.getQuestions().then(()=>{
+
         this.setState({
-            gettingQuestions: false,
-            showEnterPassword: true
+          gettingQuestions: false,
+          showEnterPassword: true,
+          showExpiredPopup: false
         });
+
     });
   }
 

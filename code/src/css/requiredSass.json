@@ -16,6 +16,8 @@
     "src/css/signature.scss",
     "src/css/asynCustomSelect.scss",
     "src/css/input.scss",
+    "src/css/enterPassword.scss",
+    "src/css/mobile/enterPassword.scss",
     "src/css/plan.scss",
     "src/css/NextSteps.scss",
     "src/css/offer.scss",
