@@ -8,6 +8,7 @@ import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Tooltip from 'rc-tooltip';
 const Handle = Slider.Handle;
+import RawHtml from "react-raw-html";
 
 
 interface Props extends React.Props<Plan> {
@@ -259,6 +260,15 @@ export default class Plan extends React.Component<Props, {}> {
   }
   componentDidMount () {
   }
+  getProductPlanInstructions() {
+    var msg = "";
+    if (this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.product_data &&
+      this.props.plans.plans_data.product_data.product_plan_instructions && this.props.plans.plans_data.product_data.product_plan_instructions.length > 0) {
+        msg = this.props.plans.plans_data.product_data.product_plan_instructions;
+    }
+
+    return msg;
+  }
   public render() {
     const personIndex = this.props.personIndex;
     const plansObjs = this.getPlansDetailsForDropdown();
@@ -279,6 +289,7 @@ export default class Plan extends React.Component<Props, {}> {
     }else{
         const product_image = 'default_image';
     }*/
+    RawHtml.addTag("mycooltag");
     const product_image_name = this.getProductImage();
     const product_image = "http://ec2-107-23-131-50.compute-1.amazonaws.com/assets/img/" + product_image_name;
     return (
@@ -294,10 +305,13 @@ export default class Plan extends React.Component<Props, {}> {
               </Col>
               <Col sm={9} className={`plan-product-info-text`}>
                 <Row className={`plan-product-name ${window.location.pathname.indexOf("/agent")>=0 ? "agent-page" : ""}`}>
+
                   {this.getProductDisplayName()}
                 </Row>
                 {!(window.location.pathname.indexOf("/agent")>=0) && <Row className="plan-sider-info-text1">
-                  This is the fun part! Move the coverage slide to your desired amount of life insurance. Watch the monthly cost estimates change as you move. Then choose how long you want that coverage to last (plan length). Finally, click on your preferred  payment method! It's that simple.
+                  <RawHtml.mycooltag>
+                    {this.getProductPlanInstructions()}
+                  </RawHtml.mycooltag>
                 </Row>}
               </Col>
             </Row>
