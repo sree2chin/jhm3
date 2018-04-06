@@ -58,7 +58,7 @@ export default class cfooter extends React.Component<Props, {}> {
               </Col>
             )}
         </Row>
-        <Row className="visisble-xs">
+        <Row className="visible-xs">
           <Col key={breadCrumbs[noFoGroupsCompleted]}
             className={`confirmation-header gather-information-container dynamic-bread-crumb`}
             style={{paddingRight: "0px", display: "block", width: "100%", textAlign: "center"}}
