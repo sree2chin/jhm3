@@ -43,7 +43,7 @@ export default class EmailModal extends React.Component<Props, {}> {
        <Modal bsSize="small" bsStyle="primary" show={this.props.showModalPassword} onHide={this.props.onCloseModal} className="email-modal-container email-modal-unique-container">
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     <Row className="email-quote-text email-quote-text-on-modal">
-                        Authenticate
+                      Enter your password
                     </Row>
                     <Row>
                         <Col className="email-description email-description-on-modal c-center" sm={12}>
@@ -53,13 +53,13 @@ export default class EmailModal extends React.Component<Props, {}> {
 
                     <Row style={{marginTop: "35px"}}>
                       <Col sm={12} className="email-label email-label-on-modal">
-                        Enter your password
+                      We sent you a unique one-time password in an email. Please enter it below.
                       </Col>
                       <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
                         <Input
                           name={"password-1"}
                           type={"password"}
-                          placeholder={"Enter your password"}
+                          placeholder={"Enter password here"}
                           value={this.state.password}
                           onChange={(e)=>{
                             this.handleChange(e)

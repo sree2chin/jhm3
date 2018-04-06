@@ -130,11 +130,13 @@ $autosuggest-choice-gutter-large: 8px;
     z-index: 3 !important;
   }
   &.has-items {
+    padding-top: 7px!important;
     padding: 0 !important;
     li {
       display: inline-block;
       margin-left: $autosuggest-choice-gutter-base;
       margin-top: $autosuggest-choice-gutter-base;
+      margin-top: 7px;
     }
     li:nth-last-child(2) {
       margin-bottom: $autosuggest-choice-gutter-base;

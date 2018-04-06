@@ -42,22 +42,37 @@ export default class cfooter extends React.Component<Props, {}> {
     var noFoGroupsCompleted = this.props.noFoGroupsCompleted || [];
     if (breadCrumbs) {
       return (<Navbar className={`cf-nav-main-header subheader bread-crumb-container`}>
-        <Row>
-        {breadCrumbs && map(breadCrumbs, (breadCrumb, index) =>
-          <Col key={breadCrumb}
-            className={`confirmation-header gather-information-container dynamic-bread-crumb ${noFoGroupsCompleted.indexOf(index)>=0 ? "active" : ""}`}
-            style={{paddingRight: "0px"}}
-          >
+          <Row className="hidden-xs">
+            {breadCrumbs && map(breadCrumbs, (breadCrumb, index) =>
+              <Col key={breadCrumb}
+                className={`confirmation-header gather-information-container dynamic-bread-crumb ${noFoGroupsCompleted.indexOf(index)>=0 ? "active" : ""}`}
+                style={{paddingRight: "0px"}}
+              >
+                <Row>
+                  <Col
+                    className={`gather-information ${index==breadCrumbs.length-1 ? "last-child" : ""}`}
+                  >
+                    {breadCrumb}
+                  </Col>
+                </Row>
+              </Col>
+            )}
+        </Row>
+        <Row className="visisble-xs">
+          <Col key={breadCrumbs[noFoGroupsCompleted]}
+            className={`confirmation-header gather-information-container dynamic-bread-crumb`}
+            style={{paddingRight: "0px", display: "block", width: "100%", textAlign: "center"}}
+            >
             <Row>
               <Col
-                className={`gather-information ${index==breadCrumbs.length-1 ? "last-child" : ""}`}
+                className={`gather-information last-child`}
               >
-                {breadCrumb}
+                {breadCrumbs[noFoGroupsCompleted]}
               </Col>
             </Row>
           </Col>
-        )}
-      </Row>
+        </Row>
+
       </Navbar>)
     } else {
       return (<Navbar className={`cf-nav-main-header subheader`}>
