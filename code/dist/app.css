@@ -1545,11 +1545,30 @@ input.form-control:focus {
 @media (max-width: 768px) {
   .all-questions-side-bar {
     width: 90%;
-    margin-left: 5%; }
+    margin-left: 5%;
+    position: relative; }
   .all-review-questions-container .all-questions-container {
     width: 90%;
-    margin-left: 5%;
-    padding-top: 615px; } }
+    margin-left: 5%; }
+  .all-group-questions-container.active .individual-question {
+    padding-left: 20px; }
+  .all-group-questions-container .individual-question hr {
+    width: 94%;
+    margin-bottom: 30px; }
+  .all-group-questions-container.active .individual-question {
+    padding-top: 0px; }
+  .all-group-questions-container.active .question-answer-header .question-text, .all-group-questions-container.active .question-answer-header .answer-text {
+    width: 100%;
+    padding-bottom: 5px;
+    padding-top: 0px;
+    padding-left: 0px; }
+  .all-group-questions-container.active .question-answer-header .question-text.question-actual-text-container {
+    padding-bottom: 15px;
+    padding-top: 0px;
+    color: #999999; }
+  .all-group-questions-container.active .question-answer-header .answer-text-container {
+    padding-bottom: 10px;
+    color: #999999; } }
 
 .edit-questions-container.questions-container .question-action-btn-container {
   margin-left: 0px; }
@@ -2960,7 +2979,9 @@ input.form-control:focus {
     .questions-container .siblings-container.generic-beneficiary-container {
       padding: 20px; }
     .questions-container .siblings-container .form-group .form-control.question-with-bottom-border {
-      width: 90%; } }
+      width: 90%; }
+    .questions-container .siblings-container .c-custom-select {
+      width: 80%; } }
 
 @media (max-width: 768px) {
   .before-select-persons {
