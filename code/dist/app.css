@@ -211,94 +211,64 @@ input.form-control:focus {
   border: solid 1px #d4d4d4;
   height: 80px; }
 
-.cf-checkbox-inner-container {
+.custom-checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #515151; }
+
+/* Hide the browser's default checkbox */
+.custom-checkbox-container input {
   position: absolute;
-  display: none;
-  display: inline-block; }
-  .cf-checkbox-inner-container.normal {
-    width: 13.5px;
-    height: 13.5px;
-    background: #fff; }
-    .cf-checkbox-inner-container.normal label {
-      width: 13.5px;
-      height: 13.5px; }
-    .cf-checkbox-inner-container.normal [type="checkbox"]:checked + label:after, .cf-checkbox-inner-container.normal.default-checked [type="checkbox"] + label:after {
-      width: 8px;
-      height: 3px;
-      top: 3.5px;
-      left: 1.5px; }
-    .cf-checkbox-inner-container.normal label.circle {
-      border-radius: 13.5px; }
-    .cf-checkbox-inner-container.normal.cross-checked [type="checkbox"] + label:after {
-      top: -4.5px;
-      left: 2.5px; }
-  .cf-checkbox-inner-container.small {
-    width: 10px;
-    height: 10px;
-    background: #fff; }
-    .cf-checkbox-inner-container.small label {
-      width: 10px;
-      height: 10px; }
-    .cf-checkbox-inner-container.small [type="checkbox"]:checked + label:after, .cf-checkbox-inner-container.small.default-checked [type="checkbox"] + label:after {
-      width: 6.5px;
-      height: 2px;
-      top: 2px;
-      left: 0.5px; }
-    .cf-checkbox-inner-container.small label.circle {
-      border-radius: 10px; }
-    .cf-checkbox-inner-container.small.cross-checked [type="checkbox"] + label:after {
-      top: -2.518px;
-      left: 1.9px;
-      font-size: 10px; }
-  .cf-checkbox-inner-container.big {
-    width: 30px;
-    height: 30px;
-    background: #fff; }
-    .cf-checkbox-inner-container.big label {
-      width: 30px;
-      height: 30px; }
-    .cf-checkbox-inner-container.big [type="checkbox"]:checked + label:after, .cf-checkbox-inner-container.big.default-checked [type="checkbox"] + label:after {
-      width: 20px;
-      height: 7px;
-      top: 7px;
-      left: 3px; }
-    .cf-checkbox-inner-container.big label.circle {
-      border-radius: 30px; }
-    .cf-checkbox-inner-container.big.cross-checked [type="checkbox"] + label:after {
-      top: -3px;
-      left: 8px;
-      font-size: 24px; }
-  .cf-checkbox-inner-container.cross-checked [type="checkbox"] + label {
-    border: solid 1px #d0011b;
-    color: #d0011b;
-    font-family: BrandonTextWeb-Light; }
-    .cf-checkbox-inner-container.cross-checked [type="checkbox"] + label:after {
-      content: "x" !important;
-      position: absolute;
-      border: none !important;
-      transform: none !important; }
-  .cf-checkbox-inner-container input {
-    display: none; }
-  .cf-checkbox-inner-container [type="checkbox"]:checked + label:after, .cf-checkbox-inner-container.default-checked [type="checkbox"] + label:after {
-    content: '';
-    position: absolute;
-    width: 9px;
-    height: 4px;
-    background: transparent;
-    top: 4px;
-    left: 3px;
-    border: 1px solid #5dcdee;
-    border-top: none;
-    border-right: none;
-    transform: rotate(-45deg); }
-  .cf-checkbox-inner-container label {
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: 1px solid #5dcdee;
-    margin-top: 3px;
-    margin-left: 5px; }
+  opacity: 0;
+  cursor: pointer; }
+
+/* Create a custom checkbox */
+.custom-checkbox-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border-radius: 4px;
+  border: solid 1px #4584c0; }
+
+/* On mouse-over, add a grey background color */
+.custom-checkbox-container:hover input ~ .custom-checkbox-checkmark {
+  background-color: #ccc; }
+
+/* When the checkbox is checked, add a blue background */
+.custom-checkbox-container input:checked ~ .custom-checkbox-checkmark {
+  background-color: #4584c0; }
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.custom-checkbox-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none; }
+
+/* Show the checkmark when checked */
+.custom-checkbox-container input:checked ~ .custom-checkbox-checkmark:after {
+  display: block; }
+
+/* Style the checkmark/indicator */
+.custom-checkbox-container .custom-checkbox-checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 8px;
+  height: 14px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg); }
 
 .before-select-persons {
   padding-bottom: 358px;
@@ -1571,6 +1541,15 @@ input.form-control:focus {
     margin-left: 20px;
     margin-top: 25.4px;
     margin-bottom: 15px; }
+
+@media (max-width: 768px) {
+  .all-questions-side-bar {
+    width: 90%;
+    margin-left: 5%; }
+  .all-review-questions-container .all-questions-container {
+    width: 90%;
+    margin-left: 5%;
+    padding-top: 615px; } }
 
 .edit-questions-container.questions-container .question-action-btn-container {
   margin-left: 0px; }
@@ -2973,7 +2952,15 @@ input.form-control:focus {
       .questions-container .questions-content-container .form-group .form-control.question-with-bottom-border {
         width: 88%; }
       .questions-container .questions-content-container .c-custom-select {
-        width: 100%; } }
+        width: 100%; }
+    .questions-container .birth-date-picker-container span.test-class + div label.control-label {
+      width: 20%; }
+    .questions-container .react-datepicker-wrapper {
+      width: 75%; }
+    .questions-container .siblings-container.generic-beneficiary-container {
+      padding: 20px; }
+    .questions-container .siblings-container .form-group .form-control.question-with-bottom-border {
+      width: 90%; } }
 
 @media (max-width: 768px) {
   .before-select-persons {
