@@ -172,7 +172,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
               <span className="test-class">
 
               </span>
-              <FormGroup controlId={"change_handler_" + this.props.personIndex}>
+              <FormGroup style={{marginBottom: "10px"}} controlId={"change_handler_" + this.props.personIndex}>
                 <ControlLabel>
                   <div className="custom-date-picker-container">
                     <span className="custom-date-picker" onClick={this.props.onClick}>
@@ -198,7 +198,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
           </Col>
             {!this.validate() &&
               <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
-                {question.constraints.minValueViolationMessage}
+                {question.constraints.minValueViolationMessage || "Required"}
               </div>
             }
             {question.answerState=="invalid" &&

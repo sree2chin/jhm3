@@ -21,6 +21,17 @@
                 width: 100%;
             }
         }
-
+        .birth-date-picker-container span.test-class + div label.control-label {
+            width: 20%;
+        }
+        .react-datepicker-wrapper {
+            width: 75%;
+        }
+        .siblings-container.generic-beneficiary-container {
+            padding: 20px;
+        }
+        .siblings-container .form-group .form-control.question-with-bottom-border {
+            width: 90%;
+        }
     }
 }

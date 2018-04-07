@@ -12,6 +12,7 @@
     "src/css/product.scss",
     "src/css/question.scss",
     "src/css/all-questions.scss",
+    "src/css/mobile/all-questions.scss",
     "src/css/edit-question.scss",
     "src/css/signature.scss",
     "src/css/asynCustomSelect.scss",

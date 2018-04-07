@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import Select from 'react-select';
-import {isEmpty} from "underscore";
+import {isEmpty, map, contains} from "underscore";
 interface Props extends React.Props<CustomSelect> {
   onChange: any,
   question: any,
@@ -16,13 +16,43 @@ export default class CustomSelect extends React.Component<Props, {}> {
     super(props);
   }
   state = {}
-
+  onDummyChange(val) {
+    this.onChange(val);
+  }
   onChange(val) {
+    var ans, alreadyPresent = false;
+
+    if (this.state.state) {
+      ans = JSON.parse(JSON.stringify(this.state.state));
+    } else {
+      ans = [];
+    }
+    for(var i=0; i<ans.length; i++) {
+      if (ans[i].id == val.id) {
+        alreadyPresent = true;
+        ans.splice(i, 1);
+      }
+    }
+    if (!alreadyPresent) {
+      ans.push(val);
+    }
+
     this.setState({
-      state: val,
+      state: ans,
       onceChanged: true
     });
-    this.props.onChange(this.props.question, val);
+    this.props.onChange(this.props.question, ans);
+  }
+  containsInAnswer(val) {
+    var ans, alreadyPresent = false;
+    if (this.state.state) {
+      for(var i=0; i<this.state.state.length; i++) {
+        if (this.state.state[i].id == val.id) {
+          alreadyPresent = true;
+        }
+      }
+    }
+    return alreadyPresent;
   }
   componentWillMount() {
     if(!isEmpty(this.props.question) && !isEmpty(this.props.question.answer)) {
@@ -89,19 +119,19 @@ export default class CustomSelect extends React.Component<Props, {}> {
         </Col>
           <Col style={{paddingRight: "15px", marginBottom: "30px"}} className="person-gender-container c-custom-select">
             <Row style={{marginLeft: "0px"}}>
-              <Select
-                name="form-field-name1"
-                options={statesObjects}
-                value={this.state.state}
-                onChange={(stateObj)=>{
-                  this.onChange(stateObj)
-                }}
-                className={""}
-                multi={this.props.multi || false}
-                placeholder={"Select..."}
-                removeSelected={true}
-                closeOnSelect={this.props.multi ? false:true}
-              />
+            {map(statesObjects, (qL)=>{
+                          return (<div key={qL.id}>
+                              <label className="custom-checkbox-container" onClick={(e)=>{
+                                    this.onDummyChange(qL);
+                                    e.preventDefault();
+                                  }}>
+                                  {qL.value}
+                                <input type="checkbox" checked={this.containsInAnswer(qL)}/>
+                                <span className="custom-checkbox-checkmark"></span>
+                              </label>
+                            </div>)
+                    })
+                }
               {question.hint && <Col className="help-text" style={{marginTop: "12px"}}>
                 {question.hint}
                 </Col>

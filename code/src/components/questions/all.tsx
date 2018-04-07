@@ -615,7 +615,7 @@ class Main extends React.Component<Props, {}> {
                                       <img src="../images/down-arrow.svg"/>
                                     </span>}
                             </div>
-                            <div className="question-answer-header">
+                            <div className="question-answer-header hidden-xs">
                                 <div className="question-text">Question</div>
                                 <div className="answer-text">Answer</div>
                             </div>
@@ -645,17 +645,35 @@ class Main extends React.Component<Props, {}> {
                                 return <div className="individual-question"  onClick={()=>{
                                             this.goToEditQuestionPage(q, qL.groupHeader);
                                         }}>
-                                        <div className="question-text">
+                                        <div className="question-text hidden-xs">
                                             <span className="question-actual-text">
                                                 {q.caption}
                                             </span>
                                         </div>
-                                        <div className="answer-text">
+                                        <div className="answer-text hidden-xs">
                                             <span>
                                                 {ans}
                                             </span>
                                             <span className="edit-img-container">
                                             </span>
+                                        </div>
+                                        <div>
+                                          <div className="question-answer-header visible-xs">
+                                              <div className="question-text">Question</div>
+                                              <span className="edit-img-container">
+                                                  </span>
+                                              <div className="question-text">
+                                                  <span className="question-actual-text">
+                                                      {q.caption}
+                                                  </span>
+                                              </div>
+                                              <div className="answer-text">Answer</div>
+                                              <div className="answer-text hidden-xs">
+                                                  <span>
+                                                      {ans}
+                                                  </span>
+                                              </div>
+                                          </div>
                                         </div>
                                         <hr/>
                                         <div> </div>
