@@ -733,6 +733,7 @@ class Main extends React.Component<Props, {}> {
       return true;
     }
   }
+
   validateMultiSelection(q) {
     if (q.constraints) {
       var constraints = q.constraints;
@@ -982,6 +983,7 @@ class Main extends React.Component<Props, {}> {
       return {};
     }
   }
+
   counter = 0;
   getQuestionComponent(q): any {
     var qComponent = {};
@@ -1248,6 +1250,7 @@ class Main extends React.Component<Props, {}> {
 
 
   }
+
   deletePrimaryBeneficiary(i) {
       if (this.questionComponents.primaryBeneficiaryQuestionsComps.length >0) {
         /* this.setState({
@@ -1300,10 +1303,12 @@ class Main extends React.Component<Props, {}> {
 
     return r;
   }
+
   isSubmitBtnDisabled() {
     return this.state.addingPrimaryBeneficiary || this.state.addingContingencyBeneficiary ||
             this.state.submittingQuestions || this.isDeletingBeneficiaryGoingOn();
   }
+
   addPrimaryBeneficiary(): any {
     var qs = this.actualQuestionLists.primaryBeneficiariesMainQuestion;
     var data = {};
@@ -1392,11 +1397,13 @@ class Main extends React.Component<Props, {}> {
     });
 
   }
+
   shouldShowPreviousBtn() {
     return !(this.actualQuestionLists && this.actualQuestionLists[0] &&
     this.props.questions && this.props.questions.extra_params && this.props.questions.extra_params.answered_questions &&
       this.props.questions.extra_params.answered_questions[0] && this.props.questions.extra_params.answered_questions[0][0] == this.actualQuestionLists[0].id);
   }
+
   public render() {
     var breadCrumbs = this.getBreadCrumbs();
     var questionsList = this.getCurrentSetOfQuestions() || [];

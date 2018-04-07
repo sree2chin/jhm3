@@ -662,20 +662,22 @@ class Main extends React.Component<Props, {}> {
                                               <div className="question-text">Question</div>
                                               <span className="edit-img-container">
                                                   </span>
-                                              <div className="question-text">
+                                              <div className="question-text question-actual-text-container">
                                                   <span className="question-actual-text">
                                                       {q.caption}
                                                   </span>
                                               </div>
                                               <div className="answer-text">Answer</div>
-                                              <div className="answer-text hidden-xs">
+                                              <div className="answer-text answer-text-container">
                                                   <span>
                                                       {ans}
                                                   </span>
                                               </div>
+                                              <hr/>
                                           </div>
+
                                         </div>
-                                        <hr/>
+                                        <hr className="hidden-xs"/>
                                         <div> </div>
                                     </div>
                             })}

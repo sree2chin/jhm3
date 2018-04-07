@@ -111,7 +111,7 @@ export default class CustomSelect extends React.Component<Props, {}> {
     this.props.onChange(this.props.question, val);
   }
   getCustomSelectObj(statesObjects) {
-    if (statesObjects && statesObjects.length<=10 && this.props.multi) {
+    if (this.props.multi) {
       return map(statesObjects, (qL)=>{
         return (<div key={qL.id}>
             <label className="custom-checkbox-container" onClick={(e)=>{

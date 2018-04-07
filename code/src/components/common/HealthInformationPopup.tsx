@@ -45,8 +45,6 @@ export default class HealthInformationPopup extends React.Component<Props, {}> {
                             <li className="">A history of a felony, incarceration, multiple DUI’s or license suspension</li>
                         </ul>
                     </Col>
-
-
                   </Row>
                 </Modal.Body>
                 <div>

@@ -1017,6 +1017,7 @@ class Main extends React.Component<Props, {}> {
                   Submit
                   {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>
+              {this.isOnlyQuestionSingleSelection() && this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </div>}
           </div>}
           {questionsList.isQuestionsList &&
@@ -1060,6 +1061,7 @@ class Main extends React.Component<Props, {}> {
                 Next Step
                 {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>}
+            {this.isOnlyQuestionSingleSelection() && this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
           </div>
           </Row>}
       </div>);
