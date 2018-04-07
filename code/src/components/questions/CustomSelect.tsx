@@ -103,6 +103,42 @@ export default class CustomSelect extends React.Component<Props, {}> {
       });
     }
   }
+  onChange1(val) {
+    this.setState({
+      state: val,
+      onceChanged: true
+    });
+    this.props.onChange(this.props.question, val);
+  }
+  getCustomSelectObj(statesObjects) {
+    if (statesObjects && statesObjects.length<=10 && this.props.multi) {
+      return map(statesObjects, (qL)=>{
+        return (<div key={qL.id}>
+            <label className="custom-checkbox-container" onClick={(e)=>{
+                  this.onDummyChange(qL);
+                  e.preventDefault();
+                }}>
+                {qL.value}
+              <input type="checkbox" checked={this.containsInAnswer(qL)}/>
+              <span className="custom-checkbox-checkmark"></span>
+            </label>
+          </div>)
+        });
+    }
+    return (<Select
+        name="form-field-name1"
+        options={statesObjects}
+        value={this.state.state}
+        onChange={(stateObj)=>{
+          this.onChange1(stateObj)
+        }}
+        className={""}
+        multi={this.props.multi || false}
+        placeholder={"Select..."}
+        removeSelected={true}
+        closeOnSelect={this.props.multi ? false:true}
+      />)
+  }
   public render() {
     var wrapperClass : string = 'form-group';
     if (this.props.error && this.props.error.length > 0) {
@@ -119,19 +155,7 @@ export default class CustomSelect extends React.Component<Props, {}> {
         </Col>
           <Col style={{paddingRight: "15px", marginBottom: "30px"}} className="person-gender-container c-custom-select">
             <Row style={{marginLeft: "0px"}}>
-            {map(statesObjects, (qL)=>{
-                          return (<div key={qL.id}>
-                              <label className="custom-checkbox-container" onClick={(e)=>{
-                                    this.onDummyChange(qL);
-                                    e.preventDefault();
-                                  }}>
-                                  {qL.value}
-                                <input type="checkbox" checked={this.containsInAnswer(qL)}/>
-                                <span className="custom-checkbox-checkmark"></span>
-                              </label>
-                            </div>)
-                    })
-                }
+              {this.getCustomSelectObj(statesObjects)}
               {question.hint && <Col className="help-text" style={{marginTop: "12px"}}>
                 {question.hint}
                 </Col>
