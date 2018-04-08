@@ -1614,8 +1614,10 @@ input.form-control:focus {
   min-width: 300px;
   max-width: max-content;
   margin-bottom: 15px; }
-  .async-auto-suggest-container .autosuggest-choices .autosuggest-input-choice input {
-    font-size: 16px; }
+  .async-auto-suggest-container .autosuggest-choices li.autosuggest-input-choice {
+    margin-top: 0px; }
+    .async-auto-suggest-container .autosuggest-choices li.autosuggest-input-choice input {
+      font-size: 16px; }
   .async-auto-suggest-container .autosuggest-choices .autosuggest-choice {
     margin-left: 10px; }
 
