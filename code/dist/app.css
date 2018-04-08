@@ -1042,7 +1042,7 @@ input.form-control:focus {
   margin-left: auto;
   margin-right: auto;
   float: none;
-  width: 54.17%;
+  width: 54.17% !important;
   text-align: left; }
   .product-continue-btn-container .c-button-default.btn.circular {
     width: auto;
@@ -3068,7 +3068,8 @@ input.form-control:focus {
     background-color: #fafafa; }
   .product-continue-btn-container {
     box-shadow: 0 0px 0 0 #d4d4d4, 0 -1px 0 0 #d4d4d4;
-    padding-top: 15px; }
+    padding-top: 15px;
+    width: 100% !important; }
     .product-continue-btn-container button {
       width: 92% !important;
       margin-left: 4%; }
