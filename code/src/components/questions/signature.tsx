@@ -130,7 +130,6 @@ class Signature extends React.Component<Props, {}> {
                 //browserHistory.push("/all-questions" + queryParamsString);
               }
             }>
-                Redirect to review page
             </Col>
         </Row> }
         <Row className="questions-container c-center">

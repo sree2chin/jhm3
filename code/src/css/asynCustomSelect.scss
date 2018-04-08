@@ -35,7 +35,8 @@
         border: solid 1px #cccccc;
     }
     .autosuggest-choices {
-        .autosuggest-input-choice {
+        li.autosuggest-input-choice {
+            margin-top: 0px;
             input {
                 font-size: 16px;
                 //padding-top: 8px;
