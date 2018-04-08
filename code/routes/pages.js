@@ -59,7 +59,7 @@ module.exports = function(app) {
 
   app.get('/payment_success', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
-    console.log("in normal url: " + JSON.stringify(url_parts));
+    console.log("in payment_success url: " + JSON.stringify(url_parts));
     req.session = req.session || {};
     //req.session.queryParams = req.session.queryParams || {};
     req.session.paymentQueryParams = {};

@@ -66,7 +66,7 @@ class Main extends React.Component<Props, {}> {
         browserHistory.push("/authorize" + queryParamsString);
         return;
       }
-      if (this.questions && this.questions.data && this.questions.data.completed) {
+      if (this.questions && this.questions && this.questions.application_complete_status==true) {
         if (this.questions.application_confirm_status == 1) {
           browserHistory.push("/signature" + queryParamsString);
         } else {
@@ -94,7 +94,7 @@ class Main extends React.Component<Props, {}> {
       }
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-    if (this.questions && this.questions.data && this.questions.data.completed) {
+    if (this.questions && this.questions && this.questions.application_complete_status==true) {
       if (this.questions.application_confirm_status == 1) {
         browserHistory.push("/signature" + queryParamsString);
       } else {
@@ -456,7 +456,7 @@ class Main extends React.Component<Props, {}> {
 
   recursiveGetQuestions1() {
     if (!isEmpty(this.questions) && !isEmpty(this.questions.data)) {
-      if (this.questions.data.questionnaire.questions) {
+      if (this.questions.data.questionnaire && this.questions.data.questionnaire.questions) {
         var preQ = null;
         var questionsList = [];
         questionsList.isQuestionsList = false;
@@ -878,7 +878,7 @@ class Main extends React.Component<Props, {}> {
           browserHistory.push("/authorize" + queryParamsString);
           return;
         }
-        if (this.questions.data.completed ==true || this.questions.data.completed =="true") {
+        if (this.questions.application_complete_status == true || this.questions.application_complete_status == "true") {
           if (this.questions.application_confirm_status == 1) {
             browserHistory.push("/signature" + queryParamsString);
           } else {

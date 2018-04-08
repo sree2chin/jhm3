@@ -705,7 +705,7 @@ class Main extends React.Component<Props, {}> {
               if (this.questionsSubmittedCount>=0) {
                 var reflexiveQuestion = this.findQuestionById(this.questions.data.questionnaire.questions, this.reflexiveQuestioninPage.id)
                 if (isEmpty(reflexiveQuestion.questions)) {
-                  if (this.questions && this.questions.data && this.questions.data.completed) {
+                  if (this.questions && this.questions && this.questions.application_complete_status==true) {
                     if (this.questions.application_confirm_status == 1) {
                       browserHistory.push("/signature" + queryParamsString);
                     } else {
@@ -719,7 +719,7 @@ class Main extends React.Component<Props, {}> {
                     questionsSource: this.questionsSource
                   });
                   if (this.getQuestions(null).length ==0) {
-                    if (this.questions && this.questions.data && this.questions.data.completed) {
+                    if (this.questions && this.questions && this.questions.application_complete_status==true) {
                       if (this.questions.application_confirm_status == 1) {
                         browserHistory.push("/signature" + queryParamsString);
                       } else {
@@ -734,7 +734,7 @@ class Main extends React.Component<Props, {}> {
               }
             }, 200)
           } else {
-            if (this.questions && this.questions.data && this.questions.data.completed) {
+            if (this.questions && this.questions && this.questions.application_complete_status==true) {
               if (this.questions.application_confirm_status == 1) {
                 browserHistory.push("/signature" + queryParamsString);
               } else {

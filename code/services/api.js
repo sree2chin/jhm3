@@ -173,7 +173,7 @@ module.exports = new function(){
     appendAgentInfo(req, formData);
     console.log("\n\n\nin confirmQuestions formData: " + JSON.stringify(formData) + "\n\n\n");
     request({
-      url: restOptions.host + '/v1/questions/confirm',
+      url: restOptions.host + '/v1/questions/questions',
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },
@@ -196,7 +196,7 @@ module.exports = new function(){
     appendAgentInfo(req, formData);
     console.log("\n\n\nformData in makePayment: " + JSON.stringify(formData) + "\n\n\n");
     request({
-      url: restOptions.host + '/v1/questions/confirm',
+      url: restOptions.host + '/v1/questions/questions',
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },

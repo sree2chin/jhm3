@@ -886,7 +886,7 @@ class Main extends React.Component<Props, {}> {
           browserHistory.push("/authorize" + queryParamsString);
           return;
         }
-        if (this.questions.data.completed ==true || this.questions.data.completed =="true") {
+        if (this.questions.application_complete_status ==true || this.questions.application_complete_status =="true") {
           if (this.questions.application_confirm_status == 1) {
             browserHistory.push("/signature" + queryParamsString);
           } else {
