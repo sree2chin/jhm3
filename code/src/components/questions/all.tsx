@@ -196,7 +196,7 @@ class Main extends React.Component<Props, {}> {
 
   recursiveGetQuestions1() {
     if (!isEmpty(this.questions) && !isEmpty(this.questions.data)) {
-      if (this.questions.data.questionnaire.questions) {
+      if (this.questions.data.questionnaire && this.questions.data.questionnaire.questions) {
 
         var questionsList = [];
         var actualQuestionLists = [];
@@ -299,10 +299,22 @@ class Main extends React.Component<Props, {}> {
       }
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-    browserHistory.push("/signature" + queryParamsString);
-    return;
+    data.review_confirm = 1;
     this.props.confirmQuestions(data).then(() => {
-      browserHistory.push("/signature" + queryParamsString);
+      var link = this.props.confirmationData && this.props.confirmationData.data &&
+      this.props.confirmationData.data.current_document_data && this.props.confirmationData.data.current_document_data.sign_url;
+      if (this.props.confirmationData.valid_user == 0) {
+        browserHistory.push("/authorize" + queryParamsString);
+        return;
+      }
+      if (!isEmpty(link)){
+        window.location.href = link;
+      } else if (isEmpty(this.props.confirmationData.data.current_document_data) && !isEmpty(this.props.confirmationData.data.offer_data)) {
+        browserHistory.push("/offer" + queryParamsString);
+      } else if(isEmpty(this.props.confirmationData.data.offer_data) && isEmpty(this.props.confirmationData.data.offer_data)) {
+        browserHistory.push("/payment_success" + queryParamsString);
+      }
+
     }).catch(()=>{
       console.log(this.props.questions);
     });
@@ -704,7 +716,8 @@ class Main extends React.Component<Props, {}> {
 
 const mapStateToProps = (state: any): Props => {
   return {
-    questions: state.questions.questions
+    questions: state.questions.questions,
+    confirmationData: state.questions.confirmationData
   }
 }
 

@@ -171,6 +171,9 @@ module.exports = new function(){
     }
 
     appendAgentInfo(req, formData);
+    if (req.body.review_confirm == 1) {
+      formData.review_confirm = 1;
+    }
     console.log("\n\n\nin confirmQuestions formData: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/questions/questions',
