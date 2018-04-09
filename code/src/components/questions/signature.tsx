@@ -41,9 +41,10 @@ class Signature extends React.Component<Props, {}> {
   questionComponents: any = [];
 
   componentWillMount() {
-    this.props.getQuestions().then(()=>{
+    this.confirmQuestions();
+    /*this.props.getQuestions().then(()=>{
         this.confirmQuestions();
-    });
+    });*/
   }
 
   componentWillReceiveProps(nextProps) {
