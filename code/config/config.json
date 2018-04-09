@@ -16,7 +16,7 @@
 			"ssl_result_format": "HTML",
 			"ssl_test_mode": "true",
 			"ssl_receipt_link_method": "REDG",
-			"ssl_receipt_link_url": "http://ec2-54-158-63-166.compute-1.amazonaws.com/payment_success",
+			"ssl_receipt_link_url": "http://ec2-54-146-136-253.compute-1.amazonaws.com:3022/payment_success",
 			"ssl_transaction_type": "ccsale",
 			"ssl_cvv2cvc2_indicator": "1",
 			"ssl_add_token": "Y",
