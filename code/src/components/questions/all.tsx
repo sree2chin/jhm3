@@ -430,7 +430,7 @@ class Main extends React.Component<Props, {}> {
     var qComps = [];
     var aQuestions = [];
     if (!isEmpty(this.questions) && !isEmpty(this.questions.data)) {
-      if (this.questions.data.questionnaire.questions) {
+      if (this.questions.data.questionnaire && this.questions.data.questionnaire.questions) {
         for(var i=0; i<previousQuestionIds.length; i++) {
           var question = this.findQuestionById(this.questions.data.questionnaire.questions, previousQuestionIds[i]);
           aQuestions.push(question);
