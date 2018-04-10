@@ -24,5 +24,31 @@
 			"ssl_verify": "Y",
 			"url": "https://api.demo.convergepay.com/VirtualMerchantDemo/process.do"
 		}
+	},
+	"production": {
+		"service_url" : "http://ec2-107-23-131-50.compute-1.amazonaws.com",
+		"service_port" : 80,
+		"redis_url": "127.0.0.1",
+		"redis_port": 6379,
+		"server_domain": "http://ec2-107-23-131-50.compute-1.amazonaws.com",
+		"client_domain": "http://127.0.0.1:3001",
+		"minify" : false,
+		"static_root" : "/pages",
+		"payment" : {
+			"ssl_merchant_id": "004582",
+			"ssl_user_id": "webpage",
+			"ssl_pin": "9VGHO0",
+			"ssl_show_form": "true",
+			"ssl_result_format": "HTML",
+			"ssl_test_mode": "true",
+			"ssl_receipt_link_method": "REDG",
+			"ssl_receipt_link_url": "http://ec2-54-158-63-166.compute-1.amazonaws.com/payment_success",
+			"ssl_transaction_type": "ccsale",
+			"ssl_cvv2cvc2_indicator": "1",
+			"ssl_add_token": "Y",
+			"ssl_get_token": "Y",
+			"ssl_verify": "Y",
+			"url": "https://api.demo.convergepay.com/VirtualMerchantDemo/process.do"
+		}
 	}
 }

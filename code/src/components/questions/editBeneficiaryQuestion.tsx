@@ -464,7 +464,7 @@ class Main extends React.Component<Props, {}> {
 
   recursiveGetQuestions1() {
     if (!isEmpty(this.questions) && !isEmpty(this.questions.data)) {
-      if (this.questions.data.questionnaire.questions) {
+      if (this.questions.data.questionnaire && this.questions.data.questionnaire.questions) {
         var preQ = null;
         var questionsList = [];
         questionsList.isQuestionsList = false;
@@ -1073,7 +1073,7 @@ class Main extends React.Component<Props, {}> {
     this.previousQuestionStructCaption = "";
 
     if (!isEmpty(this.questions) && !isEmpty(this.questions.data)) {
-      if (this.questions.data.questionnaire.questions) {
+      if (this.questions.data.questionnaire && this.questions.data.questionnaire.questions) {
         for(var i=0; i<previousQuestionIds.length; i++) {
           var question = this.findQuestionById(this.questions.data.questionnaire.questions, previousQuestionIds[i], false, 0);
           aQuestions.push(question);
