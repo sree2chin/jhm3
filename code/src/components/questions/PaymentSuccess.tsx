@@ -75,8 +75,8 @@ class paymentSuccess extends React.Component<Props, {}> {
   }
   shouldShowDefaultMessage() {
     return this.state.allDone &&
-    !((this.props.paymentData && this.props.paymentData.data && this.props.paymentData.data.message) ||
-      (this.props.confirmationData && this.props.confirmationData.data && this.props.confirmationData.data.message));
+    !((this.props.paymentData && this.props.paymentData && this.props.paymentData.message) ||
+      (this.props.confirmationData && this.props.confirmationData && this.props.confirmationData.message));
   }
   public render() {
        return (
@@ -91,8 +91,8 @@ class paymentSuccess extends React.Component<Props, {}> {
              <Col lg={3} md={3} sm={3}> </Col>
               {this.state.allDone &&
                 <Col lg={6} md={6} sm={6} xs={12} className="text-center payment_styles pt10 pb20" >
-                  <h1 className="pb20">{this.props.paymentData && this.props.paymentData.data.message}</h1>
-                  <h1 className="pb20">{this.props.confirmationData && this.props.confirmationData.data.message}</h1>
+                  <h1 className="pb20">{this.props.paymentData && this.props.paymentData.message}</h1>
+                  <h1 className="pb20">{this.props.confirmationData && this.props.confirmationData.message}</h1>
                   <h1 className="pb20">{this.shouldShowDefaultMessage() && "Thanks for contacting us. We will reach you in sometime."}</h1>
                 </Col>
               }
