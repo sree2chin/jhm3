@@ -14,7 +14,7 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
 
   validateEmailForm() {
     var isError = false;
-    var emailRegex =  /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    var emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 
     var input1Valid = emailRegex.test(this.state.email0);
     var input2Valid = emailRegex.test(this.state.email1);

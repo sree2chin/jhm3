@@ -18,7 +18,7 @@ export default class EmailModal extends React.Component<Props, {}> {
     this.setState({
       alreadySubmittedOnce: true
     });
-    var emailRegex =  /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    var emailRegex =  /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
     var input1Valid = true, input2Valid = true;
     if (this.props.noOfPersons==2) {
       input1Valid = emailRegex.test(this.state.email0);
