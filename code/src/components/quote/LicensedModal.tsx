@@ -29,9 +29,19 @@ export default class LicensedModal extends React.Component<Props, {}> {
   state = {}
 
   handlePhoneChange(e) {
-    this.props.handlePhoneChange(e.target.value);
+    var val = e.target.value;
+    var sampleVal = "123-123-1234";
+    if (val.length > 0 && (sampleVal && sampleVal.length > val.length) && !(new RegExp(/^[a-zA-Z0-9]*$/).test(sampleVal[val.length]))) {
+      if (this.state.value && this.state.value.length > val.length) {
+
+      } else {
+        val = val + sampleVal[val.length];
+      }
+
+    }
+    this.props.handlePhoneChange(val);
     this.setState({
-      phone: e.target.value
+      phone: val
     }, ()=>{
       if (this.state.phoneError && isEmpty(this.state.phone)) {
         this.setState({
@@ -143,7 +153,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
                         <Col sm={12} className={"email-input-container"}>
                           <Input
                             name={"phone-number"}
-                            placeholder={"1-800-252-7254"}
+                            placeholder={"800-252-7254"}
                             value={this.state.phone}
                             onChange={this.handlePhoneChange.bind(this)}
                           />
@@ -156,15 +166,15 @@ export default class LicensedModal extends React.Component<Props, {}> {
                     <Row className="okay-to-text-number">
                       <FormGroup className="radio-group">
                         <div className="c-radio" onClick={ ()=> {
-                                this.onTextAllowedChange("okay_to_text", "Yes")
+                                this.onTextAllowedChange("text_accepted", "Yes")
                               }}>
                           <input
                             type="radio"
-                            name={"okay_to_text"}
-                            checked={this.state.okay_to_text == "Yes"}
+                            name={"text_accepted"}
+                            checked={this.state.text_accepted == "Yes"}
                           />
                           <span style={{top: "3px"}}></span>
-                          <label htmlFor={"okay_to_text"}> It's okay to text this number. </label >
+                          <label htmlFor={"text_accepted"}> It's okay to text this number. </label >
                         </div>
                       </FormGroup>
                     </Row>

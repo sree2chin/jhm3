@@ -124,8 +124,17 @@ class PlansPage extends React.Component<Props, {}> {
   }
   getExtraInfo(data) {
     if ( this.state.type_of_submission == 10003) {
-      data.contact_time = this.state.slot;
-      data.phone_number = this.state.phone;
+      if (this.state.slot) {
+        data.contact_time = this.state.slot;
+      }
+      if (this.state.phone) {
+        data.phone_number = this.state.phone;
+      }
+      if (this.state.text_accepted) {
+        data.text_accepted = this.state.text_accepted;
+      } else {
+        data.text_accepted = "No";
+      }
       data.request_type = 3;
     } else if (this.state.type_of_submission == 10001) {
       data.request_type = 1;
@@ -134,6 +143,17 @@ class PlansPage extends React.Component<Props, {}> {
     } else if (this.state.type_of_submission == 10004) {
       data.request_type = 4;
     } else if (this.state.type_of_submission == 10005) {
+      if (this.state.slot) {
+        data.contact_time = this.state.slot;
+      }
+      if (this.state.phone) {
+        data.phone_number = this.state.phone;
+      }
+      if (this.state.text_accepted) {
+        data.text_accepted = this.state.text_accepted;
+      } else {
+        data.text_accepted = "No";
+      }
       data.request_type = 5;
     } else if (this.state.type_of_submission == 10006) {
       data.request_type = 6;

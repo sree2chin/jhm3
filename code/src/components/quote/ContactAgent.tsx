@@ -201,7 +201,7 @@ class ContactAgent extends React.Component<Props, {}> {
             <Col sm={12} className={"email-input-container"}>
               <Input
                 name={"phone-number"}
-                placeholder={"1-800-252-7254"}
+                placeholder={"800-252-7254"}
                 value={this.state.phone}
                 onChange={this.handlePhoneChange.bind(this)}
               />
