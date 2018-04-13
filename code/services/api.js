@@ -146,8 +146,11 @@ module.exports = new function(){
 
   this.postPayment = function(req, cb){
     var paymentConfig = JSON.parse(JSON.stringify(appConfig.getProperty("payment")));
-    paymentConfig.amount = req.body.amount;
-    paymentConfig.order_id = req.body.order_id;
+    //paymentConfig.amount = req.body.amount;
+    //paymentConfig.order_id = req.body.order_id;
+    var elavonConfig = req.body.elavon_params;
+    elavonConfig.ssl_receipt_link_url = paymentConfig.ssl_receipt_link_url;
+    console.log("\n\n\n" + JSON.stringify(elavonConfig) + "\n\n\n");
     request({
       url: paymentConfig.url,
       method: 'POST',
