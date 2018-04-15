@@ -163,7 +163,7 @@ export default class QuestionsCustomDatePicker extends React.Component<Props, {}
     s_birthDate = s_birthDate && s_birthDate.isValid() ? s_birthDate: "";
 
     return (
-        <Row className={question.id.replace(/[^a-zA-Z0-9]/g, "")} style={{marginBottom: "25px", marginLeft: "0px"}}>
+        <Row id={question.id.replace(/[^a-zA-Z0-9]/g, "")} className={question.id.replace(/[^a-zA-Z0-9]/g, "")} style={{marginBottom: "25px", marginLeft: "0px"}}>
           <Col sm={12} className={"c-subheader-text fs18"} style={{marginBottom: "10px", paddingLeft: "0px"}}>
           {question.constraints && question.constraints.required && <span style={{color: "rgb(255, 73, 73)", marginRight: "9px"}}>*</span>}
             {question.caption}

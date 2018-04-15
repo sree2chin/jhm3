@@ -62,6 +62,9 @@ class Main extends React.Component<Props, {}> {
   validateQuoteForm() {
     var result = true;
     var errors = [];
+    this.setState({
+      initialQuoteSubmittedOnce: true
+    });
     each (this.state.persons, (person, index) => {
       if(index < this.props.noOfPersons) {
         const {s_birthDate, s_gender, state, smoke, health, name} = person;
@@ -268,6 +271,8 @@ class Main extends React.Component<Props, {}> {
                   person={this.state.persons[0]}
                   errors={this.state.errors[0]}
                   submitQuoteForm={this.submitQuoteForm.bind(this)}
+                  validateQuoteForm={this.validateQuoteForm.bind(this)}
+                  initialQuoteSubmittedOnce={this.state.initialQuoteSubmittedOnce}
                 />
               </Col>
               { this.props.noOfPersons==2 &&
@@ -279,6 +284,8 @@ class Main extends React.Component<Props, {}> {
                     person={this.state.persons[1]}
                     errors={this.state.errors[1]}
                     submitQuoteForm={this.submitQuoteForm.bind(this)}
+                    validateQuoteForm={this.validateQuoteForm.bind(this)}
+                    initialQuoteSubmittedOnce={this.state.initialQuoteSubmittedOnce}
                   />
                 </Col>
               }

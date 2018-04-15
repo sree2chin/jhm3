@@ -180,7 +180,7 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
     var question = this.props.question;
 
     return (
-     <div>
+     <div id={question.id.replace(/[^a-zA-Z0-9]/g, "")}>
         <Col sm={12} className={"c-subheader-text fs18"} style={{marginTop: "5px", paddingLeft: "0px", marginBottom: "18px"}}>
           {question.constraints && question.constraints.required && <span style={{color: "rgb(255, 73, 73)", marginRight: "9px"}}>*</span>}
           {question.caption}

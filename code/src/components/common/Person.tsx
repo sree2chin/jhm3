@@ -34,6 +34,12 @@ export default class Person extends React.Component<Props, {}> {
       [key]: value
     });
     this.props.onChange(this.props.index, key, value);
+    if (this.propinitialQuoteSubmittedOnce) {
+      setTimeout(()=>{
+        this.props.validateQuoteForm();
+      }, 100);
+    }
+
   }
 
   onDateInputChange(year, month, date) {
@@ -50,6 +56,11 @@ export default class Person extends React.Component<Props, {}> {
       formattedDate: moment(value).format("MM/DD/YYYY")
     });
     this.props.onChange(this.props.index, key, moment(value));
+    if (this.propinitialQuoteSubmittedOnce) {
+      setTimeout(()=>{
+        this.props.validateQuoteForm();
+      }, 100);
+    }
   }
 
   getErrorsClassNames(errors, key) {
@@ -199,8 +210,8 @@ export default class Person extends React.Component<Props, {}> {
           <Col sm={12} style={{marginBottom: "0px"}} className="person-name-container">
             <Input
               name={"first-applicant-name-" + personIndex}
-              label="Name"
-              placeholder="Name"
+              label="First Name"
+              placeholder="First Name"
               value={person.name}
               onChange={(e) => {
                 this.onChange("name", e.target.value

@@ -83,6 +83,13 @@ class Main extends React.Component<Props, {}> {
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.questions)) {
       this.questions = JSON.parse(JSON.stringify(nextProps.questions));
+      setTimeout(() => {
+        if (this.questionComponents && this.questionComponents.isQuestionsBeneficiaries) {
+          //window.scrollTo(0, 100);
+          this.scrollIntoInvalidQuestionView();
+          return;
+        }
+      }, 200);
     }
     var queryParams = this.props.location.query;
     var queryParamsString = "?";
@@ -127,7 +134,8 @@ class Main extends React.Component<Props, {}> {
   }
   componentDidMount() {
     if (this.questionComponents && this.questionComponents.isQuestionsBeneficiaries) {
-      window.scrollTo(0, 100);
+      //window.scrollTo(0, 100);
+      this.scrollIntoInvalidQuestionView();
       return;
     }
     window.scrollTo(0, 0);
@@ -1402,6 +1410,45 @@ class Main extends React.Component<Props, {}> {
     return !(this.actualQuestionLists && this.actualQuestionLists[0] &&
     this.props.questions && this.props.questions.extra_params && this.props.questions.extra_params.answered_questions &&
       this.props.questions.extra_params.answered_questions[0] && this.props.questions.extra_params.answered_questions[0][0] == this.actualQuestionLists[0].id);
+  }
+
+  scrollIntoInvalidQuestionView() {
+    if (this.actualQuestionLists) {
+      if (this.actualQuestionLists.contingencyBeneficiariesMainQuestion &&
+        this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions &&
+        this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions.length > 0){
+        var questions = this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions;
+        for (var i=0; i<questions.length; i++) {
+          var qs = questions[i].questions;
+          for (var j=0; j<qs.length; j++) {
+            if (qs[j].answerState == "invalid") {
+              var question = qs[j];
+              var elem = document.getElementById(question.id.replace(/[^a-zA-Z0-9]/g, ""));
+              elem.scrollIntoView();
+              break;
+            }
+          }
+
+        }
+      }
+      if (this.actualQuestionLists.primaryBeneficiariesMainQuestion &&
+        this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions &&
+        this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions.length > 0) {
+        var questions = this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions;
+        for (var i=0; i<questions.length; i++) {
+            var qs = questions[i].questions;
+            for (var j=0; j<qs.length; j++) {
+              if (qs[j].answerState == "invalid") {
+                var question = qs[j];
+                var elem = document.getElementById(question.id.replace(/[^a-zA-Z0-9]/g, ""));
+                elem.scrollIntoView();
+                break;
+              }
+            }
+        }
+      }
+
+    }
   }
 
   public render() {

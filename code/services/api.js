@@ -149,12 +149,13 @@ module.exports = new function(){
     //paymentConfig.amount = req.body.amount;
     //paymentConfig.order_id = req.body.order_id;
     var elavonConfig = req.body.elavon_params;
-    elavonConfig.ssl_receipt_link_url = paymentConfig.ssl_receipt_link_url;
+    //elavonConfig.ssl_receipt_link_url = paymentConfig.ssl_receipt_link_url;
     console.log("\n\n\n" + JSON.stringify(elavonConfig) + "\n\n\n");
+
     request({
       url: paymentConfig.url,
       method: 'POST',
-      form: paymentConfig
+      form: elavonConfig
     }, function callback(err, httpResponse, body) {
       req.session.postPayment = JSON.stringify(httpResponse);
       cb(err, httpResponse);

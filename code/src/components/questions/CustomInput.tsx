@@ -117,7 +117,7 @@ export default class CustomInput extends React.Component<Props, {}> {
     var question = this.props.question;
 
     return (
-     <div className={wrapperClass}>
+     <div className={wrapperClass} id={question.id.replace(/[^a-zA-Z0-9]/g, "")}>
         <label className="fs18" htmlFor={question.name}>
           {question.constraints && question.constraints.required && <span style={{color: "rgb(255, 73, 73)", marginRight: "9px"}}>*</span>}
           {question.caption}
