@@ -647,6 +647,7 @@ class Main extends React.Component<Props, {}> {
                                       ans = q.answer;
                                     }
                                 }
+
                                 if (typeof ans == "object") {
                                   console.log(ans);
                                 } else {
