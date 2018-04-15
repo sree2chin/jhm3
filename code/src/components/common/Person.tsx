@@ -34,7 +34,7 @@ export default class Person extends React.Component<Props, {}> {
       [key]: value
     });
     this.props.onChange(this.props.index, key, value);
-    if (this.propinitialQuoteSubmittedOnce) {
+    if (this.props.initialQuoteSubmittedOnce) {
       setTimeout(()=>{
         this.props.validateQuoteForm();
       }, 100);
@@ -56,7 +56,7 @@ export default class Person extends React.Component<Props, {}> {
       formattedDate: moment(value).format("MM/DD/YYYY")
     });
     this.props.onChange(this.props.index, key, moment(value));
-    if (this.propinitialQuoteSubmittedOnce) {
+    if (this.props.initialQuoteSubmittedOnce) {
       setTimeout(()=>{
         this.props.validateQuoteForm();
       }, 100);
