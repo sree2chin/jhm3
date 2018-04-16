@@ -26,11 +26,11 @@
 		}
 	},
 	"production": {
-		"service_url" : "http://vantisapi-1871206991.us-east-1.elb.amazonaws.com",
+		"service_url" : "https://vantisapi.sureify.com",
 		"service_port" : 80,
 		"redis_url": "127.0.0.1",
 		"redis_port": 6379,
-		"server_domain": "http://vantisapi-1871206991.us-east-1.elb.amazonaws.com",
+		"server_domain": "https://vantisapi.sureify.com",
 		"client_domain": "http://127.0.0.1:3001",
 		"minify" : false,
 		"static_root" : "/pages",
