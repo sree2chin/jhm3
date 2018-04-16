@@ -1713,7 +1713,9 @@ input.form-control:focus {
 .enter-password-modal-container.email-modal-unique-container {
   font-family: NunitoRegular; }
   .enter-password-modal-container.email-modal-unique-container .modal-body {
-    padding: 78px 300px 25px 71px; }
+    padding: 78px 250px 25px 71px; }
+  .enter-password-modal-container.email-modal-unique-container .modal-dialog {
+    width: 50%; }
   .enter-password-modal-container.email-modal-unique-container .email-quote-text.email-quote-text-on-modal {
     font-size: 34px;
     font-weight: 600;
