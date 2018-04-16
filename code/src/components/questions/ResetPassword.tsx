@@ -25,6 +25,19 @@ export default class ResetPasswordModal extends React.Component<Props, {}> {
         });
       });
   }
+  componentDidMount() {
+    document.addEventListener("keydown", this.keyDownTextField.bind(this), false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.keyDownTextField.bind(this), false);
+  }
+  keyDownTextField(e){
+    var keyCode = e.keyCode;
+    if(keyCode==13) {
+      this.resetPassword();
+    } else {
+    }
+  }
 
   state = {}
   handleChange(key, e) {

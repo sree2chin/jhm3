@@ -582,25 +582,27 @@ class Main extends React.Component<Props, {}> {
               }
             }
             var qL = q.questions;
-            if (q.caption.toLowerCase() == "beneficiaries") {
+            if (q.caption.toLowerCase() == "beneficiaries" && !this.allBeneficiaryQuestionsAreValid(qL)) {
               questionsList.isQuestionsBeneficiaries = true;
               actualQuestionLists.primaryBeneficiariesMainQuestion = qL[0];
               actualQuestionLists.contingencyBeneficiariesMainQuestion = qL[1];
               this.actualQuestionLists = actualQuestionLists;
               return questionsList;
             }
-            var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists, isPrefixGroup, 0)
-            if(questionsFromGroup.length > 0) {
-              var allQuestionsAreLabels = true;
-              for(var i=0; i<questionsFromGroup.length; i++) {
-                if (questionsFromGroup[i].props.type != "label"){
-                  allQuestionsAreLabels = false;
+            if (q.caption.toLowerCase() != "beneficiaries") {
+              var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists, isPrefixGroup, 0)
+              if(questionsFromGroup.length > 0) {
+                var allQuestionsAreLabels = true;
+                for(var i=0; i<questionsFromGroup.length; i++) {
+                  if (questionsFromGroup[i].props.type != "label"){
+                    allQuestionsAreLabels = false;
+                  }
                 }
-              }
-              if(!allQuestionsAreLabels) {
-                return questionsFromGroup;
-              } else {
-                questionsList = questionsFromGroup;
+                if(!allQuestionsAreLabels) {
+                  return questionsFromGroup;
+                } else {
+                  questionsList = questionsFromGroup;
+                }
               }
             }
           } else if (q.type == "struct") {
@@ -666,6 +668,45 @@ class Main extends React.Component<Props, {}> {
     } else {
       return null;
     }
+  }
+  allBeneficiaryQuestionsAreValid (beneficiaryQuestions) {
+    var allQuestionsValid = beneficiaryQuestions[0] && beneficiaryQuestions[0].questions && beneficiaryQuestions[0].questions.length > 0;
+    if (!allQuestionsValid) { return false;}
+    if (beneficiaryQuestions) {
+      if (beneficiaryQuestions[1] &&
+        beneficiaryQuestions[1].questions &&
+        beneficiaryQuestions[1].questions.length > 0){
+        var questions = beneficiaryQuestions[1].questions;
+        for (var i=0; i<questions.length; i++) {
+          var qs = questions[i].questions;
+          for (var j=0; j<qs.length; j++) {
+            if ((qs[j].answerState == "valid" || this.questionsAlreadySubmitted(qs[j])) && qs[j].answerState!="invalid" &&  qs[j].answerState!="missing") {
+
+            } else {
+              allQuestionsValid = false;
+            }
+
+          }
+
+        }
+      }
+      if (beneficiaryQuestions[0] &&
+        beneficiaryQuestions[0].questions &&
+        beneficiaryQuestions[0].questions.length > 0) {
+        var questions = beneficiaryQuestions[0].questions;
+        for (var i=0; i<questions.length; i++) {
+            var qs = questions[i].questions;
+            for (var j=0; j<qs.length; j++) {
+              if ((qs[j].answerState == "valid" || this.questionsAlreadySubmitted(qs[j])) && qs[j].answerState!="invalid" &&  qs[j].answerState!="missing") {
+
+              } else {
+                allQuestionsValid = false;
+              }
+            }
+        }
+      }
+    }
+    return allQuestionsValid;
   }
 
   getQuestions(lastAnsweredQuestion) {

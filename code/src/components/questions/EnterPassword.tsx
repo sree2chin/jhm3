@@ -26,6 +26,20 @@ export default class EmailModal extends React.Component<Props, {}> {
     });
   }
 
+  componentDidMount() {
+    document.addEventListener("keydown", this.keyDownTextField.bind(this), false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.keyDownTextField.bind(this), false);
+  }
+  keyDownTextField(e){
+    var keyCode = e.keyCode;
+    if(keyCode==13) {
+      this.submitPassword();
+    } else {
+    }
+  }
+
   state = {}
   handleChange(e) {
     this.props.handleChange(e.target.value);
