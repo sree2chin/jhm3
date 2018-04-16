@@ -135,7 +135,7 @@ class Signature extends React.Component<Props, {}> {
         </Row> }
         <Row className="questions-container c-center">
             {!this.state.allDone && <div className="questions-content-container final-loading-messages">
-                <div>Passing application to customer for signature </div>
+                <div>LOADING</div>
                 <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>
             </div>}
             {this.state.allDone && <div className="questions-content-container final-thank-you-messages">
