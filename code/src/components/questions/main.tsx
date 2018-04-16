@@ -593,8 +593,8 @@ class Main extends React.Component<Props, {}> {
               var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists, isPrefixGroup, 0)
               if(questionsFromGroup.length > 0) {
                 var allQuestionsAreLabels = true;
-                for(var i=0; i<questionsFromGroup.length; i++) {
-                  if (questionsFromGroup[i].props.type != "label"){
+                for(var labelCounter=0; labelCounter<questionsFromGroup.length; labelCounter++) {
+                  if (questionsFromGroup[labelCounter].props.type != "label"){
                     allQuestionsAreLabels = false;
                   }
                 }
