@@ -849,9 +849,9 @@ class Main extends React.Component<Props, {}> {
           counter={this.counter++}
         />;
     } else if (q.type == "label") {
-      /*questionsList.push( <Label
+      qComponent = <Label
               {...q}
-            />)*/
+            />;
     } else if (q.type == "number" || q.type=="text") {
       qComponent = <CustomInput
         question={q}
