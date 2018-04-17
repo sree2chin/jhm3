@@ -198,7 +198,7 @@ export default class Plan extends React.Component<Props, {}> {
       }], this.stopSliderChanging.bind(this));
     }.bind(this);
     setTimeout(f);
-  },
+  }
   duringSliderChanging(value) {
     var sFaceAmount = parseInt(value);
     if ( sFaceAmount > parseInt(this.state.selectedPlan.FaceMax)) {

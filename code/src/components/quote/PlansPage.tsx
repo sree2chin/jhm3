@@ -127,10 +127,19 @@ class PlansPage extends React.Component<Props, {}> {
 
     this.props.setPersonsData(persons);
 
+    this.setState({
+      submittingPlansFromPlan: true
+    });
     this.props.submitPlansForm(persons).then(() => {
       if(successCb) { successCb(); }
+      this.setState({
+        submittingPlansFromPlan: false
+      });
       console.log("sdfds");
     }).catch(()=>{
+      this.setState({
+        submittingPlansFromPlan: false
+      });
       this.submmitedProductForm = false;
     });
   }
@@ -668,22 +677,23 @@ class PlansPage extends React.Component<Props, {}> {
           </Col> }
           <Col className="continue-to-next-steps c-center" style={{ }}>
 
-            <Button style={{marginTop: "0px", marginRight: "14px", backgroundColor: "#fb4d3d!important"}} className="c-button-default circular hidden-xs back-btn" onClick={(){
+            <Button disabled={this.state.submittingPlansFromPlan} style={{marginTop: "0px", marginRight: "14px", backgroundColor: "#fb4d3d!important"}} className="c-button-default circular hidden-xs back-btn" onClick={(){
                 this.redirectToProductPage()
               }}
             >
               BACK
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
-            <Button style={{marginTop: "0px"}} className="c-button-default circular hidden-xs" onClick={(){
+            <Button disabled={this.state.submittingPlansFromPlan} style={{marginTop: "0px"}} className="c-button-default circular hidden-xs" onClick={(){
                 this.redirectToNextSteps()
               }}
             >
               CONTINUE TO THE NEXT STEP
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+              {this.state.submittingPlansFromPlan && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
 
-            <Button className="c-button-default visible-xs back-btn" onClick={() => {
+            <Button disabled={this.state.submittingPlansFromPlan} className="c-button-default visible-xs back-btn" onClick={() => {
                 this.redirectToProductPage()
               }}
               style={{backgroundColor: "#fb4d3d!important", marginBottom: "15px"}}
@@ -691,12 +701,13 @@ class PlansPage extends React.Component<Props, {}> {
               BACK
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
-            <Button  style={{marginBottom: "15px"}} className="c-button-default visible-xs" onClick={(){
+            <Button disabled={this.state.submittingPlansFromPlan} style={{marginBottom: "15px"}} className="c-button-default visible-xs" onClick={(){
                 this.redirectToNextSteps()
               }}
             >
               CONTINUE TO THE NEXT STEP
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+              {this.state.submittingPlansFromPlan && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
           </Col>
         </Row>
