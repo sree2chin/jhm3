@@ -186,30 +186,54 @@ class PlansPage extends React.Component<Props, {}> {
     this.productSubmissionBtnClicked = true;
     if(this.validatePlansSelections()) {
       const persons = [];
-      this.setState({
-        movingToFinalStep: true
-      });
       const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
-      if(this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium ) {
-        var amount = this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
-        amount = amount ? parseFloat(amount.split("$")[1]) : 0;
+      if (this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].Plan && this.props.premiums[0][this.state.productIdPlan0].Plan.SpwlFlag != "1") {
+        if(false){ //this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium ) {
+          var amount = this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
+          amount = amount ? parseFloat(amount.split("$")[1]) : 0;
 
-        personOne.premium_amount=amount;
-        personOne.premium_type=this.state.premium_type;
+          personOne.premium_amount = String(amount);
+          personOne.premium_type=this.state.premium_type;
+        } else {
+          this.setState({
+            showPremiumAmountNotpresentError: true
+          });
+          return;
+        }
       }
+      this.setState({
+        showPremiumAmountNotpresentError: false
+      });
+
+
+      this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.PremiumAmount
       persons.push(personOne);
 
       if(this.props.noOfPersons == 2) {
         const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
-        if(this.props.premiums && this.props.premiums[0] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium ) {
-          var amount = this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
-          amount = amount ? parseFloat(amount.split("$")[1]) : 0;
+        if (this.props.premiums && this.props.premiums[1] && this.props.premiums[1][this.state.productIdPlan0] && this.props.premiums[1][this.state.productIdPlan0].Plan && this.props.premiums[1][this.state.productIdPlan0].Plan.SpwlFlag != "1") {
+          if(this.props.premiums && this.props.premiums[1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium ) {
+            var amount = this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
+            amount = amount ? parseFloat(amount.split("$")[1]) : 0;
 
-          personTwo.premium_amount=amount;
-          personTwo.premium_type=this.state.premium_type;
+            personTwo.premium_amount = String(amount);
+            personTwo.premium_type=this.state.premium_type;
+          } else {
+            this.setState({
+              showPremiumAmountNotpresentError: true
+            });
+            return;
+          }
         }
         persons.push(personTwo);
+        this.setState({
+          showPremiumAmountNotpresentError: false
+        });
       }
+
+      this.setState({
+        movingToFinalStep: true
+      });
 
       this.props.setPersonsData(persons);
       var queryParams = this.props.location.query;
@@ -639,6 +663,9 @@ class PlansPage extends React.Component<Props, {}> {
           {this.state.productSelectionErrorMsg && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "15px"}} sm={12} className={"c-subheader-text error"}>
                     {this.state.productSelectionErrorMsg}
                   </Col> }
+          {this.state.showPremiumAmountNotpresentError && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "15px"}} sm={12} className={"c-subheader-text error"}>
+            {"Something gone wrong. Please retry again."}
+          </Col> }
           <Col className="continue-to-next-steps c-center" style={{ }}>
 
             <Button style={{marginTop: "0px", marginRight: "14px", backgroundColor: "#fb4d3d!important"}} className="c-button-default circular hidden-xs back-btn" onClick={(){
