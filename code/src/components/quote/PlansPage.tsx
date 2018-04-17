@@ -199,7 +199,7 @@ class PlansPage extends React.Component<Props, {}> {
       if (this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].Plan && this.props.premiums[0][this.state.productIdPlan0].Plan.SpwlFlag != "1") {
         if(this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium ) {
           var amount = this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
-          amount = amount ? parseFloat(amount.split("$")[1]) : 0;
+          amount = amount ? amount.split("$")[1].replace(",", "") : 0;
 
           personOne.premium_amount = String(amount);
           personOne.premium_type=this.state.premium_type;
