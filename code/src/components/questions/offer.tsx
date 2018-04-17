@@ -160,10 +160,10 @@ class Offer extends React.Component<Props, {}> {
                         Price
                     </Col>
                     <Col className="offer-price-amount">
-                        {premium.currency}{premium.premium_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        {premium.currency}{premium.premium_amount}
                     </Col>
                     <Col className="offer-per-month">
-                        Per month for {premium.currency}{premium.coverage_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        Per month for {premium.currency}{premium.coverage_amount}
                     </Col>
                     <Col className="offer-per-month" style={{marginBottom: "16px"}}>
                         coverage
