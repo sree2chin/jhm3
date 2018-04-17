@@ -664,7 +664,7 @@ class PlansPage extends React.Component<Props, {}> {
                     {this.state.productSelectionErrorMsg}
                   </Col> }
           {this.state.showPremiumAmountNotpresentError && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "15px"}} sm={12} className={"c-subheader-text error"}>
-            {"Something gone wrong. Please retry again."}
+            {"Something gone wrong. Please try again."}
           </Col> }
           <Col className="continue-to-next-steps c-center" style={{ }}>
 
