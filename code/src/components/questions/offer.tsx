@@ -148,10 +148,24 @@ class Offer extends React.Component<Props, {}> {
           }
         }
         queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-        if (questionsInfo.application_complete_status == true || questionsInfo.application_complete_status == "true") {
-          browserHistory.push("/signature" + queryParamsString);
-        } else {
+
+        var link = questionsInfo && questionsInfo.data &&
+        questionsInfo.data.current_document_data && questionsInfo.data.current_document_data.sign_url;
+        if (questionsInfo.valid_user == 0) {
+          browserHistory.push("/authorize" + queryParamsString);
+          return;
+        }
+
+        if (questionsInfo.application_complete_status == false || questionsInfo.application_complete_status == "false") {
           browserHistory.push("/questions" + queryParamsString);
+          return;
+        }
+        if (!isEmpty(link)){
+          window.location.href = link;
+        } else if (isEmpty(questionsInfo.data && questionsInfo.data.current_document_data) && !isEmpty(questionsInfo.data.offer_data)) {
+          browserHistory.push("/offer" + queryParamsString);
+        } else if(isEmpty(questionsInfo.data) && isEmpty(questionsInfo.data.offer_data)) {
+          browserHistory.push("/payment_success" + queryParamsString);
         }
         return;
       }
