@@ -151,7 +151,10 @@ module.exports = new function(){
     var elavonConfig = req.body.elavon_params;
     //elavonConfig.ssl_receipt_link_url = paymentConfig.ssl_receipt_link_url;
     console.log("\n\n\n" + JSON.stringify(elavonConfig) + "\n\n\n");
-
+    if (_.isEmpty(elavonConfig)) {
+      this.makePayment1(req, cb, true);
+      return;
+    }
     request({
       url: paymentConfig.url,
       method: 'POST',
@@ -188,6 +191,27 @@ module.exports = new function(){
       formData: formData
     }, function callback(err, httpResponse, body) {
       console.log("\n\n\nhttpResponse: " + JSON.stringify(httpResponse) + "\n\n\n");
+      cb(err, httpResponse);
+    });
+  };
+
+  this.makePayment1 = function(req, cb){
+
+    var formData = {};
+    formData.payment_response_data = JSON.stringify([]);
+
+    appendAgentInfo(req, formData);
+
+    console.log("\n\n\nformData in makePayment1: " + JSON.stringify(formData) + "\n\n\n");
+    request({
+      url: restOptions.host + '/v1/questions/questions',
+      headers: {
+        'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
+      },
+      method: 'POST',
+      formData: formData
+    }, function callback(err, httpResponse, body) {
+      console.log("\n\n\n ttpResponse in makePayment1: " + JSON.stringify(httpResponse) + "\n\n\n");
       cb(err, httpResponse);
     });
   };

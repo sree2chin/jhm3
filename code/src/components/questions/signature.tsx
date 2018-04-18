@@ -73,6 +73,11 @@ class Signature extends React.Component<Props, {}> {
         browserHistory.push("/authorize" + queryParamsString);
         return;
       }
+
+      if (this.props.confirmationData.application_complete_status == false || this.props.confirmationData.application_complete_status == "false") {
+        browserHistory.push("/questions" + queryParamsString);
+        return;
+      }
       if (!isEmpty(link)){
         window.location.href = link;
       } else if (isEmpty(this.props.confirmationData.data.current_document_data) && !isEmpty(this.props.confirmationData.data.offer_data)) {

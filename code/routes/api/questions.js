@@ -27,6 +27,7 @@ module.exports = function(app) {
 
   app.post(prefix + '/questions/post-payment', function(req, res) {
     QuestionsService.postPayment(req, function(statusCode, data) {
+      console.log("return in post payment");
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
       res.send(data);

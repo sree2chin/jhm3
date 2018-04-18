@@ -82,6 +82,12 @@ class Offer extends React.Component<Props, {}> {
       //browserHistory.push("/signature");
       var link = this.props.confirmationData && this.props.confirmationData.data &&
       this.props.confirmationData.data.current_document_data && this.props.confirmationData.data.current_document_data.sign_url;
+
+      if (this.props.confirmationData.application_complete_status == false || this.props.confirmationData.application_complete_status == "false") {
+        browserHistory.push("/questions" + queryParamsString);
+        return;
+      }
+
       if (this.props.confirmationData.valid_user == 0) {
         browserHistory.push("/authorize" + queryParamsString);
         return;
@@ -123,11 +129,33 @@ class Offer extends React.Component<Props, {}> {
     var data = {};
     data.order_id = premium.order_id;
     data.amount = premium.premium_amount;
-    data.elavon_params = offerData && offerData.elavon_params ? offerData.elavon_params : {}
+    data.elavon_params = offerData && offerData.elavon_params ? offerData.elavon_params : [];
     this.setState({
       onPaymentGoingTo: true
     });
-    this.props.postPayment(data).then(()=>{
+    this.props.postPayment(data).then(()=> {
+
+      if (this.props.paymentInfo && isEmpty(data.elavon_params)) {
+        var questionsInfo = JSON.parse(this.props.paymentInfo);
+
+        var queryParams = this.props.location.query;
+        var queryParamsString = "?";
+        for(var k in queryParams) {
+          if (queryParams[k]) {
+            queryParamsString += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString += k + "&";
+          }
+        }
+        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+        if (questionsInfo.application_complete_status == true || questionsInfo.application_complete_status == "true") {
+          browserHistory.push("/signature" + queryParamsString);
+        } else {
+          browserHistory.push("/questions" + queryParamsString);
+        }
+        return;
+      }
+
       window.location.href = `/payment?order_id=${data.order_id}&amount=${data.amount}`;
       this.setState({
         onPaymentGoingTo: false
@@ -214,7 +242,8 @@ class Offer extends React.Component<Props, {}> {
 const mapStateToProps = (state: any): Props => {
   return {
     questions: state.questions.questions,
-    confirmationData: state.questions.confirmationData
+    confirmationData: state.questions.confirmationData,
+    paymentInfo: state.questions.paymentInfo
   }
 }
 
