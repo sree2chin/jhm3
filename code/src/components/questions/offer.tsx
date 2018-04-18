@@ -164,7 +164,7 @@ class Offer extends React.Component<Props, {}> {
           window.location.href = link;
         } else if (isEmpty(questionsInfo.data && questionsInfo.data.current_document_data) && !isEmpty(questionsInfo.data.offer_data)) {
           browserHistory.push("/offer" + queryParamsString);
-        } else if(isEmpty(questionsInfo.data) && isEmpty(questionsInfo.data.offer_data)) {
+        } else if(isEmpty(questionsInfo.data)) {
           browserHistory.push("/payment_success" + queryParamsString);
         }
         return;
