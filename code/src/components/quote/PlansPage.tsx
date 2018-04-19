@@ -130,18 +130,20 @@ class PlansPage extends React.Component<Props, {}> {
     this.setState({
       submittingPlansFromPlan: true
     });
-    this.props.submitPlansForm(persons).then(() => {
-      if(successCb) { successCb(); }
-      this.setState({
-        submittingPlansFromPlan: false
+    setTimeout(() => {
+      this.props.submitPlansForm(persons).then(() => {
+        if(successCb) { successCb(); }
+        this.setState({
+          submittingPlansFromPlan: false
+        });
+        console.log("sdfds");
+      }).catch(()=>{
+        this.setState({
+          submittingPlansFromPlan: false
+        });
+        this.submmitedProductForm = false;
       });
-      console.log("sdfds");
-    }).catch(()=>{
-      this.setState({
-        submittingPlansFromPlan: false
-      });
-      this.submmitedProductForm = false;
-    });
+    }, 100)
   }
 
   setPlanFormSubmissionErrorMsg() {
@@ -245,18 +247,22 @@ class PlansPage extends React.Component<Props, {}> {
       });
 
       this.props.setPersonsData(persons);
-      var queryParams = this.props.location.query;
-      var queryParamsString = "?";
-      for(var k in queryParams) {
-        if (queryParams[k]) {
-          queryParamsString += k + "=" + queryParams[k] + "&";
-        } else {
-          queryParamsString += k + "&";
+
+      setTimeout(() => {
+        var queryParams = this.props.location.query;
+        var queryParamsString = "?";
+        for(var k in queryParams) {
+          if (queryParams[k]) {
+            queryParamsString += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString += k + "&";
+          }
         }
-      }
-      queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-      const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
-      browserHistory.push(basePath + "next-steps" + queryParamsString);
+        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+        const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
+        browserHistory.push(basePath + "next-steps" + queryParamsString);
+      });
+
     } else {
       this.setPlanFormSubmissionErrorMsg();
     }
