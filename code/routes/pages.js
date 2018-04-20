@@ -10,16 +10,36 @@ var fs = require('fs');
 var ejs = require('ejs');
 var url = require("url");
 
+var serialize = function(obj) {
+  var str = [];
+  for (var p in obj)
+    if (obj.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    }
+  return str.join("&");
+}
 module.exports = function(app) {
   app.use(function (req, res, next) {
+      var url_parts = url.parse(req.url, true);
+      console.log("in normal url: " + JSON.stringify(url_parts));
+      req.session = req.session || {};
+      req.session.queryParams = {};
+      if (!_.isEmpty(url_parts.query)) {
+        req.session.queryParams = req.session.queryParams || {};
+        for(var k in url_parts.query) {
+          req.session.queryParams[k] = url_parts.query[k] || "";
+        }
+      };
+
+      res.redirect("/?" + serialize(JSON.stringify(url_parts)));
       console.log("\n\n\n in app use: " + req.url + "\n\n\n")
       //if(req.url.indexOf("/js") < 0 && req.url.indexOf("/css") < 0 && req.url.indexOf("/fonts") < 0 && req.url.indexOf("/img") < 0
       //    && req.url.indexOf("/installapps") < 0) {
-          res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-          res.header('Expires', '-1');
-          res.header('Pragma', 'no-cache');
+      res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+      res.header('Expires', '-1');
+      res.header('Pragma', 'no-cache');
       //}
-      next()
+      next();
   });
   app.get('/', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
