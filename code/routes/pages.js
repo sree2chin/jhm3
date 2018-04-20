@@ -27,14 +27,12 @@ module.exports = function(app) {
       req.session = req.session || {};
       req.session.queryParams = req.session.queryParams || {};
       console.log("\n\n\nuonceCameIn: " + req.session.onceCameIn);
-      if (!_.isEmpty(url_parts.query) && url_parts.query.agent_number && req.url.indexOf("/js") < 0 &&
-        req.url.indexOf("/css") < 0 && req.url.indexOf("/fonts") < 0 &&
-        req.url.indexOf("/img") < 0 && req.url.indexOf("/installapps") < 0 &&
-        req.session.onceCameIn != true) {
+      if (!_.isEmpty(url_parts.query) && url_parts.query.agent_web == "agent_web") {
         req.session.queryParams = req.session.queryParams || {};
-        req.session.onceCameIn = true;
         for(var k in url_parts.query) {
-          req.session.queryParams[k] = url_parts.query[k] || "";
+          if (k != "agent_web") {
+            req.session.queryParams[k] = url_parts.query[k] || "";
+          }
         }
         console.log("\n\n\nserialize(url_parts)3: " + queryString.stringify(url_parts.query) + "\n\n\n");
         templatePath = "../../dist/";
