@@ -76,7 +76,7 @@ class SelectPersons extends React.Component<Props, State> {
                 </Row>
                 <Row style={{marginTop: "15px"}} className="quotation-msg-text-container">
                   <Col sm={12} className="confirmation-msg confirmation-msg-first-line">
-                    Welcome! We're glad you're here. Please answer a few questions to determine which product(s) are a good match.
+                    Welcome! We're glad you're here. Please answer a few questions to determine which product(s) are a good match..
                   </Col>
                 </Row>
               </Col>
