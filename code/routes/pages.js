@@ -31,7 +31,7 @@ module.exports = function(app) {
         }
       };
 
-      res.redirect("/?" + serialize(JSON.stringify(url_parts)));
+      res.redirect("/?" + serialize(url_parts));
       console.log("\n\n\n in app use: " + req.url + "\n\n\n")
       //if(req.url.indexOf("/js") < 0 && req.url.indexOf("/css") < 0 && req.url.indexOf("/fonts") < 0 && req.url.indexOf("/img") < 0
       //    && req.url.indexOf("/installapps") < 0) {
