@@ -22,6 +22,7 @@ module.exports = function(app) {
   app.use(function (req, res, next) {
       var url_parts = url.parse(req.url, true);
       console.log("in page url: " + JSON.stringify(url_parts));
+      console.log("\n\n\nurl_parts.query: " + JSON.stringify(url_parts.query));
       req.session = req.session || {};
       req.session.queryParams = {};
       if (!_.isEmpty(url_parts.query)) {
