@@ -261,7 +261,7 @@ class PlansPage extends React.Component<Props, {}> {
         queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
         const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
         browserHistory.push(basePath + "next-steps" + queryParamsString);
-      });
+      }, 500);
 
     } else {
       this.setPlanFormSubmissionErrorMsg();
