@@ -9,6 +9,7 @@ var appConfig = require('../services/quotes.js');
 var fs = require('fs');
 var ejs = require('ejs');
 var url = require("url");
+const queryString = require('query-string');
 
 var serialize = function(obj) {
   var str = [];
@@ -30,7 +31,7 @@ module.exports = function(app) {
         for(var k in url_parts.query) {
           req.session.queryParams[k] = url_parts.query[k] || "";
         }
-        console.log("\n\n\nserialize(url_parts)3: " + serialize(url_parts) + "\n\n\n");
+        console.log("\n\n\nserialize(url_parts)3: " + queryString.stringify(url_parts.query) + "\n\n\n");
         res.redirect("/?" + serialize(url_parts));
         return;
       };

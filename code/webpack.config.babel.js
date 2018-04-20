@@ -5,7 +5,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var basePath = __dirname;
 
-var plugins = [    
+var plugins = [
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor1',
     chunks: ['app', "vendor", "vendor2"],
@@ -29,11 +29,11 @@ var plugins = [
     filename: 'index.ejs',
     template: '!!raw-loader!src/index.ejs',
     minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      conservativeCollapse: true
+      removeComments: false,
+      collapseWhitespace: false,
+      conservativeCollapse: false
     }
-  }), 
+  }),
  new ExtractTextPlugin('bundle.[hash].css')
 ];
 
