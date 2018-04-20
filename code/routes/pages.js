@@ -27,10 +27,10 @@ module.exports = function(app) {
       req.session = req.session || {};
       req.session.queryParams = req.session.queryParams || {};
       console.log("\n\n\nuonceCameIn: " + req.session.onceCameIn);
-      if (!_.isEmpty(url_parts.query) && url_parts.query.agent_web == "agent_web") {
+      if (!_.isEmpty(url_parts.query) && url_parts.query.source == "agent_web") {
         req.session.queryParams = req.session.queryParams || {};
         for(var k in url_parts.query) {
-          if (k != "agent_web") {
+          if (k != "source") {
             req.session.queryParams[k] = url_parts.query[k] || "";
           }
         }
