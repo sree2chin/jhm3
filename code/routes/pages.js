@@ -25,7 +25,7 @@ module.exports = function(app) {
       console.log("in page url1: " + JSON.stringify(url_parts));
 
       req.session = req.session || {};
-      req.session.queryParams = {};
+      req.session.queryParams = req.session.queryParams || {};
       console.log("\n\n\nuonceCameIn: " + req.session.onceCameIn);
       if (!_.isEmpty(url_parts.query) && url_parts.query.agent_number && req.url.indexOf("/js") < 0 &&
         req.url.indexOf("/css") < 0 && req.url.indexOf("/fonts") < 0 &&
