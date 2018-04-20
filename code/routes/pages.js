@@ -21,7 +21,7 @@ var serialize = function(obj) {
 module.exports = function(app) {
   app.use(function (req, res, next) {
       var url_parts = url.parse(req.url, true);
-      console.log("in normal url: " + JSON.stringify(url_parts));
+      console.log("in page url: " + JSON.stringify(url_parts));
       req.session = req.session || {};
       req.session.queryParams = {};
       if (!_.isEmpty(url_parts.query)) {
