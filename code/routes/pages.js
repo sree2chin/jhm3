@@ -28,8 +28,10 @@ module.exports = function(app) {
       req.session.queryParams = {};
       if (!_.isEmpty(url_parts.query) && url_parts.query.agent_number && req.url.indexOf("/js") < 0 &&
         req.url.indexOf("/css") < 0 && req.url.indexOf("/fonts") < 0 &&
-        req.url.indexOf("/img") < 0 && req.url.indexOf("/installapps") < 0) {
+        req.url.indexOf("/img") < 0 && req.url.indexOf("/installapps") < 0 &&
+        req.session.onceCameIn != true) {
         req.session.queryParams = req.session.queryParams || {};
+        req.session.onceCameIn = true;
         for(var k in url_parts.query) {
           req.session.queryParams[k] = url_parts.query[k] || "";
         }
