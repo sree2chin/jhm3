@@ -11,7 +11,16 @@ var ejs = require('ejs');
 var url = require("url");
 
 module.exports = function(app) {
-
+  app.use(function (req, res, next) {
+      console.log("\n\n\n in app use: " + req.url + "\n\n\n")
+      //if(req.url.indexOf("/js") < 0 && req.url.indexOf("/css") < 0 && req.url.indexOf("/fonts") < 0 && req.url.indexOf("/img") < 0
+      //    && req.url.indexOf("/installapps") < 0) {
+          res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+          res.header('Expires', '-1');
+          res.header('Pragma', 'no-cache');
+      //}
+      next()
+  });
   app.get('/', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     console.log("in normal url: " + JSON.stringify(url_parts));
