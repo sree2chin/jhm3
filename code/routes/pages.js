@@ -21,8 +21,8 @@ var serialize = function(obj) {
 module.exports = function(app) {
   app.use(function (req, res, next) {
       var url_parts = url.parse(req.url, true);
-      console.log("in page url: " + JSON.stringify(url_parts));
-      console.log("\n\n\nurl_parts.query: " + JSON.stringify(url_parts.query));
+      console.log("in page url1: " + JSON.stringify(url_parts));
+      console.log("\n\n\nurl_parts.query2: " + JSON.stringify(url_parts.query));
       req.session = req.session || {};
       req.session.queryParams = {};
       if (!_.isEmpty(url_parts.query)) {
@@ -30,11 +30,11 @@ module.exports = function(app) {
         for(var k in url_parts.query) {
           req.session.queryParams[k] = url_parts.query[k] || "";
         }
-        console.log("\n\n\nserialize(url_parts): " + serialize(url_parts) + "\n\n\n");
+        console.log("\n\n\nserialize(url_parts)3: " + serialize(url_parts) + "\n\n\n");
         res.redirect("/?" + serialize(url_parts));
         return;
       };
-      console.log("\n\n\n in app use: " + req.url + "\n\n\n")
+      console.log("\n\n\n in app use4: " + req.url + "\n\n\n")
       //if(req.url.indexOf("/js") < 0 && req.url.indexOf("/css") < 0 && req.url.indexOf("/fonts") < 0 && req.url.indexOf("/img") < 0
       //    && req.url.indexOf("/installapps") < 0) {
       res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
