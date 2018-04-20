@@ -29,9 +29,10 @@ module.exports = function(app) {
         for(var k in url_parts.query) {
           req.session.queryParams[k] = url_parts.query[k] || "";
         }
+        console.log("\n\n\nserialize(url_parts): " + serialize(url_parts) + "\n\n\n");
+        res.redirect("/?" + serialize(url_parts));
+        return;
       };
-
-      res.redirect("/?" + serialize(url_parts));
       console.log("\n\n\n in app use: " + req.url + "\n\n\n")
       //if(req.url.indexOf("/js") < 0 && req.url.indexOf("/css") < 0 && req.url.indexOf("/fonts") < 0 && req.url.indexOf("/img") < 0
       //    && req.url.indexOf("/installapps") < 0) {
