@@ -20,34 +20,7 @@ var serialize = function(obj) {
   return str.join("&");
 }
 module.exports = function(app) {
-  app.use(function (req, res, next) {
-      var url_parts = url.parse(req.url, true);
-      console.log("in page url1: " + JSON.stringify(url_parts));
 
-      req.session = req.session || {};
-      req.session.queryParams = req.session.queryParams || {};
-      console.log("\n\n\nuonceCameIn: " + req.session.onceCameIn);
-      if (!_.isEmpty(url_parts.query) && url_parts.query.source == "agent_web") {
-        req.session.queryParams = req.session.queryParams || {};
-        for(var k in url_parts.query) {
-          if (k != "source") {
-            req.session.queryParams[k] = url_parts.query[k] || "";
-          }
-        }
-        console.log("\n\n\nserialize(url_parts)3: " + queryString.stringify(url_parts.query) + "\n\n\n");
-        templatePath = "../../dist/";
-        res.render(templatePath);
-        return;
-      };
-      console.log("\n\n\n in app use4: " + req.url + "\n\n\n")
-      //if(req.url.indexOf("/js") < 0 && req.url.indexOf("/css") < 0 && req.url.indexOf("/fonts") < 0 && req.url.indexOf("/img") < 0
-      //    && req.url.indexOf("/installapps") < 0) {
-      res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-      res.header('Expires', '-1');
-      res.header('Pragma', 'no-cache');
-      //}
-      next();
-  });
   app.get('/', function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     console.log("in normal url: " + JSON.stringify(url_parts));
@@ -59,7 +32,22 @@ module.exports = function(app) {
         req.session.queryParams[k] = url_parts.query[k] || "";
       }
     };
-    templatePath = "../../dist/";
+    templatePath = "./dist/";
+    res.render(templatePath);
+  });
+
+  app.post('/', function(req, res, next) {
+    var url_parts = url.parse(req.url, true);
+    console.log("in normal post url: " + JSON.stringify(url_parts));
+    req.session = req.session || {};
+    req.session.queryParams = {};
+    if (!_.isEmpty(url_parts.query)) {
+      req.session.queryParams = req.session.queryParams || {};
+      for(var k in url_parts.query) {
+        req.session.queryParams[k] = url_parts.query[k] || "";
+      }
+    };
+    templatePath = "./dist/";
     res.render(templatePath);
   });
 
@@ -74,7 +62,7 @@ module.exports = function(app) {
         req.session.queryParams[k] = url_parts.query[k] || "";
       }
     };
-    templatePath = "../../dist/";
+    templatePath = "./dist/";
     res.render(templatePath);
   });
 
@@ -89,7 +77,7 @@ module.exports = function(app) {
         req.session.queryParams[k] = url_parts.query[k] || "";
       }
     };
-    templatePath = "../../dist/";
+    templatePath = "./dist/";
     res.render(templatePath);
   });
 
@@ -105,7 +93,7 @@ module.exports = function(app) {
         req.session.paymentQueryParams[k] = url_parts.query[k] || "";
       }
     };
-    templatePath = "../../dist/";
+    templatePath = "./dist/";
     res.render(templatePath);
   });
 
@@ -136,7 +124,7 @@ module.exports = function(app) {
         req.session.queryParams[k] = url_parts.query[k] || "";
       }
     };
-    templatePath = "../../dist/";
+    templatePath = "./dist/";
     res.render(templatePath);
   });
 
@@ -151,7 +139,7 @@ module.exports = function(app) {
         req.session.queryParams[k] = url_parts.query[k] || "";
       }
     };
-    templatePath = "../../dist/";
+    templatePath = "./dist/";
     res.render(templatePath);
   });
 
@@ -165,7 +153,7 @@ module.exports = function(app) {
         req.session.queryParams[k] = url_parts.query[k] || "";
       }
     };
-    templatePath = "../../dist/";
+    templatePath = "./dist/";
     res.render(templatePath);
   });
 
@@ -180,8 +168,10 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/favicon.ico', function(req, res, next) {
-    res.rend("");
+  app.get('/favicon.ico', function(req, res) {
+    console.log("\n\n\nin favicon server\n\n\n");
+    res.status(204);
+    res.send();
   });
 
   app.get('*.map', function(req, res, next) {
@@ -199,7 +189,7 @@ module.exports = function(app) {
         req.session.queryParams[k] = url_parts.query[k] || "";
       }
     };
-    templatePath = "../../dist/";
+    templatePath = "./dist/";
     res.render(templatePath);
   });
 };

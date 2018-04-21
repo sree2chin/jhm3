@@ -41,7 +41,7 @@ var thirtyDay = 30 * 86400000;
 app.use(session({
     store: new RedisStore({
       host: appConfig.getProperty('redis_url'),
-      port: appConfig.getProperty('redis_port'), 
+      port: appConfig.getProperty('redis_port'),
       prefix: 'c-sess',
       ttl: 30*86400
     }),
@@ -71,28 +71,54 @@ requireFu(__dirname + '/routes')(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
+  console.log("\n\n\n eq.originalUrl1: " + req.originalUrl);
+  console.log("\n\n\n req.url1 : " + req.url + "\n\n\n");
   if(req.url && req.url.indexOf('/api/')>-1 || req.url.indexOf('-min.map') > -1 || req.url.indexOf('js.map') > -1){
     console.log('Unknown api called : '+ req.url);
     res.status(500);
     res.send();
+  } else {
+    next();
   }
-  else{
-    res.status(404);
-    res.render("dist/");
-  }
-
 });
 
 app.use(function (err, req, res, next) {
+  console.log("\n\n\n eq.originalUrl2: " + req.originalUrl);
+  console.log("\n\n\n req.url2 : " + req.url + "\n\n\n");
+  console.log("\n\n\n err: " + err + "\n\n\n");
     res.status(err.status || 500);
-
     if(req.url && req.url.indexOf('/api/')){
       res.render("dist/");
       res.send();
-    }
-    else {
+    } else {
       res.render("dist/");
     }
+});
+
+app.use(function (req, res, next) {
+  /*var url_parts = req.url.parse(req.url, true);
+  req.session = req.session || {};
+  console.log("\n\n\n eq.originalUrl3: " + req.originalUrl);
+  console.log("\n\n\n req.url3 : " + req.url + "\n\n\n");
+
+  if (!_.isEmpty(url_parts.query) && url_parts.query.source == "agent_web") {
+    req.session.queryParams = {};
+    for(var k in url_parts.query) {
+      if (k != "source") {
+        req.session.queryParams[k] = url_parts.query[k] || "";
+      }
+    }
+    templatePath = "../../dist/";
+    res.render(templatePath);
+    return;
+  };*/
+
+  //if(req.url.indexOf("/js") < 0 && req.url.indexOf("/css") < 0 && req.url.indexOf("/fonts") < 0 && req.url.indexOf("/img") < 0
+  //    && req.url.indexOf("/installapps") < 0) {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+  next();
 });
 
 module.exports = app;

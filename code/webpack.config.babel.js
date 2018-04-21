@@ -29,9 +29,9 @@ var plugins = [
     filename: 'index.ejs',
     template: '!!raw-loader!src/index.ejs',
     minify: {
-      removeComments: false,
-      collapseWhitespace: false,
-      conservativeCollapse: false
+      removeComments: true,
+      collapseWhitespace: true,
+      conservativeCollapse: true
     }
   }),
  new ExtractTextPlugin('bundle.[hash].css')

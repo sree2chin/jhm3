@@ -6,7 +6,7 @@
 		"redis_port": 6379,
 		"server_domain": "https://vantisapistg.sureify.com",
 		"client_domain": "http://127.0.0.1:3001",
-		"minify" : false,
+		"minify" : true,
 		"static_root" : "/pages",
 		"payment" : {
 			"ssl_merchant_id": "004582",
@@ -32,7 +32,7 @@
 		"redis_port": 6379,
 		"server_domain": "https://vantisapi.sureify.com",
 		"client_domain": "http://127.0.0.1:3001",
-		"minify" : false,
+		"minify" : true,
 		"static_root" : "/pages",
 		"payment" : {
 			"ssl_merchant_id": "004582",
