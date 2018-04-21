@@ -546,6 +546,7 @@ class Main extends React.Component<Props, {}> {
               />)
             actualQuestionLists.push(q);
           } else if (q.type == "label") {
+            actualQuestionLists.push(q);
             questionsList.push( <Label
                     {...q}
                   />)
