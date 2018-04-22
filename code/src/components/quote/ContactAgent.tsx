@@ -95,10 +95,7 @@ class ContactAgent extends React.Component<Props, {}> {
     personOne.type_of_submission = this.state.type_of_submission;
     if(this.state.email0) {
       personOne.email = this.state.email0;
-    } else {
-      personOne.email = "TEST@co.COM";
     }
-
     this.getExtraInfo(personOne);
 
     persons.push(personOne);
@@ -108,8 +105,6 @@ class ContactAgent extends React.Component<Props, {}> {
       personTwo.type_of_submission = this.state.type_of_submission;
       if(this.state.email1) {
         personTwo.email = this.state.email1;
-      } else {
-        personTwo.email = "TEST@co.COM";
       }
 
       this.getExtraInfo(personOne);

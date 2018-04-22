@@ -168,8 +168,6 @@ class PlansPage extends React.Component<Props, {}> {
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
     if(this.state.email0) {
       personOne.email = this.state.email0;
-    } else {
-      personOne.email = "TEST@co.COM";
     }
 
     this.getExtraInfo(personOne);
@@ -181,8 +179,6 @@ class PlansPage extends React.Component<Props, {}> {
 
       if(this.state.email1) {
         personTwo.email = this.state.email1;
-      } else {
-        personTwo.email = "TEST@co.COM";
       }
 
       this.getExtraInfo(personTwo);

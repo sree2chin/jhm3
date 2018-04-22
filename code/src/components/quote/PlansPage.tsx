@@ -125,8 +125,9 @@ class PlansPage extends React.Component<Props, {}> {
       }
     }
 
-    this.props.setPersonsData(persons);
-
+    setTimeout(()=>{
+      this.props.setPersonsData(persons);
+    });
     this.setState({
       submittingPlansFromPlan: true
     });

@@ -40,7 +40,7 @@ export default class Plan extends React.Component<Props, {}> {
       sFaceAmount: String(sFaceAmount),
       productId: this.props.plans.plans_data.product_id
     }], this.stopSliderChanging.bind(this));
-  },
+  }
   onPaymentTypeChange(key, obj) {
     this.setState({
       [key]: obj.value,
@@ -48,10 +48,10 @@ export default class Plan extends React.Component<Props, {}> {
       payment_amount: parseFloat((obj.amount).split("$")[1])
     })
     this.props.onPaymentTypeChange(this.props.personIndex, obj);
-  },
+  }
   getProductName(){
 
-  },
+  }
   getPlan(plansData) {
     if (isEmpty(plansData.plans_list)) { return {};}
     var plansList = plansData.plans_list;
@@ -98,10 +98,15 @@ export default class Plan extends React.Component<Props, {}> {
       if(!this.props.selectedPaymentType && nextProps.selectedPaymentType && plan) {
         plan.value = plan.PlanID;
         plan.label = plan.PlanDisplayName;
+        if (this.props.personIndex == 1) {
+          setTimeout(() => {
+            this.onPlanChange("sPlanID", plan);
+          }, 100);
+        };
         this.onPlanChange("sPlanID", plan);
       }
     }
-  },
+  }
   getAmountFormat(amount) {
     var a = parseInt(amount);
 
@@ -110,7 +115,7 @@ export default class Plan extends React.Component<Props, {}> {
     } else {
       return (a/1000) + "k";
     }
-  },
+  }
   getPlansDetailsForDropdown() {
     if(isEmpty(this.props.plans) || isEmpty(this.props.plans.plans_data) || (isEmpty(this.props.plans.plans_data.plans_list))) {
       return [];
@@ -130,7 +135,7 @@ export default class Plan extends React.Component<Props, {}> {
       })
     }
     return plans;
-  },
+  }
 
   shouldShowPlanDropdowns() {
     return this.getPlansDetailsForDropdown().length > 1;
