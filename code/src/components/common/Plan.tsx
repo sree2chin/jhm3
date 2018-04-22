@@ -169,19 +169,20 @@ export default class Plan extends React.Component<Props, {}> {
     }
 
     return p;
-  },
+  }
 
-  state = {},
+  state = {}
   stopSliderChanging() {
     this.setState({
       sliderSliding: false
     });
     if (!this.props.shouldShowSelectProductBtn) {
       setTimeout(()=> {
-        this.selectThisProduct();
-      }, 200);
+        this.props.selectProductPlan(this.props.personIndex, this.props.premiums.plans_data.ProductID);
+        //this.selectThisProduct();
+      }, 100);
     }
-  },
+  }
   handleChange(value) {
     var sFaceAmount = parseInt(value);
     if ( sFaceAmount > parseInt(this.state.selectedPlan.FaceMax)) {
@@ -208,24 +209,24 @@ export default class Plan extends React.Component<Props, {}> {
       sFaceAmount: sFaceAmount,
       sliderSliding: true
     });
-  },
+  }
   handleSliderChange(value) {
     this.sFaceAmount = value;
-  },
+  }
   onFaceValChange(key, value) {
     this.setState({
       [key]: value
     })
-  },
+  }
   selectThisProduct() {
     this.props.selectProductPlan(this.props.personIndex, this.props.premiums.plans_data.ProductID);
-    if(this.state.selectedPlan && this.state.sFaceAmount) {
+    /*if(this.state.selectedPlan && this.state.sFaceAmount) {
       this.props.submitPlansForm(this.props.personIndex, [{
         plan: this.state.selectedPlan,
         sFaceAmount: this.state.sFaceAmount,
         productId: this.props.plans.plans_data.product_id
       }]);
-    }
+    }*/
   }
   getProductDisplayName() {
     var productId = this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.product_id;
@@ -273,22 +274,7 @@ export default class Plan extends React.Component<Props, {}> {
     const personIndex = this.props.personIndex;
     const plansObjs = this.getPlansDetailsForDropdown();
     const personsContainerWidth = this.props.noOfPersons == 2 ? 6 : 12;
-    /*const product_name = this.getProductDisplayName().toString().toLowerCase();
-    if(product_name == 'super ez complete' || product_name == 'super ez'){
-            const product_image = 'spwl_image';
-    }else if(product_name == 'vantis velocity whole life' || product_name == "vantisvalue permanent life"){
-        const product_image = 'whole_life_image';
-    }else if(product_name == 'vantis velocity whole life plus' || product_name == "vantisvalue plus permanent life"){
-        const product_image = 'whole_life_plus_image';
-    }else if(product_name == 'vantis velocity term' || product_name == "children's term" || product_name == "level term"){
-        const product_image = 'term_image';
-    }else if(product_name == 'vantis velocity term with rop' || product_name == "level term with rop"){
-        const product_image = 'term_rop_image';
-      } else if(product_name == 'guarented golden' || product_name == "guaranteed golden") {
-        const product_image = 'guarented_golden_image';
-    }else{
-        const product_image = 'default_image';
-    }*/
+
     RawHtml.addTag("mycooltag");
     const product_image_name = this.getProductImage();
     const product_image = "http://ec2-107-23-131-50.compute-1.amazonaws.com/assets/img/" + product_image_name;

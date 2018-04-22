@@ -1120,7 +1120,7 @@ class Main extends React.Component<Props, {}> {
          }
       }
     }
-
+    qComps.questionStructCaption = this.previousQuestionStructCaption;
     qComps.prefixOfGroupForLabelGroup = this.previousQuestionsPrefixOfGroupForLabelGroup;
     this.actualQuestionLists = aQuestions;
     return qComps;

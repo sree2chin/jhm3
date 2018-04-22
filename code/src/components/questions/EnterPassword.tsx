@@ -81,7 +81,7 @@ export default class EmailModal extends React.Component<Props, {}> {
                           className="question-with-bottom-border"
                         />
                       </Col>
-                      { this.props.errorMsg && this.props.errorMsg.length > 0 && <Col style={{ paddingLeft: "0px", marginLeft: "auto", color: "red", fontSize: "15px"}} sm={12} className={"c-subheader-text error"}>
+                      { this.props.errorMsg && this.props.errorMsg.length > 0 && <Col style={{ paddingLeft: "15px", marginLeft: "auto", color: "red", fontSize: "15px"}} sm={12} className={"c-subheader-text error"}>
                         {this.props.errorMsg}
                       </Col> }
                     </Row>
