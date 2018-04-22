@@ -50,6 +50,12 @@ class paymentSuccess extends React.Component<Props, {}> {
       this.props.makePayment(this.props.location.query).then((res)=>{
         var link = this.props.paymentData && this.props.paymentData.data &&
         this.props.paymentData.data.current_document_data && this.props.paymentData.data.current_document_data.sign_url;
+
+        if (this.props.paymentData && this.props.paymentData.status == false) {
+          browserHistory.push("/error" + queryParamsString);
+          return;
+        }
+
         if (this.props.paymentData.valid_user == 0) {
           browserHistory.push("/authorize" + queryParamsString);
           return;

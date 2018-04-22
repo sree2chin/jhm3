@@ -120,6 +120,8 @@ export default class LicensedModal extends React.Component<Props, {}> {
     ];
     return (
        <Modal show={this.props.showModalPhone} onHide={this.props.onCloseModal} className="email-modal-container agent-modal-container">
+                <Modal.Header closeButton>
+                </Modal.Header>
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     <Row className="email-quote-text">
                         Connect me to a licensed agent

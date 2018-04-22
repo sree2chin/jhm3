@@ -53,6 +53,13 @@ function loadAuthorisePage(location: any, callback: LoadCallback) {
     "QuotePage");
 }
 
+function loadErrorPage(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/questions/error") as typeof _QuestionsPage).default),
+    "QuotePage");
+}
+
 function allQuestionsPage(location: any, callback: LoadCallback) {
   require.ensure(
     [],
@@ -184,6 +191,7 @@ ReactDOM.render(
 
       <Route path="/questions" getComponent={ loadQuestionsPage } />
       <Route path="/authorize" getComponent={ loadAuthorisePage } />
+      <Route path="/error" getComponent={ loadErrorPage } />
 
       <Route path="/all-questions" getComponent={ allQuestionsPage } />
       <Route path="/edit-questions" getComponent={ editQuestionsPage } />

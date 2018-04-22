@@ -51,12 +51,6 @@ export default class ResetPasswordModal extends React.Component<Props, {}> {
   }
 
   public render() {
-
-
-
-
-
-
     return (
        <Modal bsSize="large" show={this.props.showModalResetPassword} onHide={this.props.onCloseModal} className="email-modal-container email-modal-unique-container enter-password-modal-container">
                 <Modal.Body style={{ fontSize: "16px", textAlign: "left"}}>

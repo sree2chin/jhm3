@@ -62,6 +62,12 @@ class Main extends React.Component<Props, {}> {
           instantIdCheckData: this.questions.instant_id_check
         });
       };
+
+      if (this.questions && this.questions.status == false) {
+        browserHistory.push("/error" + queryParamsString);
+        return;
+      }
+
       if (this.questions && this.questions.valid_user == 0) {
         browserHistory.push("/authorize" + queryParamsString);
         return;
@@ -101,6 +107,12 @@ class Main extends React.Component<Props, {}> {
       }
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+
+    if (this.questions && this.questions.status == false) {
+      browserHistory.push("/error" + queryParamsString);
+      return;
+    }
+
     if (this.questions && this.questions && this.questions.application_complete_status==true) {
       if (this.questions.application_confirm_status == 1) {
         browserHistory.push("/signature" + queryParamsString);
@@ -670,6 +682,7 @@ class Main extends React.Component<Props, {}> {
       return null;
     }
   }
+
   allBeneficiaryQuestionsAreValid (beneficiaryQuestions) {
     var allQuestionsValid = beneficiaryQuestions[0] && beneficiaryQuestions[0].questions && beneficiaryQuestions[0].questions.length > 0;
     if (!allQuestionsValid) { return false;}
@@ -924,10 +937,17 @@ class Main extends React.Component<Props, {}> {
           }
         }
         queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+
+        if (true) { //this.questions && this.questions.status == false) {
+          browserHistory.push("/error" + queryParamsString);
+          return;
+        }
+
         if (this.questions.valid_user == 0) {
           browserHistory.push("/authorize" + queryParamsString);
           return;
         }
+
         if (this.questions.application_complete_status == true || this.questions.application_complete_status == "true") {
           if (this.questions.application_confirm_status == 1) {
             browserHistory.push("/signature" + queryParamsString);

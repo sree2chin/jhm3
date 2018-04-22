@@ -57,6 +57,11 @@ class Main extends React.Component<Props, {}> {
           queryParamsString += k + "&";
         }
       }
+      if (this.questions && this.questions.status == false) {
+        browserHistory.push("/error" + queryParamsString);
+        return;
+      }
+
       if (this.questions && this.questions.valid_user == 0) {
         browserHistory.push("/authorize" + queryParamsString);
         return;
@@ -303,6 +308,12 @@ class Main extends React.Component<Props, {}> {
     this.props.confirmQuestions(data).then(() => {
       var link = this.props.confirmationData && this.props.confirmationData.data &&
       this.props.confirmationData.data.current_document_data && this.props.confirmationData.data.current_document_data.sign_url;
+
+      if (this.questions && this.questions.status == false) {
+        browserHistory.push("/error" + queryParamsString);
+        return;
+      }
+
       if (this.props.confirmationData.valid_user == 0) {
         browserHistory.push("/authorize" + queryParamsString);
         return;
@@ -493,7 +504,6 @@ class Main extends React.Component<Props, {}> {
   }
 
   handleBackSubmit(): any {
-    console.log("sdfds");
     if (this.state.previousQuestionsHandling) return;
 
     if (this.props.questions && this.props.questions.extra_params &&
@@ -515,9 +525,6 @@ class Main extends React.Component<Props, {}> {
             previousQuestionHanldingIndex: this.props.questions.extra_params.answered_questions.length - 1,
             previousQuestionsHandling: true
           }, ()=> {
-            console.log("sdfds");
-            console.log("sdfds");
-            console.log("sdfds");
             this.setState({
               previousQuestionsHandling: false,
               previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
@@ -528,10 +535,6 @@ class Main extends React.Component<Props, {}> {
         this.setState({
           previousQuestionsHandling: true
         }, ()=> {
-          console.log("sdfds-1");
-          console.log("sdfds-1");
-          console.log("sdfds-1");
-          console.log("sdfds-1");
           this.setState({
             previousQuestionsHandling: false,
             previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
@@ -565,6 +568,12 @@ class Main extends React.Component<Props, {}> {
       }
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+
+    if (this.questions && this.questions.status == false) {
+      browserHistory.push("/error" + queryParamsString);
+      return;
+    }
+
     if (groupHeader.toLowerCase().indexOf("beneficiaries") >-1) {
       browserHistory.push("/edit-questions/beneficiaries?" + queryParamsString);
       return;

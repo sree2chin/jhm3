@@ -62,6 +62,12 @@ class Main extends React.Component<Props, {}> {
           instantIdCheckData: this.questions.instant_id_check
         });
       };
+
+      if (this.questions && this.questions.status == false) {
+        browserHistory.push("/error" + queryParamsString);
+        return;
+      }
+
       if (this.questions && this.questions.valid_user == 0) {
         browserHistory.push("/authorize" + queryParamsString);
         return;
@@ -93,6 +99,12 @@ class Main extends React.Component<Props, {}> {
       }
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+
+    if (this.questions && this.questions.status == false) {
+      browserHistory.push("/error" + queryParamsString);
+      return;
+    }
+
     /*if (this.questions && this.questions.data && this.questions.data.completed) {
       if (this.questions.application_confirm_status == 1) {
         browserHistory.push("/signature" + queryParamsString);
@@ -144,8 +156,7 @@ class Main extends React.Component<Props, {}> {
     }
   }
   componentDidUpdate() {
-    //ReactDOM.findDOMNode(this).scrollTop = 0;
-    //window.scrollTo(0, 0);
+
   }
   reRecursiveRender(data) {
     if (!isEmpty(data)) {
@@ -882,10 +893,17 @@ class Main extends React.Component<Props, {}> {
           }
         }
         queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+
+        if (this.questions && this.questions.status == false) {
+          browserHistory.push("/error" + queryParamsString);
+          return;
+        }
+
         if (this.questions.valid_user == 0) {
           browserHistory.push("/authorize" + queryParamsString);
           return;
         }
+
         if (this.questions.application_complete_status ==true || this.questions.application_complete_status =="true") {
           if (this.questions.application_confirm_status == 1) {
             browserHistory.push("/signature" + queryParamsString);
@@ -995,6 +1013,7 @@ class Main extends React.Component<Props, {}> {
       return {};
     }
   }
+
   counter = 0;
   getQuestionComponent(q): any {
     var qComponent = {};

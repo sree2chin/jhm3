@@ -83,6 +83,11 @@ class Offer extends React.Component<Props, {}> {
       var link = this.props.confirmationData && this.props.confirmationData.data &&
       this.props.confirmationData.data.current_document_data && this.props.confirmationData.data.current_document_data.sign_url;
 
+      if (this.props.confirmationData.status == false) {
+        browserHistory.push("/error" + queryParamsString);
+        return;
+      }
+
       if (this.props.confirmationData.application_complete_status == false || this.props.confirmationData.application_complete_status == "false") {
         browserHistory.push("/questions" + queryParamsString);
         return;
