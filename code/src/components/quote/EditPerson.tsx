@@ -77,14 +77,26 @@ export default class EditPerson extends React.Component<Props, {}> {
         }
       } else if (val.length == 4) {
         var tempVal = val.substr(3, 1);
-        if (isNaN(tempVal) || parseInt(tempVal) > 3) {
+        var monthVal =  parseInt(val.substr(0, 2));
+        var maxVal = 3;
+        if (monthVal == 2) {
+          maxVal = 2;
+        }
+        if (isNaN(tempVal) || parseInt(tempVal) > maxVal) {
           document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 3);
         } else {
           document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val;
         }
       } else if (val.length == 5) {
         var tempVal = val.substr(3, 2);
-        if (isNaN(tempVal) || parseInt(tempVal) > 31) {
+        var maxVal = 31;
+        var monthVal =  parseInt(val.substr(0, 2));
+        if (monthVal == 4 || monthVal == 6 || monthVal == 9 || monthVal == 11) {
+          maxVal = 30
+        } else if (monthVal == 2) {
+          maxVal = 29;
+        }
+        if (isNaN(tempVal) || parseInt(tempVal) > maxVal) {
           document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val.substring(0, 4);
         } else {
           document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value = val + "/";

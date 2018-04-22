@@ -648,6 +648,10 @@ class Main extends React.Component<Props, {}> {
                                     }
                                 }
 
+                                if (q.type == "date") {
+                                  q.answer = moment(q.answer).format("MM/DD/YYYY");
+                                }
+
                                 if (typeof ans == "object") {
                                   console.log(ans);
                                 } else {

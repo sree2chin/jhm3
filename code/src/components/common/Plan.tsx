@@ -310,7 +310,7 @@ export default class Plan extends React.Component<Props, {}> {
                   {(this.state.sFaceAmount && this.state.sFaceAmount !=0) ?
                     [<span key="2" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> of</span>] : null
                   }
-                  {this.isProductSPWL() ? <span key="3" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Premium </span> : <span key="3" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Coverage </span>}
+                  {this.isProductSPWL() ? <span key="3" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Single Premium </span> : <span key="3" style={{fontSize: "14px", textAlign: "left", color: "#666666"}}> Coverage </span>}
                 </Row>
                 <Row>
                   {this.state.selectedPlan &&
