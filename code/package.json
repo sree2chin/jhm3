@@ -86,6 +86,7 @@
     "redux-thunk": "^2.1.0",
     "request": "^2.83.0",
     "require-fu": "^1.0.0",
+    "saml2-js": "^2.0.2",
     "serve-favicon": "~2.2.0",
     "toastr": "^2.1.2",
     "typings": "^2.1.1",

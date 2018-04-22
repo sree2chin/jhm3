@@ -86,6 +86,8 @@ app.use(function (err, req, res, next) {
   console.log("\n\n\n eq.originalUrl2: " + req.originalUrl);
   console.log("\n\n\n req.url2 : " + req.url + "\n\n\n");
   console.log("\n\n\n err: " + err + "\n\n\n");
+  next();
+  return;
     res.status(err.status || 500);
     if(req.url && req.url.indexOf('/api/')){
       res.render("dist/");

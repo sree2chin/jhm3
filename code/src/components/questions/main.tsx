@@ -938,7 +938,7 @@ class Main extends React.Component<Props, {}> {
         }
         queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
 
-        if (true) { //this.questions && this.questions.status == false) {
+        if (this.questions && this.questions.status == false) {
           browserHistory.push("/error" + queryParamsString);
           return;
         }
