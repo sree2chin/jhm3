@@ -17,7 +17,6 @@ import Plan from "../common/Plan"
 import { browserHistory } from 'react-router';
 import {Tooltip} from 'react-lightweight-tooltip';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
-import { browserHistory } from 'react-router';
 import Input from "../common/textInput";
 import Select from 'react-select';
 
@@ -178,10 +177,10 @@ class ContactAgent extends React.Component<Props, {}> {
             Thank you!
           </Col>
           <Col sm={12} className="confirmation-email-text">
-            We will contact you soon
+            {this.props.quoteResponse && this.props.quoteResponse.data && this.props.quoteResponse.data.message_heading}
           </Col>
           <Col sm={12} className={"confirmation-email-desc"}>
-            An agent will be in touch with you as soon as possible during your selected availability window.
+            {this.props.quoteResponse && this.props.quoteResponse.data && this.props.quoteResponse.data.message_text}
           </Col>
         </Row>
           <Row>
@@ -206,7 +205,8 @@ const mapStateToProps = (state: any): Props => {
     noOfPersons: state.selectPersons.noOfPersons,
     plans: state.quotes.plans,
     premiums: state.quotes.premiums,
-    is_agent: state.quotes.is_agent
+    is_agent: state.quotes.is_agent,
+    quoteResponse: state.quotes.quoteResponse
   };
 }
 

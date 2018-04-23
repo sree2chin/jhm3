@@ -67,7 +67,7 @@ class Signature extends React.Component<Props, {}> {
           </Row>
           <Row style={{marginLeft: "0px", marginTop: "20px", marginBottom: "40px"}}>
             <Col sm={12} style={{marginBottom: "11px", paddingLeft: "0px"}} className="person-name-container">
-              Something didn’t seem quite right with your social security number. Can you double check your input and make sure everything is correct?
+              {this.props.questions.message}
             </Col>
           </Row>
 

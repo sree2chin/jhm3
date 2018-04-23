@@ -1,11 +1,13 @@
 import * as React from "react";
 import { Modal, Button, Row, Col } from "react-bootstrap";
 import Input from "../common/textInput";
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 interface Props extends React.Props<Plan> {
 }
 
-export default class ThanksEmail extends React.Component<Props, {}> {
+class ThanksEmail extends React.Component<Props, {}> {
   constructor(){
     super();
 
@@ -35,10 +37,10 @@ export default class ThanksEmail extends React.Component<Props, {}> {
                     </Row>
                     <Row>
                       <Col sm={12} className="confirmation-email-text">
-                        We've sent you an email!
+                        {this.props.quoteResponse && this.props.quoteResponse.data && this.props.quoteResponse.data.message_heading}
                       </Col>
                       <Col sm={12} className={"confirmation-email-desc"}>
-                        We send your email a link where you can view the rest of the form and fill it out when you have time.
+                        {this.props.quoteResponse && this.props.quoteResponse.data && this.props.quoteResponse.data.message_text}
                       </Col>
                     </Row>
                 </Modal.Body>
@@ -46,3 +48,16 @@ export default class ThanksEmail extends React.Component<Props, {}> {
     );
   }
 }
+
+const mapStateToProps = (state: any): Props => {
+  return {
+    quoteResponse: state.quotes.quoteResponse
+  };
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): Props => {
+  return {
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ThanksEmail);

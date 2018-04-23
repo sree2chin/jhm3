@@ -17,7 +17,6 @@ import Plan from "../common/Plan"
 import { browserHistory } from 'react-router';
 import {Tooltip} from 'react-lightweight-tooltip';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
-import { browserHistory } from 'react-router';
 import Input from "../common/textInput";
 import Select from 'react-select';
 
@@ -175,10 +174,10 @@ class ContactAgent extends React.Component<Props, {}> {
         </Row>
         <Row>
           <Col sm={12} className="confirmation-email-text">
-            We’ve sent you an email!
+            {this.props.quoteResponse && this.props.quoteResponse.data && this.props.quoteResponse.data.message_heading}
           </Col>
           <Col sm={12} className={"confirmation-email-desc"}>
-            We sent your email a link where you can view the rest of the form and fill it out when you have time.
+            {this.props.quoteResponse && this.props.quoteResponse.data && this.props.quoteResponse.data.message_text}
           </Col>
         </Row>
           <Row>
@@ -203,7 +202,8 @@ const mapStateToProps = (state: any): Props => {
     noOfPersons: state.selectPersons.noOfPersons,
     plans: state.quotes.plans,
     premiums: state.quotes.premiums,
-    is_agent: state.quotes.is_agent
+    is_agent: state.quotes.is_agent,
+    quoteResponse: state.quotes.quoteResponse
   };
 }
 

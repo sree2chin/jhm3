@@ -1,11 +1,13 @@
 import * as React from "react";
 import { Modal, Button, Row, Col } from "react-bootstrap";
 import Input from "../common/textInput";
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
-interface Props extends React.Props<Plan> {
+interface Props extends React.Props<ThanksPhone> {
 }
 
-export default class ThanksPhone extends React.Component<Props, {}> {
+class ThanksPhone extends React.Component<Props, {}> {
   constructor(){
     super();
 
@@ -22,13 +24,10 @@ export default class ThanksPhone extends React.Component<Props, {}> {
                 </Row>
                 <Row>
                   <Col sm={12} className="confirmation-email-text">
-                    Thank you!
-                  </Col>
-                  <Col sm={12} className="confirmation-email-text">
-                    We will contact you soon
+                    {this.props.quoteResponse && this.props.quoteResponse.data && this.props.quoteResponse.data.message_heading}
                   </Col>
                   <Col sm={12} className={"confirmation-email-desc"}>
-                    An agent will be in touch with you as soon as possible during your selected availability window.
+                    {this.props.quoteResponse && this.props.quoteResponse.data && this.props.quoteResponse.data.message_text}
                   </Col>
                 </Row>
             </Modal.Body>
@@ -36,3 +35,16 @@ export default class ThanksPhone extends React.Component<Props, {}> {
     );
   }
 }
+
+const mapStateToProps = (state: any): Props => {
+  return {
+    quoteResponse: state.quotes.quoteResponse
+  };
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): Props => {
+  return {
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ThanksPhone);
