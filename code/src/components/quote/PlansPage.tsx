@@ -116,7 +116,7 @@ class PlansPage extends React.Component<Props, {}> {
     persons.push(personOne);
 
     if (this.props.noOfPersons == 2) {
-      if(personIndex ==0) {
+      if (personIndex ==0) {
         persons[0] = personOne;
         persons[1] = this.props.persons[1];
       } else {

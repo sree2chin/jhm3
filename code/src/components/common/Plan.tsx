@@ -102,6 +102,7 @@ export default class Plan extends React.Component<Props, {}> {
           setTimeout(() => {
             this.onPlanChange("sPlanID", plan);
           }, 100);
+          return;
         };
         this.onPlanChange("sPlanID", plan);
       }
