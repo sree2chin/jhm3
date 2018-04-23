@@ -59,7 +59,7 @@ class PlansPage extends React.Component<Props, {}> {
   changeTypeOfSubmission(val) {
     this.setState({
       type_of_submission: val
-    })
+    });
     this.props.setTypeOfSubmission(val);
   }
 
@@ -87,14 +87,11 @@ class PlansPage extends React.Component<Props, {}> {
 
   openPrintPdf() {
     this.setState({
-      showModalEmail: false,
+      showModalEmail: true,
       showModalEmailCapture: false,
       type_of_submission: 10006,
       openingPdf: true
-    }, ()=>{
-      this.saveQuote();
     });
-
   }
 
 
@@ -281,12 +278,23 @@ class PlansPage extends React.Component<Props, {}> {
       }
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-    if (this.state.nextStep == "continueToApplication" || this.state.nextStep == "directToCorrespondingPage") {
-      browserHistory.push("/agent/connect-to-agent" + queryParamsString);
+    if (this.state.nextStep == "continueToApplication" || this.state.nextStep=="completeTheApplication") {
+      this.changeTypeOfSubmission(10004);
+      setTimeout(() => {
+        browserHistory.push("/agent/connect-to-agent" + queryParamsString);
+      }, 100);
     } else if (this.state.nextStep == "ticketToInternalAgent" || this.state.nextStep=="ticketToVantisLifeSales") {
-      browserHistory.push("/agent/connect-to-agent" + queryParamsString);
+      this.changeTypeOfSubmission(10005);
+      setTimeout(() => {
+        browserHistory.push("/agent/connect-to-agent" + queryParamsString);
+      }, 100);
+    } else if (this.state.nextStep == "printTheQuote") {
+      this.openPrintPdf();
     } else {
-      browserHistory.push("/agent/email-to-quote" + queryParamsString);
+      this.changeTypeOfSubmission(10007);
+      setTimeout(() => {
+        browserHistory.push("/agent/email-to-quote" + queryParamsString);
+      }, 100);
     }
   }
   selectNextStep (nextStep) {
