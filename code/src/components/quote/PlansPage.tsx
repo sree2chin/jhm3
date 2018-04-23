@@ -124,13 +124,14 @@ class PlansPage extends React.Component<Props, {}> {
         persons[1] = personOne;
       }
     }
+    this.setState({
+      submittingPlansFromPlan: true
+    });
 
     setTimeout(()=>{
       this.props.setPersonsData(persons);
     });
-    this.setState({
-      submittingPlansFromPlan: true
-    });
+
     setTimeout(() => {
       this.props.submitPlansForm(persons).then(() => {
         if(successCb) { successCb(); }

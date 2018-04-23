@@ -21,8 +21,28 @@ export default class Plan extends React.Component<Props, {}> {
     this.onFaceValChange.bind(this);
     this.handleChange.bind(this);
     this.stopSliderChanging.bind(this);
+    this.firstTime = true;
   }
   onPlanChange(key, obj) {
+    var sFaceAmount = this.state.sFaceAmount;
+
+    if (sFaceAmount >=  parseInt(obj.FaceMin) && sFaceAmount <=  parseInt(obj.FaceMax)) {
+      sFaceAmount = this.state.sFaceAmount;
+    } else {
+      sFaceAmount = parseInt(obj.FaceMin);
+    }
+    this.setState({
+      [key]: obj.value,
+      selectedPlan: obj,
+      sFaceAmount: sFaceAmount
+    })
+    this.props.submitPlansForm(this.props.personIndex, [{
+      plan: obj,
+      sFaceAmount: String(sFaceAmount),
+      productId: this.props.plans.plans_data.product_id
+    }], this.stopSliderChanging.bind(this));
+  }
+  onFirstTimePlanChange(key, obj) {
     var sFaceAmount = this.state.sFaceAmount;
 
     if (sFaceAmount >=  parseInt(obj.FaceMin) && sFaceAmount <=  parseInt(obj.FaceMax)) {
@@ -98,10 +118,11 @@ export default class Plan extends React.Component<Props, {}> {
       if(!this.props.selectedPaymentType && nextProps.selectedPaymentType && plan) {
         plan.value = plan.PlanID;
         plan.label = plan.PlanDisplayName;
-        if (this.props.personIndex == 1) {
+        if (this.props.personIndex == 1 && this.firstTime) {
+          this.firstTime = false;
           setTimeout(() => {
             this.onPlanChange("sPlanID", plan);
-          }, 100);
+          }, 300);
           return;
         };
         this.onPlanChange("sPlanID", plan);
