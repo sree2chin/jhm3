@@ -1214,6 +1214,18 @@ input.form-control:focus {
     color: #9999a3; }
   .questions-container .question-action-btn-container button {
     letter-spacing: 1.3px; }
+  .questions-container .question-action-btn-container .previous-btn-text {
+    color: #4584c0;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-family: NunitoBold;
+    font-size: 14px;
+    display: inline-block;
+    width: 175px;
+    margin-left: 75px;
+    cursor: pointer; }
+    .questions-container .question-action-btn-container .previous-btn-text:hover {
+      color: #B6DBFF; }
   .questions-container .Select-control .Select-placeholder {
     font-size: 16px !important; }
   .questions-container .Select-value-label {
@@ -1301,13 +1313,22 @@ input.form-control:focus {
     padding-right: 15px;
     margin-left: 15px; }
   .questions-container .c-button-default.btn.circular {
-    margin-top: 10px;
+    margin-top: 0px;
     background-color: #4584c0 !important; }
     .questions-container .c-button-default.btn.circular.action {
       width: 30%; }
     .questions-container .c-button-default.btn.circular.next-step-btn {
       background-color: #fb4d3d !important;
       margin-right: 30px; }
+      .questions-container .c-button-default.btn.circular.next-step-btn.previous-btn-text {
+        background-color: transparent !important;
+        border: none;
+        color: #4584c0;
+        box-shadow: none; }
+        .questions-container .c-button-default.btn.circular.next-step-btn.previous-btn-text:hover {
+          color: #B6DBFF !important;
+          border: none;
+          box-shadow: none; }
     .questions-container .c-button-default.btn.circular:focus {
       outline: -webkit-focus-ring-color auto 5px;
       outline-color: -webkit-focus-ring-color;
