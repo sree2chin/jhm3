@@ -40,8 +40,8 @@ module.exports = new function() {
 
   this.saveQuoteForm= function(req, callback) {
     ApiService.saveQuoteForm(req, function(err, res) {
-      console.log("err: " + JSON.stringify(err));
-      console.log("res: " + JSON.stringify(res));
+      //console.log("err: " + JSON.stringify(err));
+      //console.log("res: " + JSON.stringify(res));
       if (!err && res.statusCode == 200){
         callback(res.statusCode, res.body);
       } else {

@@ -1054,17 +1054,18 @@ class Main extends React.Component<Props, {}> {
 
         </Row>
         {questionsList.isQuestionsList && <Row className="questions-container c-center" style={{backgrounColor: "transparent", border: "none", boxShadow: "none"}}> <div className="question-action-btn-container">
-            <Button className={`c-button-default circular next-step-btn action`} onClick={()=>{
+            <div className={`previous-btn-text`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
                   this.handleBackSubmit()
                 }}>
-                Previous Step
-                {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-            </Button>
+                <span>
+                  Previous
+                </span>
+            </div>
             {!this.isOnlyQuestionSingleSelection() && <Button className={`c-button-default circular action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                   this.onQuestionSubmit()
                 }}
               >
-                Next Step
+                Next
                 {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>}
             {this.isOnlyQuestionSingleSelection() && this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }

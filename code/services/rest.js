@@ -30,7 +30,7 @@ module.exports = new function(){
       var prot = options.port == 443 ? https : http;
       var req = prot.request(options, function(res){
           var output = '';
-          console.log(new Date()+' ### ' +''+options.path+ ':' + res.statusCode);
+          //console.log(new Date()+' ### ' +''+options.path+ ':' + res.statusCode);
           res.setEncoding('utf8');
 
           res.on('data', function (chunk) {
@@ -42,7 +42,7 @@ module.exports = new function(){
                 var obj = _.isEmpty(output) ? {} : JSON.parse(output);
               }
               catch(e){
-                console.log(new Date()+' ### ERROR PARSING RESPONSE: ' + ''+options.path+ ':' + res.statusCode);
+                //console.log(new Date()+' ### ERROR PARSING RESPONSE: ' + ''+options.path+ ':' + res.statusCode);
                 onResult(500,null);
                 return;
               }
@@ -67,12 +67,12 @@ module.exports = new function(){
     _.extend(options.headers, {
       'Content-Type': 'application/json'
     });
-    console.log("options: " + JSON.stringify(options));
+    //console.log("options: " + JSON.stringify(options));
 
       var prot = options.port == 443 ? https : http;
       var req = prot.request(options, function(res){
           var output = '';
-          console.log(new Date()+' ### ' +''+options.path+ ':' + res.statusCode);
+          //console.log(new Date()+' ### ' +''+options.path+ ':' + res.statusCode);
           res.setEncoding('utf8');
 
           res.on('data', function (chunk) {
@@ -84,7 +84,7 @@ module.exports = new function(){
                   var obj = _.isEmpty(output) ? {} : JSON.parse(output);
                 }
                 catch(e){
-                  console.log(new Date()+' ### ERROR PARSING RESPONSE: ' + ''+options.path+ ':' + res.statusCode);
+                  //console.log(new Date()+' ### ERROR PARSING RESPONSE: ' + ''+options.path+ ':' + res.statusCode);
                   onResult(500,null);
                   return;
                 }
@@ -123,7 +123,7 @@ module.exports = new function(){
           var obj = _.isEmpty(output) ? {} : JSON.parse(output);
         }
         catch(e){
-          console.log(new Date()+' ### ERROR PARSING RESPONSE: ' + ''+options.path+ ':' + res.statusCode);
+          //console.log(new Date()+' ### ERROR PARSING RESPONSE: ' + ''+options.path+ ':' + res.statusCode);
           onResult(500,null);
           return;
         }
@@ -132,7 +132,7 @@ module.exports = new function(){
     });
 
     req.on('error', function(err) {
-      console.log('error: ' + err.message);
+      //console.log('error: ' + err.message);
     });
 
     req.write(JSON.stringify(data));

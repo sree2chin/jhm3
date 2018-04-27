@@ -854,7 +854,7 @@ class Main extends React.Component<Props, {}> {
        }
     }
 
-    if (this.questionComponents.isQuestionsBeneficiaries && !notAddingOrDeletingBeneficiary) {
+    if (this.questionComponents && this.questionComponents.isQuestionsBeneficiaries && !notAddingOrDeletingBeneficiary) {
       if (this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions) {
         for(var i=0; i<this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions.length; i++) {
           var answers = this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions[i].questions;
@@ -1631,12 +1631,14 @@ class Main extends React.Component<Props, {}> {
             {questionsList}
           </div>}
           {!questionsList.isQuestionsList && <div className="question-action-btn-container">
-              {this.shouldShowPreviousBtn() && <Button className={`c-button-default circular next-step-btn action`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
+              {this.shouldShowPreviousBtn() && <div className={`previous-btn-text`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
                     this.handleBackSubmit()
                   }}>
-                  Previous
+                  <span>
+                    Previous
+                  </span>
                   {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-                </Button>
+                </div>
               }
               {this.state.singleselectionQuestionsSubmitting && <i className="fa fa-circle-o-notch fa-spin fa-fw fa-2x" style={{position: "relative", top: "14px"}}></i>}
               {!this.isOnlyQuestionSingleSelection() && <Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular  action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
@@ -1674,18 +1676,20 @@ class Main extends React.Component<Props, {}> {
             })}
         </Row>
         {questionsList.isQuestionsList && <Row className="questions-container c-center" style={{backgrounColor: "transparent", border: "none", boxShadow: "none"}}> <div className="question-action-btn-container">
-            {this.shouldShowPreviousBtn() && <Button className={`c-button-default circular action`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
-                  this.handleBackSubmit()
-                }}>
-                Previous Step
-                {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-            </Button>
+            {this.shouldShowPreviousBtn() && <div className={`previous-btn-text`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
+                    this.handleBackSubmit()
+                  }}>
+                  <span>
+                    Previous
+                  </span>
+                  {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+              </div>
             }
             {<Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                   this.onQuestionSubmit()
                 }}
               >
-                Next Step
+                Next
                 {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>}
           </div>

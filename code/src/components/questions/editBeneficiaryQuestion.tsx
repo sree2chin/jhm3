@@ -810,7 +810,7 @@ class Main extends React.Component<Props, {}> {
        }
     }
 
-    if (this.questionComponents.isQuestionsBeneficiaries && !notAddingOrDeletingBeneficiary) {
+    if (this.questionComponents && this.questionComponents.isQuestionsBeneficiaries && !notAddingOrDeletingBeneficiary) {
       if (this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions) {
         for(var i=0; i<this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions.length; i++) {
           var answers = this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions[i].questions;

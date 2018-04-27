@@ -227,7 +227,7 @@ class ContactAgent extends React.Component<Props, {}> {
                     Vantis Life Call Center toll free number  |  M-F 8am to 7pm PST:
                   </span>
                   <span className="free-toll-no center">
-                    1-800-252-7254
+                    1-866-826-8471
                   </span>
                 </Col>
               </Row>

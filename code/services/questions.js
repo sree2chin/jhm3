@@ -77,7 +77,7 @@ module.exports = new function() {
 
       if (!err && res.statusCode == 200) {
         var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
-        console.log("\n\n\n" + JSON.stringify(res.body) + "\n\n\n");
+        //console.log("\n\n\n" + JSON.stringify(res.body) + "\n\n\n");
         if (responseBody.data && responseBody.data.access_token) {
           req.session.queryParams = req.session.queryParams || {};
           req.session.queryParams.access_token = responseBody.data.access_token;
@@ -93,7 +93,7 @@ module.exports = new function() {
     ApiService.changePassword(req, function(err, res) {
 
       if (!err && res.statusCode == 200) {
-        console.log("\n\n\n" + JSON.stringify(res.body) + "\n\n\n");
+        //console.log("\n\n\n" + JSON.stringify(res.body) + "\n\n\n");
         var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
         if (responseBody.data && responseBody.data.access_token) {
           req.session.queryParams = req.session.queryParams || {};

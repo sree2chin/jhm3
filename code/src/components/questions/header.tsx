@@ -19,11 +19,11 @@ export default class Header extends React.Component<Props, {}> {
         </Navbar.Header>
         <Navbar.Text pullRight>
           <div className="header-text" style={{marginLeft: "22px"}}>
-            Need help? <a href={"tel:" + "1-800-252-7254"}><img className="visible-xs" style={{float: "right", paddingLeft: "10px"}} src={"../images/small-phone.svg"} /></a>
+            Need help? <a href={"tel:" + "1-866-826-8471"}><img className="visible-xs" style={{float: "right", paddingLeft: "10px"}} src={"../images/small-phone.svg"} /></a>
           </div>
           <div className="hidden-xs">
             <TelLinkComponent
-              phoneNumber={"1-800-252-7254"}
+              phoneNumber={"1-866-826-8471"}
             />
           </div>
         </Navbar.Text>
