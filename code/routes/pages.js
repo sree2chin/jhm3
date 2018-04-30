@@ -30,11 +30,11 @@ module.exports = function(app) {
   );
 
   app.post('/login/callback',
-     passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
-      function(req, res) {
-        res.redirect('/');
-     }
-    );
+    passport.authenticate('saml', { failureRedirect: '/login', failureFlash: true }),
+    function(req, res) {
+      res.redirect('/');
+    }
+  );
 
   app.get('/', function(req, res, next) {
     var url_parts = url.parse(req.url, true);

@@ -1,4 +1,5 @@
 var QuestionsService = require('../../services/questions.js');
+const passport = require('passport');
 
 function endsWith(str, suffix) {
   if (str == null) return true;
@@ -8,6 +9,13 @@ function endsWith(str, suffix) {
 module.exports = function(app) {
 
   var prefix = "/v1";
+
+  app.post('/login/callback',
+    passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
+    function(req, res) {
+      res.redirect('/');
+    }
+  );
 
   app.get(prefix + '/questions/questions', function(req, res) {
     QuestionsService.getQuestions(req, function(statusCode, data) {

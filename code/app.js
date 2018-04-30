@@ -73,6 +73,9 @@ app.use(express.static(path.join(__dirname, 'dist'), {maxAge: thirtyDay}));
 app.use("/dist", express.static(__dirname +'/dist/'));
 app.use("/agent", express.static(__dirname +'/dist/'));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 requireFu(__dirname + '/routes')(app);
 
 // catch 404 and forward to error handler

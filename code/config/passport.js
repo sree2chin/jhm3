@@ -9,7 +9,7 @@ module.exports = function (passport, config) {
   passport.deserializeUser(function (user, done) {
     done(null, user);
   });
-
+console.log("\n\n\nDdd\n\n\n");
   passport.use(new SamlStrategy(
     {
       path: config.passport.saml.path,
@@ -18,6 +18,7 @@ module.exports = function (passport, config) {
       cert: config.passport.saml.cert
     },
     function (profile, done) {
+      console.log("\n\n\nprofile: " + JSON.stringify(profile) + "\n\n\n");
       return done(null,
         {
           id: profile.uid,
