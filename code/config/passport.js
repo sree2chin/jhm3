@@ -11,7 +11,6 @@ module.exports = function (passport, config) {
   passport.deserializeUser(function (user, done) {
     done(null, user);
   });
-console.log("\n\n\nDdd\n\n\n" + fs.readFileSync(path.join(__dirname + "/" + config.passport.saml.cert)));
   passport.use(new SamlStrategy(
     {
       path: config.passport.saml.path,
@@ -22,7 +21,6 @@ console.log("\n\n\nDdd\n\n\n" + fs.readFileSync(path.join(__dirname + "/" + conf
       privateCert: fs.readFileSync(path.join(__dirname + "/" + config.passport.saml.privateKey), 'utf-8')
     },
     function (profile, done) {
-      console.log("\n\n\nprofile: " + JSON.stringify(profile) + "\n\n\n");
       return done(null,
         {
           id: profile.uid,
