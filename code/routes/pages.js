@@ -3,13 +3,14 @@ var ApiService = require('../services/api.js');
 var Sitemap = require('express-sitemap');
 var path = require('path');
 var _ = require('underscore');
-var config = require('../config/config.json');
 var appConfig = require('../config/service.js');
-var appConfig = require('../services/quotes.js');
 var fs = require('fs');
 var ejs = require('ejs');
 var url = require("url");
 const queryString = require('query-string');
+const passport = require('passport');
+var env = process.env.NODE_ENV || 'dev';
+const config = require('../config/config')[env];
 
 var serialize = function(obj) {
   var str = [];
@@ -20,6 +21,20 @@ var serialize = function(obj) {
   return str.join("&");
 }
 module.exports = function(app) {
+  app.get('/login',
+   passport.authenticate(config.passport.strategy,
+      {
+        successRedirect: '/',
+        failureRedirect: '/login'
+      })
+  );
+
+  app.post('/login/callback',
+     passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
+      function(req, res) {
+        res.redirect('/');
+     }
+    );
 
   app.get('/', function(req, res, next) {
     var url_parts = url.parse(req.url, true);

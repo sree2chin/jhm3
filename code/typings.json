@@ -17,9 +17,6 @@
     "react-router/react-router.d.ts": {
       "commit": "dade4414712ce84e3c63393f1aae407e9e7e6af7"
     },
-    "toastr/toastr.d.ts": {
-      "commit": "4ba57e605bd71bf7248de65aac0b4f50e3eb1c9e"
-    },
     "jquery/jquery.d.ts": {
       "commit": "4ba57e605bd71bf7248de65aac0b4f50e3eb1c9e"
     },

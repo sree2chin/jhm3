@@ -11,14 +11,20 @@ var appConfig = require('./config/service.js');
 var FileStreamRotator = require('file-stream-rotator');
 var fs = require('fs');
 var app = express();
+const passport = require('passport');
+
 app.set('trust proxy', 1);
+var env = process.env.NODE_ENV || 'dev';
+const config = require('./config/config')[env];
 
 /* -----------------------Logging Confirguration ------------------- */
 
 var logDirectory = __dirname + '/log'
 
 // Check whether log directory exists - if not then create
-fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+
+require('./config/passport')(passport, config);
 
 var accessLogStream = FileStreamRotator.getStream({
     filename: logDirectory + '/access-%DATE%.log',
