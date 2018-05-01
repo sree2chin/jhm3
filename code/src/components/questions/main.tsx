@@ -56,6 +56,10 @@ class Main extends React.Component<Props, {}> {
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     this.props.getQuestions().then(()=> {
+      if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
+        window.location.href = this.questions.LOGIN_URL;
+        return;
+      }
       if (this.questions && this.questions.instant_id_check && this.questions.instant_id_check.status==false) {
         this.setState({
           showInstantIdCheckPopup: true,
@@ -907,6 +911,10 @@ class Main extends React.Component<Props, {}> {
 
       this.props.postQuestions(data).then(() => {
         window.scrollTo(0, 0);
+        if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
+          window.location.href = this.questions.LOGIN_URL;
+          return;
+        }
         if (this.questions && this.questions.instant_id_check && this.questions.instant_id_check.status==false) {
 
           this.setState({

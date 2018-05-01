@@ -35,7 +35,7 @@ module.exports = function(app) {
     };
 
     var url_parts = url.parse(req.url, true);
-    if (url_parts.query && url_parts.query.agent_number) {
+    if (url_parts.query && url_parts.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
       if (req.session.authenticatedOnce) {
         shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 1*60*1000;
@@ -62,7 +62,7 @@ module.exports = function(app) {
     }
   };
 
-  var samlAuthenticateQuestionsMiddleware1 = function() {
+  var samlAuthenticateQuestionsMiddleware1 = function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};
     req.session.queryParams = {};
@@ -133,6 +133,25 @@ module.exports = function(app) {
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     res.redirect("/" + queryParamsString);
+  });
+
+  app.get("/questions/login", loginMiddleware, function(req,  res, next) {
+    console.log("\n\n\n/questions/login\n\n\n");
+    req.session = req.session || {};
+    req.session.queryParams = req.session.queryParams || {};
+    var queryParams = req.session.queryParams;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    console.log("req.session.questionsLoginRedirectPage1: " + req.session.questionsLoginRedirectPage1);
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+    req.session.questionsLoginRedirectPage1 = null;
+    res.redirect("/" + questionsLoginRedirectPage1 + queryParamsString);
   });
 
   app.get('/', samlAuthenticateMiddleware, function(req, res, next) {
@@ -239,7 +258,43 @@ module.exports = function(app) {
     res.render(templatePath);
   });
 
-  app.get('/questions', samlAuthenticateQuestionsMiddleware1, function(req, res, next) {
+  var samlAuthenticateQuestionsMiddleware = function(req, res, next) {
+    req.session.questionsMiddleware = true;
+    var url_parts = url.parse(req.url, true);
+    console.log("\n\n\neq.session.queryParams: " + JSON.stringify(req.session.queryParams)+ "\n\n\n\n");
+    req.session = req.session || {};
+    req.session.queryParams = req.session.queryParams || {};
+
+    if (req.session.queryParams && req.session.queryParams.agent_number && config.passport.saml.on) {
+      var shouldAuthenticate;
+      if (req.session.authenticatedOnce) {
+        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 1*60*1000;
+      } else {
+        shouldAuthenticate = true;
+      }
+      console.log("\n\n\n" + shouldAuthenticate + "\n\n\n");
+      if (shouldAuthenticate) {
+        var queryParams = req.session.queryParams;
+        var queryParamsString = "?";
+        for(var k in queryParams) {
+          if (queryParams[k]) {
+            queryParamsString += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString += k + "&";
+          }
+        }
+        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+        req.session.questionsLoginRedirectPage = req.url;
+        next();
+      } else {
+        next();
+      }
+    } else {
+      next();
+    }
+  };
+
+  app.get('/questions', samlAuthenticateQuestionsMiddleware, function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};
     req.session.queryParams = {};

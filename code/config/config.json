@@ -32,7 +32,8 @@
 				"entryPoint": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980",
 				"issuer": "passport-saml",
 				"cert":  "/sp_cert.cert",
-				"privateKey": "privateKey.pem"
+				"privateKey": "privateKey.pem",
+				"on": true
 			}
 		}
 	},
@@ -68,7 +69,8 @@
 				"entryPoint": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980",
 				"issuer": "passport-saml",
 				"cert":  "/sp_cert.cert",
-				"privateKey": "privateKey.pem"
+				"privateKey": "privateKey.pem",
+				"on": true
 			}
 		}
 	},
@@ -105,7 +107,8 @@
 				"entryPoint": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980",
 				"issuer": "passport-saml",
 				"cert":  "/sp_cert.cert",
-				"privateKey": "privateKey.pem"
+				"privateKey": "privateKey.pem",
+				"on": false
 			}
 		}
 }

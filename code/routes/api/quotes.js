@@ -2,6 +2,8 @@ var QuotesService = require('../../services/quotes.js');
 var url = require("url");
 var _ = require('underscore');
 const passport = require('passport');
+var env = process.env.NODE_ENV || 'dev';
+const config = require('../../config/config')[env];
 
 function endsWith(str, suffix) {
   if (str == null) return true;
@@ -14,11 +16,12 @@ module.exports = function(app) {
 
   var samlAuthenticateMiddleware = function(req, res, next) {
     req.session.questionsMiddleware = false;
+    console.log("\n\n\nin login callback" + req.session.questionsMiddleware + "\n\n\n");
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};
     req.session.queryParams = req.session.queryParams || {};
 
-    if (req.session.queryParams && req.session.queryParams.agent_number) {
+    if (req.session.queryParams && req.session.queryParams.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
       if (req.session.authenticatedOnce) {
         shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 1*60*1000;
@@ -63,7 +66,7 @@ module.exports = function(app) {
   });
 
   app.post(prefix + '/quote/products', samlAuthenticateMiddleware, function(req, res) {
-    console.log("]\n\n\nin quote/products\n\n\n");
+    console.log("\n\n\nin quote/products\n\n\n");
     QuotesService.getQuoteProducts(req, function(statusCode, data){
       res.statusCode = statusCode;
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');

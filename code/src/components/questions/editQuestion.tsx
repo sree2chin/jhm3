@@ -44,6 +44,10 @@ class Main extends React.Component<Props, {}> {
 
   componentWillMount() {
     this.props.getQuestions().then(()=>{
+      if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
+        window.location.href = this.questions.LOGIN_URL;
+        return;
+      }
         if (!this.alreadyAnsweredQueryQuestion && this.props.location.query && (this.props.location.query.fromReviewPage==true || this.props.location.query.fromReviewPage=="true")) {
             var questionIdFromQuery = this.props.location.query.questionId;
             var currentPageIndex = this.getCurrentPageIndex(this.props.location.query.questionId);
@@ -657,6 +661,10 @@ class Main extends React.Component<Props, {}> {
 
       this.props.postQuestions(data).then(() => {
         window.scrollTo(0, 0);
+        if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
+          window.location.href = this.questions.LOGIN_URL;
+          return;
+        }
         if (this.state.previousQuestionHanldingIndex || this.state.previousQuestionHanldingIndex == 0) {
           if (this.props.questions && this.props.questions.extra_params &&
             this.props.questions.extra_params.answered_questions &&

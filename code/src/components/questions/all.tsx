@@ -44,6 +44,10 @@ class Main extends React.Component<Props, {}> {
       gettingQuestions: true
     });
     this.props.getQuestions().then(()=>{
+      if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
+        window.location.href = this.questions.LOGIN_URL;
+        return;
+      }
       console.log("dddd");
       this.setState({
         gettingQuestions: false
@@ -306,6 +310,16 @@ class Main extends React.Component<Props, {}> {
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     data.review_confirm = 1;
     this.props.confirmQuestions(data).then(() => {
+      if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
+        window.location.href = this.questions.LOGIN_URL;
+        return;
+      };
+
+      if (this.props.confirmationData && this.props.confirmationData.LOGIN_URL && this.props.confirmationData.LOGIN_URL.length > 0) {
+        window.location.href = this.props.confirmationData.LOGIN_URL;
+        return;
+      };
+
       var link = this.props.confirmationData && this.props.confirmationData.data &&
       this.props.confirmationData.data.current_document_data && this.props.confirmationData.data.current_document_data.sign_url;
 
