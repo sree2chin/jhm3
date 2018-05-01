@@ -192,6 +192,11 @@ class PlansPage extends React.Component<Props, {}> {
     this.props.setPersonsData(persons);
 
     return this.props.saveQuoteForm(data).then(() => {
+      if (this.props.quoteResponse && this.props.quoteResponse.LOGIN_URL && this.props.quoteResponse.LOGIN_URL.length > 0) {
+        window.location.href = this.props.quoteResponse.LOGIN_URL;
+        return;
+      }
+
       if (this.props.quoteResponse && this.props.quoteResponse.redirect_url && this.props.quoteResponse.redirect_url){
         window.location.href = this.props.quoteResponse.redirect_url;
         return;

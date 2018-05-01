@@ -193,6 +193,10 @@ class PlansPage extends React.Component<Props, {}> {
     this.props.setPersonsData(persons);
 
     return this.props.saveQuoteForm(data).then(() => {
+      if (this.props.quoteResponse && this.props.quoteResponse.LOGIN_URL && this.props.quoteResponse.LOGIN_URL.length > 0) {
+        window.location.href = this.props.quoteResponse.LOGIN_URL;
+        return;
+      }
       var k1, k2;
       if(this.state.type_of_submission == 10002) {
         k1 = "showModalEmailThanks";

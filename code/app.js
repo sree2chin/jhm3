@@ -80,8 +80,6 @@ requireFu(__dirname + '/routes')(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  console.log("\n\n\n eq.originalUrl1: " + req.originalUrl);
-  console.log("\n\n\n req.url1 : " + req.url + "\n\n\n");
   if(req.url && req.url.indexOf('/api/')>-1 || req.url.indexOf('-min.map') > -1 || req.url.indexOf('js.map') > -1){
     console.log('Unknown api called : '+ req.url);
     res.status(500);

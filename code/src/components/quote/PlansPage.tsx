@@ -134,12 +134,20 @@ class PlansPage extends React.Component<Props, {}> {
 
     setTimeout(() => {
       this.props.submitPlansForm(persons).then(() => {
+        if (this.props.premiums && this.props.premiums.LOGIN_URL && this.props.premiums.LOGIN_URL.length > 0) {
+          window.location.href = this.props.premiums.LOGIN_URL;
+          return;
+        }
         if(successCb) { successCb(); }
         this.setState({
           submittingPlansFromPlan: false
         });
         console.log("sdfds");
       }).catch(()=>{
+        if (this.props.premiums && this.props.premiums.LOGIN_URL && this.props.premiums.LOGIN_URL.length > 0) {
+          window.location.href = this.props.premiums.LOGIN_URL;
+          return;
+        }
         this.setState({
           submittingPlansFromPlan: false
         });

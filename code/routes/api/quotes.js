@@ -1,4 +1,7 @@
 var QuotesService = require('../../services/quotes.js');
+var url = require("url");
+var _ = require('underscore');
+const passport = require('passport');
 
 function endsWith(str, suffix) {
   if (str == null) return true;
@@ -6,59 +9,121 @@ function endsWith(str, suffix) {
 }
 
 module.exports = function(app) {
-
+  var LOGIN_URL = "/login"
   var prefix = "/v1";
 
-  app.post(prefix + '/quote/premiums', function(req, res) {
+  var samlAuthenticateMiddleware = function(req, res, next) {
+    req.session.questionsMiddleware = false;
+    var url_parts = url.parse(req.url, true);
+    req.session = req.session || {};
+    req.session.queryParams = req.session.queryParams || {};
+
+    if (req.session.queryParams && req.session.queryParams.agent_number) {
+      var shouldAuthenticate;
+      if (req.session.authenticatedOnce) {
+        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 1*60*1000;
+      } else {
+        shouldAuthenticate = true;
+      }
+      if (shouldAuthenticate) {
+        var queryParams = req.session.queryParams;
+        var queryParamsString = "?";
+        for(var k in queryParams) {
+          if (queryParams[k]) {
+            queryParamsString += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString += k + "&";
+          }
+        }
+        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+        req.session.redirectToLogin = true;
+        next();
+      } else {
+        next();
+      }
+    } else {
+      next();
+    }
+  };
+
+  app.post(prefix + '/quote/premiums', samlAuthenticateMiddleware, function(req, res) {
     QuotesService.getQuotePremiums(req, function(statusCode, data){
       res.statusCode = statusCode;
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
-      res.send(data);
+      if (req.session.redirectToLogin) {
+        req.session.redirectToLogin = false;
+        res.send({
+          LOGIN_URL: LOGIN_URL
+        });
+      } else {
+        res.send(data);
+      }
     });
   });
 
-  app.post(prefix + '/quote/products', function(req, res) {
+  app.post(prefix + '/quote/products', samlAuthenticateMiddleware, function(req, res) {
+    console.log("]\n\n\nin quote/products\n\n\n");
     QuotesService.getQuoteProducts(req, function(statusCode, data){
       res.statusCode = statusCode;
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
-      res.send(data);
+      if (req.session.redirectToLogin) {
+        req.session.redirectToLogin = false;
+        res.send({
+          LOGIN_URL: LOGIN_URL
+        });
+      } else {
+        res.send(data);
+      }
     });
   });
 
-  app.post(prefix + '/quote/plans', function(req, res) {
+  app.post(prefix + '/quote/plans', samlAuthenticateMiddleware, function(req, res) {
     QuotesService.getQuotePlans(req, function(statusCode, data){
       res.statusCode = statusCode;
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
-      res.send(data);
+      if (req.session.redirectToLogin) {
+        req.session.redirectToLogin = false;
+        res.send({
+          LOGIN_URL: LOGIN_URL
+        });
+      } else {
+        res.send(data);
+      }
     });
   });
 
-  app.post(prefix + '/quote/savequote', function(req, res) {
+  app.post(prefix + '/quote/savequote', samlAuthenticateMiddleware, function(req, res) {
     QuotesService.saveQuoteForm(req, function(statusCode, data){
       res.statusCode = statusCode;
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
-      res.send(data);
+      if (req.session.redirectToLogin) {
+        req.session.redirectToLogin = false;
+        res.send({
+          LOGIN_URL: LOGIN_URL
+        });
+      } else {
+        res.send(data);
+      }
     });
   });
 
-  app.post(prefix + '/quote/submit', function(req, res) {
+  app.post(prefix + '/quote/submit', samlAuthenticateMiddleware, function(req, res) {
     QuotesService.getQuoteProducts(req, function(statusCode, data){
       res.statusCode = statusCode;
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
-      res.send(data);
-    });
-  });
-
-  app.get(prefix, function(req, res) {
-    UserService.get(req, function(data) {
-      res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(data));
+      if (req.session.redirectToLogin) {
+        req.session.redirectToLogin = false;
+        res.send({
+          LOGIN_URL: LOGIN_URL
+        });
+      } else {
+        res.send(data);
+      }
     });
   });
 };

@@ -122,6 +122,10 @@ class Main extends React.Component<Props, {}> {
       this.props.setPersonsData(persons);
 
       return this.props.submitQuoteForm(persons).then(() => {
+        if (this.props.products && this.props.products.LOGIN_URL && this.props.products.LOGIN_URL.length > 0) {
+          window.location.href = this.props.products.LOGIN_URL;
+          return;
+        }
         const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
         var queryParams = this.props.location.query;
         var queryParamsString = "?";
