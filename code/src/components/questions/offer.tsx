@@ -135,6 +135,7 @@ class Offer extends React.Component<Props, {}> {
     data.order_id = premium.order_id;
     data.amount = premium.premium_amount;
     data.elavon_params = offerData && offerData.elavon_params ? offerData.elavon_params : [];
+    data.elavon_url =  offerData.elavon_url;
     this.setState({
       onPaymentGoingTo: true
     });

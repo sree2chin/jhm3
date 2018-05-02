@@ -156,7 +156,7 @@ module.exports = new function(){
       return;
     }
     request({
-      url: paymentConfig.url,
+      url: req.body.elavon_url || paymentConfig.url,
       method: 'POST',
       form: elavonConfig
     }, function callback(err, httpResponse, body) {
