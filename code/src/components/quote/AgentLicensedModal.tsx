@@ -98,14 +98,13 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
                     </Row>
                     <Row>
                         <Col className="email-description c-center" sm={12}>
-                            Tell us when we may best reach you and a number to call you on and a licensed agent will follow up with your quote.
                         </Col>
                     </Row>
 
                     <Row style={{marginTop: "35px"}}>
                       <Col sm={6}>
                         <Col sm={12} className="email-label slot-label">
-                          Best time to reach you?
+                          Best time to reach applicant?
                         </Col>
                         <Col sm={12} className={"slot-input-container"}>
                           <Select

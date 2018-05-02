@@ -461,6 +461,7 @@ class PlansPage extends React.Component<Props, {}> {
           handleChange={this.handleEmailChange.bind(this)}
           onCloseModal={this.closeEmailModal.bind(this)}
           noOfPersons={this.props.noOfPersons}
+          fromAgentPage={false}
         />
 
         <EmailModalCapture
@@ -469,6 +470,7 @@ class PlansPage extends React.Component<Props, {}> {
           handleChange={this.handleEmailChange.bind(this)}
           onCloseModal={this.closeEmailCaptureModal.bind(this)}
           noOfPersons={this.props.noOfPersons}
+          fromAgentPage={false}
         />
         <LicensedModal
           showModalPhone={this.state.showModalPhone}
@@ -479,6 +481,7 @@ class PlansPage extends React.Component<Props, {}> {
           keyValueChange={this.keyValueChange.bind(this)}
           noOfPersons={this.props.noOfPersons}
           handleChange={this.handleEmailChange.bind(this)}
+          fromAgentPage={false}
         />
 
         <ThanksEmail
