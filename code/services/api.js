@@ -151,10 +151,12 @@ module.exports = new function(){
     var elavonConfig = req.body.elavon_params;
     //elavonConfig.ssl_receipt_link_url = paymentConfig.ssl_receipt_link_url;
     console.log("\n\n\n" + JSON.stringify(elavonConfig) + "\n\n\n");
+    console.log("req.body.elavon_url: " + req.body.elavon_url + "\n\n\n");
     if (_.isEmpty(elavonConfig)) {
       this.makePayment1(req, cb, true);
       return;
     }
+
     request({
       url: req.body.elavon_url || paymentConfig.url,
       method: 'POST',
