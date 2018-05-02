@@ -4,7 +4,7 @@ var appConfig       = require('../config/service.js');
 var _           = require('underscore');
 
 var restOptions = {
-  host: appConfig.getProperty('service_url'),
+  host: appConfig.getProperty('server_domain'),
   //port: appConfig.getProperty('service_port')
 };
 
