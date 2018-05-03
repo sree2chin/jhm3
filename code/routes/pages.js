@@ -135,6 +135,13 @@ module.exports = function(app) {
     res.redirect("/" + queryParamsString);
   });
 
+  app.get('/saml/Metadata',
+    function(req, res) {
+      res.type('application/xml');
+      res.status(200).send(samlStrategy.generateServiceProviderMetadata(fs.readFileSync(__dirname + '/cert/cert.pem', 'utf8')));
+    }
+  );
+
   app.get("/questions/login", loginMiddleware, function(req,  res, next) {
     console.log("\n\n\n/questions/login\n\n\n");
     req.session = req.session || {};

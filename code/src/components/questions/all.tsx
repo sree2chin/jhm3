@@ -48,7 +48,6 @@ class Main extends React.Component<Props, {}> {
         window.location.href = this.questions.LOGIN_URL;
         return;
       }
-      console.log("dddd");
       this.setState({
         gettingQuestions: false
       });
@@ -675,11 +674,9 @@ class Main extends React.Component<Props, {}> {
                                   q.answer = moment(q.answer).format("MM/DD/YYYY");
                                 }
 
-                                if (typeof ans == "object") {
-                                  console.log(ans);
-                                } else {
-                                  console.log(ans);
-                                }
+
+                                console.log(ans);
+
 
 
                                 return <div className="individual-question"  onClick={()=>{
