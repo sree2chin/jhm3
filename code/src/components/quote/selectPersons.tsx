@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {Button, Row, Col} from "react-bootstrap";
-import Input from "../common/textInput"
 import {map} from "underscore";
 import {selectNoOfPersons} from '../../actions/selectPersons';
 import { connect } from 'react-redux';

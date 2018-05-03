@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty, uniq, intersection, map, without} from "underscore";
-import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm, setPersonsData, openEditPersonModal, closeEditPersonModal, handleEditChange} from '../../actions/Quote';
+import {submitQuoteForm, submitPlansForm, submitProductsForm, setPersonsData, openEditPersonModal, closeEditPersonModal, handleEditChange} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
 import ProductContainer from "./ProductContainer";
@@ -204,9 +204,14 @@ class ProductsPage extends React.Component<Props, {}> {
       this.props.setPersonsData(persons);
 
       this.props.submitQuoteForm(persons).then(() => {
+        if (this.props.products && this.props.products.LOGIN_URL && this.props.products.LOGIN_URL.length > 0) {
+          window.location.href = this.props.products.LOGIN_URL;
+          return;
+        }
         this.setState({
           submittingUserInfo: false
         });
+        return;
       }).catch(()=>{
         var queryParams = this.props.location.query;
         var queryParamsString = "?";
@@ -256,10 +261,18 @@ class ProductsPage extends React.Component<Props, {}> {
       this.props.setPersonsData(persons);
 
       this.props.submitQuoteForm(persons).then(() => {
+        if (this.props.products && this.props.products.LOGIN_URL && this.props.products.LOGIN_URL.length > 0) {
+          window.location.href = this.props.products.LOGIN_URL;
+          return;
+        }
         this.setState({
           submittingProductsInfo: false
         });
       }).catch(()=>{
+        if (this.props.products && this.props.products.LOGIN_URL && this.props.products.LOGIN_URL.length > 0) {
+          window.location.href = this.props.products.LOGIN_URL;
+          return;
+        }
         this.submmitedProductForm = false;
         this.setState({
           submittingProductsInfo: false
@@ -310,6 +323,10 @@ class ProductsPage extends React.Component<Props, {}> {
       this.props.setPersonsData(persons);
 
       this.props.submitProductsForm(persons).then(() => {
+        if (this.props.plans && this.props.plans.LOGIN_URL && this.props.plans.LOGIN_URL.length > 0) {
+          window.location.href = this.props.plans.LOGIN_URL;
+          return;
+        }
         var queryParams = this.props.location.query;
         var queryParamsString = "?";
         for(var k in queryParams) {
@@ -326,6 +343,10 @@ class ProductsPage extends React.Component<Props, {}> {
           submittingProductsInfo: true
         });
       }).catch(()=>{
+        if (this.props.plans && this.props.plans.LOGIN_URL && this.props.plans.LOGIN_URL.length > 0) {
+          window.location.href = this.props.plans.LOGIN_URL;
+          return;
+        }
         this.submmitedProductForm = false;
         this.setState({
           submittingProductsInfo: true

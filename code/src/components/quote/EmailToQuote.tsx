@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty} from "underscore";
-import {submitQuoteForm, submitEmailForm, setPersonsData, saveQuoteForm} from '../../actions/Quote';
+import {submitQuoteForm, setPersonsData, saveQuoteForm} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ThanksEmail from "./ThanksEmail";
 import ThanksPhone from "./ThanksPhone";
@@ -134,6 +134,10 @@ class EmailToQuote extends React.Component<Props, {}> {
       }
       queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
       this.props.saveQuoteForm(data).then(() => {
+        if (this.props.quoteResponse && this.props.quoteResponse.LOGIN_URL && this.props.quoteResponse.LOGIN_URL.length > 0) {
+          window.location.href = this.props.quoteResponse.LOGIN_URL;
+          return;
+        }
         const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent/" : "/";
         browserHistory.push(basePath + "email-quote-success" + queryParamsString);
       }).catch(()=>{

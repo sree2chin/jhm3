@@ -56,6 +56,10 @@ class Main extends React.Component<Props, {}> {
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     this.props.getQuestions().then(()=> {
+      if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
+        window.location.href = this.questions.LOGIN_URL;
+        return;
+      }
       if (this.questions && this.questions.instant_id_check && this.questions.instant_id_check.status==false) {
         this.setState({
           showInstantIdCheckPopup: true,
@@ -863,8 +867,11 @@ class Main extends React.Component<Props, {}> {
 
       this.props.postQuestions(data).then(() => {
         window.scrollTo(0, 0);
+        if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
+          window.location.href = this.questions.LOGIN_URL;
+          return;
+        }
         if (this.questions && this.questions.instant_id_check && this.questions.instant_id_check.status==false) {
-
           this.setState({
             showInstantIdCheckPopup: true,
             instantIdCheckData: this.questions.instant_id_check
@@ -1348,6 +1355,10 @@ class Main extends React.Component<Props, {}> {
       addingContingencyBeneficiary: false
     });
     self.props.getFactorsearch(data).then(response => {
+      if (response.questions && response.questions.LOGIN_URL && response.questions.LOGIN_URL.length > 0) {
+        window.location.href = response.questions.LOGIN_URL;
+        return;
+      }
       if (response && response.questions && response.questions.data) {
         self.beneficiariesIds = self.beneficiariesIds || {};
         self.beneficiariesIds[qs.id] = response.questions.data;
@@ -1396,6 +1407,10 @@ class Main extends React.Component<Props, {}> {
     });
     self.props.getFactorsearch(data).then(response => {
       if (response && response.questions && response.questions.data) {
+        if (response.questions && response.questions.LOGIN_URL && response.questions.LOGIN_URL.length > 0) {
+          window.location.href = response.questions.LOGIN_URL;
+          return;
+        }
         self.beneficiariesIds = self.beneficiariesIds || {};
         self.beneficiariesIds[qs.id] = response.questions.data;
         if (qs.answerState == "valid" && qs.questions && qs.questions.length > 0) {

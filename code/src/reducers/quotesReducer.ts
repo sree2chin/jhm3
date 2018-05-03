@@ -8,6 +8,9 @@ export default (state: Array<any> = [], action) => {
       return objectAssign({}, state, {plans: action.plans});
     case 'SUMBMITTED_PLANS_INFO':
       var premiums;
+      if (action.premiums && action.premiums.LOGIN_URL && action.premiums.LOGIN_URL.length > 0) {
+        return objectAssign({}, state, {premiums: action.premiums});
+      }
       if(state.premiums) {
         premiums = JSON.parse(JSON.stringify(state.premiums));
       } else {

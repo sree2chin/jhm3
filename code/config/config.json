@@ -1,3 +1,4 @@
+
 {
 	"dev": {
 		"service_url" : "https://devvantisreact.sureify.com",
@@ -24,9 +25,16 @@
 			"ssl_verify": "Y",
 			"url": "https://api.demo.convergepay.com/VirtualMerchantDemo/process.do"
 		},
-		"saml": {
-			"sign_out_url" : "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/slo/778980",
-			"sign_in_url": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980"
+		"passport": {
+      		"strategy": "saml",
+			"saml": {
+				"path":  "https://devvantisreact.sureify.com/login/callback",
+				"entryPoint": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980",
+				"issuer": "passport-saml",
+				"cert":  "/sp_cert.cert",
+				"privateKey": "privateKey.pem",
+				"on": true
+			}
 		}
 	},
 	"development": {
@@ -54,13 +62,20 @@
 			"ssl_verify": "Y",
 			"url": "https://api.demo.convergepay.com/VirtualMerchantDemo/process.do"
 		},
-		"saml": {
-			"sign_out_url" : "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/slo/778980",
-			"sign_in_url": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980"
+		"passport": {
+      		"strategy": "saml",
+			"saml": {
+				"path":  "https://vantislifeinsurancestg.sureify.com/login/callback",
+				"entryPoint": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980",
+				"issuer": "passport-saml",
+				"cert":  "/sp_cert.cert",
+				"privateKey": "privateKey.pem",
+				"on": true
+			}
 		}
 	},
 	"production": {
-		"service_url" : "https://vantisapi.sureify.com",
+		"service_url" : "https://vantislifeinsurance.sureify.com",
 		"service_port" : 80,
 		"redis_url": "127.0.0.1",
 		"redis_port": 6379,
@@ -83,6 +98,17 @@
 			"ssl_get_token": "Y",
 			"ssl_verify": "Y",
 			"url": "https://api.demo.convergepay.com/VirtualMerchantDemo/process.do"
-		}
+		},
+		"passport": {
+			"strategy": "saml",
+		  "saml": {
+			  "path":  "https://vantislifeinsurance.sureify.com/login/callback",
+			  "entryPoint": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980",
+			  "issuer": "passport-saml",
+			  "cert":  "/sp_cert.cert",
+			  "privateKey": "privateKey.pem",
+			  "on": false
+		  }
+	  }
 	}
 }

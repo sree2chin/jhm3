@@ -118,6 +118,10 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
       })
 
       this.props.getFactorsearch(data).then(response => {
+        if (response.questions && response.questions.LOGIN_URL && response.questions.LOGIN_URL.length > 0) {
+          window.location.href = response.questions.LOGIN_URL;
+          return;
+        }
         if (response && response.questions && response.questions.data) {
           this.setState({
             items: response.questions.data

@@ -3,12 +3,20 @@ import SubmitQuoteApi from '../api/QuotesApi';
 function submitQuoteForm(postData) {
 	return (dispatch) => {
 		return SubmitQuoteApi.submit(postData).then(
-			data => dispatch({
-				type: 'SUMBMITTED_PERSONAL_INFO', products: data.data.applicants,
-				productValidations: data.data.validations,
-				is_agent: data.extra_params && data.extra_params.is_agent==1 ? true : false
-			}))
-		);
+			data => {
+				if (data && data.data && data.data.applicants) {
+					dispatch({
+						type: 'SUMBMITTED_PERSONAL_INFO', products: data.data.applicants,
+						productValidations: data.data.validations,
+						is_agent: data.extra_params && data.extra_params.is_agent==1 ? true : false
+					});
+				} else {
+					dispatch({
+						type: 'SUMBMITTED_PERSONAL_INFO', products: data,
+						is_agent: data.extra_params && data.extra_params.is_agent==1 ? true : false
+					});
+				}
+		})
 	};
 }
 
@@ -62,40 +70,55 @@ function handleEditChange(person) : any {
 function submitProductsForm(postData) : any {
 	return (dispatch) => {
 		return SubmitQuoteApi.submitProductsForm(postData).then(
-			data => dispatch({
-				type: 'SUMBMITTED_PRODUCTS_INFO', isSubmmitedProductsForm: true, plans: data.data.applicants
-			}))
-		);
+			data => {
+			if (data && data.data && data.data.applicants) {
+				dispatch({
+					type: 'SUMBMITTED_PRODUCTS_INFO', isSubmmitedProductsForm: true, plans: data.data.applicants
+				});
+			} else {
+				dispatch({
+					type: 'SUMBMITTED_PRODUCTS_INFO',
+					plans: data
+				});
+			}
+		})
 	};
 }
 
 function submitPlansForm(postData) : any {
 	return (dispatch) => {
 		return SubmitQuoteApi.plansSubmit(postData).then(
-			data => dispatch({
-				type: 'SUMBMITTED_PLANS_INFO', premiums: data.data.applicants
-			}))
-		);
-	};
-}
-
-function submitEmailForm(postData) : any{
-	return (dispatch) => {
-		SubmitQuoteApi.emailSubmit(postData).then(
-			data => dispatch({
-				type: 'SUMBMITTED_EMAIL_INFO', isSubmmitedEmailForm: data
-			}))
-		);
+			data => {
+				if (data && data.data && data.data.applicants) {
+					dispatch({
+						type: 'SUMBMITTED_PLANS_INFO',
+						premiums: data.data.applicants
+					})
+				} else {
+					dispatch({
+						type: 'SUMBMITTED_PLANS_INFO',
+						premiums: data
+					});
+				}
+		})
 	};
 }
 
 function saveQuoteForm(postData) : any{
 	return (dispatch) => {
 		return SubmitQuoteApi.saveQuoteForm(postData).then(
-			data => dispatch({
-				type: 'SUMBMITTED_SAVE_QUOTE', quoteResponse: data
-			}))
-		);
+			data => {
+				if (data && data.data && data.data.applicants) {
+					dispatch({
+						type: 'SUMBMITTED_SAVE_QUOTE', quoteResponse: data
+					});
+				} else {
+					dispatch({
+						type: 'SUMBMITTED_SAVE_QUOTE',
+						quoteResponse: data
+					});
+				}
+		})
 	};
 }
 
@@ -103,11 +126,11 @@ function saveQuoteForm(postData) : any{
 export {
 	submitQuoteForm,
 	submitPlansForm,
-	submitEmailForm,
 	submitProductsForm,
 	setPersonsData,
 	saveQuoteForm,
 	openEditPersonModal,
 	closeEditPersonModal,
-	handleEditChange
+	handleEditChange,
+	setTypeOfSubmission
 }

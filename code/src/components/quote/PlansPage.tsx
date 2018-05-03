@@ -6,7 +6,8 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty, map} from "underscore";
-import {submitQuoteForm, submitEmailForm, submitPlansForm, setPersonsData, openEditPersonModal, closeEditPersonModal, handleEditChange} from '../../actions/Quote';
+import {submitQuoteForm, submitPlansForm, setPersonsData, openEditPersonModal, closeEditPersonModal, handleEditChange} from '../../actions/Quote';
+const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
 import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
@@ -133,12 +134,20 @@ class PlansPage extends React.Component<Props, {}> {
 
     setTimeout(() => {
       this.props.submitPlansForm(persons).then(() => {
+        if (this.props.premiums && this.props.premiums.LOGIN_URL && this.props.premiums.LOGIN_URL.length > 0) {
+          window.location.href = this.props.premiums.LOGIN_URL;
+          return;
+        }
         if(successCb) { successCb(); }
         this.setState({
           submittingPlansFromPlan: false
         });
         console.log("sdfds");
       }).catch(()=>{
+        if (this.props.premiums && this.props.premiums.LOGIN_URL && this.props.premiums.LOGIN_URL.length > 0) {
+          window.location.href = this.props.premiums.LOGIN_URL;
+          return;
+        }
         this.setState({
           submittingPlansFromPlan: false
         });

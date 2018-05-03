@@ -11,14 +11,20 @@ var appConfig = require('./config/service.js');
 var FileStreamRotator = require('file-stream-rotator');
 var fs = require('fs');
 var app = express();
+const passport = require('passport');
+
 app.set('trust proxy', 1);
+var env = process.env.NODE_ENV || 'dev';
+const config = require('./config/config')[env];
 
 /* -----------------------Logging Confirguration ------------------- */
 
 var logDirectory = __dirname + '/log'
 
 // Check whether log directory exists - if not then create
-fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+
+require('./config/passport')(passport, config);
 
 var accessLogStream = FileStreamRotator.getStream({
     filename: logDirectory + '/access-%DATE%.log',
@@ -67,12 +73,13 @@ app.use(express.static(path.join(__dirname, 'dist'), {maxAge: thirtyDay}));
 app.use("/dist", express.static(__dirname +'/dist/'));
 app.use("/agent", express.static(__dirname +'/dist/'));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 requireFu(__dirname + '/routes')(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  console.log("\n\n\n eq.originalUrl1: " + req.originalUrl);
-  console.log("\n\n\n req.url1 : " + req.url + "\n\n\n");
   if(req.url && req.url.indexOf('/api/')>-1 || req.url.indexOf('-min.map') > -1 || req.url.indexOf('js.map') > -1){
     console.log('Unknown api called : '+ req.url);
     res.status(500);

@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty} from "underscore";
-import {submitQuoteForm, submitEmailForm, setPersonsData, saveQuoteForm, setTypeOfSubmission} from '../../actions/Quote';
+import {submitQuoteForm, setPersonsData, saveQuoteForm, setTypeOfSubmission} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
 import EmailModal from "./EmailModal";
@@ -192,6 +192,10 @@ class PlansPage extends React.Component<Props, {}> {
     this.props.setPersonsData(persons);
 
     return this.props.saveQuoteForm(data).then(() => {
+      if (this.props.quoteResponse && this.props.quoteResponse.LOGIN_URL && this.props.quoteResponse.LOGIN_URL.length > 0) {
+        window.location.href = this.props.quoteResponse.LOGIN_URL;
+        return;
+      }
       var k1, k2;
       if(this.state.type_of_submission == 10002) {
         k1 = "showModalEmailThanks";

@@ -14,18 +14,19 @@ import {each, isEmpty} from "underscore";
 import Confirmation from "./confirmation";
 import SelectPersons from "./selectPersons";
 import { InfinityAutoComplete } from 'react-infinite-autocomplete';
-import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm, setPersonsData} from '../../actions/Quote';
+import {submitQuoteForm, submitPlansForm, submitProductsForm, setPersonsData} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 
 interface Props {
-  submitQuoteForm: ()=>void,
+  submitQuoteForm: (a: any)=>void,
   submitProductsForm: ()=>void,
   noOfPersons: any,
   persons: any,
   setPersonsData:(a: any)=>void,
-  submitEmailForm: any
+  location?: any,
+  products?: any
 }
 
 class Main extends React.Component<Props, {}> {
@@ -122,6 +123,10 @@ class Main extends React.Component<Props, {}> {
       this.props.setPersonsData(persons);
 
       return this.props.submitQuoteForm(persons).then(() => {
+        if (this.props.products && this.props.products.LOGIN_URL && this.props.products.LOGIN_URL.length > 0) {
+          window.location.href = this.props.products.LOGIN_URL;
+          return;
+        }
         const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
         var queryParams = this.props.location.query;
         var queryParamsString = "?";
@@ -154,10 +159,6 @@ class Main extends React.Component<Props, {}> {
         });
       });
     }
-  }
-
-  submitEmailForm() {
-    this.props.submitEmailForm(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -254,7 +255,7 @@ class Main extends React.Component<Props, {}> {
           plans={this.props.plans}
           premiums={this.props.premiums}
         />
-        <SelectPersons onSubmit={this.submitEmailForm.bind(this)} />
+        <SelectPersons />
         <div className="row c-quote">
           {this.props.noOfPersons && <div>
             <div className="header hidden-xs">
@@ -331,9 +332,6 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     },
     submitPlansForm: (data) => {
       return dispatch(submitPlansForm(data))
-    },
-    submitEmailForm: (data) => {
-      return dispatch(submitEmailForm(data))
     },
     loadStates: () => {
       return loadStates();

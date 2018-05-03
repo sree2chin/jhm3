@@ -6,8 +6,9 @@ function loadStates() {
 			data => dispatch({
 					type: 'FETCH_STATES_DONE'
 					,states: data
-				}))
-		);
+				}
+			)
+		)
 	};
 }
 
