@@ -17,7 +17,8 @@ import {getQuestions, postQuestions, getFactorsearch, confirmQuestions, postPaym
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
-import PdfModal from "./PdfModal"
+import PdfModal from "./PdfModal";
+import RawHtml from "react-raw-html";
 
 
 interface Props  extends React.Props<Offer> {
@@ -193,6 +194,7 @@ class Offer extends React.Component<Props, {}> {
     var {premium, product} = offerData;
     premium = premium || {};
     product = product || {};
+    RawHtml.addTag("mycooltag");
 
     return (
       <div>
@@ -224,10 +226,12 @@ class Offer extends React.Component<Props, {}> {
                         {this.state.onPaymentGoingTo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                     </Button>
                 </Row>
-                <Row>
-                    <p>Congratulations! Based on underwriting information received, here is your offer of coverage. If you accept this offer, you will not be required to have a medical exam!</p>
-                    <p>The offer may be different than the initial quote due to information received during the underwriting process.</p>
-                </Row>
+                {offerData && offerData.offer_description && <Row>
+                    <RawHtml.mycooltag>
+                        {offerData.offer_description}
+                    </RawHtml.mycooltag>
+                  </Row>
+                }
             </Col>
             <Col sm={5} className="offer-product-info">
                 <Row className="offer-product-header-text">
@@ -240,13 +244,9 @@ class Offer extends React.Component<Props, {}> {
                     <Col sm={12} className="product-main-content offer-product-description" style={{paddingLeft: "20px"}}>
                     <Row className="text-left">
                         <ul className="c-product-desc-line">
-                        {map(product.product_description.split("."), (descLine, index)=>{
-                          if(index!=0 && descLine && descLine.trim().length >0) {
-                            return <li key={"desc-" + index}>{descLine.trim()}</li>
-                          } else {
-                            return null
-                          }
-                        })}
+                          <RawHtml.mycooltag>
+                            {product.product_description}
+                          </RawHtml.mycooltag>
                         </ul>
                     </Row>
                     </Col>
