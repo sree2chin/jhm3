@@ -156,9 +156,9 @@ module.exports = new function(){
       this.makePayment1(req, cb, true);
       return;
     }
-
+    elavonConfig.url = req.body.elavon_url;
     request({
-      url: req.body.elavon_url || paymentConfig.url,
+      url: req.body.elavon_url,
       method: 'POST',
       form: elavonConfig
     }, function callback(err, httpResponse, body) {
