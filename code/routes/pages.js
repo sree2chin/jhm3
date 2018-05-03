@@ -65,7 +65,7 @@ module.exports = function(app) {
   var samlAuthenticateQuestionsMiddleware1 = function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};
-    req.session.queryParams = {};
+    req.session.queryParams = req.session.queryParams || {};
     if (!_.isEmpty(url_parts.query)) {
       req.session.queryParams = req.session.queryParams || {};
       for(var k in url_parts.query) {
@@ -242,7 +242,7 @@ module.exports = function(app) {
     var html = JSON.parse(req.session.postPayment).body;
     var htmlP = html.split("<head>")
 
-    htmlP[0] = htmlP[0] + "<base href='https://api.demo.convergepay.com/VirtualMerchantDemo/process.do'></base>";
+    htmlP[0] = htmlP[0] + `<base href=${req.session.postPaymentElavonUrl}></base>`;
     htmlP[0] = htmlP[0] + " <link href='http://ec2-54-158-63-166.compute-1.amazonaws.com/dist/css/elavon_payment.css' rel='stylesheet'>";
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.write(htmlP[0] + htmlP[1]);

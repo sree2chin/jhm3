@@ -98,17 +98,17 @@
 			"ssl_get_token": "Y",
 			"ssl_verify": "Y",
 			"url": "https://api.demo.convergepay.com/VirtualMerchantDemo/process.do"
-		}
-	},
-	"passport": {
-      		"strategy": "saml",
-			"saml": {
-				"path":  "https://vantislifeinsurance.sureify.com/login/callback",
-				"entryPoint": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980",
-				"issuer": "passport-saml",
-				"cert":  "/sp_cert.cert",
-				"privateKey": "privateKey.pem",
-				"on": false
-			}
-		}
+		},
+		"passport": {
+			"strategy": "saml",
+		  "saml": {
+			  "path":  "https://vantislifeinsurance.sureify.com/login/callback",
+			  "entryPoint": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980",
+			  "issuer": "passport-saml",
+			  "cert":  "/sp_cert.cert",
+			  "privateKey": "privateKey.pem",
+			  "on": false
+		  }
+	  }
+	}
 }

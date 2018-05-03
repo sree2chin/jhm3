@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Input from './../common/textInput';
 import {Button, Row, Col} from "react-bootstrap";
 import {map} from "underscore";
 import {selectNoOfPersons} from '../../actions/selectPersons';

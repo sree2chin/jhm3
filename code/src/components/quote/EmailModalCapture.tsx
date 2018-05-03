@@ -102,8 +102,11 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
                     </Row>
                     <Row>
                         <Col className="email-description email-description-on-modal c-center" sm={12}>
-                            Before beginning the application, please enter the applicant's email address. An email with the quote information and a link back to their application will be sent to them.
-                        </Col>
+                            {this.props.fromAgentPage ?
+                              "Before beginning the application, please enter the applicant's email address. An email with the quote information will be sent to them." :
+                              "Before beginning the application, please enter the applicant's email address. An email with the quote information and a link back to their application will be sent to them."
+                            }
+                            </Col>
                     </Row>
 
                     <Row style={{marginTop: "35px"}}>

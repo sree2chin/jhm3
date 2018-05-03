@@ -146,21 +146,21 @@ module.exports = new function(){
 
   this.postPayment = function(req, cb){
     var paymentConfig = JSON.parse(JSON.stringify(appConfig.getProperty("payment")));
-    //paymentConfig.amount = req.body.amount;
-    //paymentConfig.order_id = req.body.order_id;
     var elavonConfig = req.body.elavon_params;
-    //elavonConfig.ssl_receipt_link_url = paymentConfig.ssl_receipt_link_url;
-    console.log("\n\n\n" + JSON.stringify(elavonConfig) + "\n\n\n");
     if (_.isEmpty(elavonConfig)) {
       this.makePayment1(req, cb, true);
       return;
     }
+    console.log("\n\n\n in postPayment" + JSON.stringify(elavonConfig) + "\n\n\n");
+    console.log("in postPayment req.body.elavon_url: " + req.body.elavon_url + "\n\n\n");
+    elavonConfig.url = req.body.elavon_url;
     request({
-      url: paymentConfig.url,
+      url: req.body.elavon_url,
       method: 'POST',
       form: elavonConfig
     }, function callback(err, httpResponse, body) {
       req.session.postPayment = JSON.stringify(httpResponse);
+      req.session.postPaymentElavonUrl = req.body.elavon_url;
       cb(err, httpResponse);
     });
   };
@@ -244,6 +244,7 @@ module.exports = new function(){
     var formData = {};
     formData.password = req.body.password;
     appendAgentInfo(req, formData);
+    console.log(restOptions.host + '/v1/auth/user');
     console.log("authenticateUser formData: " + JSON.stringify(formData));
     request({
       url: restOptions.host + '/v1/auth/user',

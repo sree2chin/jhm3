@@ -1,12 +1,7 @@
 import * as React from 'react';
-import Input from './../common/textInput';
 import {Button, Row, Col} from "react-bootstrap";
 import Input from "../common/textInput"
-import Slider, { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
 import Tooltip from 'rc-tooltip';
-const Handle = Slider.Handle;
-import Slider from 'react-rangeslider';
 import {map} from "underscore";
 
 interface Props {
@@ -57,7 +52,7 @@ export default class Confirmation extends React.Component<Props, State> {
                 Email address
               </Col>
               <Col sm={12} className={"confirmation-email-input"}>
-                <Input 
+                <Input
                   name={"email"}
                   placeholder={"Enter your email"}
                   value={this.state.email}

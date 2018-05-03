@@ -93,7 +93,11 @@ export default class EmailModal extends React.Component<Props, {}> {
                     </Row>
                     <Row>
                         <Col className="email-description email-description-on-modal c-center" sm={12}>
-                            Fill out this info to email the quote to yourself for your records! Then you can click on the link to complete the application.
+                            { this.props.fromAgentPage ? (
+                              this.props.nextStep == "printTheQuote" ? "Fill out this info to email the quote to the applicant! The applicant can click on the link to complete the application." :
+                              "Fill out this info to email the quote to the applicant! Then the application can be continued from the Agent panel.") :
+                             "Fill out this info to email the quote to yourself for your records! Then you can click on the link to complete the application."
+                            }
                         </Col>
                     </Row>
 

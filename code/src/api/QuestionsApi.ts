@@ -1,6 +1,5 @@
 import * as _ from 'underscore';
 import * as fetch from "isomorphic-fetch";
-import { getStates } from '../utility/states';
 
 var QuestionsApiI;
 
@@ -9,7 +8,6 @@ interface QuotesApiI {
 }
 
 class QuestionsApi {
-
 
   get() : Promise<any> {
     return fetch('/v1/questions/questions', {
@@ -114,13 +112,7 @@ class QuestionsApi {
           });
         }
         return r;
-    })/*.catch(function() {
-      return errRes.text().then(function (response: any) {
-        return new Promise(function(resolve, reject) {
-          resolve(response)
-        });
-      });
-    })*/
+    })
   };
 
   authenticateUser(payload) : Promise<any> {
@@ -170,9 +162,7 @@ class QuestionsApi {
         credentials: 'include'
       }).then(function(res) {
         return res.json().then(function (response: any) {
-          return new Promise(function(resolve, reject) {
-            resolve(response)
-          });
+            return response;
         })
     })
   };

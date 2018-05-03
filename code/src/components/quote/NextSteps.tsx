@@ -17,7 +17,6 @@ import LicensedModal from "./LicensedModal";
 import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
-import Plan from "../common/Plan"
 import {Tooltip} from 'react-lightweight-tooltip';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 import { browserHistory } from 'react-router';
@@ -465,6 +464,7 @@ class PlansPage extends React.Component<Props, {}> {
           handleChange={this.handleEmailChange.bind(this)}
           onCloseModal={this.closeEmailModal.bind(this)}
           noOfPersons={this.props.noOfPersons}
+          fromAgentPage={false}
         />
 
         <EmailModalCapture
@@ -473,6 +473,7 @@ class PlansPage extends React.Component<Props, {}> {
           handleChange={this.handleEmailChange.bind(this)}
           onCloseModal={this.closeEmailCaptureModal.bind(this)}
           noOfPersons={this.props.noOfPersons}
+          fromAgentPage={false}
         />
         <LicensedModal
           showModalPhone={this.state.showModalPhone}
@@ -483,6 +484,7 @@ class PlansPage extends React.Component<Props, {}> {
           keyValueChange={this.keyValueChange.bind(this)}
           noOfPersons={this.props.noOfPersons}
           handleChange={this.handleEmailChange.bind(this)}
+          fromAgentPage={false}
         />
 
         <ThanksEmail

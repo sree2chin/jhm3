@@ -17,7 +17,8 @@ import {getQuestions, postQuestions, getFactorsearch, confirmQuestions, postPaym
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
-import PdfModal from "./PdfModal"
+import PdfModal from "./PdfModal";
+import RawHtml from "react-raw-html";
 
 
 interface Props  extends React.Props<Offer> {
@@ -143,6 +144,7 @@ class Offer extends React.Component<Props, {}> {
     data.order_id = premium.order_id;
     data.amount = premium.premium_amount;
     data.elavon_params = offerData && offerData.elavon_params ? offerData.elavon_params : [];
+    data.elavon_url =  offerData.elavon_url;
     this.setState({
       onPaymentGoingTo: true
     });
@@ -207,6 +209,7 @@ class Offer extends React.Component<Props, {}> {
     var {premium, product} = offerData;
     premium = premium || {};
     product = product || {};
+    RawHtml.addTag("mycooltag");
 
     return (
       <div>
@@ -225,7 +228,7 @@ class Offer extends React.Component<Props, {}> {
                         {premium.currency}{premium.premium_amount}
                     </Col>
                     <Col className="offer-per-month">
-                        Per month for {premium.currency}{premium.coverage_amount}
+                      {premium.premium_type_title} for {premium.currency}{premium.coverage_amount}
                     </Col>
                     <Col className="offer-per-month" style={{marginBottom: "16px"}}>
                         coverage
@@ -238,10 +241,12 @@ class Offer extends React.Component<Props, {}> {
                         {this.state.onPaymentGoingTo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                     </Button>
                 </Row>
-                <Row>
-                    <p>Congratulations! Based on underwriting information received, here is your offer of coverage. If you accept this offer, you will not be required to have a medical exam!</p>
-                    <p>The offer may be different than the initial quote due to information received during the underwriting process.</p>
-                </Row>
+                {offerData && offerData.offer_description && <Row>
+                    <RawHtml.mycooltag>
+                        {offerData.offer_description}
+                    </RawHtml.mycooltag>
+                  </Row>
+                }
             </Col>
             <Col sm={5} className="offer-product-info">
                 <Row className="offer-product-header-text">
@@ -254,13 +259,9 @@ class Offer extends React.Component<Props, {}> {
                     <Col sm={12} className="product-main-content offer-product-description" style={{paddingLeft: "20px"}}>
                     <Row className="text-left">
                         <ul className="c-product-desc-line">
-                        {map(product.product_description.split("."), (descLine, index)=>{
-                          if(index!=0 && descLine && descLine.trim().length >0) {
-                            return <li key={"desc-" + index}>{descLine.trim()}</li>
-                          } else {
-                            return null
-                          }
-                        })}
+                          <RawHtml.mycooltag>
+                            {product.product_description}
+                          </RawHtml.mycooltag>
                         </ul>
                     </Row>
                     </Col>

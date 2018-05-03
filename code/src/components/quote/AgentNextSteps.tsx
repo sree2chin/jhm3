@@ -16,7 +16,6 @@ import AgentLicensedModal from "./AgentLicensedModal";
 import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
-import Plan from "../common/Plan"
 import { browserHistory } from 'react-router';
 import EmailModalCapture from "./EmailModalCapture";
 
@@ -387,7 +386,8 @@ class PlansPage extends React.Component<Props, {}> {
                       <label htmlFor={"person_s_gender_"}> Print and email quote </label >
                     </div>
                   </div>
-                  <div className="agent-next-step-container">
+
+                  {/*<div className="agent-next-step-container">
                     <div className="c-radio l-next-step-container" onClick={()=>{
                       this.selectNextStep("emailApplicationLink")
                     }}>
@@ -399,7 +399,9 @@ class PlansPage extends React.Component<Props, {}> {
                       <span></span>
                       <label htmlFor={"person_s_gender_"}> Email the application link to your customer to complete </label >
                     </div>
-                  </div>
+                    </div>*/
+                  }
+
 
                 </FormGroup>
               </Col>
@@ -446,6 +448,7 @@ class PlansPage extends React.Component<Props, {}> {
           handleChange={this.handleEmailChange.bind(this)}
           onCloseModal={this.closeEmailCaptureModal.bind(this)}
           noOfPersons={this.props.noOfPersons}
+          fromAgentPage={true}
         />
 
         <EmailModal
@@ -454,6 +457,8 @@ class PlansPage extends React.Component<Props, {}> {
           handleChange={this.handleEmailChange.bind(this)}
           onCloseModal={this.closeEmailModal.bind(this)}
           noOfPersons={this.props.noOfPersons}
+          fromAgentPage={true}
+          nextStep={this.state.nextStep}
         />
         <AgentLicensedModal
           showModalPhone={this.state.showModalPhone}
@@ -463,6 +468,7 @@ class PlansPage extends React.Component<Props, {}> {
           onCloseModal={this.closeAgentLicensedModal.bind(this)}
           keyValueChange={this.keyValueChange.bind(this)}
           noOfPersons={this.props.noOfPersons}
+          fromAgentPage={true}
         />
 
         <ThanksEmail

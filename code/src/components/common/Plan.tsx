@@ -6,8 +6,6 @@ import {each, isEmpty, find} from "underscore";
 
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import Tooltip from 'rc-tooltip';
-const Handle = Slider.Handle;
 import RawHtml from "react-raw-html";
 
 
