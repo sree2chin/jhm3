@@ -27,17 +27,39 @@ interface Props  extends React.Props<Main> {
   confirmQuestions: any,
   questions: any,
   previousQuestionIds: any,
-  getFactorsearch: any
+  getFactorsearch: any,
+  confirmationData: any,
+  location: any,
 }
 
-class Main extends React.Component<Props, {}> {
+interface State  {
+  alreadyOnceSubmitted?: any,
+  confirmingQuestions?: any,
+  siblingsCount?: any,
+  previousQuestionsHandling?: any,
+  previousQuestionIds?: any,
+  activeGroup?: any,
+  previousQuestionHanldingIndex?: any,
+  gettingQuestions?: any
+}
+
+class Main extends React.Component<Props, State> {
   constructor(){
     super();
   }
-  state = {};
+  state = {
+    alreadyOnceSubmitted: false,
+    confirmingQuestions: false,
+    siblingsCount: null,
+    previousQuestionsHandling: false,
+    previousQuestionIds: [],
+    activeGroup: null,
+    previousQuestionHanldingIndex: null
+  };
   questions:any = {};
   actualQuestionLists: any = [];
   questionComponents: any = [];
+  noFoGroupsCompleted: any = [];
 
   componentWillMount() {
     this.setState({
@@ -100,7 +122,6 @@ class Main extends React.Component<Props, {}> {
   onChangeInput(q, answer) {
     q.answer = answer;
   }
-
   reRecursiveGetQuestions1(data, questionsList, actualQuestionLists) {
     if (!isEmpty(data)) {
       for(var i=0; i<(data.length); i++) {
@@ -293,7 +314,7 @@ class Main extends React.Component<Props, {}> {
 
   confirmQuestions() {
 
-    var data = {};
+    var data: any = {};
     this.setState({
       confirmingQuestions: true
     });
@@ -414,9 +435,9 @@ class Main extends React.Component<Props, {}> {
           counter={this.counter++}
         />;
     } else if (q.type == "label") {
-      /*questionsList.push( <Label
+      qComponent =  <Label
               {...q}
-            />)*/
+            />;
     } else if (q.type == "number" || q.type=="text") {
       qComponent = <CustomInput
         question={q}

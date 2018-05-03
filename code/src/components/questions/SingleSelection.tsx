@@ -7,7 +7,8 @@ interface Props extends React.Props<SingleSelection> {
   onChange: any,
   error: any,
   alreadyOnceSubmitted: any,
-  submittingQuestions?: any
+  submittingQuestions?: any,
+  counter?: any
 }
 
 export default class SingleSelection extends React.Component<Props, {}> {
