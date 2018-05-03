@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty} from "underscore";
-import {submitQuoteForm, submitEmailForm, setPersonsData, saveQuoteForm} from '../../actions/Quote';
+import {submitQuoteForm, setPersonsData, saveQuoteForm} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ThanksEmail from "./ThanksEmail";
 import ThanksPhone from "./ThanksPhone";
@@ -17,7 +17,6 @@ import Plan from "../common/Plan"
 import { browserHistory } from 'react-router';
 import {Tooltip} from 'react-lightweight-tooltip';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
-import { browserHistory } from 'react-router';
 import Input from "../common/textInput";
 import Select from 'react-select';
 

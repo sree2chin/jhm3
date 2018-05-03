@@ -14,18 +14,19 @@ import {each, isEmpty} from "underscore";
 import Confirmation from "./confirmation";
 import SelectPersons from "./selectPersons";
 import { InfinityAutoComplete } from 'react-infinite-autocomplete';
-import {submitQuoteForm, submitPlansForm, submitEmailForm, submitProductsForm, setPersonsData} from '../../actions/Quote';
+import {submitQuoteForm, submitPlansForm, submitProductsForm, setPersonsData} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 
 interface Props {
-  submitQuoteForm: ()=>void,
+  submitQuoteForm: (a: any)=>void,
   submitProductsForm: ()=>void,
   noOfPersons: any,
   persons: any,
   setPersonsData:(a: any)=>void,
-  submitEmailForm: any
+  location?: any,
+  products?: any
 }
 
 class Main extends React.Component<Props, {}> {
@@ -160,10 +161,6 @@ class Main extends React.Component<Props, {}> {
     }
   }
 
-  submitEmailForm() {
-    this.props.submitEmailForm(this.props);
-  }
-
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.persons) && isEmpty(this.state.persons)) {
       this.setState({
@@ -258,7 +255,7 @@ class Main extends React.Component<Props, {}> {
           plans={this.props.plans}
           premiums={this.props.premiums}
         />
-        <SelectPersons onSubmit={this.submitEmailForm.bind(this)} />
+        <SelectPersons />
         <div className="row c-quote">
           {this.props.noOfPersons && <div>
             <div className="header hidden-xs">
@@ -335,9 +332,6 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     },
     submitPlansForm: (data) => {
       return dispatch(submitPlansForm(data))
-    },
-    submitEmailForm: (data) => {
-      return dispatch(submitEmailForm(data))
     },
     loadStates: () => {
       return loadStates();

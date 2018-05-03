@@ -1,12 +1,6 @@
 import * as React from 'react';
 import Input from './../common/textInput';
 import {Button, Row, Col} from "react-bootstrap";
-import Input from "../common/textInput"
-import Slider, { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
-import Tooltip from 'rc-tooltip';
-const Handle = Slider.Handle;
-import Slider from 'react-rangeslider';
 import {map} from "underscore";
 import {selectNoOfPersons} from '../../actions/selectPersons';
 import { connect } from 'react-redux';

@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {each, isEmpty} from "underscore";
-import {submitQuoteForm, submitEmailForm, setPersonsData, saveQuoteForm, setTypeOfSubmission} from '../../actions/Quote';
+import {submitQuoteForm, setPersonsData, saveQuoteForm, setTypeOfSubmission} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
 import EmailModal from "./EmailModal";

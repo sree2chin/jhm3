@@ -104,24 +104,6 @@ function submitPlansForm(postData) : any {
 	};
 }
 
-function submitEmailForm(postData) : any{
-	return (dispatch) => {
-		SubmitQuoteApi.emailSubmit(postData).then(
-			data => {
-				if (data && data.data && data.data.applicants) {
-					dispatch({
-						type: 'SUMBMITTED_EMAIL_INFO', isSubmmitedEmailForm: data
-					});
-				} else {
-					dispatch({
-						type: 'SUMBMITTED_EMAIL_INFO',
-						premiums: data
-					});
-				}
-		})
-	};
-}
-
 function saveQuoteForm(postData) : any{
 	return (dispatch) => {
 		return SubmitQuoteApi.saveQuoteForm(postData).then(
@@ -144,11 +126,11 @@ function saveQuoteForm(postData) : any{
 export {
 	submitQuoteForm,
 	submitPlansForm,
-	submitEmailForm,
 	submitProductsForm,
 	setPersonsData,
 	saveQuoteForm,
 	openEditPersonModal,
 	closeEditPersonModal,
-	handleEditChange
+	handleEditChange,
+	setTypeOfSubmission
 }
