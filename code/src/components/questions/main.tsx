@@ -1399,6 +1399,10 @@ class Main extends React.Component<Props, {}> {
       addingContingencyBeneficiary: false
     });
     self.props.getFactorsearch(data).then(response => {
+      if (response && response.questions.LOGIN_URL && response.questions.LOGIN_URL.length > 0) {
+        window.location.href = response.questions.LOGIN_URL;
+        return;
+      }
       if (response && response.questions && response.questions.data) {
         self.beneficiariesIds = self.beneficiariesIds || {};
         self.beneficiariesIds[qs.id] = response.questions.data;
@@ -1446,6 +1450,10 @@ class Main extends React.Component<Props, {}> {
       addingContingencyBeneficiary: true
     });
     self.props.getFactorsearch(data).then(response => {
+      if (response && response.questions.LOGIN_URL && response.questions.LOGIN_URL.length > 0) {
+        window.location.href = response.questions.LOGIN_URL;
+        return;
+      }
       if (response && response.questions && response.questions.data) {
         self.beneficiariesIds = self.beneficiariesIds || {};
         self.beneficiariesIds[qs.id] = response.questions.data;

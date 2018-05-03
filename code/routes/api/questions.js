@@ -18,7 +18,6 @@ module.exports = function(app) {
   app.post('/login/callback',
     passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
     function(req, res) {
-      console.log("\n\n\nin login callback req.session.authenticatedTime: " + req.session.authenticatedTime + "\n\n\n");
       req.session.authenticatedOnce = true;
       req.session.authenticatedTime = new Date().getTime();
       var queryParams = req.session.queryParams || {};

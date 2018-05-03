@@ -60,6 +60,10 @@ class Offer extends React.Component<Props, {}> {
     if(!isEmpty(nextProps.questions)) {
       this.questions = JSON.parse(JSON.stringify(nextProps.questions));
     }
+    if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
+      window.location.href = this.questions.LOGIN_URL;
+      return;
+    }
     if (nextProps.confirmationData.valid_user == 0) {
       browserHistory.push("/authorize" + queryParamsString);
       return;
@@ -80,6 +84,10 @@ class Offer extends React.Component<Props, {}> {
     var data = {};
     this.props.confirmQuestions(data).then(() => {
       //browserHistory.push("/signature");
+      if (this.props.confirmationData && this.props.confirmationData.LOGIN_URL && this.props.confirmationData.LOGIN_URL.length > 0) {
+        window.location.href = this.props.confirmationData.LOGIN_URL;
+        return;
+      }
       var link = this.props.confirmationData && this.props.confirmationData.data &&
       this.props.confirmationData.data.current_document_data && this.props.confirmationData.data.current_document_data.sign_url;
 
@@ -138,8 +146,15 @@ class Offer extends React.Component<Props, {}> {
     this.setState({
       onPaymentGoingTo: true
     });
+    if (this.props.confirmationData && this.props.confirmationData.LOGIN_URL && this.props.confirmationData.LOGIN_URL.length > 0) {
+      window.location.href = this.props.confirmationData.LOGIN_URL;
+      return;
+    }
     this.props.postPayment(data).then(()=> {
-
+      if (this.props.paymentInfo && this.props.paymentInfo.LOGIN_URL && this.props.paymentInfo.LOGIN_URL.length > 0) {
+        window.location.href = this.props.paymentInfo.LOGIN_URL;
+        return;
+      }
       if (this.props.paymentInfo && isEmpty(data.elavon_params)) {
         var questionsInfo = JSON.parse(this.props.paymentInfo);
 

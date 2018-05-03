@@ -21,6 +21,11 @@ class paymentSuccess extends React.Component<Props, {}> {
   transaction_id: any = [];
   card_number: any = [];
   componentWillMount() {
+    if (this.props.confirmationData && this.props.confirmationData.LOGIN_URL && this.props.confirmationData.LOGIN_URL.length > 0) {
+      window.location.href = this.props.confirmationData.LOGIN_URL;
+      return;
+    }
+
     this.setState({
       allDone: false
     });
@@ -48,6 +53,10 @@ class paymentSuccess extends React.Component<Props, {}> {
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     if (this.props.location && this.props.location.query && this.props.location.query.ssl_txn_id) {
       this.props.makePayment(this.props.location.query).then((res)=>{
+        if (this.props.paymentData && this.props.paymentData.LOGIN_URL && this.props.paymentData.LOGIN_URL.length > 0) {
+          window.location.href = this.props.paymentData.LOGIN_URL;
+          return;
+        }
         var link = this.props.paymentData && this.props.paymentData.data &&
         this.props.paymentData.data.current_document_data && this.props.paymentData.data.current_document_data.sign_url;
 

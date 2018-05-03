@@ -23,6 +23,7 @@ var serialize = function(obj) {
 module.exports = function(app) {
 
   var samlAuthenticateMiddleware = function(req, res, next) {
+    req.session = req.session || {};
     req.session.questionsMiddleware = false;
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};
@@ -34,7 +35,6 @@ module.exports = function(app) {
       }
     };
 
-    var url_parts = url.parse(req.url, true);
     if (url_parts.query && url_parts.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
       if (req.session.authenticatedOnce) {
@@ -259,10 +259,10 @@ module.exports = function(app) {
   });
 
   var samlAuthenticateQuestionsMiddleware = function(req, res, next) {
+    req.session = req.session || {};
     req.session.questionsMiddleware = true;
     var url_parts = url.parse(req.url, true);
     console.log("\n\n\neq.session.queryParams: " + JSON.stringify(req.session.queryParams)+ "\n\n\n\n");
-    req.session = req.session || {};
     req.session.queryParams = req.session.queryParams || {};
 
     if (req.session.queryParams && req.session.queryParams.agent_number && config.passport.saml.on) {

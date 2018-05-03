@@ -54,6 +54,10 @@ class Signature extends React.Component<Props, {}> {
   }
 
   confirmQuestions() {
+    if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
+      window.location.href = this.questions.LOGIN_URL;
+      return;
+    }
     var data = {};
     var queryParams = this.props.location.query;
     var queryParamsString = "?";
@@ -67,6 +71,10 @@ class Signature extends React.Component<Props, {}> {
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     this.props.confirmQuestions(data).then(() => {
       //browserHistory.push("/signature");
+      if (this.props.confirmationData && this.props.confirmationData.LOGIN_URL && this.props.confirmationData.LOGIN_URL.length > 0) {
+        window.location.href = this.props.confirmationData.LOGIN_URL;
+        return;
+      }
       var link = this.props.confirmationData && this.props.confirmationData.data &&
       this.props.confirmationData.data.current_document_data && this.props.confirmationData.data.current_document_data.sign_url;
 
