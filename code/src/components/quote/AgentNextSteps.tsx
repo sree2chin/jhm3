@@ -16,7 +16,6 @@ import AgentLicensedModal from "./AgentLicensedModal";
 import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
-import Plan from "../common/Plan"
 import { browserHistory } from 'react-router';
 import EmailModalCapture from "./EmailModalCapture";
 

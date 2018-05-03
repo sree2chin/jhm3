@@ -80,7 +80,6 @@ module.exports = {
       'react-router',
       'redux',
       'redux-thunk',
-      "react-swipeable-views",
       "react-bootstrap"
     ],
     vendor1: [
