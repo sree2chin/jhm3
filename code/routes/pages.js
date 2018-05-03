@@ -103,7 +103,7 @@ module.exports = function(app) {
     var html = JSON.parse(req.session.postPayment).body;
     var htmlP = html.split("<head>")
 
-    htmlP[0] = htmlP[0] + "<base href='https://api.demo.convergepay.com/VirtualMerchantDemo/process.do'></base>";
+    htmlP[0] = htmlP[0] + `<base href=${req.session.postPaymentElavonUrl}></base>`;
     htmlP[0] = htmlP[0] + " <link href='http://ec2-54-158-63-166.compute-1.amazonaws.com/dist/css/elavon_payment.css' rel='stylesheet'>";
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.write(htmlP[0] + htmlP[1]);
