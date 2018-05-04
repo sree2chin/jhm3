@@ -38,7 +38,7 @@ module.exports = function(app) {
     if (url_parts.query && url_parts.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
       if (req.session.authenticatedOnce) {
-        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 1*60*1000;
+        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 5*60*1000;
       } else {
         shouldAuthenticate = true;
       }
@@ -78,7 +78,7 @@ module.exports = function(app) {
     if (url_parts.query && url_parts.query.agent_number) {
       var shouldAuthenticate;
       if (req.session.authenticatedOnce) {
-        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 1*60*1000;
+        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 5*60*1000;
       } else {
         shouldAuthenticate = true;
       }

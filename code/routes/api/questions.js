@@ -51,7 +51,7 @@ module.exports = function(app) {
     if (req.session.queryParams && req.session.queryParams.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
       if (req.session.authenticatedOnce) {
-        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 1*60*1000;
+        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 5*60*1000;
       } else {
         shouldAuthenticate = true;
       }
