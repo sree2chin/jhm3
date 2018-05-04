@@ -30,8 +30,8 @@ module.exports = function(app) {
         }
       }
       queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-      console.log("\n\n\nin login callback" + queryParamsString + "\n\n\n");
-      console.log("\n\n\nin login callback" + req.session.questionsMiddleware + "\n\n\n");
+      console.log("\n\n\nin login callback: " + queryParamsString + "\n\n\n");
+      console.log("\n\n\nin login callback: " + req.session.questionsMiddleware + "\n\n\n");
       if (req.session.questionsMiddleware) {
         res.redirect('/questions' + queryParamsString);
       } else {

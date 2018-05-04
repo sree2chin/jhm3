@@ -16,7 +16,7 @@ module.exports = function(app) {
 
   var samlAuthenticateMiddleware = function(req, res, next) {
     req.session.questionsMiddleware = false;
-    console.log("\n\n\nin login callback" + req.session.questionsMiddleware + "\n\n\n");
+    console.log("\n\n\nsamlAuthenticateMiddleware quote" + req.session.questionsMiddleware + "\n\n\n");
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};
     req.session.queryParams = req.session.queryParams || {};
@@ -24,7 +24,7 @@ module.exports = function(app) {
     if (req.session.queryParams && req.session.queryParams.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
       if (req.session.authenticatedOnce) {
-        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 1*60*1000;
+        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 5*60*1000;
       } else {
         shouldAuthenticate = true;
       }
