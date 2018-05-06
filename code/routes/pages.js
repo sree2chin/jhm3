@@ -11,6 +11,7 @@ const queryString = require('query-string');
 const passport = require('passport');
 var env = process.env.NODE_ENV || 'dev';
 const config = require('../config/config')[env];
+var passportConfig = require('../config/passport');
 
 var serialize = function(obj) {
   var str = [];
@@ -23,6 +24,7 @@ var serialize = function(obj) {
 module.exports = function(app) {
 
   var samlAuthenticateMiddleware = function(req, res, next) {
+    console.log("\n\n\nsamlAuthenticateMiddleware\n\n\n")
     req.session = req.session || {};
     req.session.questionsMiddleware = false;
     var url_parts = url.parse(req.url, true);
@@ -135,13 +137,6 @@ module.exports = function(app) {
     res.redirect("/" + queryParamsString);
   });
 
-  app.get('/saml/Metadata',
-    function(req, res) {
-      res.type('application/xml');
-      res.status(200).send(samlStrategy.generateServiceProviderMetadata(fs.readFileSync(__dirname + '/cert/cert.pem', 'utf8')));
-    }
-  );
-
   app.get("/questions/login", loginMiddleware, function(req,  res, next) {
     console.log("\n\n\n/questions/login\n\n\n");
     req.session = req.session || {};
@@ -171,7 +166,7 @@ module.exports = function(app) {
         req.session.queryParams[k] = url_parts.query[k] || "";
       }
     };
-    templatePath = "./dist/";
+    templatePath = "./dist/index.ejs";
     res.render(templatePath);
   });
 

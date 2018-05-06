@@ -164,6 +164,7 @@ class Main extends React.Component<Props, State> {
           questionsList.push( <Label
                   {...q}
                 />)
+          actualQuestionLists.push(q);
         } else if (q.type == "list") {
           var qL = q.questions;
           if (q.prototype && q.prototype.elements) {
@@ -699,38 +700,47 @@ class Main extends React.Component<Props, State> {
                                 console.log(ans);
 
 
-
                                 return <div className="individual-question"  onClick={()=>{
                                             this.goToEditQuestionPage(q, qL.groupHeader);
                                         }}>
-                                        <div className="question-text hidden-xs">
+                                        {q.type!="label" && <div className="question-text hidden-xs">
                                             <span className="question-actual-text">
                                                 {q.caption}
                                             </span>
-                                        </div>
-                                        <div className="answer-text hidden-xs">
+                                        </div>}
+                                        {q.type=="label" && <div className="question-text hidden-xs fs18">
+                                            <span className="question-actual-text">
+                                                {q.caption}
+                                            </span>
+                                        </div>}
+                                        {q.type!="label" && <div className="answer-text hidden-xs">
                                             <span>
                                                 {ans}
                                             </span>
                                             <span className="edit-img-container">
                                             </span>
-                                        </div>
+                                        </div>}
                                         <div>
                                           <div className="question-answer-header visible-xs">
                                               <div className="question-text">Question</div>
                                               <span className="edit-img-container">
                                                   </span>
-                                              <div className="question-text question-actual-text-container">
+                                              {q.type!="label" && <div className="question-text question-actual-text-container">
                                                   <span className="question-actual-text">
                                                       {q.caption}
                                                   </span>
-                                              </div>
+                                              </div>}
+                                              {q.type=="label" && <div className="question-text question-actual-text-container fs18">
+                                                  <span className="question-actual-text">
+                                                      {q.caption}
+                                                  </span>
+                                              </div>}
                                               <div className="answer-text">Answer</div>
-                                              <div className="answer-text answer-text-container">
+                                              {q.type!="label" && <div className="answer-text answer-text-container">
                                                   <span>
                                                       {ans}
                                                   </span>
-                                              </div>
+                                              </div>}
                                               <hr/>
                                           </div>
 

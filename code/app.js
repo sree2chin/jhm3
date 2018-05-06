@@ -12,10 +12,12 @@ var FileStreamRotator = require('file-stream-rotator');
 var fs = require('fs');
 var app = express();
 const passport = require('passport');
+var passportConfig = require('./config/passport');
 
 app.set('trust proxy', 1);
 var env = process.env.NODE_ENV || 'dev';
 const config = require('./config/config')[env];
+passportConfig = passportConfig(passport, config);
 
 /* -----------------------Logging Confirguration ------------------- */
 
@@ -23,8 +25,12 @@ var logDirectory = __dirname + '/log'
 
 // Check whether log directory exists - if not then create
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
-
-require('./config/passport')(passport, config);
+passportConfig.saml();
+app.get('/saml/Metadata',
+  function(req, res) {
+    res.type('application/xml');
+    res.status(200).send(passportConfig.samlStrategy.generateServiceProviderMetadata("MIIEFzCCAv+gAwIBAgIUHU+0Gh+9C3MX5cI7bJRPPS1ej3cwDQYJKoZIhvcNAQEFBQAwWDELMAkGA1UEBhMCVVMxEDAOBgNVBAoMB1N1cmVpZnkxFTATBgNVBAsMDE9uZUxvZ2luIElkUDEgMB4GA1UEAwwXT25lTG9naW4gQWNjb3VudCAxMjYwMzgwHhcNMTgwNDIyMTc0NDMwWhcNMjMwNDIyMTc0NDMwWjBYMQswCQYDVQQGEwJVUzEQMA4GA1UECgwHU3VyZWlmeTEVMBMGA1UECwwMT25lTG9naW4gSWRQMSAwHgYDVQQDDBdPbmVMb2dpbiBBY2NvdW50IDEyNjAzODCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMgeE/hMUTcCo8bKj5aZDxrX55HTCGPP/+UpgvGZFhK2F1VVy2h8JCOxx5IIsUsVHG0OCAbBhnsEvtvYRp8aGM0n9GTBKgybsCGK+sDQKgCUqxXkHWW+x6H7Bn37oLCnS6FEGWrZppCfpB2dBROe0BVm9p7x9kjl5lnFAe5L1DBbm1XZj05sTU+k0nSY2S6BT0Jqx5JQcHCrfn9oohoDEaJuSOM4ON5MB6zrQMyIpKkPpe6lKP+hz/jSDbk2WoluxmN73b5gBIF13QOvFR4lglv7ps0mT66w7VuzkXU49kqfrZTf5GPeqYWos3cArny5iweFMTpfAOmbE49h1oXghDUCAwEAAaOB2DCB1TAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBRb3LarHkPT1OWHzE20QrJatviPaTCBlQYDVR0jBIGNMIGKgBRb3LarHkPT1OWHzE20QrJatviPaaFcpFowWDELMAkGA1UEBhMCVVMxEDAOBgNVBAoMB1N1cmVpZnkxFTATBgNVBAsMDE9uZUxvZ2luIElkUDEgMB4GA1UEAwwXT25lTG9naW4gQWNjb3VudCAxMjYwMziCFB1PtBofvQtzF+XCO2yUTz0tXo93MA4GA1UdDwEB/wQEAwIHgDANBgkqhkiG9w0BAQUFAAOCAQEARE0KCrNCVz8ll74g7IIMxLTPOSDRyy4neHTg+xi0wJEBd1R9dN2atkIBL7kR8QtmBqTr6WbYTAMjE4VC3L95xZb8dQdw9VA3dOEfLxjsQN6ihbdffwEgaWp7W4nNkWxcp+1KWCDpMo5nby6NVLAjRjr5KpBTeHDVRiAu+QisYF+pX1vPH871If1wEVHhk3GhHLxud1aHvEJE7Q2FaffO/NtfLMG6k4PfY/HhUfJfpjcjDW0IaZuZWvE1yv3p9Z7d++TOEYwdpyFubT/uo+qsdFCKSg6P1VvNtJLhvWLCaHGkEfQNLF6le8aNz4qL9rtnoFX7Pr1tEwq7p9VAtrWgCQ=="));
+});
 
 var accessLogStream = FileStreamRotator.getStream({
     filename: logDirectory + '/access-%DATE%.log',

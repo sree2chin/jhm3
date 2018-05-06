@@ -31,7 +31,7 @@
 				"path":  "https://devvantisreact.sureify.com/login/callback",
 				"entryPoint": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980",
 				"issuer": "passport-saml",
-				"cert":  "/sp_cert.cert",
+				"cert":  "cert.cert",
 				"privateKey": "privateKey.pem",
 				"on": true
 			}
@@ -68,8 +68,8 @@
 				"path":  "https://vantislifeinsurancestg.sureify.com/login/callback",
 				"entryPoint": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980",
 				"issuer": "passport-saml",
-				"cert":  "/sp_cert.cert",
-				"privateKey": "privateKey.pem",
+				"cert":  "prod_cert.cert",
+				"privateKey": "prod_privateKey.pem",
 				"on": true
 			}
 		}
@@ -105,8 +105,8 @@
 			  "path":  "https://vantislifeinsurance.sureify.com/login/callback",
 			  "entryPoint": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980",
 			  "issuer": "passport-saml",
-			  "cert":  "/sp_cert.cert",
-			  "privateKey": "privateKey.pem",
+			  "cert":  "prod_sp_cert.cert",
+			  "privateKey": "prod_privateKey.pem",
 			  "on": false
 		  }
 	  }
