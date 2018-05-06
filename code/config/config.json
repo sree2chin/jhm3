@@ -70,7 +70,7 @@
 				"issuer": "passport-saml",
 				"cert":  "prod_cert.cert",
 				"privateKey": "prod_privateKey.pem",
-				"on": true
+				"on": false
 			}
 		}
 	},
