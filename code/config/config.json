@@ -105,7 +105,7 @@
 			  "path":  "https://vantislifeinsurance.sureify.com/login/callback",
 			  "entryPoint": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980",
 			  "issuer": "passport-saml",
-			  "cert":  "prod_sp_cert.cert",
+			  "cert":  "prod_cert.cert",
 			  "privateKey": "prod_privateKey.pem",
 			  "on": false
 		  }
