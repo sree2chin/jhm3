@@ -49,6 +49,7 @@ export function getStateObjects() {
     { value: 'WA', label: 'Washington' },
     { value: 'WV', label: 'West Virginia' },
     { value: 'WI', label: 'Wisconsin' },
-    { value: 'WY', label: 'Wyoming' }
+    { value: 'WY', label: 'Wyoming' },
+    { value: 'DC', label: 'District of Columbia' }
   ]
 }
