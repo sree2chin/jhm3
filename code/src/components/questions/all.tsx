@@ -708,8 +708,8 @@ class Main extends React.Component<Props, State> {
                                                 {q.caption}
                                             </span>
                                         </div>}
-                                        {q.type=="label" && <div className="question-text hidden-xs fs18">
-                                            <span className="question-actual-text">
+                                        {q.type=="label" && <div className="question-text hidden-xs fs18" style={{color: "#464646"}}>
+                                            <span className="question-actual-text" style={{color: "#464646"}}>
                                                 {q.caption}
                                             </span>
                                         </div>}
@@ -731,7 +731,7 @@ class Main extends React.Component<Props, State> {
                                                   </span>
                                               </div>}
                                               {q.type=="label" && <div className="question-text question-actual-text-container fs18">
-                                                  <span className="question-actual-text">
+                                                  <span className="question-actual-text" style={{color: "#464646"}}>
                                                       {q.caption}
                                                   </span>
                                               </div>}
