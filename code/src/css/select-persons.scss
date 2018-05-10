@@ -37,18 +37,31 @@
     margin-top: 23px;
     width: 25.64%;
     cursor: pointer;
+    img {
+      display: none;
+      &.default-image {
+        display: block;
+      }
+    }
     &.active {
-      background-color: #317dbd;
-      color: white;
+      color: #317DBD;
+      border: 2px solid #317DBD;
       p {
-        color: white;
+        color: #317DBD;
+      }
+      img {
+        &.default-image, &.hover-image {
+          display: none;
+        }
+        &.active-image {
+          display: block!important;
+        }
       }
     }
     img {
       width: 30%;
       margin-left: auto;
       margin-right: auto;
-      display: block;
       margin-top: 30px;
       max-width: 80px;
     }
@@ -58,11 +71,28 @@
     }
   }
   .c-select-two-person:hover {
-    border: solid 2px #317dbd;
+    border: solid 2px #B6DBFF;
+    color: #B6DBFF;
+    img {
+      &.default-image, &.active-image {
+        display: none;
+      }
+      &.hover-image {
+        display: block;
+      }
+    }
   }
   .c-select-one-person:hover {
-    border: solid 2px #317dbd;
-    color: #317dbd;
+    border: solid 2px #B6DBFF;
+    color: #B6DBFF;
+    img {
+      &.default-image, &.active-image {
+        display: none;
+      }
+      &.hover-image {
+        display: block;
+      }
+    }
   }
   .c-select-two-person {
     float: right;
@@ -77,19 +107,34 @@
     cursor: pointer;
     width: 25.64%;
     &.active {
-      background-color: #317dbd;
-      color: white;
+      border: 2px solid #317DBD;
+      color: #317DBD;
       p {
-        color: white;
+        color: #317DBD;
+      }
+      img {
+        &.hover-image, &.default-image {
+          display: none;
+        }
+        &.active-image {
+          display: block!important;
+        }
       }
     }
     img {
       width: 30%;
       margin-left: auto;
       margin-right: auto;
-      display: block;
       margin-top: 30px;
       max-width: 80px;
+    }
+    img {
+      &.hover-image, &.active-image {
+        display: none;
+      }
+      &.default-image {
+        display: block;
+      }
     }
     p {
       margin-top: 16.36px;

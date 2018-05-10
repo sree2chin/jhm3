@@ -290,7 +290,7 @@ class Main extends React.Component<Props, {}> {
                   />
                 </Col>
               }
-              <div className="c-submit-person-info-btn c-center">
+              <div className="c-submit-person-info-btn c-center" style={{marginTop: "30px"}}>
                   <Button  className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
                       this.submitQuoteForm()
                     }}
@@ -298,7 +298,7 @@ class Main extends React.Component<Props, {}> {
                     CONTINUE
                     {this.state.submittingUserInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                   </Button>
-                  <Button className={`c-button-default circular visible-xs`}  onClick={(){
+                  <Button className={`c-button-default circular visible-xs`}  onClick={()=>{
                       this.submitQuoteForm()
                     }}
                   >

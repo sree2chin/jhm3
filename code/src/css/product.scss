@@ -1,5 +1,19 @@
 @import "./commonMixins";
 .product-pager-container {
+	.previous-btn-text {
+		color: #4584c0;
+		text-transform: uppercase;
+		letter-spacing: 1.3px;
+		font-family: NunitoBold;
+		font-size: 14px;
+		display: inline-block;
+		width: 100px;
+		margin-left: 75px;
+		cursor: pointer;
+		&:hover {
+			color: #B6DBFF;
+		}
+	}
 	.product-continue-btn-main-container {
 		margin-top: -56px;
 	}
@@ -303,8 +317,8 @@
 	}
 }
 .product-custom-container .single-product-content {
-		background-color: #317dbd;
-		border: 2px solid #317dbd;
+		background-color: rgba(255, 255, 255, 1);
+		border: 2px solid rgba(161, 161, 161, 1);
 		height: 368px !important;
     	margin-bottom: 70px;
     	padding-top: 40px;
@@ -313,14 +327,14 @@
 		.header {
 			font-size: 22px;
 			text-align: left;
-			color: #ffffff;
+			color: #317dbd;
 			margin-top: 8px;
 			margin-left: 0;
 			margin-bottom: 8px;
 		}
 		&:hover{
-				background-color: #fff;
-	    	border:2px solid #317dbd;
+			background-color: #fff;
+	    	border: 2px solid #317dbd;
 			}
 			&:hover .c-product-text, &:hover .header, &:hover .c-product-desc-line{
 				color: #317dbd;
@@ -328,7 +342,7 @@
 			&:hover .quote-product {
 				background-color: #317dbd;
 				border: 2px solid #317dbd;
-				color: #ffffff;
+				color: #fff;
 			}
 			&:hover .product_img_div{
 				border: 2px solid #317dbd;
@@ -361,29 +375,29 @@
 				width: 100%;
 				margin-right: auto;
 				text-align: center;
-			  &.active, &:hover {
+			  	&.active, &:hover {
 					background-color: #317dbd;
-		    	color: #FFFFFF;
-			   }
+		    		color: #fff;
+			   	}
 			}
 			.c-product-text {
 				margin-left: 30px;
 				margin-right: 30px;
 				font-size: 15.36px;
 				text-align: left;
-				color: #ffffff;
+				color: #317dbd;
 			}
 			.c-product-desc-line {
 				margin-left: 6px;
 				margin-right: 31px;
 				font-size: 15.36px;
 				text-align: left;
-				color: #ffffff;
+				color: #317dbd;
 			  }
 }
 .product-custom-container .single-product-content .quote-product.active{
 	background-color: #317dbd;
-	color: #ffffff;
+	color: #317dbd;
 	border:2px solid #317dbd;
 }
 .product-pager-container .product-custom-container{
@@ -392,7 +406,7 @@
 		height: 100px;
 		background-color: #F5F5F5;
 		border-radius: 100%;
-		border: 2px solid #ffffff;
+		border: 2px solid #a1a1a1;
 		position: absolute;
 		top: -58px;
 		bottom: 0;

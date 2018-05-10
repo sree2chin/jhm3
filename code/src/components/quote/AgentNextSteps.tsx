@@ -411,13 +411,13 @@ class PlansPage extends React.Component<Props, {}> {
         </Row>
         <Row className="next-step-submit-btn-outer-container">
           <Col className="c-center next-step-submit-btn-container">
-            <Button className={`hidden-xs c-button-default back-btn next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
+            <span className={`hidden-xs previous-btn-text ${this.state.nextStep ? "active" : ""}`} onClick={(){
                 this.redirectToPlanPage()
               }}
               style={{backgroundColor: "#fb4d3d!important"}}
             >
               BACK
-            </Button>
+            </span>
             <Button className={`hidden-xs c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
                 this.openCorrespondingPopup()
               }}

@@ -515,15 +515,15 @@ class ProductsPage extends React.Component<Props, {}> {
 
 
         <Row className="product-continue-btn-main-container">
-          {<Col xs={12} className="product-continue-btn-container container-max-width" style={{ marginLeft: "auto", marginRight: "auto", float: "none", paddingLeft: "0px"}}>
+          {<Col xs={12} className="product-continue-btn-container container-max-width"
+            style={{ marginLeft: "auto", marginRight: "auto", float: "none", paddingLeft: "0px", marginTop: "30px"}}>
             <div style={{width: "100%"}}>
-              <Button className="c-button-default circular hidden-xs back-btn" onClick={()=>{
+              <span className="previous-btn-text hidden-xs" onClick={()=>{
                   this.redirectToMainPage()
                 }}
-                style={{ marginTop: "0px", marginBottom: "16px",  backgroundColor: "#fb4d3d!important"}}
               >
                 BACK
-              </Button>
+              </span>
               <Button className="c-button-default visible-xs back-btn" style={{backgroundColor: "#fb4d3d!important", marginBottom: "15px"}} onClick={(){
                   this.redirectToMainPage()
                 }}

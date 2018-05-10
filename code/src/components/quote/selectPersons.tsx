@@ -75,14 +75,16 @@ class SelectPersons extends React.Component<Props, State> {
               </Col>
 
               <Col sm={3} className={`c-select-two-person ${this.state.noOfPersons==2 ? "active" : ""}`}  onClick={()=> this.selectNoOfPersons(2)} >
-                {(!this.state.noOfPersons || this.state.noOfPersons==1) && <img src="./images/two-people.svg" /> }
-                {this.state.noOfPersons==2 && <img src="./images/two-people-active.png" /> }
+                {(!this.state.noOfPersons || this.state.noOfPersons==1) && <img className="default-image" src="./images/default-double.svg" /> }
+                {(!this.state.noOfPersons || this.state.noOfPersons==1) && <img className="hover-image" src="./images/hover-double.svg" /> }
+                {this.state.noOfPersons==2 && <img className="active-image" src="./images/active-double.svg" /> }
                 <p> Two persons</p>
               </Col>
 
               <Col sm={3} className={`c-select-one-person ${this.state.noOfPersons==1 ? "active" : ""}`} onClick={()=> this.selectNoOfPersons(1)} >
-                 {(!this.state.noOfPersons || this.state.noOfPersons==2) && <img src="./images/one-people.svg" /> }
-                 {this.state.noOfPersons==1 && <img src="./images/one-people-active.png" /> }
+                 {(!this.state.noOfPersons || this.state.noOfPersons==2) && <img className="default-image" src="./images/default-single.svg" /> }
+                 {(!this.state.noOfPersons || this.state.noOfPersons==2) && <img className="hover-image" src="./images/hover-single.svg" /> }
+                 {this.state.noOfPersons==1 && <img className="active-image" src="./images/active-single.svg" /> }
                 <p> One person</p>
               </Col>
 

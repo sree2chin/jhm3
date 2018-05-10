@@ -59,13 +59,21 @@
 	}
 	.one-person-outer-container {
 		.c-submit-person-info-btn  {
-			width: 20.21%;
+			margin-top: 30px;
+			width: 54.2%;
+			padding-left: 0px;
+			padding-right: 0px;
+			max-width: 840px;
 		}
 	}
 	.two-person-outer-container {
 		max-width: $container-max-width;
 		.c-submit-person-info-btn  {
-			width: 36%;
+			margin-top: 30px;
+			width: 100%;
+			padding-left: 0px;
+			padding-right: 0px;
+			max-width: 840px;
 		}
 		.react-datepicker-wrapper {
 			width: 68%;
@@ -75,7 +83,7 @@
 	.c-submit-person-info-btn  {
 		.c-button-default.btn {
 			margin-top: 15px;
-    		width: 100%;
+    		width: 30%;
 		}
 	}
 	.c-person-header-text {
