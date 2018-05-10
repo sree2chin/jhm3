@@ -305,26 +305,42 @@ input.form-control:focus {
     margin-top: 23px;
     width: 25.64%;
     cursor: pointer; }
+    .c-select-persons-container .c-select-one-person img {
+      display: none; }
+      .c-select-persons-container .c-select-one-person img.default-image {
+        display: block; }
     .c-select-persons-container .c-select-one-person.active {
-      background-color: #317dbd;
-      color: white; }
+      color: #317DBD;
+      border: 2px solid #317DBD; }
       .c-select-persons-container .c-select-one-person.active p {
-        color: white; }
+        color: #317DBD; }
+      .c-select-persons-container .c-select-one-person.active img.default-image, .c-select-persons-container .c-select-one-person.active img.hover-image {
+        display: none; }
+      .c-select-persons-container .c-select-one-person.active img.active-image {
+        display: block !important; }
     .c-select-persons-container .c-select-one-person img {
       width: 30%;
       margin-left: auto;
       margin-right: auto;
-      display: block;
       margin-top: 30px;
       max-width: 80px; }
     .c-select-persons-container .c-select-one-person p {
       margin-top: 16.36px;
       text-align: center; }
   .c-select-persons-container .c-select-two-person:hover {
-    border: solid 2px #317dbd; }
+    border: solid 2px #B6DBFF;
+    color: #B6DBFF; }
+    .c-select-persons-container .c-select-two-person:hover img.default-image, .c-select-persons-container .c-select-two-person:hover img.active-image {
+      display: none; }
+    .c-select-persons-container .c-select-two-person:hover img.hover-image {
+      display: block; }
   .c-select-persons-container .c-select-one-person:hover {
-    border: solid 2px #317dbd;
-    color: #317dbd; }
+    border: solid 2px #B6DBFF;
+    color: #B6DBFF; }
+    .c-select-persons-container .c-select-one-person:hover img.default-image, .c-select-persons-container .c-select-one-person:hover img.active-image {
+      display: none; }
+    .c-select-persons-container .c-select-one-person:hover img.hover-image {
+      display: block; }
   .c-select-persons-container .c-select-two-person {
     float: right;
     max-width: 200px;
@@ -338,17 +354,24 @@ input.form-control:focus {
     cursor: pointer;
     width: 25.64%; }
     .c-select-persons-container .c-select-two-person.active {
-      background-color: #317dbd;
-      color: white; }
+      border: 2px solid #317DBD;
+      color: #317DBD; }
       .c-select-persons-container .c-select-two-person.active p {
-        color: white; }
+        color: #317DBD; }
+      .c-select-persons-container .c-select-two-person.active img.hover-image, .c-select-persons-container .c-select-two-person.active img.default-image {
+        display: none; }
+      .c-select-persons-container .c-select-two-person.active img.active-image {
+        display: block !important; }
     .c-select-persons-container .c-select-two-person img {
       width: 30%;
       margin-left: auto;
       margin-right: auto;
-      display: block;
       margin-top: 30px;
       max-width: 80px; }
+    .c-select-persons-container .c-select-two-person img.hover-image, .c-select-persons-container .c-select-two-person img.active-image {
+      display: none; }
+    .c-select-persons-container .c-select-two-person img.default-image {
+      display: block; }
     .c-select-persons-container .c-select-two-person p {
       margin-top: 16.36px;
       text-align: center; }
@@ -517,17 +540,25 @@ input.form-control:focus {
       color: red;
       margin-top: 3px; }
   .c-quote .one-person-outer-container .c-submit-person-info-btn {
-    width: 20.21%; }
+    margin-top: 30px;
+    width: 54.2%;
+    padding-left: 0px;
+    padding-right: 0px;
+    max-width: 840px; }
   .c-quote .two-person-outer-container {
     max-width: 840px; }
     .c-quote .two-person-outer-container .c-submit-person-info-btn {
-      width: 36%; }
+      margin-top: 30px;
+      width: 100%;
+      padding-left: 0px;
+      padding-right: 0px;
+      max-width: 840px; }
     .c-quote .two-person-outer-container .react-datepicker-wrapper {
       width: 68%;
       max-width: 197px; }
   .c-quote .c-submit-person-info-btn .c-button-default.btn {
     margin-top: 15px;
-    width: 100%; }
+    width: 30%; }
   .c-quote .c-person-header-text {
     font-size: 20px;
     font-weight: 500;
@@ -804,6 +835,19 @@ input.form-control:focus {
   color: #317dbd;
   margin-bottom: 20px; }
 
+.product-pager-container .previous-btn-text {
+  color: #4584c0;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  font-family: NunitoBold;
+  font-size: 14px;
+  display: inline-block;
+  width: 100px;
+  margin-left: 75px;
+  cursor: pointer; }
+  .product-pager-container .previous-btn-text:hover {
+    color: #B6DBFF; }
+
 .product-pager-container .product-continue-btn-main-container {
   margin-top: -56px; }
 
@@ -1052,8 +1096,8 @@ input.form-control:focus {
       background-color: #fb4d3d !important; }
 
 .product-custom-container .single-product-content {
-  background-color: #317dbd;
-  border: 2px solid #317dbd;
+  background-color: white;
+  border: 2px solid #a1a1a1;
   height: 368px !important;
   margin-bottom: 70px;
   padding-top: 40px;
@@ -1061,7 +1105,7 @@ input.form-control:focus {
   .product-custom-container .single-product-content .header {
     font-size: 22px;
     text-align: left;
-    color: #ffffff;
+    color: #317dbd;
     margin-top: 8px;
     margin-left: 0;
     margin-bottom: 8px; }
@@ -1073,7 +1117,7 @@ input.form-control:focus {
   .product-custom-container .single-product-content:hover .quote-product {
     background-color: #317dbd;
     border: 2px solid #317dbd;
-    color: #ffffff; }
+    color: #fff; }
   .product-custom-container .single-product-content:hover .product_img_div {
     border: 2px solid #317dbd; }
   .product-custom-container .single-product-content.active {
@@ -1103,23 +1147,23 @@ input.form-control:focus {
     text-align: center; }
     .product-custom-container .single-product-content .quote-product.active, .product-custom-container .single-product-content .quote-product:hover {
       background-color: #317dbd;
-      color: #FFFFFF; }
+      color: #fff; }
   .product-custom-container .single-product-content .c-product-text {
     margin-left: 30px;
     margin-right: 30px;
     font-size: 15.36px;
     text-align: left;
-    color: #ffffff; }
+    color: #317dbd; }
   .product-custom-container .single-product-content .c-product-desc-line {
     margin-left: 6px;
     margin-right: 31px;
     font-size: 15.36px;
     text-align: left;
-    color: #ffffff; }
+    color: #317dbd; }
 
 .product-custom-container .single-product-content .quote-product.active {
   background-color: #317dbd;
-  color: #ffffff;
+  color: #317dbd;
   border: 2px solid #317dbd; }
 
 .product-pager-container .product-custom-container .product_img_div {
@@ -1127,7 +1171,7 @@ input.form-control:focus {
   height: 100px;
   background-color: #F5F5F5;
   border-radius: 100%;
-  border: 2px solid #ffffff;
+  border: 2px solid #a1a1a1;
   position: absolute;
   top: -58px;
   bottom: 0;
@@ -2095,13 +2139,25 @@ input.form-control:focus {
     font-size: 15px; } }
 
 .next-steps-container .next-step-submit-btn-container {
-  margin-top: 0px;
-  padding-top: 0px;
-  width: 26.2%; }
+  margin-top: 30px;
+  width: 54.2%;
+  padding-left: 0px;
+  padding-right: 0px;
+  max-width: 840px; }
+  .next-steps-container .next-step-submit-btn-container .previous-btn-text {
+    color: #4584c0;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-family: NunitoBold;
+    font-size: 14px;
+    display: inline-block;
+    width: 100px;
+    margin-left: 66px;
+    cursor: pointer; }
   .next-steps-container .next-step-submit-btn-container .next-step-submit-btn {
-    width: 40%;
+    width: 23%;
     margin-top: 16px;
-    margin-bottom: 124px;
+    margin-bottom: 25px;
     margin-left: 14px; }
     .next-steps-container .next-step-submit-btn-container .next-step-submit-btn.back-btn {
       background-color: #fb4d3d !important; }
