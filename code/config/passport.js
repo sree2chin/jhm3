@@ -9,10 +9,10 @@ module.exports = function (passport, config) {
       path: config.passport.saml.path,
       callbackUrl: config.passport.saml.path,
       entryPoint: config.passport.saml.entryPoint,
-      issuer: "vantis_life_insurance_" + process.env.NODE_ENV,//config.passport.saml.issuer,
-      //callbackUrl: config.passport.saml.issuer,
+      issuer: config.passport.saml.issuer,
       cert: fs.readFileSync(path.join(__dirname + "/" + config.passport.saml.cert)).toString(),
-      privateCert: fs.readFileSync(path.join(__dirname + "/" + config.passport.saml.privateKey), 'utf-8')
+      privateCert: fs.readFileSync(path.join(__dirname + "/" + config.passport.saml.privateKey), 'utf-8'),
+      decryptionPvk: fs.readFileSync(path.join(__dirname + "/" + config.passport.saml.privateKey), 'utf-8')
     },
     function (profile, done) {
       return done(null,
