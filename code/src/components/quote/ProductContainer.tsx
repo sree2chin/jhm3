@@ -4,6 +4,8 @@ import {Button, Row, Col} from "react-bootstrap";
 import Tooltip from 'rc-tooltip';
 import {map, isEmpty, uniq, intersection, without} from "underscore";
 import RawHtml from "react-raw-html";
+import renderHTML from 'react-render-html';
+
 
 interface Props {
   product: any,
@@ -65,9 +67,16 @@ export default class ProductContainer extends React.Component<Props, State> {
 
   };
 
+  getProductsInOrders(products) {
+    return products.sort((a, b)=>{
+        return parseInt(a.ProductDisplayOrder) - parseInt(b.ProductDisplayOrder)
+    });
+  }
+
   public render() {
     const {productInfo} = this.props;
-    const products = productInfo && productInfo.products_data && productInfo.products_data.products_list;
+    var products = productInfo && productInfo.products_data && productInfo.products_data.products_list || [];
+    products = this.getProductsInOrders(products);
     const personsContainerWidth = this.props.noOfPersons == 2 ? 6 : 12;
     const productContainerWidth = this.props.noOfPersons == 2 ? 12 : 6;
     RawHtml.addTag("mycooltag");
@@ -124,9 +133,18 @@ export default class ProductContainer extends React.Component<Props, State> {
                           <Row className="text-center">
                             <ul className="c-product-desc-line">
                               {product.ProductDisplayDescription && product.ProductDisplayDescription.trim && product.ProductDisplayDescription.trim().length > 0 &&
-                                <RawHtml.mycooltag>
-                                  {product.ProductDisplayDescription.trim()}
-                                </RawHtml.mycooltag>
+                                 <RawHtml.mycooltag>
+                                    {product.ProductDisplayDescription.trim()}
+                                  </RawHtml.mycooltag>
+                                 //<div>
+                                  //{ product.ProductDisplayDescription.trim().indexOf('</') !== -1
+                                  //    ? (
+                                   //       <div dangerouslySetInnerHTML={{__html: product.ProductDisplayDescription.trim().replace(/\n/g, '<br />')}} >
+                                   //       </div>
+                                    //    )
+                                    //  : product.ProductDisplayDescription.trim()
+                                   // }
+                               // </div>
                               }
                             </ul>
                           </Row>
@@ -135,7 +153,7 @@ export default class ProductContainer extends React.Component<Props, State> {
                       <Row style={{marginLeft: "0px", marginRight: "0px"}}>
                         <Row style={{width: "90%", marginLeft: "auto", marginRight: "auto", height: "73px"}} className={`text-center ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`} onClick={()=> this.selectProduct(product)}>
                           <Col className="quote-this-product-container">
-                            {this.state.productIds.indexOf(product.ProductID)>=0 && <div className="c-coverage-amount quote-product product-selection-btn">PRODUCT SELECTED</div>}
+                            {this.state.productIds.indexOf(product.ProductID)>=0 && <div className="c-coverage-amount quote-product active product-selection-btn">PRODUCT SELECTED</div>}
                             {this.state.productIds.indexOf(product.ProductID)<0 && <div className="c-coverage-amount quote-product  product-selection-btn">QUOTE THIS PRODUCT</div>}
                           </Col>
                         </Row>

@@ -57,10 +57,10 @@ export default class EmailModal extends React.Component<Props, {}> {
   state = {}
   handleChange(personIndex, e) {
     var emailRegex =  /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-    this.props.handleChange(personIndex, e.target.value);
+    this.props.handleChange(personIndex, String(e.target.value).trim());
     this.setState({
       personIndex: personIndex,
-      ["email" + personIndex]: e.target.value
+      ["email" + personIndex]: String(e.target.value).trim()
     }, ()=>{
       var input1Valid = emailRegex.test(this.state.email0);
       var input2Valid = emailRegex.test(this.state.email1);

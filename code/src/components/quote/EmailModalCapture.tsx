@@ -77,10 +77,10 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
         });
       }
     }
-    this.props.handleChange(personIndex, e.target.value);
+    this.props.handleChange(personIndex, String(e.target.value).trim());
     this.setState({
       personIndex: personIndex,
-      ["email" + personIndex]: e.target.value
+      ["email" + personIndex]: String(e.target.value).trim()
     });
   }
 

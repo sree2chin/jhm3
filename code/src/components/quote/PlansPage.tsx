@@ -415,6 +415,11 @@ class PlansPage extends React.Component<Props, {}> {
     }
     return containOnlySPWLProducts;
   }
+  getPlansInOrder(plans) {
+    return plans.sort((a, b)=>{
+      return parseInt(a.ProductDisplayOrder) - parseInt(b.ProductDisplayOrder)
+  });
+  }
   public render() {
 
     var {persons} = this.props;
@@ -563,7 +568,7 @@ class PlansPage extends React.Component<Props, {}> {
           <Col className="c-center all-plans-main-container container-max-width">
             <Col sm={individualPlanContainerWidth} className="one-person-plan-container">
               { this.props.noOfPersons>=1 &&
-                map(this.props.plans[0].plans_data, (p)=>{
+                map(this.getPlansInOrder(this.props.plans[0].plans_data), (p)=>{
                   var pl = {
                     plans_data: p
                   };
@@ -601,7 +606,7 @@ class PlansPage extends React.Component<Props, {}> {
             </Row>
             <Col sm={individualPlanContainerWidth} className="second-person-plan-container">
               { this.props.noOfPersons==2 &&
-                map(this.props.plans[1].plans_data, (p)=>{
+                map(this.getPlansInOrder(this.props.plans[1].plans_data), (p)=>{
                   var pl = {
                     plans_data: p
                   };

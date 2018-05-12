@@ -227,7 +227,7 @@ class PlansPage extends React.Component<Props, {}> {
   }
   handleEmailChange(personIndex, v) {
     this.setState({
-      ["email" + personIndex]: v
+      ["email" + personIndex]: String(v).trim()
     });
   }
   closeEmailThanksModal() {

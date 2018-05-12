@@ -61,9 +61,9 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
   handleChange(personIndex, e) {
     this.setState({
       personIndex: personIndex,
-      ["email" + personIndex]: e.target.value
+      ["email" + personIndex]: String(e.target.value).trim()
     });
-    this.props.keyValueChange("email" + personIndex, e.target.value);
+    this.props.keyValueChange("email" + personIndex, String(e.target.value).trim());
   }
   getErrorsClassNames(errors, key) {
     if(errors[key]) {
