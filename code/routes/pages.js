@@ -24,7 +24,7 @@ var serialize = function(obj) {
 module.exports = function(app) {
 
   var samlAuthenticateMiddleware = function(req, res, next) {
-    console.log("\n\n\nsamlAuthenticateMiddleware\n\n\n")
+
     req.session = req.session || {};
     req.session.questionsMiddleware = false;
     var url_parts = url.parse(req.url, true);
@@ -77,7 +77,7 @@ module.exports = function(app) {
     req.session.questionsMiddleware = true;
 
     var url_parts = url.parse(req.url, true);
-    if (url_parts.query && url_parts.query.agent_number) {
+    if (url_parts.query && url_parts.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
       if (req.session.authenticatedOnce) {
         shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 5*60*1000;
