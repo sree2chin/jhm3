@@ -534,14 +534,14 @@ class ProductsPage extends React.Component<Props, {}> {
                   this.submitProductsForm()
                 }}
               >
-                CONTINUE
+                NEXT
                 {this.state.submittingProductsInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>
               <Button className={`c-button-default visible-xs ${this.getContinueBtnActiveClass()}`} style={{marginBottom: "15px"}} onClick={()=>{
                   this.submitProductsForm()
                 }}
               >
-                CONTINUE
+                NEXT
                 {this.state.submittingProductsInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>
             </div>

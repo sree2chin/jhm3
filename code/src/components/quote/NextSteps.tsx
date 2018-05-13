@@ -440,7 +440,7 @@ class PlansPage extends React.Component<Props, {}> {
                 this.openCorrespondingPopup()
               }}
             >
-              CONTINUE
+              NEXT
             </Button>
             <Button className={`visible-xs back-btn c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
                 this.redirectToPlanPage()
@@ -453,7 +453,7 @@ class PlansPage extends React.Component<Props, {}> {
                 this.directToCorrespondingPage()
               }}
             >
-              CONTINUE
+              NEXT
             </Button>
           </Col>
         </Row>

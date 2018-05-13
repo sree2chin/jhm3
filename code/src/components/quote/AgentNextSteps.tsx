@@ -422,7 +422,7 @@ class PlansPage extends React.Component<Props, {}> {
                 this.openCorrespondingPopup()
               }}
             >
-              CONTINUE
+              NEXT
               {this.state.openingPdf && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
             <Button className={`visible-xs c-button-default back-btn next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
@@ -436,7 +436,7 @@ class PlansPage extends React.Component<Props, {}> {
                 this.directToCorrespondingPage()
               }}
             >
-              CONTINUE
+              NEXT
               {this.state.openingPdf && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
           </Col>

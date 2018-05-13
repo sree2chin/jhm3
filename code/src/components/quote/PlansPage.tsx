@@ -715,7 +715,7 @@ class PlansPage extends React.Component<Props, {}> {
                 this.redirectToNextSteps()
               }}
             >
-              CONTINUE
+              NEXT
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               {this.state.submittingPlansFromPlan && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
@@ -732,7 +732,7 @@ class PlansPage extends React.Component<Props, {}> {
                 this.redirectToNextSteps()
               }}
             >
-              CONTINUE
+              NEXT
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               {this.state.submittingPlansFromPlan && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>

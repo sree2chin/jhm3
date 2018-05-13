@@ -295,14 +295,14 @@ class Main extends React.Component<Props, {}> {
                       this.submitQuoteForm()
                     }}
                   >
-                    CONTINUE
+                    NEXT
                     {this.state.submittingUserInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                   </Button>
                   <Button className={`c-button-default circular visible-xs`}  onClick={()=>{
                       this.submitQuoteForm()
                     }}
                   >
-                    CONTINUE
+                    NEXT
                     {this.state.submittingUserInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                   </Button>
               </div>
