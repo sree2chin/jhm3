@@ -24,7 +24,20 @@
 	.plans-continue-to-next-steps-container {
 		margin-left: 15px;
 		margin-right: 0px;
-		margin-top: 30px;
+		margin-top: 40px;
+		.continue-to-next-steps {
+			.previous-btn-text {
+				color: #4584c0;
+				text-transform: uppercase;
+				letter-spacing: 1.3px;
+				font-family: NunitoBold;
+				font-size: 14px;
+				display: inline-block;
+				width: 123px;
+				margin-left: 40px;
+				cursor: pointer;
+			}
+		}
 	}
 	.continue-to-next-steps {
 	    margin-right: 21.7%;

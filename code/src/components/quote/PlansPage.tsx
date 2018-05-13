@@ -417,7 +417,7 @@ class PlansPage extends React.Component<Props, {}> {
   }
   getPlansInOrder(plans) {
     return plans.sort((a, b)=>{
-      return parseInt(a.ProductDisplayOrder) - parseInt(b.ProductDisplayOrder)
+      return parseInt(a.PlanDisplayOrder) - parseInt(b.PlanDisplayOrder)
   });
   }
   public render() {
@@ -709,13 +709,13 @@ class PlansPage extends React.Component<Props, {}> {
                 this.redirectToProductPage()
               }}
             >
-              BACK
+              PREVIOUS
             </span>
             <Button disabled={this.state.submittingPlansFromPlan} style={{marginTop: "0px"}} className="c-button-default circular hidden-xs" onClick={(){
                 this.redirectToNextSteps()
               }}
             >
-              CONTINUE TO THE NEXT STEP
+              CONTINUE
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               {this.state.submittingPlansFromPlan && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
@@ -725,14 +725,14 @@ class PlansPage extends React.Component<Props, {}> {
               }}
               style={{backgroundColor: "#fb4d3d!important", marginBottom: "15px"}}
             >
-              BACK
+              PREVIOUS
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </span>
             <Button disabled={this.state.submittingPlansFromPlan} style={{marginBottom: "15px"}} className="c-button-default visible-xs" onClick={(){
                 this.redirectToNextSteps()
               }}
             >
-              CONTINUE TO THE NEXT STEP
+              CONTINUE
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               {this.state.submittingPlansFromPlan && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>

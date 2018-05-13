@@ -522,13 +522,13 @@ class ProductsPage extends React.Component<Props, {}> {
                   this.redirectToMainPage()
                 }}
               >
-                BACK
+                PREVIOUS
               </span>
               <Button className="c-button-default visible-xs back-btn" style={{backgroundColor: "#fb4d3d!important", marginBottom: "15px"}} onClick={(){
                   this.redirectToMainPage()
                 }}
               >
-                BACK
+                PREVIOUS
               </Button>
               <Button style={{ marginTop: "0px", marginBottom: "15px", marginLeft: "17px"}} className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
                   this.submitProductsForm()

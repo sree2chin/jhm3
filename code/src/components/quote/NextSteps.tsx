@@ -434,7 +434,7 @@ class PlansPage extends React.Component<Props, {}> {
               }}
               style={{backgroundColor: "#fb4d3d!important"}}
             >
-              BACK
+              PREVIOUS
             </span>
             <Button className={`hidden-xs c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
                 this.openCorrespondingPopup()
@@ -447,7 +447,7 @@ class PlansPage extends React.Component<Props, {}> {
               }}
               style={{backgroundColor: "#fb4d3d!important"}}
             >
-              BACK
+              PREVIOUS
             </Button>
             <Button className={`visible-xs c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
                 this.directToCorrespondingPage()
