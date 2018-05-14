@@ -530,7 +530,7 @@ class ProductsPage extends React.Component<Props, {}> {
               >
                 PREVIOUS
               </Button>
-              <Button style={{ marginTop: "0px", marginBottom: "15px", marginLeft: "17px"}} className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
+              <Button style={{ marginTop: "10px", marginBottom: "15px", marginLeft: "17px"}} className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
                   this.submitProductsForm()
                 }}
               >

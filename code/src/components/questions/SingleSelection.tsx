@@ -65,7 +65,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
 
     return (
      <div className="row" id={question.id.replace(/[^a-zA-Z0-9]/g, "")}>
-        <Col sm={12} className={"c-subheader-text fs18"}>
+        <Col sm={12} className={"c-subheader-text fs18"} style={{marginBottom: "10px"}}>
         {question.constraints && question.constraints.required && <span style={{color: "rgb(255, 73, 73)", marginRight: "9px"}}>*</span>}
           {question.caption}
         </Col>
