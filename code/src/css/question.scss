@@ -71,8 +71,8 @@
             font-family: NunitoBold;
             font-size: 14px;
             display: inline-block;
-            width: 155px;
-            margin-left: 75px;
+            width: 100px;
+            margin-left: 20px;
             cursor: pointer;
             &:hover {
                 color: #B6DBFF;
@@ -221,7 +221,7 @@
         margin-top: 0px;
         background-color: #4584c0!important;
         &.action {
-            width: 30%;
+            width: auto;
         }
         &.next-step-btn {
             background-color: #fb4d3d!important;

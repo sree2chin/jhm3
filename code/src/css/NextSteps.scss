@@ -13,15 +13,17 @@
 			font-size: 14px;
 			display: inline-block;
 			width: auto;
-			margin-left: 75px;
+			margin-left: 20px;
 			cursor: pointer;
 		}
 	    .next-step-submit-btn {
-			width: 30%;
+			width: auto;
 			margin-top: 13px;
 			margin-bottom: 25px;
-			margin-left: 75px;
+			margin-left: 20px;
 			border-radius: 6px !important;
+			padding-left: 20px;
+			padding-right: 20px;
 			&.back-btn {
 				background-color: #fb4d3d!important;
 			}
