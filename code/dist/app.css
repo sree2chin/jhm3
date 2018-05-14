@@ -558,7 +558,9 @@ input.form-control:focus {
       max-width: 197px; }
   .c-quote .c-submit-person-info-btn .c-button-default.btn {
     margin-top: 40px;
-    width: 30%; }
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px; }
   .c-quote .c-person-header-text {
     font-size: 20px;
     font-weight: 500;
@@ -842,8 +844,8 @@ input.form-control:focus {
   font-family: NunitoBold;
   font-size: 14px;
   display: inline-block;
-  width: 140px;
-  margin-left: 75px;
+  width: 85px;
+  margin-left: 20px;
   cursor: pointer; }
   .product-pager-container .previous-btn-text:hover {
     color: #B6DBFF; }
@@ -1089,7 +1091,7 @@ input.form-control:focus {
   width: 54.17% !important;
   text-align: left; }
   .product-continue-btn-container .c-button-default.btn.circular {
-    width: 30%;
+    width: auto;
     padding-left: 20px;
     padding-right: 20px; }
     .product-continue-btn-container .c-button-default.btn.circular.back-btn {
@@ -1265,8 +1267,8 @@ input.form-control:focus {
     font-family: NunitoBold;
     font-size: 14px;
     display: inline-block;
-    width: 155px;
-    margin-left: 75px;
+    width: 100px;
+    margin-left: 20px;
     cursor: pointer; }
     .questions-container .question-action-btn-container .previous-btn-text:hover {
       color: #B6DBFF; }
@@ -1360,7 +1362,7 @@ input.form-control:focus {
     margin-top: 0px;
     background-color: #4584c0 !important; }
     .questions-container .c-button-default.btn.circular.action {
-      width: 30%; }
+      width: auto; }
     .questions-container .c-button-default.btn.circular.next-step-btn {
       background-color: #fb4d3d !important;
       margin-right: 30px; }
@@ -1843,8 +1845,8 @@ input.form-control:focus {
     font-size: 14px;
     display: inline-block;
     cursor: pointer;
-    width: 145px;
-    margin-left: 55px; }
+    width: 86px;
+    margin-left: 0px; }
 
 .product-pager-container .continue-to-next-steps {
   margin-right: 21.7%;
@@ -1853,8 +1855,10 @@ input.form-control:focus {
   width: 54.17%;
   text-align: left; }
   .product-pager-container .continue-to-next-steps .c-button-default.btn.circular {
-    margin-top: 0px;
-    width: 30%; }
+    margin-top: -5px !important;
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px; }
     .product-pager-container .continue-to-next-steps .c-button-default.btn.circular.back-btn {
       background-color: #fb4d3d !important; }
 
@@ -2162,14 +2166,16 @@ input.form-control:focus {
     font-size: 14px;
     display: inline-block;
     width: auto;
-    margin-left: 75px;
+    margin-left: 20px;
     cursor: pointer; }
   .next-steps-container .next-step-submit-btn-container .next-step-submit-btn {
-    width: 30%;
+    width: auto;
     margin-top: 13px;
     margin-bottom: 25px;
-    margin-left: 75px;
-    border-radius: 6px !important; }
+    margin-left: 20px;
+    border-radius: 6px !important;
+    padding-left: 20px;
+    padding-right: 20px; }
     .next-steps-container .next-step-submit-btn-container .next-step-submit-btn.back-btn {
       background-color: #fb4d3d !important; }
 
@@ -2679,9 +2685,10 @@ input.form-control:focus {
   margin-bottom: 75px; }
 
 .next-steps-container .customer-next-steps-container.agent-next-steps-outer-container {
-  width: 65.28%;
   margin-top: 60px;
-  border-radius: 3px; }
+  border-radius: 3px;
+  width: 54.2%;
+  max-width: 840px; }
   .next-steps-container .customer-next-steps-container.agent-next-steps-outer-container .agent-next-steps-text-container {
     width: 36%;
     padding-left: 20px; }
