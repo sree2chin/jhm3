@@ -842,8 +842,8 @@ input.form-control:focus {
   font-family: NunitoBold;
   font-size: 14px;
   display: inline-block;
-  width: 123px;
-  margin-left: 60px;
+  width: 140px;
+  margin-left: 75px;
   cursor: pointer; }
   .product-pager-container .previous-btn-text:hover {
     color: #B6DBFF; }
@@ -1089,7 +1089,7 @@ input.form-control:focus {
   width: 54.17% !important;
   text-align: left; }
   .product-continue-btn-container .c-button-default.btn.circular {
-    width: auto;
+    width: 30%;
     padding-left: 20px;
     padding-right: 20px; }
     .product-continue-btn-container .c-button-default.btn.circular.back-btn {
@@ -1265,7 +1265,7 @@ input.form-control:focus {
     font-family: NunitoBold;
     font-size: 14px;
     display: inline-block;
-    width: 175px;
+    width: 155px;
     margin-left: 75px;
     cursor: pointer; }
     .questions-container .question-action-btn-container .previous-btn-text:hover {
@@ -1842,9 +1842,9 @@ input.form-control:focus {
     font-family: NunitoBold;
     font-size: 14px;
     display: inline-block;
-    width: 123px;
-    margin-left: 40px;
-    cursor: pointer; }
+    cursor: pointer;
+    width: 145px;
+    margin-left: 55px; }
 
 .product-pager-container .continue-to-next-steps {
   margin-right: 21.7%;
@@ -1854,7 +1854,7 @@ input.form-control:focus {
   text-align: left; }
   .product-pager-container .continue-to-next-steps .c-button-default.btn.circular {
     margin-top: 0px;
-    width: auto; }
+    width: 30%; }
     .product-pager-container .continue-to-next-steps .c-button-default.btn.circular.back-btn {
       background-color: #fb4d3d !important; }
 
@@ -2162,13 +2162,13 @@ input.form-control:focus {
     font-size: 14px;
     display: inline-block;
     width: auto;
-    margin-left: 60px;
+    margin-left: 75px;
     cursor: pointer; }
   .next-steps-container .next-step-submit-btn-container .next-step-submit-btn {
-    width: auto;
-    margin-top: 10px;
+    width: 30%;
+    margin-top: 13px;
     margin-bottom: 25px;
-    margin-left: 60px;
+    margin-left: 75px;
     border-radius: 6px !important; }
     .next-steps-container .next-step-submit-btn-container .next-step-submit-btn.back-btn {
       background-color: #fb4d3d !important; }
