@@ -713,7 +713,7 @@ class PlansPage extends React.Component<Props, {}> {
           </Col> }
           <Col className="continue-to-next-steps c-center" style={{ }}>
 
-            <span className="previous-btn-text hidden-xs" disabled={this.state.submittingPlansFromPlan} style={{marginTop: "0px", marginRight: "14px", backgroundColor: "#fb4d3d!important"}} onClick={(){
+            <span className="previous-btn-text hidden-xs" disabled={this.state.submittingPlansFromPlan} style={{marginTop: "0px", marginRight: "14px"}} onClick={()=>{
                 this.redirectToProductPage()
               }}
             >
