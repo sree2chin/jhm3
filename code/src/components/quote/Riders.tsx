@@ -18,11 +18,17 @@ export default class Plan extends React.Component<Props, {}> {
     this.selectRider.bind(this);
   }
   state={}
-  selectRider(rider) {
-    this.setState({
-      selectedRiderName: rider
-    });
-    this.props.selectRider(rider, this.props.index);
+  selectRider(rider, riderKey) {
+    if (riderKey == this.state.selectedRiderName) {
+      this.setState({
+        selectedRiderName: null
+      });
+    } else {
+      this.setState({
+        selectedRiderName: riderKey
+      });
+    }
+    this.props.selectRider(rider, this.props.index, riderKey);
   }
   public render() {
 
@@ -47,8 +53,8 @@ export default class Plan extends React.Component<Props, {}> {
                             return <Rider key={rider.Name}
                               rider={rider}
                               person={person}
-                              name={key}
-                              isActive={rider.Name == self.state.selectedRiderName}
+                              riderKey={key}
+                              isActive={key== self.state.selectedRiderName}
                               selectRider={self.selectRider.bind(self)}
                               premium_type={self.props.premium_type}
                             />
@@ -57,10 +63,12 @@ export default class Plan extends React.Component<Props, {}> {
                           }
                         } else {
                           return <Rider key={rider.Name}
-                            rider={rider}
-                            person={person}
-                            isActive={rider.Name == self.state.selectedRiderName}
-                            selectRider={self.selectRider.bind(self)}
+                              rider={rider}
+                              person={person}
+                              riderKey={key}
+                              isActive={key== self.state.selectedRiderName}
+                              selectRider={self.selectRider.bind(self)}
+                              premium_type={self.props.premium_type}
                             />
                         }
                       } else {

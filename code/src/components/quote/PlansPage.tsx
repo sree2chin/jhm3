@@ -394,10 +394,18 @@ class PlansPage extends React.Component<Props, {}> {
     }
 
   }
-  selectRider(rider, index) {
-    this.setState({
-      ["selectedRider" + index]: rider
-    });
+  selectRider(rider, index, riderKey) {
+    if (this.state["selectedRiderKey" + index] == riderKey) {
+      this.setState({
+        ["selectedRider" + index]: null,
+        ["selectedRiderKey" + index]: null
+      });
+    } else {
+      this.setState({
+        ["selectedRider" + index]: rider,
+        ["selectedRiderKey" + index]: riderKey
+      });
+    }
   }
   containsOnlySPWL() {
     var containOnlySPWLProducts = false;
