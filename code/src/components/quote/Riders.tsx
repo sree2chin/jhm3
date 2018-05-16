@@ -47,6 +47,7 @@ export default class Plan extends React.Component<Props, {}> {
                             return <Rider key={rider.Name}
                               rider={rider}
                               person={person}
+                              name={key}
                               isActive={rider.Name == self.state.selectedRiderName}
                               selectRider={self.selectRider.bind(self)}
                               premium_type={self.props.premium_type}

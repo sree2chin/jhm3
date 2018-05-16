@@ -9,7 +9,8 @@ interface Props extends React.Props<Plan> {
   person: any,
   isActive: Boolean,
   selectRider: any,
-  premium_type: any
+  premium_type: any,
+  key?: string
 }
 
 export default class Plan extends React.Component<Props, {}> {
@@ -47,11 +48,11 @@ export default class Plan extends React.Component<Props, {}> {
               </Col>
             </Row>
           </Row>
-          {rider.Name != "WP" && <Row className={`text-center quote-product rider-footer-container`} style={{paddingTop: "10px", marginLeft: "0px", height: "62px", fontFamily: "NunitoRegular!important"}} onClick={()=> this.selectRider(rider)}>
+          {this.props.name != "WP" && <Row className={`text-center quote-product rider-footer-container`} style={{paddingTop: "10px", marginLeft: "0px", height: "62px", fontFamily: "NunitoRegular!important"}} onClick={()=> this.selectRider(rider)}>
             <div className="c-coverage-amount" style={{fontSize: "14px", color: "#317dbd"}}>included in policy</div>
             <div className="c-coverage-amount additional-text" style={{fontSize: "14px", color: "#999999"}}>(no additional premium)</div>
           </Row>}
-          {rider.Name == "WP" && <Row className={`text-center quote-product `} style={{paddingTop: "10px", marginLeft: "10px", height: "62px", fontFamily: "NunitoRegular!important"}}>
+          {this.props.name == "WP" && <Row className={`text-center quote-product `} style={{paddingTop: "10px", marginLeft: "0px", height: "62px", fontFamily: "NunitoRegular!important"}}>
             {!this.state.riderAdded && <Button style={{float: "right", width: "88%", marginRight: "6%", marginTop: "0px"}} className={`c-button-default circular ${this.state.riderAdded ? "active" : ""}`} onClick={(){
                 this.selectRider(rider)
               }}

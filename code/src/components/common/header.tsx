@@ -4,6 +4,7 @@ import { Navbar } from "react-bootstrap"
 import TelLinkComponent from "./TelLinkComponent"
 
 interface Props extends React.Props<Header> {
+  logoImgSrc: string
 }
 
 export default class Header extends React.Component<Props, {}> {

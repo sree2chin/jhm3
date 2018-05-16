@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
 import Header from './common/header';
 import reducers  from '../reducers';
-import { Row, Col } from "react-bootstrap"
+import { Row, Col } from "react-bootstrap";
 
 interface Props extends React.Props<App> {
 }

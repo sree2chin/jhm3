@@ -20,13 +20,17 @@ import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 
 interface Props {
-  submitQuoteForm: (a: any)=>void,
-  submitProductsForm: ()=>void,
-  noOfPersons: any,
-  persons: any,
-  setPersonsData:(a: any)=>void,
+  submitQuoteForm?: (a: any)=>void,
+  submitProductsForm?: ()=>void,
+  noOfPersons?: any,
+  persons?: any,
+  setPersonsData?:(a: any)=>void,
   location?: any,
-  products?: any
+  products?: any,
+  submitPlansForm?: any,
+  plans?: any,
+  is_agent?: any,
+  premiums?:
 }
 
 class Main extends React.Component<Props, {}> {
@@ -332,9 +336,6 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     },
     submitPlansForm: (data) => {
       return dispatch(submitPlansForm(data))
-    },
-    loadStates: () => {
-      return loadStates();
     }
   };
 }
