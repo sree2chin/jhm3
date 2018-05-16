@@ -299,16 +299,28 @@ class Main extends React.Component<Props, {}> {
         }
 
         if (q.type == "group") {
+          if (actualQuestionLists.length > 0) {
+            var allQuestionsAreLabels = true;
+            for(var i=0; i<questionsList.length; i++) {
+              if (questionsList[i].props.type != "label"){
+                allQuestionsAreLabels = false;
+              }
+            }
+            if(!allQuestionsAreLabels) {
+              this.actualQuestionLists = actualQuestionLists;
+              return questionsList;
+            }
+          }
           questionsList.groupHeader = questionsList.groupHeader || [];
           questionsList.groupHeader.push(q.caption);
           if (q.tags && q.tags.SubgroupRendering) {
             currentIsPrefixGroup = true;
             isPrefixGroupCounter = -1;
             questionsList.prefixOfGroupForLabelGroup = q.caption;
-            if (actualQuestionLists.length > 0 && actualQuestionLists[actualQuestionLists.length-1].reflexiveOn[0] == "Yes") {
+            /*if (actualQuestionLists.length > 0 && actualQuestionLists[actualQuestionLists.length-1].hasReflexive) {
               questionsList.prefixOfGroupForLabelGroup = "";
               isPrefixGroup = false;
-            }
+            }*/
           } else {
             questionsList.prefixOfGroupForLabelGroup = "";
           }
@@ -496,10 +508,10 @@ class Main extends React.Component<Props, {}> {
             if (qe.tags && qe.tags.SubgroupRendering) {
               questionsList.prefixOfGroupForLabelGroup = qe.caption;
               isPrefixGroup = true;
-              if (actualQuestionLists.length > 0 && actualQuestionLists[actualQuestionLists.length-1].reflexiveOn[0] == "Yes") {
+              /*if (actualQuestionLists.length > 0 && actualQuestionLists[actualQuestionLists.length-1].hasReflexive) {
                 questionsList.prefixOfGroupForLabelGroup = "";
                 isPrefixGroup = false;
-              }
+              }*/
             } else {
               questionsList.prefixOfGroupForLabelGroup = "";
             }
