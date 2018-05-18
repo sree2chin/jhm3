@@ -228,10 +228,7 @@ class Offer extends React.Component<Props, {}> {
                         {premium.currency}{premium.premium_amount}
                     </Col>
                     <Col className="offer-per-month">
-                      {premium.premium_type_title} for {premium.currency}{premium.coverage_amount}
-                    </Col>
-                    <Col className="offer-per-month" style={{marginBottom: "16px"}}>
-                        coverage
+                      {premium.coverage_description}
                     </Col>
                     <Button className={`c-button-default circular offer-start-coverage-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                         this.onPayment()
