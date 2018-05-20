@@ -86,6 +86,10 @@
    		.single-product-container {
    			&:nth-child(2n){
 				//padding-right: 0px;
+				float: left;
+			}
+			   &:nth-child(2n+1){
+				//padding-right: 0px;
 				float: right;
    			}
    			padding-left: 0px;
@@ -286,6 +290,10 @@
 		overflow-y: scroll;
 		&.product-selection-btn {
 			overflow-y: hidden;
+			&:hover {
+				background-color: rgba(234, 242, 248, 1)!important;
+				color: rgba(49, 125, 189, 1)!important;
+			}
 		}
 	    &.active {
 		    background-color: #265fad;
@@ -353,6 +361,12 @@
 			font-size: 16px;
 			cursor: pointer;
 		}
+		.product-toggle-description-gradient {
+			background: linear-gradient(to bottom, rgba(242,242,242, 0.3), rgba(255,255,255, 0.9));
+			height: 84px;
+			position: relative;
+			top: -68px;
+		}
 		.product-toggle-line {
 			border-top: 2px solid rgb(49, 125, 189);
 			position: absolute;
@@ -371,7 +385,7 @@
 		}
 		&:hover{
 			background-color: #fff;
-	    	border: 2px solid #317dbd;
+
 			}
 			&:hover .c-product-text, &:hover .header, &:hover .c-product-desc-line{
 				color: #317dbd;
@@ -487,4 +501,35 @@
 			height: 45px !important;
 			margin-top: 30px !important;
 	}
+}
+
+#tickcontainer {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: -2px;
+}
+.tickbg {
+    content: "\A0";
+    border: solid 50px #317dbd;
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    height: 0;
+    width: 0;
+    display: block;
+}
+
+
+.tick {
+	height: 40px;
+    width: 19px;
+    border: solid #FFFFFF;
+    border-width: 0px 7px 7px 0px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    display: block;
+    margin-top: -25px;
+	margin-left: -5px;
 }

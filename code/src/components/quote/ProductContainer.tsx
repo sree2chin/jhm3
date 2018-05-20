@@ -124,10 +124,17 @@ export default class ProductContainer extends React.Component<Props, State> {
                   <Col key={product.ProductID} sm={productContainerWidth} className={`single-product-container product-custom-container`}>
                     <Row className={`single-product-content ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""} ${this.state["shouldShowProductDescription_" + product.ProductID] ? "is-open": ""}`}>
                       <Row className="product_img_div">
-                      <img
-                        className={`plan-product-image ${product_image_name}_transparent`}
-                        src={`${product_image}`}
-                      />
+                        {this.state.productIds.indexOf(product.ProductID)<0 && <img
+                            className={`plan-product-image ${product_image_name}_transparent`}
+                            src={`${product_image}`}
+                          />
+                        }
+                        {this.state.productIds.indexOf(product.ProductID)>=0 && <div id="tickcontainer">
+                          <div className="tickbg">
+                              <div className="tick">
+                              </div>
+                          </div>
+                        </div>}
                       </Row>
                       <Row className="header">
                         <Col style={{textAlign: "left"}} sm={12}>
@@ -157,16 +164,17 @@ export default class ProductContainer extends React.Component<Props, State> {
                         </Col>
                       </Row>
                       <Row style={{marginLeft: "0px", marginRight: "0px"}}>
+                      {!this.state["shouldShowProductDescription_" + product.ProductID] && <div className="product-toggle-description-gradient"></div>}
                         <Row style={{width: "90%", marginLeft: "auto", marginRight: "auto", height: "83px"}} className={`text-center ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`}>
                           <Col className="product-toggle-description" onClick={()=>{this.toggleProductDescription(product)}}>
                             {this.state["shouldShowProductDescription_" + product.ProductID] && <div style={{marginBottom: "-20px"}}>Hide Details</div>}
                             {!this.state["shouldShowProductDescription_" + product.ProductID] && <div>View Details</div>}
                           </Col>
-                          {!this.state["shouldShowProductDescription_" + product.ProductID] && <Col className="product-toggle-line" style={{borderTop: "2px solid #317dbd", marginTop: "10px"}}>
+                          {!this.state["shouldShowProductDescription_" + product.ProductID] && <Col className="product-toggle-line" style={{borderTop: "2px solid rgba(161, 161, 161, 1)", marginTop: "10px"}}>
                           </Col>}
                           <Col className="quote-this-product-container" onClick={()=> this.selectProduct(product)}>
-                            {this.state.productIds.indexOf(product.ProductID)>=0 && <div className="c-coverage-amount quote-product active product-selection-btn">PRODUCT SELECTED</div>}
-                            {this.state.productIds.indexOf(product.ProductID)<0 && <div className="c-coverage-amount quote-product  product-selection-btn">QUOTE THIS PRODUCT</div>}
+                            {this.state.productIds.indexOf(product.ProductID)>=0 && <div className="c-coverage-amount quote-product product-selection-btn">PRODUCT SELECTED</div>}
+                            {this.state.productIds.indexOf(product.ProductID)<0 && <div className="c-coverage-amount quote-product active product-selection-btn">QUOTE THIS PRODUCT</div>}
                           </Col>
                         </Row>
                       </Row>
