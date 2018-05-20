@@ -48,7 +48,7 @@ class Main extends React.Component<Props, {}> {
         window.location.href = this.questions.LOGIN_URL;
         return;
       }
-        if (!this.alreadyAnsweredQueryQuestion && this.props.location.query && (this.props.location.query.fromReviewPage==true || this.props.location.query.fromReviewPage=="true")) {
+        if (!this.alreadyAnsweredQueryQuestion && this.props.location.query && (this.props.location.query.fromReviewPage==true || this.props.location.query.fromReviewPage=="true" || (this.props.location.query.fromReviewPage && this.props.location.query.fromReviewPage[0]==true))) {
             var questionIdFromQuery = this.props.location.query.questionId;
             var currentPageIndex = this.getCurrentPageIndex(this.props.location.query.questionId);
             if (currentPageIndex>=0) {
@@ -726,6 +726,8 @@ class Main extends React.Component<Props, {}> {
                       browserHistory.push("/all-questions" +queryParamsString);
                     }
                     return;
+                  } else {
+                    browserHistory.push("/questions" +queryParamsString);
                   }
                 } else {
                   this.questionsSource = reflexiveQuestion;
@@ -740,11 +742,15 @@ class Main extends React.Component<Props, {}> {
                         browserHistory.push("/all-questions" +queryParamsString);
                       }
                       return;
+                    } else {
+                      browserHistory.push("/questions" +queryParamsString);
                     }
+                  } else {
+                    browserHistory.push("/questions" +queryParamsString);
                   }
                 }
               } else {
-
+                  browserHistory.push("/questions" +queryParamsString);\
               }
             }, 200)
           } else {
@@ -755,6 +761,8 @@ class Main extends React.Component<Props, {}> {
                 browserHistory.push("/all-questions" +queryParamsString);
               }
               return;
+            } else {
+              browserHistory.push("/questions" +queryParamsString);
             }
           }
         });
