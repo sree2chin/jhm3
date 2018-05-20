@@ -90,7 +90,7 @@ export default class CustomInput extends React.Component<Props, {}> {
         onceChanged: true
       });
     } else {
-      var sampleVal = this.props.question.sample_input;
+      var sampleVal = this.props.question.infoText;
 
       if (val.length > 0 && (sampleVal && sampleVal.length > val.length) && !(new RegExp(/^[a-zA-Z0-9]*$/).test(sampleVal[val.length]))) {
         if (this.state.value && this.state.value.length > val.length) {

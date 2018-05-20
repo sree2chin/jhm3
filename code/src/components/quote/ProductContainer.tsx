@@ -73,6 +73,12 @@ export default class ProductContainer extends React.Component<Props, State> {
     });
   }
 
+  toggleProductDescription(product) {
+    this.setState({
+      ["shouldShowProductDescription_" + product.ProductID]: !this.state["shouldShowProductDescription_" + product.ProductID]
+    });
+  }
+
   public render() {
     const {productInfo} = this.props;
     var products = productInfo && productInfo.products_data && productInfo.products_data.products_list || [];
@@ -115,8 +121,8 @@ export default class ProductContainer extends React.Component<Props, State> {
                 const product_image = "http://ec2-107-23-131-50.compute-1.amazonaws.com/assets/img/" + product.product_image;
 
                 return(
-                  <Col key={product.ProductID} sm={productContainerWidth} className="single-product-container product-custom-container">
-                    <Row className={`single-product-content ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`}>
+                  <Col key={product.ProductID} sm={productContainerWidth} className={`single-product-container product-custom-container`}>
+                    <Row className={`single-product-content ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""} ${this.state["shouldShowProductDescription_" + product.ProductID] ? "is-open": ""}`}>
                       <Row className="product_img_div">
                       <img
                         className={`plan-product-image ${product_image_name}_transparent`}
@@ -134,25 +140,31 @@ export default class ProductContainer extends React.Component<Props, State> {
                             <ul className="c-product-desc-line">
                               {product.ProductDisplayDescription && product.ProductDisplayDescription.trim && product.ProductDisplayDescription.trim().length > 0 &&
                                  <RawHtml.mycooltag>
-                                    {product.ProductDisplayDescription.trim()}
-                                  </RawHtml.mycooltag>
-                                 //<div>
-                                  //{ product.ProductDisplayDescription.trim().indexOf('</') !== -1
-                                  //    ? (
-                                   //       <div dangerouslySetInnerHTML={{__html: product.ProductDisplayDescription.trim().replace(/\n/g, '<br />')}} >
-                                   //       </div>
-                                    //    )
-                                    //  : product.ProductDisplayDescription.trim()
-                                   // }
-                               // </div>
+                                   {product.ProductDisplayDescription.trim()}
+                                 </RawHtml.mycooltag>
+                              //    <div>
+                              //     { product.ProductDisplayDescription.trim().indexOf('</') !== -1
+                              //        ? (
+                              //            <div dangerouslySetInnerHTML={{__html: product.ProductDisplayDescription.trim().replace(/\n/g, '')}} >
+                              //            </div>
+                              //          )
+                              //        : product.ProductDisplayDescription.trim()
+                              //      }
+                              //  </div>
                               }
                             </ul>
                           </Row>
                         </Col>
                       </Row>
                       <Row style={{marginLeft: "0px", marginRight: "0px"}}>
-                        <Row style={{width: "90%", marginLeft: "auto", marginRight: "auto", height: "73px"}} className={`text-center ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`} onClick={()=> this.selectProduct(product)}>
-                          <Col className="quote-this-product-container">
+                        <Row style={{width: "90%", marginLeft: "auto", marginRight: "auto", height: "83px"}} className={`text-center ${this.state.productIds.indexOf(product.ProductID)>=0 ? "active" : ""}`}>
+                          <Col className="product-toggle-description" onClick={()=>{this.toggleProductDescription(product)}}>
+                            {this.state["shouldShowProductDescription_" + product.ProductID] && <div style={{marginBottom: "-20px"}}>Hide Details</div>}
+                            {!this.state["shouldShowProductDescription_" + product.ProductID] && <div>View Details</div>}
+                          </Col>
+                          {!this.state["shouldShowProductDescription_" + product.ProductID] && <Col className="product-toggle-line" style={{borderTop: "2px solid #317dbd", marginTop: "10px"}}>
+                          </Col>}
+                          <Col className="quote-this-product-container" onClick={()=> this.selectProduct(product)}>
                             {this.state.productIds.indexOf(product.ProductID)>=0 && <div className="c-coverage-amount quote-product active product-selection-btn">PRODUCT SELECTED</div>}
                             {this.state.productIds.indexOf(product.ProductID)<0 && <div className="c-coverage-amount quote-product  product-selection-btn">QUOTE THIS PRODUCT</div>}
                           </Col>

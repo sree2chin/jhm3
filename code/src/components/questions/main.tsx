@@ -262,7 +262,7 @@ class Main extends React.Component<Props, {}> {
             />);
     }
   }
-  reRecursiveGetQuestions1(data, questionsList, preQ, actualQuestionLists, isPrefixGroup, isPrefixGroupCounter) {
+  reRecursiveGetQuestions1(data, questionsList, preQ, actualQuestionLists, isPrefixGroup, isPrefixGroupCounter, wasPrefixInsideGroup) {
     questionsList.isQuestionsList = false;
     var currentIsPrefixGroup = false;
     if (!isEmpty(data)) {
@@ -279,6 +279,9 @@ class Main extends React.Component<Props, {}> {
               if(reflexsiveQuestionList.length > 0){
                 questionsList.groupHeader = questionsList.groupHeader || [];
                 questionsList.groupHeader.push(q.caption);
+                if (isPrefixGroup && isPrefixGroupCounter == 0) {
+                  questionsList.prefixOfGroupForLabelGroup = "";
+                }
                 return reflexsiveQuestionList;
               } else {
                 continue;
@@ -297,6 +300,8 @@ class Main extends React.Component<Props, {}> {
             return questionsList;
           }
         }
+
+        var isPrefixInsideGroup = false;
 
         if (q.type == "group") {
           if (actualQuestionLists.length > 0) {
@@ -321,13 +326,13 @@ class Main extends React.Component<Props, {}> {
               questionsList.prefixOfGroupForLabelGroup = "";
               isPrefixGroup = false;
             }*/
-          } else {
-            questionsList.prefixOfGroupForLabelGroup = "";
           }
         } else {
           if (isPrefixGroup && isPrefixGroupCounter == 0) {
           } else {
-            if (!this.gotQuestionsFromPrefixFirstLevel) {
+            if (wasPrefixInsideGroup || q.type == "assessment-factor-group" || q.type == "struct") {
+
+            } else {
               questionsList.prefixOfGroupForLabelGroup = "";
             }
           }
@@ -336,7 +341,7 @@ class Main extends React.Component<Props, {}> {
         if (q.type == "singleselection") {
           preQ = q;
           if (isPrefixGroup && isPrefixGroupCounter == 0) {
-            this.gotQuestionsFromPrefixFirstLevel = true;
+            //this.gotQuestionsFromPrefixFirstLevel = true;
           }
           if(q.options.length ==2) {
             questionsList.push(<SingleSelection
@@ -408,7 +413,7 @@ class Main extends React.Component<Props, {}> {
             }
           }
           var qL = q.questions;
-          var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists, currentIsPrefixGroup, isPrefixGroupCounter + 1)
+          var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists, currentIsPrefixGroup, isPrefixGroupCounter + 1, isPrefixInsideGroup)
           if(questionsFromGroup.length > 0) {
             var allQuestionsAreLabels = true;
             for(var i=0; i<questionsFromGroup.length; i++) {
@@ -421,6 +426,18 @@ class Main extends React.Component<Props, {}> {
             } else {
               //questionsList = questionsFromGroup;
             }
+            if (isPrefixGroup && isPrefixGroupCounter == 0) {
+            } else {
+              if (wasPrefixInsideGroup) {
+
+              } else {
+                questionsList.prefixOfGroupForLabelGroup = "";
+              }
+            }
+          } else {
+            //if (q.tags && q.tags.SubgroupRendering) {
+            //  questionsList.prefixOfGroupForLabelGroup = "";
+            //}
           }
         } else if (q.type == "struct") {
           if (questionsList.length > 0) {
@@ -448,6 +465,14 @@ class Main extends React.Component<Props, {}> {
               return questionsFromGroup;
             } else {
               //questionsList = questionsFromGroup;
+            }
+            if (isPrefixGroup && isPrefixGroupCounter == 0) {
+            } else {
+              if (wasPrefixInsideGroup) {
+
+              } else {
+                questionsList.prefixOfGroupForLabelGroup = "";
+              }
             }
           }
         } else if (q.type == "number" || q.type=="text") {
@@ -487,6 +512,204 @@ class Main extends React.Component<Props, {}> {
     } else {
       this.actualQuestionLists = actualQuestionLists;
       return questionsList;
+    }
+  }
+  getReflexiveQuestionForAnsweredQuestions() {
+    var previousIds = this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex];
+    var reflexiveQuestion = null;
+    for(var i=0; i<previousIds.length; i++) {
+      var q = this.findQuestionById(this.questions.data.questionnaire.questions, previousIds[i]);
+      if (q.hasReflexive) {
+        reflexiveQuestion = q;
+      }
+    }
+    return reflexiveQuestion;
+  }
+  recursiveGetQuestionsForSource(questionsSource: any) {
+    if (!isEmpty(questionsSource) && !isEmpty(questionsSource.questions)) {
+      if (questionsSource.questions) {
+        var preQ = null;
+        var questionsList = [];
+        questionsList.isQuestionsList = false;
+        var actualQuestionLists = [];
+        var boundaryReached = false;
+
+        for(var i=0; i<(questionsSource.questions.length); i++) {
+          var qe = questionsSource.questions[i];
+          if (qe.type == "group") {
+            questionsList.groupHeader = [];
+            questionsList.groupHeader.push(qe.caption);
+          }
+          var q = qe;
+          q.key = q.id;
+          if ((q.answerState == "valid" || this.questionsAlreadySubmitted(q)) && q.answerState!="invalid" &&  q.answerState!="missing") {
+            if (q.hasReflexive) {
+              if (q.questions){
+                var reflexsiveQuestionList = this.reRecursiveGetQuestions1(q.questions, questionsList, preQ, actualQuestionLists);
+                if(reflexsiveQuestionList.length > 0){
+                  questionsList.groupHeader = questionsList.groupHeader || [];
+                  questionsList.groupHeader.push(qe.caption);
+                  return reflexsiveQuestionList;
+                } else {
+                  continue;
+                }
+              }
+            }
+            continue;
+          }
+          if (preQ && preQ.hasReflexive) {
+            //this.setLastAnsweredQuestion(preQ);
+            boundaryReached = true;
+            if (questionsList.length > 0) {
+              this.actualQuestionLists = actualQuestionLists;
+              return questionsList;
+            }
+          }
+          if (q.type == "singleselection") {
+            if(q.options.length == 2) {
+              questionsList.push(<SingleSelection
+                    question={q}
+                    error={""}
+                    onChange={this.onChangeInput.bind(this)}
+                    alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                    key={q.id}
+                  />);
+                  actualQuestionLists.push(q);
+            } else {
+              questionsList.push(<CustomSelect
+                  question={q}
+                  error={""}
+                  onChange={this.onChangeInput.bind(this)}
+                  alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                  key={q.id}
+                /> )
+                actualQuestionLists.push(q);
+            }
+          } else if (q.type == "multiselection") {
+            questionsList.push(<CustomSelect
+                question={q}
+                error={""}
+                onChange={this.onChangeInput.bind(this)}
+                alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                key={q.id}
+                multi={true}
+              />)
+            actualQuestionLists.push(q);
+          } else if (q.type == "label") {
+            questionsList.push( <Label
+                    {...q}
+                  />)
+            actualQuestionLists.push(q);
+          } else if (q.type=="list") {
+            var qL = q.questions;
+            if (q.prototype && q.prototype.elements) {
+              if (!q.answer) {
+                q.answer = [q.prototype];
+              }
+              questionsList.siblingAnswers = q.answer;
+              qL = q.answer[0].elements;
+            } else {
+              qL = [];
+            }
+
+            for(var i=0; i<qL.length; i++) {
+              questionsList.push(this.getQuestionComponent(qL[i]));
+              actualQuestionLists.push(qL[i]);
+            }
+            this.actualQuestionLists = actualQuestionLists;
+            questionsList.isQuestionsList = true
+            return questionsList;
+          } else if (q.type == "group" || q.type == "assessment-factor-group") {
+              if (questionsList.length > 0) {
+                var allQuestionsAreLabels = true;
+                for(var i=0; i<questionsList.length; i++) {
+                  if (questionsList[i].props.type != "label"){
+                    allQuestionsAreLabels = false;
+                  }
+                }
+                if(!allQuestionsAreLabels) {
+                  this.actualQuestionLists = actualQuestionLists;
+                  return questionsList;
+                }
+              }
+              var qL = q.questions;
+              var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists)
+              if(questionsFromGroup.length > 0) {
+                var allQuestionsAreLabels = true;
+                for(var i=0; i<questionsFromGroup.length; i++) {
+                  if (questionsFromGroup[i].props.type != "label"){
+                    allQuestionsAreLabels = false;
+                  }
+                }
+                if(!allQuestionsAreLabels) {
+                  return questionsFromGroup;
+                } else {
+                  questionsList = questionsFromGroup;
+                }
+              }
+          } else if (q.type == "struct") {
+            if (questionsList.length > 0) {
+              var allQuestionsAreLabels = true;
+              for(var i=0; i<questionsList.length; i++) {
+                if (questionsList[i].props.type != "label"){
+                  allQuestionsAreLabels = false;
+                }
+              }
+              if(!allQuestionsAreLabels) {
+                this.actualQuestionLists = actualQuestionLists;
+                return questionsList;
+              }
+            }
+            var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ, actualQuestionLists)
+            if(questionsFromGroup.length > 0) {
+              var allQuestionsAreLabels = true;
+              for(var i=0; i<questionsFromGroup.length; i++) {
+                if (questionsFromGroup[i].props.type != "label"){
+                  allQuestionsAreLabels = false;
+                }
+              }
+              if(!allQuestionsAreLabels) {
+                return questionsFromGroup;
+              } else {
+                questionsList = questionsFromGroup;
+              }
+            }
+          } else if (q.type == "number" || q.type=="text") {
+            questionsList.push(<CustomInput
+              question={q}
+              error={""}
+              onChange={this.onChangeInput.bind(this)}
+              alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+              key={q.id}
+            />)
+            actualQuestionLists.push(q);
+          } else if (q.type == "date") {
+            questionsList.push(<QuestionsCustomDatePicker
+                      question={q}
+                      error={""}
+                      onChange={this.onChangeInput.bind(this)}
+                      alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                      key={q.id}
+                  />)
+                  actualQuestionLists.push(q);
+          } else if (q.type == "assessment-factor-search") {
+            questionsList.push(<AsyncCustomSelect
+                question={q}
+                error={""}
+                onChange={this.onChangeInput.bind(this)}
+                alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                getFactorsearch={this.props.getFactorsearch.bind(this)}
+                key={q.id}
+            />)
+            actualQuestionLists.push(q);
+          }
+          preQ = q;
+        };
+        this.actualQuestionLists = actualQuestionLists;
+        return questionsList;
+      };
+    } else {
+      return null;
     }
   }
 
@@ -826,6 +1049,7 @@ class Main extends React.Component<Props, {}> {
   }
 
   onQuestionSubmit(notAddingOrDeletingBeneficiary, noOfBeneficiaryDeleted) {
+
     var answered_questions = [];
     var allQuestionsValid = true;
     if (!notAddingOrDeletingBeneficiary) {
@@ -920,6 +1144,9 @@ class Main extends React.Component<Props, {}> {
         questions: this.questions,
         answered_questions: answered_questions
       };
+      if (this.previousQuestionsSource && this.previousQuestionsSource.questions && this.previousQuestionsSource.questions.length > 0) {
+        data.current_index = this.previousQuestionHanldingIndexInstance;
+      }
 
       this.props.postQuestions(data).then(() => {
         window.scrollTo(0, 0);
@@ -928,7 +1155,6 @@ class Main extends React.Component<Props, {}> {
           return;
         }
         if (this.questions && this.questions.instant_id_check && this.questions.instant_id_check.status==false) {
-
           this.setState({
             showInstantIdCheckPopup: true,
             instantIdCheckData: this.questions.instant_id_check
@@ -981,19 +1207,44 @@ class Main extends React.Component<Props, {}> {
           if (this.props.questions && this.props.questions.extra_params &&
             this.props.questions.extra_params.answered_questions &&
             this.props.questions.extra_params.answered_questions.length > 0) {
-              if (this.props.questions.extra_params.answered_questions-1 == this.state.previousQuestionHanldingIndex) {
-                this.setState({
-                  previousQuestionHanldingIndex: null,
-                  previousQuestionIds: null
-                });
-              } else {
-                this.setState({
-                  previousQuestionHanldingIndex: this.state.previousQuestionHanldingIndex + 1,
-                }, ()=> {
+              if (this.props.questions.extra_params.answered_questions.length-1 == this.state.previousQuestionHanldingIndex) {
+                var reflexiveQuestion = this.getReflexiveQuestionForAnsweredQuestions()
+                var questionsForReflexiveQuestions = this.recursiveGetQuestionsForSource(reflexiveQuestion);
+                //if (questionsForReflexiveQuestions && questionsForReflexiveQuestions.length > 0) {
+                //  this.previousQuestionsSource = reflexiveQuestion;
+                //} else {
                   this.setState({
-                    previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
+                    previousQuestionHanldingIndex: null,
+                    previousQuestionIds: null
                   });
-                });
+                //}
+              } else {
+                var incrementCounter = 1;
+                if (this.previousQuestionsSource && this.previousQuestionsSource.questions && this.previousQuestionsSource.questions.length > 0) {
+                  this.previousQuestionsSource = null;
+                  incrementCounter  = 1;
+                }
+                var reflexiveQuestion = this.getReflexiveQuestionForAnsweredQuestions()
+                var questionsForReflexiveQuestions = this.recursiveGetQuestionsForSource(reflexiveQuestion);
+                this.previousQuestionHanldingIndexInstance = this.state.previousQuestionHanldingIndex + incrementCounter;
+                if (questionsForReflexiveQuestions && questionsForReflexiveQuestions.length > 0) {
+                  this.previousQuestionsSource = reflexiveQuestion;
+                  this.setState({
+                    previousQuestionHanldingIndex: this.state.previousQuestionHanldingIndex + incrementCounter,
+                  }, ()=> {
+                    this.setState({
+                      previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
+                    });
+                  });
+                } else {
+                  this.setState({
+                    previousQuestionHanldingIndex: this.state.previousQuestionHanldingIndex + incrementCounter,
+                  }, ()=> {
+                    this.setState({
+                      previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
+                    });
+                  });
+                }
               }
             }
         }
@@ -1209,7 +1460,12 @@ class Main extends React.Component<Props, {}> {
 
   getCurrentSetOfQuestions() {
     if (this.state.previousQuestionIds && this.state.previousQuestionIds.length > 0) {
-      this.questionComponents = this.getPreviousQuestionComponents();
+      if (this.previousQuestionsSource && this.previousQuestionsSource && this.previousQuestionsSource.questions.length > 0) {
+        this.questionComponents = this.recursiveGetQuestionsForSource(this.previousQuestionsSource);
+      } else {
+        this.questionComponents = this.getPreviousQuestionComponents();
+      }
+
       if (this.questionComponents && this.questionComponents.isQuestionsList) {
 
       }
@@ -1299,6 +1555,7 @@ class Main extends React.Component<Props, {}> {
 
   handleBackSubmit(): any {
     console.log("sdfds");
+    this.previousQuestionsSource = null;
     if (this.state.previousQuestionsHandling) return;
 
     if (this.props.questions && this.props.questions.extra_params &&

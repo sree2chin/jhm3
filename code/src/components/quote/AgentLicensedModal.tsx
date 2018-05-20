@@ -30,7 +30,7 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
   state = {}
 
   handlePhoneChange(e) {
-    var val = e.target.value;
+    var val = String(e.target.value).trim();
     var sampleVal = "123-123-1234";
     if (val.length > 0 && (sampleVal && sampleVal.length > val.length) && !(new RegExp(/^[a-zA-Z0-9]*$/).test(sampleVal[val.length]))) {
       if (this.state.value && this.state.value.length > val.length) {

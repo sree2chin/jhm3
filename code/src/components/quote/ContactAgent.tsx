@@ -54,7 +54,7 @@ class ContactAgent extends React.Component<Props, {}> {
 
   handlePhoneChange(e) {
     this.setState({
-      phone: e.target.value
+      phone: String(e.target.value).trim()
     });
   }
   handleSlotChange(v) {

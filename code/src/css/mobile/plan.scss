@@ -130,6 +130,10 @@
 		}
 		.riders-outer-container .c-center {
 			padding-left: 41px;
+			.product-main-content {
+				overflow-y: scroll;
+				height: 200px;
+			}
 		}
 	}
 	.product-pager-container .plan-details-container {
