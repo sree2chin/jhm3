@@ -335,12 +335,12 @@ module.exports = function(app) {
         console.log('SITEMAP-REQUEST-SUCCESS');
     });
   });
-
+/*
   app.get('/favicon.ico', function(req, res) {
     res.status(204);
     res.send();
   });
-
+*/
   app.get('*.map', function(req, res, next) {
     res.rend("");
   });

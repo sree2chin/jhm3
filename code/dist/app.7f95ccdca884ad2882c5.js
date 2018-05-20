@@ -1,1 +1,1012 @@
-webpackJsonp([0],{0:function(e,t,n){"use strict";var r=n(1),o=n(37),a=n(184),s=n(247);function i(e,t){n.e(2,function(){return t(null,n(546).default)})}function u(e,t){n.e(2,function(){return t(null,n(895).default)})}function p(e,t){n.e(2,function(){return t(null,n(901).default)})}function c(e,t){n.e(2,function(){return t(null,n(971).default)})}function l(e,t){n.e(2,function(){return t(null,n(972).default)})}function f(e,t){n.e(2,function(){return t(null,n(973).default)})}function d(e,t){n.e(2,function(){return t(null,n(974).default)})}function h(e,t){n.e(2,function(){return t(null,n(975).default)})}o.render(r.createElement(a.Router,{history:a.browserHistory},r.createElement(a.Route,{path:"/",component:s.default},r.createElement(a.IndexRoute,{getComponent:i}),r.createElement(a.Route,{path:"/products",getComponent:u}),r.createElement(a.Route,{path:"/plans",getComponent:p}),r.createElement(a.Route,{path:"/next-steps",getComponent:function(e,t){n.e(2,function(){return t(null,n(963).default)})}}),r.createElement(a.Route,{path:"/questions",getComponent:function(e,t){n.e(2,function(){return t(null,n(706).default)})}}),r.createElement(a.Route,{path:"/authorize",getComponent:function(e,t){n.e(2,function(){return t(null,n(726).default)})}}),r.createElement(a.Route,{path:"/error",getComponent:function(e,t){n.e(2,function(){return t(null,n(729).default)})}}),r.createElement(a.Route,{path:"/all-questions",getComponent:function(e,t){n.e(2,function(){return t(null,n(730).default)})}}),r.createElement(a.Route,{path:"/edit-questions",getComponent:function(e,t){n.e(2,function(){return t(null,n(893).default)})}}),r.createElement(a.Route,{path:"/edit-questions/beneficiaries",getComponent:function(e,t){n.e(2,function(){return t(null,n(894).default)})}}),r.createElement(a.Route,{path:"/signature",getComponent:function(e,t){n.e(2,function(){return t(null,n(731).default)})}}),r.createElement(a.Route,{path:"/offer",getComponent:function(e,t){n.e(2,function(){return t(null,n(732).default)})}}),r.createElement(a.Route,{path:"/payment_success",getComponent:function(e,t){n.e(2,function(){return t(null,n(976).default)})}}),r.createElement(a.Route,{path:"/payment",getComponent:function(e,t){n.e(2,function(){return t(null,n(977).default)})}}),r.createElement(a.Route,{path:"/agent",getComponent:i}),r.createElement(a.Route,{path:"/agent/products",getComponent:u}),r.createElement(a.Route,{path:"/agent/plans",getComponent:p}),r.createElement(a.Route,{path:"/agent/next-steps",getComponent:function(e,t){n.e(2,function(){return t(null,n(969).default)})}}),r.createElement(a.Route,{path:"/connect-to-agent",getComponent:c}),r.createElement(a.Route,{path:"/connect-through-application",getComponent:f}),r.createElement(a.Route,{path:"/agent/connect-to-agent",getComponent:c}),r.createElement(a.Route,{path:"/connect-agent-success",getComponent:d}),r.createElement(a.Route,{path:"/agent/connect-agent-success",getComponent:d}),r.createElement(a.Route,{path:"/email-to-quote",getComponent:l}),r.createElement(a.Route,{path:"/agent/email-to-quote",getComponent:l}),r.createElement(a.Route,{path:"/agent/connect-through-application",getComponent:f}),r.createElement(a.Route,{path:"/agent/email-quote-success",getComponent:h}),r.createElement(a.Route,{path:"/email-quote-success",getComponent:h}),r.createElement(a.Route,{path:"/customer",getComponent:i}),r.createElement(a.Route,{path:"/quote",getComponent:i}),r.createElement(a.Route,{path:"/about",getComponent:function(e,t){n.e(1,function(){return t(null,n(545).default)})}}))),document.getElementById("root"))},247:function(e,t,n){"use strict";var r=this&&this.__extends||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);function r(){this.constructor=e}e.prototype=null===t?Object.create(t):(r.prototype=t.prototype,new r)},o=n(1),a=n(248),s=n(268),i=n(278),u=n(279),p=n(540),c=n(280),l=a.createStore(p.default,a.applyMiddleware(i.default)),f=function(e){function t(){e.apply(this,arguments)}return r(t,e),t.prototype.render=function(){var e="/payment"==this.props.location.pathname;return o.createElement(s.Provider,{store:l},o.createElement("div",{className:""},!e&&o.createElement(u.default,{logoImgSrc:"../images/logo.svg"}),o.createElement("div",{className:"c-body"},this.props.children),!e&&o.createElement(c.Row,{className:"c-footer hidden-xs",style:{marginBottom:"0px"}},o.createElement(c.Col,{xs:8,className:"c-footer-content c-center"},o.createElement(c.Row,null,o.createElement(c.Col,null,"Site Map »  Privacy Policy »"),o.createElement(c.Col,null,"© Copyright 2018 Vantis Life Insurance Company, Windsor, Connecticut, USA - All Rights Reserved."),o.createElement(c.Col,null,'Vantis, Vantis Life, and "A better life experience" are registered trademarks of Vantis Life Insurance Company.'),o.createElement(c.Col,null,"Life insurance and annuities issued by Vantis Life Insurance Company, Windsor, CT (all states except NY) and by Vantis Life Insurance Company of New York, Brewster, NY (NY only). Products not available in all states and state variations may apply."))))))},t}(o.Component);Object.defineProperty(t,"__esModule",{value:!0}),t.default=f},268:function(e,t,n){"use strict";t.__esModule=!0,t.connect=t.Provider=void 0;var r=a(n(269)),o=a(n(274));function a(e){return e&&e.__esModule?e:{default:e}}t.Provider=r.default,t.connect=o.default},269:function(e,u,p){(function(e){"use strict";u.__esModule=!0,u.default=void 0;var t=p(1),n=a(p(270)),r=a(p(272)),o=a(p(273));function a(e){return e&&e.__esModule?e:{default:e}}var s=!1;var i=function(r){function o(e,t){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,o);var n=function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}(this,r.call(this,e,t));return n.store=e.store,n}return function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}(o,r),o.prototype.getChildContext=function(){return{store:this.store}},o.prototype.render=function(){return t.Children.only(this.props.children)},o}(t.Component);u.default=i,"production"!==e.env.NODE_ENV&&(i.prototype.componentWillReceiveProps=function(e){this.store!==e.store&&(s||(s=!0,(0,o.default)("<Provider> does not support changing `store` on the fly. It is most likely that you see this error because you updated to Redux 2.x and React Redux 2.x which no longer hot reload reducers automatically. See https://github.com/reactjs/react-redux/releases/tag/v2.0.0 for the migration instructions.")))}),i.propTypes={store:r.default.isRequired,children:n.default.element.isRequired},i.childContextTypes={store:r.default.isRequired}}).call(u,p(3))},272:function(e,t,n){"use strict";t.__esModule=!0;var r,o=n(270),a=(r=o)&&r.__esModule?r:{default:r};t.default=a.default.shape({subscribe:a.default.func.isRequired,dispatch:a.default.func.isRequired,getState:a.default.func.isRequired})},273:function(e,t){"use strict";t.__esModule=!0,t.default=function(e){"undefined"!=typeof console&&"function"==typeof console.error&&console.error(e);try{throw new Error(e)}catch(e){}}},274:function(e,t,n){(function(P){"use strict";t.__esModule=!0;var g=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e};t.default=function(e,t,n){var r=3<arguments.length&&void 0!==arguments[3]?arguments[3]:{},u=Boolean(e),c=e||i,l=void 0;l="function"==typeof t?t:t?(0,s.default)(t):p;var f=n||N,o=r.pure,d=void 0===o||o,a=r.withRef,h=void 0!==a&&a,m=d&&f!==N,y=T++;return function(p){var e,s="Connect("+((e=p).displayName||e.name||"Component")+")";function i(e,t){(0,b.default)(e)||(0,S.default)(t+"() in "+s+" must return a plain object. Instead received "+e+".")}var t=function(o){function a(e,t){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,a);var n=function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}(this,o.call(this,e,t));n.version=y,n.store=e.store||t.store,(0,C.default)(n.store,'Could not find "store" in either the context or props of "'+s+'". Either wrap the root component in a <Provider>, or explicitly pass "store" as a prop to "'+s+'".');var r=n.store.getState();return n.state={storeState:r},n.clearCache(),n}return function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}(a,o),a.prototype.shouldComponentUpdate=function(){return!d||this.haveOwnPropsChanged||this.hasStoreStateChanged},a.prototype.computeStateProps=function(e,t){if(!this.finalMapStateToProps)return this.configureFinalMapState(e,t);var n=e.getState(),r=this.doStatePropsDependOnOwnProps?this.finalMapStateToProps(n,t):this.finalMapStateToProps(n);return"production"!==P.env.NODE_ENV&&i(r,"mapStateToProps"),r},a.prototype.configureFinalMapState=function(e,t){var n=c(e.getState(),t),r="function"==typeof n;return this.finalMapStateToProps=r?n:c,this.doStatePropsDependOnOwnProps=1!==this.finalMapStateToProps.length,r?this.computeStateProps(e,t):("production"!==P.env.NODE_ENV&&i(n,"mapStateToProps"),n)},a.prototype.computeDispatchProps=function(e,t){if(!this.finalMapDispatchToProps)return this.configureFinalMapDispatch(e,t);var n=e.dispatch,r=this.doDispatchPropsDependOnOwnProps?this.finalMapDispatchToProps(n,t):this.finalMapDispatchToProps(n);return"production"!==P.env.NODE_ENV&&i(r,"mapDispatchToProps"),r},a.prototype.configureFinalMapDispatch=function(e,t){var n=l(e.dispatch,t),r="function"==typeof n;return this.finalMapDispatchToProps=r?n:l,this.doDispatchPropsDependOnOwnProps=1!==this.finalMapDispatchToProps.length,r?this.computeDispatchProps(e,t):("production"!==P.env.NODE_ENV&&i(n,"mapDispatchToProps"),n)},a.prototype.updateStatePropsIfNeeded=function(){var e=this.computeStateProps(this.store,this.props);return(!this.stateProps||!(0,_.default)(e,this.stateProps))&&(this.stateProps=e,!0)},a.prototype.updateDispatchPropsIfNeeded=function(){var e=this.computeDispatchProps(this.store,this.props);return(!this.dispatchProps||!(0,_.default)(e,this.dispatchProps))&&(this.dispatchProps=e,!0)},a.prototype.updateMergedPropsIfNeeded=function(){var e=function(e,t,n){var r=f(e,t,n);"production"!==P.env.NODE_ENV&&i(r,"mergeProps");return r}(this.stateProps,this.dispatchProps,this.props);return!(this.mergedProps&&m&&(0,_.default)(e,this.mergedProps))&&(this.mergedProps=e,!0)},a.prototype.isSubscribed=function(){return"function"==typeof this.unsubscribe},a.prototype.trySubscribe=function(){u&&!this.unsubscribe&&(this.unsubscribe=this.store.subscribe(this.handleChange.bind(this)),this.handleChange())},a.prototype.tryUnsubscribe=function(){this.unsubscribe&&(this.unsubscribe(),this.unsubscribe=null)},a.prototype.componentDidMount=function(){this.trySubscribe()},a.prototype.componentWillReceiveProps=function(e){d&&(0,_.default)(e,this.props)||(this.haveOwnPropsChanged=!0)},a.prototype.componentWillUnmount=function(){this.tryUnsubscribe(),this.clearCache()},a.prototype.clearCache=function(){this.dispatchProps=null,this.stateProps=null,this.mergedProps=null,this.haveOwnPropsChanged=!0,this.hasStoreStateChanged=!0,this.haveStatePropsBeenPrecalculated=!1,this.statePropsPrecalculationError=null,this.renderedElement=null,this.finalMapDispatchToProps=null,this.finalMapStateToProps=null},a.prototype.handleChange=function(){if(this.unsubscribe){var e=this.store.getState(),t=this.state.storeState;if(!d||t!==e){if(d&&!this.doStatePropsDependOnOwnProps){var n=function(e,t){try{return e.apply(t)}catch(e){return R.value=e,R}}(this.updateStatePropsIfNeeded,this);if(!n)return;n===R&&(this.statePropsPrecalculationError=R.value),this.haveStatePropsBeenPrecalculated=!0}this.hasStoreStateChanged=!0,this.setState({storeState:e})}}},a.prototype.getWrappedInstance=function(){return(0,C.default)(h,"To access the wrapped instance, you need to specify { withRef: true } as the fourth argument of the connect() call."),this.refs.wrappedInstance},a.prototype.render=function(){var e=this.haveOwnPropsChanged,t=this.hasStoreStateChanged,n=this.haveStatePropsBeenPrecalculated,r=this.statePropsPrecalculationError,o=this.renderedElement;if(this.haveOwnPropsChanged=!1,this.hasStoreStateChanged=!1,this.haveStatePropsBeenPrecalculated=!1,this.statePropsPrecalculationError=null,r)throw r;var a=!0,s=!0;d&&o&&(a=t||e&&this.doStatePropsDependOnOwnProps,s=e&&this.doDispatchPropsDependOnOwnProps);var i=!1,u=!1;n?i=!0:a&&(i=this.updateStatePropsIfNeeded()),s&&(u=this.updateDispatchPropsIfNeeded());return!(!!(i||u||e)&&this.updateMergedPropsIfNeeded())&&o?o:(this.renderedElement=h?(0,E.createElement)(p,g({},this.mergedProps,{ref:"wrappedInstance"})):(0,E.createElement)(p,this.mergedProps),this.renderedElement)},a}(E.Component);return t.displayName=s,t.WrappedComponent=p,t.contextTypes={store:v.default},t.propTypes={store:v.default},"production"!==P.env.NODE_ENV&&(t.prototype.componentWillUpdate=function(){this.version!==y&&(this.version=y,this.trySubscribe(),this.clearCache())}),(0,O.default)(t,p)}};var E=n(1),v=e(n(272)),_=e(n(275)),s=e(n(276)),S=e(n(273)),b=e(n(250)),O=e(n(277)),C=e(n(192));function e(e){return e&&e.__esModule?e:{default:e}}var i=function(e){return{}},p=function(e){return{dispatch:e}},N=function(e,t,n){return g({},n,e,t)};var R={value:null};var T=0}).call(t,n(3))},275:function(e,t){"use strict";t.__esModule=!0,t.default=function(e,t){if(e===t)return!0;var n=Object.keys(e),r=Object.keys(t);if(n.length!==r.length)return!1;for(var o=Object.prototype.hasOwnProperty,a=0;a<n.length;a++)if(!o.call(t,n[a])||e[n[a]]!==t[n[a]])return!1;return!0}},276:function(e,t,n){"use strict";t.__esModule=!0,t.default=function(t){return function(e){return(0,r.bindActionCreators)(t,e)}};var r=n(248)},277:function(e,t,n){var r;r=function(){"use strict";var p={childContextTypes:!0,contextTypes:!0,defaultProps:!0,displayName:!0,getDefaultProps:!0,getDerivedStateFromProps:!0,mixins:!0,propTypes:!0,type:!0},c={name:!0,length:!0,prototype:!0,caller:!0,callee:!0,arguments:!0,arity:!0},l=Object.defineProperty,f=Object.getOwnPropertyNames,d=Object.getOwnPropertySymbols,h=Object.getOwnPropertyDescriptor,m=Object.getPrototypeOf,y=m&&m(Object);return function e(t,n,r){if("string"!=typeof n){if(y){var o=m(n);o&&o!==y&&e(t,o,r)}var a=f(n);d&&(a=a.concat(d(n)));for(var s=0;s<a.length;++s){var i=a[s];if(!(p[i]||c[i]||r&&r[i])){var u=h(n,i);try{l(t,i,u)}catch(e){}}}return t}return t}},e.exports=r()},279:function(e,t,n){"use strict";var r=this&&this.__extends||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);function r(){this.constructor=e}e.prototype=null===t?Object.create(t):(r.prototype=t.prototype,new r)},o=n(1),a=n(280),s=n(539),i=function(e){function t(){e.apply(this,arguments)}return r(t,e),t.prototype.render=function(){return o.createElement(a.Navbar,{className:"cf-nav-main-header"},o.createElement(a.Navbar.Header,null,o.createElement("div",null,o.createElement(a.Navbar.Brand,null,o.createElement("img",{src:this.props.logoImgSrc})))),o.createElement(a.Navbar.Text,{pullRight:!0},o.createElement("div",{className:"header-text",style:{marginLeft:"22px",fontSize:"16px"}},o.createElement("div",{style:{textAlign:"right"}},"Need help? ",o.createElement("a",{href:"tel:1-866-826-8471"},o.createElement("img",{className:"visible-xs",style:{float:"right",paddingLeft:"10px",paddingTop:"4px"},src:"../images/small-phone.svg"}))),o.createElement("div",{className:"hidden-xs",style:{fontSize:"18px"}},o.createElement(s.default,{phoneNumber:"1-866-826-8471"})))))},t}(o.Component);Object.defineProperty(t,"__esModule",{value:!0}),t.default=i},539:function(e,t,n){"use strict";var r=n(1),o=r.createClass({render:function(){return r.createElement("a",{href:"tel:"+this.props.phoneNumber},this.props.phoneNumber)}});Object.defineProperty(t,"__esModule",{value:!0}),t.default=o},540:function(e,t,n){"use strict";var r=n(248),o=n(541),a=n(542),s=n(543),i=n(544);Object.defineProperty(t,"__esModule",{value:!0}),t.default=r.combineReducers({states:o.default,quotes:a.default,questions:s.default,selectPersons:i.default})},541:function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e,t){switch(void 0===e&&(e=[]),t.type){case"MEMBERS_ASSIGN":return t.members.slice();default:return e}}},542:function(e,t,n){"use strict";var a=n(4);Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e,t){switch(void 0===e&&(e=[]),t.type){case"SUMBMITTED_PERSONAL_INFO":return a({},e,{products:t.products,productValidations:t.productValidations,isProductFetchCallDone:!0,is_agent:t.is_agent});case"SUMBMITTED_PRODUCTS_INFO":return a({},e,{plans:t.plans});case"SUMBMITTED_PLANS_INFO":var n;return t.premiums&&t.premiums.LOGIN_URL&&0<t.premiums.LOGIN_URL.length?a({},e,{premiums:t.premiums}):(!(n=e.premiums?JSON.parse(JSON.stringify(e.premiums)):t.premiums)[1]&&t.premiums[1]&&(n[1]=t.premiums[1]),n[0]&&t.premiums[0]&&(n[0].input_data=t.premiums[0].input_data,t.premiums[0].plans_data&&t.premiums[0].plans_data.ProductID&&(n[0][t.premiums[0].plans_data.ProductID]=t.premiums[0].plans_data)),n[1]&&t.premiums[1]&&(n[1].input_data=t.premiums[1].input_data,t.premiums[1].plans_data&&t.premiums[1].plans_data.ProductID&&(n[1][t.premiums[1].plans_data.ProductID]=t.premiums[1].plans_data)),a({},e,{premiums:n}));case"SETTING_PERSONS_INFO":return a({},e,{persons:t.persons});case"SETTING_TYPE_OF_SUBMISSION":return a({},e,{typeOfSubmission:t.typeOfSubmission});case"OPEN_EDIT_PERSON_MODAL":return a({},e,{showModalEditPerson:!0,editablePerson:t.editablePerson,editablePersonIndex:t.editablePersonIndex});case"CLOSE_EDIT_PERSON_MODAL":return a({},e,{showModalEditPerson:!1,editablePerson:{}});case"EDITED_PERSON":var r=JSON.parse(JSON.stringify(t.person)),o=JSON.parse(JSON.stringify(e.persons));return o[parseInt(r.applicant)-1]=r,a({},e,{editablePerson:r,persons:o});case"SUMBMITTED_SAVE_QUOTE":return a({},e,{quoteResponse:t.quoteResponse});case"SUMBMITTED_EMAIL_INFO":return a({},e,{isSubmmitedEmailForm:t.isSubmmitedPlansForm});default:return e}}},543:function(e,t,n){"use strict";var r=n(4);Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e,t){switch(void 0===e&&(e=[]),t.type){case"FETCHING_QUESTIONS":case"POSTING_QUESTIONS":return r({},e,{questions:t.questions});case"CONFIRM_QUESTIONS":return r({},e,{confirmationData:t.confirmationData});case"MADE_PAYMENT":return r({},e,{paymentData:t.paymentData});case"AUTHENTICATE_USER":case"PASSWORD_RESET":return r({},e,{user:t.user});case"POST_PAYMENT_DONE":return r({},e,{paymentInfo:t.paymentInfo});default:return e}}},544:function(e,t,n){"use strict";var r=n(4);Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e,t){switch(void 0===e&&(e=[]),t.type){case"NUMBER_OF_PERSONS_SELECTED":return r({},e,{noOfPersons:t.noOfPersons});default:return e}}}});
+webpackJsonp([0],{
+
+/***/ 0:
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(37);
+	var react_router_1 = __webpack_require__(184);
+	var app_1 = __webpack_require__(247);
+	function loadAboutPage(location, callback) {
+	    __webpack_require__.e/* nsure */(1, function () { return callback(null, __webpack_require__(545).default); });
+	}
+	;
+	function loadQuotePage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(546).default); });
+	}
+	function loadQuestionsPage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(706).default); });
+	}
+	function loadAuthorisePage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(726).default); });
+	}
+	function loadErrorPage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(729).default); });
+	}
+	function allQuestionsPage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(730).default); });
+	}
+	function getSignaturePage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(731).default); });
+	}
+	function getOfferPage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(732).default); });
+	}
+	function editQuestionsPage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(893).default); });
+	}
+	function editBeneficiaryQuestionsPage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(894).default); });
+	}
+	function editSignaturePage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(893).default); });
+	}
+	function loadProductsPage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(895).default); });
+	}
+	function loadPlansPage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(901).default); });
+	}
+	function loadNextStepsPage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(963).default); });
+	}
+	function loadAgentNextStepsPage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(969).default); });
+	}
+	function loadContactAgent(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(971).default); });
+	}
+	function loadEmailToQuote(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(972).default); });
+	}
+	function loadEmailCaptureToQuote(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(973).default); });
+	}
+	function loadContactAgentSuccess(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(974).default); });
+	}
+	function loadEmailToQuoteSuccess(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(975).default); });
+	}
+	function loadPaymentSuccessPage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(976).default); });
+	}
+	function loadPaymentPage(location, callback) {
+	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(977).default); });
+	}
+	ReactDOM.render(React.createElement(react_router_1.Router, {history: react_router_1.browserHistory}, React.createElement(react_router_1.Route, {path: "/", component: app_1.default}, React.createElement(react_router_1.IndexRoute, {getComponent: loadQuotePage}), React.createElement(react_router_1.Route, {path: "/products", getComponent: loadProductsPage}), React.createElement(react_router_1.Route, {path: "/plans", getComponent: loadPlansPage}), React.createElement(react_router_1.Route, {path: "/next-steps", getComponent: loadNextStepsPage}), React.createElement(react_router_1.Route, {path: "/questions", getComponent: loadQuestionsPage}), React.createElement(react_router_1.Route, {path: "/authorize", getComponent: loadAuthorisePage}), React.createElement(react_router_1.Route, {path: "/error", getComponent: loadErrorPage}), React.createElement(react_router_1.Route, {path: "/all-questions", getComponent: allQuestionsPage}), React.createElement(react_router_1.Route, {path: "/edit-questions", getComponent: editQuestionsPage}), React.createElement(react_router_1.Route, {path: "/edit-questions/beneficiaries", getComponent: editBeneficiaryQuestionsPage}), React.createElement(react_router_1.Route, {path: "/signature", getComponent: getSignaturePage}), React.createElement(react_router_1.Route, {path: "/offer", getComponent: getOfferPage}), React.createElement(react_router_1.Route, {path: "/payment_success", getComponent: loadPaymentSuccessPage}), React.createElement(react_router_1.Route, {path: "/payment", getComponent: loadPaymentPage}), React.createElement(react_router_1.Route, {path: "/agent", getComponent: loadQuotePage}), React.createElement(react_router_1.Route, {path: "/agent/products", getComponent: loadProductsPage}), React.createElement(react_router_1.Route, {path: "/agent/plans", getComponent: loadPlansPage}), React.createElement(react_router_1.Route, {path: "/agent/next-steps", getComponent: loadAgentNextStepsPage}), React.createElement(react_router_1.Route, {path: "/connect-to-agent", getComponent: loadContactAgent}), React.createElement(react_router_1.Route, {path: "/connect-through-application", getComponent: loadEmailCaptureToQuote}), React.createElement(react_router_1.Route, {path: "/agent/connect-to-agent", getComponent: loadContactAgent}), React.createElement(react_router_1.Route, {path: "/connect-agent-success", getComponent: loadContactAgentSuccess}), React.createElement(react_router_1.Route, {path: "/agent/connect-agent-success", getComponent: loadContactAgentSuccess}), React.createElement(react_router_1.Route, {path: "/email-to-quote", getComponent: loadEmailToQuote}), React.createElement(react_router_1.Route, {path: "/agent/email-to-quote", getComponent: loadEmailToQuote}), React.createElement(react_router_1.Route, {path: "/agent/connect-through-application", getComponent: loadEmailCaptureToQuote}), React.createElement(react_router_1.Route, {path: "/agent/email-quote-success", getComponent: loadEmailToQuoteSuccess}), React.createElement(react_router_1.Route, {path: "/email-quote-success", getComponent: loadEmailToQuoteSuccess}), React.createElement(react_router_1.Route, {path: "/customer", getComponent: loadQuotePage}), React.createElement(react_router_1.Route, {path: "/quote", getComponent: loadQuotePage}), React.createElement(react_router_1.Route, {path: "/about", getComponent: loadAboutPage}))), document.getElementById('root'));
+
+
+/***/ }),
+
+/***/ 247:
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var React = __webpack_require__(1);
+	var redux_1 = __webpack_require__(248);
+	var react_redux_1 = __webpack_require__(268);
+	var redux_thunk_1 = __webpack_require__(278);
+	var header_1 = __webpack_require__(279);
+	var reducers_1 = __webpack_require__(540);
+	var react_bootstrap_1 = __webpack_require__(280);
+	var store = redux_1.createStore(reducers_1.default, redux_1.applyMiddleware(redux_thunk_1.default));
+	var App = (function (_super) {
+	    __extends(App, _super);
+	    function App() {
+	        _super.apply(this, arguments);
+	    }
+	    App.prototype.render = function () {
+	        var isPaymentPage = this.props.location.pathname == "/payment";
+	        return (React.createElement(react_redux_1.Provider, {store: store}, React.createElement("div", {className: ""}, !isPaymentPage && React.createElement(header_1.default, {logoImgSrc: "../images/logo.svg"}), React.createElement("div", {className: "c-body"}, this.props.children), !isPaymentPage && React.createElement(react_bootstrap_1.Row, {className: "c-footer hidden-xs", style: { marginBottom: "0px" }}, React.createElement(react_bootstrap_1.Col, {xs: 8, className: "c-footer-content c-center"}, React.createElement(react_bootstrap_1.Row, null, React.createElement(react_bootstrap_1.Col, null, "Site Map »  Privacy Policy »"), React.createElement(react_bootstrap_1.Col, null, "© Copyright 2018 Vantis Life Insurance Company, Windsor, Connecticut, USA - All Rights Reserved."), React.createElement(react_bootstrap_1.Col, null, "Vantis, Vantis Life, and \"A better life experience\" are registered trademarks of Vantis Life Insurance Company."), React.createElement(react_bootstrap_1.Col, null, "Life insurance and annuities issued by Vantis Life Insurance Company, Windsor, CT (all states except NY) and by Vantis Life Insurance Company of New York, Brewster, NY (NY only). Products not available in all states and state variations may apply.")))))));
+	    };
+	    return App;
+	}(React.Component));
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = App;
+
+
+/***/ }),
+
+/***/ 268:
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports.connect = exports.Provider = undefined;
+	
+	var _Provider = __webpack_require__(269);
+	
+	var _Provider2 = _interopRequireDefault(_Provider);
+	
+	var _connect = __webpack_require__(274);
+	
+	var _connect2 = _interopRequireDefault(_connect);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	exports.Provider = _Provider2["default"];
+	exports.connect = _connect2["default"];
+
+/***/ }),
+
+/***/ 269:
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	exports.__esModule = true;
+	exports["default"] = undefined;
+	
+	var _react = __webpack_require__(1);
+	
+	var _propTypes = __webpack_require__(270);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _storeShape = __webpack_require__(272);
+	
+	var _storeShape2 = _interopRequireDefault(_storeShape);
+	
+	var _warning = __webpack_require__(273);
+	
+	var _warning2 = _interopRequireDefault(_warning);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var didWarnAboutReceivingStore = false;
+	function warnAboutReceivingStore() {
+	  if (didWarnAboutReceivingStore) {
+	    return;
+	  }
+	  didWarnAboutReceivingStore = true;
+	
+	  (0, _warning2["default"])('<Provider> does not support changing `store` on the fly. ' + 'It is most likely that you see this error because you updated to ' + 'Redux 2.x and React Redux 2.x which no longer hot reload reducers ' + 'automatically. See https://github.com/reactjs/react-redux/releases/' + 'tag/v2.0.0 for the migration instructions.');
+	}
+	
+	var Provider = function (_Component) {
+	  _inherits(Provider, _Component);
+	
+	  Provider.prototype.getChildContext = function getChildContext() {
+	    return { store: this.store };
+	  };
+	
+	  function Provider(props, context) {
+	    _classCallCheck(this, Provider);
+	
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+	
+	    _this.store = props.store;
+	    return _this;
+	  }
+	
+	  Provider.prototype.render = function render() {
+	    return _react.Children.only(this.props.children);
+	  };
+	
+	  return Provider;
+	}(_react.Component);
+	
+	exports["default"] = Provider;
+	
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  Provider.prototype.componentWillReceiveProps = function (nextProps) {
+	    var store = this.store;
+	    var nextStore = nextProps.store;
+	
+	
+	    if (store !== nextStore) {
+	      warnAboutReceivingStore();
+	    }
+	  };
+	}
+	
+	Provider.propTypes = {
+	  store: _storeShape2["default"].isRequired,
+	  children: _propTypes2["default"].element.isRequired
+	};
+	Provider.childContextTypes = {
+	  store: _storeShape2["default"].isRequired
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+
+/***/ 272:
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _propTypes = __webpack_require__(270);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	exports["default"] = _propTypes2["default"].shape({
+	  subscribe: _propTypes2["default"].func.isRequired,
+	  dispatch: _propTypes2["default"].func.isRequired,
+	  getState: _propTypes2["default"].func.isRequired
+	});
+
+/***/ }),
+
+/***/ 273:
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports["default"] = warning;
+	/**
+	 * Prints a warning in the console if it exists.
+	 *
+	 * @param {String} message The warning message.
+	 * @returns {void}
+	 */
+	function warning(message) {
+	  /* eslint-disable no-console */
+	  if (typeof console !== 'undefined' && typeof console.error === 'function') {
+	    console.error(message);
+	  }
+	  /* eslint-enable no-console */
+	  try {
+	    // This error was thrown as a convenience so that if you enable
+	    // "break on all exceptions" in your console,
+	    // it would pause the execution at this line.
+	    throw new Error(message);
+	    /* eslint-disable no-empty */
+	  } catch (e) {}
+	  /* eslint-enable no-empty */
+	}
+
+/***/ }),
+
+/***/ 274:
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	exports.__esModule = true;
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	exports["default"] = connect;
+	
+	var _react = __webpack_require__(1);
+	
+	var _storeShape = __webpack_require__(272);
+	
+	var _storeShape2 = _interopRequireDefault(_storeShape);
+	
+	var _shallowEqual = __webpack_require__(275);
+	
+	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
+	
+	var _wrapActionCreators = __webpack_require__(276);
+	
+	var _wrapActionCreators2 = _interopRequireDefault(_wrapActionCreators);
+	
+	var _warning = __webpack_require__(273);
+	
+	var _warning2 = _interopRequireDefault(_warning);
+	
+	var _isPlainObject = __webpack_require__(250);
+	
+	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
+	
+	var _hoistNonReactStatics = __webpack_require__(277);
+	
+	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
+	
+	var _invariant = __webpack_require__(192);
+	
+	var _invariant2 = _interopRequireDefault(_invariant);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var defaultMapStateToProps = function defaultMapStateToProps(state) {
+	  return {};
+	}; // eslint-disable-line no-unused-vars
+	var defaultMapDispatchToProps = function defaultMapDispatchToProps(dispatch) {
+	  return { dispatch: dispatch };
+	};
+	var defaultMergeProps = function defaultMergeProps(stateProps, dispatchProps, parentProps) {
+	  return _extends({}, parentProps, stateProps, dispatchProps);
+	};
+	
+	function getDisplayName(WrappedComponent) {
+	  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+	}
+	
+	var errorObject = { value: null };
+	function tryCatch(fn, ctx) {
+	  try {
+	    return fn.apply(ctx);
+	  } catch (e) {
+	    errorObject.value = e;
+	    return errorObject;
+	  }
+	}
+	
+	// Helps track hot reloading.
+	var nextVersion = 0;
+	
+	function connect(mapStateToProps, mapDispatchToProps, mergeProps) {
+	  var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+	
+	  var shouldSubscribe = Boolean(mapStateToProps);
+	  var mapState = mapStateToProps || defaultMapStateToProps;
+	
+	  var mapDispatch = void 0;
+	  if (typeof mapDispatchToProps === 'function') {
+	    mapDispatch = mapDispatchToProps;
+	  } else if (!mapDispatchToProps) {
+	    mapDispatch = defaultMapDispatchToProps;
+	  } else {
+	    mapDispatch = (0, _wrapActionCreators2["default"])(mapDispatchToProps);
+	  }
+	
+	  var finalMergeProps = mergeProps || defaultMergeProps;
+	  var _options$pure = options.pure,
+	      pure = _options$pure === undefined ? true : _options$pure,
+	      _options$withRef = options.withRef,
+	      withRef = _options$withRef === undefined ? false : _options$withRef;
+	
+	  var checkMergedEquals = pure && finalMergeProps !== defaultMergeProps;
+	
+	  // Helps track hot reloading.
+	  var version = nextVersion++;
+	
+	  return function wrapWithConnect(WrappedComponent) {
+	    var connectDisplayName = 'Connect(' + getDisplayName(WrappedComponent) + ')';
+	
+	    function checkStateShape(props, methodName) {
+	      if (!(0, _isPlainObject2["default"])(props)) {
+	        (0, _warning2["default"])(methodName + '() in ' + connectDisplayName + ' must return a plain object. ' + ('Instead received ' + props + '.'));
+	      }
+	    }
+	
+	    function computeMergedProps(stateProps, dispatchProps, parentProps) {
+	      var mergedProps = finalMergeProps(stateProps, dispatchProps, parentProps);
+	      if (process.env.NODE_ENV !== 'production') {
+	        checkStateShape(mergedProps, 'mergeProps');
+	      }
+	      return mergedProps;
+	    }
+	
+	    var Connect = function (_Component) {
+	      _inherits(Connect, _Component);
+	
+	      Connect.prototype.shouldComponentUpdate = function shouldComponentUpdate() {
+	        return !pure || this.haveOwnPropsChanged || this.hasStoreStateChanged;
+	      };
+	
+	      function Connect(props, context) {
+	        _classCallCheck(this, Connect);
+	
+	        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+	
+	        _this.version = version;
+	        _this.store = props.store || context.store;
+	
+	        (0, _invariant2["default"])(_this.store, 'Could not find "store" in either the context or ' + ('props of "' + connectDisplayName + '". ') + 'Either wrap the root component in a <Provider>, ' + ('or explicitly pass "store" as a prop to "' + connectDisplayName + '".'));
+	
+	        var storeState = _this.store.getState();
+	        _this.state = { storeState: storeState };
+	        _this.clearCache();
+	        return _this;
+	      }
+	
+	      Connect.prototype.computeStateProps = function computeStateProps(store, props) {
+	        if (!this.finalMapStateToProps) {
+	          return this.configureFinalMapState(store, props);
+	        }
+	
+	        var state = store.getState();
+	        var stateProps = this.doStatePropsDependOnOwnProps ? this.finalMapStateToProps(state, props) : this.finalMapStateToProps(state);
+	
+	        if (process.env.NODE_ENV !== 'production') {
+	          checkStateShape(stateProps, 'mapStateToProps');
+	        }
+	        return stateProps;
+	      };
+	
+	      Connect.prototype.configureFinalMapState = function configureFinalMapState(store, props) {
+	        var mappedState = mapState(store.getState(), props);
+	        var isFactory = typeof mappedState === 'function';
+	
+	        this.finalMapStateToProps = isFactory ? mappedState : mapState;
+	        this.doStatePropsDependOnOwnProps = this.finalMapStateToProps.length !== 1;
+	
+	        if (isFactory) {
+	          return this.computeStateProps(store, props);
+	        }
+	
+	        if (process.env.NODE_ENV !== 'production') {
+	          checkStateShape(mappedState, 'mapStateToProps');
+	        }
+	        return mappedState;
+	      };
+	
+	      Connect.prototype.computeDispatchProps = function computeDispatchProps(store, props) {
+	        if (!this.finalMapDispatchToProps) {
+	          return this.configureFinalMapDispatch(store, props);
+	        }
+	
+	        var dispatch = store.dispatch;
+	
+	        var dispatchProps = this.doDispatchPropsDependOnOwnProps ? this.finalMapDispatchToProps(dispatch, props) : this.finalMapDispatchToProps(dispatch);
+	
+	        if (process.env.NODE_ENV !== 'production') {
+	          checkStateShape(dispatchProps, 'mapDispatchToProps');
+	        }
+	        return dispatchProps;
+	      };
+	
+	      Connect.prototype.configureFinalMapDispatch = function configureFinalMapDispatch(store, props) {
+	        var mappedDispatch = mapDispatch(store.dispatch, props);
+	        var isFactory = typeof mappedDispatch === 'function';
+	
+	        this.finalMapDispatchToProps = isFactory ? mappedDispatch : mapDispatch;
+	        this.doDispatchPropsDependOnOwnProps = this.finalMapDispatchToProps.length !== 1;
+	
+	        if (isFactory) {
+	          return this.computeDispatchProps(store, props);
+	        }
+	
+	        if (process.env.NODE_ENV !== 'production') {
+	          checkStateShape(mappedDispatch, 'mapDispatchToProps');
+	        }
+	        return mappedDispatch;
+	      };
+	
+	      Connect.prototype.updateStatePropsIfNeeded = function updateStatePropsIfNeeded() {
+	        var nextStateProps = this.computeStateProps(this.store, this.props);
+	        if (this.stateProps && (0, _shallowEqual2["default"])(nextStateProps, this.stateProps)) {
+	          return false;
+	        }
+	
+	        this.stateProps = nextStateProps;
+	        return true;
+	      };
+	
+	      Connect.prototype.updateDispatchPropsIfNeeded = function updateDispatchPropsIfNeeded() {
+	        var nextDispatchProps = this.computeDispatchProps(this.store, this.props);
+	        if (this.dispatchProps && (0, _shallowEqual2["default"])(nextDispatchProps, this.dispatchProps)) {
+	          return false;
+	        }
+	
+	        this.dispatchProps = nextDispatchProps;
+	        return true;
+	      };
+	
+	      Connect.prototype.updateMergedPropsIfNeeded = function updateMergedPropsIfNeeded() {
+	        var nextMergedProps = computeMergedProps(this.stateProps, this.dispatchProps, this.props);
+	        if (this.mergedProps && checkMergedEquals && (0, _shallowEqual2["default"])(nextMergedProps, this.mergedProps)) {
+	          return false;
+	        }
+	
+	        this.mergedProps = nextMergedProps;
+	        return true;
+	      };
+	
+	      Connect.prototype.isSubscribed = function isSubscribed() {
+	        return typeof this.unsubscribe === 'function';
+	      };
+	
+	      Connect.prototype.trySubscribe = function trySubscribe() {
+	        if (shouldSubscribe && !this.unsubscribe) {
+	          this.unsubscribe = this.store.subscribe(this.handleChange.bind(this));
+	          this.handleChange();
+	        }
+	      };
+	
+	      Connect.prototype.tryUnsubscribe = function tryUnsubscribe() {
+	        if (this.unsubscribe) {
+	          this.unsubscribe();
+	          this.unsubscribe = null;
+	        }
+	      };
+	
+	      Connect.prototype.componentDidMount = function componentDidMount() {
+	        this.trySubscribe();
+	      };
+	
+	      Connect.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	        if (!pure || !(0, _shallowEqual2["default"])(nextProps, this.props)) {
+	          this.haveOwnPropsChanged = true;
+	        }
+	      };
+	
+	      Connect.prototype.componentWillUnmount = function componentWillUnmount() {
+	        this.tryUnsubscribe();
+	        this.clearCache();
+	      };
+	
+	      Connect.prototype.clearCache = function clearCache() {
+	        this.dispatchProps = null;
+	        this.stateProps = null;
+	        this.mergedProps = null;
+	        this.haveOwnPropsChanged = true;
+	        this.hasStoreStateChanged = true;
+	        this.haveStatePropsBeenPrecalculated = false;
+	        this.statePropsPrecalculationError = null;
+	        this.renderedElement = null;
+	        this.finalMapDispatchToProps = null;
+	        this.finalMapStateToProps = null;
+	      };
+	
+	      Connect.prototype.handleChange = function handleChange() {
+	        if (!this.unsubscribe) {
+	          return;
+	        }
+	
+	        var storeState = this.store.getState();
+	        var prevStoreState = this.state.storeState;
+	        if (pure && prevStoreState === storeState) {
+	          return;
+	        }
+	
+	        if (pure && !this.doStatePropsDependOnOwnProps) {
+	          var haveStatePropsChanged = tryCatch(this.updateStatePropsIfNeeded, this);
+	          if (!haveStatePropsChanged) {
+	            return;
+	          }
+	          if (haveStatePropsChanged === errorObject) {
+	            this.statePropsPrecalculationError = errorObject.value;
+	          }
+	          this.haveStatePropsBeenPrecalculated = true;
+	        }
+	
+	        this.hasStoreStateChanged = true;
+	        this.setState({ storeState: storeState });
+	      };
+	
+	      Connect.prototype.getWrappedInstance = function getWrappedInstance() {
+	        (0, _invariant2["default"])(withRef, 'To access the wrapped instance, you need to specify ' + '{ withRef: true } as the fourth argument of the connect() call.');
+	
+	        return this.refs.wrappedInstance;
+	      };
+	
+	      Connect.prototype.render = function render() {
+	        var haveOwnPropsChanged = this.haveOwnPropsChanged,
+	            hasStoreStateChanged = this.hasStoreStateChanged,
+	            haveStatePropsBeenPrecalculated = this.haveStatePropsBeenPrecalculated,
+	            statePropsPrecalculationError = this.statePropsPrecalculationError,
+	            renderedElement = this.renderedElement;
+	
+	
+	        this.haveOwnPropsChanged = false;
+	        this.hasStoreStateChanged = false;
+	        this.haveStatePropsBeenPrecalculated = false;
+	        this.statePropsPrecalculationError = null;
+	
+	        if (statePropsPrecalculationError) {
+	          throw statePropsPrecalculationError;
+	        }
+	
+	        var shouldUpdateStateProps = true;
+	        var shouldUpdateDispatchProps = true;
+	        if (pure && renderedElement) {
+	          shouldUpdateStateProps = hasStoreStateChanged || haveOwnPropsChanged && this.doStatePropsDependOnOwnProps;
+	          shouldUpdateDispatchProps = haveOwnPropsChanged && this.doDispatchPropsDependOnOwnProps;
+	        }
+	
+	        var haveStatePropsChanged = false;
+	        var haveDispatchPropsChanged = false;
+	        if (haveStatePropsBeenPrecalculated) {
+	          haveStatePropsChanged = true;
+	        } else if (shouldUpdateStateProps) {
+	          haveStatePropsChanged = this.updateStatePropsIfNeeded();
+	        }
+	        if (shouldUpdateDispatchProps) {
+	          haveDispatchPropsChanged = this.updateDispatchPropsIfNeeded();
+	        }
+	
+	        var haveMergedPropsChanged = true;
+	        if (haveStatePropsChanged || haveDispatchPropsChanged || haveOwnPropsChanged) {
+	          haveMergedPropsChanged = this.updateMergedPropsIfNeeded();
+	        } else {
+	          haveMergedPropsChanged = false;
+	        }
+	
+	        if (!haveMergedPropsChanged && renderedElement) {
+	          return renderedElement;
+	        }
+	
+	        if (withRef) {
+	          this.renderedElement = (0, _react.createElement)(WrappedComponent, _extends({}, this.mergedProps, {
+	            ref: 'wrappedInstance'
+	          }));
+	        } else {
+	          this.renderedElement = (0, _react.createElement)(WrappedComponent, this.mergedProps);
+	        }
+	
+	        return this.renderedElement;
+	      };
+	
+	      return Connect;
+	    }(_react.Component);
+	
+	    Connect.displayName = connectDisplayName;
+	    Connect.WrappedComponent = WrappedComponent;
+	    Connect.contextTypes = {
+	      store: _storeShape2["default"]
+	    };
+	    Connect.propTypes = {
+	      store: _storeShape2["default"]
+	    };
+	
+	    if (process.env.NODE_ENV !== 'production') {
+	      Connect.prototype.componentWillUpdate = function componentWillUpdate() {
+	        if (this.version === version) {
+	          return;
+	        }
+	
+	        // We are hot reloading!
+	        this.version = version;
+	        this.trySubscribe();
+	        this.clearCache();
+	      };
+	    }
+	
+	    return (0, _hoistNonReactStatics2["default"])(Connect, WrappedComponent);
+	  };
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+
+/***/ 275:
+/***/ (function(module, exports) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	exports["default"] = shallowEqual;
+	function shallowEqual(objA, objB) {
+	  if (objA === objB) {
+	    return true;
+	  }
+	
+	  var keysA = Object.keys(objA);
+	  var keysB = Object.keys(objB);
+	
+	  if (keysA.length !== keysB.length) {
+	    return false;
+	  }
+	
+	  // Test for A's keys different from B.
+	  var hasOwn = Object.prototype.hasOwnProperty;
+	  for (var i = 0; i < keysA.length; i++) {
+	    if (!hasOwn.call(objB, keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
+	      return false;
+	    }
+	  }
+	
+	  return true;
+	}
+
+/***/ }),
+
+/***/ 276:
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports["default"] = wrapActionCreators;
+	
+	var _redux = __webpack_require__(248);
+	
+	function wrapActionCreators(actionCreators) {
+	  return function (dispatch) {
+	    return (0, _redux.bindActionCreators)(actionCreators, dispatch);
+	  };
+	}
+
+/***/ }),
+
+/***/ 277:
+/***/ (function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2015, Yahoo! Inc.
+	 * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+	 */
+	(function (global, factory) {
+	     true ? module.exports = factory() :
+	    typeof define === 'function' && define.amd ? define(factory) :
+	    (global.hoistNonReactStatics = factory());
+	}(this, (function () {
+	    'use strict';
+	    
+	    var REACT_STATICS = {
+	        childContextTypes: true,
+	        contextTypes: true,
+	        defaultProps: true,
+	        displayName: true,
+	        getDefaultProps: true,
+	        getDerivedStateFromProps: true,
+	        mixins: true,
+	        propTypes: true,
+	        type: true
+	    };
+	    
+	    var KNOWN_STATICS = {
+	        name: true,
+	        length: true,
+	        prototype: true,
+	        caller: true,
+	        callee: true,
+	        arguments: true,
+	        arity: true
+	    };
+	    
+	    var defineProperty = Object.defineProperty;
+	    var getOwnPropertyNames = Object.getOwnPropertyNames;
+	    var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+	    var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+	    var getPrototypeOf = Object.getPrototypeOf;
+	    var objectPrototype = getPrototypeOf && getPrototypeOf(Object);
+	    
+	    return function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
+	        if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
+	            
+	            if (objectPrototype) {
+	                var inheritedComponent = getPrototypeOf(sourceComponent);
+	                if (inheritedComponent && inheritedComponent !== objectPrototype) {
+	                    hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
+	                }
+	            }
+	            
+	            var keys = getOwnPropertyNames(sourceComponent);
+	            
+	            if (getOwnPropertySymbols) {
+	                keys = keys.concat(getOwnPropertySymbols(sourceComponent));
+	            }
+	            
+	            for (var i = 0; i < keys.length; ++i) {
+	                var key = keys[i];
+	                if (!REACT_STATICS[key] && !KNOWN_STATICS[key] && (!blacklist || !blacklist[key])) {
+	                    var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
+	                    try { // Avoid failures from read-only properties
+	                        defineProperty(targetComponent, key, descriptor);
+	                    } catch (e) {}
+	                }
+	            }
+	            
+	            return targetComponent;
+	        }
+	        
+	        return targetComponent;
+	    };
+	})));
+
+
+/***/ }),
+
+/***/ 279:
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var React = __webpack_require__(1);
+	var react_bootstrap_1 = __webpack_require__(280);
+	var TelLinkComponent_1 = __webpack_require__(539);
+	var Header = (function (_super) {
+	    __extends(Header, _super);
+	    function Header() {
+	        _super.apply(this, arguments);
+	    }
+	    Header.prototype.render = function () {
+	        return (React.createElement(react_bootstrap_1.Navbar, {className: "cf-nav-main-header"}, React.createElement(react_bootstrap_1.Navbar.Header, null, React.createElement("div", null, React.createElement(react_bootstrap_1.Navbar.Brand, null, React.createElement("img", {src: this.props.logoImgSrc})))), React.createElement(react_bootstrap_1.Navbar.Text, {pullRight: true}, React.createElement("div", {className: "header-text", style: { marginLeft: "22px", fontSize: "16px" }}, React.createElement("div", {style: { textAlign: "right" }}, "Need help? ", React.createElement("a", {href: "tel:" + "1-866-826-8471"}, React.createElement("img", {className: "visible-xs", style: { float: "right", paddingLeft: "10px", paddingTop: "4px" }, src: "../images/small-phone.svg"}))), React.createElement("div", {className: "hidden-xs", style: { fontSize: "18px" }}, React.createElement(TelLinkComponent_1.default, {phoneNumber: "1-866-826-8471"}))))));
+	    };
+	    return Header;
+	}(React.Component));
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = Header;
+
+
+/***/ }),
+
+/***/ 539:
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var React = __webpack_require__(1);
+	var TelLinkComponent = React.createClass({
+	    render: function () {
+	        return (React.createElement("a", {href: "tel:" + this.props.phoneNumber}, this.props.phoneNumber));
+	    }
+	});
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = TelLinkComponent;
+
+
+/***/ }),
+
+/***/ 540:
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var redux_1 = __webpack_require__(248);
+	var StatesReducer_1 = __webpack_require__(541);
+	var quotesReducer_1 = __webpack_require__(542);
+	var questionsReducer_1 = __webpack_require__(543);
+	var selectPersons_1 = __webpack_require__(544);
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = redux_1.combineReducers({
+	    states: StatesReducer_1.default,
+	    quotes: quotesReducer_1.default,
+	    questions: questionsReducer_1.default,
+	    selectPersons: selectPersons_1.default
+	});
+
+
+/***/ }),
+
+/***/ 541:
+/***/ (function(module, exports) {
+
+	"use strict";
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = function (state, action) {
+	    if (state === void 0) { state = []; }
+	    switch (action.type) {
+	        case 'MEMBERS_ASSIGN':
+	            return action.members.slice();
+	        default:
+	            return state;
+	    }
+	};
+
+
+/***/ }),
+
+/***/ 542:
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var objectAssign = __webpack_require__(4);
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = function (state, action) {
+	    if (state === void 0) { state = []; }
+	    switch (action.type) {
+	        case 'SUMBMITTED_PERSONAL_INFO':
+	            return objectAssign({}, state, { products: action.products, productValidations: action.productValidations, isProductFetchCallDone: true, is_agent: action.is_agent });
+	        case 'SUMBMITTED_PRODUCTS_INFO':
+	            return objectAssign({}, state, { plans: action.plans });
+	        case 'SUMBMITTED_PLANS_INFO':
+	            var premiums;
+	            if (action.premiums && action.premiums.LOGIN_URL && action.premiums.LOGIN_URL.length > 0) {
+	                return objectAssign({}, state, { premiums: action.premiums });
+	            }
+	            if (state.premiums) {
+	                premiums = JSON.parse(JSON.stringify(state.premiums));
+	            }
+	            else {
+	                premiums = action.premiums;
+	            }
+	            if (!premiums[1] && action.premiums[1]) {
+	                premiums[1] = action.premiums[1];
+	            }
+	            if (premiums[0] && action.premiums[0]) {
+	                premiums[0].input_data = action.premiums[0].input_data;
+	                if (action.premiums[0].plans_data && action.premiums[0].plans_data.ProductID) {
+	                    premiums[0][action.premiums[0].plans_data.ProductID] = action.premiums[0].plans_data;
+	                }
+	            }
+	            if (premiums[1] && action.premiums[1]) {
+	                premiums[1].input_data = action.premiums[1].input_data;
+	                if (action.premiums[1].plans_data) {
+	                    if (action.premiums[1].plans_data.ProductID) {
+	                        premiums[1][action.premiums[1].plans_data.ProductID] = action.premiums[1].plans_data;
+	                    }
+	                }
+	            }
+	            return objectAssign({}, state, { premiums: premiums });
+	        case "SETTING_PERSONS_INFO":
+	            return objectAssign({}, state, { persons: action.persons });
+	        case "SETTING_TYPE_OF_SUBMISSION":
+	            return objectAssign({}, state, { typeOfSubmission: action.typeOfSubmission });
+	        case "OPEN_EDIT_PERSON_MODAL":
+	            return objectAssign({}, state, { showModalEditPerson: true, editablePerson: action.editablePerson, editablePersonIndex: action.editablePersonIndex });
+	        case "CLOSE_EDIT_PERSON_MODAL":
+	            return objectAssign({}, state, { showModalEditPerson: false, editablePerson: {} });
+	        case "EDITED_PERSON":
+	            var person = JSON.parse(JSON.stringify(action.person));
+	            var persons = JSON.parse(JSON.stringify(state.persons));
+	            persons[parseInt(person["applicant"]) - 1] = person;
+	            return objectAssign({}, state, { editablePerson: person, persons: persons });
+	        case "SUMBMITTED_SAVE_QUOTE":
+	            return objectAssign({}, state, { quoteResponse: action.quoteResponse });
+	        case "SUMBMITTED_EMAIL_INFO":
+	            return objectAssign({}, state, { isSubmmitedEmailForm: action.isSubmmitedPlansForm });
+	        default:
+	            return state;
+	    }
+	};
+
+
+/***/ }),
+
+/***/ 543:
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var objectAssign = __webpack_require__(4);
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = function (state, action) {
+	    if (state === void 0) { state = []; }
+	    switch (action.type) {
+	        case 'FETCHING_QUESTIONS':
+	            return objectAssign({}, state, { questions: action.questions });
+	        case 'POSTING_QUESTIONS':
+	            return objectAssign({}, state, { questions: action.questions });
+	        case "CONFIRM_QUESTIONS":
+	            return objectAssign({}, state, { confirmationData: action.confirmationData });
+	        case "MADE_PAYMENT":
+	            return objectAssign({}, state, { paymentData: action.paymentData });
+	        case "AUTHENTICATE_USER":
+	            return objectAssign({}, state, { user: action.user });
+	        case "PASSWORD_RESET":
+	            return objectAssign({}, state, { user: action.user });
+	        case "POST_PAYMENT_DONE":
+	            return objectAssign({}, state, { paymentInfo: action.paymentInfo });
+	        default:
+	            return state;
+	    }
+	};
+
+
+/***/ }),
+
+/***/ 544:
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var objectAssign = __webpack_require__(4);
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = function (state, action) {
+	    if (state === void 0) { state = []; }
+	    switch (action.type) {
+	        case 'NUMBER_OF_PERSONS_SELECTED':
+	            return objectAssign({}, state, { noOfPersons: action.noOfPersons });
+	        default:
+	            return state;
+	    }
+	};
+
+
+/***/ })
+
+});
+//# sourceMappingURL=app.7f95ccdca884ad2882c5.js.map

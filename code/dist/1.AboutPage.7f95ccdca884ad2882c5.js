@@ -1,1 +1,30 @@
-webpackJsonp([1],{545:function(e,t,l){"use strict";var n=this&&this.__extends||function(e,t){for(var l in t)t.hasOwnProperty(l)&&(e[l]=t[l]);function n(){this.constructor=e}e.prototype=null===t?Object.create(t):(n.prototype=t.prototype,new n)},a=l(1),r=function(e){function t(){e.apply(this,arguments)}return n(t,e),t.prototype.render=function(){return a.createElement("div",{className:"row about-page top-buffer"},a.createElement("h1",{className:"jumbotron"},"Durga testing"),a.createElement("div",{className:"col-xs-12"},a.createElement("h1",null,a.createElement("small",null,"Testing redux")),a.createElement("div",{className:"col-xs-12"},a.createElement("h3",null,a.createElement("small",null,"We are adding Lazy Loading support to React Router: we are only loading AboutPage at startup and MemberPage + MembersPage are loaded just on user request.")))),a.createElement("div",{className:"col-xs-12 top-buffer"},a.createElement("h3",null,"Highlights"),a.createElement("hr",null),a.createElement("h3",null,a.createElement("small",null,"The most interesting parts worth to take a look"))),a.createElement("div",{className:"col-xs-12 top-buffer"},a.createElement("ul",null,a.createElement("li",{className:"top-buffer"},a.createElement("h4",null,a.createElement("b",null,"Configuration:")),a.createElement("ul",{className:"top-buffer"},a.createElement("li",{className:"top-buffer"},a.createElement("h4",null,"webpack.config.js: ",a.createElement("small",null,"code splitting into multiple bundles. We are creating app, styles and vendor bundles.",a.createElement("b",null,"Important"),": use '[name]' webpack variable in output.filename section when using multiple entry points."))))),a.createElement("li",{className:"top-buffer"},a.createElement("h4",null,a.createElement("b",null,"Components:")),a.createElement("ul",{className:"top-buffer"},a.createElement("li",null,a.createElement("h4",null,"index.tsx: ",a.createElement("small",null,"using require.ensure to request pages on demand."))))))))},t}(a.Component);Object.defineProperty(t,"__esModule",{value:!0}),t.default=r}});
+webpackJsonp([1],{
+
+/***/ 545:
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var React = __webpack_require__(1);
+	var About = (function (_super) {
+	    __extends(About, _super);
+	    function About() {
+	        _super.apply(this, arguments);
+	    }
+	    About.prototype.render = function () {
+	        return (React.createElement("div", {className: "row about-page top-buffer"}, React.createElement("h1", {className: "jumbotron"}, "Durga testing"), React.createElement("div", {className: "col-xs-12"}, React.createElement("h1", null, React.createElement("small", null, "Testing redux")), React.createElement("div", {className: "col-xs-12"}, React.createElement("h3", null, React.createElement("small", null, "We are adding Lazy Loading support to React Router: we are only loading AboutPage at startup and MemberPage + MembersPage" + ' ' + "are loaded just on user request.")))), React.createElement("div", {className: "col-xs-12 top-buffer"}, React.createElement("h3", null, "Highlights"), React.createElement("hr", null), React.createElement("h3", null, React.createElement("small", null, "The most interesting parts worth to take a look"))), React.createElement("div", {className: "col-xs-12 top-buffer"}, React.createElement("ul", null, React.createElement("li", {className: "top-buffer"}, React.createElement("h4", null, React.createElement("b", null, "Configuration:")), React.createElement("ul", {className: "top-buffer"}, React.createElement("li", {className: "top-buffer"}, React.createElement("h4", null, "webpack.config.js: ", React.createElement("small", null, "code splitting into multiple bundles. We are creating app, styles and vendor bundles.", React.createElement("b", null, "Important"), ": use '[name]' webpack variable in output.filename section when using multiple entry points."))))), React.createElement("li", {className: "top-buffer"}, React.createElement("h4", null, React.createElement("b", null, "Components:")), React.createElement("ul", {className: "top-buffer"}, React.createElement("li", null, React.createElement("h4", null, "index.tsx: ", React.createElement("small", null, "using require.ensure to request pages on demand.")))))))));
+	    };
+	    return About;
+	}(React.Component));
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = About;
+
+
+/***/ })
+
+});
+//# sourceMappingURL=1.AboutPage.7f95ccdca884ad2882c5.js.map
