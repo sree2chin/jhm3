@@ -910,6 +910,8 @@ input.form-control:focus {
 .product-pager-container .one-product-outer-container .single-product-container {
   padding-left: 0px; }
   .product-pager-container .one-product-outer-container .single-product-container:nth-child(2n) {
+    float: left; }
+  .product-pager-container .one-product-outer-container .single-product-container:nth-child(2n+1) {
     float: right; }
   .product-pager-container .one-product-outer-container .single-product-container .single-product-content {
     margin-left: 0px;
@@ -1070,6 +1072,9 @@ input.form-control:focus {
   overflow-y: scroll; }
   .product-pager-container .quote-product.product-selection-btn {
     overflow-y: hidden; }
+    .product-pager-container .quote-product.product-selection-btn:hover {
+      background-color: #eaf2f8 !important;
+      color: #317dbd !important; }
   .product-pager-container .quote-product.active {
     background-color: #265fad;
     color: white; }
@@ -1125,6 +1130,11 @@ input.form-control:focus {
     color: #317dbd;
     font-size: 16px;
     cursor: pointer; }
+  .product-custom-container .single-product-content .product-toggle-description-gradient {
+    background: linear-gradient(to bottom, rgba(242, 242, 242, 0.3), rgba(255, 255, 255, 0.9));
+    height: 84px;
+    position: relative;
+    top: -68px; }
   .product-custom-container .single-product-content .product-toggle-line {
     border-top: 2px solid #317dbd;
     position: absolute;
@@ -1139,8 +1149,7 @@ input.form-control:focus {
     margin-left: 0;
     margin-bottom: 8px; }
   .product-custom-container .single-product-content:hover {
-    background-color: #fff;
-    border: 2px solid #317dbd; }
+    background-color: #fff; }
   .product-custom-container .single-product-content:hover .c-product-text, .product-custom-container .single-product-content:hover .header, .product-custom-container .single-product-content:hover .c-product-desc-line {
     color: #317dbd; }
   .product-custom-container .single-product-content:hover .quote-product {
@@ -1237,6 +1246,34 @@ input.form-control:focus {
   width: 33px !important;
   height: 45px !important;
   margin-top: 30px !important; }
+
+#tickcontainer {
+  height: 100px;
+  width: 100px;
+  position: relative;
+  left: -2px; }
+
+.tickbg {
+  content: "\A0";
+  border: solid 50px #317dbd;
+  border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  height: 0;
+  width: 0;
+  display: block; }
+
+.tick {
+  height: 40px;
+  width: 19px;
+  border: solid #FFFFFF;
+  border-width: 0px 7px 7px 0px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  display: block;
+  margin-top: -25px;
+  margin-left: -5px; }
 
 .fs18 {
   font-size: 18px !important; }
