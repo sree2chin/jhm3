@@ -128,7 +128,10 @@ module.exports = new function(){
       input_json: JSON.stringify(req.body.questions.data),
     };
     if (!_.isEmpty(req.body.answered_questions)) {
-      formData.answered_questions = JSON.stringify(req.body.answered_questions)
+      formData.answered_questions = JSON.stringify(req.body.answered_questions);
+    }
+    if (!_.isEmpty(req.body.current_index)) {
+      formData.current_index = req.body.current_index;
     }
     appendAgentInfo(req, formData);
 
