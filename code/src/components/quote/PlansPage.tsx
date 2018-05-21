@@ -366,7 +366,7 @@ class PlansPage extends React.Component<Props, {}> {
         total += riderAmount;
       }
     }
-    total = "$" + String(Math.round(total*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    total = "$" + String((Math.round(total*100)/100).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     if (total.split(".") && total.split(".")[1] && total.split(".")[1].length==1) {
       total += "0";
     }
