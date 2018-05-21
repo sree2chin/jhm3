@@ -687,7 +687,7 @@ class PlansPage extends React.Component<Props, {}> {
               </Col>
             </Row>
           </Col>
-          <Col sm={3} xs={12} className="c-center plan-total-container hidden-xs container-max-width">
+          {!this.containsOnlySPWL() && <Col sm={3} xs={12} className="c-center plan-total-container hidden-xs container-max-width">
             <Row className="plans-selector-container" style={{marginLeft: "0px"}}>
               <Col md={4} sm={5} className="" style={{float: "right", marginRight: "15px"}}>
                 <Row>
@@ -701,7 +701,7 @@ class PlansPage extends React.Component<Props, {}> {
 
               </Col>
             </Row>
-          </Col>
+          </Col>}
         </Row>}
 
         <Row className="plans-continue-to-next-steps-container">
