@@ -2110,8 +2110,8 @@ input.form-control:focus {
     .product-pager-container .plan-details-container .plan-sider-info-text .plan-coverage-container {
       text-align: center;
       margin-top: 15px; }
-      .product-pager-container .plan-details-container .plan-sider-info-text .plan-coverage-container .plan-faceMax {
-        padding-left: 0px; }
+    .product-pager-container .plan-details-container .plan-sider-info-text .plan-faceMax {
+      padding-left: 0px; }
     .product-pager-container .plan-details-container .plan-sider-info-text .Select {
       margin-top: 5px;
       width: 82%;
