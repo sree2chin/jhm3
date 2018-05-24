@@ -223,7 +223,7 @@ class PlansPage extends React.Component<Props, {}> {
             personOne.sWP = 1;
           }
 
-          personOne.premium_amount = String(amount + riderAmount);
+          personOne.premium_amount = String(parseFloat(amount) + parseFloat(riderAmount));
           personOne.quote_premium = String(amount);
           personOne.premium_type=this.state.premium_type;
 
@@ -260,7 +260,7 @@ class PlansPage extends React.Component<Props, {}> {
               personTwo.sWP = 1;
             }
 
-            personTwo.premium_amount = String(amount + riderAmount);
+            personTwo.premium_amount =  String(parseFloat(amount) + parseFloat(riderAmount));
             personTwo.quote_premium = String(amount);
             personTwo.premium_type = this.state.premium_type;
 
