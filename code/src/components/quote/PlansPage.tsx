@@ -253,11 +253,11 @@ class PlansPage extends React.Component<Props, {}> {
             var amount = this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
             amount = amount ? parseFloat(amount.split("$")[1]) : 0;
             var riderAmount = 0;
-            personOne.sWP = 0;
+            personTwo.sWP = 0;
             if (this.state.selectedRider1 && this.state.selectedRider1.Premium) {
               riderAmount = this.state.selectedRider1.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider1.Premium[this.state.premium_type].split("$")[1])  : 0;
-              personOne.wp_premium = String(riderAmount);
-              personOne.sWP = 1;
+              personTwo.wp_premium = String(riderAmount);
+              personTwo.sWP = 1;
             }
 
             personTwo.premium_amount = String(amount + riderAmount);
