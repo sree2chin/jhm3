@@ -215,9 +215,18 @@ class PlansPage extends React.Component<Props, {}> {
         if(this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium ) {
           var amount = this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
           amount = amount ? amount.split("$")[1].replace(",", "") : 0;
+          var riderAmount = 0;
+          personOne.sWP = 0;
+          if (this.state.selectedRider0 && this.state.selectedRider0.Premium) {
+            riderAmount = this.state.selectedRider0.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider0.Premium[this.state.premium_type].split("$")[1]) : 0;
+            personOne.wp_premium = String(riderAmount);
+            personOne.sWP = 1;
+          }
 
-          personOne.premium_amount = String(amount);
+          personOne.premium_amount = String(amount + riderAmount);
+          personOne.quote_premium = String(amount);
           personOne.premium_type=this.state.premium_type;
+
         } else {
           this.setState({
             showPremiumAmountNotpresentError: true
@@ -243,9 +252,18 @@ class PlansPage extends React.Component<Props, {}> {
           if(this.props.premiums && this.props.premiums[1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium ) {
             var amount = this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
             amount = amount ? parseFloat(amount.split("$")[1]) : 0;
+            var riderAmount = 0;
+            personOne.sWP = 0;
+            if (this.state.selectedRider1 && this.state.selectedRider1.Premium) {
+              riderAmount = this.state.selectedRider1.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider1.Premium[this.state.premium_type].split("$")[1])  : 0;
+              personOne.wp_premium = String(riderAmount);
+              personOne.sWP = 1;
+            }
 
-            personTwo.premium_amount = String(amount);
-            personTwo.premium_type=this.state.premium_type;
+            personTwo.premium_amount = String(amount + riderAmount);
+            personTwo.quote_premium = String(amount);
+            personTwo.premium_type = this.state.premium_type;
+
           } else {
             this.setState({
               showPremiumAmountNotpresentError: true
