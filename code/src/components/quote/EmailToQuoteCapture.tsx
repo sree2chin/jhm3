@@ -27,7 +27,7 @@ class EmailToQuote extends React.Component<Props, {}> {
   constructor(){
     super();
     this.setState({
-      type_of_submission: 10002
+      type_of_submission: 10001
     });
   };
   state={};
@@ -127,6 +127,7 @@ class EmailToQuote extends React.Component<Props, {}> {
       var data = {
         applicants: JSON.stringify(persons)
       };
+      data.request_type = 1;
 
       this.props.setPersonsData(persons);
       var queryParams = this.props.location.query;
@@ -142,6 +143,10 @@ class EmailToQuote extends React.Component<Props, {}> {
       this.props.saveQuoteForm(data).then(() => {
         if (this.props.quoteResponse && this.props.quoteResponse.LOGIN_URL && this.props.quoteResponse.LOGIN_URL.length > 0) {
           window.location.href = this.props.quoteResponse.LOGIN_URL;
+          return;
+        }
+        if (this.props.quoteResponse && this.props.quoteResponse.redirect_url && this.props.quoteResponse.redirect_url.length > 0) {
+          window.location.href = this.props.quoteResponse.redirect_url;
           return;
         }
         const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent/" : "/";
@@ -261,7 +266,8 @@ const mapStateToProps = (state: any): Props => {
     plans: state.quotes.plans,
     premiums: state.quotes.premiums,
     typeOfSubmission: state.quotes.typeOfSubmission,
-    is_agent: state.quotes.is_agent
+    is_agent: state.quotes.is_agent,,
+    quoteResponse: state.quotes.quoteResponse
   };
 }
 

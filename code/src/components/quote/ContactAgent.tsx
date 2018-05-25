@@ -95,6 +95,7 @@ class ContactAgent extends React.Component<Props, {}> {
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
     personOne.type_of_submission = this.state.type_of_submission;
+    personOne.request_type = this.state.type_of_submission;
     if(this.state.email0) {
       personOne.email = this.state.email0;
     }
@@ -105,6 +106,7 @@ class ContactAgent extends React.Component<Props, {}> {
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
       personTwo.type_of_submission = this.state.type_of_submission;
+
       if(this.state.email1) {
         personTwo.email = this.state.email1;
       }
@@ -118,7 +120,7 @@ class ContactAgent extends React.Component<Props, {}> {
     };
 
     this.getExtraInfo(data)
-
+    data.request_type = 3;
 
     this.props.setPersonsData(persons);
     var queryParams = this.props.location.query;

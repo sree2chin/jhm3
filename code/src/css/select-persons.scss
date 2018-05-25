@@ -42,6 +42,9 @@
       &.default-image {
         display: block;
       }
+      &.hover-image, &.active-image {
+        display: none;
+      }
     }
     &.active {
       color: #317DBD;

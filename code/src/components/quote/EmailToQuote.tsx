@@ -121,7 +121,7 @@ class EmailToQuote extends React.Component<Props, {}> {
       var data = {
         applicants: JSON.stringify(persons)
       };
-
+      data.request_type = 2;
       this.props.setPersonsData(persons);
       var queryParams = this.props.location.query;
       var queryParamsString = "?";

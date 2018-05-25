@@ -203,7 +203,7 @@ class PlansPage extends React.Component<Props, {}> {
     browserHistory.push(basePath + "products" + queryParamsString);
   }
 
-  redirectToNextSteps() {
+  redirectToNextSteps(shouldNotRedirect) {
     this.productSubmissionBtnClicked = true;
     if(this.validatePlansSelections()) {
       const persons = [];
@@ -746,15 +746,15 @@ class PlansPage extends React.Component<Props, {}> {
               {this.state.submittingPlansFromPlan && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>
 
-            <span disabled={this.state.submittingPlansFromPlan} className="previous-btn-text visible-xs " onClick={() => {
+            <Button disabled={this.state.submittingPlansFromPlan} className="previous-btn-text c-button-default visible-xs " onClick={() => {
                 this.redirectToProductPage()
               }}
-              style={{backgroundColor: "#fb4d3d!important", marginBottom: "15px"}}
+              style={{backgroundColor: "#fb4d3d!important", color: "white", width: "100%" marginBottom: "15px"}}
             >
               PREVIOUS
               {this.state.movingToFinalStep && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </span>
-            <Button disabled={this.state.submittingPlansFromPlan} style={{marginBottom: "15px"}} className="c-button-default visible-xs" onClick={(){
+            <Button disabled={this.state.submittingPlansFromPlan} style={{marginBottom: "15px"}} className="c-button-default visible-xs" onClick={()=>{
                 this.redirectToNextSteps()
               }}
             >

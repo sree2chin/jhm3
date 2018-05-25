@@ -274,10 +274,19 @@ class PlansPage extends React.Component<Props, {}> {
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     if (this.state.nextStep == "continueToApplication") {
+      this.setState({
+        type_of_submission: 10001,
+      });
       browserHistory.push("/connect-through-application" + queryParamsString);
     } else if (this.state.nextStep == "connectMeToAgent") {
+      this.setState({
+        type_of_submission: 10003,
+      });
       browserHistory.push("/connect-to-agent" + queryParamsString);
     } else {
+      this.setState({
+        type_of_submission: 10002,
+      });
       browserHistory.push("/email-to-quote" + queryParamsString);
     }
   }
