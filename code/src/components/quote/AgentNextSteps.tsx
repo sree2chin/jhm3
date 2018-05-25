@@ -293,7 +293,11 @@ class PlansPage extends React.Component<Props, {}> {
         browserHistory.push("/agent/connect-to-agent" + queryParamsString);
       }, 100);
     } else if (this.state.nextStep == "printTheQuote") {
-      this.openPrintPdf();
+      this.changeTypeOfSubmission(10006);
+      //this.openPrintPdf();
+      setTimeout(() => {
+        browserHistory.push("/agent/email-to-quote" + queryParamsString);
+      }, 100);
     } else {
       this.changeTypeOfSubmission(10007);
       setTimeout(() => {

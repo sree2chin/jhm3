@@ -95,6 +95,61 @@ class EmailToQuote extends React.Component<Props, {}> {
 
     return !isError;
   };
+  getExtraInfo(data) {
+    if ( this.props.typeOfSubmission == 10003) {
+      data.request_type = 3;
+      if (this.state.slot) {
+        data.contact_time = this.state.slot;
+      }
+      if (this.state.phone) {
+        data.phone_number = this.state.phone;
+      }
+      if (this.state.text_accepted) {
+        data.text_accepted = this.state.text_accepted;
+      } else {
+        data.text_accepted = "No";
+      }
+    } else if (this.props.typeOfSubmission == 10001) {
+      data.request_type = 1;
+    } else if (this.props.typeOfSubmission == 10002) {
+      data.request_type = 2;
+    } else if (this.props.typeOfSubmission == 10004) {
+      data.request_type = 4;
+      if (this.state.slot) {
+        data.contact_time = this.state.slot;
+      }
+      if (this.state.phone) {
+        data.phone_number = this.state.phone;
+      }
+      if (this.state.text_accepted) {
+        data.text_accepted = this.state.text_accepted;
+      }
+    } else if (this.props.typeOfSubmission == 10005) {
+      data.request_type = 5;
+      if (this.state.slot) {
+        data.contact_time = this.state.slot;
+      }
+      if (this.state.phone) {
+        data.phone_number = this.state.phone;
+      }
+      if (this.state.text_accepted) {
+        data.text_accepted = this.state.text_accepted;
+      }
+    } else if (this.props.typeOfSubmission == 10006) {
+      data.request_type = 6;
+    } else if (this.props.typeOfSubmission == 10007) {
+      data.request_type = 7;
+    }
+    if (this.state.slot) {
+      data.contact_time = this.state.slot;
+    }
+    if (this.state.phone) {
+      data.phone_number = this.state.phone;
+    }
+    if (this.state.text_accepted) {
+      data.text_accepted = this.state.text_accepted;
+    }
+  }
   saveQuote() {
     const persons = [];
 
@@ -121,7 +176,7 @@ class EmailToQuote extends React.Component<Props, {}> {
       var data = {
         applicants: JSON.stringify(persons)
       };
-      data.request_type = 2;
+      this.getExtraInfo(data);
       this.props.setPersonsData(persons);
       var queryParams = this.props.location.query;
       var queryParamsString = "?";
@@ -132,10 +187,17 @@ class EmailToQuote extends React.Component<Props, {}> {
           queryParamsString += k + "&";
         }
       }
+      this.setState({
+        savingQuote: true
+      });
       queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
       this.props.saveQuoteForm(data).then(() => {
         if (this.props.quoteResponse && this.props.quoteResponse.LOGIN_URL && this.props.quoteResponse.LOGIN_URL.length > 0) {
           window.location.href = this.props.quoteResponse.LOGIN_URL;
+          return;
+        }
+        if (this.props.quoteResponse && this.props.quoteResponse.redirect_url && this.props.quoteResponse.redirect_url.length > 0) {
+          window.location.href = this.props.quoteResponse.redirect_url;
           return;
         }
         const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent/" : "/";
@@ -248,7 +310,8 @@ const mapStateToProps = (state: any): Props => {
     plans: state.quotes.plans,
     premiums: state.quotes.premiums,
     typeOfSubmission: state.quotes.typeOfSubmission,
-    is_agent: state.quotes.is_agent
+    is_agent: state.quotes.is_agent,
+    quoteResponse: state.quotes.quoteResponse
   };
 }
 

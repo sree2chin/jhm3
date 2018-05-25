@@ -266,7 +266,7 @@ const mapStateToProps = (state: any): Props => {
     plans: state.quotes.plans,
     premiums: state.quotes.premiums,
     typeOfSubmission: state.quotes.typeOfSubmission,
-    is_agent: state.quotes.is_agent,,
+    is_agent: state.quotes.is_agent,
     quoteResponse: state.quotes.quoteResponse
   };
 }

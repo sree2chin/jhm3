@@ -53,8 +53,19 @@ class ContactAgent extends React.Component<Props, {}> {
   }
 
   handlePhoneChange(e) {
+    var val = String(e.target.value).trim();
+    var sampleVal = "123-123-1234";
+    if (val.length > 0 && (sampleVal && sampleVal.length > val.length) && !(new RegExp(/^[a-zA-Z0-9]*$/).test(sampleVal[val.length]))) {
+      if (this.state.value && this.state.value.length > val.length) {
+
+      } else {
+        val = val + sampleVal[val.length];
+      }
+
+    }
+    val = String(val).trim();
     this.setState({
-      phone: String(e.target.value).trim()
+      phone: val
     });
   }
   handleSlotChange(v) {
@@ -64,6 +75,34 @@ class ContactAgent extends React.Component<Props, {}> {
   }
   onTextAllowedChange(k, v) {
     this.setState({[k]: v});
+  }
+  getExtraInfo(data) {
+    if ( this.props.typeOfSubmission == 10003) {
+      data.request_type = 3;
+    } else if (this.props.typeOfSubmission == 10001) {
+      data.request_type = 1;
+    } else if (this.props.typeOfSubmission == 10002) {
+      data.request_type = 2;
+    } else if (this.props.typeOfSubmission == 10004) {
+      data.request_type = 4;
+    } else if (this.props.typeOfSubmission == 10005) {
+      data.request_type = 5;
+    } else if (this.props.typeOfSubmission == 10006) {
+      data.request_type = 6;
+    } else if (this.props.typeOfSubmission == 10007) {
+      data.request_type = 7;
+    }
+    if (this.state.slot) {
+      data.contact_time = this.state.slot;
+    }
+    if (this.state.phone) {
+      data.phone_number = this.state.phone;
+    }
+    if (this.state.text_accepted) {
+      data.text_accepted = this.state.text_accepted;
+    } else {
+      data.text_accepted = "No";
+    }
   }
   directToCorrespondingPage() {
     var queryParams = this.props.location.query;
@@ -85,10 +124,6 @@ class ContactAgent extends React.Component<Props, {}> {
       browserHistory.push(basePath + "/agent/email-to-quote" + queryParamsString);
     }
   }
-  getExtraInfo(data) {
-      data.contact_time = this.state.slot;
-      data.phone_number = this.state.phone;
-  }
   saveQuote() {
     const persons = [];
 
@@ -96,31 +131,27 @@ class ContactAgent extends React.Component<Props, {}> {
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
     personOne.type_of_submission = this.state.type_of_submission;
     personOne.request_type = this.state.type_of_submission;
+    this.getExtraInfo(personOne);
     if(this.state.email0) {
       personOne.email = this.state.email0;
     }
-    this.getExtraInfo(personOne);
-
     persons.push(personOne);
 
     if(this.props.noOfPersons == 2) {
       const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
       personTwo.type_of_submission = this.state.type_of_submission;
-
+      this.getExtraInfo(personTwo);
       if(this.state.email1) {
         personTwo.email = this.state.email1;
       }
 
-      this.getExtraInfo(personOne);
       persons.push(personTwo);
     }
-
     var data = {
       applicants: JSON.stringify(persons)
     };
 
-    this.getExtraInfo(data)
-    data.request_type = 3;
+    this.getExtraInfo(data);
 
     this.props.setPersonsData(persons);
     var queryParams = this.props.location.query;
@@ -133,23 +164,92 @@ class ContactAgent extends React.Component<Props, {}> {
       }
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-
-    this.props.saveQuoteForm(data).then(() => {
-      if (this.props.quoteResponse && this.props.quoteResponse.LOGIN_URL && this.props.quoteResponse.LOGIN_URL.length > 0) {
-        window.location.href = this.props.quoteResponse.LOGIN_URL;
-        return;
-      }
-      const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent/" : "/";
-      browserHistory.push(basePath + "connect-agent-success" + queryParamsString);
-    }).catch(()=>{
-      this.submmitedProductForm = false;
-    });
+    if (this.validateEmailForm()) {
+      this.setState({
+        savingQuote: true
+      });
+      this.props.saveQuoteForm(data).then(() => {
+        if (this.props.quoteResponse && this.props.quoteResponse.LOGIN_URL && this.props.quoteResponse.LOGIN_URL.length > 0) {
+          window.location.href = this.props.quoteResponse.LOGIN_URL;
+          return;
+        }
+        if (this.props.quoteResponse && this.props.quoteResponse.redirect_url && this.props.quoteResponse.redirect_url.length > 0) {
+          window.location.href = this.props.quoteResponse.redirect_url;
+          return;
+        }
+        const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent/" : "/";
+        browserHistory.push(basePath + "connect-agent-success" + queryParamsString);
+      }).catch(()=>{
+        this.submmitedProductForm = false;
+      });
+    }
   }
   onSlotChange(key, obj) {
     this.setState({
       [key]: obj.value
     });
   }
+  getErrorsClassNames(errors, key) {
+    if(errors[key]) {
+      return "input-border-error";
+    }
+  };
+  validateEmailForm() {
+    var isError = false;
+    var emailRegex =  /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+
+    var input1Valid = emailRegex.test(this.state.email0);
+    var input2Valid = emailRegex.test(this.state.email1);
+
+    if ((!input1Valid && isEmpty(this.state.email0)) && (!input2Valid && isEmpty(this.state.email1))) {
+      isError = true;
+      this.setState({
+        emailErrorExists: true,
+        emailError0: true
+      });
+    } else {
+      isError = false;
+      this.setState({
+        emailErrorExists: false
+      });
+      if (!input2Valid && !isEmpty(this.state.email1)) {
+        isError = true;
+        this.setState({
+          ["emailError1"]: true
+        });
+      } else {
+        this.setState({
+          ["emailError1"]: false
+        });
+      }
+      if (!input1Valid && !isEmpty(this.state.email0)) {
+        isError = true;
+        this.setState({
+          ["emailError0"]: true
+        });
+      } else {
+        this.setState({
+          ["emailError0"]: false
+        });
+      }
+
+    }
+
+    return !isError;
+  };
+  handleChange(personIndex, e) {
+    if(this.state.emailErrorExists) {
+      if(this.validateEmailForm()) {
+        this.setState({
+          emailErrorExists: false
+        });
+      }
+    }
+    this.setState({
+      personIndex: personIndex,
+      ["email" + personIndex]: e.target.value
+    });
+  };
   public render() {
     const timingSlots = [
       {
@@ -214,18 +314,57 @@ class ContactAgent extends React.Component<Props, {}> {
         <Row className="okay-to-text-number">
           <FormGroup className="radio-group">
             <div className="c-radio" onClick={ ()=> {
-                    this.onTextAllowedChange("okay_to_text", "Yes")
+                    this.onTextAllowedChange("text_accepted", "Yes")
                   }}>
               <input
                 type="radio"
-                name={"okay_to_text"}
-                checked={this.state.okay_to_text == "Yes"}
+                name={"text_accepted"}
+                checked={this.state.text_accepted == "Yes"}
               />
               <span style={{top: "3px"}}></span>
-              <label htmlFor={"okay_to_text"}> It's okay to text this number. </label >
+              <label htmlFor={"text_accepted"}> It's okay to text this number. </label >
             </div>
           </FormGroup>
         </Row>
+        <Row style={{marginTop: "35px"}}>
+          <Col sm={12} className="email-label email-label-on-modal">
+            Applicant Email address 1
+          </Col>
+          <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
+            <Input
+              name={"email-1"}
+              placeholder={"Enter your email"}
+              value={this.state.email0}
+              onChange={(e)=>{
+                this.handleChange(0, e)
+              }}
+              className={this.getErrorsClassNames(this.state, "emailError0")}
+            />
+            { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
+              Please enter email address of applicant 1.
+            </Col> }
+          </Col>
+        </Row>
+        {this.props.noOfPersons ==2 && <Row style={{marginTop: "35px"}}>
+            <Col sm={12} className="email-label">
+              Applicant Email address 2
+            </Col>
+            <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
+              <Input
+                name={"email-1"}
+                placeholder={"Enter your email"}
+                value={this.state.email1}
+                onChange={(e)=>{
+                  this.handleChange(1, e)
+                }}
+                className={this.getErrorsClassNames(this.state, "emailError1")}
+              />
+            { this.state.emailError1 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
+              Please enter email address of applicant 2.
+            </Col> }
+            </Col>
+          </Row>
+        }
         <Row className="contact-agent-text-submit-btn-container">
           <Row>
             <Col xs={8} className="c-center" style={{marginTop: "20px"}}>
@@ -266,7 +405,8 @@ const mapStateToProps = (state: any): Props => {
     plans: state.quotes.plans,
     premiums: state.quotes.premiums,
     typeOfSubmission: state.quotes.typeOfSubmission,
-    is_agent: state.quotes.is_agent
+    is_agent: state.quotes.is_agent,
+    quoteResponse: state.quotes.quoteResponse
   };
 }
 
