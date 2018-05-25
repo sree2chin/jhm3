@@ -309,6 +309,8 @@ input.form-control:focus {
       display: none; }
       .c-select-persons-container .c-select-one-person img.default-image {
         display: block; }
+      .c-select-persons-container .c-select-one-person img.hover-image, .c-select-persons-container .c-select-one-person img.active-image {
+        display: none; }
     .c-select-persons-container .c-select-one-person.active {
       color: #317DBD;
       border: 2px solid #317DBD; }
@@ -1876,7 +1878,9 @@ input.form-control:focus {
   .enter-password-modal-container.email-modal-unique-container .email-quote-text.email-quote-text-on-modal {
     font-size: 26px; }
   .enter-password-modal-container.email-modal-unique-container .modal-footer {
-    padding-left: 31px !important; } }
+    padding-left: 31px !important; }
+  .enter-password-modal-container.email-modal-unique-container .modal-dialog {
+    width: 94%; } }
 
 .product-pager-container .two_products_conainer_width {
   width: 100% !important; }
@@ -3232,14 +3236,14 @@ input.form-control:focus {
     padding-top: 15px;
     width: 100% !important; }
     .product-continue-btn-container button {
-      width: 92% !important;
-      margin-left: 4%; }
+      width: 88% !important;
+      margin-left: 8%; }
   .riders-outer-container {
     margin-left: -5px;
     margin-right: 20px; }
   .product-pager-container .quote-this-product-container {
-    bottom: 2px;
-    width: 86%; }
+    bottom: 74px;
+    width: 85%; }
   .product-pager-container .product-selection-error-msg {
     margin-top: 20px; }
   .product-pager-container .product-page-continue-btn {
@@ -3330,6 +3334,9 @@ input.form-control:focus {
     padding-left: 41px !important;
     padding-right: 15px;
     width: 100%; }
+  .product-pager-container .riders-outer-container .rider-header-text {
+    width: 100%;
+    text-align: center !important; }
   .product-pager-container .plans-selector-container {
     height: auto;
     border-top: none;
@@ -3524,11 +3531,12 @@ input.form-control:focus {
     border-radius: 2px !important;
     background-color: white; }
     .next-steps-container .next-step-submit-btn-container .next-step-submit-btn {
-      width: 93%;
+      width: 97%;
       margin-bottom: 15px;
-      margin-top: 15px; }
+      margin-top: 15px;
+      margin-left: 5px; }
       .next-steps-container .next-step-submit-btn-container .next-step-submit-btn.back-btn {
-        background-color: #fb4d3d !important; }
+        background-color: #4584c0 !important; }
   .next-steps-container .customer-next-steps-container {
     width: 100%;
     margin-top: 0px; }
