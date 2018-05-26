@@ -65,6 +65,10 @@ class Offer extends React.Component<Props, {}> {
       window.location.href = this.questions.LOGIN_URL;
       return;
     }
+    if (this.questions && this.questions.redirect_url && this.questions.redirect_url.length > 0) {
+      window.location.href = this.questions.redirect_url;
+      return;
+    }
     if (nextProps.confirmationData.valid_user == 0) {
       browserHistory.push("/authorize" + queryParamsString);
       return;
@@ -87,6 +91,10 @@ class Offer extends React.Component<Props, {}> {
       //browserHistory.push("/signature");
       if (this.props.confirmationData && this.props.confirmationData.LOGIN_URL && this.props.confirmationData.LOGIN_URL.length > 0) {
         window.location.href = this.props.confirmationData.LOGIN_URL;
+        return;
+      }
+      if (this.props.confirmationData && this.props.confirmationData.redirect_url && this.props.confirmationData.redirect_url.length > 0) {
+        window.location.href = this.props.confirmationData.redirect_url;
         return;
       }
       var link = this.props.confirmationData && this.props.confirmationData.data &&
@@ -152,9 +160,17 @@ class Offer extends React.Component<Props, {}> {
       window.location.href = this.props.confirmationData.LOGIN_URL;
       return;
     }
+    if (this.props.confirmationData && this.props.confirmationData.redirect_url && this.props.confirmationData.redirect_url.length > 0) {
+      window.location.href = this.props.confirmationData.redirect_url;
+      return;
+    }
     this.props.postPayment(data).then(()=> {
       if (this.props.paymentInfo && this.props.paymentInfo.LOGIN_URL && this.props.paymentInfo.LOGIN_URL.length > 0) {
         window.location.href = this.props.paymentInfo.LOGIN_URL;
+        return;
+      }
+      if (this.props.paymentInfo && this.props.paymentInfo.redirect_url && this.props.paymentInfo.redirect_url.length > 0) {
+        window.location.href = this.props.paymentInfo.redirect_url;
         return;
       }
       if (this.props.paymentInfo && isEmpty(data.elavon_params)) {

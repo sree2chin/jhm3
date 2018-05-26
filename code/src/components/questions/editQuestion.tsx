@@ -48,6 +48,10 @@ class Main extends React.Component<Props, {}> {
         window.location.href = this.questions.LOGIN_URL;
         return;
       }
+      if (this.questions && this.questions.redirect_url && this.questions.redirect_url.length > 0) {
+        window.location.href = this.questions.redirect_url;
+        return;
+      }
         if (!this.alreadyAnsweredQueryQuestion && this.props.location.query && (this.props.location.query.fromReviewPage==true || this.props.location.query.fromReviewPage=="true" || (this.props.location.query.fromReviewPage && this.props.location.query.fromReviewPage[0]==true))) {
             var questionIdFromQuery = this.props.location.query.questionId;
             var currentPageIndex = this.getCurrentPageIndex(this.props.location.query.questionId);
@@ -663,6 +667,10 @@ class Main extends React.Component<Props, {}> {
         window.scrollTo(0, 0);
         if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
           window.location.href = this.questions.LOGIN_URL;
+          return;
+        }
+        if (this.questions && this.questions.redirect_url && this.questions.redirect_url.length > 0) {
+          window.location.href = this.questions.redirect_url;
           return;
         }
         if (this.state.previousQuestionHanldingIndex || this.state.previousQuestionHanldingIndex == 0) {

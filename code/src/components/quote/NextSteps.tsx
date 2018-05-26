@@ -196,6 +196,10 @@ class PlansPage extends React.Component<Props, {}> {
         window.location.href = this.props.quoteResponse.LOGIN_URL;
         return;
       }
+      if (this.props.quoteResponse && this.props.quoteResponse.redirect_url && this.props.quoteResponse.redirect_url.length > 0) {
+        window.location.href = this.props.quoteResponse.redirect_url;
+        return;
+      }
       var k1, k2;
       if(this.state.type_of_submission == 10002) {
         k1 = "showModalEmailThanks";

@@ -25,7 +25,10 @@ class paymentSuccess extends React.Component<Props, {}> {
       window.location.href = this.props.confirmationData.LOGIN_URL;
       return;
     }
-
+    if (this.props.confirmationData && this.props.confirmationData.redirect_url && this.props.confirmationData.redirect_url.length > 0) {
+      window.location.href = this.props.confirmationData.redirect_url;
+      return;
+    }
     this.setState({
       allDone: false
     });
@@ -55,6 +58,10 @@ class paymentSuccess extends React.Component<Props, {}> {
       this.props.makePayment(this.props.location.query).then((res)=>{
         if (this.props.paymentData && this.props.paymentData.LOGIN_URL && this.props.paymentData.LOGIN_URL.length > 0) {
           window.location.href = this.props.paymentData.LOGIN_URL;
+          return;
+        }
+        if (this.props.paymentData && this.props.paymentData.redirect_url && this.props.paymentData.redirect_url.length > 0) {
+          window.location.href = this.props.paymentData.redirect_url;
           return;
         }
         var link = this.props.paymentData && this.props.paymentData.data &&

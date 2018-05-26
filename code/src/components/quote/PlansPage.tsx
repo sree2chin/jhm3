@@ -138,6 +138,10 @@ class PlansPage extends React.Component<Props, {}> {
           window.location.href = this.props.premiums.LOGIN_URL;
           return;
         }
+        if (this.props.premiums && this.props.premiums.redirect_url && this.props.premiums.redirect_url.length > 0) {
+          window.location.href = this.props.premiums.redirect_url;
+          return;
+        }
         if(successCb) { successCb(); }
         this.setState({
           submittingPlansFromPlan: false
@@ -146,6 +150,10 @@ class PlansPage extends React.Component<Props, {}> {
       }).catch(()=>{
         if (this.props.premiums && this.props.premiums.LOGIN_URL && this.props.premiums.LOGIN_URL.length > 0) {
           window.location.href = this.props.premiums.LOGIN_URL;
+          return;
+        }
+        if (this.props.premiums && this.props.premiums.redirect_url && this.props.premiums.redirect_url.length > 0) {
+          window.location.href = this.props.premiums.redirect_url;
           return;
         }
         this.setState({

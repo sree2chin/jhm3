@@ -122,6 +122,10 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
           window.location.href = response.questions.LOGIN_URL;
           return;
         }
+        if (response.questions && response.questions.redirect_url && response.questions.redirect_url.length > 0) {
+          window.location.href = response.questions.redirect_url;
+          return;
+        }
         if (response && response.questions && response.questions.data) {
           this.setState({
             items: response.questions.data

@@ -11,6 +11,9 @@ export default (state: Array<any> = [], action) => {
       if (action.premiums && action.premiums.LOGIN_URL && action.premiums.LOGIN_URL.length > 0) {
         return objectAssign({}, state, {premiums: action.premiums});
       }
+      if (action.premiums && action.premiums.redirect_url && action.premiums.redirect_url.length > 0) {
+        return objectAssign({}, state, {premiums: action.premiums});
+      }
       if(state.premiums) {
         premiums = JSON.parse(JSON.stringify(state.premiums));
       } else {

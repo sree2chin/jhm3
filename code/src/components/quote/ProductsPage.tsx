@@ -208,6 +208,10 @@ class ProductsPage extends React.Component<Props, {}> {
           window.location.href = this.props.products.LOGIN_URL;
           return;
         }
+        if (this.props.products && this.props.products.redirect_url && this.props.products.redirect_url.length > 0) {
+          window.location.href = this.props.products.redirect_url;
+          return;
+        }
         this.setState({
           submittingUserInfo: false
         });
@@ -265,12 +269,20 @@ class ProductsPage extends React.Component<Props, {}> {
           window.location.href = this.props.products.LOGIN_URL;
           return;
         }
+        if (this.props.products && this.props.products.redirect_url && this.props.products.redirect_url.length > 0) {
+          window.location.href = this.props.products.redirect_url;
+          return;
+        }
         this.setState({
           submittingProductsInfo: false
         });
       }).catch(()=>{
         if (this.props.products && this.props.products.LOGIN_URL && this.props.products.LOGIN_URL.length > 0) {
           window.location.href = this.props.products.LOGIN_URL;
+          return;
+        }
+        if (this.props.products && this.props.products.redirect_url && this.props.products.redirect_url.length > 0) {
+          window.location.href = this.props.products.redirect_url;
           return;
         }
         this.submmitedProductForm = false;
@@ -327,6 +339,10 @@ class ProductsPage extends React.Component<Props, {}> {
           window.location.href = this.props.plans.LOGIN_URL;
           return;
         }
+        if (this.props.plans && this.props.plans.redirect_url && this.props.plans.redirect_url.length > 0) {
+          window.location.href = this.props.plans.redirect_url;
+          return;
+        }
         var queryParams = this.props.location.query;
         var queryParamsString = "?";
         for(var k in queryParams) {
@@ -345,6 +361,10 @@ class ProductsPage extends React.Component<Props, {}> {
       }).catch(()=>{
         if (this.props.plans && this.props.plans.LOGIN_URL && this.props.plans.LOGIN_URL.length > 0) {
           window.location.href = this.props.plans.LOGIN_URL;
+          return;
+        }
+        if (this.props.plans && this.props.plans.redirect_url && this.props.plans.redirect_url.length > 0) {
+          window.location.href = this.props.plans.redirect_url;
           return;
         }
         this.submmitedProductForm = false;

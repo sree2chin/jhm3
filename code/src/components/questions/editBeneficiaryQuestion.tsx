@@ -60,6 +60,10 @@ class Main extends React.Component<Props, {}> {
         window.location.href = this.questions.LOGIN_URL;
         return;
       }
+      if (this.questions && this.questions.redirect_url && this.questions.redirect_url.length > 0) {
+        window.location.href = this.questions.redirect_url;
+        return;
+      }
       if (this.questions && this.questions.instant_id_check && this.questions.instant_id_check.status==false) {
         this.setState({
           showInstantIdCheckPopup: true,
@@ -871,6 +875,10 @@ class Main extends React.Component<Props, {}> {
           window.location.href = this.questions.LOGIN_URL;
           return;
         }
+        if (this.questions && this.questions.redirect_url && this.questions.redirect_url.length > 0) {
+          window.location.href = this.questions.redirect_url;
+          return;
+        }
         if (this.questions && this.questions.instant_id_check && this.questions.instant_id_check.status==false) {
           this.setState({
             showInstantIdCheckPopup: true,
@@ -1359,6 +1367,10 @@ class Main extends React.Component<Props, {}> {
         window.location.href = response.questions.LOGIN_URL;
         return;
       }
+      if (response.questions && response.questions.redirect_url && response.questions.redirect_url.length > 0) {
+        window.location.href = response.questions.redirect_url;
+        return;
+      }
       if (response && response.questions && response.questions.data) {
         self.beneficiariesIds = self.beneficiariesIds || {};
         self.beneficiariesIds[qs.id] = response.questions.data;
@@ -1409,6 +1421,10 @@ class Main extends React.Component<Props, {}> {
       if (response && response.questions && response.questions.data) {
         if (response.questions && response.questions.LOGIN_URL && response.questions.LOGIN_URL.length > 0) {
           window.location.href = response.questions.LOGIN_URL;
+          return;
+        }
+        if (response.questions && response.questions.redirect_url && response.questions.redirect_url.length > 0) {
+          window.location.href = response.questions.redirect_url;
           return;
         }
         self.beneficiariesIds = self.beneficiariesIds || {};

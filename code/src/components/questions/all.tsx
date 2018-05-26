@@ -70,6 +70,10 @@ class Main extends React.Component<Props, State> {
         window.location.href = this.questions.LOGIN_URL;
         return;
       }
+      if (this.questions && this.questions.redirect_url && this.questions.redirect_url.length > 0) {
+        window.location.href = this.questions.redirect_url;
+        return;
+      }
       this.setState({
         gettingQuestions: false
       });
@@ -336,10 +340,20 @@ class Main extends React.Component<Props, State> {
         return;
       };
 
+      if (this.questions && this.questions.redirect_url && this.questions.redirect_url.length > 0) {
+        window.location.href = this.questions.redirect_url;
+        return;
+      }
+
       if (this.props.confirmationData && this.props.confirmationData.LOGIN_URL && this.props.confirmationData.LOGIN_URL.length > 0) {
         window.location.href = this.props.confirmationData.LOGIN_URL;
         return;
       };
+
+      if (this.confirmationData && this.confirmationData.redirect_url && this.confirmationData.redirect_url.length > 0) {
+        window.location.href = this.confirmationData.redirect_url;
+        return;
+      }
 
       var link = this.props.confirmationData && this.props.confirmationData.data &&
       this.props.confirmationData.data.current_document_data && this.props.confirmationData.data.current_document_data.sign_url;
