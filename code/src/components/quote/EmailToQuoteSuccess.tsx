@@ -139,6 +139,10 @@ class ContactAgent extends React.Component<Props, {}> {
         window.location.href = this.props.quoteResponse.LOGIN_URL;
         return;
       }
+      if (this.props.quoteResponse && this.props.quoteResponse.redirect_url && this.props.quoteResponse.redirect_url.length > 0) {
+        window.location.href = this.props.quoteResponse.redirect_url;
+        return;
+      }
       const basePath = this.props.location.pathname.indexOf("agent") > 1 || this.props.is_agent ? "/agent/" : "/";
       browserHistory.push(basePath + "connect-agent-success" + queryParamsString);
     }).catch(()=>{

@@ -48,6 +48,9 @@ class EmailToQuote extends React.Component<Props, {}> {
     }
   };
 
+  isInAgentFlow() {
+    return window.location.pathname.indexOf("/agent")>=0
+  }
   handlePhoneChange(e) {
     this.setState({
       phone: e.target.value
@@ -140,6 +143,10 @@ class EmailToQuote extends React.Component<Props, {}> {
         }
       }
       queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+
+      this.setState({
+        savingQuote: true
+      });
       this.props.saveQuoteForm(data).then(() => {
         if (this.props.quoteResponse && this.props.quoteResponse.LOGIN_URL && this.props.quoteResponse.LOGIN_URL.length > 0) {
           window.location.href = this.props.quoteResponse.LOGIN_URL;
@@ -197,7 +204,10 @@ class EmailToQuote extends React.Component<Props, {}> {
         </Row>
         <Row>
             <Col className="email-description c-center" sm={12}>
-                Before beginning the application, please enter email addresses for {this.props.persons && this.props.persons[0].name} {this.getSecondPersonName()} so that we can send your quotes to you as well as links you can use to return to your applications at any time.
+              {this.isInAgentFlow() ?
+                "Before beginning the application, please enter the applicant's email address. An email with the quote information will be sent to them." :
+                "Before beginning the application, please enter the applicant's email address. An email with the quote information and a link back to their application will be sent to them."
+              }
             </Col>
         </Row>
         <Row style={{marginTop: "35px"}}>

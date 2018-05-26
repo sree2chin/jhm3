@@ -131,6 +131,10 @@ class Main extends React.Component<Props, {}> {
           window.location.href = this.props.products.LOGIN_URL;
           return;
         }
+        if (this.props.products && this.props.products.redirect_url && this.props.products.redirect_url.length > 0) {
+          window.location.href = this.props.products.redirect_url;
+          return;
+        }
         const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
         var queryParams = this.props.location.query;
         var queryParamsString = "?";

@@ -285,7 +285,7 @@ class PlansPage extends React.Component<Props, {}> {
     if (this.state.nextStep == "continueToApplication" || this.state.nextStep=="completeTheApplication") {
       this.changeTypeOfSubmission(10004);
       setTimeout(() => {
-        browserHistory.push("/agent/connect-to-agent" + queryParamsString);
+        browserHistory.push("/agent/connect-through-application" + queryParamsString);
       }, 100);
     } else if (this.state.nextStep == "ticketToInternalAgent" || this.state.nextStep=="ticketToVantisLifeSales") {
       this.changeTypeOfSubmission(10005);

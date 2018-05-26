@@ -371,7 +371,7 @@ class PlansPage extends React.Component<Props, {}> {
                         {this.state.nextStep=="continueToApplication" && <img src={"../images/form@2x.png"} />}
                       </Col>
                       <Col xs={7} style={{marginTop: "23px"}}>
-                        Apply now
+                        Continue to application
                       </Col>
                       <Col xs={3} className="next-steps-tool-tips">
                        <Tooltip content="Apply now" styles={toolTipStyles}>
@@ -393,7 +393,7 @@ class PlansPage extends React.Component<Props, {}> {
                         {this.state.nextStep=="emailMeQuote" && <img src={"../images/activeemail.png"}/>}
                       </Col>
                       <Col xs={7} style={{marginTop: "23px"}}>
-                        Email me the quote
+                        Email me quote
                       </Col>
                       <Col xs={3} className="next-steps-tool-tips">
                        <Tooltip content="Apply now" styles={toolTipStyles}>

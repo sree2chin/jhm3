@@ -1,13 +1,6 @@
 @media(max-width: 768px) {
-	.all-riders-info-container {
-		width: 100%;
-	}
-	.product-pager-container .single-product-container.rider-container:nth-child(3n+1) {
-		padding-right: 26px;
-		padding-left: 7px;
-	}
-	.product-pager-container .single-product-container.rider-container:nth-child(3n+2) {
-		padding-right: 26px;
-		padding-left: 7px;
+	.product-pager-container .single-product-container.rider-container {
+		padding-right: 25px;
+		margin-left: 10px;
 	}
 }

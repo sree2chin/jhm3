@@ -46,7 +46,9 @@ class EmailToQuote extends React.Component<Props, {}> {
       browserHistory.push(basePath + queryParamsString);
     }
   };
-
+  isInAgentFlow() {
+    return window.location.pathname.indexOf("/agent")>=0
+  }
   handlePhoneChange(e) {
     this.setState({
       phone: e.target.value
@@ -202,7 +204,7 @@ class EmailToQuote extends React.Component<Props, {}> {
         }
         const basePath = this.props.location.pathname.indexOf("/agent") > 1 || this.props.is_agent ? "/agent/" : "/";
         browserHistory.push(basePath + "email-quote-success" + queryParamsString);
-      }).catch(()=>{
+      }).catch(() => {
         this.submmitedProductForm = false;
       });
     }
@@ -241,7 +243,11 @@ class EmailToQuote extends React.Component<Props, {}> {
         </Row>
         <Row>
             <Col className="email-description c-center" sm={12}>
-                Please add your email address so we can mail you a link to complete the application on your time.
+              {this.isInAgentFlow() ? (
+                this.props.typeOfSubmission == 10006 ? "Fill out this info to email the quote to the applicant! The applicant can click on the link to complete the application." :
+                "Fill out this info to email the quote to the applicant! Then the application can be continued from the Agent panel.") :
+                "Fill out this info to email the quote to yourself for your records! Then you can click on the link to complete the application."
+              }
             </Col>
         </Row>
         <Row style={{marginTop: "35px"}}>
