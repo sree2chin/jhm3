@@ -3322,6 +3322,11 @@ input.form-control:focus {
     font-size: 18px; } }
 
 @media (max-width: 768px) {
+  .product-pager-container .single-product-container.rider-container {
+    padding-right: 25px;
+    margin-left: 10px; } }
+
+@media (max-width: 768px) {
   .product-pager-container .plans-continue-to-next-steps-container {
     margin-left: 0px; }
   .product-pager-container .plan-details-container .plan-length-container .death-benefit-key-text {
@@ -3524,6 +3529,9 @@ input.form-control:focus {
     width: auto; } }
 
 @media (max-width: 768px) {
+  .next-steps-container .customer-next-steps-container .next-steps-text {
+    margin-left: 25px !important;
+    margin-right: 25px !important; }
   .next-steps-container .next-step-submit-btn-outer-container {
     background-color: white; }
   .next-steps-container .next-step-submit-btn-container {
