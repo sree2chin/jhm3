@@ -102,6 +102,61 @@ class EmailToQuote extends React.Component<Props, {}> {
   appendRequestType(person) {
 
   }
+  getExtraInfo(data) {
+    if ( this.props.typeOfSubmission == 10003) {
+      data.request_type = 3;
+      if (this.state.slot) {
+        data.contact_time = this.state.slot;
+      }
+      if (this.state.phone) {
+        data.phone_number = this.state.phone;
+      }
+      if (this.state.text_accepted) {
+        data.text_accepted = this.state.text_accepted;
+      } else {
+        data.text_accepted = "No";
+      }
+    } else if (this.props.typeOfSubmission == 10001) {
+      data.request_type = 1;
+    } else if (this.props.typeOfSubmission == 10002) {
+      data.request_type = 2;
+    } else if (this.props.typeOfSubmission == 10004) {
+      data.request_type = 4;
+      if (this.state.slot) {
+        data.contact_time = this.state.slot;
+      }
+      if (this.state.phone) {
+        data.phone_number = this.state.phone;
+      }
+      if (this.state.text_accepted) {
+        data.text_accepted = this.state.text_accepted;
+      }
+    } else if (this.props.typeOfSubmission == 10005) {
+      data.request_type = 5;
+      if (this.state.slot) {
+        data.contact_time = this.state.slot;
+      }
+      if (this.state.phone) {
+        data.phone_number = this.state.phone;
+      }
+      if (this.state.text_accepted) {
+        data.text_accepted = this.state.text_accepted;
+      }
+    } else if (this.props.typeOfSubmission == 10006) {
+      data.request_type = 6;
+    } else if (this.props.typeOfSubmission == 10007) {
+      data.request_type = 7;
+    }
+    if (this.state.slot) {
+      data.contact_time = this.state.slot;
+    }
+    if (this.state.phone) {
+      data.phone_number = this.state.phone;
+    }
+    if (this.state.text_accepted) {
+      data.text_accepted = this.state.text_accepted;
+    }
+  }
   saveQuote() {
     const persons = [];
 
@@ -130,8 +185,8 @@ class EmailToQuote extends React.Component<Props, {}> {
       var data = {
         applicants: JSON.stringify(persons)
       };
-      data.request_type = 1;
-
+      //data.request_type = 1;
+      this.getExtraInfo(data);
       this.props.setPersonsData(persons);
       var queryParams = this.props.location.query;
       var queryParamsString = "?";
