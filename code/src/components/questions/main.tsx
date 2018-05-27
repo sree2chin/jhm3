@@ -1932,7 +1932,7 @@ class Main extends React.Component<Props, {}> {
             {questionsList}
           </div>}
           {!questionsList.isQuestionsList && <div className="question-action-btn-container">
-              {this.shouldShowPreviousBtn() && <div className={`previous-btn-text`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
+              {this.shouldShowPreviousBtn() && <div className={`previous-btn-text hidden-xs`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
                     this.handleBackSubmit()
                   }}>
                   <span>
@@ -1940,6 +1940,14 @@ class Main extends React.Component<Props, {}> {
                   </span>
                   {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                 </div>
+              }
+              {this.shouldShowPreviousBtn() && <Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular  action visible-xs`} style={{marginLeft: "30px!important", marginBottom: "20px"}}  onClick={()=>{
+                    this.handleBackSubmit()
+                  }}
+                >
+                  Previous
+                  {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+              </Button>
               }
               {<Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular  action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                     this.onQuestionSubmit()
@@ -1976,7 +1984,7 @@ class Main extends React.Component<Props, {}> {
             })}
         </Row>
         {questionsList.isQuestionsList && <Row className="questions-container c-center" style={{backgrounColor: "transparent", border: "none", boxShadow: "none"}}> <div className="question-action-btn-container">
-            {this.shouldShowPreviousBtn() && <div className={`previous-btn-text`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
+            {this.shouldShowPreviousBtn() && <div className={`previous-btn-text hidden-xs`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
                     this.handleBackSubmit()
                   }}>
                   <span>
@@ -1984,6 +1992,14 @@ class Main extends React.Component<Props, {}> {
                   </span>
                   {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </div>
+            }
+            {this.shouldShowPreviousBtn() && <Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular next-step-btn action visible-xs`} style={{marginLeft: "30px!important", marginBottom: "20px"}}  onClick={()=>{
+                  this.handleBackSubmit()
+                }}
+              >
+                Previous
+                {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+            </Button>}
             }
             {<Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                   this.onQuestionSubmit()
