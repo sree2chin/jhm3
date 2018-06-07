@@ -5,9 +5,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>Vantis Life Insurance Company</title>
+    <script>
+      window.trackingUrl = "<%= trackingUrl %>" ;
+    </script>
   </head>
   <body>
     <div id="root">
     </div>
+    <script type="text/javascript">
+      if (trackingUrl && trackingUrl.length > 0) {
+        window._mfq = window._mfq || [];
+        (function() {
+          var mf = document.createElement("script");
+          mf.type = "text/javascript"; mf.async = true;
+          mf.src = trackingUrl;
+          document.getElementsByTagName("head")[0].appendChild(mf);
+        })();
+      }
+    </script>
   </body>
 </html>

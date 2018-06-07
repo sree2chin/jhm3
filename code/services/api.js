@@ -10,6 +10,7 @@ var restOptions = {
 
 module.exports = new function(){
 
+  var self = this;
   var appendAgentInfo = function(req, data) {
     if(req.session) {
       if (req.session && req.session.queryParams) {
@@ -46,6 +47,18 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
+      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+        self.logErrors(req, {
+            user: null,
+            apiName: "/v1/quote/premiums",
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for api: /v1/quote/premiums");
+          });
+      }
       cb(err, httpResponse);
     });
   };
@@ -66,6 +79,18 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
+      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+        self.logErrors(req, {
+            user: null,
+            apiName: "/v1/quote/products",
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for api: /v1/quote/products");
+          });
+      }
       cb(err, httpResponse);
     });
   };
@@ -85,6 +110,18 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
+      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+        self.logErrors(req, {
+            user: null,
+            apiName: "/v1/quote/productplans",
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for api: /v1/quote/productplans");
+          });
+      }
       cb(err, httpResponse);
     });
   };
@@ -101,6 +138,18 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
+      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+        self.logErrors(req, {
+            user: null,
+            apiName: "/v1/quote/premiums",
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for api: /v1/quote/premiums");
+          });
+      }
       cb(err, httpResponse);
     });
   };
@@ -119,6 +168,18 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
+      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+        self.logErrors(req, {
+            user: null,
+            apiName: "/v1/questions/questions",
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for GET api: /v1/questions/questions");
+          });
+      }
       cb(err, httpResponse);
     });
   };
@@ -143,6 +204,18 @@ module.exports = new function(){
       method: 'POST',
       formData: formData
     }, function callback(err, httpResponse, body) {
+      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+        self.logErrors(req, {
+            user: null,
+            apiName: "/v1/questions/questions",
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for POST api: /v1/questions/questions");
+          });
+      }
       cb(err, httpResponse);
     });
   };
@@ -164,6 +237,18 @@ module.exports = new function(){
     }, function callback(err, httpResponse, body) {
       req.session.postPayment = JSON.stringify(httpResponse);
       req.session.postPaymentElavonUrl = req.body.elavon_url;
+      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+        self.logErrors(req, {
+            user: null,
+            apiName: req.body.elavon_url,
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for POST api: " + req.body.elavon_url);
+          });
+      }
       cb(err, httpResponse);
     });
   };
@@ -193,7 +278,18 @@ module.exports = new function(){
       method: 'POST',
       formData: formData
     }, function callback(err, httpResponse, body) {
-      console.log("\n\n\nhttpResponse: " + JSON.stringify(httpResponse) + "\n\n\n");
+      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+        self.logErrors(req, {
+            user: null,
+            apiName: '/v1/questions/questions',
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for POST confirm questions api: " + '/v1/questions/questions');
+          });
+      }
       cb(err, httpResponse);
     });
   };
@@ -215,6 +311,18 @@ module.exports = new function(){
       formData: formData
     }, function callback(err, httpResponse, body) {
       console.log("\n\n\n ttpResponse in makePayment1: " + JSON.stringify(httpResponse) + "\n\n\n");
+      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+        self.logErrors(req, {
+            user: null,
+            apiName: '/v1/questions/questions',
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for POST makePayment1 api: " + '/v1/questions/questions');
+          });
+      }
       cb(err, httpResponse);
     });
   };
@@ -237,6 +345,18 @@ module.exports = new function(){
       method: 'POST',
       formData: formData
     }, function callback(err, httpResponse, body) {
+      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+        self.logErrors(req, {
+            user: null,
+            apiName: '/v1/questions/questions',
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for POST makePayment api: " + '/v1/questions/questions');
+          });
+      }
       cb(err, httpResponse);
     });
   };
@@ -257,6 +377,18 @@ module.exports = new function(){
       method: 'POST',
       formData: formData
     }, function callback(err, httpResponse, body) {
+      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+        self.logErrors(req, {
+            user: null,
+            apiName: '/v1/auth/user',
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for POST api: " + '/v1/auth/user');
+          });
+      }
       cb(err, httpResponse);
     });
   };
@@ -276,6 +408,18 @@ module.exports = new function(){
       method: 'POST',
       formData: formData
     }, function callback(err, httpResponse, body) {
+      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+        self.logErrors(req, {
+            user: null,
+            apiName: '/v1/auth/setpassword',
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for POST api: " + '/v1/auth/setpassword');
+          });
+      }
       cb(err, httpResponse);
     });
   };
@@ -295,6 +439,52 @@ module.exports = new function(){
       },
       method: 'POST',
       formData: data
+    }, function callback(err, httpResponse, body) {
+      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+        self.logErrors(req, {
+            user: null,
+            apiName: '/v1/questions/factorsearch',
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for POST api: " + '/v1/questions/factorsearch');
+          });
+      }
+      cb(err, httpResponse);
+    });
+  };
+
+  this.logErrors = function(req, data, cb){
+    var formData = {};
+    appendAgentInfo(req, formData);
+    if (data.user) {
+      formData.user = data.user;
+    }
+    if (data.inputParams) {
+      formData.input_params = JSON.stringify(data.inputParams);
+    }
+    if (data.response) {
+      formData.response = data.response;
+    }
+    if (data.expection) {
+      formData.raised_exception = data.expection;
+    }
+    if (data.errorMessage) {
+      formData.error_message = data.errorMessage;
+    }
+
+    formData.api_name = data.apiName;
+
+    console.log("formData in log errors: " + JSON.stringify(formData));
+    request({
+      url: restOptions.host + '/v1/createlogs/create_log',
+      headers: {
+        'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
+      },
+      method: 'POST',
+      formData: formData
     }, function callback(err, httpResponse, body) {
       cb(err, httpResponse);
     });
