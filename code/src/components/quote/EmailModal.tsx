@@ -89,12 +89,12 @@ export default class EmailModal extends React.Component<Props, {}> {
        <Modal bsSize="small" show={this.props.showModalEmail} onHide={this.props.onCloseModal} className="email-modal-container email-modal-unique-container">
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     <Row className="email-quote-text email-quote-text-on-modal">
-                        Email the quote
+                        {this.props.nextStep == "printTheQuote" ? "Print & Email Quote" :"Email the quote"}
                     </Row>
                     <Row>
                         <Col className="email-description email-description-on-modal c-center" sm={12}>
                             { this.props.fromAgentPage ? (
-                              this.props.nextStep == "printTheQuote" ? "Fill out this info to email the quote to the applicant! The applicant can click on the link to complete the application." :
+                              this.props.nextStep == "printTheQuote" ? "Please provide the applicant's email address where the quote should be sent. You will then be redirected to the Agent Panel so you can print the quote information." :
                               "Fill out this info to email the quote to the applicant! Then the application can be continued from the Agent panel.") :
                              "Fill out this info to email the quote to yourself for your records! Then you can click on the link to complete the application."
                             }
