@@ -884,7 +884,7 @@ input.form-control:focus {
 
 .product-pager-container .riders-outer-container .riders-container {
   width: 54.17%;
-  padding-left: 0px !important;
+  padding-left: 10px !important;
   padding-right: 0px; }
 
 .product-pager-container .riders-outer-container .c-center {
@@ -1080,6 +1080,17 @@ input.form-control:focus {
   .product-pager-container .quote-product.active {
     background-color: #265fad;
     color: white; }
+  .product-pager-container .quote-product .rider-adding-btn {
+    background-color: #317dbd !important;
+    color: white;
+    border: 2px solid #317dbd; }
+    .product-pager-container .quote-product .rider-adding-btn.active {
+      background-color: #ffffff !important;
+      border: 2px solid #317dbd;
+      color: #317dbd !important; }
+    .product-pager-container .quote-product .rider-adding-btn:hover {
+      background-color: #eaf2f8 !important;
+      color: #317dbd !important; }
 
 .product-pager-container .c-product-text {
   margin-left: 30px;
@@ -1154,10 +1165,6 @@ input.form-control:focus {
     background-color: #fff; }
   .product-custom-container .single-product-content:hover .c-product-text, .product-custom-container .single-product-content:hover .header, .product-custom-container .single-product-content:hover .c-product-desc-line {
     color: #317dbd; }
-  .product-custom-container .single-product-content:hover .quote-product {
-    background-color: #317dbd;
-    border: 2px solid #317dbd;
-    color: #fff; }
   .product-custom-container .single-product-content:hover .product_img_div {
     border: 2px solid #317dbd; }
   .product-custom-container .single-product-content.active {
@@ -1389,7 +1396,8 @@ input.form-control:focus {
     padding: 40px;
     margin-left: 0px;
     margin-right: 0px;
-    margin-top: 50px; }
+    margin-top: 50px;
+    padding-top: 10px; }
     .questions-container .questions-content-container .main-loader {
       font-size: 150px;
       margin-bottom: 70px; }
@@ -1428,7 +1436,7 @@ input.form-control:focus {
     margin-top: 0px;
     background-color: #4584c0 !important; }
     .questions-container .c-button-default.btn.circular.action {
-      width: auto; }
+      width: 20%; }
     .questions-container .c-button-default.btn.circular.next-step-btn {
       background-color: #fb4d3d !important;
       margin-right: 30px; }
