@@ -1,8 +1,8 @@
 import SubmitQuoteApi from '../api/QuotesApi';
 
-function submitQuoteForm(postData) {
+function submitQuoteForm(postData, isFromMainPage=false) {
 	return (dispatch) => {
-		return SubmitQuoteApi.submit(postData).then(
+		return SubmitQuoteApi.submit(postData, isFromMainPage).then(
 			data => {
 				if (data && data.data && data.data.applicants) {
 					dispatch({

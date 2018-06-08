@@ -50,7 +50,7 @@
 		}
 		.riders-container {
 		    width: 54.17%;
-		    padding-left: 0px!important;
+		    padding-left: 10px!important;
 			padding-right: 0px;
 		}
 		.c-center {
@@ -299,7 +299,20 @@
 		    background-color: #265fad;
 		    color: white;
 	    }
-
+		.rider-adding-btn {
+			background-color: #317dbd!important;
+			color: white;
+			border: 2px solid #317dbd;
+			&.active {
+				background-color: #ffffff!important;
+				border: 2px solid #317dbd;
+				color: #317dbd!important;
+			}
+			&:hover {
+				background-color: rgba(234, 242, 248, 1)!important;
+				color: rgba(49, 125, 189, 1)!important;
+			}
+		}
 	}
 	.c-product-text {
 		margin-left: 30px;
@@ -389,11 +402,6 @@
 			}
 			&:hover .c-product-text, &:hover .header, &:hover .c-product-desc-line{
 				color: #317dbd;
-			}
-			&:hover .quote-product {
-				background-color: #317dbd;
-				border: 2px solid #317dbd;
-				color: #fff;
 			}
 			&:hover .product_img_div{
 				border: 2px solid #317dbd;

@@ -20,9 +20,14 @@ export default class LicensedModal extends React.Component<Props, {}> {
       });
     } else {
       this.setState({
-        savingQuote: true
+        phoneError: false
       });
-      this.props.saveQuote();
+      if (this.validateEmailForm()) {
+        this.setState({
+          savingQuote: true
+        });
+        this.props.saveQuote();
+      }
     }
   }
 
@@ -50,7 +55,49 @@ export default class LicensedModal extends React.Component<Props, {}> {
       }
     });
   }
+  validateEmailForm() {
+    var isError = false;
+    var emailRegex =  /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 
+    var input1Valid = emailRegex.test(this.state.email0);
+    var input2Valid = emailRegex.test(this.state.email1);
+
+    if ((!input1Valid && isEmpty(this.state.email0)) && (!input2Valid && isEmpty(this.state.email1))) {
+      isError = true;
+      this.setState({
+        emailErrorExists: true,
+        emailError0: true
+      });
+    } else {
+      isError = false;
+      this.setState({
+        emailErrorExists: false
+      });
+      if (!input2Valid && !isEmpty(this.state.email1)) {
+        isError = true;
+        this.setState({
+          ["emailError1"]: true
+        });
+      } else {
+        this.setState({
+          ["emailError1"]: false
+        });
+      }
+      if (!input1Valid && !isEmpty(this.state.email0)) {
+        isError = true;
+        this.setState({
+          ["emailError0"]: true
+        });
+      } else {
+        this.setState({
+          ["emailError0"]: false
+        });
+      }
+
+    }
+
+    return !isError;
+  };
   onSlotChange(key, obj) {
     if (this.state.slotInputError) {
       this.setState({
@@ -76,6 +123,13 @@ export default class LicensedModal extends React.Component<Props, {}> {
 
   handleChange(personIndex, e) {
     var emailRegex =  /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    if(this.state.emailErrorExists) {
+      if(this.validateEmailForm()) {
+        this.setState({
+          emailErrorExists: false
+        });
+      }
+    }
     this.props.handleChange(personIndex, String(e.target.value).trim());
     this.setState({
       personIndex: personIndex,
@@ -194,7 +248,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
                           }}
                           className={this.getErrorsClassNames(this.state, "emailError0")}
                         />
-                        { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
+                        { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px", fontSize: "16px", marginBottom: "15px"}}>
                           Please enter email address of applicant 1.
                         </Col> }
                       </Col>
@@ -213,7 +267,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
                             }}
                             className={this.getErrorsClassNames(this.state, "emailError1")}
                           />
-                        { this.state.emailError1 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
+                        { this.state.emailError1 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px", fontSize: "16px", marginBottom: "15px"}}>
                           Please enter email address of applicant 2.
                         </Col> }
                         </Col>

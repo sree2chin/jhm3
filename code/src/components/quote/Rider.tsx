@@ -50,13 +50,13 @@ export default class Plan extends React.Component<Props, {}> {
             <div className="c-coverage-amount additional-text" style={{fontSize: "14px", color: "#999999"}}>(no additional premium)</div>
           </Row>}
           {this.props.riderKey == "WP" && <Row className={`text-center quote-product `} style={{paddingTop: "10px", marginLeft: "0px", height: "62px", fontFamily: "NunitoRegular!important", fontSize: "12px"}}>
-            {!this.props.isActive && <Button style={{float: "right", width: "88%", marginRight: "6%", marginTop: "0px"}} className={`c-button-default circular ${this.state.riderAdded ? "active" : ""}`} onClick={(){
+            {!this.props.isActive && <Button style={{float: "right", width: "88%", marginRight: "6%", marginTop: "0px"}} className={`c-button-default circular rider-adding-btn ${this.state.riderAdded ? "active" : ""}`} onClick={(){
                 this.selectRider(rider, this.props.riderKey)
               }}
             >
               ADD +${this.props.rider.Premium[this.props.premium_type] ? parseFloat(this.props.rider.Premium[this.props.premium_type].split("$")[1]) : 0}/{this.props.premium_type.substring(0, 2).toUpperCase()}
             </Button>}
-            {this.props.isActive && <Button style={{float: "right", width: "88%", marginRight: "6%", marginTop: "0px"}} className={`c-button-default circular ${this.state.riderAdded ? "active" : ""}`} onClick={(){
+            {this.props.isActive && <Button style={{float: "right", width: "88%", marginRight: "6%", marginTop: "0px"}} className={`c-button-default circular active rider-adding-btn ${this.state.riderAdded ? "active" : ""}`} onClick={(){
                 this.selectRider(rider, this.props.riderKey)
               }}
             >

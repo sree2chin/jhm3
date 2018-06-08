@@ -2,6 +2,7 @@ var rest        = require('../services/rest.js');
 var request       = require('request');
 var appConfig       = require('../config/service.js');
 var _           = require('underscore');
+const uuidV1 = require('uuid/v1');
 
 var restOptions = {
   host: appConfig.getProperty('server_domain'),
@@ -18,6 +19,9 @@ module.exports = new function(){
           data[k] = req.session.queryParams[k];
         }
       }
+    }
+    if (req.session.uniqueTransactionId) {
+      data["transaction_id"] = req.session.uniqueTransactionId;
     }
   };
 
@@ -69,6 +73,12 @@ module.exports = new function(){
     var formData = {
       applicants: JSON.stringify(data)
     };
+    console.log("req.query.isFromMainPage: " + JSON.stringify(req.query.isFromMainPage));
+
+    if (req.query.isFromMainPage == true || req.query.isFromMainPage == "true") {
+      req.session.uniqueTransactionId = uuidV1();
+    }
+    console.log("req.session.uniqueTransactionId: " + JSON.stringify(req.session.uniqueTransactionId));
     appendAgentInfo(req, formData);
     console.log("\n\n\nin getQuoteProducts formData: " + JSON.stringify(formData) + "\n\n\n");
     request({

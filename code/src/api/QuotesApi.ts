@@ -2,7 +2,7 @@ import * as _ from 'underscore';
 import * as fetch from "isomorphic-fetch";
 import { getStates } from '../utility/states';
 
-var QuotesApiI; 
+var QuotesApiI;
 
 interface QuotesApiI {
   submit: any;
@@ -12,8 +12,8 @@ interface QuotesApiI {
 }
 
 class QuotesApi {
-  submit(payload) {
-    return fetch('/v1/quote/products', {
+  submit(payload, isFromMainPage) {
+    return fetch('/v1/quote/products?isFromMainPage=' + isFromMainPage, {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -22,7 +22,7 @@ class QuotesApi {
         },
         credentials: 'include'
       }).then(function(res) {
-        return res.json().then(function (response: any) {    
+        return res.json().then(function (response: any) {
           return new Promise(function(resolve, reject) {
             resolve(response)
           });
@@ -40,7 +40,7 @@ class QuotesApi {
         },
         credentials: 'include'
       }).then(function(res) {
-        return res.json().then(function (response: any) {    
+        return res.json().then(function (response: any) {
           return new Promise(function(resolve, reject) {
             resolve(response)
           });
@@ -48,7 +48,7 @@ class QuotesApi {
     });
   };
 
-  
+
   plansSubmit(payload) : Promise<any> {
     return fetch('/v1/quote/premiums', {
         method: "POST",
@@ -59,7 +59,7 @@ class QuotesApi {
         },
         credentials: 'include'
       }).then(function(res) {
-        return res.json().then(function (response: any) {    
+        return res.json().then(function (response: any) {
           return new Promise(function(resolve, reject) {
             resolve(response)
           });
@@ -77,7 +77,7 @@ class QuotesApi {
         },
         credentials: 'include'
       }).then(function(res) {
-        return res.json().then(function (response: any) {    
+        return res.json().then(function (response: any) {
           return new Promise(function(resolve, reject) {
             resolve(response)
           });

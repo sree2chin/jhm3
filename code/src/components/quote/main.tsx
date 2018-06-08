@@ -334,7 +334,7 @@ const mapStateToProps = (state: any): Props => {
 
 const mapDispatchToProps = (dispatch: Dispatch): Props => {
   return {
-    submitQuoteForm: (data) => {return dispatch(submitQuoteForm(data))},
+    submitQuoteForm: (data) => {return dispatch(submitQuoteForm(data, true))},
     setPersonsData: (data) => {
       return dispatch(setPersonsData(data))
     },
