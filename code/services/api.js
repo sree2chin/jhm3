@@ -89,7 +89,7 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
-      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse && httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
         self.logErrors(req, {
             user: null,
             apiName: "/v1/quote/products",
@@ -178,7 +178,7 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
-      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse && httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
         self.logErrors(req, {
             user: null,
             apiName: "/v1/questions/questions",

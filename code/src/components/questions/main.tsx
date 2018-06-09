@@ -75,21 +75,25 @@ class Main extends React.Component<Props, {}> {
         browserHistory.push("/error" + queryParamsString);
         return;
       }
-
-      if (this.questions && this.questions.valid_user == 0) {
-        browserHistory.push("/authorize" + queryParamsString);
-        return;
-      }
-      if (this.questions && this.questions && this.questions.application_complete_status==true) {
-        if (this.questions.application_confirm_status == 1) {
-          browserHistory.push("/signature" + queryParamsString);
-        } else {
-          browserHistory.push("/all-questions" +queryParamsString);
+      var self = this;
+      new Promise((resolve, reject) => {
+        if (self.questions && self.questions.valid_user == 0) {
+          //browserHistory.push("/authorize" + queryParamsString);
+          return;
         }
-        return;
-      }
-      this.setState({
-        gettingQuestions: false
+        resolve();
+      }).then(()=>{
+        if (this.questions && this.questions && this.questions.application_complete_status==true) {
+          if (this.questions.application_confirm_status == 1) {
+            browserHistory.push("/signature" + queryParamsString);
+          } else {
+            browserHistory.push("/all-questions" +queryParamsString);
+          }
+          return;
+        }
+        this.setState({
+          gettingQuestions: false
+        });
       });
     });
   }
@@ -129,8 +133,12 @@ class Main extends React.Component<Props, {}> {
       }
       return;
     }
-
-    if (this.questions.valid_user == 0) {
+    if (nextProps.questions) {
+      if (nextProps.questions.valid_user == 0) {
+        browserHistory.push("/authorize" + queryParamsString);
+        return;
+      }
+    } else if (this.questions.valid_user == 0) {
       browserHistory.push("/authorize" + queryParamsString);
       return;
     }
@@ -152,13 +160,15 @@ class Main extends React.Component<Props, {}> {
       this.onQuestionSubmit();
     }
   }
+
   componentDidMount() {
+
     if (this.questionComponents && this.questionComponents.isQuestionsBeneficiaries) {
       //window.scrollTo(0, 100);
       this.scrollIntoInvalidQuestionView();
       return;
     }
-    window.scrollTo(0, 0);
+    this.scrollIntoBeneficiaryView();
     document.addEventListener("keydown", this.keyDownTextField.bind(this), false);
   }
   componentWillUnmount() {
@@ -1153,7 +1163,7 @@ class Main extends React.Component<Props, {}> {
       }
 
       this.props.postQuestions(data).then(() => {
-        window.scrollTo(0, 0);
+        this.scrollIntoBeneficiaryView();
         if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
           window.location.href = this.questions.LOGIN_URL;
           return;
@@ -1671,6 +1681,7 @@ class Main extends React.Component<Props, {}> {
     data.assessment_factor_url = qs.links[0].href;
     data.q = "*";
     var self = this;
+    this.addingPrimaryBeneficiary = true;
     this.setState({
       addingPrimaryBeneficiary: true,
       addingContingencyBeneficiary: false
@@ -1726,6 +1737,7 @@ class Main extends React.Component<Props, {}> {
     data.assessment_factor_url = qs.links[0].href;
     data.q = "*";
     var self = this;
+    this.addingContingencyBeneficiary = true;
     this.setState({
       addingPrimaryBeneficiary: false,
       addingContingencyBeneficiary: true
@@ -1773,6 +1785,23 @@ class Main extends React.Component<Props, {}> {
     return !(this.actualQuestionLists && this.actualQuestionLists[0] &&
     this.props.questions && this.props.questions.extra_params && this.props.questions.extra_params.answered_questions &&
       this.props.questions.extra_params.answered_questions[0] && this.props.questions.extra_params.answered_questions[0][0] == this.actualQuestionLists[0].id);
+  }
+
+  scrollIntoBeneficiaryView() {
+    var idName;
+    if(this.addingPrimaryBeneficiary) {
+      idName = "primary-beneficiary-container-" + (this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer.length-1);
+    }
+    if (this.addingContingencyBeneficiary) {
+      idName = "contingency-beneficiary-container-" + (this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer.length-1);
+    }
+    if (idName) {
+      var elem = document.getElementById(idName);
+      elem.scrollIntoView();
+      return;
+    }
+
+    window.scrollTo(0, 0);
   }
 
   scrollIntoInvalidQuestionView() {
@@ -1841,8 +1870,8 @@ class Main extends React.Component<Props, {}> {
           {questionsList.isQuestionsBeneficiaries && <div className="primary-beneficiary-main-header">Primary beneficiaries</div>}
           {questionsList.isQuestionsBeneficiaries &&
             map(questionsList.primaryBeneficiaryQuestionsComps, (s, i)=>{
-                return <div className="" key={i}>
-                  <div  className="siblings-container generic-beneficiary-container">
+                return <div id={"primary-beneficiary-container-" + i} key={i}>
+                  <div className="siblings-container generic-beneficiary-container">
                     {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
                       <div className="single-add-primary-beneficiary-text">
                         Add Primary Beneficiary
@@ -1880,7 +1909,7 @@ class Main extends React.Component<Props, {}> {
           {questionsList.isQuestionsBeneficiaries && <div className="primary-beneficiary-main-header">Contingent beneficiaries</div>}
           {questionsList.isQuestionsBeneficiaries &&
             map(questionsList.contingencyBeneficiaryQuestionsComps, (s, i)=>{
-                return <div className="" key={i}>
+                return <div id={"contingency-beneficiary-container-" + i} key={i}>
                   <div  className="siblings-container generic-beneficiary-container">
                   {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
                     <div className="single-add-primary-beneficiary-text">
@@ -1917,12 +1946,12 @@ class Main extends React.Component<Props, {}> {
             </div>
           }
           {!questionsList.isQuestionsList && !questionsList.isQuestionsBeneficiaries && <div className="questions-content-container">
-            {this.state.gettingQuestions && <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>}
-            <Row className="questions-sub-group-header fs18">
-            {
-              questionsList.questionStructCaption
+            {this.state.gettingQuestions && <i style={{marginTop: "25px"}} className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>}
+            {questionsList.questionStructCaption && questionsList.questionStructCaption.length > 0 &&
+              <Row className="questions-sub-group-header fs18">
+                {questionsList.questionStructCaption}
+              </Row>
             }
-            </Row>
             {questionsList.prefixOfGroupForLabelGroup && <Row>
               <Col sm={12} className={"c-subheader-text fs18 questions-sub-group-header"} style={{marginBottom: "10px", marginLeft: "0px"}}>
                 {questionsList.prefixOfGroupForLabelGroup}
