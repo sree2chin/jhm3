@@ -302,7 +302,7 @@ export default class Plan extends React.Component<Props, {}> {
 
     RawHtml.addTag("mycooltag");
     const product_image_name = this.getProductImage();
-    const product_image = "/assets/img/" + product_image_name;
+    const product_image = window.staticRoot + "/assets/img/" + product_image_name;
     return (
       <Col sm={12} className={`single-plan-container ${this.props.noOfPersons==2 ? "two-persons-plan-container" : ""}`}>
         <Row className="plan-details-container">

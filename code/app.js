@@ -45,7 +45,7 @@ if (!appConfig.getProperty("minify")) {
 
 app.locals.deployVersion    = (new Date).getTime();
 app.locals.isProd           = appConfig.getProperty("minify");
-app.locals.staticRoot       = appConfig.getProperty("static_root");
+app.locals.staticRoot       = appConfig.getProperty("server_domain");
 app.locals.pagesPath        = '/pages';
 app.locals.trackingUrl           = appConfig.getProperty("trackingUrl");
 
