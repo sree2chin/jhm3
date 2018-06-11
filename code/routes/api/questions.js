@@ -192,4 +192,12 @@ module.exports = function(app) {
     });
   });
 
+  app.post(prefix + '/error/logs', function(req, res) {
+    QuestionsService.logErrors(req, function(statusCode, data) {
+      res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
+      res.setHeader('Content-Type', 'application/json');
+      res.send(data);
+    });
+  });
+
 };

@@ -19,7 +19,6 @@ const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 
-
 interface Props  extends React.Props<Main> {
   submitQuoteForm: ()=>void,
   submitProductsForm: ()=>void,

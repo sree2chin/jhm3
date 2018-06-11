@@ -5,6 +5,9 @@ import reduxThunk from 'redux-thunk';
 import Header from './common/header';
 import reducers  from '../reducers';
 import { Row, Col } from "react-bootstrap";
+import ErrorLogsApi from '../api/ErrorLogsApi';
+
+window.errorLogsApiIns = new ErrorLogsApi();
 
 interface Props extends React.Props<App> {
 }

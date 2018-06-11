@@ -116,4 +116,14 @@ module.exports = new function() {
     });
   };
 
+  this.logErrors = function(req, callback) {
+    ApiService.logErrors(req, req.body, function(err, res) {
+      if (!err && res.statusCode == 200) {
+        callback(res.statusCode, res.body);
+      } else {
+        callback(res.statusCode, res.body);
+      }
+    });
+  };
+
 };

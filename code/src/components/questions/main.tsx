@@ -1163,115 +1163,115 @@ class Main extends React.Component<Props, {}> {
       }
 
       this.props.postQuestions(data).then(() => {
-        this.scrollIntoBeneficiaryView();
-        if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
-          window.location.href = this.questions.LOGIN_URL;
-          return;
-        }
-        if (this.questions && this.questions.redirect_url && this.questions.redirect_url.length > 0) {
-          window.location.href = this.questions.redirect_url;
-          return;
-        }
-        if (this.questions && this.questions.instant_id_check && this.questions.instant_id_check.status==false) {
-          this.setState({
-            showInstantIdCheckPopup: true,
-            instantIdCheckData: this.questions.instant_id_check
-          });
-        };
-        this.setState({
-          addingPrimaryBeneficiary: false,
-          addingContingencyBeneficiary: false,
-          singleselectionQuestionsSubmitting: false,
-          deletingContingencyBeneficiary: false,
-          deletingPrimaryBeneficiary: false
-        });
-        if (noOfBeneficiaryDeleted || noOfBeneficiaryDeleted==0) {
-          this.setState({
-            ["deletingContingencyBeneficiary_" +  noOfBeneficiaryDeleted]: false,
-            ["deletingPrimaryBeneficiary_" +  noOfBeneficiaryDeleted]: false
-          });
-        }
-        var queryParams = this.props.location.query;
-        var queryParamsString = "?";
-        for(var k in queryParams) {
-          if (queryParams[k]) {
-            queryParamsString += k + "=" + queryParams[k] + "&";
-          } else {
-            queryParamsString += k + "&";
-          }
-        }
-        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-
-        if (this.questions && this.questions.status == false) {
-          browserHistory.push("/error" + queryParamsString);
-          return;
-        }
-
-        if (this.questions.valid_user == 0) {
-          browserHistory.push("/authorize" + queryParamsString);
-          return;
-        }
-
-        if (this.questions.application_complete_status == true || this.questions.application_complete_status == "true") {
-          if (this.questions.application_confirm_status == 1) {
-            browserHistory.push("/signature" + queryParamsString);
-          } else {
-            browserHistory.push("/all-questions" +queryParamsString);
-          }
-
-          return;
-        }
-        if (this.state.previousQuestionHanldingIndex || this.state.previousQuestionHanldingIndex == 0) {
-          if (this.props.questions && this.props.questions.extra_params &&
-            this.props.questions.extra_params.answered_questions &&
-            this.props.questions.extra_params.answered_questions.length > 0) {
-              if (this.props.questions.extra_params.answered_questions.length-1 == this.state.previousQuestionHanldingIndex) {
-                var reflexiveQuestion = this.getReflexiveQuestionForAnsweredQuestions()
-                var questionsForReflexiveQuestions = this.recursiveGetQuestionsForSource(reflexiveQuestion);
-                //if (questionsForReflexiveQuestions && questionsForReflexiveQuestions.length > 0) {
-                //  this.previousQuestionsSource = reflexiveQuestion;
-                //} else {
-                  this.setState({
-                    previousQuestionHanldingIndex: null,
-                    previousQuestionIds: null
-                  });
-                //}
-              } else {
-                var incrementCounter = 1;
-                if (this.previousQuestionsSource && this.previousQuestionsSource.questions && this.previousQuestionsSource.questions.length > 0) {
-                  this.previousQuestionsSource = null;
-                  incrementCounter  = 1;
-                }
-                var reflexiveQuestion = this.getReflexiveQuestionForAnsweredQuestions()
-                var questionsForReflexiveQuestions = this.recursiveGetQuestionsForSource(reflexiveQuestion);
-                this.previousQuestionHanldingIndexInstance = this.state.previousQuestionHanldingIndex + incrementCounter;
-                if (questionsForReflexiveQuestions && questionsForReflexiveQuestions.length > 0) {
-                  this.previousQuestionsSource = reflexiveQuestion;
-                  this.setState({
-                    previousQuestionHanldingIndex: this.state.previousQuestionHanldingIndex + incrementCounter,
-                  }, ()=> {
-                    this.setState({
-                      previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
-                    });
-                  });
-                } else {
-                  this.setState({
-                    previousQuestionHanldingIndex: this.state.previousQuestionHanldingIndex + incrementCounter,
-                  }, ()=> {
-                    this.setState({
-                      previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
-                    });
-                  });
-                }
-              }
-            }
-        }
-
         this.setState({
           alreadyOnceSubmitted: false,
           submittingQuestions: false
-        })
+        }, ()=> {
+          this.scrollIntoBeneficiaryView();
+          if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
+            window.location.href = this.questions.LOGIN_URL;
+            return;
+          }
+          if (this.questions && this.questions.redirect_url && this.questions.redirect_url.length > 0) {
+            window.location.href = this.questions.redirect_url;
+            return;
+          }
+          if (this.questions && this.questions.instant_id_check && this.questions.instant_id_check.status==false) {
+            this.setState({
+              showInstantIdCheckPopup: true,
+              instantIdCheckData: this.questions.instant_id_check
+            });
+          };
 
+          this.setState({
+            addingPrimaryBeneficiary: false,
+            addingContingencyBeneficiary: false,
+            singleselectionQuestionsSubmitting: false,
+            deletingContingencyBeneficiary: false,
+            deletingPrimaryBeneficiary: false
+          });
+          if (noOfBeneficiaryDeleted || noOfBeneficiaryDeleted==0) {
+            this.setState({
+              ["deletingContingencyBeneficiary_" +  noOfBeneficiaryDeleted]: false,
+              ["deletingPrimaryBeneficiary_" +  noOfBeneficiaryDeleted]: false
+            });
+          }
+          var queryParams = this.props.location.query;
+          var queryParamsString = "?";
+          for(var k in queryParams) {
+            if (queryParams[k]) {
+              queryParamsString += k + "=" + queryParams[k] + "&";
+            } else {
+              queryParamsString += k + "&";
+            }
+          }
+          queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+
+          if (this.questions && this.questions.status == false) {
+            browserHistory.push("/error" + queryParamsString);
+            return;
+          }
+
+          if (this.questions.valid_user == 0) {
+            browserHistory.push("/authorize" + queryParamsString);
+            return;
+          }
+
+          if (this.questions.application_complete_status == true || this.questions.application_complete_status == "true") {
+            if (this.questions.application_confirm_status == 1) {
+              browserHistory.push("/signature" + queryParamsString);
+            } else {
+              browserHistory.push("/all-questions" +queryParamsString);
+            }
+
+            return;
+          }
+          if (this.state.previousQuestionHanldingIndex || this.state.previousQuestionHanldingIndex == 0) {
+            if (this.props.questions && this.props.questions.extra_params &&
+              this.props.questions.extra_params.answered_questions &&
+              this.props.questions.extra_params.answered_questions.length > 0) {
+                if (this.props.questions.extra_params.answered_questions.length-1 == this.state.previousQuestionHanldingIndex) {
+                  var reflexiveQuestion = this.getReflexiveQuestionForAnsweredQuestions()
+                  var questionsForReflexiveQuestions = this.recursiveGetQuestionsForSource(reflexiveQuestion);
+                  //if (questionsForReflexiveQuestions && questionsForReflexiveQuestions.length > 0) {
+                  //  this.previousQuestionsSource = reflexiveQuestion;
+                  //} else {
+                    this.setState({
+                      previousQuestionHanldingIndex: null,
+                      previousQuestionIds: null
+                    });
+                  //}
+                } else {
+                  var incrementCounter = 1;
+                  if (this.previousQuestionsSource && this.previousQuestionsSource.questions && this.previousQuestionsSource.questions.length > 0) {
+                    this.previousQuestionsSource = null;
+                    incrementCounter  = 1;
+                  }
+                  var reflexiveQuestion = this.getReflexiveQuestionForAnsweredQuestions()
+                  var questionsForReflexiveQuestions = this.recursiveGetQuestionsForSource(reflexiveQuestion);
+                  this.previousQuestionHanldingIndexInstance = this.state.previousQuestionHanldingIndex + incrementCounter;
+                  if (questionsForReflexiveQuestions && questionsForReflexiveQuestions.length > 0) {
+                    this.previousQuestionsSource = reflexiveQuestion;
+                    this.setState({
+                      previousQuestionHanldingIndex: this.state.previousQuestionHanldingIndex + incrementCounter,
+                    }, ()=> {
+                      this.setState({
+                        previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
+                      });
+                    });
+                  } else {
+                    this.setState({
+                      previousQuestionHanldingIndex: this.state.previousQuestionHanldingIndex + incrementCounter,
+                    }, ()=> {
+                      this.setState({
+                        previousQuestionIds: this.props.questions.extra_params.answered_questions[this.state.previousQuestionHanldingIndex]
+                      });
+                    });
+                  }
+                }
+              }
+          }
+        });
       }).catch(()=>{
         console.log(this.props.questions);
       });

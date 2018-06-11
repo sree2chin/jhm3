@@ -20,7 +20,6 @@ import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 import EnterPassword from "./EnterPassword";
 import ResetPassword from "./ResetPassword";
 
-
 interface Props  extends React.Props<Signature> {
   submitQuoteForm: ()=>void,
   submitProductsForm: ()=>void,
