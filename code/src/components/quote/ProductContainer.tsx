@@ -118,7 +118,7 @@ export default class ProductContainer extends React.Component<Props, State> {
                   const product_image = 'default_image';
                 }*/
                 const product_image_name = product.product_image;
-                const product_image = "http://ec2-107-23-131-50.compute-1.amazonaws.com/assets/img/" + product.product_image;
+                const product_image = "/assets/img/" + product.product_image;
 
                 return(
                   <Col key={product.ProductID} sm={productContainerWidth} className={`single-product-container product-custom-container`}>
