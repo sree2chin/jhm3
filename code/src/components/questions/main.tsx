@@ -332,15 +332,6 @@ class Main extends React.Component<Props, {}> {
           }
           questionsList.groupHeader = questionsList.groupHeader || [];
           questionsList.groupHeader.push(q.caption);
-          if (q.tags && q.tags.SubgroupRendering) {
-            currentIsPrefixGroup = true;
-            isPrefixGroupCounter = -1;
-            questionsList.prefixOfGroupForLabelGroup = q.caption;
-            /*if (actualQuestionLists.length > 0 && actualQuestionLists[actualQuestionLists.length-1].hasReflexive) {
-              questionsList.prefixOfGroupForLabelGroup = "";
-              isPrefixGroup = false;
-            }*/
-          }
         } else {
           if (isPrefixGroup && isPrefixGroupCounter == 0) {
           } else {
@@ -426,6 +417,11 @@ class Main extends React.Component<Props, {}> {
               return questionsList;
             }
           }
+          if (q.tags && q.tags.SubgroupRendering) {
+            currentIsPrefixGroup = true;
+            isPrefixGroupCounter = -1;
+            questionsList.prefixOfGroupForLabelGroup = q.caption;
+          }
           var qL = q.questions;
           var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists, currentIsPrefixGroup, isPrefixGroupCounter + 1, isPrefixInsideGroup)
           if(questionsFromGroup.length > 0) {
@@ -449,9 +445,9 @@ class Main extends React.Component<Props, {}> {
               }
             }
           } else {
-            //if (q.tags && q.tags.SubgroupRendering) {
-            //  questionsList.prefixOfGroupForLabelGroup = "";
-            //}
+            if (q.tags && q.tags.SubgroupRendering && isPrefixGroupCounter == -1) {
+              questionsList.prefixOfGroupForLabelGroup = "";
+            }
           }
         } else if (q.type == "struct") {
           if (questionsList.length > 0) {
@@ -1292,13 +1288,18 @@ class Main extends React.Component<Props, {}> {
 
         } else {
           if (!this.gotQuestionsFromPrefixGroupWhileBack || this.previousQuestionIdForPrefixGroup!= questionId) {
-            this.previousQuestionsPrefixOfGroupForLabelGroup = "";
+            //this.previousQuestionsPrefixOfGroupForLabelGroup = "";
           }
         }
         if (q.id == questionId) {
           if (isPrefixGroup && isPrefixGroupCounter == 0) {
             this.gotQuestionsFromPrefixGroupWhileBack = true;
             this.previousQuestionIdForPrefixGroup = questionId;
+          }
+          if (qe.type != "group" && isPrefixGroupCounter == 1) {
+            this.previousQuestionsPrefixOfGroupForLabelGroup = "";
+          } else if (isPrefixGroupCounter > 1 && isPrefixGroupCounter < 10) {
+            this.previousQuestionsPrefixOfGroupForLabelGroup = "";
           }
           return q;
         }
@@ -1312,19 +1313,21 @@ class Main extends React.Component<Props, {}> {
             //this.previousQuestionsPrefixOfGroupForLabelGroup = "";
           }
           targetQuestion = this.findQuestionById(q.questions, questionId, currentIsPrefixGroup, isPrefixGroupCounter+1)
-         /* if (!isEmpty(targetQuestion) && this.gotQuestionsFromPrefixGroupWhileBack) {
+          if (!isEmpty(targetQuestion)) {
 
           } else {
-            this.previousQuestionsPrefixOfGroupForLabelGroup = "";
-          }*/
+            if (q.tags && q.tags.SubgroupRendering && isPrefixGroupCounter == -1) {
+              this.previousQuestionsPrefixOfGroupForLabelGroup = "";
+            }
+          }
         }
 
         if (qe.type == "list" && q.answer && q.answer[0].elements) {
-          targetQuestion = this.findQuestionById(q.answer[0].elements, questionId, false, 1);
+          targetQuestion = this.findQuestionById(q.answer[0].elements, questionId, false, 10);
         }
 
         if (qe.type == "struct") {
-          targetQuestion = this.findQuestionById(q.elements, questionId, false, 1);
+          targetQuestion = this.findQuestionById(q.elements, questionId, false, 10);
           if (!isEmpty(targetQuestion)) {
             this.previousQuestionStructCaption = qe.caption;
           }
@@ -1423,7 +1426,7 @@ class Main extends React.Component<Props, {}> {
     if (!isEmpty(this.questions) && !isEmpty(this.questions.data)) {
       if (this.questions.data.questionnaire && this.questions.data.questionnaire.questions) {
         for(var i=0; i<previousQuestionIds.length; i++) {
-          var question = this.findQuestionById(this.questions.data.questionnaire.questions, previousQuestionIds[i], false, 1);
+          var question = this.findQuestionById(this.questions.data.questionnaire.questions, previousQuestionIds[i], false, 10);
           aQuestions.push(question);
           qComps.push(this.getQuestionComponent(question));
          }
