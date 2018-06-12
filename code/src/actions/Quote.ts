@@ -4,6 +4,10 @@ function submitQuoteForm(postData, isFromMainPage=false) {
 	return (dispatch) => {
 		return SubmitQuoteApi.submit(postData, isFromMainPage).then(
 			data => {
+				if (data && data.uniqueTransactionId) {
+					window._mfq = window._mfq || [];
+					window._mfq.push(["setVariable", "transaction_id", data.uniqueTransactionId]);
+				}
 				if (data && data.data && data.data.applicants) {
 					dispatch({
 						type: 'SUMBMITTED_PERSONAL_INFO', products: data.data.applicants,

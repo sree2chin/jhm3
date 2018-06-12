@@ -101,6 +101,9 @@ module.exports = new function(){
             console.log("Error posted for api: /v1/quote/products");
           });
       }
+      httpResponse.body = httpResponse.body || {};
+      httpResponse.body = JSON.parse(httpResponse.body);
+      httpResponse.body.uniqueTransactionId = req.session.uniqueTransactionId;
       cb(err, httpResponse);
     });
   };

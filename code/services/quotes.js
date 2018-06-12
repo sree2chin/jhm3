@@ -21,6 +21,7 @@ module.exports = new function() {
   this.getQuoteProducts = function(req, callback) {
     ApiService.getQuoteProducts(req, function(err, res) {
       if (!err && res.statusCode == 200) {
+        console.log("\n\n\nres.body: " + JSON.stringify(res.body) + "\n\n\n\n");
         callback(res.statusCode, res.body);
       } else {
         callback(res.statusCode, err);

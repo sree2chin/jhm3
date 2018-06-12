@@ -163,6 +163,14 @@ function loadPaymentPage(location: any, callback: LoadCallback) {
     "QuotePage");
 }
 
+var onRouteChange = ()=>{
+  window._mfq = window._mfq || [];
+  window._mfq.push(["newPageView"]);
+};
+browserHistory.listen( location =>  {
+  window._mfq = window._mfq || [];
+  window._mfq.push(["newPageView"]);
+ });
 
 ReactDOM.render(
   <Router history={browserHistory}>

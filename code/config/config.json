@@ -47,7 +47,7 @@
 		"client_domain": "http://127.0.0.1:3001",
 		"minify" : true,
 		"static_root" : "/pages",
-		"trackingUrl": "//cdn.mouseflow.com/projects/ebcbb6ad-7b5d-4b0b-af01-27871417fec0.js",
+		"trackingUrl": "//cdn.mouseflow.com/projects/7686d47c-31e1-4654-b6da-a7f2e1244e40.js",
 		"payment" : {
 			"ssl_merchant_id": "004582",
 			"ssl_user_id": "webpage",
@@ -85,7 +85,7 @@
 		"client_domain": "http://127.0.0.1:3001",
 		"minify" : true,
 		"static_root" : "/pages",
-		"trackingUrl": "//cdn.mouseflow.com/projects/ebcbb6ad-7b5d-4b0b-af01-27871417fec0.js",
+		"trackingUrl": "//cdn.mouseflow.com/projects/7686d47c-31e1-4654-b6da-a7f2e1244e40.js",
 		"payment" : {
 			"ssl_merchant_id": "004582",
 			"ssl_user_id": "webpage",
