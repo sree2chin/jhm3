@@ -1161,7 +1161,12 @@ class Main extends React.Component<Props, {}> {
       this.props.postQuestions(data).then(() => {
         this.setState({
           alreadyOnceSubmitted: false,
-          submittingQuestions: false
+          submittingQuestions: false,
+          addingPrimaryBeneficiary: false,
+          addingContingencyBeneficiary: false,
+          singleselectionQuestionsSubmitting: false,
+          deletingContingencyBeneficiary: false,
+          deletingPrimaryBeneficiary: false
         }, ()=> {
           this.scrollIntoBeneficiaryView();
           if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
@@ -1180,12 +1185,8 @@ class Main extends React.Component<Props, {}> {
           };
 
           this.setState({
-            addingPrimaryBeneficiary: false,
-            addingContingencyBeneficiary: false,
             singleselectionQuestionsSubmitting: false,
-            deletingContingencyBeneficiary: false,
-            deletingPrimaryBeneficiary: false
-          });
+          })
           if (noOfBeneficiaryDeleted || noOfBeneficiaryDeleted==0) {
             this.setState({
               ["deletingContingencyBeneficiary_" +  noOfBeneficiaryDeleted]: false,
@@ -1415,17 +1416,55 @@ class Main extends React.Component<Props, {}> {
     }
     return qComponent;
   }
-
+  previousQuestionsIdsContainsBeneficiaries(previousQuestionIds) {
+    var primarybeneficiaryRegex = /primarybeneficiary/i;
+    var contingentbeneficiaryRegex = /contingentbeneficiary/i;
+    for(var i=0; i<previousQuestionIds.length; i++) {
+      if (primarybeneficiaryRegex.test(previousQuestionIds[i]) || contingentbeneficiaryRegex.test(previousQuestionIds[i])) {
+        return true;
+      }
+    }
+  }
   getPreviousQuestionComponents() {
     var previousQuestionIds = this.state.previousQuestionIds;
     var qComps = [];
     var aQuestions = [];
     this.previousQuestionsPrefixOfGroupForLabelGroup = "";
     this.previousQuestionStructCaption = "";
+    if (this.previousQuestionsIdsContainsBeneficiaries(previousQuestionIds)) {
+      var preQ = null;
+      var questionsList = [];
+      questionsList.isQuestionsList = false;
+      var actualQuestionLists = [];
+      this.noFoGroupsCompleted = 0;
+      for(var i=0; i<(this.questions.data.questionnaire.questions.length); i++) {
+        var qe = this.questions.data.questionnaire.questions[i];
+        var isPrefixGroup = false;
+        if (qe.type == "group") {
+          questionsList.groupHeader = [];
+          questionsList.groupHeader.push(qe.caption);
+        }
+        this.noFoGroupsCompleted = i;
+        var q = qe;
+        q.key = q.id;
 
+        if (q.type == "group" || q.type == "assessment-factor-group") {
+          var qL = q.questions;
+          if (q.caption.toLowerCase() == "beneficiaries") {
+            questionsList.isQuestionsBeneficiaries = true;
+            actualQuestionLists.primaryBeneficiariesMainQuestion = qL[0];
+            actualQuestionLists.contingencyBeneficiariesMainQuestion = qL[1];
+            this.actualQuestionLists = actualQuestionLists;
+            return questionsList;
+          }
+        }
+      };
+    }
     if (!isEmpty(this.questions) && !isEmpty(this.questions.data)) {
       if (this.questions.data.questionnaire && this.questions.data.questionnaire.questions) {
+        this.noFoGroupsCompleted = 0;
         for(var i=0; i<previousQuestionIds.length; i++) {
+          this.noFoGroupsCompleted = i;
           var question = this.findQuestionById(this.questions.data.questionnaire.questions, previousQuestionIds[i], false, 10);
           aQuestions.push(question);
           qComps.push(this.getQuestionComponent(question));
@@ -1479,6 +1518,36 @@ class Main extends React.Component<Props, {}> {
     return currentPageIndex;
   }
 
+  setBeneficiaryQuestionsProperly() {
+    var aQuestions = [];
+    var beneficiaryQuestions = [];
+    var qComps;
+    if (this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions) {
+      for(var i=0; i<this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions.length; i++) {
+        var answers = this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions[i].questions;
+        qComps = [];
+        for (var j=0; j<answers.length; j++) {
+          qComps.push(this.getQuestionComponent(answers[j]));
+        }
+        beneficiaryQuestions.push(qComps);
+      }
+    }
+    this.questionComponents.primaryBeneficiaryQuestionsComps = beneficiaryQuestions;
+
+    beneficiaryQuestions = [];
+    if (this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions) {
+      for(var i=0; i<this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions.length; i++) {
+        var answers = this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions[i].questions;
+        qComps = [];
+        for (var j=0; j<answers.length; j++) {
+          qComps.push(this.getQuestionComponent(answers[j]));
+        }
+        beneficiaryQuestions.push(qComps);
+      }
+    }
+     this.questionComponents.contingencyBeneficiaryQuestionsComps = beneficiaryQuestions;
+  }
+
   getCurrentSetOfQuestions() {
     if (this.state.previousQuestionIds && this.state.previousQuestionIds.length > 0) {
       if (this.previousQuestionsSource && this.previousQuestionsSource && this.previousQuestionsSource.questions.length > 0) {
@@ -1486,7 +1555,9 @@ class Main extends React.Component<Props, {}> {
       } else {
         this.questionComponents = this.getPreviousQuestionComponents();
       }
-
+      if (this.questionComponents && this.questionComponents.isQuestionsBeneficiaries) {
+        this.setBeneficiaryQuestionsProperly();
+      }
       if (this.questionComponents && this.questionComponents.isQuestionsList) {
 
       }
@@ -1521,34 +1592,7 @@ class Main extends React.Component<Props, {}> {
       }
 
       if (this.questionComponents && this.questionComponents.isQuestionsBeneficiaries) {
-
-        var aQuestions = [];
-        var beneficiaryQuestions = [];
-        var qComps;
-        if (this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions) {
-          for(var i=0; i<this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions.length; i++) {
-            var answers = this.actualQuestionLists.primaryBeneficiariesMainQuestion.questions[i].questions;
-            qComps = [];
-            for (var j=0; j<answers.length; j++) {
-              qComps.push(this.getQuestionComponent(answers[j]));
-            }
-            beneficiaryQuestions.push(qComps);
-          }
-        }
-        this.questionComponents.primaryBeneficiaryQuestionsComps = beneficiaryQuestions;
-
-        beneficiaryQuestions = [];
-        if (this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions) {
-          for(var i=0; i<this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions.length; i++) {
-            var answers = this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions[i].questions;
-            qComps = [];
-            for (var j=0; j<answers.length; j++) {
-              qComps.push(this.getQuestionComponent(answers[j]));
-            }
-            beneficiaryQuestions.push(qComps);
-          }
-        }
-         this.questionComponents.contingencyBeneficiaryQuestionsComps = beneficiaryQuestions;
+        this.setBeneficiaryQuestionsProperly();
       }
       return this.questionComponents;
     } else {
