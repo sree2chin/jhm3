@@ -1462,9 +1462,7 @@ class Main extends React.Component<Props, {}> {
     }
     if (!isEmpty(this.questions) && !isEmpty(this.questions.data)) {
       if (this.questions.data.questionnaire && this.questions.data.questionnaire.questions) {
-        this.noFoGroupsCompleted = 0;
         for(var i=0; i<previousQuestionIds.length; i++) {
-          this.noFoGroupsCompleted = i;
           var question = this.findQuestionById(this.questions.data.questionnaire.questions, previousQuestionIds[i], false, 10);
           aQuestions.push(question);
           qComps.push(this.getQuestionComponent(question));
