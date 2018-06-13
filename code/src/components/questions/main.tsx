@@ -1844,7 +1844,9 @@ class Main extends React.Component<Props, {}> {
     }
     if (idName) {
       var elem = document.getElementById(idName);
-      elem.scrollIntoView();
+      if (elem && elem.scrollIntoView) {
+        elem.scrollIntoView();
+      }
       return;
     }
 
