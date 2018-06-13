@@ -1159,6 +1159,8 @@ class Main extends React.Component<Props, {}> {
       }
 
       this.props.postQuestions(data).then(() => {
+        this.addingPrimaryBeneficiary = false;
+        this.addingContingencyBeneficiary = false;
         this.setState({
           alreadyOnceSubmitted: false,
           submittingQuestions: false,
@@ -1168,6 +1170,7 @@ class Main extends React.Component<Props, {}> {
           deletingContingencyBeneficiary: false,
           deletingPrimaryBeneficiary: false
         }, ()=> {
+
           this.scrollIntoBeneficiaryView();
           if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
             window.location.href = this.questions.LOGIN_URL;
@@ -1834,10 +1837,10 @@ class Main extends React.Component<Props, {}> {
 
   scrollIntoBeneficiaryView() {
     var idName;
-    if(this.addingPrimaryBeneficiary) {
+    if(this.addingPrimaryBeneficiary && this.actualQuestionLists && this.actualQuestionLists.primaryBeneficiariesMainQuestion && this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer && this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer.length) {
       idName = "primary-beneficiary-container-" + (this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer.length-1);
     }
-    if (this.addingContingencyBeneficiary) {
+    if (this.addingContingencyBeneficiary && this.actualQuestionLists && this.actualQuestionLists.contingencyBeneficiariesMainQuestion && this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer && this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer.length) {
       idName = "contingency-beneficiary-container-" + (this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer.length-1);
     }
     if (idName) {
