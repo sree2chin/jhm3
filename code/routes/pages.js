@@ -187,7 +187,7 @@ module.exports = function(app) {
 
   app.get('/signature', samlAuthenticateQuestionsMiddleware1, function(req, res, next) {
     var url_parts = url.parse(req.url, true);
-    console.log("in normal url: " + JSON.stringify(url_parts));
+    console.log("in signature url: " + JSON.stringify(url_parts));
     req.session = req.session || {};
     req.session.queryParams = req.session.queryParams || {};
     if (!_.isEmpty(url_parts.query)) {

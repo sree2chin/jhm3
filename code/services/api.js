@@ -269,12 +269,13 @@ module.exports = new function(){
   this.confirmQuestions = function(req, cb){
 
     var formData = {};
+    console.log("\n\n\nreq.session.envelop_id: req.session.envelop_id: " + req.session.envelop_id);
     if(req.session.envelop_id)      {
       formData.envelop_id = req.session.envelop_id;
-      delete req.session.envelop_id;
+      //elete req.session.envelop_id;
     }
     if (req.session.queryParams && req.session.queryParams.event == "signing_complete") {
-      delete req.session.queryParams.event;
+      //delete req.session.queryParams.event;
       formData.signature_status = "1";
     } else {
       formData.signature_status = "0";
