@@ -13,6 +13,13 @@ module.exports = new function() {
       if (!err && res.statusCode == 200) {
         callback(res.statusCode, res.body);
       } else {
+        var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
+
+        if (responseBody && responseBody.data && responseBody.data.current_document_data) {
+          req.session.envelop_id = responseBody.data.current_document_data.envelop_id;
+          req.session.signature_status = responseBody.data.current_document_data.signature_status;
+          console.log("\n\n\nreq.session.envelop_id: " + req.session.envelop_id + "\n\n\n");
+        }
         callback(res.statusCode, res.body);
       }
     });
@@ -26,6 +33,13 @@ module.exports = new function() {
       if (!err && res.statusCode == 200) {
         callback(res.statusCode, res.body);
       } else {
+        var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
+
+        if (responseBody && responseBody.data && responseBody.data.current_document_data) {
+          req.session.envelop_id = responseBody.data.current_document_data.envelop_id;
+          req.session.signature_status = responseBody.data.current_document_data.signature_status;
+          console.log("\n\n\nreq.session.envelop_id: " + req.session.envelop_id + "\n\n\n");
+        }
         callback(res.statusCode, res.body);
       }
     });
@@ -65,6 +79,11 @@ module.exports = new function() {
       if (!err && res.statusCode == 200) {
         var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
 
+        if (responseBody && responseBody.data && responseBody.data.current_document_data) {
+          req.session.envelop_id = responseBody.data.current_document_data.envelop_id;
+          req.session.signature_status = responseBody.data.current_document_data.signature_status;
+          console.log("\n\n\nreq.session.envelop_id: " + req.session.envelop_id + "\n\n\n");
+        }
         callback(res.statusCode, res.body);
       } else {
         callback(res.statusCode, res.body);
