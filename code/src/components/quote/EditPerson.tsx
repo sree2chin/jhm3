@@ -295,7 +295,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                   </Row>
                   <Row  style={{marginBottom: "11px", marginLeft: "-15px"}}>
                     <Col sm={12} className={"c-subheader-text c-subheader-overall-health"} style={{marginTop: "15px"}}>
-                      Overall health
+                      How would you rate your overall health?
                     </Col>
                     <Col sm={12} style={{marginBottom: "10px", marginTop: "6px"}}>
                       <Select

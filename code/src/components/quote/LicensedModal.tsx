@@ -298,7 +298,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
                             Vantis Life Call Center toll free number  |  M-F 8am to 7pm PST:
                           </Col>
                           <Col className="free-toll-no center">
-                            1-866-826-8471
+                            {window.contactNumber || "1-866-826-8471"} {window.contactNumberText}
                           </Col>
                         </Row>
                       </Col>
