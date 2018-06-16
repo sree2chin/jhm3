@@ -1159,6 +1159,16 @@ class Main extends React.Component<Props, {}> {
       }
 
       this.props.postQuestions(data).then(() => {
+        if (this.addingPrimaryBeneficiary == true || this.addingContingencyBeneficiary == true) {
+          this.donotScrollBeneficaryError = true;
+        }
+
+        if (this.addingPrimaryBeneficiary == true) {
+          this.addingPrimaryBeneficiaryFlag = true;
+        }
+        if (this.addingContingencyBeneficiary == true) {
+          this.addingContingencyBeneficiaryFlag = true;
+        }
         this.addingPrimaryBeneficiary = false;
         this.addingContingencyBeneficiary = false;
         this.setState({
@@ -1837,10 +1847,12 @@ class Main extends React.Component<Props, {}> {
 
   scrollIntoBeneficiaryView() {
     var idName;
-    if(this.addingPrimaryBeneficiary && this.actualQuestionLists && this.actualQuestionLists.primaryBeneficiariesMainQuestion && this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer && this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer.length) {
+    if(this.addingPrimaryBeneficiaryFlag && this.actualQuestionLists && this.actualQuestionLists.primaryBeneficiariesMainQuestion && this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer && this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer.length) {
+      this.addingPrimaryBeneficiaryFlag = false;
       idName = "primary-beneficiary-container-" + (this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer.length-1);
     }
-    if (this.addingContingencyBeneficiary && this.actualQuestionLists && this.actualQuestionLists.contingencyBeneficiariesMainQuestion && this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer && this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer.length) {
+    if (this.addingContingencyBeneficiaryFlag && this.actualQuestionLists && this.actualQuestionLists.contingencyBeneficiariesMainQuestion && this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer && this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer.length) {
+      this.addingContingencyBeneficiaryFlag = false;
       idName = "contingency-beneficiary-container-" + (this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer.length-1);
     }
     if (idName) {
@@ -1855,7 +1867,8 @@ class Main extends React.Component<Props, {}> {
   }
 
   scrollIntoInvalidQuestionView() {
-    if (this.actualQuestionLists) {
+    if (this.actualQuestionLists && !this.donotScrollBeneficaryError) {
+      this.donotScrollBeneficaryError = false;
       if (this.actualQuestionLists.contingencyBeneficiariesMainQuestion &&
         this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions &&
         this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions.length > 0){
@@ -1890,6 +1903,8 @@ class Main extends React.Component<Props, {}> {
         }
       }
 
+    } else if (this.donotScrollBeneficaryError) {
+      this.donotScrollBeneficaryError = false;
     }
   }
 
