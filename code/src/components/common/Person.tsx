@@ -345,7 +345,12 @@ export default class Person extends React.Component<Props, {}> {
         </div>
         <div  style={{marginBottom: "0px"}}>
           <Col sm={12} className={"c-subheader-text"} style={{marginTop: "5px"}}>
-            How would you rate your overall health?
+            Overall health
+            <div style={{display: 'inline-block'}}>
+            <Tooltip content="How would you rate your overall health?" styles={toolTipStylesTobaccoUsage}>
+              <img style={{marginBottom: "-30px"}} src={"../images/question-mark.svg"} />
+            </Tooltip>
+            </div>
           </Col>
           <Col sm={12} style={{marginBottom: "0px", marginTop: "6px"}}>
             <Select
@@ -357,21 +362,11 @@ export default class Person extends React.Component<Props, {}> {
               }}
               className={this.getErrorsClassNames(errors, "healthError")}
             />
-            <div style={{display: 'inline-block'}} onClick={ ()=> {
-              this.setState({
-                showHealthPopup: true
-              })
-            }}>
-              <img style={{marginTop: "-38px", marginLeft: "15px"}} src={"../images/question-mark.svg"} />
-            </div>
             <Col sm={12} style={{marginTop: "-5px", paddingLeft: "0px"}} className={`c-subheader-text error ${errors.healthError ? "visibility-show" : "visibility-hidden"}`}>
               Please select your health status.
             </Col>
           </Col>
-            <HealthInformationPopup
-              show={this.state.showHealthPopup}
-              onCloseModal={this.closeHealthInformationPopup.bind(this)}
-            />
+
         </div>
         <div>
           <Col sm={12} className={"c-subheader-text"}  style={{marginTop: "0px"}}>
