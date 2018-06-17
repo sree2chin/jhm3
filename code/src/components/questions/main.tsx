@@ -1157,6 +1157,9 @@ class Main extends React.Component<Props, {}> {
       if (this.previousQuestionsSource && this.previousQuestionsSource.questions && this.previousQuestionsSource.questions.length > 0) {
         data.current_index = this.previousQuestionHanldingIndexInstance;
       }
+      this.setState({
+        alreadyOnceSubmitted: false
+      });
 
       this.props.postQuestions(data).then(() => {
         if (this.addingPrimaryBeneficiary == true || this.addingContingencyBeneficiary == true) {
