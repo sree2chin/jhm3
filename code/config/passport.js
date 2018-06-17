@@ -6,13 +6,14 @@ module.exports = function (passport, config) {
   console.log(fs.readFileSync(path.join(__dirname + "/" + config.passport.saml.cert)).toString());
   this.samlStrategy = new SamlStrategy(
     {
+signatureAlgorithm: 'sha512',
       path: config.passport.saml.path,
       callbackUrl: config.passport.saml.path,
       entryPoint: config.passport.saml.entryPoint,
       issuer: config.passport.saml.issuer,
-      cert: fs.readFileSync(path.join(__dirname + "/" + config.passport.saml.cert)).toString(),
-      privateCert: fs.readFileSync(path.join(__dirname + "/" + config.passport.saml.privateKey), 'utf-8'),
-      decryptionPvk: fs.readFileSync(path.join(__dirname + "/" + config.passport.saml.privateKey), 'utf-8')
+     cert: fs.readFileSync(path.join(__dirname + "/" + config.passport.saml.cert)).toString(),
+//     privateCert: fs.readFileSync(path.join(__dirname + "/" + config.passport.saml.privateKey), 'utf-8'),
+  //   decryptionPvk: fs.readFileSync(path.join(__dirname + "/" + config.passport.saml.privateKey), 'utf-8')
     },
     function (profile, done) {
       return done(null,
