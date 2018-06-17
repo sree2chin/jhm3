@@ -116,7 +116,7 @@
 			  "issuer": "https://vantislifeinsurance.sureify.com/saml/Metadata",
 			  "cert":  "prod_cert.cert",
 			  "privateKey": "prod_privateKey.pem",
-			  "on": false
+			  "on": true
 		  }
 	  }
 	}
