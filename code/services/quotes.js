@@ -13,7 +13,7 @@ module.exports = new function() {
       if (!err && res.statusCode == 200) {
         callback(res.statusCode, res.body);
       } else {
-        callback(res.statusCode, data);
+        callback(res.statusCode, res.body);
       }
     });
   };
