@@ -15,6 +15,7 @@ module.exports = function(app) {
   var prefix = "/v1";
 
   var samlAuthenticateMiddleware = function(req, res, next) {
+    req.session = req.session || {};
     req.session.questionsMiddleware = false;
     console.log("\n\n\nsamlAfdffdfuthenticateMiddleware quote" + req.session.questionsMiddleware + "\n\n\n");
     var url_parts = url.parse(req.url, true);

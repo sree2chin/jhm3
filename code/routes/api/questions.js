@@ -42,6 +42,7 @@ module.exports = function(app) {
   );
 
   var samlAuthenticateQuestionsMiddleware = function(req, res, next) {
+    req.session = req.session || {};
     req.session.questionsMiddleware = true;
     var url_parts = url.parse(req.url, true);
     console.log("\n\n\neq.session.queryParams: " + JSON.stringify(req.session.queryParams)+ "\n\n\n\n");
