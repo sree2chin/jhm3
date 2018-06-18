@@ -51,7 +51,7 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
-      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
             apiName: "/v1/quote/premiums",
@@ -89,7 +89,7 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
-      if (httpResponse && httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse && httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
             apiName: "/v1/quote/products",
@@ -98,13 +98,16 @@ module.exports = new function(){
             expection: null,
             error_message: null
           }, function() {
-            console.log("Error posted for api: /v1/quote/products");
+            console.log("Error posted for api: /v1/quote/products: " + httpResponse.body);
           });
+          cb(err, httpResponse);
+      } else {
+        httpResponse.body = httpResponse.body || {};
+        httpResponse.body = JSON.parse(httpResponse.body);
+        httpResponse.body.uniqueTransactionId = req.session.uniqueTransactionId;
+        cb(err, httpResponse);
       }
-      httpResponse.body = httpResponse.body || {};
-      httpResponse.body = JSON.parse(httpResponse.body);
-      httpResponse.body.uniqueTransactionId = req.session.uniqueTransactionId;
-      cb(err, httpResponse);
+
     });
   };
 
@@ -123,7 +126,7 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
-      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
             apiName: "/v1/quote/productplans",
@@ -151,7 +154,7 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
-      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
             apiName: "/v1/quote/premiums",
@@ -181,7 +184,7 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
-      if (httpResponse && httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse && httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
             apiName: "/v1/questions/questions",
@@ -217,7 +220,7 @@ module.exports = new function(){
       method: 'POST',
       formData: formData
     }, function callback(err, httpResponse, body) {
-      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse && httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
             apiName: "/v1/questions/questions",
@@ -250,7 +253,7 @@ module.exports = new function(){
     }, function callback(err, httpResponse, body) {
       req.session.postPayment = JSON.stringify(httpResponse);
       req.session.postPaymentElavonUrl = req.body.elavon_url;
-      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse && httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
             apiName: req.body.elavon_url,
@@ -294,7 +297,7 @@ module.exports = new function(){
       method: 'POST',
       formData: formData
     }, function callback(err, httpResponse, body) {
-      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse && httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
             apiName: '/v1/questions/questions',
@@ -327,7 +330,7 @@ module.exports = new function(){
       formData: formData
     }, function callback(err, httpResponse, body) {
       console.log("\n\n\n ttpResponse in makePayment1: " + JSON.stringify(httpResponse) + "\n\n\n");
-      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse && httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
             apiName: '/v1/questions/questions',
@@ -361,7 +364,7 @@ module.exports = new function(){
       method: 'POST',
       formData: formData
     }, function callback(err, httpResponse, body) {
-      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse && httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
             apiName: '/v1/questions/questions',
@@ -393,7 +396,7 @@ module.exports = new function(){
       method: 'POST',
       formData: formData
     }, function callback(err, httpResponse, body) {
-      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse && httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
             apiName: '/v1/auth/user',
@@ -424,7 +427,7 @@ module.exports = new function(){
       method: 'POST',
       formData: formData
     }, function callback(err, httpResponse, body) {
-      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse && httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
             apiName: '/v1/auth/setpassword',
@@ -456,7 +459,7 @@ module.exports = new function(){
       method: 'POST',
       formData: data
     }, function callback(err, httpResponse, body) {
-      if (httpResponse.body && httpResponse.body.indexOf("A PHP Error was encountered") >-1) {
+      if (httpResponse && httpResponse.body &&  (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
             apiName: '/v1/questions/factorsearch',

@@ -68,7 +68,7 @@ module.exports = new function() {
       if (!err && res.statusCode == 200) {
         var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
 
-        if (responseBody.data && responseBody.data.current_document_data) {
+        if (responseBody && responseBody.data && responseBody.data.current_document_data) {
           req.session.envelop_id = responseBody.data.current_document_data.envelop_id;
           req.session.signature_status = responseBody.data.current_document_data.signature_status;
           console.log("\n\n\nreq.session.envelop_id: " + req.session.envelop_id + "\n\n\n");
@@ -105,7 +105,7 @@ module.exports = new function() {
       if (!err && res.statusCode == 200) {
         var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
         //console.log("\n\n\n" + JSON.stringify(res.body) + "\n\n\n");
-        if (responseBody.data && responseBody.data.access_token) {
+        if (responseBody && responseBody.data && responseBody.data.access_token) {
           req.session.queryParams = req.session.queryParams || {};
           req.session.queryParams.access_token = responseBody.data.access_token;
         }
@@ -122,7 +122,7 @@ module.exports = new function() {
       if (!err && res.statusCode == 200) {
         //console.log("\n\n\n" + JSON.stringify(res.body) + "\n\n\n");
         var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
-        if (responseBody.data && responseBody.data.access_token) {
+        if (responseBody && responseBody.data && responseBody.data.access_token) {
           req.session.queryParams = req.session.queryParams || {};
           req.session.queryParams.access_token = responseBody.data.access_token;
         }
@@ -136,6 +136,11 @@ module.exports = new function() {
   this.getFactorsearch = function(req, callback) {
     ApiService.getFactorsearch(req, function(err, res) {
       if (!err && res.statusCode == 200) {
+        var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
+        if (responseBody && responseBody.data && responseBody.data.access_token) {
+          req.session.queryParams = req.session.queryParams || {};
+          req.session.queryParams.access_token = responseBody.data.access_token;
+        }
         callback(res.statusCode, res.body);
       } else {
         callback(res.statusCode, res.body);
