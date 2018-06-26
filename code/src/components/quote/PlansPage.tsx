@@ -229,6 +229,9 @@ class PlansPage extends React.Component<Props, {}> {
             riderAmount = this.state.selectedRider0.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider0.Premium[this.state.premium_type].split("$")[1]) : 0;
             personOne.wp_premium = String(riderAmount);
             personOne.sWP = 1;
+          } else {
+            delete personOne.wp_premium;
+            personOne.sWP = 0;
           }
 
           personOne.premium_amount = String(parseFloat(amount) + parseFloat(riderAmount));
@@ -266,6 +269,9 @@ class PlansPage extends React.Component<Props, {}> {
               riderAmount = this.state.selectedRider1.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider1.Premium[this.state.premium_type].split("$")[1])  : 0;
               personTwo.wp_premium = String(riderAmount);
               personTwo.sWP = 1;
+            } else {
+              delete personTwo.wp_premium;
+              personTwo.sWP = 0;
             }
 
             personTwo.premium_amount =  String(parseFloat(amount) + parseFloat(riderAmount));
