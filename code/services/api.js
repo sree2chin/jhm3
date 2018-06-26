@@ -370,6 +370,13 @@ module.exports = new function(){
             console.log("Error posted for POST makePayment1 api: " + '/v1/questions/questions');
           });
       }
+      var responseBody = JSON.parse(JSON.stringify(JSON.parse(httpResponse.body)));
+
+      if (responseBody && responseBody.data && responseBody.data.current_document_data) {
+        req.session.envelop_id = responseBody.data.current_document_data.envelop_id;
+        req.session.signature_status = responseBody.data.current_document_data.signature_status;
+        console.log("\n\n\nreq.session.envelop_id: " + req.session.envelop_id + "\n\n\n");
+      }
       cb(err, httpResponse);
     });
   };
