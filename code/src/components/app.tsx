@@ -25,6 +25,7 @@ export default class App extends React.Component<Props, {}> {
         <div className="">
           {!isPaymentPage && <Header
             logoImgSrc={"../images/logo.svg"}
+            location={this.props.location}
           />}
           <div className="c-body">
             {this.props.children}
