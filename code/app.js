@@ -50,6 +50,8 @@ app.locals.contactNumber       = appConfig.getProperty("contactNumber");
 app.locals.contactNumberText       = appConfig.getProperty("contactNumberText");
 app.locals.pagesPath        = '/pages';
 app.locals.trackingUrl           = appConfig.getProperty("trackingUrl");
+app.locals.goAgentWeb           = appConfig.getProperty("goAgentWeb");
+app.locals.lifetimeAgentPanel           = appConfig.getProperty("lifetimeAgentPanel");
 
 var thirtyDay = 30 * 86400000;
 

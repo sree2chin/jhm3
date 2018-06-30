@@ -12,6 +12,8 @@
 		"trackingUrl": "",
 		"contactNumber": "1-866-826-8471",
 		"contactNumberText": "Option 3",
+		"goAgentWeb": "http://training.goagentweb.com/agent/main_menu.asp",
+		"lifetimeAgentPanel": "https://vantisstg.sureify.com/carrier/applicants/index",
 		"payment" : {
 			"ssl_merchant_id": "004582",
 			"ssl_user_id": "webpage",
@@ -52,6 +54,8 @@
 		"minify" : true,
 		"static_root" : "/pages",
 		"trackingUrl": "//cdn.mouseflow.com/projects/7686d47c-31e1-4654-b6da-a7f2e1244e40.js",
+		"goAgentWeb": "http://training.goagentweb.com/agent/main_menu.asp",
+		"lifetimeAgentPanel": "https://vantisstg.sureify.com/carrier/applicants/index",
 		"payment" : {
 			"ssl_merchant_id": "004582",
 			"ssl_user_id": "webpage",
@@ -92,6 +96,8 @@
 		"minify" : true,
 		"static_root" : "/pages",
 		"trackingUrl": "//cdn.mouseflow.com/projects/7686d47c-31e1-4654-b6da-a7f2e1244e40.js",
+		"goAgentWeb": "https://www.goagentweb.com/Vantis/agent/main_menu.asp",
+		"lifetimeAgentPanel": "https://vantis.sureify.com/carrier/applicants/index",
 		"payment" : {
 			"ssl_merchant_id": "004582",
 			"ssl_user_id": "webpage",

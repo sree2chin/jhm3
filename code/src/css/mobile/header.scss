@@ -1,6 +1,6 @@
 @media(max-width:768px) {
 	.c-footer {
-		
+
 	}
 	.cf-nav-main-header {
 		.navbar-header img {
@@ -12,6 +12,13 @@
 			.header-text {
 				margin-left: 0px;
 				margin-top: 10px;
+			}
+			.navbar-links {
+				font-size: 11px;
+				margin-left: 28px;
+				.first-link {
+					margin-right: 15px;
+				}
 			}
 		}
 	}

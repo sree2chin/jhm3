@@ -85,6 +85,15 @@
       margin-right: 0px;
       margin-top: 23px;
       float: right;
+      .navbar-links {
+        float: left;
+        font-size: 16px;
+        margin-top: 10px;
+        margin-left: 35px;
+        .first-link {
+          margin-right: 27px;
+        }
+      }
       .link {
         color: #317dbd;
         font-size: 18px;

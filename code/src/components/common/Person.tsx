@@ -421,7 +421,7 @@ export default class Person extends React.Component<Props, {}> {
               </Col>
             </Row>
             <Col sm={12} className={`c-subheader-text error ${errors.smokeError ? "visibility-show" : "visibility-hidden"}`} style={{marginTop: "0px", paddingLeft: "0px"}}>
-              Please indicate whether or not you use tobacco products.
+              Please indicate whether or not use tobacco products.
             </Col>
           </Col>
         </div>
