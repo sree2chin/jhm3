@@ -345,7 +345,7 @@ export default class Person extends React.Component<Props, {}> {
         </div>
         <div  style={{marginBottom: "0px"}}>
           <Col sm={12} className={"c-subheader-text"} style={{marginTop: "5px"}}>
-            Overall health
+            How would you rate your overall health?
             <div style={{display: 'inline-block'}}>
             <Tooltip content="How would you rate your overall health?" styles={toolTipStylesTobaccoUsage}>
               <img style={{marginBottom: "-30px"}} src={"../images/question-mark.svg"} />

@@ -48,6 +48,7 @@ class Header extends React.Component<Props, {}> {
               <TelLinkComponent
                 phoneNumber={(window.contactNumber ? window.contactNumber :  "1-866-826-8471")}
               />
+              {" " + window.contactNumberText}
             </div>
           </div>
 
