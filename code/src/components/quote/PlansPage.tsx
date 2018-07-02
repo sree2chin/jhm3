@@ -375,8 +375,8 @@ class PlansPage extends React.Component<Props, {}> {
 
   getTotalPaymentAmount() {
     var total = 0;
-    var sProductID = this.props.persons && this.props.persons[0] && this.props.persons[0].sProductID || null;
-    var sProductID1 = this.props.persons && this.props.persons[1] && this.props.persons[1].sProductID || null;
+    var sProductID = this.state.productIdPlan0 || null;
+    var sProductID1 = this.state.productIdPlan1 || null;
 
     if (this.props.premiums && this.props.premiums[0] && this.props.premiums[0] && this.props.premiums[0][sProductID] && sProductID && this.state.premium_type){
       if (this.props.premiums[0][sProductID].QuoteRateGrid && this.props.premiums[0][sProductID].QuoteRateGrid.Col1 && this.props.premiums[0][sProductID].QuoteRateGrid.Col1.Face1 && this.props.premiums[0][sProductID].QuoteRateGrid.Col1.Face1.Premium) {
@@ -683,6 +683,7 @@ class PlansPage extends React.Component<Props, {}> {
               index={0}
               selectRider={this.selectRider.bind(this)}
               premium_type={this.state.premium_type}
+              selectedRider={this.state.selectedRider0}
             />
           </Col>
         </Row>
@@ -698,6 +699,7 @@ class PlansPage extends React.Component<Props, {}> {
               index={1}
               selectRider={this.selectRider.bind(this)}
               premium_type={this.state.premium_type}
+              selectedRider={this.state.selectedRider1}
             />
           </Col>
         </Row>

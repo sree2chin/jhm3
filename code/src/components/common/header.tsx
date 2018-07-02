@@ -3,16 +3,19 @@ import {Link} from 'react-router';
 import { Navbar } from "react-bootstrap";
 import TelLinkComponent from "./TelLinkComponent";
 import {each, isEmpty} from "underscore";
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 
 interface Props extends React.Props<Header> {
   logoImgSrc: string,
   location? : any
 }
 
-export default class Header extends React.Component<Props, {}> {
+class Header extends React.Component<Props, {}> {
   shouldShowAgentLinks() {
     var queryParams = this.props.location.query;
-    return !isEmpty(queryParams["agent_number"]);
+    return !isEmpty(queryParams["agent_number"]) ||
+      this.props.is_agent == true;
   }
   public render() {
     return (
@@ -53,3 +56,20 @@ export default class Header extends React.Component<Props, {}> {
     );
   }
 }
+
+const mapStateToProps = (state: any): Props => {
+  return {
+    products: state.quotes.products,
+    plans: state.quotes.plans,
+    persons: state.quotes.persons,
+    noOfPersons: state.selectPersons.noOfPersons,
+    is_agent: state.quotes.is_agent,
+    premiums: state.quotes.premiums
+  };
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): Props => {
+  return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
