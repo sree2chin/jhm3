@@ -455,7 +455,7 @@ input.form-control:focus {
   color: #333333;
   margin-right: 0px;
   margin-top: 23px;
-  float: right; }
+  display: inline-block; }
   .cf-nav-main-header p.navbar-text .navbar-links {
     float: left;
     font-size: 16px;
