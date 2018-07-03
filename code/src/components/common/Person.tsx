@@ -283,7 +283,7 @@ export default class Person extends React.Component<Props, {}> {
             </Row>
 
             <Col sm={12} className={`c-subheader-text error ${errors.s_genderError ? "visibility-show" : "visibility-hidden"}`} style={{paddingLeft: "0px", marginTop: "0px"}}>
-              Please select your gender.
+              Please select gender.
             </Col>
           </Col>
         </div>
@@ -320,7 +320,7 @@ export default class Person extends React.Component<Props, {}> {
 
           </Col>
           <Col sm={12} className={`c-subheader-text error ${errors.s_birthDateError ? "visibility-show" : "visibility-hidden"}`}>
-            Please select your birth date.
+            Please select birth date.
           </Col>
         </Row>
         <div style={{marginBottom: "12px"}}>
@@ -338,7 +338,7 @@ export default class Person extends React.Component<Props, {}> {
               className={this.getErrorsClassNames(errors, "stateError")}
             />
             <Col style={{ paddingLeft: "0px", marginTop: "-5px"}} sm={12} className={`c-subheader-text error ${errors.stateError ? "visibility-show" : "visibility-hidden"}`}>
-              Please select your state.
+              Please select state.
             </Col>
           </Col>
 
@@ -365,7 +365,7 @@ export default class Person extends React.Component<Props, {}> {
               <img style={{marginTop: "-38px", marginLeft: "15px"}} src={"../images/question-mark.svg"} />
             </div>
             <Col sm={12} style={{marginTop: "-5px", paddingLeft: "0px"}} className={`c-subheader-text error ${errors.healthError ? "visibility-show" : "visibility-hidden"}`}>
-              Please select your health status.
+              Please select health status.
             </Col>
           </Col>
           <HealthInformationPopup

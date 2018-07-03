@@ -233,7 +233,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                       </div>
                     </FormGroup>
                     { errors.s_genderError && <Col sm={12} className={"c-subheader-text error"} style={{paddingLeft: "0px"}}>
-                      Please select your gender.
+                      Please select gender.
                     </Col> }
                   </Col>
                   </Row>
@@ -271,7 +271,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                         </FormGroup>
                     </Col>
                     { errors.s_birthDateError && <Col sm={12} className={"c-subheader-text error"}>
-                      Please select your birth date.
+                      Please select birth date.
                     </Col> }
                   </Row>
                   <Row style={{marginBottom: "12px", marginLeft: "-15px"}}>
@@ -288,7 +288,7 @@ export default class EditPerson extends React.Component<Props, {}> {
                         }}
                       />
                        { errors.stateError && <Col style={{ paddingLeft: "0px"}} sm={12} className={"c-subheader-text error"}>
-                            Please select your state.
+                            Please select state.
                           </Col> }
                     </Col>
 
