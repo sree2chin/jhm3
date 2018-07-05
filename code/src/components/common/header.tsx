@@ -22,9 +22,9 @@ class Header extends React.Component<Props, {}> {
       <Navbar className="cf-nav-main-header">
         <Navbar.Header>
           <div>
-            <Navbar.Brand>
-              <img src={this.props.logoImgSrc} />
-            </Navbar.Brand>
+            <span>
+              <img className="navbar-brand" src={this.props.logoImgSrc} />
+            </span>
             {this.shouldShowAgentLinks() && <span className="navbar-links">
                   {window.goAgentWeb && <a href={window.goAgentWeb} className="first-link">Go Agent Web</a>}
                   {window.lifetimeAgentPanel && <a href={window.lifetimeAgentPanel}>Lifetime Agent Panel</a>}
