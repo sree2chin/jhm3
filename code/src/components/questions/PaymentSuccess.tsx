@@ -1,11 +1,10 @@
 import * as React from 'react';
-import {Link} from 'react-router';
-import { Row, Col } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import {makePayment} from '../../actions/Questions';
+import {makePayment, postPayment} from '../../actions/Questions';
 import { browserHistory } from 'react-router';
-import {each, isEmpty, map} from "underscore";
+import { isEmpty } from "underscore";
+import {Button, Row, Col} from "react-bootstrap";
 
 interface Props extends React.Props<paymentSuccess> {
     location: any
@@ -100,6 +99,75 @@ class paymentSuccess extends React.Component<Props, {}> {
     !((this.props.paymentData && this.props.paymentData && this.props.paymentData.message) ||
       (this.props.confirmationData && this.props.confirmationData && this.props.confirmationData.message));
   }
+  onPayment() {
+    var elavonData = this.props.paymentData && this.props.paymentData.data && this.props.paymentData.data.elavon_data;
+    var data = {};
+    data.elavon_params = elavonData && elavonData.elavon_params ? elavonData.elavon_params : [];
+    data.elavon_url =  elavonData.elavon_url;
+    this.setState({
+      onPaymentGoingTo: true
+    });
+    if (this.props.paymentData && this.props.paymentData.LOGIN_URL && this.props.paymentData.LOGIN_URL.length > 0) {
+      window.location.href = this.props.paymentData.LOGIN_URL;
+      return;
+    }
+    if (this.props.paymentData && this.props.paymentData.redirect_url && this.props.paymentData.redirect_url.length > 0) {
+      window.location.href = this.props.paymentData.redirect_url;
+      return;
+    }
+    this.props.postPayment(data).then(()=> {
+      if (this.props.paymentInfo && this.props.paymentInfo.LOGIN_URL && this.props.paymentInfo.LOGIN_URL.length > 0) {
+        window.location.href = this.props.paymentInfo.LOGIN_URL;
+        return;
+      }
+      if (this.props.paymentInfo && this.props.paymentInfo.redirect_url && this.props.paymentInfo.redirect_url.length > 0) {
+        window.location.href = this.props.paymentInfo.redirect_url;
+        return;
+      }
+      if (this.props.paymentInfo && isEmpty(data.elavon_params)) {
+        var questionsInfo = JSON.parse(this.props.paymentInfo);
+
+        var queryParams = this.props.location.query;
+        var queryParamsString = "?";
+        for(var k in queryParams) {
+          if (queryParams[k]) {
+            queryParamsString += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString += k + "&";
+          }
+        }
+        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+
+        var link = questionsInfo && questionsInfo.data &&
+        questionsInfo.data.current_document_data && questionsInfo.data.current_document_data.sign_url;
+        if (questionsInfo.valid_user == 0) {
+          browserHistory.push("/authorize" + queryParamsString);
+          return;
+        }
+
+        if (questionsInfo.application_complete_status == false || questionsInfo.application_complete_status == "false") {
+          browserHistory.push("/questions" + queryParamsString);
+          return;
+        }
+        if (!isEmpty(link)){
+          window.location.href = link;
+        } else if (!isEmpty(questionsInfo.data) && isEmpty(questionsInfo.data.current_document_data) && !isEmpty(questionsInfo.data.offer_data)) {
+          browserHistory.push("/offer" + queryParamsString);
+        } else {
+          browserHistory.push("/payment_success" + queryParamsString);
+        }
+        return;
+      }
+
+      window.location.href = `/payment`;
+      this.setState({
+        onPaymentGoingTo: false
+      });
+      //browserHistory.push("/payment")
+    });
+
+    //window.location.href = `https://devlifeco.sureifylife.com/elevon/index.php?order_id=${data.order_id}&amount=${data.amount}`;
+  }
   public render() {
        return (
          <div className="payment_styles_div">
@@ -116,6 +184,13 @@ class paymentSuccess extends React.Component<Props, {}> {
                   <h1 className="pb20">{this.props.paymentData && this.props.paymentData.message}</h1>
                   <h1 className="pb20">{this.props.confirmationData && this.props.confirmationData.message}</h1>
                   <h1 className="pb20">{this.shouldShowDefaultMessage() && "Thanks for contacting us. We will reach you in sometime."}</h1>
+                  {this.props.paymentData && this.props.paymentData && this.props.paymentData.data && this.props.paymentData.data.payment_fail==1 && <Button className={`c-button-default circular offer-start-coverage-btn action`} style={{marginLeft: "30px!important", width: "60%"}}  onClick={()=>{
+                        this.onPayment()
+                        }}
+                    >
+                        {this.props.paymentData && this.props.paymentData.data && this.props.paymentData.data.button_title}
+                        {this.state.onPaymentGoingTo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                    </Button>}
                 </Col>
               }
            </Row>
@@ -127,7 +202,8 @@ class paymentSuccess extends React.Component<Props, {}> {
 const mapStateToProps = (state: any): Props => {
   return {
     paymentData:  state.questions.paymentData,
-    confirmationData: state.questions.confirmationData
+    confirmationData: state.questions.confirmationData,
+    paymentInfo: state.questions.paymentInfo
   };
 }
 
@@ -135,6 +211,9 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
   return {
     makePayment: (data) => {
       return dispatch(makePayment(data))
+    },
+    postPayment: (data) => {
+      return dispatch(postPayment(data));
     }
   };
 }

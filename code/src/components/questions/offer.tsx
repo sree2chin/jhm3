@@ -208,7 +208,7 @@ class Offer extends React.Component<Props, {}> {
         return;
       }
 
-      window.location.href = `/payment?order_id=${data.order_id}&amount=${data.amount}`;
+      window.location.href = `/payment`;
       this.setState({
         onPaymentGoingTo: false
       });
@@ -246,13 +246,13 @@ class Offer extends React.Component<Props, {}> {
                     <Col className="offer-per-month">
                       {premium.coverage_description}
                     </Col>
-                    <Button className={`c-button-default circular offer-start-coverage-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+                    {offerData.show_start_coverage_button==true && <Button className={`c-button-default circular offer-start-coverage-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                         this.onPayment()
                         }}
                     >
                         START COVERAGE
                         {this.state.onPaymentGoingTo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-                    </Button>
+                    </Button>}
                 </Row>
                 {offerData && offerData.offer_description && <Row>
                     <RawHtml.mycooltag>
