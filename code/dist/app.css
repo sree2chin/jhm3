@@ -443,6 +443,13 @@ input.form-control:focus {
 
 .cf-nav-main-header .navbar-header {
   float: left; }
+  .cf-nav-main-header .navbar-header .navbar-links {
+    font-size: 16px;
+    margin-top: 36px;
+    margin-left: 35px;
+    display: inline-block; }
+    .cf-nav-main-header .navbar-header .navbar-links .first-link {
+      margin-right: 27px; }
 
 .cf-nav-main-header .navbar-header img {
   position: relative;
@@ -456,13 +463,6 @@ input.form-control:focus {
   margin-right: 0px;
   margin-top: 23px;
   display: inline-block; }
-  .cf-nav-main-header p.navbar-text .navbar-links {
-    float: left;
-    font-size: 16px;
-    margin-top: 10px;
-    margin-left: 35px; }
-    .cf-nav-main-header p.navbar-text .navbar-links .first-link {
-      margin-right: 27px; }
   .cf-nav-main-header p.navbar-text .link {
     color: #317dbd;
     font-size: 18px; }
