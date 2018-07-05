@@ -71,6 +71,15 @@
   }
   .navbar-header {
     float: left;
+    .navbar-links {
+      font-size: 16px;
+      margin-top: 36px;
+      margin-left: 35px;
+      display: inline-block;
+      .first-link {
+        margin-right: 27px;
+      }
+    }
   }
   .navbar-header img {
     position: relative;
@@ -85,15 +94,6 @@
      margin-right: 0px;
      margin-top: 23px;
      display: inline-block;
-      .navbar-links {
-        float: left;
-        font-size: 16px;
-        margin-top: 10px;
-        margin-left: 35px;
-        .first-link {
-          margin-right: 27px;
-        }
-      }
       .link {
         color: #317dbd;
         font-size: 18px;
