@@ -26,10 +26,10 @@ class Header extends React.Component<Props, {}> {
               <img src={this.props.logoImgSrc} />
             </Navbar.Brand>
             {this.shouldShowAgentLinks() && <span className="navbar-links">
-                {window.goAgentWeb && <a href={window.goAgentWeb} className="first-link">Go Agent Web</a>}
-                {window.lifetimeAgentPanel && <a href={window.lifetimeAgentPanel}>Lifetime Agent Panel</a>}
-              </span>
-            }
+                  {window.goAgentWeb && <a href={window.goAgentWeb} className="first-link">Go Agent Web</a>}
+                  {window.lifetimeAgentPanel && <a href={window.lifetimeAgentPanel}>Lifetime Agent Panel</a>}
+                </span>
+              }
           </div>
         </Navbar.Header>
         <Navbar.Text pullRight>
