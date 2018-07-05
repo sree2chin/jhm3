@@ -468,7 +468,8 @@ input.form-control:focus {
     font-size: 18px; }
 
 .cf-nav-main-header.navbar > .container .navbar-brand {
-  margin-left: 0px; }
+  margin-left: 0px;
+  display: inline-block; }
 
 @media (max-width: 800px) {
   .cf-nav-main-header > .container .navbar-collapse.collapse p {
