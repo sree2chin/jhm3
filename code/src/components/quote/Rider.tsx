@@ -64,7 +64,7 @@ export default class Plan extends React.Component<Props, {}> {
                   this.selectRider(rider, this.props.riderKey)
                 }}
               >
-              <div>ADD +${this.props.rider.Premium[this.props.premium_type] ? parseFloat(this.props.rider.Premium[this.props.premium_type].split("$")[1]) : 0}</div>
+              <div>ADD ${this.props.rider.Premium[this.props.premium_type] ? this.props.rider.Premium[this.props.premium_type].split("$")[1] : 0}</div>
               <div>{this.getPremiumType()}</div>
             </Button>}
 
