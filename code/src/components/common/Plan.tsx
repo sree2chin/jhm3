@@ -225,6 +225,23 @@ export default class Plan extends React.Component<Props, {}> {
     }.bind(this);
     setTimeout(f);
   }
+  handleChangeForSlider(value) {
+    var sFaceAmount = parseInt(value);
+    if ( sFaceAmount > parseInt(this.state.selectedPlan.FaceMax)) {
+      sFaceAmount = parseInt(this.state.selectedPlan.FaceMax)
+    }
+    this.setState({
+      sFaceAmount: sFaceAmount
+    });
+    var f = function() {
+      this.props.submitPlansForm(this.props.personIndex, [{
+        plan: this.state.selectedPlan,
+        sFaceAmount: sFaceAmount,
+        productId: this.props.plans.plans_data.product_id
+      }], this.stopSliderChanging.bind(this), true);
+    }.bind(this);
+    setTimeout(f);
+  }
   duringSliderChanging(value) {
     var sFaceAmount = parseInt(value);
     if ( sFaceAmount > parseInt(this.state.selectedPlan.FaceMax)) {
@@ -245,13 +262,13 @@ export default class Plan extends React.Component<Props, {}> {
   }
   selectThisProduct() {
     this.props.selectProductPlan(this.props.personIndex, this.props.premiums.plans_data.ProductID);
-    /*if(this.state.selectedPlan && this.state.sFaceAmount) {
+    if(this.state.selectedPlan && this.state.sFaceAmount) {
       this.props.submitPlansForm(this.props.personIndex, [{
         plan: this.state.selectedPlan,
         sFaceAmount: this.state.sFaceAmount,
         productId: this.props.plans.plans_data.product_id
       }]);
-    }*/
+    }
   }
   getProductDisplayName() {
     var productId = this.props.plans && this.props.plans.plans_data && this.props.plans.plans_data.product_id;
@@ -283,8 +300,6 @@ export default class Plan extends React.Component<Props, {}> {
       faceAmount += "0";
     }
     return faceAmount;
-  }
-  componentDidMount () {
   }
   getProductPlanInstructions() {
     var msg = "";
@@ -350,7 +365,7 @@ export default class Plan extends React.Component<Props, {}> {
                           max={parseInt(this.state.selectedPlan.slider_max)}
                           step={parseInt(this.state.selectedPlan.slider_step_value) == 0 ? 1 : parseInt(this.state.selectedPlan.slider_step_value)}
                           onChange={this.duringSliderChanging.bind(this)}
-                          onAfterChange={this.handleChange.bind(this)}
+                          onAfterChange={this.handleChangeForSlider.bind(this)}
                           trackStyle={{ backgroundColor: '#ffffff', height: 10, border: "solid 1px #999999" }}
                           handleStyle={{
                             height: 24,

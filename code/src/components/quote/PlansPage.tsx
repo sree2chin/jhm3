@@ -92,76 +92,81 @@ class PlansPage extends React.Component<Props, {}> {
     });
   }
 
-  submitPlansForm(personIndex, data, successCb) {
+  submitPlansForm(personIndex, data, successCb, isCalledFromSlider) {
     const persons = [];
+    if (true) {
+      const personOne = JSON.parse(JSON.stringify(this.props.persons[personIndex]));
+      personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
+      personOne.sPlanID = data[0].plan.PlanID;
+      personOne.sProductID = data[0].productId;
+      personOne.sFaceAmount = data[0].sFaceAmount;
 
-    const personOne = JSON.parse(JSON.stringify(this.props.persons[personIndex]));
-    personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
-    personOne.sPlanID = data[0].plan.PlanID;
-    personOne.sProductID = data[0].productId;
-    personOne.sFaceAmount = data[0].sFaceAmount;
-
-    if (data[0].plan.SpwlFlag == "1") {
-      personOne.sFaceAmount = 0;
-      personOne.sPremiumAmount = data[0].sFaceAmount;
-      personOne.sWP = "1";
-    } else {
-      personOne.sWP = "0";
-    }
-
-    personOne.sClassNum="2";
-    personOne.sDividendNum = "1";
-    personOne.duration = data[0].plan && data[0].plan.PlanName && data[0].plan.PlanName.split(" ")[0] ? data[0].plan.PlanName.split(" ")[0] : "";
-
-    persons.push(personOne);
-
-    if (this.props.noOfPersons == 2) {
-      if (personIndex ==0) {
-        persons[0] = personOne;
-        persons[1] = this.props.persons[1];
+      if (data[0].plan.SpwlFlag == "1") {
+        personOne.sFaceAmount = 0;
+        personOne.sPremiumAmount = data[0].sFaceAmount;
+        personOne.sWP = "1";
       } else {
-        persons[0] = this.props.persons[0];
-        persons[1] = personOne;
+        personOne.sWP = "0";
       }
-    }
-    this.setState({
-      submittingPlansFromPlan: true
-    });
 
-    setTimeout(()=>{
-      this.props.setPersonsData(persons);
-    });
+      personOne.sClassNum="2";
+      personOne.sDividendNum = "1";
+      personOne.duration = data[0].plan && data[0].plan.PlanName && data[0].plan.PlanName.split(" ")[0] ? data[0].plan.PlanName.split(" ")[0] : "";
 
-    setTimeout(() => {
-      this.props.submitPlansForm(persons).then(() => {
-        if (this.props.premiums && this.props.premiums.LOGIN_URL && this.props.premiums.LOGIN_URL.length > 0) {
-          window.location.href = this.props.premiums.LOGIN_URL;
-          return;
+      persons.push(personOne);
+
+      if (this.props.noOfPersons == 2) {
+        if (personIndex ==0) {
+          persons[0] = personOne;
+          persons[1] = this.props.persons[1];
+        } else {
+          persons[0] = this.props.persons[0];
+          persons[1] = personOne;
         }
-        if (this.props.premiums && this.props.premiums.redirect_url && this.props.premiums.redirect_url.length > 0) {
-          window.location.href = this.props.premiums.redirect_url;
-          return;
-        }
-        if(successCb) { successCb(); }
-        this.setState({
-          submittingPlansFromPlan: false
-        });
-        console.log("sdfds");
-      }).catch(()=>{
-        if (this.props.premiums && this.props.premiums.LOGIN_URL && this.props.premiums.LOGIN_URL.length > 0) {
-          window.location.href = this.props.premiums.LOGIN_URL;
-          return;
-        }
-        if (this.props.premiums && this.props.premiums.redirect_url && this.props.premiums.redirect_url.length > 0) {
-          window.location.href = this.props.premiums.redirect_url;
-          return;
-        }
-        this.setState({
-          submittingPlansFromPlan: false
-        });
-        this.submmitedProductForm = false;
+      }
+      this.setState({
+        submittingPlansFromPlan: true
       });
-    }, 100)
+      if (!isCalledFromSlider || this.props.persons[personIndex].sProductID == data[0].productId) {
+        setTimeout(()=>{
+          this.props.setPersonsData(persons);
+        });
+      }
+
+
+      setTimeout(() => {
+        this.props.submitPlansForm(persons).then(() => {
+          if (this.props.premiums && this.props.premiums.LOGIN_URL && this.props.premiums.LOGIN_URL.length > 0) {
+            window.location.href = this.props.premiums.LOGIN_URL;
+            return;
+          }
+          if (this.props.premiums && this.props.premiums.redirect_url && this.props.premiums.redirect_url.length > 0) {
+            window.location.href = this.props.premiums.redirect_url;
+            return;
+          }
+          if(successCb) { successCb(); }
+          this.setState({
+            submittingPlansFromPlan: false
+          });
+          console.log("sdfds");
+        }).catch(()=>{
+          if (this.props.premiums && this.props.premiums.LOGIN_URL && this.props.premiums.LOGIN_URL.length > 0) {
+            window.location.href = this.props.premiums.LOGIN_URL;
+            return;
+          }
+          if (this.props.premiums && this.props.premiums.redirect_url && this.props.premiums.redirect_url.length > 0) {
+            window.location.href = this.props.premiums.redirect_url;
+            return;
+          }
+          this.setState({
+            submittingPlansFromPlan: false
+          });
+          this.submmitedProductForm = false;
+        });
+      }, 10)
+    } else {
+      if(successCb) { successCb(); }
+    }
   }
 
   setPlanFormSubmissionErrorMsg() {
