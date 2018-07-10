@@ -202,7 +202,7 @@ module.exports = function(app) {
 
   app.get('/offer', samlAuthenticateQuestionsMiddleware1, function(req, res, next) {
     var url_parts = url.parse(req.url, true);
-    console.log("in normal url: " + JSON.stringify(url_parts));
+    console.log("in offer url: " + JSON.stringify(url_parts));
     req.session = req.session || {};
     req.session.queryParams = req.session.queryParams || {};
     if (!_.isEmpty(url_parts.query)) {
@@ -211,8 +211,20 @@ module.exports = function(app) {
         req.session.queryParams[k] = url_parts.query[k] || "";
       }
     };
-    templatePath = "./dist/";
-    res.render(templatePath);
+    var queryParams = req.session.queryParams;
+    var queryParamsString = "?";
+    for(var k in queryParams) {
+      if (queryParams[k]) {
+        queryParamsString += k + "=" + queryParams[k] + "&";
+      } else {
+        queryParamsString += k + "&";
+      }
+    }
+    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+
+    res.redirect("/questions" + queryParamsString);
+    //templatePath = "./dist/";
+    //res.render(templatePath);
   });
 
   app.get('/payment_success', samlAuthenticateQuestionsMiddleware1, function(req, res, next) {
