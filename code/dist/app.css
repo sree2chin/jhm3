@@ -2080,27 +2080,26 @@ input.form-control:focus {
   .product-pager-container .plan-details-container .select-this-product-container {
     height: 40px;
     border-radius: 5px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    background-color: #ffffff;
+    background-color: #317dbd;
+    border: solid 2px #d4d4d4;
+    color: white;
     font-size: 14px;
     font-weight: 500;
     text-align: center;
-    color: #317dbd;
     padding-top: 10px;
     margin-right: -16px;
+    text-transform: uppercase;
+    font-weight: bold;
     cursor: pointer; }
     .product-pager-container .plan-details-container .select-this-product-container:hover {
-      background-color: #f7f7f7;
       border: solid 2px #317dbd;
-      border-top-left-radius: 0px;
-      border-top-right-radius: 0px;
-      padding-top: 8px; }
+      padding-top: 8px;
+      background-color: #eaf2f8 !important;
+      color: #317dbd !important; }
     .product-pager-container .plan-details-container .select-this-product-container.active {
-      background-color: #317dbd;
-      border-top-left-radius: 0px;
-      border-top-right-radius: 0px;
-      color: #ffffff; }
+      background-color: #ffffff;
+      border: solid 2px #317dbd;
+      color: #317dbd !important; }
   .product-pager-container .plan-details-container .c-center {
     border-radius: 6px;
     background-color: #ffffff;
