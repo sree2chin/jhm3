@@ -416,6 +416,8 @@ class PlansPage extends React.Component<Props, {}> {
       if(this.props.persons[0].selected_products.length==1) return true;
       return this.state.productIdPlan0 && this.state.productIdPlan0.length > 0;
     } else {
+      return (this.state.productIdPlan0 && this.state.productIdPlan0.length > 0) ||
+        this.state.productIdPlan1 && this.state.productIdPlan1.length>0;
       if(this.props.persons[0].selected_products.length==1) {
         if(this.props.persons[1].selected_products.length==1) {
           return true;

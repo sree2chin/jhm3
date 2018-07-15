@@ -442,8 +442,11 @@ export default class Plan extends React.Component<Props, {}> {
                 </Row>
               </Col>}
             </Row>
-            {this.props.shouldShowSelectProductBtn && <Row className={"select-this-product-container" + (this.props.productIdPlan == this.props.plans.plans_data.product_id ? " active" : "")} onClick={this.selectThisProduct.bind(this)}>
+            {this.props.shouldShowSelectProductBtn && this.props.productIdPlan != this.props.plans.plans_data.product_id && <Row className={"select-this-product-container" + (this.props.productIdPlan == this.props.plans.plans_data.product_id ? " active" : "")} onClick={this.selectThisProduct.bind(this)}>
               SELECT THIS PRODUCT
+            </Row>}
+            {this.props.shouldShowSelectProductBtn && this.props.productIdPlan == this.props.plans.plans_data.product_id && <Row className={"select-this-product-container" + (this.props.productIdPlan == this.props.plans.plans_data.product_id ? " active" : "")} onClick={this.selectThisProduct.bind(this)}>
+              PRODUCT SELECTED
             </Row>}
           </Col>
         </Row>
