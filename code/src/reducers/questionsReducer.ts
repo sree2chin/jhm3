@@ -16,6 +16,8 @@ export default (state: Array<any> = [], action) => {
       return objectAssign({}, state, {user: action.user});
     case "POST_PAYMENT_DONE":
       return objectAssign({}, state, {paymentInfo: action.paymentInfo});
+    case "RESEND_LINK_SENT":
+      return objectAssign({}, state, {resendData: action.resendData, resendLinkDone: true});
     default:
       return state;
   }

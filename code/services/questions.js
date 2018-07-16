@@ -126,6 +126,24 @@ module.exports = new function() {
     });
   };
 
+
+  this.resentLink = function(req, callback) {
+    ApiService.resentLink(req, function(err, res) {
+      if (!err && res.statusCode == 200) {
+        //console.log("\n\n\n" + JSON.stringify(res.body) + "\n\n\n");
+        // var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
+        // if (responseBody && responseBody.data && responseBody.data.access_token) {
+        //   req.session.queryParams = req.session.queryParams || {};
+        //   req.session.queryParams.access_token = responseBody.data.access_token;
+        callback(res.statusCode, res.body);
+      } else {
+        callback(res.statusCode, res.body);
+      }
+    });
+  };
+
+
+
   this.getFactorsearch = function(req, callback) {
     ApiService.getFactorsearch(req, function(err, res) {
       if (!err && res.statusCode == 200) {

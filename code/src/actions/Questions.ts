@@ -54,6 +54,15 @@ function changePassword(data) {
 	};
 }
 
+function sendResetLink(data) {
+	return (dispatch) => {
+		return QuestionsApi.sendResetLink(data).then(
+			data => dispatch({
+				type: 'RESEND_LINK_SENT', resendData: data
+			}));
+	};
+}
+
 function getFactorsearch(data) {
 	return (dispatch) => {
 		return QuestionsApi.getFactorsearch(data).then(
@@ -80,5 +89,6 @@ export {
 	authenticateUser,
 	changePassword,
 	postPayment,
-	makePayment
+	makePayment,
+	sendResetLink,
 }

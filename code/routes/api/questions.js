@@ -193,6 +193,16 @@ module.exports = function(app) {
     });
   });
 
+  app.post(prefix + '/auth/resend-link', function(req, res) {
+    QuestionsService.resentLink(req, function(statusCode, data) {
+      res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
+      res.setHeader('Content-Type', 'application/json');
+      res.send(data);
+    });
+  });
+
+
+
   app.post(prefix + '/error/logs', function(req, res) {
     QuestionsService.logErrors(req, function(statusCode, data) {
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');

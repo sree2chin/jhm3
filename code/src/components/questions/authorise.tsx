@@ -1,19 +1,10 @@
 import * as React from 'react';
-import * as Autocomplete from "react-autocomplete"
-import * as moment from "moment";
-import {Link} from 'react-router';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio, NavItem, Nav} from "react-bootstrap";
-import SingleSelection from "./SingleSelection";
-import Label from "./Label"
-import CustomInput from "./CustomInput";
-import CustomSelect from "./CustomSelect";
-import AsyncCustomSelect from "./AsyncCustomSelect";
-import QuestionsCustomDatePicker from "./QuestionsCustomDatePicker";
 import Subheader from "../common/subheader";
 import {each, isEmpty, map} from "underscore";
-import {getQuestions, authenticateUser, changePassword} from '../../actions/Questions';
+import {getQuestions, authenticateUser, changePassword, sendResetLink} from '../../actions/Questions';
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
@@ -61,6 +52,12 @@ class Signature extends React.Component<Props, {}> {
     if(!isEmpty(nextProps.questions)) {
       this.questions = JSON.parse(JSON.stringify(nextProps.questions));
     }
+  }
+
+  sendResetLink(cb) {
+    this.props.sendResetLink(()=>{
+      if (cb) { cb();}
+    })
   }
 
   authenticateUser(cb) {
@@ -195,10 +192,12 @@ class Signature extends React.Component<Props, {}> {
         return (
             <EnterPassword
                 submitPassword={this.authenticateUser.bind(this)}
+                sendResetLink={this.sendResetLink.bind(this)}
                 handleChange={this.handlePasswordChange.bind(this)}
                 showModalPassword={true}
                 onCloseModal={()=>{}}
                 errorMsg={this.props.user && this.props.user.message}
+                questions={this.props.questions}
             />
         )
       } else {
@@ -247,6 +246,9 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     },
     changePassword: (data: any) =>  {
         return dispatch(changePassword(data));
+    }
+    sendResetLink: (data: any) => {
+      return dispatch(sendResetLink(data));
     }
   };
 }

@@ -19,9 +19,9 @@ module.exports = new function(){
           data[k] = req.session.queryParams[k];
         }
       }
-    }
-    if (req.session.uniqueTransactionId) {
-      data["transaction_id"] = req.session.uniqueTransactionId;
+      if (req.session.uniqueTransactionId) {
+        data["transaction_id"] = req.session.uniqueTransactionId;
+      }
     }
   };
 
@@ -476,6 +476,36 @@ module.exports = new function(){
         self.logErrors(req, {
             user: null,
             apiName: '/v1/auth/setpassword',
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for POST api: " + '/v1/auth/setpassword');
+          });
+      }
+      cb(err, httpResponse);
+    });
+  };
+
+  this.resentLink = function(req, cb){
+    var formData = {};
+    //formData.password = req.body.password;
+    //formData.new_password = req.body.new_password;
+    appendAgentInfo(req, formData);
+    console.log("\n\n\n changePassword formData: " + JSON.stringify(formData) +  "\n\n\n");
+    request({
+      url: restOptions.host + '/v1/auth/gen_authcode',
+      headers: {
+        'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
+      },
+      method: 'POST',
+      formData: formData
+    }, function callback(err, httpResponse, body) {
+      if (httpResponse && httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
+        self.logErrors(req, {
+            user: null,
+            apiName: '/v1/auth/gen_authcode',
             inputParams: {applicants: data},
             response: httpResponse.body,
             expection: null,
