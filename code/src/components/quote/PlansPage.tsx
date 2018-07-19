@@ -225,8 +225,8 @@ class PlansPage extends React.Component<Props, {}> {
         return;
       }
       if (this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].Plan && this.props.premiums[0][this.state.productIdPlan0].Plan.SpwlFlag != "1") {
-        if(this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1 && this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium ) {
-          var amount = this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
+        if(this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].plan && this.props.premiums[0][this.state.productIdPlan0].Plan.Premium ) {
+          var amount = this.props.premiums[0][this.state.productIdPlan0].Plan.Premium[this.state.premium_type];
           amount = amount ? amount.split("$")[1].replace(",", "") : 0;
           var riderAmount = 0;
           personOne.sWP = 0;
@@ -255,7 +255,6 @@ class PlansPage extends React.Component<Props, {}> {
       });
 
 
-      this.props.premiums[0][this.state.productIdPlan0].QuoteRateGrid.Col1.Face1.PremiumAmount
       persons.push(personOne);
 
       if(this.props.noOfPersons == 2) {
@@ -265,8 +264,8 @@ class PlansPage extends React.Component<Props, {}> {
         }
 
         if (this.props.premiums && this.props.premiums[1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1].Plan && this.props.premiums[1][this.state.productIdPlan1].Plan.SpwlFlag != "1") {
-          if(this.props.premiums && this.props.premiums[1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1 && this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium ) {
-            var amount = this.props.premiums[1][this.state.productIdPlan1].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type];
+          if(this.props.premiums && this.props.premiums[1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1].Plan && this.props.premiums[1][this.state.productIdPlan1].Plan.Premium ) {
+            var amount = this.props.premiums[1][this.state.productIdPlan1].Plan.Premium[this.state.premium_type];
             amount = amount ? parseFloat(amount.split("$")[1]) : 0;
             var riderAmount = 0;
             personTwo.sWP = 0;
@@ -384,8 +383,8 @@ class PlansPage extends React.Component<Props, {}> {
     var sProductID1 = this.state.productIdPlan1 || null;
 
     if (this.props.premiums && this.props.premiums[0] && this.props.premiums[0] && this.props.premiums[0][sProductID] && sProductID && this.state.premium_type){
-      if (this.props.premiums[0][sProductID].QuoteRateGrid && this.props.premiums[0][sProductID].QuoteRateGrid.Col1 && this.props.premiums[0][sProductID].QuoteRateGrid.Col1.Face1 && this.props.premiums[0][sProductID].QuoteRateGrid.Col1.Face1.Premium) {
-        total = parseFloat(this.props.premiums[0][sProductID].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type].split("$")[1].replace(",", ""));
+      if (this.props.premiums[0][sProductID] && this.props.premiums[0][sProductID] && this.props.premiums[0][sProductID].Plan && this.props.premiums[0][sProductID].Plan.Premium) {
+        total = parseFloat(this.props.premiums[0][sProductID].Plan.Premium[this.state.premium_type].split("$")[1].replace(",", ""));
       }
       if (this.state.selectedRider0) {
         var riderAmount = this.state.selectedRider0.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider0.Premium[this.state.premium_type].split("$")[1]) : 0;
@@ -395,8 +394,8 @@ class PlansPage extends React.Component<Props, {}> {
 
 
     if (this.props.premiums && this.props.premiums[1] && this.props.premiums[1] && this.props.premiums[1][sProductID1] && sProductID1 && this.state.premium_type){
-      if (this.props.premiums[1][sProductID1].QuoteRateGrid && this.props.premiums[1][sProductID1].QuoteRateGrid.Col1 && this.props.premiums[1][sProductID1].QuoteRateGrid.Col1.Face1 && this.props.premiums[1][sProductID1].QuoteRateGrid.Col1.Face1.Premium) {
-        total += parseFloat(this.props.premiums[1][sProductID1].QuoteRateGrid.Col1.Face1.Premium[this.state.premium_type].split("$")[1].replace(",", ""));
+      if (this.props.premiums[1][sProductID1] && this.props.premiums[1][sProductID1] && this.props.premiums[1][sProductID1].plan && this.props.premiums[1][sProductID1].Plan.Premium) {
+        total += parseFloat(this.props.premiums[1][sProductID1].Plan.Premium[this.state.premium_type].split("$")[1].replace(",", ""));
       }
       if (this.state.selectedRider1) {
         var riderAmount = this.state.selectedRider1.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider1.Premium[this.state.premium_type].split("$")[1])  : 0;

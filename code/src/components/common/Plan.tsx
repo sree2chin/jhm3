@@ -162,11 +162,11 @@ export default class Plan extends React.Component<Props, {}> {
   }
 
   getPaymentSchedules() {
-    if(isEmpty(this.props.premiums) || isEmpty(this.props.premiums.plans_data) || isEmpty(this.props.premiums.plans_data.QuoteRateGrid) || isEmpty(this.props.premiums.plans_data.QuoteRateGrid.Col1)) {
+    if(isEmpty(this.props.premiums) || isEmpty(this.props.premiums.plans_data) || isEmpty(this.props.premiums.plans_data.Plan) || isEmpty(this.props.premiums.plans_data.Plan)) {
       return [];
     }
 
-    var paymentSchedules = JSON.parse(JSON.stringify(this.props.premiums.plans_data.QuoteRateGrid.Col1));
+    var paymentSchedules = JSON.parse(JSON.stringify(this.props.premiums.plans_data.Plan));
     var sFaceAmount;
     if(this.state.sFaceAmount == 0) {
       if(this.state.selectedPlan && this.state.selectedPlan.FaceMin) {
@@ -421,7 +421,7 @@ export default class Plan extends React.Component<Props, {}> {
                       {this.state.sliderSliding && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                       {!this.state.sliderSliding && this.isProductSPWL() && "$"}
                       {!this.state.sliderSliding && this.isProductSPWL() && this.state.sFaceAmount}
-                      {!this.state.sliderSliding && !this.isProductSPWL() && this.props.selectedPaymentType && this.props.selectedPaymentType.label && this.props.premiums && this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.QuoteRateGrid && this.props.premiums.plans_data.QuoteRateGrid.Col1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium[this.props.selectedPaymentType.label]}
+                      {!this.state.sliderSliding && !this.isProductSPWL() && this.props.selectedPaymentType && this.props.selectedPaymentType.label && this.props.premiums && this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.Plan && this.props.premiums.plans_data.Plan && this.props.premiums.plans_data.Plan && this.props.premiums.plans_data.Plan.Premium && this.props.premiums.plans_data.Plan.Premium[this.props.selectedPaymentType.label]}
                     </Col>
                   </Col>
                 </Row>
@@ -436,7 +436,7 @@ export default class Plan extends React.Component<Props, {}> {
                     </Col>
                     <Col sm={4} className="plan-cost-amount">
                       {this.state.sliderSliding && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-                      {!this.state.sliderSliding && this.props.selectedPaymentType && this.props.selectedPaymentType.label && this.props.premiums && this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.QuoteRateGrid && this.props.premiums.plans_data.QuoteRateGrid.Col1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1 && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium && this.props.premiums.plans_data.QuoteRateGrid.Col1.Face1.Premium[this.props.selectedPaymentType.label]}
+                      {!this.state.sliderSliding && this.props.selectedPaymentType && this.props.selectedPaymentType.label && this.props.premiums && this.props.premiums && this.props.premiums.plans_data && this.props.premiums.plans_data.Plan && this.props.premiums.plans_data.Plan && this.props.premiums.plans_data.Plan && this.props.premiums.plans_data.Plan.Premium && this.props.premiums.plans_data.Plan.Premium[this.props.selectedPaymentType.label]}
                     </Col>
                   </Col>
                 </Row>
