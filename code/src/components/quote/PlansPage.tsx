@@ -225,7 +225,7 @@ class PlansPage extends React.Component<Props, {}> {
         return;
       }
       if (this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].Plan && this.props.premiums[0][this.state.productIdPlan0].Plan.SpwlFlag != "1") {
-        if(this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].plan && this.props.premiums[0][this.state.productIdPlan0].Plan.Premium ) {
+        if(this.props.premiums && this.props.premiums[0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0] && this.props.premiums[0][this.state.productIdPlan0].Plan && this.props.premiums[0][this.state.productIdPlan0].Plan.Premium ) {
           var amount = this.props.premiums[0][this.state.productIdPlan0].Plan.Premium[this.state.premium_type];
           amount = amount ? amount.split("$")[1].replace(",", "") : 0;
           var riderAmount = 0;
