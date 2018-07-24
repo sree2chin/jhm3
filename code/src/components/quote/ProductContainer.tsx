@@ -130,8 +130,12 @@ export default class ProductContainer extends React.Component<Props, State> {
                           />
                         }
                         {this.state.productIds.indexOf(product.ProductID)>=0 && <div id="tickcontainer">
-                          <div className="tickbg">
-                              <div className="tick">
+                          <div className="">
+                              <div className="">
+                                <img
+                                  className={``}
+                                  src={`../images/tick-mark.svg`}
+                                />
                               </div>
                           </div>
                         </div>}
