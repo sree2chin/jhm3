@@ -1268,7 +1268,8 @@ input.form-control:focus {
   height: 100px;
   width: 100px;
   position: relative;
-  left: -2px; }
+  left: -2px;
+  top: -2px; }
 
 .tickbg {
   content: "\A0";
