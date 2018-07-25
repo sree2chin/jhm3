@@ -97,7 +97,7 @@ class QuestionsApi {
         console.log("sdfs");
         var r;
         try {
-           r = res.text().then(function (response: any) {
+           r = res.json().then(function (response: any) {
             return new Promise(function(resolve, reject) {
               resolve(response)
             });
@@ -105,7 +105,7 @@ class QuestionsApi {
         }
         catch(e) {
           console.log(e);
-          r = res.text().then(function (response: any) {
+          r = res.json().then(function (response: any) {
             return new Promise(function(resolve, reject) {
               resolve(response)
             });
