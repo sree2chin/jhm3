@@ -102,7 +102,9 @@ class QuestionsApi {
               resolve(response)
             });
           }).catch(function(e) {
-            resolve(e);
+            return new Promise(function(resolve, reject) {
+              resolve(e)
+            });
           });;
         } catch(e) {
           console.log(e);
