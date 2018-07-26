@@ -101,15 +101,19 @@ class QuestionsApi {
             return new Promise(function(resolve, reject) {
               resolve(response)
             });
-          });
-        }
-        catch(e) {
+          }).catch(function(e) {
+            resolve(e);
+          });;
+        } catch(e) {
           console.log(e);
-          r = res.json().then(function (response: any) {
-            return new Promise(function(resolve, reject) {
-              resolve(response)
-            });
+          return new Promise(function(resolve, reject) {
+            resolve(e)
           });
+          // r = res.json().then(function (response: any) {
+          //   return new Promise(function(resolve, reject) {
+          //     resolve(response)
+          //   });
+          // });
         }
         return r;
     })
