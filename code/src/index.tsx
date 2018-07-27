@@ -16,6 +16,13 @@ function loadAboutPage(location: any, callback: LoadCallback) {
     "AboutPage");
 };
 
+function loadErrorRedirectPage(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/error/error404Page") as typeof _Error404).default),
+    "Error404");
+};
+
 function loadQuotePage(location: any, callback: LoadCallback) {
   require.ensure(
     [],
@@ -217,6 +224,11 @@ ReactDOM.render(
       <Route path="/customer" getComponent={ loadQuotePage } />
       <Route path="/quote" getComponent={ loadQuotePage } />
       <Route path="/about" getComponent={ loadAboutPage } />
+      
+      
+      
+      <Route path="*" getComponent={ loadErrorRedirectPage } />
+      
     </Route>
   </Router>,
   document.getElementById('root'));
