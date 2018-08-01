@@ -118,7 +118,7 @@ export default class CustomSelect extends React.Component<Props, {}> {
                   this.onDummyChange(qL);
                   e.preventDefault();
                 }}>
-                {qL.value}
+                {qL.label}
               <input type="checkbox" checked={this.containsInAnswer(qL)}/>
               <span className="custom-checkbox-checkmark"></span>
             </label>
