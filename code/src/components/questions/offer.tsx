@@ -174,7 +174,12 @@ class Offer extends React.Component<Props, {}> {
         return;
       }
       if (this.props.paymentInfo && isEmpty(data.elavon_params)) {
-        var questionsInfo = JSON.parse(this.props.paymentInfo);
+        if (typeof this.props.paymentInfo == "string") {
+          var questionsInfo = JSON.parse(this.props.paymentInfo);
+        } else {
+          var questionsInfo = this.props.paymentInfo;
+        }
+
 
         var queryParams = this.props.location.query;
         var queryParamsString = "?";
