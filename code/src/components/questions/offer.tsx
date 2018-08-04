@@ -73,6 +73,15 @@ class Offer extends React.Component<Props, {}> {
       browserHistory.push("/authorize" + queryParamsString);
       return;
     }
+    var offerData = nextProps.confirmationData && nextProps.confirmationData.data && nextProps.confirmationData.data.offer_data;
+    if (offerData && !isEmpty(offerData.elavon_params)) {
+      this.setState({
+        onDirectedRedirectionToPayment: true
+      })
+      setTimeout(() => {
+        this.onPayment();
+      }, 1000);
+    }
   }
 
   confirmQuestions() {
@@ -231,6 +240,14 @@ class Offer extends React.Component<Props, {}> {
     premium = premium || {};
     product = product || {};
     RawHtml.addTag("mycooltag");
+    if (this.state.onDirectedRedirectionToPayment) {
+      return (<Row className="questions-container c-center">
+        <div className="questions-content-container final-loading-messages">
+              <div>LOADING</div>
+              <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>
+          </div>
+      </Row>)
+    } else {
 
     return (
       <div>
@@ -289,6 +306,7 @@ class Offer extends React.Component<Props, {}> {
 
         </Row>
       </div>);
+    }
   }
 }
 
