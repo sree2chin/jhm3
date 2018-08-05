@@ -281,7 +281,7 @@ class Main extends React.Component<Props, {}> {
     var currentIsPrefixGroup = false;
     if (!isEmpty(data)) {
       var boundaryReached = false;
-      for(var i=0; i<(data.length); i++) {
+      for(let i=0; i<(data.length); i++) {
         var qe = data[i];
         var q = qe;
 
@@ -732,7 +732,7 @@ class Main extends React.Component<Props, {}> {
         var actualQuestionLists = [];
         var boundaryReached = false;
         this.noFoGroupsCompleted = 0;
-        for(var i=0; i<(this.questions.data.questionnaire.questions.length); i++) {
+        for(let i=0; i<(this.questions.data.questionnaire.questions.length); i++) {
           var qe = this.questions.data.questionnaire.questions[i];
           var isPrefixGroup = false;
           if (qe.type == "group") {
