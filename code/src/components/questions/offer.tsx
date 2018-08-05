@@ -42,9 +42,15 @@ class Offer extends React.Component<Props, {}> {
   questionComponents: any = [];
 
   componentWillMount() {
-    /*this.props.getQuestions().then(()=>{
-        this.confirmQuestions();
-    });*/
+    var offerData = this.props.confirmationData && this.props.confirmationData.data && this.props.confirmationData.data.offer_data;
+    if (offerData && !isEmpty(offerData.elavon_params)) {
+      this.setState({
+        onDirectedRedirectionToPayment: true
+      })
+      setTimeout(() => {
+        this.onPayment();
+      }, 0);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -73,15 +79,15 @@ class Offer extends React.Component<Props, {}> {
       browserHistory.push("/authorize" + queryParamsString);
       return;
     }
-    var offerData = nextProps.confirmationData && nextProps.confirmationData.data && nextProps.confirmationData.data.offer_data;
-    if (offerData && !isEmpty(offerData.elavon_params)) {
-      this.setState({
-        onDirectedRedirectionToPayment: true
-      })
-      setTimeout(() => {
-        this.onPayment();
-      }, 1000);
-    }
+    // var offerData = nextProps.confirmationData && nextProps.confirmationData.data && nextProps.confirmationData.data.offer_data;
+    // if (offerData && !isEmpty(offerData.elavon_params)) {
+    //   this.setState({
+    //     onDirectedRedirectionToPayment: true
+    //   })
+    //   setTimeout(() => {
+    //     this.onPayment();
+    //   }, 1000);
+    // }
   }
 
   confirmQuestions() {
