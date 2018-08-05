@@ -834,7 +834,7 @@ class Main extends React.Component<Props, {}> {
             if (questionsList.length > 0) {
               var allQuestionsAreLabels = true;
               for(var iq=0; iq<questionsList.length; iq++) {
-                if (questionsListthis[iq].props.type != "label"){
+                if (questionsList[iq].props.type != "label"){
                   allQuestionsAreLabels = false;
                 }
               }
@@ -1631,11 +1631,20 @@ class Main extends React.Component<Props, {}> {
 
     return breadCrumbs;
   }
+  emptyCurrentQuestions () {
+    each(this.actualQuestionLists, (q)=>{
+      delete q.answer;
+    });
+  }
 
   handleBackSubmit(): any {
     console.log("sdfds");
+    this.questionsListUsing;
     this.previousQuestionsSource = null;
     if (this.state.previousQuestionsHandling) return;
+    if (this.state.previousQuestionHanldingIndex == undefined) {
+      this.emptyCurrentQuestions();
+    }
 
     if (this.props.questions && this.props.questions.extra_params &&
       this.props.questions.extra_params.answered_questions &&
@@ -1914,6 +1923,7 @@ class Main extends React.Component<Props, {}> {
   public render() {
     var breadCrumbs = this.getBreadCrumbs();
     var questionsList = this.getCurrentSetOfQuestions() || [];
+    this.questionsListUsing = questionsList;
     var noFoGroupsCompleted = this.noFoGroupsCompleted;
     return (
       <div>
