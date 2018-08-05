@@ -10,6 +10,7 @@ interface Props extends React.Props<SingleSelection> {
 
 export default class SingleSelection extends React.Component<Props, {}> {
   constructor(props : Props){
+    this.type = "label";
     super(props);
   }
 

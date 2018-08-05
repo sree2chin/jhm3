@@ -258,7 +258,7 @@ class Main extends React.Component<Props, {}> {
     return false;
   };
   checkIfRemaingQuestionsAreLabels(qs: any, startIndex: number) {
-    var onlyLabelsPresent = true;
+    var onlyLabelsPresent = startIndex < qs.length;
     var i=0;
     for (i=startIndex; (i<qs.length && onlyLabelsPresent); i++) {
       onlyLabelsPresent = onlyLabelsPresent && qs[i].type == "label";
@@ -320,8 +320,8 @@ class Main extends React.Component<Props, {}> {
         if (q.type == "group") {
           if (actualQuestionLists.length > 0) {
             var allQuestionsAreLabels = true;
-            for(var i=0; i<questionsList.length; i++) {
-              if (questionsList[i].props.type != "label"){
+            for(let j=0; j<questionsList.length; j++) {
+              if (questionsList[j].props.type != "label"){
                 allQuestionsAreLabels = false;
               }
             }
@@ -396,9 +396,9 @@ class Main extends React.Component<Props, {}> {
             qL = [];
           }
 
-          for(var i=0; i<qL.length; i++) {
-            questionsList.push(this.getQuestionComponent(qL[i]));
-            actualQuestionLists.push(qL[i]);
+          for(var ii=0; ii<qL.length; ii++) {
+            questionsList.push(this.getQuestionComponent(qL[ii]));
+            actualQuestionLists.push(qL[ii]);
           }
           this.actualQuestionLists = actualQuestionLists;
           questionsList.isQuestionsList = true;
@@ -407,8 +407,8 @@ class Main extends React.Component<Props, {}> {
         } else if (q.type == "group" || q.type == "assessment-factor-group") {
           if (questionsList.length > 0) {
             var allQuestionsAreLabels = true;
-            for(var i=0; i<questionsList.length; i++) {
-              if (questionsList[i].props.type != "label"){
+            for(var ij=0; ij<questionsList.length; ij++) {
+              if (questionsList[ij].props.type != "label"){
                 allQuestionsAreLabels = false;
               }
             }
@@ -426,8 +426,8 @@ class Main extends React.Component<Props, {}> {
           var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists, currentIsPrefixGroup, isPrefixGroupCounter + 1, isPrefixInsideGroup)
           if(questionsFromGroup.length > 0) {
             var allQuestionsAreLabels = true;
-            for(var i=0; i<questionsFromGroup.length; i++) {
-              if (questionsFromGroup[i].props.type != "label"){
+            for(var ik=0; ik<questionsFromGroup.length; ik++) {
+              if (questionsFromGroup[ik].props.type != "label"){
                 allQuestionsAreLabels = false;
               }
             }
@@ -452,8 +452,8 @@ class Main extends React.Component<Props, {}> {
         } else if (q.type == "struct") {
           if (questionsList.length > 0) {
             var allQuestionsAreLabels = true;
-            for(var i=0; i<questionsList.length; i++) {
-              if (questionsList[i].props.type != "label"){
+            for(var il=0; il<questionsList.length; il++) {
+              if (questionsList[il].props.type != "label"){
                 allQuestionsAreLabels = false;
               }
             }
@@ -465,8 +465,8 @@ class Main extends React.Component<Props, {}> {
           var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ, actualQuestionLists, currentIsPrefixGroup, isPrefixGroupCounter + 1)
           if(questionsFromGroup.length > 0) {
             var allQuestionsAreLabels = true;
-            for(var i=0; i<questionsFromGroup.length; i++) {
-              if (questionsFromGroup[i].props.type != "label"){
+            for(var im=0; im<questionsFromGroup.length; im++) {
+              if (questionsFromGroup[im].props.type != "label"){
                 allQuestionsAreLabels = false;
               }
             }
@@ -622,9 +622,9 @@ class Main extends React.Component<Props, {}> {
               qL = [];
             }
 
-            for(var i=0; i<qL.length; i++) {
-              questionsList.push(this.getQuestionComponent(qL[i]));
-              actualQuestionLists.push(qL[i]);
+            for(var ia=0; ia<qL.length; ia++) {
+              questionsList.push(this.getQuestionComponent(qL[ia]));
+              actualQuestionLists.push(qL[ia]);
             }
             this.actualQuestionLists = actualQuestionLists;
             questionsList.isQuestionsList = true
@@ -632,8 +632,8 @@ class Main extends React.Component<Props, {}> {
           } else if (q.type == "group" || q.type == "assessment-factor-group") {
               if (questionsList.length > 0) {
                 var allQuestionsAreLabels = true;
-                for(var i=0; i<questionsList.length; i++) {
-                  if (questionsList[i].props.type != "label"){
+                for(var ib=0; ib<questionsList.length; ib++) {
+                  if (questionsList[ib].props.type != "label"){
                     allQuestionsAreLabels = false;
                   }
                 }
@@ -646,8 +646,8 @@ class Main extends React.Component<Props, {}> {
               var questionsFromGroup = this.reRecursiveGetQuestions1(qL, questionsList, preQ, actualQuestionLists)
               if(questionsFromGroup.length > 0) {
                 var allQuestionsAreLabels = true;
-                for(var i=0; i<questionsFromGroup.length; i++) {
-                  if (questionsFromGroup[i].props.type != "label"){
+                for(var ic=0; ic<questionsFromGroup.length; ic++) {
+                  if (questionsFromGroup[ic].props.type != "label"){
                     allQuestionsAreLabels = false;
                   }
                 }
@@ -660,8 +660,8 @@ class Main extends React.Component<Props, {}> {
           } else if (q.type == "struct") {
             if (questionsList.length > 0) {
               var allQuestionsAreLabels = true;
-              for(var i=0; i<questionsList.length; i++) {
-                if (questionsList[i].props.type != "label"){
+              for(var id=0; id<questionsList.length; id++) {
+                if (questionsList[id].props.type != "label"){
                   allQuestionsAreLabels = false;
                 }
               }
@@ -673,8 +673,8 @@ class Main extends React.Component<Props, {}> {
             var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ, actualQuestionLists)
             if(questionsFromGroup.length > 0) {
               var allQuestionsAreLabels = true;
-              for(var i=0; i<questionsFromGroup.length; i++) {
-                if (questionsFromGroup[i].props.type != "label"){
+              for(var ie=0; ie<questionsFromGroup.length; ie++) {
+                if (questionsFromGroup[ie].props.type != "label"){
                   allQuestionsAreLabels = false;
                 }
               }
@@ -833,8 +833,8 @@ class Main extends React.Component<Props, {}> {
           } else if (q.type == "group" || q.type == "assessment-factor-group") {
             if (questionsList.length > 0) {
               var allQuestionsAreLabels = true;
-              for(var i=0; i<questionsList.length; i++) {
-                if (questionsList[i].props.type != "label"){
+              for(var iq=0; iq<questionsList.length; iq++) {
+                if (questionsListthis[iq].props.type != "label"){
                   allQuestionsAreLabels = false;
                 }
               }
@@ -870,8 +870,8 @@ class Main extends React.Component<Props, {}> {
           } else if (q.type == "struct") {
             if (questionsList.length > 0) {
               var allQuestionsAreLabels = true;
-              for(var i=0; i<questionsList.length; i++) {
-                if (questionsList[i].props.type != "label"){
+              for(var iw=0; iw<questionsList.length; iw++) {
+                if (questionsList[iw].props.type != "label"){
                   allQuestionsAreLabels = false;
                 }
               }
@@ -883,8 +883,8 @@ class Main extends React.Component<Props, {}> {
             var questionsFromGroup = this.reRecursiveGetQuestions1(q.elements, questionsList, preQ, actualQuestionLists, isPrefixGroup, 0)
             if(questionsFromGroup.length > 0) {
               var allQuestionsAreLabels = true;
-              for(var i=0; i<questionsFromGroup.length; i++) {
-                if (questionsFromGroup[i].props.type != "label"){
+              for(var ie=0; ie<questionsFromGroup.length; ie++) {
+                if (questionsFromGroup[ie].props.type != "label"){
                   allQuestionsAreLabels = false;
                 }
               }
