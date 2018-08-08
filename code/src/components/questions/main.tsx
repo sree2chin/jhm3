@@ -1199,6 +1199,10 @@ class Main extends React.Component<Props, {}> {
             return;
           }
           if (this.questions && this.questions.redirect_url && this.questions.redirect_url.length > 0) {
+            this.setState({
+              submittingQuestions: true,
+              gettingQuestions: true
+            });
             window.location.href = this.questions.redirect_url;
             return;
           }
