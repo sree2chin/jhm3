@@ -20,7 +20,7 @@ import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 
 
-interface Props  extends React.Props<Main> {
+interface Props extends React.Props<Main> {
   submitQuoteForm: ()=>void,
   submitProductsForm: ()=>void,
   getQuestions: any,
@@ -122,6 +122,15 @@ class Main extends React.Component<Props, {}> {
 
     if (this.questions && this.questions.status == false) {
       browserHistory.push("/error" + queryParamsString);
+      return;
+    }
+
+    if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
+      window.location.href = this.questions.LOGIN_URL;
+      return;
+    }
+    if (this.questions && this.questions.redirect_url && this.questions.redirect_url.length > 0) {
+      window.location.href = this.questions.redirect_url;
       return;
     }
 
@@ -1227,6 +1236,15 @@ class Main extends React.Component<Props, {}> {
 
           if (this.questions.valid_user == 0) {
             browserHistory.push("/authorize" + queryParamsString);
+            return;
+          }
+
+          if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
+            window.location.href = this.questions.LOGIN_URL;
+            return;
+          }
+          if (this.questions && this.questions.redirect_url && this.questions.redirect_url.length > 0) {
+            window.location.href = this.questions.redirect_url;
             return;
           }
 
