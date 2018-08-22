@@ -18,6 +18,7 @@ import {submitQuoteForm, submitPlansForm, submitProductsForm, setPersonsData} fr
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
+import { Script } from 'vm';
 
 interface Props {
   submitQuoteForm?: (a: any)=>void,
@@ -102,7 +103,7 @@ class Main extends React.Component<Props, {}> {
   componentDidMount() {
     setTimeout(function() {
       window.scrollTo(0, 0);
-    }, 300);
+    }, 300);    
   }
 
   submitQuoteForm() {
@@ -299,14 +300,15 @@ class Main extends React.Component<Props, {}> {
                 </Col>
               }
               <div className="c-submit-person-info-btn c-center" style={{marginTop: "30px"}}>
-                  <Button  className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
+                  <Button  className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} 
+                  onKeyPress={event => { if (event.key === "Enter") { this.submitQuoteForm();}}} onClick={(){
                       this.submitQuoteForm()
                     }}
                   >
                     NEXT
                     {this.state.submittingUserInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                   </Button>
-                  <Button className={`c-button-default circular visible-xs`}  onClick={()=>{
+                  <Button className={`c-button-default circular visible-xs`}  onKeyPress={event => { if (event.key === "Enter") { this.submitQuoteForm();}}} onClick={()=>{
                       this.submitQuoteForm()
                     }}
                   >
