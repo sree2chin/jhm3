@@ -300,7 +300,7 @@ class Main extends React.Component<Props, {}> {
               }
               <div className="c-submit-person-info-btn c-center" style={{marginTop: "30px"}}>
                   <Button  className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} 
-                  onKeyPress={event => { if (event.key === "Enter") { this.submitQuoteForm();}}} onClick={(){
+                  onKeyPress={event => { if (event.key === "Enter") { this.submitQuoteForm();}}} onClick={()=>{
                       this.submitQuoteForm()
                     }}
                   >
