@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {scrollToFirstError} from "../common/ScrollToFirstError";
 import * as Autocomplete from "react-autocomplete"
 import * as moment from "moment";
 import {Link} from 'react-router';
@@ -108,7 +109,6 @@ class Main extends React.Component<Props, {}> {
 
   submitQuoteForm() {
     if(this.validateQuoteForm()) {
-
       const persons = [];
       this.setState({
         submittingUserInfo: true
@@ -167,6 +167,9 @@ class Main extends React.Component<Props, {}> {
           submittingUserInfo: false
         });
       });
+    }
+    else{
+      scrollToFirstError();
     }
   }
 
@@ -301,7 +304,7 @@ class Main extends React.Component<Props, {}> {
               }
               <div className="c-submit-person-info-btn c-center" style={{marginTop: "30px"}}>
                   <Button  className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} 
-                  onKeyPress={event => { if (event.key === "Enter") { this.submitQuoteForm();}}} onClick={(){
+                  onKeyPress={event => { if (event.key === "Enter") { this.submitQuoteForm();}}} onClick={()=>{
                       this.submitQuoteForm()
                     }}
                   >
