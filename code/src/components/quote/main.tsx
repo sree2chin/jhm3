@@ -19,7 +19,6 @@ import {submitQuoteForm, submitPlansForm, submitProductsForm, setPersonsData} fr
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
-import { Script } from 'vm';
 
 interface Props {
   submitQuoteForm?: (a: any)=>void,
