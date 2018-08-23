@@ -1,3 +1,7 @@
 node_modules
+~/
 log
+*.log
+*.code-workspace
+.vscode
 .DS_Store
