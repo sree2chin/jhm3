@@ -628,7 +628,9 @@ class Main extends React.Component<Props, State> {
     }
     browserHistory.push("/edit-questions?fromReviewPage=true&questionId=" + q.id + queryParamsString);
   }
-
+  getBtnText() {
+    return this.questions.review_button_title || "NEXT";
+  }
   public render() {
     var breadCrumbs = this.getBreadCrumbs();
     var questionsList = this.getCurrentSetOfQuestions() || [];
@@ -773,7 +775,7 @@ class Main extends React.Component<Props, State> {
                 <Button className={`c-button-default circular action`} onClick={()=>{
                         this.confirmQuestions()
                     }} style={{width: "auto"}}>
-                    E SIGN AND SUBMIT
+                    {this.getBtnText()}
                     {this.state.confirmingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                 </Button>
                 </div>
