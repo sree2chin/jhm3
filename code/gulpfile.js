@@ -15,12 +15,23 @@ var uglify = require('gulp-uglify');
 var gulpUtil = require('gulp-util');
 var pump = require('pump');
 
+/* for opening chrome browser on default build */
+var shell = require('gulp-shell');
+
+/* to replace url with cdn url */
+var gulpreplace = require('gulp-replace');
+/** to upload file to s3 */
+var loadawsgulp = require('./gulpawslib.js');
+
+// Open one file with default application
+gulp.task('openbrowser', shell.task("gksu -u saibabu google-chrome http://localhost:3024/"));
+
 gulp.task("default", function () {
-  runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"], 'start_server');
+  runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"],'updatecdnurl','uploadtos3','start_server','openbrowser');
 });
 
 gulp.task("prod", function () {
-  runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"], ["compress"]);
+  runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"],'updatecdnurl','uploadtos3', ["compress"]);
 });
 
 gulp.task("watch", function () {
@@ -131,4 +142,15 @@ gulp.task('bundle-sw', () => {
 gulp.task('clean:dist', function () {
     del.sync('public/clevertap_sw.js');
     return del.sync('dist');
+});
+
+gulp.task('updatecdnurl',function(){
+    var s3path = "https://s3.amazonaws.com/develpers3/dist/";
+    gulp.src(['dist/index.ejs'])
+    .pipe(gulpreplace('/dist/', s3path))
+    .pipe(gulp.dest("dist/"));
+
+    gulp.src(['dist/*.css'])
+    .pipe(gulpreplace('/dist/', s3path))
+    .pipe(gulp.dest("dist/"));
 });
