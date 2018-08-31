@@ -26,11 +26,16 @@ var loadawsgulp = require('./gulpawslib.js');
 // Open one file with default application
 gulp.task('openbrowser', shell.task("gksu -u saibabu google-chrome http://localhost:3024/"));
 
+//,'openbrowser'
 gulp.task("default", function () {
-  runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"],'updatecdnurl','uploadtos3','start_server','openbrowser');
+    process.env.NODE_ENV="dev";
+    process.env.PORT="3024";
+  runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"],'updatecdnurl','uploadtos3','start_server');
 });
 
 gulp.task("prod", function () {
+    process.env.NODE_ENV="production";
+    process.env.PORT="3022";
   runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"],'updatecdnurl','uploadtos3', ["compress"]);
 });
 
@@ -145,7 +150,7 @@ gulp.task('clean:dist', function () {
 });
 
 gulp.task('updatecdnurl',function(){
-    var s3path = "https://s3.amazonaws.com/develpers3/dist/";
+    var s3path = "http://d66xi69gei13h.cloudfront.net/dist/";
     gulp.src(['dist/index.ejs'])
     .pipe(gulpreplace('/dist/', s3path))
     .pipe(gulp.dest("dist/"));

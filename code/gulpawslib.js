@@ -3,10 +3,12 @@
 */
 
 var gulp = require('gulp');
-var AWS  = require('aws-sdk');
 var fs   = require('fs');
+var mime = require('mime-types');
+var AWS  = require('aws-sdk');
 var walk = require('walk');
 var path = require('path');
+
 /*
  * Declaration of global variables
  */
@@ -16,8 +18,8 @@ var isPaused = false;
 var awsConfig = {
   key    : '',
   secret : '',
-  region : '',
-  bucket : ''
+  region : 'us-east-1',
+  bucket : 'reactcdn'
 };
 
 /*
@@ -27,7 +29,9 @@ var awsConfig = {
 AWS.config.accessKeyId = awsConfig.key || null;
 AWS.config.secretAccessKey = awsConfig.secret || null;
 AWS.config.region = awsConfig.region || null;
-
+AWS.config.signatureVersion="v4";
+//AWS.config.ServerSideEncryption="aws:kms";
+AWS.config.ServerSideEncryption="AES256";
 /*
  * Publishing function: uses a stream to push the files on the AWS Bucket
  */
@@ -37,7 +41,12 @@ var file = filename.substring('./'.length);
 var key = file;//file.substring('dist/'.length);
 var fileStream = fs.createReadStream(file);
 isPaused = true;
-var filePathObj = path.parse(file);
+filename = __dirname+"/"+filename.substring('./'.length);
+var uploadmimeType = mime.lookup(filename).toString();
+var file_name = path.basename(filename);
+var content_length = fs.stat(filename,function(err,stats){
+    return stats.size;
+});
 // Check if there is an error on the file
 fileStream.on('error', function (err) {
         if (err) { throw err; }
@@ -46,14 +55,19 @@ fileStream.on('error', function (err) {
 // Action to do on opening of the file
 fileStream.on('open', function () {
         var s3 = new AWS.S3();
-
+        
         // Uploading the stream to the bucket
         s3.putObject({
                     Bucket: awsConfig.bucket || null,
+                    //ServerSideEncryption: "aws:kms",
                     Key:key,
+                    ContentType:uploadmimeType,
+                    ContentDisposition:"inline filename='"+file_name+"'",
+                    ContentLength:content_length,
+                    CacheControl:"1",
                     Body: fileStream,
                     ACL:'public-read'
-                    }, function (err,data) {                                        
+                    }, function (err,data) {
                 // Show the error if there is any
                 if (err) { throw err; }
 
