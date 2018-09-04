@@ -174,6 +174,7 @@ class Main extends React.Component<Props, {}> {
 
     if (this.questionComponents && this.questionComponents.isQuestionsBeneficiaries) {
       //window.scrollTo(0, 100);
+      
       this.scrollIntoInvalidQuestionView();
       return;
     }
@@ -1191,8 +1192,7 @@ class Main extends React.Component<Props, {}> {
           singleselectionQuestionsSubmitting: false,
           deletingContingencyBeneficiary: false,
           deletingPrimaryBeneficiary: false
-        }, ()=> {
-
+        }, ()=> {          
           this.scrollIntoBeneficiaryView();
           if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
             window.location.href = this.questions.LOGIN_URL;
@@ -1883,19 +1883,33 @@ class Main extends React.Component<Props, {}> {
     var idName;
     if(this.addingPrimaryBeneficiaryFlag && this.actualQuestionLists && this.actualQuestionLists.primaryBeneficiariesMainQuestion && this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer && this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer.length) {
       this.addingPrimaryBeneficiaryFlag = false;
-      idName = "primary-beneficiary-container-" + (this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer.length-1);
+      idName = "primary-beneficiary-container-" + (this.actualQuestionLists.primaryBeneficiariesMainQuestion.answer.length-1);      
     }
     if (this.addingContingencyBeneficiaryFlag && this.actualQuestionLists && this.actualQuestionLists.contingencyBeneficiariesMainQuestion && this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer && this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer.length) {
       this.addingContingencyBeneficiaryFlag = false;
-      idName = "contingency-beneficiary-container-" + (this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer.length-1);
+      idName = "contingency-beneficiary-container-" + (this.actualQuestionLists.contingencyBeneficiariesMainQuestion.answer.length-1);      
     }
     if (idName) {
       var elem = document.getElementById(idName);
       if (elem && elem.scrollIntoView) {
-        elem.scrollIntoView();
+        elem.scrollIntoView();        
+        //focus on first element
+        var first_child = elem.querySelectorAll('.form-control')[0];
+        first_child.focus();
       }
       return;
     }
+
+    //on default page load    
+    var checkExist = setInterval(function() {
+      var parent_containers = document.getElementById("primary-beneficiary-container-0") || document.getElementById("contingency-beneficiary-container-0");
+      if(parent_containers){
+        var first_child = parent_containers.querySelectorAll('.form-control')[0];
+        first_child.focus();
+        clearInterval(checkExist);
+        parent_containers.scrollIntoView();
+      }
+   }, 1);
 
     window.scrollTo(0, 0);
   }
@@ -1970,11 +1984,11 @@ class Main extends React.Component<Props, {}> {
           {questionsList.isQuestionsBeneficiaries && <div className="primary-beneficiary-main-header">Primary beneficiaries</div>}
           {questionsList.isQuestionsBeneficiaries &&
             map(questionsList.primaryBeneficiaryQuestionsComps, (s, i)=>{
-                return <div id={"primary-beneficiary-container-" + i} key={i}>
+                return <div id={"primary-beneficiary-container-" + i} key={i}>                
                   <div className="siblings-container generic-beneficiary-container">
                     {questionsList.isQuestionsBeneficiaries && <div className="question-action-btn-container">
                       <div className="single-add-primary-beneficiary-text">
-                        Add Primary Beneficiary
+                        Add Primary Beneficiary                        
                         {!this.state["deletingPrimaryBeneficiary_" + i] && <img style={{float: "right", marginBottom: "25px", width: "24px", height: "24px"}} src={"../images/delete_beneficiary.svg"} onClick={()=>{
                               this.deletePrimaryBeneficiary(i)
                         }}/>}
