@@ -1,5 +1,6 @@
 var rest        = require('../services/rest.js');
 var request       = require('request');
+var url = require('url');
 var appConfig       = require('../config/service.js');
 var _           = require('underscore');
 const uuidV1 = require('uuid/v1');
@@ -33,6 +34,43 @@ module.exports = new function(){
         }
       }
     }
+  };
+
+  this.allowAccessQuotes = function(req, cb){
+    var options = {
+      url: restOptions.host + '/v1/quote/access',//"https://vantisapistg.sureify.com/v1/quote/access",//
+      headers: {
+        'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
+      },
+      method: 'POST'
+    }
+    var url_parts = url.parse(req.url, true);
+    var query = url_parts.query;
+    var formData = Object.assign({},query,req.body);    
+    options.formData = formData;
+    if(Object.keys(formData).length > 0){
+      options.formData = formData;
+    }
+    console.log('params posted');
+    console.log(JSON.stringify(options));
+    request(options, function callback(err, httpResponse, body) {
+      if (httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
+        self.logErrors(req, {
+            user: null,
+            apiName: "/v1/quote/access",
+            inputParams: {},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for api: /v1/quote/access");
+          });
+      }
+      console.log('callback first page ejs');
+      console.log(JSON.stringify(err));
+      console.log(JSON.stringify(httpResponse));
+      cb(err, httpResponse);
+    });
   };
 
   this.getQuotePremiums = function(req, cb) {
