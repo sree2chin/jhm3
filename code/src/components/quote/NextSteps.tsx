@@ -44,7 +44,8 @@ class PlansPage extends React.Component<Props, {}> {
         }
       }
       queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-      browserHistory.push(basePath + queryParamsString);
+      //browserHistory.push(basePath + queryParamsString);
+      window.location.href = basePath + queryParamsString;
     }
   }
 
