@@ -145,10 +145,23 @@ class ProductsPage extends React.Component<Props, {}> {
     });
   }
   validateProductsFormSubmission (isFromEditModal) {
-    if(this.props.noOfPersons == 2) {
-      return (this.state.productId0.length > 0 && this.state.productId1.length > 0)
-    } else {
-      return this.state.productId0.length > 0;
+    //case when modal popup person details edit
+    if(isFromEditModal) {
+      //remove visual selection of products
+      var activeProducts = document.querySelectorAll('.single-product-content.active .quote-this-product-container');
+      var k=0,len = activeProducts.length;
+      if(len>0){
+        for(;k<len;k++){
+          activeProducts[k].click();
+        }
+      }
+    }
+    else{
+      if(this.props.noOfPersons == 2) {
+        return (this.state.productId0.length > 0 && this.state.productId1.length > 0)
+      } else {
+        return this.state.productId0.length > 0;
+      }
     }
   }
   validateQuoteForm() {

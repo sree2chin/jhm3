@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 import {Tooltip} from 'react-lightweight-tooltip';
 import Select from 'react-select';
 import { getStateObjects } from '../../utility/states';
-import {isEmpty} from 'underscore';
+import {isEmpty,isEqual, extend} from 'underscore';
 import * as moment from "moment";
 import {DateInputComponent, DateFormats } from "react-controlled-date-input";
 
@@ -16,7 +16,7 @@ interface Props extends React.Props<EditPerson> {
   onCloseModal: any,
   editablePerson: any
 }
-
+let initialpersonData = {};
 export default class EditPerson extends React.Component<Props, {}> {
   constructor(){
     super();
@@ -129,18 +129,31 @@ export default class EditPerson extends React.Component<Props, {}> {
       this.previousDateVal = document.querySelector(parentClass + " .react-datepicker__input-container").getElementsByTagName("input")[0].value;
     }
   }
+
   componentWillReceiveProps(nextProps) {
-    if(!isEmpty(nextProps.editablePerson)) {
-      const person = JSON.parse(JSON.stringify(nextProps.editablePerson));
+    if(( (this.props.editablePerson == undefined || isEmpty(this.props.editablePerson))) && !isEmpty(nextProps.editablePerson)){
+      initialpersonData = extend({},nextProps.editablePerson);
+      initialpersonData.s_birthDate = moment(initialpersonData.s_birthDate);
+    }
+
+    if(!isEmpty(nextProps.editablePerson)) {      
+      const person = extend({},nextProps.editablePerson);
       person.s_birthDate = moment(person.s_birthDate);
       this.setState(person);
     }
   }
+
   submitEditForm() {
-    this.props.handleChange(this.state, true);
+    const newState = extend({},this.state);
+    const oldState = extend({},initialpersonData);
+    //console.log(oldState);
+    //console.log(newState);
+    //trigger callback only if there is a change in fields
+    if(!isEqual(newState,oldState)){      
+      this.props.handleChange(this.state, true);
+    }
     this.props.onCloseModal();
   }
-
 
   public render() {
     var errors ={};
@@ -368,8 +381,6 @@ export default class EditPerson extends React.Component<Props, {}> {
                   </div>
 
                 </Modal.Body>
-
-
 
             </Modal>
     );

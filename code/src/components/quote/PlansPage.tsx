@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
-import {each, isEmpty, map} from "underscore";
+import {each, isEmpty, map, extend} from "underscore";
 import {submitQuoteForm, submitPlansForm, setPersonsData, openEditPersonModal, closeEditPersonModal, handleEditChange} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
@@ -339,22 +339,36 @@ class PlansPage extends React.Component<Props, {}> {
       self.setPlanFormSubmissionErrorMsg();
     });
   }
+
+  deleteProductSelection(person){
+    delete person.duration;
+    delete person.sClassNum;
+    delete person.sDividendNum;
+    delete person.sFaceAmount;
+    delete person.sPlanID;
+    delete person.sProductID;
+    delete person.sWP;
+    person.selected_products = [];
+    return person;
+  }
+
   submitProductsFormOnEditPerson() {
 
     const persons = [];
 
-    const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
+    let personOne = extend({},this.props.persons[0]);
     personOne.sBirthDate = moment(personOne.s_birthDate).format("YYYY-MM-DD");
     personOne.applicant = "1";
     personOne.sGender = personOne.s_gender;
-
+    personOne = this.deleteProductSelection(personOne);
     persons.push(personOne);
 
     if(this.props.noOfPersons == 2) {
-      const personTwo = JSON.parse(JSON.stringify(this.props.persons[1]));
+      let personTwo = extend({},this.props.persons[1]);
       personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
       personTwo.applicant = "2";
       personTwo.sGender = personTwo.s_gender;
+      personTwo = this.deleteProductSelection(personTwo);
       persons.push(personTwo);
     }
 
