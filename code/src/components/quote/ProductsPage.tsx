@@ -33,12 +33,13 @@ class ProductsPage extends React.Component<Props, {}> {
     super();
   }
   componentDidMount () {
-    console.log("DDFDSD");
+    console.log("DDFDSD");    
     setTimeout(() => {
       //this._scrollView.scrollTo({y: 100})
     }, 1)
   }
-  componentWillMount() {
+
+  componentWillMount() {    
     var queryParams = this.props.location.query;
     var queryParamsString = "?";
     for(var k in queryParams) {
@@ -51,7 +52,9 @@ class ProductsPage extends React.Component<Props, {}> {
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     if (isEmpty(this.props.products) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("agent") > 1 || this.props.is_agent ? "/agent" : "/";
-      browserHistory.push(basePath + queryParamsString);
+      //browserHistory.push(basePath + queryParamsString);
+      window.location.href = basePath + queryParamsString;
+      return;
     }
     if(this.props.persons && this.props.persons[0] && this.props.products && this.props.products[0] && this.props.products[0].products_data) {
       const productList = this.props.products[0].products_data.products_list;
@@ -62,6 +65,7 @@ class ProductsPage extends React.Component<Props, {}> {
         });
         productId0 = intersection(this.props.persons[0].selected_products, productListIds);
       }
+      
       this.setState({
         productId0: productId0
       });
@@ -97,16 +101,14 @@ class ProductsPage extends React.Component<Props, {}> {
 
   deSelectProductForIndex(personIndex, product) {
     var productsList = JSON.parse(JSON.stringify(this.state["productId" + personIndex]));
-    productsList =  without(productsList, product.ProductID );
-
+    productsList =  without(productsList, product.ProductID );    
     this.setState({
       ["productId" + personIndex]: productsList
     });
     var self = this;
     setTimeout(function() {
       self.setProductFormSubmissionErrorMsg();
-    }, 10);
-
+    }, 10);    
   }
   setProductFormSubmissionErrorMsg() {
     if(this.productSubmissionBtnClicked) {
@@ -430,7 +432,9 @@ class ProductsPage extends React.Component<Props, {}> {
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
-    browserHistory.push(basePath + queryParamsString);
+    //browserHistory.push(basePath + queryParamsString);
+    window.location.href = basePath + queryParamsString;
+    return;
   }
   isEmptyProducts() {
 
@@ -597,6 +601,7 @@ class ProductsPage extends React.Component<Props, {}> {
 }
 
 const mapStateToProps = (state: any): Props => {
+  //console.log(state.quotes);
   return {
     persons: state.quotes.persons,
     products: state.quotes.products,

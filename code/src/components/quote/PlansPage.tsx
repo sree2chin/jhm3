@@ -46,7 +46,8 @@ class PlansPage extends React.Component<Props, {}> {
         }
       }
       queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-      browserHistory.push(basePath + queryParamsString);
+      //browserHistory.push(basePath + queryParamsString);
+      window.location.href = basePath + queryParamsString;
     }
   }
 
@@ -362,7 +363,6 @@ class PlansPage extends React.Component<Props, {}> {
     personOne.sGender = personOne.s_gender;
     personOne = this.deleteProductSelection(personOne);
     persons.push(personOne);
-
     if(this.props.noOfPersons == 2) {
       let personTwo = extend({},this.props.persons[1]);
       personTwo.sBirthDate = moment(personTwo.s_birthDate).format("YYYY-MM-DD");
