@@ -33,12 +33,13 @@ class ProductsPage extends React.Component<Props, {}> {
     super();
   }
   componentDidMount () {
-    console.log("DDFDSD");
+    console.log("DDFDSD");    
     setTimeout(() => {
       //this._scrollView.scrollTo({y: 100})
     }, 1)
   }
-  componentWillMount() {
+
+  componentWillMount() {    
     var queryParams = this.props.location.query;
     var queryParamsString = "?";
     for(var k in queryParams) {
@@ -64,6 +65,7 @@ class ProductsPage extends React.Component<Props, {}> {
         });
         productId0 = intersection(this.props.persons[0].selected_products, productListIds);
       }
+      
       this.setState({
         productId0: productId0
       });
@@ -99,16 +101,14 @@ class ProductsPage extends React.Component<Props, {}> {
 
   deSelectProductForIndex(personIndex, product) {
     var productsList = JSON.parse(JSON.stringify(this.state["productId" + personIndex]));
-    productsList =  without(productsList, product.ProductID );
-
+    productsList =  without(productsList, product.ProductID );    
     this.setState({
       ["productId" + personIndex]: productsList
     });
     var self = this;
     setTimeout(function() {
       self.setProductFormSubmissionErrorMsg();
-    }, 10);
-
+    }, 10);    
   }
   setProductFormSubmissionErrorMsg() {
     if(this.productSubmissionBtnClicked) {
@@ -147,10 +147,23 @@ class ProductsPage extends React.Component<Props, {}> {
     });
   }
   validateProductsFormSubmission (isFromEditModal) {
-    if(this.props.noOfPersons == 2) {
-      return (this.state.productId0.length > 0 && this.state.productId1.length > 0)
-    } else {
-      return this.state.productId0.length > 0;
+    //case when modal popup person details edit
+    if(isFromEditModal) {
+      //remove visual selection of products
+      var activeProducts = document.querySelectorAll('.single-product-content.active .quote-this-product-container');
+      var k=0,len = activeProducts.length;
+      if(len>0){
+        for(;k<len;k++){
+          activeProducts[k].click();
+        }
+      }
+    }
+    else{
+      if(this.props.noOfPersons == 2) {
+        return (this.state.productId0.length > 0 && this.state.productId1.length > 0)
+      } else {
+        return this.state.productId0.length > 0;
+      }
     }
   }
   validateQuoteForm() {
@@ -588,6 +601,7 @@ class ProductsPage extends React.Component<Props, {}> {
 }
 
 const mapStateToProps = (state: any): Props => {
+  //console.log(state.quotes);
   return {
     persons: state.quotes.persons,
     products: state.quotes.products,
