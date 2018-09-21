@@ -28,15 +28,17 @@ gulp.task('openbrowser', shell.task("gksu -u saibabu google-chrome http://localh
 
 //,'openbrowser'
 gulp.task("default", function () {
-    process.env.NODE_ENV="dev";
-    process.env.PORT="3024";
-  runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"],'updatecdnurl','uploadtos3','start_server');
+    //process.env.NODE_ENV="dev";
+    //process.env.PORT="3024";
+    //runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"],'updatecdnurl','uploadtos3','start_server');
+    runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"],'start_server');
 });
 
 gulp.task("prod", function () {
-    process.env.NODE_ENV="production";
-    process.env.PORT="3022";
-  runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"],'updatecdnurl','uploadtos3', ["compress"]);
+    //process.env.NODE_ENV="production";
+    //process.env.PORT="3022";
+    //runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"],'updatecdnurl','uploadtos3', ["compress"]);
+    runSequence("clean:dist", ["scss", "image", "css"], ["build", "font", "font-awesome"], ["compress"]);
 });
 
 gulp.task("watch", function () {
