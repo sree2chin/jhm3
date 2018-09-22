@@ -36,9 +36,9 @@ module.exports = new function(){
     }
   };
 
-  this.allowAccessQuotes = function(req, cb){
+  this.getQuotesAccess = function(req, cb){
     var options = {
-      url: restOptions.host + '/v1/quote/access',//"https://vantisapistg.sureify.com/v1/quote/access",//
+      url: restOptions.host + '/v1/quote/access',//"https://vantisapistg.sureify.com/v1/quote/access"
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },
@@ -51,8 +51,7 @@ module.exports = new function(){
     if(Object.keys(formData).length > 0){
       options.formData = formData;
     }
-    console.log('params posted');
-    console.log(JSON.stringify(options));
+    
     request(options, function callback(err, httpResponse, body) {
       if (httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
@@ -66,10 +65,7 @@ module.exports = new function(){
             console.log("Error posted for api: /v1/quote/access");
           });
       }
-      console.log('callback first page ejs');
-      console.log(JSON.stringify(err));
-      console.log(JSON.stringify(httpResponse));
-      cb(err, httpResponse);
+      cb(httpResponse.statusCode, httpResponse.body);
     });
   };
 

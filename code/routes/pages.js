@@ -1,5 +1,4 @@
 var UserService = require('../services/user.js');
-var ApiService = require('../services/api.js');
 var Sitemap = require('express-sitemap');
 var path = require('path');
 var _ = require('underscore');
@@ -156,27 +155,18 @@ module.exports = function(app) {
     res.redirect("/" + questionsLoginRedirectPage1 + queryParamsString);
   });
 
-  app.get('/', samlAuthenticateMiddleware, function(req, res, next) {    
-    var master_request = Object.assign({},req);
-    ApiService.allowAccessQuotes(master_request, function(access_err, access_res) {      
-      access_res = JSON.parse(access_res.body);
-      if(access_res.data != undefined &&  access_res.data.access != undefined && access_res.data.access){        
-          var url_parts = url.parse(req.url, true);
-          req.session = req.session || {};
-          req.session.queryParams = {};
-          if (!_.isEmpty(url_parts.query)) {
-            req.session.queryParams = req.session.queryParams || {};
-            for(var k in url_parts.query) {
-              req.session.queryParams[k] = url_parts.query[k] || "";
-            }
-          };
-          templatePath = "./dist/index.ejs";
-          res.render(templatePath);
+  app.get('/', samlAuthenticateMiddleware, function(req, res, next) {
+    var url_parts = url.parse(req.url, true);
+    req.session = req.session || {};
+    req.session.queryParams = {};
+    if (!_.isEmpty(url_parts.query)) {
+      req.session.queryParams = req.session.queryParams || {};
+      for(var k in url_parts.query) {
+        req.session.queryParams[k] = url_parts.query[k] || "";
       }
-      else{
-        res.end('');
-      }
-    });
+    };
+    templatePath = "./dist/index.ejs";
+    res.render(templatePath);
   });
 
   app.post('/', samlAuthenticateMiddleware, function(req, res, next) {

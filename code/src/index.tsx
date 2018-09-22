@@ -6,6 +6,8 @@ import * as _AboutPage from "./components/about/aboutPage";
 import * as _QuotePage from "./components/quote/main";
 import * as _QuestionsPage from "./components/questions/main";
 import * as _AllQuestionsPage from "./components/questions/all";
+import * as AccessApi from "./api/AccessApi";
+import {isEmpty} from "underscore";
 
 type LoadCallback = (error: any, component: React.ComponentClass<any>) => void;
 
@@ -170,6 +172,17 @@ function loadPaymentPage(location: any, callback: LoadCallback) {
     "QuotePage");
 }
 
+function checkAccessable(nextState, replace, callback) {  
+  AccessApi.default.getQuoteAccess(nextState.location.query).then(function(res){
+    if(res != undefined && res != null && !isEmpty(res.data) && res.data.access){
+      return callback();  
+    }
+    return false;
+  }).catch(function(error){
+    return false;
+  });
+}
+
 var onRouteChange = ()=>{
   window._mfq = window._mfq || [];
   window._mfq.push(["newPageView"]);
@@ -183,7 +196,7 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route  path="/" component= {App} >
 
-      <IndexRoute getComponent={ loadQuotePage } />
+      <IndexRoute onEnter={checkAccessable}  getComponent={ loadQuotePage } />
       <Route path="/products" getComponent={ loadProductsPage } />
       <Route path="/plans" getComponent={ loadPlansPage } />
       <Route path="/next-steps" getComponent={ loadNextStepsPage } />
