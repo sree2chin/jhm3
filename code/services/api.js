@@ -35,6 +35,14 @@ module.exports = new function(){
     }
   };
 
+  var appendQueryParams = function (req, data) {
+    if(req.query) {
+      for(var k in req.query) {
+        data[k] = req.query[k];
+      }
+    }
+  };
+
   this.getQuotePremiums = function(req, cb) {
     var data = req.body;
     var url = restOptions.host + '/v1/quote/premiums';
@@ -42,6 +50,7 @@ module.exports = new function(){
       applicants: JSON.stringify(data)
     };
     appendAgentInfo(req, formData);
+    appendQueryParams(req, formData);
     console.log("\n\n\n in getQuotePremiums formData: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: url,
@@ -80,6 +89,7 @@ module.exports = new function(){
     }
     console.log("req.session.uniqueTransactionId: " + JSON.stringify(req.session.uniqueTransactionId));
     appendAgentInfo(req, formData);
+    appendQueryParams(req, formData);
     console.log("\n\n\nin getQuoteProducts formData: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: url,
@@ -117,6 +127,7 @@ module.exports = new function(){
       applicants: JSON.stringify(data)
     };
     appendAgentInfo(req, formData);
+    appendQueryParams(req, formData);
     console.log("\n\n\nin getQuotePlans formData: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/quote/productplans',
@@ -145,6 +156,7 @@ module.exports = new function(){
   this.saveQuoteForm = function(req, cb){
     var data = req.body;
     appendAgentInfo(req, data);
+    appendQueryParams(req, data);
     console.log("\n\n\nin saveQuoteForm formData: " + JSON.stringify(data) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/quote/savequote',
@@ -173,7 +185,7 @@ module.exports = new function(){
   this.getQuestions = function(req, cb){
     var data = {};
     appendAgentInfo(req, data);
-
+    appendQueryParams(req, data);
     console.log("\n\n\nin getQuestions formData: " + JSON.stringify(data) + "\n\n\n");
     if (req.session.queryParams && req.session.queryParams.event == "signing_complete") {
       delete req.session.queryParams.event;
@@ -220,7 +232,7 @@ module.exports = new function(){
       formData.current_index = req.body.current_index;
     }
     appendAgentInfo(req, formData);
-
+    appendQueryParams(req, formData);
     if (req.session.queryParams && req.session.queryParams.event == "signing_complete") {
       delete req.session.queryParams.event;
       if(req.session.envelop_id) {
@@ -265,6 +277,7 @@ module.exports = new function(){
     console.log("\n\n\n in postPayment" + JSON.stringify(elavonConfig) + "\n\n\n");
     console.log("in postPayment req.body.elavon_url: " + req.body.elavon_url + "\n\n\n");
     elavonConfig.url = req.body.elavon_url;
+    //appendQueryParams(req, elavonConfig);
     request({
       url: req.body.elavon_url,
       method: 'POST',
@@ -304,6 +317,7 @@ module.exports = new function(){
     }
 
     appendAgentInfo(req, formData);
+    appendQueryParams(req, formData);
     if (req.body.review_confirm == 1) {
       formData.review_confirm = 1;
     }
@@ -338,6 +352,7 @@ module.exports = new function(){
     formData.payment_response_data = JSON.stringify([]);
 
     appendAgentInfo(req, formData);
+    appendQueryParams(req, formData);
     if (req.session.queryParams && req.session.queryParams.event == "signing_complete") {
       delete req.session.queryParams.event;
       if(req.session.envelop_id)      {
@@ -390,6 +405,7 @@ module.exports = new function(){
 
     appendAgentPaymentInfo(req, formData);
     appendAgentInfo(req, formData);
+    appendQueryParams(req, formData);
     if (req.session.queryParams && req.session.queryParams.event == "signing_complete") {
       delete req.session.queryParams.event;
       if(req.session.envelop_id)      {
@@ -431,6 +447,7 @@ module.exports = new function(){
     var formData = {};
     formData.password = req.body.password;
     appendAgentInfo(req, formData);
+    appendQueryParams(req, formData);
     console.log(restOptions.host + '/v1/auth/user');
     console.log("authenticateUser formData: " + JSON.stringify(formData));
     request({
@@ -463,6 +480,7 @@ module.exports = new function(){
     formData.password = req.body.password;
     formData.new_password = req.body.new_password;
     appendAgentInfo(req, formData);
+    appendQueryParams(req, formData);
     console.log("\n\n\n changePassword formData: " + JSON.stringify(formData) +  "\n\n\n");
     request({
       url: restOptions.host + '/v1/auth/setpassword',
@@ -493,6 +511,7 @@ module.exports = new function(){
     //formData.password = req.body.password;
     //formData.new_password = req.body.new_password;
     appendAgentInfo(req, formData);
+    appendQueryParams(req, formData);
     console.log("\n\n\n changePassword formData: " + JSON.stringify(formData) +  "\n\n\n");
     request({
       url: restOptions.host + '/v1/auth/gen_authcode',
@@ -526,6 +545,7 @@ module.exports = new function(){
       q: req.body.q
     };
     appendAgentInfo(req, data);
+    appendQueryParams(req, formData);
     request({
       url: restOptions.host + '/v1/questions/factorsearch',
       headers: {
@@ -553,6 +573,7 @@ module.exports = new function(){
   this.logErrors = function(req, data, cb){
     var formData = {};
     appendAgentInfo(req, formData);
+    appendQueryParams(req, formData);
     if (data.user) {
       formData.user = data.user;
     }

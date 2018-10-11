@@ -279,7 +279,7 @@ class EmailToQuote extends React.Component<Props, {}> {
               }}
               className={this.getErrorsClassNames(this.state, "emailError0")}
             />
-            { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
+            { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px", textAlign: "left", fontSize: "18px"}}>
               Please enter email address of applicant 1.
             </Col> }
           </Col>
@@ -298,7 +298,7 @@ class EmailToQuote extends React.Component<Props, {}> {
                 }}
                 className={this.getErrorsClassNames(this.state, "emailError1")}
               />
-            { this.state.emailError1 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
+            { this.state.emailError1 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px", textAlign: "left", fontSize: "18px"}}>
               Please enter email address of applicant 2.
             </Col> }
             </Col>

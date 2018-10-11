@@ -18,39 +18,56 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
 
     var input1Valid = emailRegex.test(this.state.email0);
     var input2Valid = emailRegex.test(this.state.email1);
-
-    if ((!input1Valid && isEmpty(this.state.email0)) && (!input2Valid && isEmpty(this.state.email1))) {
-      isError = true;
-      this.setState({
-        emailErrorExists: true,
-        emailError0: true
-      });
+    
+    if (this.props.noOfPersons==2) {
+      if ((!input1Valid && isEmpty(this.state.email0)) && (!input2Valid && isEmpty(this.state.email1))) {
+        isError = true;
+        this.setState({
+          emailErrorExists: true,
+          emailError0: true
+        });
+      } else {
+        isError = false;
+        this.setState({
+          emailErrorExists: false
+        });
+        if (!input2Valid && !isEmpty(this.state.email1)) {
+          isError = true;
+          this.setState({
+            ["emailError1"]: true
+          });
+        } else {
+          this.setState({
+            ["emailError1"]: false
+          });
+        }
+        if (!input1Valid && !isEmpty(this.state.email0)) {
+          isError = true;
+          this.setState({
+            ["emailError0"]: true
+          });
+        } else {
+          this.setState({
+            ["emailError0"]: false
+          });
+        }
+      }
     } else {
-      isError = false;
-      this.setState({
-        emailErrorExists: false
-      });
-      if (!input2Valid && !isEmpty(this.state.email1)) {
-        isError = true;
+      if (input1Valid) {
+        isError = false;
         this.setState({
-          ["emailError1"]: true
+          emailError0: false
+        });
+        this.setState({
+          emailErrorExists: false
         });
       } else {
-        this.setState({
-          ["emailError1"]: false
-        });
-      }
-      if (!input1Valid && !isEmpty(this.state.email0)) {
         isError = true;
         this.setState({
-          ["emailError0"]: true
-        });
-      } else {
-        this.setState({
-          ["emailError0"]: false
+          emailError0: true,
+          emailErrorExists: true
         });
       }
-
     }
 
     return !isError;
@@ -70,12 +87,10 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
 
   state = {}
   handleChange(personIndex, e) {
-    if(this.state.emailErrorExists) {
-      if(this.validateEmailForm()) {
-        this.setState({
-          emailErrorExists: false
-        });
-      }
+    if(this.validateEmailForm()) {
+      this.setState({
+        emailErrorExists: false
+      });
     }
     this.props.handleChange(personIndex, String(e.target.value).trim());
     this.setState({
@@ -124,7 +139,7 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
                           }}
                           className={this.getErrorsClassNames(this.state, "emailError0")}
                         />
-                        { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
+                        { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px", textAlign: "left", fontSize: "18px"}}>
                           Please enter email address of applicant 1.
                         </Col> }
                       </Col>
@@ -143,7 +158,7 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
                             }}
                             className={this.getErrorsClassNames(this.state, "emailError1")}
                           />
-                          { this.state.emailError1 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
+                          { this.state.emailError1 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px", textAlign: "left", fontSize: "18px"}}>
                             Please enter email address of applicant 2.
                           </Col> }
                         </Col>

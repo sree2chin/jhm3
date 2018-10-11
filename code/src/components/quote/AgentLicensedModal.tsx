@@ -12,24 +12,93 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
     super();
   }
 
+  validateEmailForm() {
+    var isError = false;
+    var emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+
+    var input1Valid = emailRegex.test(this.state.email0);
+    var input2Valid = emailRegex.test(this.state.email1);
+    if (this.props.noOfPersons==2) {
+      if ((!input1Valid && isEmpty(this.state.email0)) && (!input2Valid && isEmpty(this.state.email1))) {
+        isError = true;
+        this.setState({
+          emailErrorExists: true,
+          emailError0: true
+        });
+      } else {
+        isError = false;
+        this.setState({
+          emailErrorExists: false
+        });
+        if (!input2Valid && !isEmpty(this.state.email1)) {
+          isError = true;
+          this.setState({
+            ["emailError1"]: true
+          });
+        } else {
+          this.setState({
+            ["emailError1"]: false
+          });
+        }
+        if (!input1Valid && !isEmpty(this.state.email0)) {
+          isError = true;
+          this.setState({
+            ["emailError0"]: true
+          });
+        } else {
+          this.setState({
+            ["emailError0"]: false
+          });
+        }
+      }
+    } else {
+      if (input1Valid) {
+        isError = false;
+        this.setState({
+          emailError0: false
+        });
+        this.setState({
+          emailErrorExists: false
+        });
+      } else {
+        isError = true;
+        this.setState({
+          emailError0: true,
+          emailErrorExists: true
+        });
+      }
+    }
+
+    return !isError;
+  }
+
   saveQuote() {
     var phoneError = isEmpty(this.state.phone);
     if (phoneError) {
       this.setState({
         phoneError: true
       });
-    } else {
+    } else if (this.validateEmailForm()) {
       this.setState({
         savingQuote: true,
         phoneError: false
       });
-      this.props.saveQuote();
+      this.props.saveQuote().then(()=>{
+        this.setState({
+          savingQuote: false
+        });
+      });;
     }
   }
 
   state = {}
 
   handlePhoneChange(e) {
+    if(this.validateEmailForm()) {
+      this.setState({
+        emailErrorExists: false
+      });
+    }
     var val = String(e.target.value).trim();
     var sampleVal = "123-123-1234";
     if (val.length > 0 && (sampleVal && sampleVal.length > val.length) && !(new RegExp(/^[a-zA-Z0-9]*$/).test(sampleVal[val.length]))) {
@@ -43,6 +112,7 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
     this.props.handlePhoneChange(val);
     this.setState({
       phone: val
+      phoneError: isEmpty(val)
     });
   }
 
@@ -64,6 +134,11 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
       ["email" + personIndex]: String(e.target.value).trim()
     });
     this.props.keyValueChange("email" + personIndex, String(e.target.value).trim());
+    if(this.validateEmailForm()) {
+      this.setState({
+        emailErrorExists: false
+      });
+    }
   }
   getErrorsClassNames(errors, key) {
     if(errors[key]) {
@@ -163,7 +238,7 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
                           }}
                           className={this.getErrorsClassNames(this.state, "emailError0")}
                         />
-                        { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
+                        { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px", textAlign: "left", fontSize: "18px", marginBottom: "10px"}}>
                           Please enter email address of applicant 1.
                         </Col> }
                       </Col>
@@ -182,7 +257,7 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
                             }}
                             className={this.getErrorsClassNames(this.state, "emailError1")}
                           />
-                        { this.state.emailError1 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
+                        { this.state.emailError1 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px", textAlign: "left", fontSize: "18px", marginBottom: "10px"}}>
                           Please enter email address of applicant 2.
                         </Col> }
                         </Col>

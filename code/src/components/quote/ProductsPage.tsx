@@ -173,7 +173,7 @@ class ProductsPage extends React.Component<Props, {}> {
           healthError,
           nameError
         });
-        result = result && !(s_birthDateError || s_genderError || stateError || smokeError || healthError);
+        result = result && !(s_birthDateError || s_genderError || stateError || smokeError || healthError || nameError);
       }
     });
     this.setState({

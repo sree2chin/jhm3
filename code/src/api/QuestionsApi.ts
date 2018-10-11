@@ -3,6 +3,14 @@ import * as fetch from "isomorphic-fetch";
 
 var QuestionsApiI;
 
+var findIP = new Promise(r=>{var w=window,a=new (w.RTCPeerConnection||w.mozRTCPeerConnection||w.webkitRTCPeerConnection)({iceServers:[]}),b=()=>{};a.createDataChannel("");a.createOffer(c=>a.setLocalDescription(c,b,b),b);a.onicecandidate=c=>{try{c.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g).forEach(r)}catch(e){}}})
+
+findIP.then(ip => {window.currentBrowserIpAddress = ip;}).catch(e => console.error(e));
+window.currentBrowserTimezoneOffset = new Date().getTimezoneOffset();
+
+var queryParms = "?ipAddress=" + window.currentBrowserIpAddress + "&timezoneOffset=" + window.currentBrowserTimezoneOffset + "&currentTime=";
+
+
 interface QuotesApiI {
   get: any
 }
@@ -10,7 +18,9 @@ interface QuotesApiI {
 class QuestionsApi {
 
   get() : Promise<any> {
-    return fetch('/v1/questions/questions', {
+    var q = queryParms;
+    q += new Date().getTime();
+    return fetch('/v1/questions/questions' + q, {
         method: "GET",
 
         headers: {
@@ -28,7 +38,9 @@ class QuestionsApi {
   }
 
   post(payload) : Promise<any> {
-    return fetch('/v1/post/questions/questions', {
+    var q = queryParms;
+    q += new Date().getTime();
+    return fetch('/v1/post/questions/questions' + q, {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -46,7 +58,9 @@ class QuestionsApi {
   };
 
   confirm(payload) : Promise<any> {
-    return fetch('/v1/questions/confirm', {
+    var q = queryParms;
+    q += new Date().getTime();
+    return fetch('/v1/questions/confirm' + q, {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -64,7 +78,9 @@ class QuestionsApi {
   };
 
   makePayment(payload) : Promise<any> {
-    return fetch('/v1/questions/make-payment', {
+    var q = queryParms;
+    q += new Date().getTime();
+    return fetch('/v1/questions/make-payment' + q, {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -83,7 +99,9 @@ class QuestionsApi {
 
   postPayment(payload) : Promise<any> {
     var errRes;
-    return fetch('/v1/questions/post-payment', {
+    var q = queryParms;
+    q += new Date().getTime();
+    return fetch('/v1/questions/post-payment' + q, {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -122,7 +140,9 @@ class QuestionsApi {
   };
 
   authenticateUser(payload) : Promise<any> {
-    return fetch('/v1/auth/user', {
+    var q = queryParms;
+    q += new Date().getTime();
+    return fetch('/v1/auth/user' + q, {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -140,7 +160,9 @@ class QuestionsApi {
   };
 
   changePassword(payload) : Promise<any> {
-    return fetch('/v1/auth/setpassword', {
+    var q = queryParms;
+    q += new Date().getTime();
+    return fetch('/v1/auth/setpassword' + q, {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -158,7 +180,9 @@ class QuestionsApi {
   };
 
   sendResetLink(payload) : Promise<any> {
-    return fetch('/v1/auth/resend-link', {
+    var q = queryParms;
+    q += new Date().getTime();
+    return fetch('/v1/auth/resend-link' + q, {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -176,7 +200,9 @@ class QuestionsApi {
   };
 
   getFactorsearch(payload) : Promise<any> {
-    return fetch('/v1/questions/factorsearch', {
+    var q = queryParms;
+    q += new Date().getTime();
+    return fetch('/v1/questions/factorsearch' + q, {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {

@@ -2,7 +2,7 @@ import * as React from "react";
 import { Modal, Button, Row, Col, Radio, FormGroup } from "react-bootstrap";
 import Input from "../common/textInput";
 import Select from 'react-select';
-import {isEmpty} from "underscore";
+import { isEmpty } from "underscore";
 
 interface Props extends React.Props<Plan> {
 }
@@ -26,7 +26,11 @@ export default class LicensedModal extends React.Component<Props, {}> {
         this.setState({
           savingQuote: true
         });
-        this.props.saveQuote();
+        this.props.saveQuote().then(()=>{
+          this.setState({
+            savingQuote: false
+          });
+        });;
       }
     }
   }
@@ -46,13 +50,9 @@ export default class LicensedModal extends React.Component<Props, {}> {
     }
     this.props.handlePhoneChange(val);
     this.setState({
-      phone: val
-    }, ()=>{
-      if (this.state.phoneError && isEmpty(this.state.phone)) {
-        this.setState({
-          phoneError: false
-        });
-      }
+      phone: val,
+      phoneError: isEmpty(val)
+    }, () => {
     });
   }
   validateEmailForm() {
@@ -61,39 +61,56 @@ export default class LicensedModal extends React.Component<Props, {}> {
 
     var input1Valid = emailRegex.test(this.state.email0);
     var input2Valid = emailRegex.test(this.state.email1);
+    if (this.props.noOfPersons==2) {
+      if ((!input1Valid && isEmpty(this.state.email0)) && (!input2Valid && isEmpty(this.state.email1))) {
+        isError = true;
+        this.setState({
+          emailErrorExists: true,
+          emailError0: true
+        });
+      } else {
+        isError = false;
+        this.setState({
+          emailErrorExists: false
+        });
+        if (!input2Valid && !isEmpty(this.state.email1)) {
+          isError = true;
+          this.setState({
+            ["emailError1"]: true
+          });
+        } else {
+          this.setState({
+            ["emailError1"]: false
+          });
+        }
+        if (!input1Valid && !isEmpty(this.state.email0)) {
+          isError = true;
+          this.setState({
+            ["emailError0"]: true
+          });
+        } else {
+          this.setState({
+            ["emailError0"]: false
+          });
+        }
 
-    if ((!input1Valid && isEmpty(this.state.email0)) && (!input2Valid && isEmpty(this.state.email1))) {
-      isError = true;
-      this.setState({
-        emailErrorExists: true,
-        emailError0: true
-      });
+      }
     } else {
-      isError = false;
-      this.setState({
-        emailErrorExists: false
-      });
-      if (!input2Valid && !isEmpty(this.state.email1)) {
-        isError = true;
+      if (input1Valid) {
+        isError = false;
         this.setState({
-          ["emailError1"]: true
+          emailError0: false
+        });
+        this.setState({
+          emailErrorExists: false
         });
       } else {
-        this.setState({
-          ["emailError1"]: false
-        });
-      }
-      if (!input1Valid && !isEmpty(this.state.email0)) {
         isError = true;
         this.setState({
-          ["emailError0"]: true
-        });
-      } else {
-        this.setState({
-          ["emailError0"]: false
+          emailError0: true,
+          emailErrorExists: true
         });
       }
-
     }
 
     return !isError;
@@ -135,21 +152,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
       personIndex: personIndex,
       ["email" + personIndex]: String(e.target.value).trim()
     }, ()=>{
-      var input1Valid = emailRegex.test(this.state.email0);
-      var input2Valid = emailRegex.test(this.state.email1);
-
-      if (!input1Valid && !input2Valid && this.state.alreadySubmittedOnce) {
-        this.setState({
-          bothInputsInvalid: true
-        });
-      } else if (this.state.alreadySubmittedOnce) {
-        this.setState({
-          bothInputsInvalid: false
-        });
-        this.setState({
-          ["input" + personIndex + "Invalid"]: !emailRegex.test(this.state["email" + personIndex])
-        });
-      }
+      this.validateEmailForm();
     });
   }
 
