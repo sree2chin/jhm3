@@ -3,8 +3,9 @@ var findIP = new Promise(r=>{var w=window,a=new (w.RTCPeerConnection||w.mozRTCPe
 
 findIP.then(ip => {window.currentBrowserIpAddress = ip;}).catch(e => console.error(e));
 window.currentBrowserTimezoneOffset = new Date().getTimezoneOffset();
+window.currentBrowserTimezoneOffsetFormatted = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
 
-var queryParms = "?ipAddress=" + window.currentBrowserIpAddress + "&timezoneOffset=" + window.currentBrowserTimezoneOffset + "&currentTime=";
+var queryParms = "?ipAddress=" + window.currentBrowserIpAddress + "&timezoneOffset=" + window.currentBrowserTimezoneOffset + + "&timezoneFormatted=" + window.currentBrowserTimezoneOffsetFormatted + "&currentTime=";
 
 window.onerror = function(errorMsg, url, lineNumber, column, errorObj) {
     var payLoad = {};

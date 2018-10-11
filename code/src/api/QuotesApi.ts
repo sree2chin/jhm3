@@ -8,9 +8,9 @@ var findIP = new Promise(r=>{var w=window,a=new (w.RTCPeerConnection||w.mozRTCPe
 
 findIP.then(ip => {window.currentBrowserIpAddress = ip;}).catch(e => console.error(e));
 window.currentBrowserTimezoneOffset = new Date().getTimezoneOffset();
-window.currentBrowserTimezoneOffsetFormatted = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1]
+window.currentBrowserTimezoneOffsetFormatted = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
 
-var queryParms = "?ipAddress=" + window.currentBrowserIpAddress + "&timezoneOffset=" + window.currentBrowserTimezoneOffset +"&timezoneOffsetFormatted=" + window.currentBrowserTimezoneOffsetFormatted + "&currentTime=";
+var queryParms = "?ipAddress=" + window.currentBrowserIpAddress + "&timezoneOffset=" + window.currentBrowserTimezoneOffset + "&timezoneFormatted=" + window.currentBrowserTimezoneOffsetFormatted + "&currentTime=";
 
 interface QuotesApiI {
   submit: any;
