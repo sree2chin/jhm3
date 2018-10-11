@@ -2696,6 +2696,8 @@ input.form-control:focus {
     color: #666666;
     width: 100%;
     text-align: left; }
+    .edit-modal-container .c-subheader-text.error {
+      color: red; }
   .edit-modal-container .react-datepicker-wrapper {
     float: left; }
     .edit-modal-container .react-datepicker-wrapper .react-datepicker__input-container {
