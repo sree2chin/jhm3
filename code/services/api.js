@@ -579,7 +579,7 @@ module.exports = new function(){
       q: req.body.q
     };
     appendAgentInfo(req, data);
-    appendQueryParams(req, formData);
+    appendQueryParams(req, data);
     request({
       url: restOptions.host + '/v1/questions/factorsearch',
       headers: {
