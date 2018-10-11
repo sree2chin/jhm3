@@ -205,38 +205,62 @@ class ContactAgent extends React.Component<Props, {}> {
     var input1Valid = emailRegex.test(this.state.email0);
     var input2Valid = emailRegex.test(this.state.email1);
 
-    if ((!input1Valid && isEmpty(this.state.email0)) && (!input2Valid && isEmpty(this.state.email1))) {
-      isError = true;
-      this.setState({
-        emailErrorExists: true,
-        emailError0: true
-      });
-    } else {
-      isError = false;
-      this.setState({
-        emailErrorExists: false
-      });
-      if (!input2Valid && !isEmpty(this.state.email1)) {
+    if (this.props.noOfPersons==2) {
+      if ((!input1Valid && isEmpty(this.state.email0)) && (!input2Valid && isEmpty(this.state.email1))) {
         isError = true;
         this.setState({
-          ["emailError1"]: true
+          emailErrorExists: true,
+          emailError0: true
         });
       } else {
+        isError = false;
         this.setState({
-          ["emailError1"]: false
+          emailErrorExists: false
         });
-      }
-      if (!input1Valid && !isEmpty(this.state.email0)) {
-        isError = true;
-        this.setState({
-          ["emailError0"]: true
-        });
-      } else {
-        this.setState({
-          ["emailError0"]: false
-        });
-      }
+        if (!input2Valid && !isEmpty(this.state.email1)) {
+          isError = true;
+          this.setState({
+            ["emailError1"]: true
+          });
+        } else {
+          this.setState({
+            ["emailError1"]: false
+          });
+        }
+        if (!input1Valid && !isEmpty(this.state.email0)) {
+          isError = true;
+          this.setState({
+            ["emailError0"]: true
+          });
+        } else {
+          this.setState({
+            ["emailError0"]: false
+          });
+        }
 
+      }
+    } else {
+      if (input1Valid) {
+        isError = false;
+        this.setState({
+          input0Invalid: false
+        });
+        this.setState({
+          savingQuote: true,
+          emailErrorExists: false
+        });
+        this.props.saveQuote().then(()=>{
+          this.setState({
+            savingQuote: false
+          });
+        });
+      } else {
+        isError = true;
+        this.setState({
+          input0Invalid: true,
+          emailErrorExists: true
+        });
+      }
     }
 
     return !isError;
