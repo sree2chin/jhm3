@@ -38,7 +38,7 @@ module.exports = new function(){
 
   this.getQuotesAccess = function(req, cb){
     var options = {
-      url: restOptions.host + '/v1/quote/access',//"https://vantisapistg.sureify.com/v1/quote/access"
+      url: restOptions.host + '/v1/quote/access',
       headers: {
         'Authorization': "Basic YWRtaW46NyVkUkdyZVQ="
       },
@@ -50,6 +50,10 @@ module.exports = new function(){
     options.formData = formData;
     if(Object.keys(formData).length > 0){
       options.formData = formData;
+    }
+
+    if(options.formData.vdtca == null){
+      options.formData.vdtca = "";
     }
     
     request(options, function callback(err, httpResponse, body) {
