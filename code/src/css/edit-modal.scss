@@ -101,6 +101,9 @@
 	    color: #666666;
 	    width: 100%;
 	    text-align: left;
+	    &.error {
+	    	color: red;
+	    }
 	}
 	.react-datepicker-wrapper {
 		float: left;

@@ -21,7 +21,11 @@ export default class EditPerson extends React.Component<Props, {}> {
   constructor(){
     super();
   }
-  state={}
+
+  state = {
+    errors: {}
+  }
+  
   handleChange(personIndex, key, val) {
     this.setState({
       [key]: val
@@ -31,6 +35,36 @@ export default class EditPerson extends React.Component<Props, {}> {
   onDateInputChange(year, month, date) {
     this.setState({ year, month, date });
     this.onDateChange("s_birthDate", month + "/" + date + "/" + year, month + "/" + date + "/" + year);
+  }
+
+  validateQuoteForm() {
+    var result = true;
+    var errors = {};
+    const {s_birthDate, s_gender, state, smoke, health, name} = this.state;
+
+    const s_birthDateError = !(s_birthDate && moment(s_birthDate).format("YYYY-MM-DD").length > 0);
+    const s_genderError = !(s_gender ==1 || s_gender ==2);
+    const stateError = !(state && state.length > 0);
+    const smokeError = !(smoke=="Yes" || smoke=="No");
+    const healthError = !(health);
+    const nameError = !(name && name.length > 0);
+
+    errors = {
+      s_birthDateError,
+      s_genderError,
+      stateError,
+      smokeError,
+      healthError,
+      nameError
+    };
+    result = result && !(s_birthDateError || s_genderError || stateError || smokeError || healthError || nameError);
+
+
+    this.setState({
+      errors
+    });
+
+    return result;
   }
 
   onDateChange(key, value, formattedDate) {
@@ -144,19 +178,21 @@ export default class EditPerson extends React.Component<Props, {}> {
   }
 
   submitEditForm() {
-    const newState = extend({},this.state);
-    const oldState = extend({},initialpersonData);
-    //console.log(oldState);
-    //console.log(newState);
+    const newState = extend({}, this.state);
+    const oldState = extend({}, initialpersonData);
     //trigger callback only if there is a change in fields
-    if(!isEqual(newState,oldState)){      
-      this.props.handleChange(this.state, true);
+    if(!isEqual(newState, oldState)){      
+      if(this.validateQuoteForm()) {
+        this.props.handleChange(this.state, true);
+        this.props.onCloseModal();
+      }
+    } else {
+      this.props.onCloseModal();
     }
-    this.props.onCloseModal();
   }
 
   public render() {
-    var errors ={};
+    var {errors} = this.state;
     const {personIndex} = this.props;
     const toolTipStyles = {
       wrapper: {

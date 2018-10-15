@@ -18,17 +18,7 @@ export default class EmailModal extends React.Component<Props, {}> {
     this.setState({
       alreadySubmittedOnce: true
     });
-    var emailRegex =  /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-    var input1Valid = true, input2Valid = true;
-    if (this.props.noOfPersons==2) {
-      input1Valid = emailRegex.test(this.state.email0);
-      input2Valid = emailRegex.test(this.state.email1);
-    } else {
-      input1Valid = emailRegex.test(this.state.email0);
-    }
-
-    if ((input1Valid && isEmpty(this.state.email1)) || (input2Valid && isEmpty(this.state.email0)) ||
-        (input1Valid && input2Valid)) {
+    if(this.validateEmailForm()) {
       this.setState({
         savingQuote: true
       });
@@ -37,46 +27,79 @@ export default class EmailModal extends React.Component<Props, {}> {
           savingQuote: false
         });
       });
-    } else {
-      if ((!input1Valid && !isEmpty(this.state.email1)) && (!input2Valid && !isEmpty(this.state.email1))) {
-        this.setState({
-          bothInputsInvalid: true
-        });
-      } else if (!input2Valid && !isEmpty(this.state.email1)) {
-        this.setState({
-          input1Invalid: true
-        });
-      } else {
-        this.setState({
-          input0Invalid: true
-        });
-      }
     }
   }
 
   state = {}
+
+  validateEmailForm() {
+    var isError = false;
+    var emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+
+    var input1Valid = emailRegex.test(this.state.email0);
+    var input2Valid = emailRegex.test(this.state.email1);
+    
+    if (this.props.noOfPersons==2) {
+      if ((!input1Valid && isEmpty(this.state.email0)) && (!input2Valid && isEmpty(this.state.email1))) {
+        isError = true;
+        this.setState({
+          emailErrorExists: true,
+          emailError0: true
+        });
+      } else {
+        isError = false;
+        this.setState({
+          emailErrorExists: false
+        });
+        if (!input2Valid && !isEmpty(this.state.email1)) {
+          isError = true;
+          this.setState({
+            ["emailError1"]: true
+          });
+        } else {
+          this.setState({
+            ["emailError1"]: false
+          });
+        }
+        if (!input1Valid && !isEmpty(this.state.email0)) {
+          isError = true;
+          this.setState({
+            ["emailError0"]: true
+          });
+        } else {
+          this.setState({
+            ["emailError0"]: false
+          });
+        }
+      }
+    } else {
+      if (input1Valid) {
+        isError = false;
+        this.setState({
+          emailError0: false
+        });
+        this.setState({
+          emailErrorExists: false
+        });
+      } else {
+        isError = true;
+        this.setState({
+          emailError0: true,
+          emailErrorExists: true
+        });
+      }
+    }
+    return !isError;
+  }
+
   handleChange(personIndex, e) {
     var emailRegex =  /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
     this.props.handleChange(personIndex, String(e.target.value).trim());
     this.setState({
       personIndex: personIndex,
       ["email" + personIndex]: String(e.target.value).trim()
-    }, ()=>{
-      var input1Valid = emailRegex.test(this.state.email0);
-      var input2Valid = emailRegex.test(this.state.email1);
-
-      if ((!input1Valid && !isEmpty(this.state.email1)) && (!input2Valid && !isEmpty(this.state.email1)) && this.state.alreadySubmittedOnce) {
-        this.setState({
-          bothInputsInvalid: true
-        });
-      } else if (this.state.alreadySubmittedOnce) {
-        this.setState({
-          bothInputsInvalid: false
-        });
-        this.setState({
-          ["input" + personIndex + "Invalid"]: !emailRegex.test(this.state["email" + personIndex]) && !isEmpty(this.state["email" + personIndex])
-        });
-      }
+    }, ()=> {
+      this.validateEmailForm();
     });
   }
   onCloseModal() {
@@ -116,8 +139,8 @@ export default class EmailModal extends React.Component<Props, {}> {
                         />
                       </Col>
                     </Row>
-                    {this.state.input0Invalid && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px", fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
-                      Please enter valid email.
+                    {this.state.emailError0 && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px", fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
+                      Please enter email address of applicant 1.
                     </Col> }
                     {this.props.noOfPersons ==2 && <Row style={{marginTop: "15px"}}>
                         <Col sm={12} className="email-label">
@@ -135,17 +158,15 @@ export default class EmailModal extends React.Component<Props, {}> {
                         </Col>
                       </Row>
                     }
-                    {this.state.input1Invalid && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
-                      Please enter valid email.
+                    {this.state.emailError1 && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
+                      Please enter email address of applicant 2.
                     </Col> }
-                    {(!this.state.input0Invalid && !this.state.input1Invalid && this.state.bothInputsInvalid) && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
-                      Please enter valid emails.
-                    </Col> }
+                   
                 </Modal.Body>
                 <Modal.Footer>
                     <Row>
                       <Col sm={12} className="c-center">
-                        <Button  style={{float: "right"}} className={`c-button-default circular ${this.state.savingQuote ? "active" : ""}`}  onClick={(){
+                        <Button  style={{float: "right"}} className={`c-button-default circular ${this.state.savingQuote ? "active" : ""}`}  onClick={()=>{
                             this.saveQuote()
                           }}
                         >
