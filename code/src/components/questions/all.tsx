@@ -631,6 +631,17 @@ class Main extends React.Component<Props, State> {
   getBtnText() {
     return this.questions.review_button_title || "NEXT";
   }
+
+  //function to show edit icon or not
+  showEditIcon(q){
+    var answered_questions = this.props.questions.extra_params.answered_questions;
+    answered_questions.concat(this.props.questions.extra_params.current_answered_questions);
+    var found_answer = map(answered_questions, (childArray)=>{
+                          return childArray.indexOf(q.id) > -1;
+                    });
+    return found_answer.indexOf(true) > -1;
+  }
+
   public render() {
     var breadCrumbs = this.getBreadCrumbs();
     var questionsList = this.getCurrentSetOfQuestions() || [];
@@ -674,13 +685,13 @@ class Main extends React.Component<Props, State> {
               {this.state.gettingQuestions && <i className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>}
                 {
                     map(actualQuestionLists, (qL)=>{
-                        var ans;
+                        var ans;                        
                         if(qL.length >0) {
-                          return (<div key={qL.groupHeader} onClick={()=>{
-                                    this.makeGroupActive(qL.groupHeader)
-                                  }}
+                          return (<div key={qL.groupHeader} 
                             className={`questions-content-container all-group-questions-container ${this.state.activeGroup == qL.groupHeader ? "active" : ""}`}>
-                            <div className="all-group-header">
+                            <div className="all-group-header" onClick={()=>{
+                                    this.makeGroupActive(qL.groupHeader)
+                                  }}>
                                 {qL.groupHeader}
                                 {<span className="down-arrow-container">
                                       <img src="../images/down-arrow.svg"/>
@@ -712,11 +723,15 @@ class Main extends React.Component<Props, State> {
                                 }
 
 
-                                console.log(ans);
+                                //console.log(ans);
 
-
-                                return <div className="individual-question"  onClick={()=>{
-                                            this.goToEditQuestionPage(q, qL.groupHeader);
+                                const canClick = this.showEditIcon(q);
+                                return <div className="individual-question" onClick={(e)=>{
+                                          e.preventDefault();
+                                          if(!canClick){
+                                            return false;
+                                          }
+                                          this.goToEditQuestionPage(q, qL.groupHeader);
                                         }}>
                                         {q.type!="label" && <div className="question-text hidden-xs">
                                             <span className="question-actual-text">
@@ -732,14 +747,12 @@ class Main extends React.Component<Props, State> {
                                             <span>
                                                 {ans}
                                             </span>
-                                            <span className="edit-img-container">
-                                            </span>
+                                            {canClick && <span className="edit-img-container"></span>}
                                         </div>}
                                         <div>
                                           <div className="question-answer-header visible-xs">
                                               <div className="question-text">Question</div>
-                                              <span className="edit-img-container">
-                                                  </span>
+                                              {canClick && <span className="edit-img-container"></span>}
                                               {q.type!="label" && <div className="question-text question-actual-text-container">
                                                   <span className="question-actual-text">
                                                       {q.caption}
