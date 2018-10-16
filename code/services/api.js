@@ -47,12 +47,8 @@ module.exports = new function(){
     var url_parts = url.parse(req.url, true);
     var query = url_parts.query;
     var formData = Object.assign({},query,req.body);    
-    options.formData = formData;
-    if(Object.keys(formData).length > 0){
-      options.formData = formData;
-    }
-
-    if(options.formData.vdtca == null){
+    options.formData = formData;    
+    if(undefined != options.formData.vdtca && options.formData.vdtca == null){
       options.formData.vdtca = "";
     }
     

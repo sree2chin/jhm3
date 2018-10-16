@@ -49,8 +49,11 @@ class EmailModal extends React.Component<Props, {}> {
   }
   keyDownTextField(e){
     var keyCode = e.keyCode;
-    if(keyCode==13) {
-      this.submitPassword();
+    if(keyCode==13) {      
+      var activeElement = document.activeElement;
+      if(activeElement.getAttribute('aria-haspopup') == null && !activeElement.classList.contains('react-datepicker-ignore-onclickoutside')){
+        this.submitPassword();
+      }
     } else {
     }
   }
