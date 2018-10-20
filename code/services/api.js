@@ -44,14 +44,11 @@ module.exports = new function(){
       },
       method: 'POST'
     }
-    var url_parts = url.parse(req.url, true);
-    var query = url_parts.query;
-    var formData = Object.assign({},query,req.body);    
+    var formData = req.body;    
+    appendAgentInfo(req, formData);
+    appendQueryParams(req, formData);
     options.formData = formData;
-    if(Object.keys(formData).length > 0){
-      options.formData = formData;
-    }
-    
+    console.log("\n\n\nformData: " + JSON.stringify(formData) + "\n\n\n");
     request(options, function callback(err, httpResponse, body) {
       if (httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
@@ -72,7 +69,9 @@ module.exports = new function(){
   var appendQueryParams = function (req, data) {
     if(req.query) {
       for(var k in req.query) {
-        data[k] = req.query[k];
+        if (req.query[k] && req.query[k] != "undefined") {
+          data[k] = req.query[k];
+        }
       }
     }
   }

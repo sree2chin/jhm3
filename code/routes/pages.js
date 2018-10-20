@@ -102,6 +102,7 @@ module.exports = function(app) {
       next();
     }
   };
+  
   var loginMiddleware = function(req, res, next) {
     console.log("in loginMiddleware");
     req.session = req.session || {};
