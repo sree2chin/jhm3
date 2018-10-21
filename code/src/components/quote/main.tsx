@@ -101,11 +101,25 @@ class Main extends React.Component<Props, {}> {
   }
 
   componentDidMount() {
+    document.addEventListener("keydown", this.keyDownTextField.bind(this), false);
     setTimeout(function() {
       window.scrollTo(0, 0);
     }, 300);    
   }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.keyDownTextField.bind(this), false);
+  }
 
+  keyDownTextField(e){
+    var keyCode = e.keyCode;
+    if(keyCode==13) {      
+      var activeElement = document.activeElement;
+      if(activeElement.getAttribute('aria-haspopup') == null && !activeElement.classList.contains('react-datepicker-ignore-onclickoutside')){
+        this.submitQuoteForm();
+      }
+    } else {
+    }
+  }
   submitQuoteForm() {
     if(this.validateQuoteForm()) {
       const persons = [];
@@ -303,14 +317,14 @@ class Main extends React.Component<Props, {}> {
               }
               <div className="c-submit-person-info-btn c-center" style={{marginTop: "30px"}}>
                   <Button  className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} 
-                  onKeyPress={event => { if (event.key === "Enter") { this.submitQuoteForm();}}} onClick={()=>{
+                     onClick={()=>{
                       this.submitQuoteForm()
                     }}
                   >
                     NEXT
                     {this.state.submittingUserInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                   </Button>
-                  <Button className={`c-button-default circular visible-xs`}  onKeyPress={event => { if (event.key === "Enter") { this.submitQuoteForm();}}} onClick={()=>{
+                  <Button className={`c-button-default circular visible-xs`} onClick={()=>{
                       this.submitQuoteForm()
                     }}
                   >

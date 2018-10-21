@@ -157,8 +157,11 @@ class Main extends React.Component<Props, {}> {
   }
   keyDownTextField(e){
     var keyCode = e.keyCode;
-    if(keyCode==13) {
-      this.onQuestionSubmit();
+    if(keyCode==13) {      
+      var activeElement = document.activeElement;
+      if(activeElement.getAttribute('aria-haspopup') == null && !activeElement.classList.contains('react-datepicker-ignore-onclickoutside') && !activeElement.classList.contains('btn')){
+        this.onQuestionSubmit();
+      }
     } else {
     }
   }
@@ -1572,18 +1575,31 @@ class Main extends React.Component<Props, {}> {
             {questionsList}
           </div>}
           {!questionsList.isQuestionsList && <div className="question-action-btn-container">
-              <Button className={`c-button-default circular next-step-btn action`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
+             {/* <Button className={`c-button-default circular next-step-btn action`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
                     this.handleBackSubmit()
                   }}>
                   Previous
                   {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-              </Button>
+              </Button> */
+
+              /*
+            <div className={`previous-btn-text next-step-btn action`} disabled={this.isSubmitBtnDisabled()} onClick={()=>{
+                    this.handleBackSubmit()
+                  }}>
+                <span>
+                  Previous
+                  {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                </span>
+            </div>
+            */
+            }
+
               {this.state.singleselectionQuestionsSubmitting && <i className="fa fa-circle-o-notch fa-spin fa-fw fa-2x" style={{position: "relative", top: "14px"}}></i>}
               {!this.isOnlyQuestionSingleSelection() && <Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular  action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                     this.onQuestionSubmit()
                   }}
                 >
-                  Next
+                  SUBMIT
                   {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>}
             </div>}

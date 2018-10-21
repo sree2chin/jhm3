@@ -802,7 +802,10 @@ class Main extends React.Component<Props, {}> {
   keyDownTextField(e){
     var keyCode = e.keyCode;
     if(keyCode==13) {
-      this.onQuestionSubmit();
+      var activeElement = document.activeElement;
+      if(activeElement.getAttribute('aria-haspopup') == null && !activeElement.classList.contains('react-datepicker-ignore-onclickoutside')){
+        this.onQuestionSubmit();
+      }
     } else {
     }
   }

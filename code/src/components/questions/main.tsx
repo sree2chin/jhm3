@@ -187,7 +187,10 @@ class Main extends React.Component<Props, {}> {
   keyDownTextField(e){
     var keyCode = e.keyCode;
     if(keyCode==13) {
-      this.onQuestionSubmit();
+      var activeElement = document.activeElement;
+      if(activeElement.getAttribute('aria-haspopup') == null && !activeElement.classList.contains('react-datepicker-ignore-onclickoutside')  && !activeElement.classList.contains('btn')){
+        this.onQuestionSubmit();
+      }
     } else {
     }
   }
@@ -2006,10 +2009,10 @@ class Main extends React.Component<Props, {}> {
                 Add a Primary Beneficiary
               </Row>
               <Row>
-                <Col sm="7" className="Add-a-Primary-Benefi-description-text">
+                <Col sm={7} className="Add-a-Primary-Benefi-description-text">
                   You must add at least one primary beneficiary to your policy.
                 </Col>
-                <Col sm="5">
+                <Col sm={5}>
                 <Button className={`c-button-default circular action`} disabled={this.isSubmitBtnDisabled()} style={{marginLeft: "20px"}} onClick={()=>{
                       this.addPrimaryBeneficiary()
                     }}>
@@ -2045,10 +2048,10 @@ class Main extends React.Component<Props, {}> {
                 Add a Contingent Beneficiary
               </Row>
               <Row>
-                <Col sm="7" className="Add-a-Primary-Benefi-description-text">
+                <Col sm={7} className="Add-a-Primary-Benefi-description-text">
                   Adding a contingent beneficiary is optional.
                 </Col>
-                <Col sm="5">
+                <Col sm={5}>
                 <Button className={`c-button-default circular action`} disabled={this.isSubmitBtnDisabled()} style={{marginLeft: "20px"}} onClick={()=>{
                     this.addContingencyBeneficiary()
                   }}>
