@@ -250,6 +250,11 @@ class PlansPage extends React.Component<Props, {}> {
           });
           return;
         }
+      } else {
+        delete personOne.wp_premium;
+        delete personOne.quote_premium;
+        delete personOne.premium_amount;
+        delete personOne.premium_type;
       }
       this.setState({
         showPremiumAmountNotpresentError: false
@@ -289,6 +294,11 @@ class PlansPage extends React.Component<Props, {}> {
             });
             return;
           }
+        }  else {
+          delete personTwo.wp_premium;
+          delete personTwo.quote_premium;
+          delete personTwo.premium_amount;
+          delete personTwo.premium_type;
         }
         persons.push(personTwo);
         this.setState({
