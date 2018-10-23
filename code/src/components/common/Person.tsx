@@ -46,16 +46,16 @@ export default class Person extends React.Component<Props, {}> {
     this.setState({ year, month, date });
     var momentDate = moment(new Date(month + "/" + date + "/" + year));
     if (momentDate.isValid()) {
-      this.onDateChange("s_birthDate", month + "/" + date + "/" + year, month + "/" + date + "/" + year);
+      this.onDateChange("s_birthDate", month + "/" + date + "/" + year);
     }
   }
 
-  onDateChange(key, value) {
+  onDateChange(key, value) {    
     this.setState({
-      [key]: moment(value),
-      formattedDate: moment(value).format("MM/DD/YYYY")
+      [key]: ((value == null) ? null : moment(value)),
+      formattedDate: ((value == null) ? null : moment(value).format("MM/DD/YYYY"))
     });
-    this.props.onChange(this.props.index, key, moment(value));
+    this.props.onChange(this.props.index, key, value);
     if (this.props.initialQuoteSubmittedOnce) {
       setTimeout(()=>{
         this.props.validateQuoteForm();

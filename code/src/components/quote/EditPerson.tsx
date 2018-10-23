@@ -23,31 +23,42 @@ export default class EditPerson extends React.Component<Props, {}> {
   }
 
   state = {
-    errors: {}
+    errors: {},
+    initialQuoteSubmittedOnce:false
   }
   
-  handleChange(personIndex, key, val) {
+  handleChange(personIndex, key, val) {    
     this.setState({
       [key]: val
     });
+    this.props.handleChange(this.props.personIndex, key, val);
+    if (this.state.initialQuoteSubmittedOnce) {
+      setTimeout(()=>{
+        this.validateQuoteForm();
+      }, 100);
+    }
   }
 
   onDateInputChange(year, month, date) {
-    this.setState({ year, month, date });
-    this.onDateChange("s_birthDate", month + "/" + date + "/" + year, month + "/" + date + "/" + year);
+    this.setState({ year, month, date });    
+    var momentDate = moment(new Date(month + "/" + date + "/" + year));
+    if (momentDate.isValid()) {
+      this.onDateChange("s_birthDate", month + "/" + date + "/" + year);
+    }
   }
 
   validateQuoteForm() {
     var result = true;
     var errors = {};
+    
     const {s_birthDate, s_gender, state, smoke, health, name} = this.state;
 
     const s_birthDateError = !(s_birthDate && moment(s_birthDate).format("YYYY-MM-DD").length > 0);
     const s_genderError = !(s_gender ==1 || s_gender ==2);
     const stateError = !(state && state.length > 0);
     const smokeError = !(smoke=="Yes" || smoke=="No");
-    const healthError = !(health);
-    const nameError = !(name && name.length > 0);
+    const healthError = !(health);    
+    const nameError = !(name && String.prototype.trim.call(name).length > 0);
 
     errors = {
       s_birthDateError,
@@ -59,21 +70,25 @@ export default class EditPerson extends React.Component<Props, {}> {
     };
     result = result && !(s_birthDateError || s_genderError || stateError || smokeError || healthError || nameError);
 
-
     this.setState({
-      errors
+      errors,
+      initialQuoteSubmittedOnce:true
     });
 
     return result;
   }
 
-  onDateChange(key, value, formattedDate) {
-    var date = moment(new Date(value));
-    if (date.isValid()) {
-      this.setState({
-        [key]: date,
-        formattedDate
-      });
+  //this function is called after onChangeRaw
+  onDateChange(key, value) {
+    this.setState({
+      [key]: ((value == null) ? null : moment(value)),
+      formattedDate: ((value == null) ? null : moment(value).format("MM/DD/YYYY"))
+    });
+    this.handleChange(this.props.personIndex, key, value);
+    if (this.state.initialQuoteSubmittedOnce) {
+      setTimeout(()=>{
+        this.validateQuoteForm();
+      }, 100);
     }
   }
   onKeyDown(e) {
@@ -85,7 +100,7 @@ export default class EditPerson extends React.Component<Props, {}> {
       }
     }
   }
-  onChangeRaw(e) {
+  onChangeRaw(e) {    
     var parentClass = ".edit-modal-container"
     /*if (this.props.index==0) {
       parentClass=".first- ";
