@@ -80,7 +80,7 @@ class Main extends React.Component<Props, {}> {
         const stateError = !(state && state.length > 0);
         const smokeError = !(smoke=="Yes" || smoke=="No");
         const healthError = !(health);
-        const nameError = !(name && name.length > 0);
+        const nameError = !(name && String.prototype.trim.call(name).length > 0);
 
         errors.push({
           s_birthDateError,
