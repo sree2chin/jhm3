@@ -432,8 +432,8 @@ class ProductsPage extends React.Component<Props, {}> {
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
     const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
-    //browserHistory.push(basePath + queryParamsString);
-    window.location.href = basePath + queryParamsString;
+    browserHistory.push(basePath + queryParamsString);
+    //window.location.href = basePath + queryParamsString;
     return;
   }
   isEmptyProducts() {
