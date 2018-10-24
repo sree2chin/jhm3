@@ -1537,6 +1537,8 @@ input.form-control:focus {
     color: #464646;
     margin-left: -15px;
     margin-top: 20px; }
+    .question-action-btn-container.questions-content-container.Add-a-Primary-Benefi .Add-a-Primary-Benefi-description-text.Add-a-Primary-Benefi-description-text-error {
+      color: red; }
   .question-action-btn-container.questions-content-container.Add-a-Primary-Benefi button {
     float: right;
     font-family: NunitoRegular;
