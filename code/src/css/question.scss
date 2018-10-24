@@ -337,6 +337,9 @@
         color: #464646;
         margin-left: -15px;
         margin-top: 20px;
+        &.Add-a-Primary-Benefi-description-text-error {
+            color: red;
+        }
     }
     button {
         float: right;
