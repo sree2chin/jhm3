@@ -15,6 +15,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
   saveQuote() {
     var phoneError = isEmpty(this.state.phone);
     if (phoneError) {
+      this.validateEmailForm();
       this.setState({
         phoneError: true
       });
