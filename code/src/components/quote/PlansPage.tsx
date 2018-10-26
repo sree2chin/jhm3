@@ -419,8 +419,9 @@ class PlansPage extends React.Component<Props, {}> {
     if (this.props.premiums && this.props.premiums[0] && this.props.premiums[0] && this.props.premiums[0][sProductID] && sProductID && this.state.premium_type){
       if (this.props.premiums[0][sProductID] && this.props.premiums[0][sProductID] && this.props.premiums[0][sProductID].Plan && this.props.premiums[0][sProductID].Plan.Premium) {
         total = parseFloat(this.props.premiums[0][sProductID].Plan.Premium[this.state.premium_type].split("$")[1].replace(",", ""));
-      } else if (this.isSPWLProduct(this.props.premiums, 0, sProductID)) {
-        total += parseFloat(this.props.persons[0].sPremiumAmount);
+      } else if (this.isSPWLProduct(this.props.premiums, 0, sProductID) && this.props.premiums && this.props.premiums[0] && this.props.premiums[0][sProductID] && this.props.premiums[0][sProductID].Plan) {
+        total += parseFloat(this.props.premiums[0][sProductID].Plan.PremiumAmount);
+        //total += parseFloat(this.props.persons[0].sPremiumAmount);
       }
       if (this.state.selectedRider0) {
         var riderAmount = this.state.selectedRider0.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider0.Premium[this.state.premium_type].split("$")[1]) : 0;
@@ -432,8 +433,9 @@ class PlansPage extends React.Component<Props, {}> {
     if (this.props.premiums && this.props.premiums[1] && this.props.premiums[1] && this.props.premiums[1][sProductID1] && sProductID1 && this.state.premium_type){
       if (this.props.premiums[1][sProductID1] && this.props.premiums[1][sProductID1] && this.props.premiums[1][sProductID1].Plan && this.props.premiums[1][sProductID1].Plan.Premium) {
         total += parseFloat(this.props.premiums[1][sProductID1].Plan.Premium[this.state.premium_type].split("$")[1].replace(",", ""));
-      } else if (this.isSPWLProduct(this.props.premiums, 1, sProductID1)) {
-        total += parseFloat(this.props.persons[1].sPremiumAmount);
+      } else if (this.isSPWLProduct(this.props.premiums, 1, sProductID1) && this.props.premiums && this.props.premiums[1] && this.props.premiums[1][sProductID1] && parseFloat(this.props.premiums[1][sProductID1].Plan) {
+        total += parseFloat(this.props.premiums[1][sProductID1].Plan.PremiumAmount);
+        //total += parseFloat(this.props.persons[1].sPremiumAmount);
       }
       if (this.state.selectedRider1) {
         var riderAmount = this.state.selectedRider1.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider1.Premium[this.state.premium_type].split("$")[1])  : 0;
