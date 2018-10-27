@@ -250,6 +250,11 @@ class PlansPage extends React.Component<Props, {}> {
           });
           return;
         }
+      } else {
+        delete personOne.wp_premium;
+        delete personOne.quote_premium;
+        delete personOne.premium_amount;
+        delete personOne.premium_type;
       }
       this.setState({
         showPremiumAmountNotpresentError: false
@@ -289,6 +294,11 @@ class PlansPage extends React.Component<Props, {}> {
             });
             return;
           }
+        }  else {
+          delete personTwo.wp_premium;
+          delete personTwo.quote_premium;
+          delete personTwo.premium_amount;
+          delete personTwo.premium_type;
         }
         persons.push(personTwo);
         this.setState({
@@ -391,6 +401,16 @@ class PlansPage extends React.Component<Props, {}> {
     });
   }
 
+  shouldPremiumTypeText() {
+    var sProductID = this.state.productIdPlan0 || null;
+    var sProductID1 = this.state.productIdPlan1 || null;
+    return !(this.isSPWLProduct(this.props.premiums, 0, sProductID) || this.isSPWLProduct(this.props.premiums, 1, sProductID1));
+  }
+
+  isSPWLProduct(premiums, index, sProductID) {
+    return premiums && premiums[index] && premiums[index][sProductID] && premiums[index][sProductID].Plan && premiums[index][sProductID].Plan.SpwlFlag == 1;
+  }
+
   getTotalPaymentAmount() {
     var total = 0;
     var sProductID = this.state.productIdPlan0 || null;
@@ -399,6 +419,9 @@ class PlansPage extends React.Component<Props, {}> {
     if (this.props.premiums && this.props.premiums[0] && this.props.premiums[0] && this.props.premiums[0][sProductID] && sProductID && this.state.premium_type){
       if (this.props.premiums[0][sProductID] && this.props.premiums[0][sProductID] && this.props.premiums[0][sProductID].Plan && this.props.premiums[0][sProductID].Plan.Premium) {
         total = parseFloat(this.props.premiums[0][sProductID].Plan.Premium[this.state.premium_type].split("$")[1].replace(",", ""));
+      } else if (this.isSPWLProduct(this.props.premiums, 0, sProductID) && this.props.premiums && this.props.premiums[0] && this.props.premiums[0][sProductID] && this.props.premiums[0][sProductID].Plan) {
+        total += parseFloat(this.props.premiums[0][sProductID].Plan.PremiumAmount);
+        //total += parseFloat(this.props.persons[0].sPremiumAmount);
       }
       if (this.state.selectedRider0) {
         var riderAmount = this.state.selectedRider0.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider0.Premium[this.state.premium_type].split("$")[1]) : 0;
@@ -408,8 +431,11 @@ class PlansPage extends React.Component<Props, {}> {
 
 
     if (this.props.premiums && this.props.premiums[1] && this.props.premiums[1] && this.props.premiums[1][sProductID1] && sProductID1 && this.state.premium_type){
-      if (this.props.premiums[1][sProductID1] && this.props.premiums[1][sProductID1] && this.props.premiums[1][sProductID1].plan && this.props.premiums[1][sProductID1].Plan.Premium) {
+      if (this.props.premiums[1][sProductID1] && this.props.premiums[1][sProductID1] && this.props.premiums[1][sProductID1].Plan && this.props.premiums[1][sProductID1].Plan.Premium) {
         total += parseFloat(this.props.premiums[1][sProductID1].Plan.Premium[this.state.premium_type].split("$")[1].replace(",", ""));
+      } else if (this.isSPWLProduct(this.props.premiums, 1, sProductID1) && this.props.premiums && this.props.premiums[1] && this.props.premiums[1][sProductID1] && parseFloat(this.props.premiums[1][sProductID1].Plan) {
+        total += parseFloat(this.props.premiums[1][sProductID1].Plan.PremiumAmount);
+        //total += parseFloat(this.props.persons[1].sPremiumAmount);
       }
       if (this.state.selectedRider1) {
         var riderAmount = this.state.selectedRider1.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider1.Premium[this.state.premium_type].split("$")[1])  : 0;
@@ -731,7 +757,7 @@ class PlansPage extends React.Component<Props, {}> {
               <Col sm={8} className="c-center" style={{float: "right", marginRight: "15px"}}>
                 <Row>
                   <Col sm={4} xs={6} className="plan-total-text">
-                    {this.state.premium_type} Total
+                    {this.shouldPremiumTypeText() ? this.state.premium_type : ""} Total
                   </Col>
                   <Col sm={8} xs={6} className="plan-total-amount">
                     {this.getTotalPaymentAmount()}
@@ -746,7 +772,7 @@ class PlansPage extends React.Component<Props, {}> {
               <Col md={4} sm={5} className="" style={{float: "right", marginRight: "15px"}}>
                 <Row>
                   <Col sm={7} md={6} className="plan-total-text">
-                    {this.state.premium_type} Total
+                    {this.shouldPremiumTypeText() ? this.state.premium_type : ""} Total
                   </Col>
                   {this.shouldShowTotal() && <Col sm={5} xs={6} className="plan-total-amount">
                     {this.getTotalPaymentAmount()}

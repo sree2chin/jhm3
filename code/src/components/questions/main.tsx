@@ -1136,6 +1136,16 @@ class Main extends React.Component<Props, {}> {
             }
           });
         }
+        this.setState({
+          addAtleastOnePrimaryBeneficiaryError: false
+        });
+      } else {
+        allQuestionsValid = false;
+        this.setState({
+          addAtleastOnePrimaryBeneficiaryError: true
+        });
+        document.querySelectorAll(".Add-a-Primary-Benefi")[0].scrollIntoView();
+        return;
       }
 
       if (this.actualQuestionLists.contingencyBeneficiariesMainQuestion.questions) {
@@ -1181,6 +1191,9 @@ class Main extends React.Component<Props, {}> {
 
         if (this.addingPrimaryBeneficiary == true) {
           this.addingPrimaryBeneficiaryFlag = true;
+          this.setState({
+            addAtleastOnePrimaryBeneficiaryError: false
+          });
         }
         if (this.addingContingencyBeneficiary == true) {
           this.addingContingencyBeneficiaryFlag = true;
@@ -1779,7 +1792,8 @@ class Main extends React.Component<Props, {}> {
     this.addingPrimaryBeneficiary = true;
     this.setState({
       addingPrimaryBeneficiary: true,
-      addingContingencyBeneficiary: false
+      addingContingencyBeneficiary: false,
+
     });
     self.props.getFactorsearch(data).then(response => {
       if (response && response.questions.LOGIN_URL && response.questions.LOGIN_URL.length > 0) {
@@ -2009,17 +2023,17 @@ class Main extends React.Component<Props, {}> {
                 Add a Primary Beneficiary
               </Row>
               <Row>
-                <Col sm={7} className="Add-a-Primary-Benefi-description-text">
+                <Col sm={7} className={`Add-a-Primary-Benefi-description-text ${this.state.addAtleastOnePrimaryBeneficiaryError ? "Add-a-Primary-Benefi-description-text-error": ""}`}>
                   You must add at least one primary beneficiary to your policy.
                 </Col>
                 <Col sm={5}>
-                <Button className={`c-button-default circular action`} disabled={this.isSubmitBtnDisabled()} style={{marginLeft: "20px"}} onClick={()=>{
-                      this.addPrimaryBeneficiary()
-                    }}>
-                    ADD PRIMARY BENEFICIARY
-                    {this.state.addingPrimaryBeneficiary && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-                </Button>
-              </Col>
+                  <Button className={`c-button-default circular action`} disabled={this.isSubmitBtnDisabled()} style={{marginLeft: "20px"}} onClick={()=>{
+                        this.addPrimaryBeneficiary()
+                      }}>
+                      ADD PRIMARY BENEFICIARY
+                      {this.state.addingPrimaryBeneficiary && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+                  </Button>
+                </Col>
               </Row>
             </div>
           }

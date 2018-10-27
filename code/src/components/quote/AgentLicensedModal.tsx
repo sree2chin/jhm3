@@ -75,6 +75,7 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
   saveQuote() {
     var phoneError = isEmpty(this.state.phone);
     if (phoneError) {
+      this.this.validateEmailForm();
       this.setState({
         phoneError: true
       });
