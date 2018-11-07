@@ -261,7 +261,7 @@ class EmailToQuote extends React.Component<Props, {}> {
             <Col className="email-description c-center" sm={12}>
               {this.isInAgentFlow() ?
                 "Before beginning the application, please enter the applicant's email address. An email with the quote information will be sent to them." :
-                "Before beginning the application, please enter the applicant's email address. An email with the quote information and a link back to their application will be sent to them."
+                "Before beginning the application, please enter your preferred email address.  We will send you the estimated quote for your records."
               }
             </Col>
         </Row>

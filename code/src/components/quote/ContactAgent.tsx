@@ -306,7 +306,7 @@ class ContactAgent extends React.Component<Props, {}> {
         </Row>
         <Row>
             <Col className="email-description c-center" sm={12}>
-              Tell us when we may best reach you and a number to call you on and a licensed agent will follow up with your quote.
+              Please complete the information below and a licensed agent will contact you to complete your application.
             </Col>
         </Row>
         <Row style={{marginTop: "35px"}}>

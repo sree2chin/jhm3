@@ -17,6 +17,7 @@ class SelectPersons extends React.Component<Props, State> {
     this.state = {};
   };
   componentWillMount() {
+    this.selectNoOfPersons(1);
     if(this.props.noOfPersons) {
       this.setState({
         noOfPersons: this.props.noOfPersons,
@@ -30,9 +31,10 @@ class SelectPersons extends React.Component<Props, State> {
       noOfPersons: value,
       selectNoOfPersonsError: false
     });
-    if(!(document.getElementById("select-no-of-persons-mobile-btn").offsetHeight > 0)) {
+    this.props.selectNoOfPersons(value);
+    /*if(!(document.getElementById("select-no-of-persons-mobile-btn").offsetHeight > 0)) {
       this.props.selectNoOfPersons(value);
-    }
+    }*/
   };
 
   selectNoOfPersonsForMobile = () => {
@@ -62,11 +64,11 @@ class SelectPersons extends React.Component<Props, State> {
       <div style={{backgroundColor: "#fcfcfc"}} className={`${!this.props.noOfPersons ? "before-select-persons" : ""}`}>
         <Row>
           <Col className="c-select-persons-container">
-            <Row style={{marginLeft: "0px", marginRight: "0px"}}>
-              <Col sm={5} className="confirmation-msg-container">
-                <Row className="c-selected-person-header fwbold">
+            <Row style={{marginLeft: "auto", marginRight: "auto", marginBottom: "21px", width: "80%"}}>
+              <Col sm={6} className="confirmation-msg-container">
+                {/*<Row className="c-selected-person-header fwbold">
                   For How Many People are We Quoting?
-                </Row>
+                </Row>*/}
                 <Row style={{marginTop: "15px"}} className="quotation-msg-text-container">
                   <Col sm={12} className="confirmation-msg confirmation-msg-first-line">
                     Welcome! We're glad you're here. Please answer a few questions to determine which product(s) are a good match..
@@ -74,12 +76,12 @@ class SelectPersons extends React.Component<Props, State> {
                 </Row>
               </Col>
 
-              <Col sm={3} className={`c-select-two-person ${this.state.noOfPersons==2 ? "active" : ""}`}  onClick={()=> this.selectNoOfPersons(2)} >
+              {/*<Col sm={3} className={`c-select-two-person ${this.state.noOfPersons==2 ? "active" : ""}`}  onClick={()=> this.selectNoOfPersons(2)} >
                 {(!this.state.noOfPersons || this.state.noOfPersons==1) && <img className="default-image" src="./images/default-double.svg" /> }
                 {(!this.state.noOfPersons || this.state.noOfPersons==1) && <img className="hover-image" src="./images/hover-double.svg" /> }
                 {this.state.noOfPersons==2 && <img className="active-image" src="./images/active-double.svg" /> }
                 <p> Two persons</p>
-              </Col>
+              </Col>*/}
 
               <Col sm={3} className={`c-select-one-person ${this.state.noOfPersons==1 ? "active" : ""}`} onClick={()=> this.selectNoOfPersons(1)} >
                  {(!this.state.noOfPersons || this.state.noOfPersons==2) && <img className="default-image" src="./images/default-single.svg" /> }
@@ -94,7 +96,7 @@ class SelectPersons extends React.Component<Props, State> {
                 Please select the number of person
               </Col> }
 
-              <div className="visible-xs" id="select-no-of-persons-mobile-btn">
+              {/*<div className="visible-xs" id="select-no-of-persons-mobile-btn">
                 <Col sm={4}>
                   <Button className={`c-button-default ${this.getMobileContinueBtnActiveClass()}`} onClick={(){
                       this.selectNoOfPersonsForMobile()
@@ -103,7 +105,7 @@ class SelectPersons extends React.Component<Props, State> {
                     CONTINUE
                   </Button>
                 </Col>
-              </div>
+              </div>*/}
 
             </Row>
           </Col>

@@ -182,11 +182,11 @@ export default class LicensedModal extends React.Component<Props, {}> {
                 </Modal.Header>
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     <Row className="email-quote-text">
-                        Connect me to a licensed agent
+                      Connect me to a licensed agent
                     </Row>
                     <Row>
                         <Col className="email-description c-center" sm={12}>
-                            Tell us when we may best reach you and a number to call you on and a licensed agent will follow up with your quote.
+                            Please complete the information below and a licensed agent will contact you to complete your application.
                         </Col>
                     </Row>
 
