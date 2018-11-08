@@ -27,6 +27,26 @@ export default class EditPerson extends React.Component<Props, {}> {
     initialQuoteSubmittedOnce:false
   }
   
+  componentDidMount() {
+    document.addEventListener("keydown", this.keyDownTextField.bind(this), false);    
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.keyDownTextField.bind(this), false);
+  }
+
+  keyDownTextField(e){
+    var keyCode = e.keyCode;
+    var isModalPopup = document.querySelector('div[role="dialog"].fade.in');
+    if(keyCode==13 && isModalPopup != null) {
+        var activeElement = document.activeElement;
+        if(activeElement.getAttribute('aria-haspopup') == null && !activeElement.classList.contains('react-datepicker-ignore-onclickoutside')){
+          this.submitEditForm()
+        }
+    }
+  }
+
+
   handleChange(personIndex, key, val) {    
     this.setState({
       [key]: val
@@ -91,6 +111,8 @@ export default class EditPerson extends React.Component<Props, {}> {
       }, 100);
     }
   }
+
+  //only for datepicker 
   onKeyDown(e) {
     if (e.keyCode == 13) {
       if (e.target.value && e.target.value.length ==10) {
@@ -193,6 +215,8 @@ export default class EditPerson extends React.Component<Props, {}> {
   }
 
   submitEditForm() {
+    //console.log("initialpersonData");
+    //console.log(initialpersonData);
     const newState = extend({}, this.state);
     const oldState = extend({}, initialpersonData);
     //trigger callback only if there is a change in fields

@@ -12,6 +12,26 @@ class ThanksEmail extends React.Component<Props, {}> {
     super();
 
   }
+
+  componentDidMount() {
+    document.addEventListener("keydown", this.keyDownTextField.bind(this), false);    
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.keyDownTextField.bind(this), false);
+  }
+
+  keyDownTextField(e){
+    var keyCode = e.keyCode;
+    var isModalPopup = document.querySelector('div[role="dialog"].fade.in');
+    if(keyCode==13 && isModalPopup != null) {
+        var activeElement = document.activeElement;
+        if(activeElement.getAttribute('aria-haspopup') == null && !activeElement.classList.contains('react-datepicker-ignore-onclickoutside')){
+          this.saveQuote();
+        }
+    }
+  }
+
   saveQuote() {
     this.props.saveQuote();
   }

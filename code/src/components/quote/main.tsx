@@ -114,7 +114,8 @@ class Main extends React.Component<Props, {}> {
     var keyCode = e.keyCode;
     if(keyCode==13) {
       var isModalPopup = document.querySelector('div[role="dialog"].fade.in');
-      if(isModalPopup == null){
+      var last_page = window.location.href.lastIndexOf('/next-steps') > -1;
+      if(isModalPopup == null && !last_page){
         var activeElement = document.activeElement;
         if(activeElement.getAttribute('aria-haspopup') == null && !activeElement.classList.contains('react-datepicker-ignore-onclickoutside')){
           this.submitQuoteForm();

@@ -452,19 +452,19 @@ class PlansPage extends React.Component<Props, {}> {
   shouldShowTotal () {
     if(!this.props.persons) return true;
     if(this.props.noOfPersons ==1) {
-      if(this.props.persons[0].selected_products.length==1) return true;
+      if(undefined != this.props.persons[0].selected_products && this.props.persons[0].selected_products.length==1) return true;
       return this.state.productIdPlan0 && this.state.productIdPlan0.length > 0;
     } else {
       return (this.state.productIdPlan0 && this.state.productIdPlan0.length > 0) ||
         this.state.productIdPlan1 && this.state.productIdPlan1.length>0;
-      if(this.props.persons[0].selected_products.length==1) {
+      if(undefined != this.props.persons[0].selected_products && this.props.persons[0].selected_products.length==1) {
         if(this.props.persons[1].selected_products.length==1) {
           return true;
         } else {
           return this.state.productIdPlan1 && this.state.productIdPlan1.length>0;
         }
       } else {
-        if(this.props.persons[1].selected_products.length==1) {
+        if(undefined != this.props.persons[1].selected_products && this.props.persons[1].selected_products.length==1) {
           return this.state.productIdPlan0 && this.state.productIdPlan0.length > 0;
         }
         return this.state.productIdPlan0 && this.state.productIdPlan0.length>0 && this.state.productIdPlan1 && this.state.productIdPlan1.length>0;
