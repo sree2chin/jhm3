@@ -112,12 +112,14 @@ class Main extends React.Component<Props, {}> {
 
   keyDownTextField(e){
     var keyCode = e.keyCode;
-    if(keyCode==13) {      
-      var activeElement = document.activeElement;
-      if(activeElement.getAttribute('aria-haspopup') == null && !activeElement.classList.contains('react-datepicker-ignore-onclickoutside')){
-        this.submitQuoteForm();
+    if(keyCode==13) {
+      var isModalPopup = document.querySelector('div[role="dialog"].fade.in');
+      if(isModalPopup == null){
+        var activeElement = document.activeElement;
+        if(activeElement.getAttribute('aria-haspopup') == null && !activeElement.classList.contains('react-datepicker-ignore-onclickoutside')){
+          this.submitQuoteForm();
+        }
       }
-    } else {
     }
   }
   submitQuoteForm() {
