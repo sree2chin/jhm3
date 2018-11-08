@@ -35,12 +35,13 @@
 }
 .email-modal-container {
 	.email-quote-text {
-		font-size: 22px;
-	    line-height: 1.77;
+	    font-size: 20px;
 	    text-align: left;
 	    color: #333333;
 	    margin-top: 15px;
 	    margin-left: 0px;
+	    line-height: 1.1;
+	    margin-bottom: 6px;
 	    &.email-quote-text-on-modal {
 	    	text-align: center;
 	    }
