@@ -51,7 +51,7 @@ export default class EditPerson extends React.Component<Props, {}> {
     this.setState({
       [key]: val
     });
-    this.props.handleChange(this.props.personIndex, key, val);
+    //this.props.handleChange(this.props.personIndex, key, val);
     if (this.state.initialQuoteSubmittedOnce) {
       setTimeout(()=>{
         this.validateQuoteForm();
