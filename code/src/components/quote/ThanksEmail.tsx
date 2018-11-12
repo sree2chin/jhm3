@@ -6,22 +6,34 @@ import { Dispatch } from 'redux';
 
 interface Props extends React.Props<Plan> {
 }
-
+let thanksemailmodal = null;
 class ThanksEmail extends React.Component<Props, {}> {
   constructor(){
     super();
 
   }
 
-  componentDidMount() {
-    document.addEventListener("keydown", this.keyDownTextField.bind(this), false);    
-  }
-
   componentWillUnmount() {
-    document.removeEventListener("keydown", this.keyDownTextField.bind(this), false);
+    console.log('componentWillUnmount');
+    if(thanksemailmodal != null)
+    thanksemailmodal.removeEventListener("keydown", this.keyDownthanksemailmodal.bind(this), false);
+    thanksemailmodal = null;
   }
 
-  keyDownTextField(e){
+  componentWillReceiveProps(nextProps){
+    if(nextProps.showModalPhone && thanksemailmodal == null){
+      const current = this;
+      setTimeout(function(current){
+        var modal = document.querySelector('div[role="dialog"].fade.in');        
+        if(modal){
+          thanksemailmodal = modal;
+          thanksemailmodal.addEventListener("keydown", current.keyDownthanksemailmodal.bind(current), false);  
+        }
+      },200,current);
+    }
+  }
+
+  keyDownthanksemailmodal(e){
     var keyCode = e.keyCode;
     var isModalPopup = document.querySelector('div[role="dialog"].fade.in');
     if(keyCode==13 && isModalPopup != null) {

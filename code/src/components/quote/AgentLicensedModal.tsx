@@ -7,25 +7,40 @@ import {each, isEmpty} from "underscore";
 interface Props extends React.Props<Plan> {
 }
 
+let agentlicensedmodal = null;
 export default class AgentLicensedModal extends React.Component<Props, {}> {
   constructor(){
     super();
   }
 
-  componentDidMount() {
-    document.addEventListener("keydown", this.keyDownTextField.bind(this), false);    
-  }
-
   componentWillUnmount() {
-    document.removeEventListener("keydown", this.keyDownTextField.bind(this), false);
+    console.log('componentWillUnmount');
+    if(agentlicensedmodal != null)
+    agentlicensedmodal.removeEventListener("keydown", this.keyDownAgentLicensedModal.bind(this), false);
+    agentlicensedmodal = null;
   }
 
-  keyDownTextField(e){
+  componentWillReceiveProps(nextProps){
+    if(nextProps.showModalPhone && agentlicensedmodal == null){
+      console.log('componentWillReceiveProps');
+      const current = this;
+      setTimeout(function(current){
+        var modal = document.querySelector('div[role="dialog"].fade.in');        
+        if(modal){
+          agentlicensedmodal = modal;
+          agentlicensedmodal.addEventListener("keydown", current.keyDownAgentLicensedModal.bind(current), false);  
+        }
+      },200,current);
+    }
+  }
+
+  keyDownAgentLicensedModal(e){
     var keyCode = e.keyCode;
     var isModalPopup = document.querySelector('div[role="dialog"].fade.in');
     if(keyCode==13 && isModalPopup != null) {
         var activeElement = document.activeElement;
         if(activeElement.getAttribute('aria-haspopup') == null && !activeElement.classList.contains('react-datepicker-ignore-onclickoutside')){
+          console.log("AgentLicenseModal.tsx");
           this.saveQuote();
         }
     }

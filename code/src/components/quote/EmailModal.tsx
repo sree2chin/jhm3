@@ -9,21 +9,32 @@ interface Props extends React.Props<EmailModal> {
   saveQuote: any
 }
 
+let popupemailmodal = null;
 export default class EmailModal extends React.Component<Props, {}> {
   constructor(){
     super();
-
-  }
-  
-  componentDidMount() {
-    document.addEventListener("keydown", this.keyDownTextField.bind(this), false);    
   }
 
-  componentWillUnmount() {
-    document.removeEventListener("keydown", this.keyDownTextField.bind(this), false);
+  componentWillUnmount() {    
+    if(popupemailmodal != null)
+    popupemailmodal.removeEventListener("keydown", this.keyDownEmailModal.bind(this), false);
+    popupemailmodal = null;
   }
 
-  keyDownTextField(e){
+  componentWillReceiveProps(nextProps){
+    if(nextProps.showModalEmail && popupemailmodal == null){      
+      const current = this;
+      setTimeout(function(current){
+        var modal = document.querySelector('div[role="dialog"].fade.in');        
+        if(modal){
+          popupemailmodal = modal;
+          popupemailmodal.addEventListener("keydown", current.keyDownEmailModal.bind(current), false);  
+        }
+      },200,current);
+    }
+  }
+
+  keyDownEmailModal(e){    
     var keyCode = e.keyCode;
     var isModalPopup = document.querySelector('div[role="dialog"].fade.in');
     if(keyCode==13 && isModalPopup != null) {
@@ -122,14 +133,11 @@ export default class EmailModal extends React.Component<Props, {}> {
       this.validateEmailForm();
     });
   }
-  onCloseModal() {
-
-  }
 
   public render() {
 
     return (
-       <Modal bsSize="small" show={this.props.showModalEmail} onHide={this.props.onCloseModal} className="email-modal-container email-modal-unique-container">
+       <Modal autoFocus={true} bsSize="small" show={this.props.showModalEmail} onHide={this.props.onCloseModal} className="email-modal-container email-modal-unique-container">
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     <Row className="email-quote-text email-quote-text-on-modal">
                         {this.props.nextStep == "printTheQuote" ? "Print & Email Quote" :"Email the quote"}

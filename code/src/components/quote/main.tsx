@@ -110,7 +110,7 @@ class Main extends React.Component<Props, {}> {
     document.removeEventListener("keydown", this.keyDownTextField.bind(this), false);
   }
 
-  keyDownTextField(e){
+  keyDownTextField(e){    
     var keyCode = e.keyCode;
     if(keyCode==13) {
       var isModalPopup = document.querySelector('div[role="dialog"].fade.in');

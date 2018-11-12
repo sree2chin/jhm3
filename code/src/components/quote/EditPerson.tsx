@@ -17,6 +17,7 @@ interface Props extends React.Props<EditPerson> {
   editablePerson: any
 }
 let initialpersonData = {};
+let editpersonmodal = null;
 export default class EditPerson extends React.Component<Props, {}> {
   constructor(){
     super();
@@ -27,15 +28,13 @@ export default class EditPerson extends React.Component<Props, {}> {
     initialQuoteSubmittedOnce:false
   }
   
-  componentDidMount() {
-    document.addEventListener("keydown", this.keyDownTextField.bind(this), false);    
+  componentWillUnmount() {    
+    if(editpersonmodal != null)
+    editpersonmodal.removeEventListener("keydown", this.keyDowneditpersonmodal.bind(this), false);
+    editpersonmodal = null;
   }
 
-  componentWillUnmount() {
-    document.removeEventListener("keydown", this.keyDownTextField.bind(this), false);
-  }
-
-  keyDownTextField(e){
+  keyDowneditpersonmodal(e){
     var keyCode = e.keyCode;
     var isModalPopup = document.querySelector('div[role="dialog"].fade.in');
     if(keyCode==13 && isModalPopup != null) {
@@ -205,6 +204,18 @@ export default class EditPerson extends React.Component<Props, {}> {
     if(( (this.props.editablePerson == undefined || isEmpty(this.props.editablePerson))) && !isEmpty(nextProps.editablePerson)){
       initialpersonData = extend({},nextProps.editablePerson);
       initialpersonData.s_birthDate = moment(initialpersonData.s_birthDate);
+    }
+
+    //for keyboard
+    if(nextProps.showModalEditPerson && editpersonmodal == null){      
+      const current = this;
+      setTimeout(function(current){
+        var modal = document.querySelector('div[role="dialog"].fade.in');        
+        if(modal){
+          editpersonmodal = modal;
+          editpersonmodal.addEventListener("keydown", current.keyDowneditpersonmodal.bind(current), false);  
+        }
+      },200,current);
     }
 
     if(!isEmpty(nextProps.editablePerson)) {      

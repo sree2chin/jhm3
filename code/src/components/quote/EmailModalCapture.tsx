@@ -6,27 +6,38 @@ import {each, isEmpty} from "underscore";
 interface Props extends React.Props<Plan> {
 }
 
+let emailmodalacapturemodal = null;
 export default class EmailModalCapture extends React.Component<Props, {}> {
   constructor(){
     super();
-
+  }
+  
+  componentWillUnmount() {    
+    if(emailmodalacapturemodal != null)
+    emailmodalacapturemodal.removeEventListener("keydown", this.keyDownEmailModalCapture.bind(this), false);
+    emailmodalacapturemodal = null;
   }
 
-  componentDidMount() {
-    document.addEventListener("keydown", this.keyDownTextField.bind(this), false);    
+  componentWillReceiveProps(nextProps){
+    if(nextProps.showModalEmail && emailmodalacapturemodal == null){      
+      const current = this;
+      setTimeout(function(current){
+        var modal = document.querySelector('div[role="dialog"].fade.in');        
+        if(modal){
+          emailmodalacapturemodal = modal;
+          emailmodalacapturemodal.addEventListener("keydown", current.keyDownEmailModalCapture.bind(current), false);  
+        }
+      },200,current);
+    }
   }
 
-  componentWillUnmount() {
-    document.removeEventListener("keydown", this.keyDownTextField.bind(this), false);
-  }
-
-  keyDownTextField(e){
+  keyDownEmailModalCapture(e){    
     var keyCode = e.keyCode;
     var isModalPopup = document.querySelector('div[role="dialog"].fade.in');
     if(keyCode==13 && isModalPopup != null) {
         var activeElement = document.activeElement;
         if(activeElement.getAttribute('aria-haspopup') == null && !activeElement.classList.contains('react-datepicker-ignore-onclickoutside')){
-          this.saveQuote();
+          { this.saveQuote() }
         }
     }
   }
@@ -92,10 +103,14 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
     return !isError;
   }
   saveQuote() {
+    console.log('saveQuote()');
+    console.log(this.props);
+    console.log(typeof this.props.saveQuote);
     if(this.validateEmailForm()) {
       this.setState({
         savingQuote: true
       });
+      
       this.props.saveQuote().then(()=>{
         this.setState({
           savingQuote: false
@@ -118,9 +133,6 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
     });
   }
 
-  onCloseModal() {
-
-  }
   getErrorsClassNames(errors, key) {
     if(errors[key]) {
       return "input-border-error";
@@ -129,7 +141,7 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
   public render() {
 
     return (
-       <Modal bsSize="small" show={this.props.showModalEmail} onHide={this.props.onCloseModal} className="email-modal-container email-modal-capture-container">
+       <Modal autoFocus={true} bsSize="small" show={this.props.showModalEmail} onHide={this.props.onCloseModal} className="email-modal-container email-modal-capture-container">
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     <Row className="email-quote-text email-quote-text-on-modal">
                         Email capture
@@ -187,7 +199,7 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
                 <Modal.Footer>
                     <Row>
                       <Col sm={12} className="c-center">
-                        <Button  style={{float: "right"}} className={`c-button-default circular ${this.state.savingQuote ? "active" : ""}`}  onClick={(){
+                        <Button style={{float: "right"}} className={`c-button-default circular ${this.state.savingQuote ? "active" : ""}`}  onClick={()=>{
                             this.saveQuote()
                           }}
                         >

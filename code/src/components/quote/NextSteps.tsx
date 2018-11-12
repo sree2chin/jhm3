@@ -31,6 +31,7 @@ class PlansPage extends React.Component<Props, {}> {
     super();
   }
   state={}
+  
   componentWillMount() {
     if (isEmpty(this.props.plans) && isEmpty(this.props.persons)) {
       const basePath = this.props.location.pathname.indexOf("agent") > 1 || this.props.is_agent ? "/agent" : "/";
@@ -479,20 +480,20 @@ class PlansPage extends React.Component<Props, {}> {
             >
               PREVIOUS
             </span>
-            <Button className={`hidden-xs c-button-default forward-btn next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
+            <Button className={`hidden-xs c-button-default forward-btn next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={()=>{
                 this.openCorrespondingPopup()
               }}
             >
               NEXT
             </Button>
-            <Button className={`visible-xs back-btn c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
+            <Button className={`visible-xs back-btn c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={()=>{
                 this.redirectToPlanPage()
               }}
               style={{backgroundColor: "#fb4d3d!important"}}
             >
               PREVIOUS
             </Button>
-            <Button className={`visible-xs c-button-default forward-btn next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
+            <Button className={`visible-xs c-button-default forward-btn next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={()=>{
                 this.directToCorrespondingPage()
               }}
             >
@@ -518,6 +519,7 @@ class PlansPage extends React.Component<Props, {}> {
           noOfPersons={this.props.noOfPersons}
           fromAgentPage={false}
         />
+        
         <LicensedModal
           showModalPhone={this.state.showModalPhone}
           saveQuote={this.saveQuote.bind(this)}
