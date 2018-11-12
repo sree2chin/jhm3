@@ -215,11 +215,11 @@ export default class Person extends React.Component<Props, {}> {
     var minDate = moment('1900-01-01');
     return (
       <Col sm={12} className="c-one-person-container">
-        <div>
-          {/*
-          <Col sm={12} className={"c-person-header-text fwbold"}>
-            {"Quote " + (personIndex + 1)}
-          </Col> */}
+        <div>          
+          <Col sm={12} style={{textAlign:"center", fontSize:"26px"}} className={"c-person-header-text fwbold"}>
+          {/*"Quote " + (personIndex + 1) */}
+          Quote Information
+          </Col> 
           <Col sm={12} style={{marginBottom: "0px"}} className="person-name-container">
             <Input
               name={"first-applicant-name-" + personIndex}

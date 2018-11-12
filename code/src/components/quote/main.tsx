@@ -288,9 +288,9 @@ class Main extends React.Component<Props, {}> {
           {this.props.noOfPersons && <div>
             <div className="header">
               <div style={{textAlign: "center", fontSize: "26px"}} className="fwbold">
-                Quote Information
+               {/* Quote Information*/}
               </div>
-            </div>
+          </div>
             <div className={this.props.noOfPersons==2 ? "two-person-outer-container c-center": "one-person-outer-container"}>
               <Col sm={personsContainerWidth} className="one-person-content">
                 <Person
