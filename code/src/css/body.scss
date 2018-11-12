@@ -20,6 +20,18 @@
     max-width: $container-max-width!important;
 }
 
+.noborder{
+    border: none !important;
+}
+
+.noboxshadow{
+    box-shadow:none !important;
+}
+
+.nobg{
+    background-color: transparent !important;
+}
+
 .input-border-error {
     border: solid 1.1px #ff4949!important;
 }

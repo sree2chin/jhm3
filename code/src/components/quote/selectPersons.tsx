@@ -63,12 +63,16 @@ class SelectPersons extends React.Component<Props, State> {
     return (
       <div style={{backgroundColor: "#fcfcfc"}} className={`${!this.props.noOfPersons ? "before-select-persons" : ""}`}>
         <Row>
-          <Col className="c-select-persons-container">
-            <Row style={{marginLeft: "auto", marginRight: "auto", marginBottom: "21px", width: "80%"}}>
-              <Col sm={6} className="confirmation-msg-container">
-                {/*<Row className="c-selected-person-header fwbold">
+          <Col className="c-select-persons-container  noborder nobg noboxshadow">
+            <Row style={{marginLeft: "auto", marginRight: "auto", marginBottom: "0px", width: "100%"}}>
+              <Col style={{fontSize: "22px"}} sm={12} className="confirmation-msg-container fwbold">
+                Welcome! We’re glad you’re here. Please answer a few questions to determine which product(s) are a good match.
+              </Col>
+
+              {/*<Col sm={6} className="confirmation-msg-container">
+                <Row className="c-selected-person-header fwbold">
                   For How Many People are We Quoting?
-                </Row>*/}
+                </Row>
                 <Row style={{marginTop: "15px"}} className="quotation-msg-text-container">
                   <Col sm={12} className="confirmation-msg confirmation-msg-first-line">
                     Welcome! We're glad you're here. Please answer a few questions to determine which product(s) are a good match..
@@ -76,12 +80,12 @@ class SelectPersons extends React.Component<Props, State> {
                 </Row>
               </Col>
 
-              {/*<Col sm={3} className={`c-select-two-person ${this.state.noOfPersons==2 ? "active" : ""}`}  onClick={()=> this.selectNoOfPersons(2)} >
+              <Col sm={3} className={`c-select-two-person ${this.state.noOfPersons==2 ? "active" : ""}`}  onClick={()=> this.selectNoOfPersons(2)} >
                 {(!this.state.noOfPersons || this.state.noOfPersons==1) && <img className="default-image" src="./images/default-double.svg" /> }
                 {(!this.state.noOfPersons || this.state.noOfPersons==1) && <img className="hover-image" src="./images/hover-double.svg" /> }
                 {this.state.noOfPersons==2 && <img className="active-image" src="./images/active-double.svg" /> }
                 <p> Two persons</p>
-              </Col>*/}
+              </Col>
 
               <Col sm={3} className={`c-select-one-person ${this.state.noOfPersons==1 ? "active" : ""}`} onClick={()=> this.selectNoOfPersons(1)} >
                  {(!this.state.noOfPersons || this.state.noOfPersons==2) && <img className="default-image" src="./images/default-single.svg" /> }
@@ -90,7 +94,7 @@ class SelectPersons extends React.Component<Props, State> {
                 <p> One person</p>
               </Col>
 
-
+                */}
 
               { this.state.selectNoOfPersonsError && <Col style={{ paddingLeft: "0px", marginLeft: "30px", color: "red"}} sm={12} className={"c-subheader-text error"}>
                 Please select the number of person
