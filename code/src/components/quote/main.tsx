@@ -286,9 +286,9 @@ class Main extends React.Component<Props, {}> {
         <SelectPersons />
         <div className="row c-quote">
           {this.props.noOfPersons && <div>
-            <div className="header hidden-xs">
+            <div className="header">
               <div style={{textAlign: "center", fontSize: "26px"}} className="fwbold">
-                Quote information
+                Quote Information
               </div>
             </div>
             <div className={this.props.noOfPersons==2 ? "two-person-outer-container c-center": "one-person-outer-container"}>

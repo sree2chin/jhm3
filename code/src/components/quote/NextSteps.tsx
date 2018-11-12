@@ -84,10 +84,31 @@ class PlansPage extends React.Component<Props, {}> {
     });
   }
 
+  /** returns visible next button */
+  getNextButtonDOM(){
+    var submit_button = document.querySelectorAll('button.next-step-submit-btn.forward-btn');
+    for (var i = 0, max = submit_button.length; i < max; i++) {
+      var style =  window.getComputedStyle(submit_button[i]);
+      var isHidden = ((style.display === 'none') || (style.visibility === 'hidden'));
+      if (!isHidden) {
+        submit_button = submit_button[i];
+        break;
+      }
+    }
+    return submit_button;
+  }
+
+  focusNextBtn(){
+    var submit_button = this.getNextButtonDOM();
+    window.scrollTo(0,submit_button.offsetTop + 50);
+    submit_button.focus();
+  }
+
   selectNextStep (nextStep) {
     this.setState({
       nextStep
     });
+    this.focusNextBtn();
   }
 
   openAgentInputPopup() {
@@ -458,7 +479,7 @@ class PlansPage extends React.Component<Props, {}> {
             >
               PREVIOUS
             </span>
-            <Button className={`hidden-xs c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
+            <Button className={`hidden-xs c-button-default forward-btn next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
                 this.openCorrespondingPopup()
               }}
             >
@@ -471,7 +492,7 @@ class PlansPage extends React.Component<Props, {}> {
             >
               PREVIOUS
             </Button>
-            <Button className={`visible-xs c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
+            <Button className={`visible-xs c-button-default forward-btn next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={(){
                 this.directToCorrespondingPage()
               }}
             >
