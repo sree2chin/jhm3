@@ -60,7 +60,7 @@ class Signature extends React.Component<Props, {}> {
 
   public render() {
     return (
-      <Modal bsSize="large" bsStyle="primary" show={true} onHide={this.redirectToQuestions.bind(this)} className="email-modal-container email-modal-unique-container enter-password-modal-container">
+      <Modal autoFocus={true} bsSize="large" bsStyle="primary" show={true} onHide={this.redirectToQuestions.bind(this)} className="email-modal-container email-modal-unique-container enter-password-modal-container">
       <Modal.Body style={{ fontSize: "16px", textAlign: "left", padding: "78px 150px 25px 71px"}}>
           <Row className="email-quote-text email-quote-text-on-modal">
             Something doesn’t seem right…

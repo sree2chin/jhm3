@@ -60,7 +60,7 @@ class ThanksEmail extends React.Component<Props, {}> {
   public render() {
 
     return (
-          <Modal show={this.props.showModalEmailThanks} onHide={this.props.onCloseModal} bsSize="small">
+          <Modal autoFocus={true} show={this.props.showModalEmailThanks} onHide={this.props.onCloseModal} bsSize="small">
                 <Modal.Header closeButton>
                 </Modal.Header>
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>

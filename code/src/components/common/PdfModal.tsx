@@ -8,7 +8,7 @@ export interface PdfModal {
 const PdfModal = React.createClass<PdfModal, {}>({
     render() {
         return (
-            <Modal show={this.props.link} onHide={this.props.onCloseModal}>
+            <Modal autoFocus={true} show={this.props.link} onHide={this.props.onCloseModal}>
 
             </Modal>
         )

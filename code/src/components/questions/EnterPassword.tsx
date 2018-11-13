@@ -80,7 +80,7 @@ class EmailModal extends React.Component<Props, {}> {
   public render() {
 
     return (
-      <Modal bsSize="large" bsStyle="primary" show={this.props.showModalPassword} onHide={this.props.onCloseModal} className="email-modal-container email-modal-unique-container enter-password-modal-container">
+      <Modal autoFocus={true} bsSize="large" bsStyle="primary" show={this.props.showModalPassword} onHide={this.props.onCloseModal} className="email-modal-container email-modal-unique-container enter-password-modal-container">
         <Modal.Body style={{ fontSize: "16px", textAlign: "left"}}>
             {/* <Row className="email-quote-text email-quote-text-on-modal">
               Enter your password

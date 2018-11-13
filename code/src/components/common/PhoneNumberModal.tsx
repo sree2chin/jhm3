@@ -13,7 +13,7 @@ export interface PhoneNumberProps {
 const PhoneNumberModal = React.createClass<PhoneNumberProps, {}>({
     render() {
         return (
-            <Modal show={this.props.showModalPhoneNumber} onHide={this.props.onCloseModal}>
+            <Modal autoFocus={true} show={this.props.showModalPhoneNumber} onHide={this.props.onCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-lg">{this.props.titleText}</Modal.Title>
                 </Modal.Header>

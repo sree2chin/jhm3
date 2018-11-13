@@ -283,7 +283,7 @@ export default class EditPerson extends React.Component<Props, {}> {
     toolTipStylesTobaccoUsage.tooltip.width = "250px";
     toolTipStylesTobaccoUsage.wrapper.top = "0px";
     return (
-       <Modal bsSize="small" show={this.props.showModalEditPerson} className="edit-modal-container"  onHide={this.props.onCloseModal}>
+       <Modal autoFocus={true} bsSize="small" show={this.props.showModalEditPerson} className="edit-modal-container"  onHide={this.props.onCloseModal}>
                 <Modal.Header closeButton>
                   {"Applicant " + (personIndex + 1)}
                 </Modal.Header>

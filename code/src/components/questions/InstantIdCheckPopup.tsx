@@ -17,7 +17,7 @@ export default class InstantIdCheckPopup extends React.Component<Props, {}> {
   public render() {
 
     return (
-          <Modal className="instant-id-check-popup-container" show={this.props.showInstantIdCheckPopup} onHide={this.props.onCloseModal} bsSize="large">
+          <Modal autoFocus={true} className="instant-id-check-popup-container" show={this.props.showInstantIdCheckPopup} onHide={this.props.onCloseModal} bsSize="large">
                 <Modal.Header>
                   <img style={{float: "right", marginBottom: "25px", width: "24px", height: "24px"}} src={"../images/delete_beneficiary.svg"} onClick={()=>{
                           this.props.onCloseModal();

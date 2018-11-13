@@ -15,7 +15,7 @@ class ThanksPhone extends React.Component<Props, {}> {
   state = {};
   public render() {
     return (
-      <Modal show={this.props.showModalPhoneThanks} onHide={this.props.onCloseModal} bsSize="small">
+      <Modal autoFocus={true} show={this.props.showModalPhoneThanks} onHide={this.props.onCloseModal} bsSize="small">
             <Modal.Header closeButton>
             </Modal.Header>
             <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>

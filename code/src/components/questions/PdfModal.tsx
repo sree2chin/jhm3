@@ -13,7 +13,7 @@ const PdfModal = React.createClass<PdfModal, {}>({
     },
     render() {
         return (
-            <Modal bsSize="large"
+            <Modal autoFocus={true} bsSize="large"
                 aria-labelledby="contained-modal-title-lg"
                 show={this.props.link && this.props.link.length > 0}
                 className="pdf-modal-container"

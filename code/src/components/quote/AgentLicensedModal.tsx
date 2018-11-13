@@ -201,7 +201,7 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
       }
     ];
     return (
-       <Modal show={this.props.showModalPhone} onHide={this.props.onCloseModal} className="email-modal-container agent-modal-container">
+       <Modal autoFocus={true} show={this.props.showModalPhone} onHide={this.props.onCloseModal} className="email-modal-container agent-modal-container">
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     <Row className="email-quote-text">
                       Drop ticket to Vantis Life call center

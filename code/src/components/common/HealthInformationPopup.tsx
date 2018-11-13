@@ -22,7 +22,7 @@ export default class HealthInformationPopup extends React.Component<Props, {}> {
 
   public render() {
     return (
-       <Modal bsSize="large" show={this.props.show} className="health-information-popup-modal"  onHide={this.props.onCloseModal}>
+       <Modal autoFocus={true} bsSize="large" show={this.props.show} className="health-information-popup-modal"  onHide={this.props.onCloseModal}>
                 <Modal.Header closeButton>
                     Attention
                 </Modal.Header>
