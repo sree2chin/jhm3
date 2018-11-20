@@ -1071,6 +1071,10 @@ class Main extends React.Component<Props, {}> {
     }
   }
 
+  validateAssessmentFactorSearch(q) {
+    return q && q.answer && q.answer.length > 0;
+  }
+
   onQuestionSubmit(notAddingOrDeletingBeneficiary, noOfBeneficiaryDeleted) {
 
     var answered_questions = [];
@@ -1093,6 +1097,8 @@ class Main extends React.Component<Props, {}> {
         allQuestionsValid = allQuestionsValid && !!this.validateMultiSelection(q);
       } else if (q.type == "date") {
         allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q);
+      } else if (q.type == "assessment-factor-search") {
+        allQuestionsValid = allQuestionsValid && !!this.validateAssessmentFactorSearch(q);
       }
     });
 
@@ -1112,6 +1118,8 @@ class Main extends React.Component<Props, {}> {
             allQuestionsValid = allQuestionsValid && !!this.validateMultiSelection(q);
           } else if (q.type == "date") {
             allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q);
+          } else if (q.type == "assessment-factor-search") {
+            allQuestionsValid = allQuestionsValid && !!this.validateAssessmentFactorSearch(q);
           }
         });
        }
@@ -1133,6 +1141,8 @@ class Main extends React.Component<Props, {}> {
               allQuestionsValid = allQuestionsValid && !!this.validateMultiSelection(q);
             } else if (q.type == "date") {
               allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q);
+            } else if (q.type == "assessment-factor-search") {
+              allQuestionsValid = allQuestionsValid && !!this.validateAssessmentFactorSearch(q);
             }
           });
         }
@@ -1163,6 +1173,8 @@ class Main extends React.Component<Props, {}> {
               allQuestionsValid = allQuestionsValid && !!this.validateMultiSelection(q);
             } else if (q.type == "date") {
               allQuestionsValid = allQuestionsValid && !!this.validateCustomDatePicker(q);
+            } else if (q.type == "assessment-factor-search") {
+              allQuestionsValid = allQuestionsValid && !!this.validateAssessmentFactorSearch(q);
             }
           });
         }
@@ -2160,7 +2172,6 @@ class Main extends React.Component<Props, {}> {
                 Previous
                 {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>}
-            }
             {<Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                   this.onQuestionSubmit()
                 }}
