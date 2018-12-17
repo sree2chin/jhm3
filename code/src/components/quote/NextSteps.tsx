@@ -375,7 +375,7 @@ class PlansPage extends React.Component<Props, {}> {
             </Row>
             <Row>
               <Col sm={8} className="next-steps-text c-center">
-                This is where the rubber hits the road. You're well on your way on getting covered with life insurance! Click on the appropriate button to take the next step.
+                This is where the rubber hits the road. You're well on your way to getting covered with life insurance! Click on the appropriate button to take the next step.
               </Col>
             </Row>
             <Row>
