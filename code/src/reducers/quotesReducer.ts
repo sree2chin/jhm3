@@ -56,6 +56,8 @@ export default (state: Array<any> = [], action) => {
       return objectAssign({}, state, {quoteResponse: action.quoteResponse});
     case "SUMBMITTED_EMAIL_INFO":
     	return objectAssign({}, state, {isSubmmitedEmailForm: action.isSubmmitedPlansForm});
+    case "GOT_PHONE_NUMBER_DETAILS":
+      return objectAssign({}, state, {phoneNumberDetails: action.phoneNumberDetails});
     default:
       return state;
   }

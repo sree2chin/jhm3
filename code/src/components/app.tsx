@@ -16,7 +16,7 @@ const store = createStore(
   reducers
   , applyMiddleware(reduxThunk)
 );
-
+window.reduxDispatch = store.dispatch;
 export default class App extends React.Component<Props, {}> {
   public render() {
     var isPaymentPage = this.props.location.pathname == "/payment";

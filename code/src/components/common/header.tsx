@@ -44,9 +44,8 @@ class Header extends React.Component<Props, {}> {
             </div>
             <div className="hidden-xs" style={{fontSize: "18px"}}>
               <TelLinkComponent
-                phoneNumber={(window.contactNumber ? window.contactNumber :  "1-866-826-8471")}
+                phoneNumber={this.props.phoneNumberDetails}
               />
-              {" " + window.contactNumberText}
             </div>
           </div>
 
@@ -57,14 +56,21 @@ class Header extends React.Component<Props, {}> {
 }
 
 const mapStateToProps = (state: any): Props => {
-  return {
+  var d = {
     products: state.quotes.products,
     plans: state.quotes.plans,
     persons: state.quotes.persons,
     noOfPersons: state.selectPersons.noOfPersons,
     is_agent: state.quotes.is_agent,
-    premiums: state.quotes.premiums
+    premiums: state.quotes.premiums,
   };
+  if (state.quotes && state.quotes.phoneNumberDetails) {
+    d.phoneNumberDetails = state.quotes.phoneNumberDetails;
+  }
+  if (state.questions && state.questions && state.questions.questions && state.questions.questions.extra_params && state.questions.questions.extra_params.phone_number) {
+    d.phoneNumberDetails = state.questions.questions.extra_params.phone_number;
+  }
+  return d;
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): Props => {
