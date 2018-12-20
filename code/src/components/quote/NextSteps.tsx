@@ -20,6 +20,7 @@ import Subheader from "../common/subheader";
 import {Tooltip} from 'react-lightweight-tooltip';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 import { browserHistory } from 'react-router';
+import * as _ from "underscore";
 
 interface Props {
   plans: [any],
@@ -166,6 +167,7 @@ class PlansPage extends React.Component<Props, {}> {
     } else if (this.state.type_of_submission == 10007) {
       data.request_type = 6;
     }
+    data.request_type = this.state.nextStep.request_type;
   }
   constructPersonsInfo(persons) {
     const personOne = JSON.parse(JSON.stringify(this.props.persons[0]));
@@ -281,9 +283,9 @@ class PlansPage extends React.Component<Props, {}> {
     });
   }
   openCorrespondingPopup() {
-    if (this.state.nextStep == "continueToApplication") {
+    if (this.state.nextStep.menu_item_id == "customer_continue_application") {
       this.openEmailCapturePopup();
-    } else if (this.state.nextStep == "connectMeToAgent") {
+    } else if (this.state.nextStep.menu_item_id == "customer_connect_to_agent") {
       this.openAgentInputPopup();
     } else {
       this.openEmailPopup();
@@ -300,7 +302,7 @@ class PlansPage extends React.Component<Props, {}> {
       }
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-    if (this.state.nextStep == "continueToApplication") {
+    if (this.state.nextStep.menu_item_id == "customer_continue_application") {
       this.setState({
         type_of_submission: 10001,
       });
@@ -308,7 +310,7 @@ class PlansPage extends React.Component<Props, {}> {
       setTimeout(() => {
         browserHistory.push("/connect-through-application" + queryParamsString);
       }, 100)
-    } else if (this.state.nextStep == "connectMeToAgent") {
+    } else if (this.state.nextStep.menu_item_id == "customer_connect_to_agent") {
       this.setState({
         type_of_submission: 10003,
       });
@@ -380,93 +382,57 @@ class PlansPage extends React.Component<Props, {}> {
             </Row>
             <Row>
               <Col sm={12}>
-                <Col sm={4} className="next-action-application-img-container" onClick={()=>{
-                  this.selectNextStep("continueToApplication")
-                }} style={{}}>
-                  <Col sm={12} className={`next-action-img-container next-action-img-container-mobile ${this.state.nextStep=="continueToApplication" ? "active" : ""}`}>
+                {
+                  _.map(this.props.saveQuoteOptions, (saveQuoteOption)=>{
+                    if (saveQuoteOption.enable) {
+                      return (<Col sm={4} className="next-action-application-img-container" onClick={()=>{
+                        this.selectNextStep(saveQuoteOption)
+                      }}>
+                        <Col sm={12} className={`next-action-img-container next-action-img-container-mobile ${this.state.nextStep && this.state.nextStep.menu_item_id == saveQuoteOption.menu_item_id ? "active" : ""}`}>
 
-                    {this.state.nextStep!="continueToApplication" && <img src={"../images/application.svg"} className="hidden-xs"/>}
-                    {this.state.nextStep=="continueToApplication" && <img src={"../images/form@2x.png"} className="hidden-xs"/>}
+                          {(!this.state.nextStep || this.state.nextStep.menu_item_id != saveQuoteOption.menu_item_id) && <img src={"../images/" + saveQuoteOption.menu_item_id + ".svg"} className="hidden-xs"/>}
+                          {this.state.nextStep && this.state.nextStep.menu_item_id == saveQuoteOption.menu_item_id && <img src={"../images/" + saveQuoteOption.menu_item_id + "_active.png"} className="hidden-xs"/>}
 
-                    <Row className="visible-xs">
-                      <Col xs={2} style={{paddingRight: "0px"}}>
-                        {this.state.nextStep!="continueToApplication" && <img src={"../images/application.svg"} />}
-                        {this.state.nextStep=="continueToApplication" && <img src={"../images/form@2x.png"} />}
-                      </Col>
-                      <Col xs={7} style={{marginTop: "23px"}}>
-                        Continue to application
-                      </Col>
-                      <Col xs={3} className="next-steps-tool-tips">
-                       <Tooltip content="Apply now" styles={toolTipStyles}>
-                          <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
-                        </Tooltip>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Col>
-                <Col sm={4} className="next-action-email-img-container" onClick={()=>{
-                  this.selectNextStep("emailMeQuote")
-                }} style={{}}>
-                  <Col sm={12} className={`next-action-img-container next-action-img-container-mobile ${this.state.nextStep=="emailMeQuote" ? "active" : ""}`}>
-                    {this.state.nextStep!="emailMeQuote" && <img src={"../images/email.svg"} className="hidden-xs"/>}
-                    {this.state.nextStep=="emailMeQuote" && <img src={"../images/activeemail.png"} className="hidden-xs"/>}
-                    <Row className="visible-xs">
-                      <Col xs={2} style={{paddingRight: "0px"}}>
-                        {this.state.nextStep!="emailMeQuote" && <img src={"../images/email.svg"}/>}
-                        {this.state.nextStep=="emailMeQuote" && <img src={"../images/activeemail.png"}/>}
-                      </Col>
-                      <Col xs={7} style={{marginTop: "23px"}}>
-                        Email me quote
-                      </Col>
-                      <Col xs={3} className="next-steps-tool-tips">
-                       <Tooltip content="Apply now" styles={toolTipStyles}>
-                          <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
-                        </Tooltip>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Col>
-                <Col sm={4} className="next-action-phone-img-container" onClick={()=>{
-                  this.selectNextStep("connectMeToAgent")
-                }} style={{}}>
-                  <Col sm={12} className={`next-action-img-container next-action-img-container-mobile ${this.state.nextStep=="connectMeToAgent" ? "active" : ""}`}>
-                    {this.state.nextStep!="connectMeToAgent" && <img src={"../images/phone.svg"} className="hidden-xs"/>}
-                    {this.state.nextStep=="connectMeToAgent" && <img src={"../images/activephone.png"} className="hidden-xs"/>}
-                    <Row className="visible-xs">
-                      <Col xs={2} style={{paddingRight: "0px"}}>
-                      {this.state.nextStep!="connectMeToAgent" && <img src={"../images/phone.svg"}/>}
-                      {this.state.nextStep=="connectMeToAgent" && <img src={"../images/activephone.png"}/>}
-                      </Col>
-                      <Col xs={7} style={{marginTop: "23px"}}>
-                        Connect me to a licensed agent
-                      </Col>
-                      <Col xs={3} className="next-steps-tool-tips">
-                       <Tooltip content="Apply now" styles={toolTipStyles}>
-                          <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
-                        </Tooltip>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Col>
+                          <Row className="visible-xs">
+                            <Col xs={2} style={{paddingRight: "0px"}}>
+                              {(!this.state.nextStep || this.state.nextStep.menu_item_id != saveQuoteOption.menu_item_id) && <img src={"../images/" + saveQuoteOption.menu_item_id + ".svg"} />}
+                              {this.state.nextStep && this.state.nextStep.menu_item_id == saveQuoteOption.menu_item_id && <img src={"../images/" + saveQuoteOption.menu_item_id + "_active.png"} />}
+                            </Col>
+                            <Col xs={7} style={{marginTop: "23px"}}>
+                              {saveQuoteOption.menu_item_title}
+                            </Col>
+                            <Col xs={3} className="next-steps-tool-tips">
+                             <Tooltip content="Apply now" styles={toolTipStyles}>
+                                <img style={{marginBottom: "7px"}} src={"../images/question-mark.svg"} />
+                              </Tooltip>
+                            </Col>
+                          </Row>
+                        </Col>
+                      </Col>)
+                    } else {
+                      return null;
+                    }
+                  })
+                }
               </Col>
             </Row>
             <Row className="hidden-xs">
               <Col sm={12} className="next-steps-footer">
-                <Col sm={4}  onClick={()=>{
-                  this.selectNextStep("continueToApplication")
-                }}>
-                  Continue to application
-                </Col>
-                <Col sm={4} onClick={()=>{
-                  this.selectNextStep("emailMeQuote")
-                }}>
-                  Email me quote
-                </Col>
-                <Col sm={4}  onClick={()=>{
-                  this.selectNextStep("connectMeToAgent")
-                }}>
-                  Connect me to a licensed agent
-                </Col>
+                {
+                  _.map(this.props.saveQuoteOptions, (saveQuoteOption)=> {
+                    if (saveQuoteOption.enable) {
+                      return (
+                        <Col sm={4}  onClick={()=>{
+                          this.selectNextStep(saveQuoteOption)
+                        }}>
+                          {saveQuoteOption.menu_item_title}
+                        </Col>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })
+                }
               </Col>
             </Row>
           </Col>
@@ -554,7 +520,8 @@ const mapStateToProps = (state: any): Props => {
     plans: state.quotes.plans,
     premiums: state.quotes.premiums,
     is_agent: state.quotes.is_agent,
-    quoteResponse: state.quotes.quoteResponse
+    quoteResponse: state.quotes.quoteResponse,
+    saveQuoteOptions: state.quotes.saveQuoteOptions
   };
 }
 

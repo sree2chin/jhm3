@@ -12,7 +12,8 @@ function submitQuoteForm(postData, isFromMainPage=false) {
 					dispatch({
 						type: 'SUMBMITTED_PERSONAL_INFO', products: data.data.applicants,
 						productValidations: data.data.validations,
-						is_agent: data.extra_params && data.extra_params.is_agent==1 ? true : false
+						is_agent: data.extra_params && data.extra_params.is_agent==1 ? true : false,
+						saveQuoteOptions: data.extra_params && data.extra_params.save_quote_options ? data.extra_params.save_quote_options : null
 					});
 				} else {
 					dispatch({

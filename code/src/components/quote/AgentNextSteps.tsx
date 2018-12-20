@@ -18,6 +18,7 @@ import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
 import { browserHistory } from 'react-router';
 import EmailModalCapture from "./EmailModalCapture";
+import * as _ from "underscore"
 
 interface Props {
   plans: [any]
@@ -156,6 +157,7 @@ class PlansPage extends React.Component<Props, {}> {
     } else if (this.state.type_of_submission == 10007) {
       data.request_type = 7;
     }
+    data.request_type = this.state.nextStep.request_type;
   }
   saveQuote() {
     const persons = [];
@@ -256,11 +258,11 @@ class PlansPage extends React.Component<Props, {}> {
     });
   }
   openCorrespondingPopup() {
-    if (this.state.nextStep == "continueToApplication" || this.state.nextStep=="completeTheApplication") {
+    if (this.state.nextStep.menu_item_id == "agent_complete_application" || this.state.nextStep.menu_item_id=="completeTheApplication") {
       this.openEmailCapturePopup();
-    } else if (this.state.nextStep == "ticketToInternalAgent" || this.state.nextStep=="ticketToVantisLifeSales") {
+    } else if (this.state.nextStep.menu_item_id == "agent_drop_ticket_call_center" || this.state.nextStep.menu_item_id=="ticketToVantisLifeSales") {
       this.openAgentInputPopup();
-    } else if (this.state.nextStep == "printTheQuote") {
+    } else if (this.state.nextStep.menu_item_id == "agent_print_email_quote") {
       this.openPrintPdf();
     } else {
       this.openEmailPopup();
@@ -282,17 +284,17 @@ class PlansPage extends React.Component<Props, {}> {
       }
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-    if (this.state.nextStep == "continueToApplication" || this.state.nextStep=="completeTheApplication") {
+    if (this.state.nextStep.menu_item_id == "agent_complete_application" || this.state.nextStep=="completeTheApplication") {
       this.changeTypeOfSubmission(10004);
       setTimeout(() => {
         browserHistory.push("/agent/connect-through-application" + queryParamsString);
       }, 100);
-    } else if (this.state.nextStep == "ticketToInternalAgent" || this.state.nextStep=="ticketToVantisLifeSales") {
+    } else if (this.state.nextStep.menu_item_id == "agent_drop_ticket_call_center" || this.state.nextStep=="ticketToVantisLifeSales") {
       this.changeTypeOfSubmission(10005);
       setTimeout(() => {
         browserHistory.push("/agent/connect-to-agent" + queryParamsString);
       }, 100);
-    } else if (this.state.nextStep == "printTheQuote") {
+    } else if (this.state.nextStep.menu_item_id == "agent_print_email_quote") {
       this.changeTypeOfSubmission(10006);
       //this.openPrintPdf();
       setTimeout(() => {
@@ -350,63 +352,27 @@ class PlansPage extends React.Component<Props, {}> {
               </Col>
               <Col sm={8} className="agent-next-steps-container">
                 <FormGroup className="radio-group">
-                  <div className="agent-next-step-container">
-                    <div className="c-radio l-next-step-container" onClick={()=>{
-                      this.selectNextStep("completeTheApplication")
-                    }}>
-                      <input
-                        type="radio"
-                        name={"nextStep-continueToApplication"}
-                        checked={this.state.nextStep == "completeTheApplication"}
-                      />
-                      <span></span>
-                      <label htmlFor={"person_s_gender_"}> Complete the application </label >
-                    </div>
-                  </div>
-                  <div className="agent-next-step-container">
-                    <div className="c-radio l-next-step-container" onClick={()=>{
-                      this.selectNextStep("ticketToVantisLifeSales")
-                    }}>
-                      <input
-                        type="radio"
-                        name={"person_s_gender_"}
-                        checked={this.state.nextStep=="ticketToVantisLifeSales"}
-                      />
-                      <span></span>
-                      <label htmlFor={"person_s_gender_"}> Drop ticket to Vantis Life call center
-                      </label >
-                    </div>
-                  </div>
-                  <div className="agent-next-step-container">
-                    <div className="c-radio l-next-step-container" onClick={()=>{
-                      this.selectNextStep("printTheQuote")
-                    }}>
-                      <input
-                        type="radio"
-                        name={"person_s_gender_"}
-                        checked={this.state.nextStep=="printTheQuote"}
-                      />
-                      <span></span>
-                      <label htmlFor={"person_s_gender_"}> Print and email quote </label >
-                    </div>
-                  </div>
-
-                  {/*<div className="agent-next-step-container">
-                    <div className="c-radio l-next-step-container" onClick={()=>{
-                      this.selectNextStep("emailApplicationLink")
-                    }}>
-                      <input
-                        type="radio"
-                        name={"person_s_gender_"}
-                        checked={this.state.nextStep=="emailApplicationLink"}
-                      />
-                      <span></span>
-                      <label htmlFor={"person_s_gender_"}> Email the application link to your customer to complete </label >
-                    </div>
-                    </div>*/
+                  {
+                    _.map(this.props.saveQuoteOptions, (saveQuoteOption)=>{
+                      if (saveQuoteOption.enable) {
+                        return  (<div className="agent-next-step-container">
+                          <div className="c-radio l-next-step-container" onClick={()=>{
+                            this.selectNextStep(saveQuoteOption)
+                          }}>
+                            <input
+                              type="radio"
+                              name={"nextStep-agent_complete_application"}
+                              checked={this.state.nextStep && this.state.nextStep.menu_item_id == saveQuoteOption.menu_item_id}
+                            />
+                            <span></span>
+                            <label htmlFor={"person_s_gender_"}> {saveQuoteOption.menu_item_title} </label >
+                          </div>
+                        </div>)
+                      } else {
+                        return null;
+                      }
+                    })
                   }
-
-
                 </FormGroup>
               </Col>
 
@@ -496,7 +462,8 @@ const mapStateToProps = (state: any): Props => {
     plans: state.quotes.plans,
     premiums: state.quotes.premiums,
     is_agent: state.quotes.is_agent,
-    quoteResponse: state.quotes.quoteResponse
+    quoteResponse: state.quotes.quoteResponse,
+    saveQuoteOptions: state.quotes.saveQuoteOptions
   };
 }
 

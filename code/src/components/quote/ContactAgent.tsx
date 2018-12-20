@@ -249,11 +249,11 @@ class ContactAgent extends React.Component<Props, {}> {
           savingQuote: true,
           emailErrorExists: false
         });
-        this.props.saveQuote().then(()=>{
+      /*this.props.saveQuote().then(()=>{
           this.setState({
             savingQuote: false
           });
-        });
+        });*/
       } else {
         isError = true;
         this.setState({
