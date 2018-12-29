@@ -11,9 +11,14 @@
     }
     .autosuggest {
         .input-group-btn {
+            display: inline;
             button {
                 height: 44px;
                 visibility: hidden;
+            }
+            img {
+                height: 44px;
+                background-color: #e7e5e5;
             }
         }
         .dropdown-menu {
