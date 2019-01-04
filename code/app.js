@@ -53,14 +53,14 @@ app.locals.trackingUrl           = appConfig.getProperty("trackingUrl");
 app.locals.goAgentWeb           = appConfig.getProperty("goAgentWeb");
 app.locals.lifetimeAgentPanel           = appConfig.getProperty("lifetimeAgentPanel");
 
-var thirtyDay = 10 * 86400000;
+var thirtyDay = 1 * 86400000;
 
 app.use(session({
     store: new RedisStore({
       host: appConfig.getProperty('redis_url'),
       port: appConfig.getProperty('redis_port'),
       prefix: 'c-sess',
-      ttl: 10*86400
+      ttl: 1*86400
     }),
     cookie: {expires: new Date(Date.now() + thirtyDay)},
     secret: 'cenkrypt',
