@@ -3,8 +3,9 @@
 	"dev": {
 		"service_url" : "http://ec2-34-234-69-130.compute-1.amazonaws.com/",
 		"service_port" : 80,
-		"redis_url": "127.0.0.1",
+		"redis_url": "localhost",
 		"redis_port": 6379,
+		"redis_password": "",
 		"server_domain": "http://ec2-52-55-71-95.compute-1.amazonaws.com",
 		"client_domain": "http://127.0.0.1:3001",
 		"minify" : true,
@@ -45,8 +46,9 @@
 	"development": {
 		"service_url" : "https://vantislifeinsurancestg.sureify.com",
 		"service_port" : 80,
-		"redis_url": "127.0.0.1",
+		"redis_url": "localhost",
 		"redis_port": 6379,
+		"redis_password": "",
 		"server_domain": "https://vantisapistg.sureify.com",
 		"client_domain": "http://127.0.0.1:3001",
 		"contactNumber": "1-866-826-8471",
@@ -87,8 +89,9 @@
 	"production": {
 		"service_url" : "https://vantislifeinsurance.sureify.com",
 		"service_port" : 80,
-		"redis_url": "127.0.0.1",
+		"redis_url": "localhost",
 		"redis_port": 6379,
+		"redis_password": "",
 		"server_domain": "https://vantisapi.sureify.com",
 		"client_domain": "http://127.0.0.1:3001",
 		"contactNumber": "1-866-826-8471",

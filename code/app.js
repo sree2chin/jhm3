@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var requireFu = require('require-fu');
 var RedisStore = require('connect-redis')(session);
+var Redis = require('ioredis');
 var appConfig = require('./config/service.js');
 var FileStreamRotator = require('file-stream-rotator');
 var fs = require('fs');
@@ -55,12 +56,18 @@ app.locals.lifetimeAgentPanel           = appConfig.getProperty("lifetimeAgentPa
 
 var thirtyDay = 1 * 86400000;
 
-app.use(session({
-    store: new RedisStore({
+var redis = null;
+redis = new Redis({
       host: appConfig.getProperty('redis_url'),
       port: appConfig.getProperty('redis_port'),
+      password: appConfig.getProperty('redis_password'),
       prefix: 'c-sess',
       ttl: 1*86400
+});
+
+app.use(session({
+    store: new RedisStore({
+      client:redis
     }),
     cookie: {expires: new Date(Date.now() + thirtyDay)},
     secret: 'cenkrypt',
