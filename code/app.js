@@ -54,7 +54,7 @@ app.locals.trackingUrl           = appConfig.getProperty("trackingUrl");
 app.locals.goAgentWeb           = appConfig.getProperty("goAgentWeb");
 app.locals.lifetimeAgentPanel           = appConfig.getProperty("lifetimeAgentPanel");
 
-var thirtyDay = 1 * 86400000;
+var thirtyDay = 10 * 86400000;
 
 var redis = null;
 redis = new Redis({
@@ -62,7 +62,7 @@ redis = new Redis({
       port: appConfig.getProperty('redis_port'),
       password: appConfig.getProperty('redis_password'),
       prefix: 'c-sess',
-      ttl: 1*86400
+      ttl: 10*86400
 });
 
 app.use(session({
