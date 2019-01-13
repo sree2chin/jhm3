@@ -161,7 +161,27 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
       })
     }
   };
-
+  onSearchCustomization(value) {
+    const searchDebounce = 250;
+    clearTimeout(this._searchTimeoutId)
+    this._searchTimeoutId = setTimeout(() => {
+      this._searchTimeoutId = null
+      if (value != this.state.searchValue) {
+        this.setState({ searchValue: value })
+        this.onTextSearch(value);
+      }
+    }, searchDebounce)
+  }
+  componentDidMount() {
+    var self = this;
+    document.querySelector(".async-auto-suggest-container li.autosuggest-input-choice input").addEventListener("keyup", function(e) {
+      self.onSearchCustomization(e.target.value);
+    });
+  }
+  componentWillUnmount(){
+    var self = this;
+    document.querySelector(".async-auto-suggest-container li.autosuggest-input-choice input").removeEventListener("keyup");
+  }
   validate() {
     //if(!this.props.alreadyOnceSubmitted) {return true;}
     if (!this.state.onceChanged) {
