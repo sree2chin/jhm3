@@ -1904,8 +1904,9 @@ class Main extends React.Component<Props, {}> {
 
   shouldShowPreviousBtn() {
     return !(this.actualQuestionLists && this.actualQuestionLists[0] &&
-    this.props.questions && this.props.questions.extra_params && this.props.questions.extra_params.answered_questions &&
-      this.props.questions.extra_params.answered_questions[0] && this.props.questions.extra_params.answered_questions[0][0] == this.actualQuestionLists[0].id);
+    this.props.questions && this.props.questions.extra_params && this.props.questions.extra_params.answered_questions && (
+      (this.props.questions.extra_params.answered_questions.length == 0) || (
+      this.props.questions.extra_params.answered_questions[0] && this.props.questions.extra_params.answered_questions[0][0] == this.actualQuestionLists[0].id)));
   }
 
   scrollIntoBeneficiaryView() {
