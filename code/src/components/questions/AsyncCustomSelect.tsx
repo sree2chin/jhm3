@@ -43,6 +43,7 @@ TagAdapter.instance = new TagAdapter()
 export default class AsyncCustomSelect extends React.Component<Props, {selectedItem: any}> {
   constructor(props : Props){
     super(props);
+    this.onSearchCustomization = this.onSearchCustomization.bind(this);
   }
   state = {
     selectedItem: null,
@@ -161,7 +162,27 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
       })
     }
   };
-
+  onSearchCustomization(e) {
+    const searchDebounce = 250;
+    if (e.target.parentElement.className === "autosuggest-input-choice") {
+      clearTimeout(this._searchTimeoutId)
+      this._searchTimeoutId = setTimeout(() => {
+        this._searchTimeoutId = null
+        if (e.target.value != this.state.searchValue) {
+          this.setState({ searchValue: e.target.value })
+          this.onTextSearch(e.target.value);
+        }
+      }, searchDebounce);
+    }
+  }
+  componentDidMount() {
+    var self = this;
+    document.addEventListener("keyup", this.onSearchCustomization, false);
+  }
+  componentWillUnmount(){
+    var self = this;
+    document.removeEventListener("keyup", this.onSearchCustomization, false);
+  }
   validate() {
     //if(!this.props.alreadyOnceSubmitted) {return true;}
     if (!this.state.onceChanged) {

@@ -438,6 +438,7 @@ class PlansPage extends React.Component<Props, {}> {
           keyValueChange={this.keyValueChange.bind(this)}
           noOfPersons={this.props.noOfPersons}
           fromAgentPage={true}
+          phoneNumberDetails={this.props.phoneNumber}
         />
 
         <ThanksEmail
@@ -463,7 +464,8 @@ const mapStateToProps = (state: any): Props => {
     premiums: state.quotes.premiums,
     is_agent: state.quotes.is_agent,
     quoteResponse: state.quotes.quoteResponse,
-    saveQuoteOptions: state.quotes.saveQuoteOptions
+    saveQuoteOptions: state.quotes.saveQuoteOptions,
+    phoneNumber: state.quotes.phoneNumberDetails
   };
 }
 

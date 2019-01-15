@@ -3,6 +3,7 @@ import { Modal, Button, Row, Col, Radio, FormGroup } from "react-bootstrap";
 import Input from "../common/textInput";
 import Select from 'react-select';
 import {each, isEmpty} from "underscore";
+import TelLinkComponent from "../common/TelLinkComponent";
 
 interface Props extends React.Props<Plan> {
 }
@@ -315,10 +316,12 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
                       <Col sm={10} className="c-center" style={{marginTop: "20px"}}>
                         <Row>
                           <Col className="free-toll-no-text">
-                            Vantis Life Call Center toll free number  |  M-F 8am to 7pm PST:
+                            Vantis Life Call Center toll free number  |  Mon. – Fri., 8:30am – 5:00pm, EST:
                           </Col>
                           <Col className="free-toll-no center">
-                            {window.contactNumber || "1-866-826-8471"} {window.contactNumberText}
+                            <TelLinkComponent
+                                phoneNumber={this.props.phoneNumberDetails}
+                              />
                           </Col>
                         </Row>
                       </Col>
