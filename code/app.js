@@ -1,3 +1,20 @@
+//function to add prefix datetime in console.log function
+global.console.log=(function() {
+  var orig=console.log;
+  return function() {
+    try {
+      arguments[0] = "["+new Date().toUTCString() +"] "+ arguments[0];
+      orig.apply(console, arguments);
+    }
+    catch(err){
+      orig.apply(console, arguments);   
+    } 
+    finally {
+      //nothing
+    }
+  };
+})();
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
