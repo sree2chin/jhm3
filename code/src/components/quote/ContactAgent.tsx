@@ -18,6 +18,7 @@ import {Tooltip} from 'react-lightweight-tooltip';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 import Input from "../common/textInput";
 import Select from 'react-select';
+import TelLinkComponent from "../common/TelLinkComponent";
 
 interface Props {
   plans: [any]
@@ -402,7 +403,9 @@ class ContactAgent extends React.Component<Props, {}> {
                     Vantis Life Call Center toll free number  |  M-F 8am to 7pm PST:
                   </span>
                   <span className="free-toll-no center">
-                    {window.contactNumber || "1-866-826-8471"} {window.contactNumberText}
+                  <TelLinkComponent
+                                phoneNumber={this.props.phoneNumberDetails}
+                              />
                   </span>
                 </Col>
               </Row>
