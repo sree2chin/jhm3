@@ -266,7 +266,7 @@ export default class Person extends React.Component<Props, {}> {
             </FormGroup>
             <Row className="visible-xs">
               <Col xs={6}>
-                <Button className={`c-button-default circular ${person.s_gender == "1" ? "active" : ""}`} onClick={(){
+                <Button className={`c-button-default btn-checkbox circular ${person.s_gender == "1" ? "active" : ""}`} onClick={(){
                       this.onChange("s_gender", "1")
                     }}
                   >
@@ -274,7 +274,7 @@ export default class Person extends React.Component<Props, {}> {
                 </Button>
               </Col>
               <Col xs={6}>
-                <Button style={{marginBottom: "0px"}} className={`c-button-default circular ${person.s_gender == "2" ? "active" : ""}`} onClick={(){
+                <Button style={{marginBottom: "0px"}} className={`c-button-default circular btn-checkbox ${person.s_gender == "2" ? "active" : ""}`} onClick={(){
                       this.onChange("s_gender", "2")
                     }}
                   >
@@ -411,7 +411,7 @@ export default class Person extends React.Component<Props, {}> {
             </FormGroup>
             <Row className="visible-xs">
               <Col xs={6}>
-                <Button className={`c-button-default circular ${person.smoke == "Yes" ? "active" : ""}`} onClick={(){
+                <Button className={`c-button-default btn-checkbox circular ${person.smoke == "Yes" ? "active" : ""}`} onClick={(){
                       this.onChange("smoke", "Yes")
                     }}
                   >
@@ -419,7 +419,7 @@ export default class Person extends React.Component<Props, {}> {
                 </Button>
               </Col>
               <Col xs={6}>
-                <Button className={`c-button-default circular ${person.smoke == "No" ? "active" : ""}`} onClick={(){
+                <Button className={`c-button-default btn-checkbox circular ${person.smoke == "No" ? "active" : ""}`} onClick={(){
                       this.onChange("smoke", "No")
                     }}
                   >
