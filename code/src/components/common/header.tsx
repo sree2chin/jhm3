@@ -70,6 +70,9 @@ const mapStateToProps = (state: any): Props => {
   if (state.questions && state.questions && state.questions.questions && state.questions.questions.extra_params && state.questions.questions.extra_params.phone_number) {
     d.phoneNumberDetails = state.questions.questions.extra_params.phone_number;
   }
+  if (state.questions && state.questions.confirmationData && state.questions.questions.extra_params && state.questions.confirmationData.extra_params.phone_number) {
+    d.phoneNumberDetails = state.questions.confirmationData.extra_params.phone_number;
+  })
   return d;
 }
 

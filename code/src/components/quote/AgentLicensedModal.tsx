@@ -316,7 +316,7 @@ export default class AgentLicensedModal extends React.Component<Props, {}> {
                       <Col sm={10} className="c-center" style={{marginTop: "20px"}}>
                         <Row>
                           <Col className="free-toll-no-text">
-                            Vantis Life Call Center toll free number  |  Mon. – Fri., 8:30am – 5:00pm, EST:
+                            Vantis Life Call Center toll free number  |  Mon-Fri 8:30 am - 6 pm, Eastern Time
                           </Col>
                           <Col className="free-toll-no center">
                             <TelLinkComponent
