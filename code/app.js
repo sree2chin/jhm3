@@ -37,6 +37,14 @@ var env = process.env.NODE_ENV || 'dev';
 const config = require('./config/config')[env];
 passportConfig = passportConfig(passport, config);
 
+//https redirection
+app.use(function(request, response){
+  if(!request.secure){
+    console.log('Called http to https redirection');
+    response.redirect("https://" + request.headers.host + request.url);
+  }
+});
+
 /* -----------------------Logging Confirguration ------------------- */
 
 var logDirectory = __dirname + '/log'
