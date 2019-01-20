@@ -64,13 +64,13 @@ const mapStateToProps = (state: any): Props => {
     is_agent: state.quotes.is_agent,
     premiums: state.quotes.premiums,
   };
-  if (state.quotes && state.quotes.phoneNumberDetails) {
+  if (state && state.quotes && state.quotes.phoneNumberDetails) {
     d.phoneNumberDetails = state.quotes.phoneNumberDetails;
   }
-  if (state.questions && state.questions && state.questions.questions && state.questions.questions.extra_params && state.questions.questions.extra_params.phone_number) {
+  if (state && state.questions && state.questions && state.questions.questions && state.questions.questions.extra_params && state.questions.questions.extra_params.phone_number) {
     d.phoneNumberDetails = state.questions.questions.extra_params.phone_number;
   }
-  if (state.questions && state.questions.confirmationData && state.questions.questions.extra_params && state.questions.confirmationData.extra_params.phone_number) {
+  if (state && state.questions && state.questions.confirmationData && state.questions.questions && state.questions.questions.extra_params && state.questions.confirmationData.extra_params.phone_number) {
     d.phoneNumberDetails = state.questions.confirmationData.extra_params.phone_number;
   })
   return d;

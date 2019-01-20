@@ -108,7 +108,8 @@ class Signature extends React.Component<Props, {}> {
         browserHistory.push("/payment_success" + queryParamsString);
       }
 
-    }).catch(()=>{
+    }).catch((e)=>{
+      console.log(e);
       browserHistory.push("/authorize" + queryParamsString);
       console.log(this.questions);
     });
