@@ -2466,7 +2466,9 @@ input.form-control:focus {
   font-size: 14px;
   text-align: left;
   color: #666666;
-  padding-top: 34px; }
+  padding-top: 34px;
+  padding-left: 0px;
+  padding-right: 0px; }
   .email-modal-container.email-modal-unique-container .okay-to-text-number .c-radio label {
     font-size: 14px;
     text-align: left;
@@ -2574,7 +2576,9 @@ input.form-control:focus {
   font-size: 14px;
   text-align: left;
   color: #666666;
-  padding-top: 34px; }
+  padding-top: 34px;
+  padding-left: 0px;
+  padding-right: 0px; }
   .email-modal-container.email-modal-capture-container .okay-to-text-number .c-radio label {
     font-size: 14px;
     text-align: left;
