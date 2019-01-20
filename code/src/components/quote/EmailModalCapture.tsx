@@ -108,6 +108,8 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
         phone: val
         phoneError: isEmpty(val)
       });
+    } else {
+      phoneError: isEmpty(phoneNumber)
     }
 
     return !isError;
@@ -155,7 +157,7 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
     var val = String(e.target.value).trim();
     var sampleVal = "123-123-1234";
     if (val.length > 0 && (sampleVal && sampleVal.length > val.length) && !(new RegExp(/^[a-zA-Z0-9]*$/).test(sampleVal[val.length]))) {
-      if (this.state.value && this.state.value.length > val.length) {
+      if (this.state.phone && this.state.phone.length > val.length) {
 
       } else {
         val = val + sampleVal[val.length];
@@ -224,10 +226,10 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
                             onChange={this.handlePhoneChange.bind(this)}
                           />
                         </Col>
+                        {this.state.phoneError && <Col style={{textAlign: "right", color: "red", paddingRight: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px", textAlign: "left"}} sm={12} className={"c-subheader-text error"}>
+                          Please enter valid phone number.
+                        </Col> }
                       </Col>
-                      {this.state.phoneError && <Col style={{textAlign: "right", color: "red", paddingRight: "33px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
-                        Please enter valid phone number.
-                      </Col> }
                       <Col sm={6} className="okay-to-text-number">
                         <FormGroup className="radio-group">
                           <div className="c-radio" onClick={ ()=> {
