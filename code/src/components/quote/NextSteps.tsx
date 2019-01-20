@@ -132,19 +132,19 @@ class PlansPage extends React.Component<Props, {}> {
     });
   }
   getExtraInfo(data) {
+    if (this.state.slot) {
+      data.contact_time = this.state.slot;
+    }
+    if (this.state.phone) {
+      data.phone_number = this.state.phone;
+    }
+    if (this.state.text_accepted) {
+      data.text_accepted = this.state.text_accepted;
+    } else {
+      data.text_accepted = "No";
+    }
     if ( this.state.type_of_submission == 10003) {
       data.request_type = 3;
-      if (this.state.slot) {
-        data.contact_time = this.state.slot;
-      }
-      if (this.state.phone) {
-        data.phone_number = this.state.phone;
-      }
-      if (this.state.text_accepted) {
-        data.text_accepted = this.state.text_accepted;
-      } else {
-        data.text_accepted = "No";
-      }
     } else if (this.state.type_of_submission == 10001) {
       data.request_type = 1;
     } else if (this.state.type_of_submission == 10002) {
@@ -475,6 +475,10 @@ class PlansPage extends React.Component<Props, {}> {
           onCloseModal={this.closeEmailModal.bind(this)}
           noOfPersons={this.props.noOfPersons}
           fromAgentPage={false}
+          handlePhoneChange={this.handlePhoneChange.bind(this)}
+          handleSlotChange={this.handleSlotChange.bind(this)}
+          keyValueChange={this.keyValueChange.bind(this)}
+          phoneNumberDetails={this.props.phoneNumber}
         />
 
         <EmailModalCapture
@@ -484,6 +488,10 @@ class PlansPage extends React.Component<Props, {}> {
           onCloseModal={this.closeEmailCaptureModal.bind(this)}
           noOfPersons={this.props.noOfPersons}
           fromAgentPage={false}
+          handlePhoneChange={this.handlePhoneChange.bind(this)}
+          handleSlotChange={this.handleSlotChange.bind(this)}
+          keyValueChange={this.keyValueChange.bind(this)}
+          phoneNumberDetails={this.props.phoneNumber}
         />
         
         <LicensedModal

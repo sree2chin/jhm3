@@ -9,7 +9,7 @@ import {each, isEmpty} from "underscore";
 import {submitQuoteForm, setPersonsData, saveQuoteForm, setTypeOfSubmission} from '../../actions/Quote';
 const objectAssign = require('object-assign');
 import ProductHeader from "./ProductHeader";
-import EmailModal from "./EmailModal";
+import AgentEmailModal from "./AgentEmailModal";
 import ThanksEmail from "./ThanksEmail";
 import ThanksPhone from "./ThanksPhone";
 import AgentLicensedModal from "./AgentLicensedModal";
@@ -17,7 +17,7 @@ import ProductContainer from "./ProductContainer";
 import PersonInfo from "./PersonInfo";
 import Subheader from "../common/subheader";
 import { browserHistory } from 'react-router';
-import EmailModalCapture from "./EmailModalCapture";
+import AgentEmailModalCapture from "./AgentEmailModalCapture";
 import * as _ from "underscore"
 
 interface Props {
@@ -411,7 +411,7 @@ class PlansPage extends React.Component<Props, {}> {
           </Col>
         </Row>
 
-        <EmailModalCapture
+        <AgentEmailModalCapture
           showModalEmail={this.state.showModalEmailCapture}
           saveQuote={this.saveQuote.bind(this)}
           handleChange={this.handleEmailChange.bind(this)}
@@ -420,7 +420,7 @@ class PlansPage extends React.Component<Props, {}> {
           fromAgentPage={true}
         />
 
-        <EmailModal
+        <AgentEmailModal
           showModalEmail={this.state.showModalEmail}
           saveQuote={this.saveQuote.bind(this)}
           handleChange={this.handleEmailChange.bind(this)}

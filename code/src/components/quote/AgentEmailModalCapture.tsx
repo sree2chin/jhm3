@@ -1,14 +1,13 @@
 import * as React from "react";
-import { Modal, Button, Row, Col, Radio, FormGroup } from "react-bootstrap";
+import { Modal, Button, Row, Col } from "react-bootstrap";
 import Input from "../common/textInput";
 import {each, isEmpty} from "underscore";
-import TelLinkComponent from "../common/TelLinkComponent";
 
 interface Props extends React.Props<Plan> {
 }
 
 let emailmodalacapturemodal = null;
-export default class EmailModalCapture extends React.Component<Props, {}> {
+export default class AgentEmailModalCapture extends React.Component<Props, {}> {
   constructor(){
     super();
   }
@@ -100,19 +99,13 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
         });
       }
     }
-    var phoneNumber = this.state.phone;
-    if (!isEmpty(phoneNumber)) {
-      var val = phoneNumber.trim();
-      this.props.handlePhoneChange(val);
-      this.setState({
-        phone: val
-        phoneError: isEmpty(val)
-      });
-    }
 
     return !isError;
   }
   saveQuote() {
+    console.log('saveQuote()');
+    console.log(this.props);
+    console.log(typeof this.props.saveQuote);
     if(this.validateEmailForm()) {
       this.setState({
         savingQuote: true
@@ -145,42 +138,13 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
       return "input-border-error";
     }
   }
-
-  handlePhoneChange(e) {
-    /*if(this.validateEmailForm()) {
-      this.setState({
-        emailErrorExists: false
-      });
-    }*/
-    var val = String(e.target.value).trim();
-    var sampleVal = "123-123-1234";
-    if (val.length > 0 && (sampleVal && sampleVal.length > val.length) && !(new RegExp(/^[a-zA-Z0-9]*$/).test(sampleVal[val.length]))) {
-      if (this.state.value && this.state.value.length > val.length) {
-
-      } else {
-        val = val + sampleVal[val.length];
-      }
-
-    }
-    this.props.handlePhoneChange(val);
-    this.setState({
-      phone: val
-      phoneError: isEmpty(val)
-    });
-  }
-
-  onTextAllowedChange(k, v) {
-    this.setState({[k]: v});
-    this.props.keyValueChange(k, v);
-  };
-
   public render() {
 
     return (
        <Modal autoFocus={true} bsSize="small" show={this.props.showModalEmail} onHide={this.props.onCloseModal} className="email-modal-container email-modal-capture-container">
                 <Modal.Body style={{ fontSize: "25px", textAlign: "center"}}>
                     <Row className="email-quote-text email-quote-text-on-modal">
-                        Email
+                        Email capture
                     </Row>
                     <Row>
                         <Col className="email-description email-description-on-modal c-center" sm={12}>
@@ -207,41 +171,8 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
                           className={this.getErrorsClassNames(this.state, "emailError0")}
                         />
                         { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px", textAlign: "left", fontSize: "18px"}}>
-                          Please enter email address of applicant.
+                          Please enter email address of applicant 1.
                         </Col> }
-                      </Col>
-                    </Row>
-                    <Row style={{marginTop: "35px"}}>
-                      <Col sm={6}>
-                        <Col sm={12} className="email-label">
-                          Phone number
-                        </Col>
-                        <Col sm={12} className={"email-input-container"}>
-                          <Input
-                            name={"phone-number"}
-                            placeholder={"866-826-8471"}
-                            value={this.state.phone}
-                            onChange={this.handlePhoneChange.bind(this)}
-                          />
-                        </Col>
-                      </Col>
-                      {this.state.phoneError && <Col style={{textAlign: "right", color: "red", paddingRight: "33px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
-                        Please enter valid phone number.
-                      </Col> }
-                      <Col sm={6} className="okay-to-text-number">
-                        <FormGroup className="radio-group">
-                          <div className="c-radio" onClick={ ()=> {
-                                  this.onTextAllowedChange("text_accepted", "Yes")
-                                }}>
-                            <input
-                              type="radio"
-                              name={"text_accepted"}
-                              checked={this.state.text_accepted == "Yes"}
-                            />
-                            <span style={{top: "3px"}}></span>
-                            <label htmlFor={"text_accepted"}> It's okay to text this number. </label >
-                          </div>
-                        </FormGroup>
                       </Col>
                     </Row>
                     {this.props.noOfPersons ==2 && <Row style={{marginTop: "35px"}}>
@@ -267,33 +198,14 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
                 </Modal.Body>
                 <Modal.Footer>
                     <Row>
-                      <Col sm={8} className="c-center">
-                        <Button  style={{float: "right"}} className={`c-button-default circular ${this.state.savingQuote ? "active" : ""}`} onClick={(){
+                      <Col sm={12} className="c-center">
+                        <Button style={{float: "right"}} className={`c-button-default circular ${this.state.savingQuote ? "active" : ""}`}  onClick={()=>{
                             this.saveQuote()
                           }}
                         >
                           SUBMIT
                           {this.state.savingQuote && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                         </Button>
-                      </Col>
-                    </Row>
-                    <Row className="agent-modal-submit-text-container">
-                      <Col className="agent-modal-submit-text">
-                        By clicking SUBMIT, I consent to receive phone calls from Vantis Life Insurance Company, at the telephone numbers indicated above including wireless numbers, if provided. I understand these calls may be generated using an automatic dialing system. I understand consent is not required to get a quote, apply for insurance or to make a purchase from Vantis Life Insurance Company.
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col sm={10} className="c-center" style={{marginTop: "20px"}}>
-                        <Row>
-                          <Col className="free-toll-no-text">
-                            Vantis Life Call Center toll free number  |  Mon-Fri 8:30 am - 6 pm, Eastern Time
-                          </Col>
-                          <Col className="free-toll-no center">
-                            <TelLinkComponent
-                                phoneNumber={this.props.phoneNumberDetails}
-                              />
-                          </Col>
-                        </Row>
                       </Col>
                     </Row>
                 </Modal.Footer>

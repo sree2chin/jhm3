@@ -271,7 +271,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
                     </Row>
                     <Row style={{marginTop: "35px"}}>
                       <Col sm={12} className="email-label email-label-on-modal">
-                        Applicant Email address 1
+                        Applicant Email address
                       </Col>
                       <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
                         <Input
