@@ -2437,6 +2437,9 @@ input.form-control:focus {
 .email-modal-container.agent-modal-container .modal-dialog {
   width: 35.72%; }
 
+.email-modal-container.email-modal-unique-container .modal-dialog {
+  width: 35.72%; }
+
 .email-modal-container.email-modal-unique-container .modal-footer {
   border-top: 0px;
   padding-top: 0px;
@@ -2459,6 +2462,41 @@ input.form-control:focus {
     width: 89%;
     float: none; }
 
+.email-modal-container.email-modal-unique-container .okay-to-text-number {
+  font-size: 14px;
+  text-align: left;
+  color: #666666;
+  padding-top: 34px; }
+  .email-modal-container.email-modal-unique-container .okay-to-text-number .c-radio label {
+    font-size: 14px;
+    text-align: left;
+    color: #666666;
+    font-weight: normal; }
+
+.email-modal-container.email-modal-unique-container .free-toll-no-text {
+  font-size: 14px;
+  text-align: center;
+  color: #999999; }
+
+.email-modal-container.email-modal-unique-container .free-toll-no {
+  font-weight: 500;
+  color: #317dbd;
+  text-align: center; }
+
+.email-modal-container.email-modal-unique-container .agent-modal-submit-text-container {
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 25px;
+  margin-left: 0px;
+  margin-right: 0px; }
+  .email-modal-container.email-modal-unique-container .agent-modal-submit-text-container .agent-modal-submit-text {
+    font-size: 13px;
+    line-height: 1.46;
+    text-align: center;
+    color: #999999;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 20px; }
+
 .email-modal-container .email-quote-text {
   font-size: 20px;
   text-align: left;
@@ -2467,8 +2505,6 @@ input.form-control:focus {
   margin-left: 0px;
   line-height: 1.1;
   margin-bottom: 6px; }
-  .email-modal-container .email-quote-text.email-quote-text-on-modal {
-    text-align: center; }
 
 .email-modal-container .email-label {
   font-size: 14px;
@@ -2488,7 +2524,6 @@ input.form-control:focus {
   color: #999999;
   padding-left: 20px; }
   .email-modal-container .email-description.email-description-on-modal {
-    text-align: center;
     padding-left: 15px;
     color: #2D2D2D;
     font-size: 14.36px; }
@@ -2534,6 +2569,41 @@ input.form-control:focus {
 .email-modal-container.email-modal-capture-container .modal-footer {
   border-top: none;
   padding-top: 0px; }
+
+.email-modal-container.email-modal-capture-container .okay-to-text-number {
+  font-size: 14px;
+  text-align: left;
+  color: #666666;
+  padding-top: 34px; }
+  .email-modal-container.email-modal-capture-container .okay-to-text-number .c-radio label {
+    font-size: 14px;
+    text-align: left;
+    color: #666666;
+    font-weight: normal; }
+
+.email-modal-container.email-modal-capture-container .free-toll-no-text {
+  font-size: 14px;
+  text-align: center;
+  color: #999999; }
+
+.email-modal-container.email-modal-capture-container .free-toll-no {
+  font-weight: 500;
+  color: #317dbd;
+  text-align: center; }
+
+.email-modal-container.email-modal-capture-container .agent-modal-submit-text-container {
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 25px;
+  margin-left: 0px;
+  margin-right: 0px; }
+  .email-modal-container.email-modal-capture-container .agent-modal-submit-text-container .agent-modal-submit-text {
+    font-size: 13px;
+    line-height: 1.46;
+    text-align: center;
+    color: #999999;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 20px; }
 
 .agent-modal-container {
   font-family: NunitoRegular; }
