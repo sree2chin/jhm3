@@ -42,6 +42,7 @@ app.use(function(request, response){
   if(!request.secure){
     console.log('Called http to https redirection');
     response.redirect("https://" + request.headers.host + request.url);
+    return;
   }
 });
 
