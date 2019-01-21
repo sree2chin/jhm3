@@ -357,7 +357,7 @@ class ContactAgent extends React.Component<Props, {}> {
         </Row>
         <Row style={{marginTop: "35px"}}>
           <Col sm={12} className="email-label email-label-on-modal">
-            Applicant Email address 1
+            Applicant Email address
           </Col>
           <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
             <Input
@@ -395,8 +395,24 @@ class ContactAgent extends React.Component<Props, {}> {
           </Row>
         }
         <Row className="contact-agent-text-submit-btn-container">
+            <Row>
+            <Col xs={12} className="c-center">
+              <Button  style={{float: "right", width: "96%"}} className={`c-button-default ${this.state.savingQuote ? "active" : ""}`} onClick={(){
+                  this.saveQuote()
+                }}
+              >
+                SUBMIT
+                {this.state.savingQuote && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+              </Button>
+            </Col>
+          </Row>
+          <Row style={{marginLeft: "20px"}} className="agent-modal-submit-text-container">
+            <Col className="agent-modal-submit-text">
+              By clicking SUBMIT, I consent to receive phone calls from Vantis Life Insurance Company, at the telephone numbers indicated above including wireless numbers, if provided. I understand these calls may be generated using an automatic dialing system. I understand consent is not required to get a quote, apply for insurance or to make a purchase from Vantis Life Insurance Company.
+            </Col>
+          </Row>
           <Row>
-            <Col xs={8} className="c-center" style={{marginTop: "20px"}}>
+            <Col xs={10} className="c-center" style={{marginTop: "20px"}}>
               <Row>
                 <Col style={{marginBottom: "15px"}}>
                   <span className="free-toll-no-text">
@@ -411,17 +427,7 @@ class ContactAgent extends React.Component<Props, {}> {
               </Row>
             </Col>
           </Row>
-          <Row>
-            <Col xs={12} className="c-center">
-              <Button  style={{float: "right", width: "96%"}} className={`c-button-default ${this.state.savingQuote ? "active" : ""}`} onClick={(){
-                  this.saveQuote()
-                }}
-              >
-                SUBMIT
-                {this.state.savingQuote && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-              </Button>
-            </Col>
-          </Row>
+
 
         </Row>
       </div>);
@@ -437,7 +443,8 @@ const mapStateToProps = (state: any): Props => {
     premiums: state.quotes.premiums,
     typeOfSubmission: state.quotes.typeOfSubmission,
     is_agent: state.quotes.is_agent,
-    quoteResponse: state.quotes.quoteResponse
+    quoteResponse: state.quotes.quoteResponse,
+    phoneNumberDetails: state.quotes.phoneNumberDetails
   };
 }
 

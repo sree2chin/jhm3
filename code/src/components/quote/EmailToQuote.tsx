@@ -17,6 +17,7 @@ import { browserHistory } from 'react-router';
 import {Tooltip} from 'react-lightweight-tooltip';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 import Input from "../common/textInput";
+import TelLinkComponent from "../common/TelLinkComponent";
 
 interface Props {
   plans: [any]
@@ -214,7 +215,9 @@ class EmailToQuote extends React.Component<Props, {}> {
       [key]: obj.value
     });
   };
-
+  onTextAllowedChange(k, v) {
+    this.setState({[k]: v});
+  }
   handleChange(personIndex, e) {
     if(this.state.emailErrorExists) {
       if(this.validateEmailForm()) {
@@ -265,8 +268,41 @@ class EmailToQuote extends React.Component<Props, {}> {
               className={this.getErrorsClassNames(this.state, "emailError0")}
             />
             { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px"}}>
-              Please enter email address of applicant 1.
+              Please enter email address of applicant.
             </Col> }
+          </Col>
+        </Row>
+        <Row style={{marginTop: "35px"}}>
+          <Col sm={6}>
+            <Col sm={12} className="email-label">
+              Phone number
+            </Col>
+            <Col sm={12} className={"email-input-container"}>
+              <Input
+                name={"phone-number"}
+                placeholder={"866-826-8471"}
+                value={this.state.phone}
+                onChange={this.handlePhoneChange.bind(this)}
+              />
+            </Col>
+            {this.state.phoneError && <Col style={{textAlign: "right", color: "red", paddingRight: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px", textAlign: "left"}} sm={12} className={"c-subheader-text error"}>
+              Please enter valid phone number.
+            </Col> }
+          </Col>
+          <Col sm={6} className="okay-to-text-number">
+            <FormGroup className="radio-group">
+              <div className="c-radio" onClick={ ()=> {
+                      this.onTextAllowedChange("text_accepted", "Yes")
+                    }}>
+                <input
+                  type="radio"
+                  name={"text_accepted"}
+                  checked={this.state.text_accepted == "Yes"}
+                />
+                <span style={{top: "3px"}}></span>
+                <label htmlFor={"text_accepted"}> It's okay to text this number. </label >
+              </div>
+            </FormGroup>
           </Col>
         </Row>
         {this.props.noOfPersons ==2 && <Row style={{marginTop: "35px"}}>
@@ -302,7 +338,25 @@ class EmailToQuote extends React.Component<Props, {}> {
               </Button>
             </Col>
           </Row>
-
+          <Row style={{marginLeft: "20px"}} className="agent-modal-submit-text-container">
+            <Col className="agent-modal-submit-text">
+              By clicking SUBMIT, I consent to receive phone calls from Vantis Life Insurance Company, at the telephone numbers indicated above including wireless numbers, if provided. I understand these calls may be generated using an automatic dialing system. I understand consent is not required to get a quote, apply for insurance or to make a purchase from Vantis Life Insurance Company.
+            </Col>
+          </Row>
+          <Row style={{marginLeft: "15px"}}>
+            <Col sm={10} className="c-center" style={{marginTop: "20px"}}>
+              <Row>
+                <Col className="free-toll-no-text">
+                  Vantis Life Call Center toll free number  |  Mon-Fri 8:30 am - 6 pm, Eastern Time
+                </Col>
+                <Col className="free-toll-no center">
+                  <TelLinkComponent
+                      phoneNumber={this.props.phoneNumberDetails}
+                    />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
         </Row>
       </div>);
   }
@@ -317,7 +371,8 @@ const mapStateToProps = (state: any): Props => {
     premiums: state.quotes.premiums,
     typeOfSubmission: state.quotes.typeOfSubmission,
     is_agent: state.quotes.is_agent,
-    quoteResponse: state.quotes.quoteResponse
+    quoteResponse: state.quotes.quoteResponse,
+    phoneNumberDetails: state.quotes.phoneNumberDetails
   };
 }
 

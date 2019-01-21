@@ -130,7 +130,9 @@ export default class EmailModal extends React.Component<Props, {}> {
         phoneError: isEmpty(val)
       });
     } else {
-      phoneError: isEmpty(phoneNumber)
+      this.setState({
+        phoneError: isEmpty(phoneNumber)
+      }
     }
     return !isError;
   }
@@ -229,7 +231,7 @@ export default class EmailModal extends React.Component<Props, {}> {
                     {this.state.emailError1 && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
                       Please enter email address of applicant 2.
                     </Col> }
-                                       <Row style={{marginTop: "35px"}}>
+                    <Row style={{marginTop: "35px"}}>
                       <Col sm={6}>
                         <Col sm={12} className="email-label">
                           Phone number
