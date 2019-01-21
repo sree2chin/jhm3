@@ -2444,7 +2444,8 @@ input.form-control:focus {
   border-top: 0px;
   padding-top: 0px;
   padding-left: 0px;
-  padding-right: 0px; }
+  padding-right: 0px;
+  padding: 15px; }
 
 .email-modal-container.email-modal-unique-container .email-label {
   padding-left: 15px; }
@@ -2908,13 +2909,12 @@ input.form-control:focus {
     .agent-page-container .contact-agent-text-submit-btn-container {
       bottom: 15px;
       margin-right: 4px;
-      margin-top: 10vh;
+      margin-top: 2vh;
       padding-bottom: 15px; }
       .agent-page-container .contact-agent-text-submit-btn-container .email-quote-btn-container {
         margin-right: -42px; }
       .agent-page-container .contact-agent-text-submit-btn-container.email-text-submit-btn-container {
-        width: 100%;
-        margin-top: 37vh; } }
+        width: 100%; } }
 
 @media (max-width: 768px) {
   .agent-success-page-container {
