@@ -51,8 +51,19 @@ class EmailToQuote extends React.Component<Props, {}> {
     return window.location.pathname.indexOf("/agent")>=0
   }
   handlePhoneChange(e) {
+    var val = String(e.target.value).trim();
+    var sampleVal = "123-123-1234";
+    if (val.length > 0 && (sampleVal && sampleVal.length > val.length) && !(new RegExp(/^[a-zA-Z0-9]*$/).test(sampleVal[val.length]))) {
+      if (this.state.phone && this.state.phone.length > val.length) {
+
+      } else {
+        val = val + sampleVal[val.length];
+      }
+
+    }
     this.setState({
-      phone: e.target.value
+      phone: val
+      phoneError: isEmpty(val)
     });
   };
   validateEmailForm() {
