@@ -267,7 +267,7 @@ class EmailToQuote extends React.Component<Props, {}> {
         </Row>
         <Row style={{marginTop: "35px"}}>
           <Col sm={12} className="email-label email-label-on-modal">
-            Applicant Email address 1
+            Applicant Email address{this.props.noOfPersons ==2 && ` 1`}
           </Col>
           <Col sm={12} className={"email-input-container  email-input-container-on-modal"}>
             <Input
@@ -280,7 +280,7 @@ class EmailToQuote extends React.Component<Props, {}> {
               className={this.getErrorsClassNames(this.state, "emailError0")}
             />
             { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px", textAlign: "left", fontSize: "18px"}}>
-              Please enter email address of applicant 1.
+              Please enter email address of applicant{this.props.noOfPersons ==2 && ` 1`}.
             </Col> }
           </Col>
         </Row>
