@@ -321,7 +321,7 @@ class EmailToQuote extends React.Component<Props, {}> {
                 onChange={this.handlePhoneChange.bind(this)}
               />
             </Col>
-            {this.state.phoneError && <Col style={{textAlign: "right", color: "red", paddingRight: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px", textAlign: "left"}} sm={12} className={"c-subheader-text error"}>
+            {this.state.phoneError && <Col style={{color: "red", paddingRight: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px", textAlign: "left"}} sm={12} className={"c-subheader-text error"}>
               Please enter valid phone number.
             </Col> }
           </Col>
