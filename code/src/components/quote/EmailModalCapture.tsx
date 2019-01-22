@@ -210,7 +210,7 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
                           className={this.getErrorsClassNames(this.state, "emailError0")}
                         />
                         {this.state.emailError0 && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px", fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
-                          Please enter email address of applicant.
+                          Please enter valid email address of applicant.
                         </Col> }
                       </Col>
                     </Row>
@@ -262,7 +262,7 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
                             className={this.getErrorsClassNames(this.state, "emailError1")}
                           />
                           { this.state.emailError1 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px", textAlign: "left", fontSize: "18px"}}>
-                            Please enter email address of applicant 2.
+                            Please enter valid email address of applicant 2.
                           </Col> }
                         </Col>
                       </Row>

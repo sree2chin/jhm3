@@ -284,7 +284,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
                           className={this.getErrorsClassNames(this.state, "emailError0")}
                         />
                         { this.state.emailError0 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px", fontSize: "16px", marginBottom: "15px"}}>
-                          Please enter email address of applicant{this.props.noOfPersons == 2 && `1`}.
+                          Please enter valid email address of applicant{this.props.noOfPersons == 2 && `1`}.
                         </Col> }
                       </Col>
                     </Row>
@@ -303,7 +303,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
                             className={this.getErrorsClassNames(this.state, "emailError1")}
                           />
                         { this.state.emailError1 && <Col sm={12} className={"c-subheader-text error-msg"}  style={{paddingLeft: "0px", fontSize: "16px", marginBottom: "15px"}}>
-                          Please enter email address of applicant 2.
+                          Please enter valid email address of applicant 2.
                         </Col> }
                         </Col>
                       </Row>

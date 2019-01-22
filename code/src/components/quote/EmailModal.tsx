@@ -209,7 +209,7 @@ export default class EmailModal extends React.Component<Props, {}> {
                       </Col>
                     </Row>
                     {this.state.emailError0 && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px", fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
-                      Please enter email address of applicant{this.props.noOfPersons ==2 && ` 1`}.
+                      Please enter valid email address of applicant{this.props.noOfPersons ==2 && ` 1`}.
                     </Col> }
                     {this.props.noOfPersons ==2 && <Row style={{marginTop: "15px"}}>
                         <Col sm={12} className="email-label">
@@ -228,7 +228,7 @@ export default class EmailModal extends React.Component<Props, {}> {
                       </Row>
                     }
                     {this.state.emailError1 && <Col style={{textAlign: "left", color: "red", paddingLeft: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px"}} sm={12} className={"c-subheader-text error"}>
-                      Please enter email address of applicant 2.
+                      Please enter valid email address of applicant 2.
                     </Col> }
                     <Row style={{marginTop: "35px"}}>
                       <Col sm={6}>
