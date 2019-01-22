@@ -127,7 +127,7 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
       
       this.props.saveQuote().then(()=>{
         this.setState({
-          savingQuote: false
+          //savingQuote: false
         });
       });
     }
