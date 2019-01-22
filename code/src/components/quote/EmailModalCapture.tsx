@@ -8,6 +8,7 @@ interface Props extends React.Props<Plan> {
 }
 
 let emailmodalacapturemodal = null;
+let phonesampleVal = "123-123-1234";
 export default class EmailModalCapture extends React.Component<Props, {}> {
   constructor(){
     super();
@@ -101,15 +102,15 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
       }
     }
     var phoneNumber = this.state.phone;
-    if (!isEmpty(phoneNumber)) {
-      var val = phoneNumber.trim();
+    var val = phoneNumber.trim();
+    if (!isEmpty(val)) {
       this.props.handlePhoneChange(val);
       this.setState({
         phone: val
-        phoneError: isEmpty(val)
+        phoneError: (val.length != phonesampleVal.length)
       });
     } else {
-      phoneError: isEmpty(phoneNumber)
+      //phoneError: isEmpty(phoneNumber)
     }
 
     return !isError;
@@ -155,19 +156,19 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
       });
     }*/
     var val = String(e.target.value).trim();
-    var sampleVal = "123-123-1234";
-    if (val.length > 0 && (sampleVal && sampleVal.length > val.length) && !(new RegExp(/^[a-zA-Z0-9]*$/).test(sampleVal[val.length]))) {
+    //var sampleVal = "123-123-1234";
+    if (val.length > 0 && (phonesampleVal && phonesampleVal.length > val.length) && !(new RegExp(/^[a-zA-Z0-9]*$/).test(phonesampleVal[val.length]))) {
       if (this.state.phone && this.state.phone.length > val.length) {
 
       } else {
-        val = val + sampleVal[val.length];
+        val = val + phonesampleVal[val.length];
       }
 
     }
     this.props.handlePhoneChange(val);
     this.setState({
       phone: val
-      phoneError: isEmpty(val)
+      phoneError: (val.length > phonesampleVal.length)
     });
   }
 
@@ -223,7 +224,7 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
                             name={"phone-number"}
                             placeholder={"866-826-8471"}
                             value={this.state.phone}
-                            onChange={this.handlePhoneChange.bind(this)}
+                            onChange = {this.handlePhoneChange.bind(this)}
                           />
                         </Col>
                         {this.state.phoneError && <Col style={{textAlign: "right", color: "red", paddingRight: "0px", marginBottom: "15px",  fontSize: "15px", marginTop: "-5px", textAlign: "left"}} sm={12} className={"c-subheader-text error"}>

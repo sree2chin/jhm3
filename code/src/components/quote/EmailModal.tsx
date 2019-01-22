@@ -11,6 +11,7 @@ interface Props extends React.Props<EmailModal> {
 }
 
 let popupemailmodal = null;
+let phonesampleVal = "123-123-1234";
 export default class EmailModal extends React.Component<Props, {}> {
   constructor(){
     super();
@@ -122,17 +123,15 @@ export default class EmailModal extends React.Component<Props, {}> {
       }
     }
     var phoneNumber = this.state.phone;
-    if (!isEmpty(phoneNumber)) {
-      var val = phoneNumber.trim();
+    var val = phoneNumber.trim();
+    if (!isEmpty(val)) {
       this.props.handlePhoneChange(val);
       this.setState({
         phone: val
-        phoneError: isEmpty(val)
+        phoneError: (val.length != phonesampleVal.length)
       });
     } else {
-      this.setState({
-        phoneError: isEmpty(phoneNumber)
-      }
+      //phoneError: isEmpty(phoneNumber)
     }
     return !isError;
   }
@@ -144,19 +143,19 @@ export default class EmailModal extends React.Component<Props, {}> {
       });
     }*/
     var val = String(e.target.value).trim();
-    var sampleVal = "123-123-1234";
-    if (val.length > 0 && (sampleVal && sampleVal.length > val.length) && !(new RegExp(/^[a-zA-Z0-9]*$/).test(sampleVal[val.length]))) {
+    //var sampleVal = "123-123-1234";
+    if (val.length > 0 && (phonesampleVal && phonesampleVal.length > val.length) && !(new RegExp(/^[a-zA-Z0-9]*$/).test(phonesampleVal[val.length]))) {
       if (this.state.phone && this.state.phone.length > val.length) {
 
       } else {
-        val = val + sampleVal[val.length];
+        val = val + phonesampleVal[val.length];
       }
 
     }
     this.props.handlePhoneChange(val);
     this.setState({
       phone: val
-      phoneError: isEmpty(val)
+      phoneError: (val.length > phonesampleVal.length)
     });
   }
 
