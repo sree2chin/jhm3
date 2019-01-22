@@ -9,19 +9,19 @@ var plugins = [
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor1',
     chunks: ['app', "vendor", "vendor2"],
-    filename: 'vendor1.js',
+    filename: 'vendor4.js',
     minChunks: Infinity
   }),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor2',
     chunks: ['app',  'vendor1'],
-    filename: 'vendor2.js',
+    filename: 'vendor5.js',
     minChunks: Infinity
   }),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
     chunks: ['app'],
-    filename: 'vendor.js',
+    filename: 'vendo3.js',
     minChunks: Infinity
   }),
  new HtmlWebpackPlugin({
