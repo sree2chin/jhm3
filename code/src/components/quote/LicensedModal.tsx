@@ -45,26 +45,15 @@ export default class LicensedModal extends React.Component<Props, {}> {
   }
 
   saveQuote() {
-    var phoneError = isEmpty(this.state.phone);
-    if (phoneError) {
-      this.validateEmailForm();
+    if (this.validateEmailForm(true)) {
       this.setState({
-        phoneError: true
+        savingQuote: true
       });
-    } else {
-      this.setState({
-        phoneError: false
-      });
-      if (this.validateEmailForm()) {
+      this.props.saveQuote().then(()=>{
         this.setState({
-          savingQuote: true
+          savingQuote: false
         });
-        this.props.saveQuote().then(()=>{
-          this.setState({
-            savingQuote: false
-          });
-        });;
-      }
+      });;
     }
   }
 
@@ -87,7 +76,8 @@ export default class LicensedModal extends React.Component<Props, {}> {
       phoneError: (isEmpty(val) || val.length > phonesampleVal.length)
     });
   }
-  validateEmailForm() {
+  validateEmailForm(checkPhoneNumber) {
+    checkPhoneNumber = undefined != checkPhoneNumber ? checkPhoneNumber : false;
     var isError = false;
     var emailRegex =  /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 
@@ -145,6 +135,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
       }
     }
 
+    if(checkPhoneNumber) {
       var phoneNumber = this.state.phone || "";
       var val = phoneNumber.trim();
       //if (!isEmpty(val)) {
@@ -157,6 +148,7 @@ export default class LicensedModal extends React.Component<Props, {}> {
       if(!isError && (val.length != phonesampleVal.length)){
         isError = true;
       }
+    }
     //}
 
     return !isError;
