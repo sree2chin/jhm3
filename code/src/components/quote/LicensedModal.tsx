@@ -8,6 +8,7 @@ import TelLinkComponent from "../common/TelLinkComponent";
 interface Props extends React.Props<Plan> {
 }
 let licensemodal = null;
+let phonesampleVal = "123-123-1234";
 export default class LicensedModal extends React.Component<Props, {}> {
   constructor(){
     super();
@@ -71,20 +72,19 @@ export default class LicensedModal extends React.Component<Props, {}> {
 
   handlePhoneChange(e) {
     var val = e.target.value;
-    var sampleVal = "123-123-1234";
-    if (val.length > 0 && (sampleVal && sampleVal.length > val.length) && !(new RegExp(/^[a-zA-Z0-9]*$/).test(sampleVal[val.length]))) {
+    val = val.trim();
+    //var sampleVal = "123-123-1234";
+    if (val.length > 0 && (phonesampleVal && phonesampleVal.length > val.length) && !(new RegExp(/^[a-zA-Z0-9]*$/).test(phonesampleVal[val.length]))) {
       if (this.state.phone && this.state.phone.length > val.length) {
 
       } else {
-        val = val + sampleVal[val.length];
+        val = val + phonesampleVal[val.length];
       }
-
     }
     this.props.handlePhoneChange(val);
     this.setState({
       phone: val,
-      phoneError: isEmpty(val)
-    }, () => {
+      phoneError: (isEmpty(val) || val.length > phonesampleVal.length)
     });
   }
   validateEmailForm() {
@@ -144,6 +144,20 @@ export default class LicensedModal extends React.Component<Props, {}> {
         });
       }
     }
+
+      var phoneNumber = this.state.phone || "";
+      var val = phoneNumber.trim();
+      //if (!isEmpty(val)) {
+      this.props.handlePhoneChange(val);
+      this.setState({
+        phone: val,
+        phoneError: (val.length != phonesampleVal.length)
+      });
+
+      if(!isError && (val.length != phonesampleVal.length)){
+        isError = true;
+      }
+    //}
 
     return !isError;
   };

@@ -44,7 +44,8 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
     }
   }
 
-  validateEmailForm() {
+  validateEmailForm(checkPhoneNumber) {
+    checkPhoneNumber = undefined != checkPhoneNumber ? checkPhoneNumber : false;
     var isError = false;
     var emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 
@@ -101,22 +102,25 @@ export default class EmailModalCapture extends React.Component<Props, {}> {
         });
       }
     }
-    var phoneNumber = this.state.phone;
-    var val = phoneNumber.trim();
-    if (!isEmpty(val)) {
-      this.props.handlePhoneChange(val);
-      this.setState({
-        phone: val
-        phoneError: (val.length != phonesampleVal.length)
-      });
-    } else {
-      //phoneError: isEmpty(phoneNumber)
+    if(checkPhoneNumber) {
+      var phoneNumber = this.state.phone || "";
+      var val = phoneNumber.trim();
+      if (!isEmpty(val)) {
+        this.props.handlePhoneChange(val);
+        this.setState({
+          phone: val,
+          phoneError: (val.length != phonesampleVal.length)
+        });
+        if(!isError && (val.length != phonesampleVal.length)){
+          isError = true;
+        }
+      } 
     }
 
     return !isError;
   }
   saveQuote() {
-    if(this.validateEmailForm()) {
+    if(this.validateEmailForm(true)) {
       this.setState({
         savingQuote: true
       });
