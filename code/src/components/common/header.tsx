@@ -36,7 +36,7 @@ class Header extends React.Component<Props, {}> {
           <div className="header-text" style={{marginLeft: "22px", fontSize: "16px"}}>
             <div style={{textAlign: "right"}}>
               Need help?
-              <a href={"tel:" + (window.contactNumber ? window.contactNumber :  "1-866-826-8471")}>
+              <a href={this.props.phoneNumberDetails ? this.props.phoneNumberDetails.phone_number_href :  "tel:" + "1-866-826-8471"}>
                 <img className="visible-xs"
                   style={{float: "right", paddingLeft: "10px", paddingTop: "4px"}}
                   src={"../images/small-phone.svg"} />
