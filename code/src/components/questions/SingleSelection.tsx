@@ -79,7 +79,7 @@ export default class SingleSelection extends React.Component<Props, {}> {
                     {question.options[0].label}
                 </Button>
               </Col>
-              <Col style={{display: "inline"}}>
+              <Col style={{display: "inline", paddingLeft: "15px"}}>
                 <Button style={{marginBottom: "0px"}} disabled={this.props.submittingQuestions}  className={`c-button-default circular single-select-btn ${this.state.selectedId == question.options[1].id ? "active" : ""}`} onClick={(){
                       this.onChange(question.options[1])
                     }}
