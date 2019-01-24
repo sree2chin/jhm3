@@ -1,6 +1,13 @@
 @import "./commonMixins";
 
+
+.rc-slider {
+	.rc-slider-track {
+		background-color: #d4d4d4!important;
+	}
+}
 .c-quote {
+
 	.c-coverage {
 		.rc-slider {
 			.rc-slider-track {

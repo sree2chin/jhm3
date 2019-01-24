@@ -787,7 +787,7 @@ class Main extends React.Component<Props, State> {
             <div className="question-action-btn-container">
                 <Button className={`c-button-default circular action`} onClick={()=>{
                         this.confirmQuestions()
-                    }} style={{width: "auto"}}>
+                    }}>
                     {this.getBtnText()}
                     {this.state.confirmingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                 </Button>

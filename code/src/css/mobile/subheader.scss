@@ -48,6 +48,10 @@
 		.confirmation-header {
 			&.gather-information-container {
 				padding-left: 15px;
+				&.dynamic-bread-crumb {
+					padding-left: 0px;
+					margin-top: 15px;
+				}
 			}
 			.gather-information {
 				padding-right: 0px;
