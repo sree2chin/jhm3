@@ -845,6 +845,8 @@ input.form-control:focus {
 .c-quote .c-coverage .rc-slider {
   margin-top: 20px;
   margin-bottom: 30px; }
+  .c-quote .c-coverage .rc-slider .rc-slider-track {
+    background-color: #d4d4d4; }
   .c-quote .c-coverage .rc-slider .rc-slider-handle {
     width: 24px;
     height: 24px;
@@ -1652,6 +1654,9 @@ input.form-control:focus {
     padding-bottom: 20px;
     padding-left: 30px; }
 
+.all-group-questions-container .all-group-header {
+  margin-bottom: 0px; }
+
 .all-group-questions-container.questions-content-container {
   padding: 25.4px 0px 29.6px 0px !important; }
 
@@ -1912,6 +1917,8 @@ input.form-control:focus {
   .enter-password-modal-container.email-modal-unique-container .modal-footer {
     padding-left: 31px !important; }
   .enter-password-modal-container.email-modal-unique-container .modal-dialog {
+    width: 94%; }
+  .email-modal-container.email-modal-unique-container.enter-password-modal-container .modal-dialog {
     width: 94%; } }
 
 .product-pager-container .two_products_conainer_width {
@@ -2398,6 +2405,11 @@ input.form-control:focus {
       padding-left: 0px !important; }
       .offer-container .offer-product-info-container .offer-product-description .c-product-desc-line {
         padding-left: 35px; }
+
+@media (max-width: 768px) {
+  .offer-container .offer-product-info {
+    padding-left: 15px;
+    padding-right: 15px; } }
 
 .pdf-modal-container .modal-body {
   height: 100vh; }
@@ -3238,6 +3250,12 @@ input.form-control:focus {
 @media (max-width: 768px) {
   .fs18 {
     font-size: 16px !important; }
+  .question-action-btn-container.questions-content-container.Add-a-Primary-Benefi {
+    padding: 30px 20px 20px 30px; }
+  .question-action-btn-container.questions-content-container.Add-a-Primary-Benefi {
+    padding: 30px 20px 20px 30px; }
+  .cf-nav-main-header p.navbar-text {
+    float: right; }
   .questions-container {
     width: 92%; }
     .questions-container .c-button-default.btn.circular.action {
@@ -3248,6 +3266,8 @@ input.form-control:focus {
       padding: 15px;
       margin-top: 15px;
       margin-bottom: 0px; }
+      .questions-container .questions-content-container .c-button-default.btn.circular {
+        margin-top: 20px; }
       .questions-container .questions-content-container .form-group .form-control.question-with-bottom-border {
         width: 88%; }
       .questions-container .questions-content-container .c-custom-select {
@@ -3595,8 +3615,6 @@ input.form-control:focus {
     float: left; } }
 
 @media (max-width: 768px) {
-  .c-body {
-    overflow-y: scroll; }
   .c-quote .react-datepicker-wrapper {
     width: 68%; }
   .c-quote .birth-date-picker-container .custom-date-picker-container .custom-date-picker img {
@@ -3712,3 +3730,7 @@ input.form-control:focus {
     line-height: 1.6;
     padding-right: 40px;
     font-size: 16px; } }
+
+@media (max-width: 768px) {
+  .payment_styles_div {
+    height: 100vh; } }
