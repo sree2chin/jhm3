@@ -47,6 +47,7 @@
     "src/css/mobile/quote.scss",
     "src/css/mobile/agentNextSteps.scss",
     "src/css/mobile/next-steps.scss",
-    "src/css/healthInformationPopup.scss"
+    "src/css/healthInformationPopup.scss",
+    "src/css/mobile/paymentSuccess.scss"
   ]
 }

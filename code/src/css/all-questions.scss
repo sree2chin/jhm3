@@ -120,6 +120,9 @@
     }
 }
 .all-group-questions-container {
+    .all-group-header {
+        margin-bottom: 0px;
+    }
     &.questions-content-container {
         padding: 25.4px 0px 29.6px 0px !important;
     }
