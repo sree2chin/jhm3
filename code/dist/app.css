@@ -842,6 +842,9 @@ input.form-control:focus {
 .cf-nav-main-header p.navbar-text .header-text {
   margin-left: 50%; }
 
+.rc-slider .rc-slider-track {
+  background-color: #d4d4d4 !important; }
+
 .c-quote .c-coverage .rc-slider {
   margin-top: 20px;
   margin-bottom: 30px; }
@@ -1759,9 +1762,14 @@ input.form-control:focus {
 .async-auto-suggest-container .input-group.input-group-toggle {
   padding-left: 0px; }
 
-.async-auto-suggest-container .autosuggest .input-group-btn button {
-  height: 44px;
-  visibility: hidden; }
+.async-auto-suggest-container .autosuggest .input-group-btn {
+  display: inline; }
+  .async-auto-suggest-container .autosuggest .input-group-btn button {
+    height: 44px;
+    visibility: hidden; }
+  .async-auto-suggest-container .autosuggest .input-group-btn img {
+    height: 44px;
+    background-color: #e7e5e5; }
 
 .async-auto-suggest-container .autosuggest .dropdown-menu {
   font-size: 16px;
@@ -1781,7 +1789,7 @@ input.form-control:focus {
 .async-auto-suggest-container .autosuggest-choices {
   padding-top: 0px;
   height: 44px;
-  min-width: 300px;
+  min-width: 260px;
   max-width: max-content;
   margin-bottom: 15px; }
   .async-auto-suggest-container .autosuggest-choices li.autosuggest-input-choice {
@@ -3168,6 +3176,9 @@ input.form-control:focus {
       margin-top: 14px; }
     .cf-nav-main-header.navbar.subheader .confirmation-header.gather-information-container {
       padding-left: 15px; }
+      .cf-nav-main-header.navbar.subheader .confirmation-header.gather-information-container.dynamic-bread-crumb {
+        padding-left: 0px;
+        margin-top: 15px; }
     .cf-nav-main-header.navbar.subheader .confirmation-header .gather-information {
       padding-right: 0px; }
     .cf-nav-main-header.navbar.subheader .confirmation-header.next-steps {
