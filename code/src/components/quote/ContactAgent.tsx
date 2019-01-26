@@ -399,7 +399,8 @@ class ContactAgent extends React.Component<Props, {}> {
             <Col xs={12} className="c-center">
               <Button  style={{float: "right", width: "96%"}} className={`c-button-default ${this.state.savingQuote ? "active" : ""}`} onClick={(){
                   this.saveQuote()
-                }}
+                }} 
+                disabled={this.state.savingQuote}
               >
                 SUBMIT
                 {this.state.savingQuote && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }

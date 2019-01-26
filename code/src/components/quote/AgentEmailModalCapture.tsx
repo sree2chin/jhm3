@@ -201,7 +201,8 @@ export default class AgentEmailModalCapture extends React.Component<Props, {}> {
                       <Col sm={12} className="c-center">
                         <Button style={{float: "right"}} className={`c-button-default circular ${this.state.savingQuote ? "active" : ""}`}  onClick={()=>{
                             this.saveQuote()
-                          }}
+                          }} 
+                          disabled={this.state.savingQuote}
                         >
                           SUBMIT
                           {this.state.savingQuote && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }

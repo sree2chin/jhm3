@@ -295,7 +295,8 @@ class EmailToQuote extends React.Component<Props, {}> {
             <Col xs={11} className="c-center">
               <Button  style={{float: "right"}} className={`c-button-default ${this.state.savingQuote ? "active" : ""}`} onClick={(){
                   this.saveQuote()
-                }}
+                }} 
+                disabled={this.state.savingQuote}
               >
                 SUBMIT
                 {this.state.savingQuote && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
