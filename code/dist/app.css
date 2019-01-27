@@ -1577,6 +1577,9 @@ input.form-control:focus {
     padding-right: 25px;
     cursor: pointer; }
 
+.all-review-questions-container .questions-container .c-button-default.btn.circular.action {
+  width: auto; }
+
 .all-review-questions-container .all-questions-container {
   padding-bottom: 60px;
   width: 42.71%;
@@ -1720,6 +1723,8 @@ input.form-control:focus {
     width: 90%;
     margin-left: 5%;
     position: relative; }
+  .all-review-questions-container .questions-container .c-button-default.btn.circular.action {
+    width: 100%; }
   .all-review-questions-container .all-questions-container {
     width: 90%;
     margin-left: 5%; }
@@ -3019,7 +3024,8 @@ input.form-control:focus {
 
 .autosuggest-choices {
   cursor: text;
-  overflow: hidden; }
+  overflow: hidden;
+  width: 70%; }
   .autosuggest-choices li {
     display: block; }
   .autosuggest-choices.focused {
