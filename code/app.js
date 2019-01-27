@@ -39,7 +39,7 @@ passportConfig = passportConfig(passport, config);
 
 //https redirection
 /*app.use(function(request, response){
-  if(!request.secure){
+  if(request.protocol==='http'){
     console.log('Called http to https redirection');
     response.redirect("https://" + request.headers.host + request.url);
     return;

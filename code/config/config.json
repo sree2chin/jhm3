@@ -48,7 +48,7 @@
 		"service_port" : 80,
 		"redis_url": "localhost",
 		"redis_port": 6379,
-		"redis_password": "",
+		"redis_password": "Vantis$*098#Redis",
 		"server_domain": "https://vantisapistg.sureify.com",
 		"client_domain": "http://127.0.0.1:3001",
 		"contactNumber": "1-866-826-8471",
