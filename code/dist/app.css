@@ -1794,6 +1794,7 @@ input.form-control:focus {
 .async-auto-suggest-container .autosuggest-choices {
   padding-top: 0px;
   height: 44px;
+  width: 70% !important;
   min-width: 260px;
   max-width: max-content;
   margin-bottom: 15px; }
