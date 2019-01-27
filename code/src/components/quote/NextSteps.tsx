@@ -452,18 +452,18 @@ class PlansPage extends React.Component<Props, {}> {
             >
               NEXT
             </Button>
+            <Button className={`visible-xs c-button-default forward-btn next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={()=>{
+                this.directToCorrespondingPage()
+              }}
+            >
+              NEXT
+            </Button>
             <Button className={`visible-xs back-btn c-button-default next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={()=>{
                 this.redirectToPlanPage()
               }}
               style={{backgroundColor: "#fb4d3d!important"}}
             >
               PREVIOUS
-            </Button>
-            <Button className={`visible-xs c-button-default forward-btn next-step-submit-btn ${this.state.nextStep ? "active" : ""}`} onClick={()=>{
-                this.directToCorrespondingPage()
-              }}
-            >
-              NEXT
             </Button>
           </Col>
         </Row>

@@ -561,12 +561,6 @@ class ProductsPage extends React.Component<Props, {}> {
               >
                 PREVIOUS
               </span>
-              <Button className="c-button-default visible-xs back-btn" style={{backgroundColor: "#fb4d3d!important", marginBottom: "15px"}} onClick={(){
-                  this.redirectToMainPage()
-                }}
-              >
-                PREVIOUS
-              </Button>
               <Button style={{ marginTop: "10px", marginBottom: "15px", marginLeft: "17px"}} className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
                   this.submitProductsForm()
                 }}
@@ -582,6 +576,12 @@ class ProductsPage extends React.Component<Props, {}> {
                 {this.state.submittingProductsInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>
             </div>
+            <Button className="c-button-default visible-xs back-btn" style={{backgroundColor: "#fb4d3d!important", marginBottom: "15px"}} onClick={(){
+                this.redirectToMainPage()
+              }}
+            >
+              PREVIOUS
+            </Button>
             {this.state.productSelectionErrorMsg && <Col style={{textAlign: "center", color: "red", paddingLeft: "0px", marginBottom: "15px"}} sm={12} className={"c-subheader-text error"}>
                       {this.state.productSelectionErrorMsg}
                     </Col> }

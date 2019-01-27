@@ -117,6 +117,7 @@ $autosuggest-choice-gutter-large: 8px;
 .autosuggest-choices {
   cursor: text;
   overflow: hidden;
+  width: 70%;
   li {
     // allow li/input to fill container if !has-items
     display: block;

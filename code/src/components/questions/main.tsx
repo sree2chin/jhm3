@@ -2114,7 +2114,14 @@ class Main extends React.Component<Props, {}> {
                   {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
                 </div>
               }
-              {this.shouldShowPreviousBtn() && <Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular  action visible-xs`} style={{marginLeft: "30px!important", marginBottom: "20px"}}  onClick={()=>{
+              {<Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular  action`} style={{marginLeft: "30px!important", marginBottom: "20px"}}  onClick={()=>{
+                    this.onQuestionSubmit()
+                  }}
+                >
+                  Next
+                  {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+              </Button>}
+              {this.shouldShowPreviousBtn() && <Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular  action visible-xs`} style={{marginLeft: "30px!important"}}  onClick={()=>{
                     this.handleBackSubmit()
                   }}
                 >
@@ -2122,13 +2129,6 @@ class Main extends React.Component<Props, {}> {
                   {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </Button>
               }
-              {<Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular  action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
-                    this.onQuestionSubmit()
-                  }}
-                >
-                  Next
-                  {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-              </Button>}
             </div>}
           {questionsList.isQuestionsList &&
             map(questionsList.siblingComponents, (s, i)=>{
@@ -2166,19 +2166,19 @@ class Main extends React.Component<Props, {}> {
                   {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
               </div>
             }
-            {this.shouldShowPreviousBtn() && <Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular next-step-btn action visible-xs`} style={{marginLeft: "30px!important", marginBottom: "20px"}}  onClick={()=>{
-                  this.handleBackSubmit()
-                }}
-              >
-                Previous
-                {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-            </Button>}
-            {<Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+            {<Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular next-step-btn action`} style={{marginLeft: "30px!important", marginBottom: "20px"}}  onClick={()=>{
                   this.onQuestionSubmit()
                 }}
               >
                 Next
                 {this.state.submittingQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
+            </Button>}
+            {this.shouldShowPreviousBtn() && <Button disabled={this.isSubmitBtnDisabled()} className={`c-button-default circular next-step-btn action visible-xs`} style={{marginLeft: "30px!important"}}  onClick={()=>{
+                  this.handleBackSubmit()
+                }}
+              >
+                Previous
+                {this.state.goingBackQuestions && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
             </Button>}
           </div>
           </Row>}
