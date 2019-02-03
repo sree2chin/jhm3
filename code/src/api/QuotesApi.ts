@@ -10,7 +10,9 @@ findIP.then(ip => {window.currentBrowserIpAddress = ip;}).catch(e => console.err
 window.currentBrowserTimezoneOffset = new Date().getTimezoneOffset();
 window.currentBrowserTimezoneOffsetFormatted = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
 
-var queryParms = "?ipAddress=" + window.currentBrowserIpAddress + "&timezoneOffset=" + window.currentBrowserTimezoneOffset + "&timezoneFormatted=" + window.currentBrowserTimezoneOffsetFormatted + "&currentTime=";
+var getQueryParms = function() {
+  return String(window.location.search) + "&ipAddress=" + window.currentBrowserIpAddress + "&timezoneOffset=" + window.currentBrowserTimezoneOffset + "&timezoneFormatted=" + window.currentBrowserTimezoneOffsetFormatted + "&currentTime=";
+}
 
 interface QuotesApiI {
   submit: any;
@@ -22,7 +24,7 @@ interface QuotesApiI {
 class QuotesApi {
 
   submit(payload, isFromMainPage) {
-    var q = queryParms;
+    var q = getQueryParms();
     q = q + new Date().getTime() + '&isFromMainPage=' + isFromMainPage;
     return fetch('/v1/quote/products' + q, {
         method: "POST",
@@ -42,7 +44,7 @@ class QuotesApi {
   };
 
   submitProductsForm(payload) : Promise<any> {
-    var q = queryParms;
+    var q = getQueryParms();
     q += new Date().getTime();
     return fetch('/v1/quote/plans' + q, {
         method: "POST",
@@ -63,7 +65,7 @@ class QuotesApi {
 
 
   plansSubmit(payload) : Promise<any> {
-    var q = queryParms;
+    var q = getQueryParms();
     q += new Date().getTime();
     return fetch('/v1/quote/premiums' + q, {
         method: "POST",
@@ -83,7 +85,7 @@ class QuotesApi {
   };
 
   saveQuoteForm(payload) : Promise<any> {
-    var q = queryParms;
+    var q = getQueryParms();
     q += new Date().getTime();
     return fetch('/v1/quote/savequote' + q, {
         method: "POST",

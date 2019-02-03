@@ -5,7 +5,9 @@ findIP.then(ip => {window.currentBrowserIpAddress = ip;}).catch(e => console.err
 window.currentBrowserTimezoneOffset = new Date().getTimezoneOffset();
 window.currentBrowserTimezoneOffsetFormatted = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
 
-var queryParms = "?ipAddress=" + window.currentBrowserIpAddress + "&timezoneOffset=" + window.currentBrowserTimezoneOffset + + "&timezoneFormatted=" + window.currentBrowserTimezoneOffsetFormatted + "&currentTime=";
+var getQueryParms = function() {
+    return String(window.location.search) + "&ipAddress=" + window.currentBrowserIpAddress + "&timezoneOffset=" + window.currentBrowserTimezoneOffset + + "&timezoneFormatted=" + window.currentBrowserTimezoneOffsetFormatted + "&currentTime=";
+}
 
 window.onerror = function(errorMsg, url, lineNumber, column, errorObj) {
     var payLoad = {};
@@ -25,7 +27,7 @@ class ErrorLogsApi {
     submit(payload) {
         window.totalErrorPosted++;
         window.lastErrorPostedTime = new Date().getTime();
-        var q = queryParms;
+        var q = getQueryParms();
         q += new Date().getTime();
         return fetch('/v1/error/logs' + q, {
             method: "POST",

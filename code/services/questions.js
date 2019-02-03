@@ -9,6 +9,7 @@ module.exports = new function() {
 
   this.getQuestions = function(req, callback) {
     req.session = req.session || {};
+    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
     ApiService.getQuestions(req, function(err, res) {
       if (!err && res.statusCode == 200) {
         callback(res.statusCode, res.body);
@@ -16,9 +17,9 @@ module.exports = new function() {
         var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
 
         if (responseBody && responseBody.data && responseBody.data.current_document_data) {
-          req.session.envelop_id = responseBody.data.current_document_data.envelop_id;
-          req.session.signature_status = responseBody.data.current_document_data.signature_status;
-          console.log("\n\n\nreq.session.envelop_id: " + req.session.envelop_id + "\n\n\n");
+          req.session[req.query.transaction_id].envelop_id = responseBody.data.current_document_data.envelop_id;
+          req.session[req.query.transaction_id].signature_status = responseBody.data.current_document_data.signature_status;
+          console.log("\n\n\nreq.session.envelop_id: " + req.session[req.query.transaction_id].envelop_id + "\n\n\n");
         }
         callback(res.statusCode, res.body);
       }
@@ -27,15 +28,16 @@ module.exports = new function() {
 
   this.postQuestions = function(req, callback) {
     req.session = req.session || {};
-    req.session.answered_questions = req.session.answered_questions || [];
-    req.session.answered_questions.push(req.body.answered_questions);
+    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    req.session[req.query.transaction_id].answered_questions = req.session[req.query.transaction_id].answered_questions || [];
+    req.session[req.query.transaction_id].answered_questions.push(req.body.answered_questions);
     ApiService.postQuestions(req, function(err, res) {
       if (!err && res.statusCode == 200) {
         var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
 
         if (responseBody && responseBody.data && responseBody.data.current_document_data) {
-          req.session.envelop_id = responseBody.data.current_document_data.envelop_id;
-          req.session.signature_status = responseBody.data.current_document_data.signature_status;
+          req.session[req.query.transaction_id].envelop_id = responseBody.data.current_document_data.envelop_id;
+          req.session[req.query.transaction_id].signature_status = responseBody.data.current_document_data.signature_status;
           console.log("\n\n\nreq.session.envelop_id: " + req.session.envelop_id + "\n\n\n");
         }
         callback(res.statusCode, res.body);
@@ -62,8 +64,8 @@ module.exports = new function() {
         var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
 
         if (responseBody && responseBody.data && responseBody.data.current_document_data) {
-          req.session.envelop_id = responseBody.data.current_document_data.envelop_id;
-          req.session.signature_status = responseBody.data.current_document_data.signature_status;
+          req.session[req.query.transaction_id].envelop_id = responseBody.data.current_document_data.envelop_id;
+          req.session[req.query.transaction_id].signature_status = responseBody.data.current_document_data.signature_status;
           console.log("\n\n\nreq.session.envelop_id: " + req.session.envelop_id + "\n\n\n");
         }
         callback(res.statusCode, res.body);
@@ -80,8 +82,8 @@ module.exports = new function() {
         var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
 
         if (responseBody && responseBody.data && responseBody.data.current_document_data) {
-          req.session.envelop_id = responseBody.data.current_document_data.envelop_id;
-          req.session.signature_status = responseBody.data.current_document_data.signature_status;
+          req.session[req.query.transaction_id].envelop_id = responseBody.data.current_document_data.envelop_id;
+          req.session[req.query.transaction_id].signature_status = responseBody.data.current_document_data.signature_status;
           console.log("\n\n\nreq.session.envelop_id: " + req.session.envelop_id + "\n\n\n");
         }
         callback(res.statusCode, res.body);
@@ -99,8 +101,8 @@ module.exports = new function() {
         var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
         //console.log("\n\n\n" + JSON.stringify(res.body) + "\n\n\n");
         if (responseBody && responseBody.data && responseBody.data.access_token) {
-          req.session.queryParams = req.session.queryParams || {};
-          req.session.queryParams.access_token = responseBody.data.access_token;
+          req.session[req.query.transaction_id].queryParams = req.session.queryParams || {};
+          req.session[req.query.transaction_id].queryParams.access_token = responseBody.data.access_token;
         }
         callback(res.statusCode, res.body);
       } else {
@@ -116,8 +118,8 @@ module.exports = new function() {
         //console.log("\n\n\n" + JSON.stringify(res.body) + "\n\n\n");
         var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
         if (responseBody && responseBody.data && responseBody.data.access_token) {
-          req.session.queryParams = req.session.queryParams || {};
-          req.session.queryParams.access_token = responseBody.data.access_token;
+          req.session[req.query.transaction_id].queryParams = req.session.queryParams || {};
+          req.session[req.query.transaction_id].queryParams.access_token = responseBody.data.access_token;
         }
         callback(res.statusCode, res.body);
       } else {
@@ -149,8 +151,8 @@ module.exports = new function() {
       if (!err && res.statusCode == 200) {
         var responseBody = JSON.parse(JSON.stringify(JSON.parse(res.body)));
         if (responseBody && responseBody.data && responseBody.data.access_token) {
-          req.session.queryParams = req.session.queryParams || {};
-          req.session.queryParams.access_token = responseBody.data.access_token;
+          req.session[req.query.transaction_id].queryParams = req.session.queryParams || {};
+          req.session[req.query.transaction_id].queryParams.access_token = responseBody.data.access_token;
         }
         callback(res.statusCode, res.body);
       } else {

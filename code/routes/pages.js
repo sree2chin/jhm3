@@ -25,35 +25,19 @@ module.exports = function(app) {
   var samlAuthenticateMiddleware = function(req, res, next) {
 
     req.session = req.session || {};
-    req.session.questionsMiddleware = false;
+    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    req.session[req.query.transaction_id].questionsMiddleware = false;
     var url_parts = url.parse(req.url, true);
-    req.session = req.session || {};
-    req.session.queryParams = {};
-    if (!_.isEmpty(url_parts.query)) {
-      req.session.queryParams = req.session.queryParams || {};
-      for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k] || "";
-      }
-    };
 
     if (url_parts.query && url_parts.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
-      if (req.session.authenticatedOnce) {
-        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 5*60*1000;
+      if (req.session[req.query.transaction_id].authenticatedOnce) {
+        shouldAuthenticate = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 5*60*1000;
       } else {
         shouldAuthenticate = true;
       }
       if (shouldAuthenticate) {
-        var queryParams = url_parts.query;
-        var queryParamsString = "?";
-        for(var k in queryParams) {
-          if (queryParams[k]) {
-            queryParamsString += k + "=" + queryParams[k] + "&";
-          } else {
-            queryParamsString += k + "&";
-          }
-        }
-        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+        var queryParamsString = url_parts.search;
         passport.authenticate('saml', { failureRedirect: '/login' + queryParamsString, failureFlash: true })(req, res, next);
       } else {
         next();
@@ -66,34 +50,19 @@ module.exports = function(app) {
   var samlAuthenticateQuestionsMiddleware1 = function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};
-    req.session.queryParams = req.session.queryParams || {};
-    if (!_.isEmpty(url_parts.query)) {
-      req.session.queryParams = req.session.queryParams || {};
-      for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k] || "";
-      }
-    };
-    req.session.questionsMiddleware = true;
+    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    req.session[req.query.transaction_id].questionsMiddleware = true;
 
     var url_parts = url.parse(req.url, true);
     if (url_parts.query && url_parts.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
-      if (req.session.authenticatedOnce) {
-        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 5*60*1000;
+      if (req.session[req.query.transaction_id].authenticatedOnce) {
+        shouldAuthenticate = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 5*60*1000;
       } else {
         shouldAuthenticate = true;
       }
       if (shouldAuthenticate) {
-        var queryParams = url_parts.query;
-        var queryParamsString = "?";
-        for(var k in queryParams) {
-          if (queryParams[k]) {
-            queryParamsString += k + "=" + queryParams[k] + "&";
-          } else {
-            queryParamsString += k + "&";
-          }
-        }
-        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+        var queryParamsString = url_parts.search;
         passport.authenticate('saml', { failureRedirect: '/login' + queryParamsString, failureFlash: true })(req, res, next);
       } else {
         next();
@@ -106,96 +75,56 @@ module.exports = function(app) {
   var loginMiddleware = function(req, res, next) {
     console.log("in loginMiddleware");
     req.session = req.session || {};
-    req.session.queryParams = req.session.queryParams || {};
-    var queryParams = req.session.queryParams;
-    var queryParamsString = "?";
-    for(var k in queryParams) {
-      if (queryParams[k]) {
-        queryParamsString += k + "=" + queryParams[k] + "&";
-      } else {
-        queryParamsString += k + "&";
-      }
-    }
-    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    var url_parts = url.parse(req.url, true);
+
+    var queryParamsString = url_parts.search;
     passport.authenticate('saml', { failureRedirect: '/login' + queryParamsString, failureFlash: true })(req, res, next);
 
   };
 
   app.get("/login", loginMiddleware, function(req,  res, next) {
     req.session = req.session || {};
-    req.session.queryParams = req.session.queryParams || {};
-    var queryParams = req.session.queryParams;
-    var queryParamsString = "?";
-    for(var k in queryParams) {
-      if (queryParams[k]) {
-        queryParamsString += k + "=" + queryParams[k] + "&";
-      } else {
-        queryParamsString += k + "&";
-      }
-    }
-    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+
+    var url_parts = url.parse(req.url, true);
+
+    var queryParamsString = url_parts.search;
     res.redirect("/" + queryParamsString);
   });
 
   app.get("/questions/login", loginMiddleware, function(req,  res, next) {
     console.log("\n\n\n/questions/login\n\n\n");
     req.session = req.session || {};
-    req.session.queryParams = req.session.queryParams || {};
-    var queryParams = req.session.queryParams;
-    var queryParamsString = "?";
-    for(var k in queryParams) {
-      if (queryParams[k]) {
-        queryParamsString += k + "=" + queryParams[k] + "&";
-      } else {
-        queryParamsString += k + "&";
-      }
-    }
-    console.log("req.session.questionsLoginRedirectPage1: " + req.session.questionsLoginRedirectPage1);
-    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-    req.session.questionsLoginRedirectPage1 = null;
+    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    var url_parts = url.parse(req.url, true);
+
+    var queryParamsString = url_parts.search;
+    var questionsLoginRedirectPage1 = req.session[req.query.transaction_id].questionsLoginRedirectPage1;
+    req.session[req.query.transaction_id].questionsLoginRedirectPage1 = null;
     res.redirect("/" + questionsLoginRedirectPage1 + queryParamsString);
   });
 
   app.get('/', samlAuthenticateMiddleware, function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};
-    req.session.queryParams = {};
-    if (!_.isEmpty(url_parts.query)) {
-      req.session.queryParams = req.session.queryParams || {};
-      for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k] || "";
-      }
-    };
+    // req.session.queryParams = {};
+    // if (!_.isEmpty(url_parts.query)) {
+    //   req.session.queryParams = req.session.queryParams || {};
+    //   for(var k in url_parts.query) {
+    //     req.session.queryParams[k] = url_parts.query[k] || "";
+    //   }
+    // };
     templatePath = "./dist/index.ejs";
     res.render(templatePath);
   });
 
   app.post('/', samlAuthenticateMiddleware, function(req, res, next) {
-    var url_parts = url.parse(req.url, true);
-    console.log("in normal post url: " + JSON.stringify(url_parts));
-    req.session = req.session || {};
-    req.session.queryParams = {};
-    if (!_.isEmpty(url_parts.query)) {
-      req.session.queryParams = req.session.queryParams || {};
-      for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k] || "";
-      }
-    };
     templatePath = "./dist/";
     res.render(templatePath);
   });
 
   app.get('/signature', samlAuthenticateQuestionsMiddleware1, function(req, res, next) {
-    var url_parts = url.parse(req.url, true);
-    console.log("in signature url: " + JSON.stringify(url_parts));
-    req.session = req.session || {};
-    req.session.queryParams = req.session.queryParams || {};
-    if (!_.isEmpty(url_parts.query)) {
-      req.session.queryParams = req.session.queryParams || {};
-      for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k] || "";
-      }
-    };
     templatePath = "./dist/";
     res.render(templatePath);
   });
@@ -203,24 +132,7 @@ module.exports = function(app) {
   app.get('/offer', samlAuthenticateQuestionsMiddleware1, function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     console.log("in offer url: " + JSON.stringify(url_parts));
-    req.session = req.session || {};
-    req.session.queryParams = req.session.queryParams || {};
-    if (!_.isEmpty(url_parts.query)) {
-      req.session.queryParams = req.session.queryParams || {};
-      for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k] || "";
-      }
-    };
-    var queryParams = req.session.queryParams;
-    var queryParamsString = "?";
-    for(var k in queryParams) {
-      if (queryParams[k]) {
-        queryParamsString += k + "=" + queryParams[k] + "&";
-      } else {
-        queryParamsString += k + "&";
-      }
-    }
-    queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+    var queryParamsString = url_parts.search;
 
     res.redirect("/questions" + queryParamsString);
     //templatePath = "./dist/";
@@ -231,12 +143,12 @@ module.exports = function(app) {
     var url_parts = url.parse(req.url, true);
     console.log("in payment_success url: " + JSON.stringify(url_parts));
     req.session = req.session || {};
-    //req.session.queryParams = req.session.queryParams || {};
-    req.session.paymentQueryParams = {};
+    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    req.session[req.query.transaction_id].paymentQueryParams = {};
     if (!_.isEmpty(url_parts.query)) {
-      req.session.paymentQueryParams = req.session.paymentQueryParams || {};
+      req.session[req.query.transaction_id].paymentQueryParams = req.session[req.query.transaction_id].paymentQueryParams || {};
       for(var k in url_parts.query) {
-        req.session.paymentQueryParams[k] = url_parts.query[k] || "";
+        req.session[req.query.transaction_id].paymentQueryParams[k] = url_parts.query[k] || "";
       }
     };
     templatePath = "./dist/";
@@ -245,29 +157,19 @@ module.exports = function(app) {
 
   app.get('/payment', function(req, res, next) {
     req.session = req.session || {};
-    req.session.queryParams = req.session.queryParams || {};
-    var html = JSON.parse(req.session.postPayment).body;
+    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    var html = JSON.parse(req.session[req.query.transaction_id].postPayment).body;
     var htmlP = html.split("<head>")
 
-    htmlP[0] = htmlP[0] + `<base href=${req.session.postPaymentElavonUrl}></base>`;
+    htmlP[0] = htmlP[0] + `<base href=${req.session[req.query.transaction_id].postPaymentElavonUrl}></base>`;
     htmlP[0] = htmlP[0] + " <link href='http://ec2-54-158-63-166.compute-1.amazonaws.com/dist/css/elavon_payment.css' rel='stylesheet'>";
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.write(htmlP[0] + htmlP[1]);
-    //req.session.postPayment = null;
     res.end();
   });
 
 
   app.get('/authorize', function(req, res, next) {
-    var url_parts = url.parse(req.url, true);
-    req.session.queryParams = {};
-
-    if (!_.isEmpty(url_parts.query)) {
-      req.session.queryParams = req.session.queryParams || {};
-      for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k] || "";
-      }
-    };
     templatePath = "./dist/";
     res.render(templatePath);
   });
@@ -276,29 +178,17 @@ module.exports = function(app) {
     req.session = req.session || {};
     req.session.questionsMiddleware = true;
     var url_parts = url.parse(req.url, true);
-    console.log("\n\n\neq.session.queryParams: " + JSON.stringify(req.session.queryParams)+ "\n\n\n\n");
-    req.session.queryParams = req.session.queryParams || {};
 
-    if (req.session.queryParams && req.session.queryParams.agent_number && config.passport.saml.on) {
+    if (req.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
-      if (req.session.authenticatedOnce) {
-        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 1*60*1000;
+      if (req.session[req.query.transaction_id].authenticatedOnce) {
+        shouldAuthenticate = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 1*60*1000;
       } else {
         shouldAuthenticate = true;
       }
-      console.log("\n\n\n" + shouldAuthenticate + "\n\n\n");
       if (shouldAuthenticate) {
-        var queryParams = req.session.queryParams;
-        var queryParamsString = "?";
-        for(var k in queryParams) {
-          if (queryParams[k]) {
-            queryParamsString += k + "=" + queryParams[k] + "&";
-          } else {
-            queryParamsString += k + "&";
-          }
-        }
-        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-        req.session.questionsLoginRedirectPage = req.url;
+        var queryParamsString = url_parts.search;
+        req.session[req.query.transaction_id].questionsLoginRedirectPage = req.url;
         next();
       } else {
         next();
@@ -309,30 +199,11 @@ module.exports = function(app) {
   };
 
   app.get('/questions', samlAuthenticateQuestionsMiddleware, function(req, res, next) {
-    var url_parts = url.parse(req.url, true);
-    req.session = req.session || {};
-    req.session.queryParams = {};
-    console.log("in questions url: " + !_.isEmpty(url_parts.query));
-    if (!_.isEmpty(url_parts.query)) {
-      req.session.queryParams = req.session.queryParams || {};
-      for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k] || "";
-      }
-    };
     templatePath = "./dist/";
     res.render(templatePath);
   });
 
   app.get('/agent', samlAuthenticateMiddleware, function(req, res, next) {
-    var url_parts = url.parse(req.url, true);
-    req.session = req.session || {};
-    req.session.queryParams = {};
-    if (!_.isEmpty(url_parts.query)) {
-      req.session.queryParams = req.session.queryParams || {};
-      for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k] || "";
-      }
-    };
     templatePath = "./dist/";
     res.render(templatePath);
   });
@@ -358,17 +229,6 @@ module.exports = function(app) {
   });
 
   app.get('*', function(req, res, next) {    
-    console.log(JSON.stringify(req.url));
-    var url_parts = url.parse(req.url, true);
-    console.log("in * url: " + JSON.stringify(url_parts));
-    req.session = req.session || {};
-    //req.session.queryParams = {};
-    if (!_.isEmpty(url_parts.query)) {
-      req.session.queryParams = req.session.queryParams || {};
-      for(var k in url_parts.query) {
-        req.session.queryParams[k] = url_parts.query[k] || "";
-      }
-    };
     templatePath = "./dist/";
     res.render(templatePath);
   });
