@@ -229,9 +229,7 @@ module.exports = new function(){
         data.envelop_id = req.session[req.query.transaction_id].envelop_id;
         delete req.session[req.query.transaction_id].envelop_id;
       }
-      data.signature_status = "1";
     } else {
-      data.signature_status = "0";
     }
     request({
       url: restOptions.host + '/v1/questions/questions',
@@ -274,9 +272,7 @@ module.exports = new function(){
         formData.envelop_id = req.session[req.query.transaction_id].envelop_id;
         delete req.session[req.query.transaction_id].envelop_id;
       }
-      formData.signature_status = "1";
     } else {
-      formData.signature_status = "0";
     }
     request({
       url: restOptions.host + '/v1/questions/questions',
@@ -345,9 +341,7 @@ module.exports = new function(){
         formData.envelop_id = req.session[req.query.transaction_id].envelop_id;
         delete req.session[req.query.transaction_id].envelop_id;
       }
-      formData.signature_status = "1";
     } else {
-      formData.signature_status = "0";
     }
 
     appendAgentInfo(req, formData);
@@ -391,9 +385,7 @@ module.exports = new function(){
         formData.envelop_id = req.session[req.query.transaction_id].envelop_id;
         delete req.session[req.query.transaction_id].envelop_id;
       }
-      formData.signature_status = "1";
     } else {
-      formData.signature_status = "0";
     }
     console.log("\n\n\nformData in makePayment1: " + JSON.stringify(formData) + "\n\n\n");
     request({
@@ -443,9 +435,7 @@ module.exports = new function(){
         formData.envelop_id = req.session[req.query.transaction_id].envelop_id;
         delete req.session[req.query.transaction_id].envelop_id;
       }
-      formData.signature_status = "1";
     } else {
-      formData.signature_status = "0";
     }
     console.log("\n\n\nformData in makePayment: " + JSON.stringify(formData) + "\n\n\n");
     request({

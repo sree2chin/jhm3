@@ -228,7 +228,7 @@ class Offer extends React.Component<Props, {}> {
         return;
       }
 
-      window.location.href = `/payment`;
+      window.location.href = `/payment` + window.location.search;
       this.setState({
         onPaymentGoingTo: false
       });
