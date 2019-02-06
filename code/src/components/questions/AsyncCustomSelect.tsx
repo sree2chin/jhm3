@@ -214,7 +214,7 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
           {question.constraints && question.constraints.required && <span style={{color: "rgb(255, 73, 73)", marginRight: "9px"}}>*</span>}
           {question.caption}
         </Col>
-          <Col style={{paddingRight: "15px", marginBottom: "15px"}} className="async-auto-suggest-container">
+          <Col style={{marginBottom: "15px"}} className="async-auto-suggest-container">
             <Row>
               <Autosuggest
                 datalist={this.state.items || []}
@@ -230,7 +230,7 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
                 onChange={this.onItemChange.bind(this)}
                 multiple
                 datalistOnly={true} 
-                buttonAfter={<img src={"../images/iconfinder_icon.svg"}/>}/>
+                buttonAfter={(this.state.selectedItem && this.state.selectedItem.length > 0) ? null : <img src={"../images/iconfinder_icon.svg"}/> }/>
                 {question.hint && <Col className="help-text" style={{marginTop: "12px"}}>
                   {question.hint}
                   </Col>
