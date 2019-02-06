@@ -301,11 +301,14 @@ module.exports = new function(){
   this.postPayment = function(req, cb){
     var paymentConfig = JSON.parse(JSON.stringify(appConfig.getProperty("payment")));
     var elavonConfig = req.body.elavon_params;
+    if (req.body.start_coverage == 1) {
+      elavonConfig.start_coverage = req.body.start_coverage;
+    }
     if (_.isEmpty(elavonConfig)) {
       this.makePayment1(req, cb, true);
       return;
     }
-    console.log("\n\n\n in postPayment" + JSON.stringify(elavonConfig) + "\n\n\n");
+    console.log("\n\n\n in postPayment: " + JSON.stringify(elavonConfig) + "\n\n\n");
     console.log("in postPayment req.body.elavon_url: " + req.body.elavon_url + "\n\n\n");
     elavonConfig.url = req.body.elavon_url;
     //appendQueryParams(req, elavonConfig);
@@ -377,7 +380,9 @@ module.exports = new function(){
 
     var formData = {};
     formData.payment_response_data = JSON.stringify([]);
-
+    if (req.body.start_coverage == 1) {
+      formData.start_coverage = req.body.start_coverage;
+    }
     appendAgentInfo(req, formData);
     appendQueryParams(req, formData);
     if (req.query.event == "signing_complete") {
