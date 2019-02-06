@@ -1768,12 +1768,12 @@ input.form-control:focus {
   padding-left: 0px; }
 
 .async-auto-suggest-container .autosuggest .input-group-btn {
-  display: inline; }
+  display: inline-block; }
   .async-auto-suggest-container .autosuggest .input-group-btn button {
     height: 44px;
     visibility: hidden; }
   .async-auto-suggest-container .autosuggest .input-group-btn img {
-    height: 44px;
+    height: 46px;
     background-color: #e7e5e5; }
 
 .async-auto-suggest-container .autosuggest .dropdown-menu {
@@ -1793,15 +1793,20 @@ input.form-control:focus {
 
 .async-auto-suggest-container .autosuggest-choices {
   padding-top: 0px;
-  height: 44px;
+  height: auto;
   width: 70% !important;
-  min-width: 260px;
+  min-width: 250px;
   max-width: max-content;
-  margin-bottom: 15px; }
+  margin-bottom: 15px !important;
+  display: inline-block !important;
+  padding-bottom: 0px; }
+  .async-auto-suggest-container .autosuggest-choices.ul {
+    display: inline; }
   .async-auto-suggest-container .autosuggest-choices li.autosuggest-input-choice {
     margin-top: 0px; }
     .async-auto-suggest-container .autosuggest-choices li.autosuggest-input-choice input {
-      font-size: 16px; }
+      font-size: 16px;
+      padding-top: 5px; }
   .async-auto-suggest-container .autosuggest-choices .autosuggest-choice {
     margin-left: 10px; }
 
