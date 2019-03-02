@@ -1795,7 +1795,7 @@ input.form-control:focus {
   padding-top: 0px;
   height: auto;
   width: 70% !important;
-  min-width: 250px;
+  min-width: 240px;
   max-width: max-content;
   margin-bottom: 15px !important;
   display: inline-block !important;
@@ -1809,6 +1809,10 @@ input.form-control:focus {
       padding-top: 5px; }
   .async-auto-suggest-container .autosuggest-choices .autosuggest-choice {
     margin-left: 10px; }
+
+@media (max-width: 768px) {
+  .async-auto-suggest-container .autosuggest-choices {
+    min-width: 230px; } }
 
 .input-without-border-group {
   position: relative;
