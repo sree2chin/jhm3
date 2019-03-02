@@ -145,6 +145,12 @@ class PlansPage extends React.Component<Props, {}> {
             window.location.href = this.props.premiums.redirect_url;
             return;
           }
+          if (this.state.selectedRider0) {
+            this.updateRider(this.state.selectedRider0, 0, this.state.selectedRiderKey0);
+          }
+          if (this.state.selectedRider1) {
+            this.updateRider(this.state.selectedRider1, 1, this.state.selectedRiderKey1);
+          }
           if(successCb) { successCb(); }
           this.setState({
             submittingPlansFromPlan: false
@@ -485,6 +491,28 @@ class PlansPage extends React.Component<Props, {}> {
       });
     }
   }
+
+  updateRider(rider, index, riderKey) {
+    var latestRiderInfo = rider;
+    if (this.props.premiums && this.props.premiums[index] && 
+      this.props.premiums[index][this.state["productIdPlan"+index]] && 
+      this.props.premiums[index][this.state["productIdPlan"+index]].Plan &&
+      this.props.premiums[index][this.state["productIdPlan"+index]].Plan.Rider
+    ) {
+      var riders = this.props.premiums[index][this.state["productIdPlan" +index]].Plan.Rider;
+      for (var key in riders) {
+        if (key === riderKey) {
+          latestRiderInfo = riders[key];
+          break;
+        }
+      }
+    }
+    this.setState({
+      ["selectedRider" + index]: latestRiderInfo,
+      ["selectedRiderKey" + index]: riderKey
+    });
+  }
+
   containsOnlySPWL() {
     var containOnlySPWLProducts = false;
     if (this.props.plans) {
