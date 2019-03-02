@@ -224,6 +224,12 @@ input.form-control:focus {
   border: solid 1px #d4d4d4;
   height: 80px; }
 
+.quote-main-loader-container {
+  padding-left: calc(18% - 15px);
+  margin-top: 50px; }
+  .quote-main-loader-container .main-loader {
+    font-size: 150px; }
+
 .custom-checkbox-container {
   display: block;
   position: relative;
