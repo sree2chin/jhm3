@@ -516,6 +516,13 @@ class PlansPage extends React.Component<Props, {}> {
     const paymentSchedules = this.state.paymentSchedules;
     var additionalPersonClass = this.props.noOfPersons==2 ? "all-plan-person-info-container" : "";
 
+    if (isEmpty(persons)) {
+      return (
+        <div className="quote-main-loader-container">
+          <i style={{marginTop: "25px"}} className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>
+        </div>);
+    }
+
     return (
       <div className="product-pager-container">
         <ScrollToTopOnMount />

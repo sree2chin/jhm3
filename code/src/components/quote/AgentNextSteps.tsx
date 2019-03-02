@@ -331,6 +331,14 @@ class PlansPage extends React.Component<Props, {}> {
     var {persons} = this.props;
     persons = persons || [];
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
+
+    if (isEmpty(persons)) {
+      return (
+        <div className="quote-main-loader-container">
+          <i style={{marginTop: "25px"}} className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>
+        </div>);
+    }
+    
     return (
       <div className="next-steps-container">
         <Subheader
