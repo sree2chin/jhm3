@@ -145,6 +145,12 @@ class PlansPage extends React.Component<Props, {}> {
             window.location.href = this.props.premiums.redirect_url;
             return;
           }
+          if (this.state.selectedRider0) {
+            this.updateRider(this.state.selectedRider0, 0, this.state.selectedRiderKey0);
+          }
+          if (this.state.selectedRider1) {
+            this.updateRider(this.state.selectedRider1, 1, this.state.selectedRiderKey1);
+          }
           if(successCb) { successCb(); }
           this.setState({
             submittingPlansFromPlan: false
@@ -232,7 +238,7 @@ class PlansPage extends React.Component<Props, {}> {
           var riderAmount = 0;
           personOne.sWP = 0;
           if (this.state.selectedRider0 && this.state.selectedRider0.Premium) {
-            riderAmount = this.state.selectedRider0.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider0.Premium[this.state.premium_type].split("$")[1]) : 0;
+            riderAmount = this.state.selectedRider0.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider0.Premium[this.state.premium_type].split("$")[1].replace(",", "")) : 0;
             personOne.wp_premium = String(riderAmount);
             personOne.sWP = 1;
           } else {
@@ -272,11 +278,11 @@ class PlansPage extends React.Component<Props, {}> {
         if (this.props.premiums && this.props.premiums[1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1].Plan && this.props.premiums[1][this.state.productIdPlan1].Plan.SpwlFlag != "1") {
           if(this.props.premiums && this.props.premiums[1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1] && this.props.premiums[1][this.state.productIdPlan1].Plan && this.props.premiums[1][this.state.productIdPlan1].Plan.Premium ) {
             var amount = this.props.premiums[1][this.state.productIdPlan1].Plan.Premium[this.state.premium_type];
-            amount = amount ? parseFloat(amount.split("$")[1]) : 0;
+            amount = amount ? parseFloat(amount.split("$")[1].replace(",", "")) : 0;
             var riderAmount = 0;
             personTwo.sWP = 0;
             if (this.state.selectedRider1 && this.state.selectedRider1.Premium) {
-              riderAmount = this.state.selectedRider1.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider1.Premium[this.state.premium_type].split("$")[1])  : 0;
+              riderAmount = this.state.selectedRider1.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider1.Premium[this.state.premium_type].split("$")[1].replace(",", ""))  : 0;
               personTwo.wp_premium = String(riderAmount);
               personTwo.sWP = 1;
             } else {
@@ -424,7 +430,7 @@ class PlansPage extends React.Component<Props, {}> {
         //total += parseFloat(this.props.persons[0].sPremiumAmount);
       }
       if (this.state.selectedRider0) {
-        var riderAmount = this.state.selectedRider0.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider0.Premium[this.state.premium_type].split("$")[1]) : 0;
+        var riderAmount = this.state.selectedRider0.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider0.Premium[this.state.premium_type].split("$")[1].replace(",", "")) : 0;
         total += riderAmount;
       }
     }
@@ -438,7 +444,7 @@ class PlansPage extends React.Component<Props, {}> {
         //total += parseFloat(this.props.persons[1].sPremiumAmount);
       }
       if (this.state.selectedRider1) {
-        var riderAmount = this.state.selectedRider1.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider1.Premium[this.state.premium_type].split("$")[1])  : 0;
+        var riderAmount = this.state.selectedRider1.Premium[this.state.premium_type] ? parseFloat(this.state.selectedRider1.Premium[this.state.premium_type].split("$")[1].replace(",", ""))  : 0;
         total += riderAmount;
       }
     }
@@ -485,6 +491,28 @@ class PlansPage extends React.Component<Props, {}> {
       });
     }
   }
+
+  updateRider(rider, index, riderKey) {
+    var latestRiderInfo = rider;
+    if (this.props.premiums && this.props.premiums[index] && 
+      this.props.premiums[index][this.state["productIdPlan"+index]] && 
+      this.props.premiums[index][this.state["productIdPlan"+index]].Plan &&
+      this.props.premiums[index][this.state["productIdPlan"+index]].Plan.Rider
+    ) {
+      var riders = this.props.premiums[index][this.state["productIdPlan" +index]].Plan.Rider;
+      for (var key in riders) {
+        if (key === riderKey) {
+          latestRiderInfo = riders[key];
+          break;
+        }
+      }
+    }
+    this.setState({
+      ["selectedRider" + index]: latestRiderInfo,
+      ["selectedRiderKey" + index]: riderKey
+    });
+  }
+
   containsOnlySPWL() {
     var containOnlySPWLProducts = false;
     if (this.props.plans) {

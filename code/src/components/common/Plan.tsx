@@ -63,7 +63,7 @@ export default class Plan extends React.Component<Props, {}> {
     this.setState({
       [key]: obj.value,
       selectedPaymentType: obj,
-      payment_amount: parseFloat((obj.amount).split("$")[1])
+      payment_amount: parseFloat((obj.amount).split("$")[1].replace(",", ""))
     })
     this.props.onPaymentTypeChange(this.props.personIndex, obj);
   }
