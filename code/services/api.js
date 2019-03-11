@@ -15,22 +15,22 @@ module.exports = new function(){
   var self = this;
   var appendAgentInfo = function(req, data) {
     if(req.session) {
-      if (req.session && req.session.queryParams) {
-        for(var k in req.session.queryParams) {
-          data[k] = req.session.queryParams[k];
-        }
-      }
-      if (req.session.uniqueTransactionId) {
-        data["transaction_id"] = req.session.uniqueTransactionId;
-      }
+      // if (req.session && req.session.queryParams) {
+      //   for(var k in req.session.queryParams) {
+      //     data[k] = req.session.queryParams[k];
+      //   }
+      // }
+      // if (req.session.uniqueTransactionId) {
+      //   data["transaction_id"] = req.session.uniqueTransactionId;
+      // }
     }
   };
 
   var appendAgentPaymentInfo = function(req, data) {
-    if(req.session) {
-      if (req.session && req.session.paymentQueryParams) {
-        for(var k in req.session.paymentQueryParams) {
-          data[k] = req.session.paymentQueryParams[k];
+    if(req.session && req.session[req.query.transaction_id]) {
+      if (req.session[req.query.transaction_id].paymentQueryParams) {
+        for(var k in req.session[req.query.transaction_id].paymentQueryParams) {
+          data[k] = req.session[req.query.transaction_id].paymentQueryParams[k];
         }
       }
     }
@@ -45,7 +45,7 @@ module.exports = new function(){
       method: 'POST'
     }
     var formData = req.body;    
-    appendAgentInfo(req, formData);
+    //appendAgentInfo(req, formData);
     appendQueryParams(req, formData);
     options.formData = formData;
     console.log("\n\n\nformData: " + JSON.stringify(formData) + "\n\n\n");
@@ -68,8 +68,11 @@ module.exports = new function(){
 
   var appendQueryParams = function (req, data) {
     if(req.query) {
+      console.log("\n\n\nreq.query: " + JSON.stringify(req.query) + "\n\n\n");
       for(var k in req.query) {
         if (req.query[k] && req.query[k] != "undefined") {
+          data[k] = req.query[k];
+        } else if (req.query[k] == ""){
           data[k] = req.query[k];
         }
       }
@@ -118,7 +121,8 @@ module.exports = new function(){
     console.log("req.query.isFromMainPage: " + JSON.stringify(req.query.isFromMainPage));
 
     if (req.query.isFromMainPage == true || req.query.isFromMainPage == "true") {
-      req.session.uniqueTransactionId = uuidV1();
+      req.session.uniqueTransactionId = uuidV1() + "_" + new Date().getTime();
+      req.session[req.session.uniqueTransactionId] = {};
     }
     console.log("req.session.uniqueTransactionId: " + JSON.stringify(req.session.uniqueTransactionId));
     appendAgentInfo(req, formData);
@@ -220,16 +224,7 @@ module.exports = new function(){
     appendAgentInfo(req, data);
     appendQueryParams(req, data);
     console.log("\n\n\nin getQuestions formData: " + JSON.stringify(data) + "\n\n\n");
-    if (req.session.queryParams && req.session.queryParams.event == "signing_complete") {
-      delete req.session.queryParams.event;
-      if(req.session.envelop_id)      {
-        data.envelop_id = req.session.envelop_id;
-        delete req.session.envelop_id;
-      }
-      data.signature_status = "1";
-    } else {
-      data.signature_status = "0";
-    }
+
     request({
       url: restOptions.host + '/v1/questions/questions',
       formData: data,
@@ -266,16 +261,7 @@ module.exports = new function(){
     }
     appendAgentInfo(req, formData);
     appendQueryParams(req, formData);
-    if (req.session.queryParams && req.session.queryParams.event == "signing_complete") {
-      delete req.session.queryParams.event;
-      if(req.session.envelop_id) {
-        formData.envelop_id = req.session.envelop_id;
-        delete req.session.envelop_id;
-      }
-      formData.signature_status = "1";
-    } else {
-      formData.signature_status = "0";
-    }
+
     request({
       url: restOptions.host + '/v1/questions/questions',
       headers: {
@@ -303,11 +289,14 @@ module.exports = new function(){
   this.postPayment = function(req, cb){
     var paymentConfig = JSON.parse(JSON.stringify(appConfig.getProperty("payment")));
     var elavonConfig = req.body.elavon_params;
+    if (req.body.start_coverage == 1) {
+      elavonConfig.start_coverage = req.body.start_coverage;
+    }
     if (_.isEmpty(elavonConfig)) {
       this.makePayment1(req, cb, true);
       return;
     }
-    console.log("\n\n\n in postPayment" + JSON.stringify(elavonConfig) + "\n\n\n");
+    console.log("\n\n\n in postPayment: " + JSON.stringify(elavonConfig) + "\n\n\n");
     console.log("in postPayment req.body.elavon_url: " + req.body.elavon_url + "\n\n\n");
     elavonConfig.url = req.body.elavon_url;
     //appendQueryParams(req, elavonConfig);
@@ -316,8 +305,8 @@ module.exports = new function(){
       method: 'POST',
       form: elavonConfig
     }, function callback(err, httpResponse, body) {
-      req.session.postPayment = JSON.stringify(httpResponse);
-      req.session.postPaymentElavonUrl = req.body.elavon_url;
+      req.session[req.query.transaction_id].postPayment = JSON.stringify(httpResponse);
+      req.session[req.query.transaction_id].postPaymentElavonUrl = req.body.elavon_url;
       if (httpResponse && httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
@@ -336,18 +325,7 @@ module.exports = new function(){
 
   this.confirmQuestions = function(req, cb){
 
-    var formData = {};
-    console.log("\n\n\nreq.session.envelop_id: req.session.envelop_id: " + req.session.envelop_id);
-    if (req.session.queryParams && req.session.queryParams.event == "signing_complete") {
-      delete req.session.queryParams.event;
-      if(req.session.envelop_id)      {
-        formData.envelop_id = req.session.envelop_id;
-        delete req.session.envelop_id;
-      }
-      formData.signature_status = "1";
-    } else {
-      formData.signature_status = "0";
-    }
+    var formData = {}; 
 
     appendAgentInfo(req, formData);
     appendQueryParams(req, formData);
@@ -367,7 +345,6 @@ module.exports = new function(){
         self.logErrors(req, {
             user: null,
             apiName: '/v1/questions/questions',
-            inputParams: {applicants: data},
             response: httpResponse.body,
             expection: null,
             error_message: null
@@ -383,19 +360,12 @@ module.exports = new function(){
 
     var formData = {};
     formData.payment_response_data = JSON.stringify([]);
-
+    if (req.body.start_coverage == 1) {
+      formData.start_coverage = req.body.start_coverage;
+    }
     appendAgentInfo(req, formData);
     appendQueryParams(req, formData);
-    if (req.session.queryParams && req.session.queryParams.event == "signing_complete") {
-      delete req.session.queryParams.event;
-      if(req.session.envelop_id)      {
-        formData.envelop_id = req.session.envelop_id;
-        delete req.session.envelop_id;
-      }
-      formData.signature_status = "1";
-    } else {
-      formData.signature_status = "0";
-    }
+
     console.log("\n\n\nformData in makePayment1: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/questions/questions',
@@ -421,9 +391,7 @@ module.exports = new function(){
       var responseBody = JSON.parse(JSON.stringify(JSON.parse(httpResponse.body)));
 
       if (responseBody && responseBody.data && responseBody.data.current_document_data) {
-        req.session.envelop_id = responseBody.data.current_document_data.envelop_id;
-        req.session.signature_status = responseBody.data.current_document_data.signature_status;
-        console.log("\n\n\nreq.session.envelop_id: " + req.session.envelop_id + "\n\n\n");
+        req.session[req.query.transaction_id].signature_status = responseBody.data.current_document_data.signature_status;
       }
       cb(err, httpResponse);
     });
@@ -439,16 +407,7 @@ module.exports = new function(){
     appendAgentPaymentInfo(req, formData);
     appendAgentInfo(req, formData);
     appendQueryParams(req, formData);
-    if (req.session.queryParams && req.session.queryParams.event == "signing_complete") {
-      delete req.session.queryParams.event;
-      if(req.session.envelop_id)      {
-        formData.envelop_id = req.session.envelop_id;
-        delete req.session.envelop_id;
-      }
-      formData.signature_status = "1";
-    } else {
-      formData.signature_status = "0";
-    }
+    
     console.log("\n\n\nformData in makePayment: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/questions/questions',

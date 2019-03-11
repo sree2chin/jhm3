@@ -14,10 +14,9 @@ findIP.then(ip => {window.currentBrowserIpAddress = ip;}).catch(e => console.err
 window.currentBrowserTimezoneOffset = new Date().getTimezoneOffset();
 window.currentBrowserTimezoneOffsetFormatted = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
 
-var queryParms = "?ipAddress=" + window.currentBrowserIpAddress + "&timezoneOffset=" + window.currentBrowserTimezoneOffset + "&timezoneFormatted=" + window.currentBrowserTimezoneOffsetFormatted + "&currentTime=";
-
 class AccessApi {
-    getQuoteAccess(payload) : Promise<any> {  
+    getQuoteAccess(payload) : Promise<any> { 
+    var queryParms = String(window.location.search) + "&ipAddress=" + window.currentBrowserIpAddress + "&timezoneOffset=" + window.currentBrowserTimezoneOffset + "&timezoneFormatted=" + window.currentBrowserTimezoneOffsetFormatted + "&currentTime="; 
     var q = queryParms;
     q = q + new Date().getTime();  
     return fetch('/v1/quote/access' + q, {

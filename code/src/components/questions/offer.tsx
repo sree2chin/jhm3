@@ -168,6 +168,7 @@ class Offer extends React.Component<Props, {}> {
     data.amount = premium.premium_amount;
     data.elavon_params = offerData && offerData.elavon_params ? offerData.elavon_params : [];
     data.elavon_url =  offerData.elavon_url;
+    data.start_coverage = 1;
     this.setState({
       onPaymentGoingTo: true
     });
@@ -228,7 +229,7 @@ class Offer extends React.Component<Props, {}> {
         return;
       }
 
-      window.location.href = `/payment`;
+      window.location.href = `/payment` + window.location.search;
       this.setState({
         onPaymentGoingTo: false
       });
