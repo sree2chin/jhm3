@@ -24,7 +24,7 @@ export default class CustomInput extends React.Component<Props, {}> {
     return className;
   }
   componentWillMount() {
-    if (!isEmpty(this.props.question) && !isEmpty(String(this.props.question.answer)) && String(this.props.question.answer).length > 0) {
+    if (!isEmpty(this.props.question) && !isEmpty(String(this.props.question.answer)) && String(this.props.question.answer).length > 0 && typeof this.props.question.answer != "undefined") {
       var answer = this.props.question.type=="number" ? String(this.props.question.answer).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : this.props.question.answer;
       this.setState({
         value: answer
@@ -33,7 +33,7 @@ export default class CustomInput extends React.Component<Props, {}> {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!isEmpty(nextProps.question) && nextProps.question.answer && !isEmpty(String(nextProps.question.answer)) && String(nextProps.question.answer).length > 0) {
+    if (!isEmpty(nextProps.question) && nextProps.question.answer && !isEmpty(String(nextProps.question.answer)) && String(nextProps.question.answer).length > 0 && typeof this.props.question.answer != "undefined") {
       var answer = nextProps.question.type=="number" ? String(nextProps.question.answer).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : nextProps.question.answer
       this.setState({
         value: answer
