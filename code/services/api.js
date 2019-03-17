@@ -11,7 +11,7 @@ var restOptions = {
 };
 
 module.exports = new function(){
-
+ 
   var self = this;
   var appendAgentInfo = function(req, data) {
     if(req.session) {
@@ -556,6 +556,42 @@ module.exports = new function(){
             error_message: null
           }, function() {
             console.log("Error posted for POST api: " + '/v1/questions/factorsearch');
+          });
+      }
+      cb(err, httpResponse);
+    });
+  }; 
+ 
+  this.unsubscribe = function(req, cb) {
+    var data = {};
+    console.log("req.body: req.body: " + JSON.stringify(req.body));
+    if (!_.isEmpty(req.body)) {
+      data.subscription_option_selected = JSON.stringify(req.body);
+    }
+    console.log("req.body: req.body: " + JSON.stringify(data));
+
+    appendAgentInfo(req, data);
+    appendQueryParams(req, data);
+    console.log("\n\n\n unsubscribe data:  " + JSON.stringify(data));
+    request({
+      url: restOptions.host + '/v1/notifications/unsubscribe',
+      headers: {
+        'Authorization': "Basic YWRtaW46NyVkUkdyZVQ=",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: 'POST',
+      formData: data
+    }, function callback(err, httpResponse, body) {
+      if (httpResponse && httpResponse.body &&  (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
+        self.logErrors(req, {
+            user: null,
+            apiName: '/v1/notifications/unsubscribe',
+            inputParams: {applicants: data},
+            response: httpResponse.body,
+            expection: null,
+            error_message: null
+          }, function() {
+            console.log("Error posted for POST api: " + '/v1/notifications/unsubscribe');
           });
       }
       cb(err, httpResponse);

@@ -162,5 +162,15 @@ module.exports = new function() {
       }
     });
   };
+  this.unsubscribe = function(req, callback) {
+    req.session = req.session || {};
+    ApiService.unsubscribe(req, function(err, res) {
+      if (!err && res.statusCode == 200) {
+        callback(res.statusCode, res.body);
+      } else {
+        callback(res.statusCode, res.body);
+      }
+    });
+  };
 
 };

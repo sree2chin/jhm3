@@ -203,6 +203,11 @@ module.exports = function(app) {
     res.render(templatePath);
   });
 
+  app.get('/unsubscribe', function(req, res, next) {
+    templatePath = "./dist/";
+    res.render(templatePath);
+  });
+
   app.get('/agent', samlAuthenticateMiddleware, function(req, res, next) {
     templatePath = "./dist/";
     res.render(templatePath);

@@ -18,6 +18,10 @@ export default (state: Array<any> = [], action) => {
       return objectAssign({}, state, {paymentInfo: action.paymentInfo});
     case "RESEND_LINK_SENT":
       return objectAssign({}, state, {resendData: action.resendData, resendLinkDone: true});
+    case "GET_UNSUBSCRIBITIONS_OPTIONS":
+      return objectAssign({}, state, {unsubscribeOptions: action.unsubscribeOptions});
+    case "POST_UNSUBSCRIBITIONS_OPTIONS":
+      return objectAssign({}, state, {thanksMessage: action.thanksMessage});
     default:
       return state;
   }

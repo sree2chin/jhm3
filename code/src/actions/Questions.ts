@@ -81,6 +81,24 @@ function postPayment(data) {
 	};
 }
 
+function getUnSubscribeOptions(data) {
+	return (dispatch) => {
+		return QuestionsApi.getUnSubscribeOptions(data).then(
+			data => dispatch({
+				type: 'GET_UNSUBSCRIBITIONS_OPTIONS', unsubscribeOptions: data.data
+			}));
+	};
+}
+
+function postUnSubscribeOptions(data) {
+	return (dispatch) => {
+		return QuestionsApi.postUnSubscribeOptions(data).then(
+			data => dispatch({
+				type: 'POST_UNSUBSCRIBITIONS_OPTIONS', thanksMessage: data.message
+			}));
+	};
+}
+
 export {
 	getQuestions,
 	postQuestions,
@@ -91,4 +109,6 @@ export {
 	postPayment,
 	makePayment,
 	sendResetLink,
+	getUnSubscribeOptions,
+	postUnSubscribeOptions,
 }

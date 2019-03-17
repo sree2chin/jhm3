@@ -231,6 +231,46 @@ class QuestionsApi {
     })
   };
 
+  getUnSubscribeOptions(payload) : Promise<any> {
+    var q = getQueryParms();
+    q = updateQueryStringParameter(String(window.location.search), "currentTime", new Date().getTime());
+    return fetch('/v1/notifications/unsubscribe' + q, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      }).then(function(res) {
+        return res.json().then(function (response: any) {
+          return new Promise(function(resolve, reject) {
+            resolve(response)
+          });
+        })
+    })
+  };
+
+  postUnSubscribeOptions(payload) : Promise<any> {
+    var q = getQueryParms();
+    q = updateQueryStringParameter(String(window.location.search), "currentTime", new Date().getTime());
+    return fetch('/v1/notifications/unsubscribe' + q, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      }).then(function(res) {
+        return res.json().then(function (response: any) {
+          return new Promise(function(resolve, reject) {
+            resolve(response)
+          });
+        })
+    })
+  };
+
 
 }
 
