@@ -19,12 +19,14 @@ module.exports = function(app) {
     passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
     function(req, res) {
       req.session.authenticatedOnce = true;
+      req.session.authenticatedTime = new Date().getTime();
       if (req.query.transaction_id) {
         req.session[req.query.transaction_id].authenticatedOnce = true;
+        req.session[req.query.transaction_id].authenticatedTime = new Date().getTime();
         req.session.authenticatedOnce = false;
+        req.session.authenticatedTime = null;
       }
 
-      req.session.authenticatedTime = new Date().getTime();
       if (!req.query.transaction_id) {
         var queryParams = req.session.queryParams || {};
         var queryParamsString = "?";

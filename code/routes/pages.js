@@ -99,7 +99,9 @@ module.exports = function(app) {
   var loginMiddleware = function(req, res, next) {
     console.log("in loginMiddleware");
     req.session = req.session || {};
-    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    if (req.query.transaction_id) {
+      req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    }
     var url_parts = url.parse(req.url, true);
 
     var queryParamsString = url_parts.search;
@@ -109,7 +111,9 @@ module.exports = function(app) {
 
   app.get("/login", loginMiddleware, function(req,  res, next) {
     req.session = req.session || {};
-    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    if (req.query.transaction_id) {
+      req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    }
 
     var url_parts = url.parse(req.url, true);
 
