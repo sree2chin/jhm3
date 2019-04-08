@@ -25,17 +25,30 @@ module.exports = function(app) {
   var samlAuthenticateMiddleware = function(req, res, next) {
 
     req.session = req.session || {};
-    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
-    req.session[req.query.transaction_id].questionsMiddleware = false;
+    if (req.query.transaction_id) {
+      req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+      req.session[req.query.transaction_id].questionsMiddleware = false;
+    }
+
     var url_parts = url.parse(req.url, true);
 
     if (url_parts.query && url_parts.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
-      if (req.session[req.query.transaction_id].authenticatedOnce) {
-        shouldAuthenticate = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 5*60*1000;
+      if (req.query.transaction_id) {
+        req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+        if (req.session[req.query.transaction_id].authenticatedOnce) {
+          authenticatedOnce = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 5*60*1000;
+        } else {
+          shouldAuthenticate = true;
+        }
       } else {
-        shouldAuthenticate = true;
+        if (req.session.authenticatedOnce) {
+          shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 5*60*1000;
+        } else {
+          shouldAuthenticate = true;
+        }
       }
+
       if (shouldAuthenticate) {
         var queryParamsString = url_parts.search;
         passport.authenticate('saml', { failureRedirect: '/login' + queryParamsString, failureFlash: true })(req, res, next);
@@ -50,16 +63,27 @@ module.exports = function(app) {
   var samlAuthenticateQuestionsMiddleware1 = function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};
-    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
-    req.session[req.query.transaction_id].questionsMiddleware = true;
+    if (req.query.transaction_id) {
+      req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+      req.session[req.query.transaction_id].questionsMiddleware = false;
+    }
 
     var url_parts = url.parse(req.url, true);
     if (url_parts.query && url_parts.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
-      if (req.session[req.query.transaction_id].authenticatedOnce) {
-        shouldAuthenticate = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 5*60*1000;
+      if (req.query.transaction_id) {
+        req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+        if (req.session[req.query.transaction_id].authenticatedOnce) {
+          authenticatedOnce = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 5*60*1000;
+        } else {
+          shouldAuthenticate = true;
+        }
       } else {
-        shouldAuthenticate = true;
+        if (req.session.authenticatedOnce) {
+          shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 5*60*1000;
+        } else {
+          shouldAuthenticate = true;
+        }
       }
       if (shouldAuthenticate) {
         var queryParamsString = url_parts.search;
@@ -108,18 +132,27 @@ module.exports = function(app) {
   app.get('/', samlAuthenticateMiddleware, function(req, res, next) {
     var url_parts = url.parse(req.url, true);
     req.session = req.session || {};
-    // req.session.queryParams = {};
-    // if (!_.isEmpty(url_parts.query)) {
-    //   req.session.queryParams = req.session.queryParams || {};
-    //   for(var k in url_parts.query) {
-    //     req.session.queryParams[k] = url_parts.query[k] || "";
-    //   }
-    // };
+    req.session.queryParams = {};
+    if (!_.isEmpty(url_parts.query)) {
+      req.session.queryParams = req.session.queryParams || {};
+      for(var k in url_parts.query) {
+        req.session.queryParams[k] = url_parts.query[k] || "";
+      }
+    };
     templatePath = "./dist/index.ejs";
     res.render(templatePath);
   });
 
   app.post('/', samlAuthenticateMiddleware, function(req, res, next) {
+    var url_parts = url.parse(req.url, true);
+    req.session = req.session || {};
+    req.session.queryParams = {};
+    if (!_.isEmpty(url_parts.query)) {
+      req.session.queryParams = req.session.queryParams || {};
+      for(var k in url_parts.query) {
+        req.session.queryParams[k] = url_parts.query[k] || "";
+      }
+    };
     templatePath = "./dist/";
     res.render(templatePath);
   });
@@ -181,14 +214,13 @@ module.exports = function(app) {
 
     if (req.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
-      if (req.session[req.query.transaction_id].authenticatedOnce) {
-        shouldAuthenticate = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 1*60*1000;
+      if (req.session.authenticatedOnce) {
+        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 1*60*1000;
       } else {
         shouldAuthenticate = true;
       }
       if (shouldAuthenticate) {
-        var queryParamsString = url_parts.search;
-        req.session[req.query.transaction_id].questionsLoginRedirectPage = req.url;
+        req.session.questionsLoginRedirectPage = req.url;
         next();
       } else {
         next();

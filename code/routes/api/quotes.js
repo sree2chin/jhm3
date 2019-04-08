@@ -16,22 +16,34 @@ module.exports = function(app) {
 
   var samlAuthenticateMiddleware = function(req, res, next) {
     req.session = req.session || {};
-    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
-    req.session[req.query.transaction_id].questionsMiddleware = false;
+    req.session = req.session || {};
+    req.session.questionsMiddleware = false;
     console.log("\n\n\nsamlAfdffdfuthenticateMiddleware quote" + req.session.questionsMiddleware + "\n\n\n");
     var url_parts = url.parse(req.url, true);
 
     if (req.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
-      if (req.session[req.query.transaction_id].authenticatedOnce) {
-        shouldAuthenticate = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 15*60*1000;
+      if (req.query.transaction_id) {
+        req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+        if (req.session[req.query.transaction_id].authenticatedOnce) {
+          authenticatedOnce = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 5*60*1000;
+        } else {
+          shouldAuthenticate = true;
+        }
       } else {
-        shouldAuthenticate = true;
+        if (req.session.authenticatedOnce) {
+          shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 5*60*1000;
+        } else {
+          shouldAuthenticate = true;
+        }
       }
       if (shouldAuthenticate) {
-
-        queryParamsString = url_parts.search;
-        req.session[req.query.transaction_id].redirectToLogin = true;
+        if (req.query.transaction_id) { 
+          req.session.redirectToLogin = false;
+          req.session[req.query.transaction_id].redirectToLogin = true;
+        } else {
+          req.session.redirectToLogin = true;
+        }  
         next();
       } else {
         next();
@@ -63,8 +75,11 @@ module.exports = function(app) {
       res.statusCode = statusCode;
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
-      if (req.session[req.query.transaction_id].redirectToLogin) {
-        req.session[req.query.transaction_id].redirectToLogin = false;
+      if ((req.query.transaction_id && req.session[req.query.transaction_id].redirectToLogin) || req.session.redirectToLogin) {
+        if (req.query.transaction_id) {
+          req.session[req.query.transaction_id].redirectToLogin = false;
+        }
+        req.session.redirectToLogin = false;
         res.send({
           LOGIN_URL: LOGIN_URL
         });

@@ -18,14 +18,45 @@ module.exports = function(app) {
   app.post('/login/callback',
     passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
     function(req, res) {
-      var url_parts = url.parse(req.url, true);
+      req.session.authenticatedOnce = true;
+      if (req.query.transaction_id) {
+        req.session[req.query.transaction_id].authenticatedOnce = true;
+        req.session.authenticatedOnce = false;
+      }
 
-      req.session[req.query.transaction_id].authenticatedOnce = true;
-      req.session[req.query.transaction_id].authenticatedTime = new Date().getTime();
-      queryParamsString = url_parts.search;
+      req.session.authenticatedTime = new Date().getTime();
+      if (!req.query.transaction_id) {
+        var queryParams = req.session.queryParams || {};
+        var queryParamsString = "?";
+        for(var k in queryParams) {
+          if (queryParams[k]) {
+            queryParamsString += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString += k + "&";
+          }
+        }
+      }
+
+      queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+      var queryParamsString1 = "";
+      if (req.query.transaction_id && req.session.queryParams[req.query.transaction_id]) {
+        
+        queryParams = req.session.queryParams[req.query.transaction_id].queryParams;
+        
+        for(var k in queryParams) {
+          if (queryParams[k]) {
+            queryParamsString1 += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString1 += k + "&";
+          }
+        }
+        queryParamsString1 = queryParamsString1.substring(0, queryParamsString.length-1);
+      }
+      queryParamsString = queryParamsString + queryParamsString1;
+
       console.log("\n\n\nin login callback: " + queryParamsString + "\n\n\n");
       console.log("\n\n\nin login callback: " + req.session.questionsMiddleware + "\n\n\n");
-      if (req.session[req.query.transaction_id].questionsMiddleware) {
+      if (req.session.questionsMiddleware) {
         res.redirect('/questions' + queryParamsString);
       } else {
         res.redirect('/' + queryParamsString);
@@ -36,22 +67,33 @@ module.exports = function(app) {
 
   var samlAuthenticateQuestionsMiddleware = function(req, res, next) {
     req.session = req.session || {};
-    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
-    req.session[req.query.transaction_id].questionsMiddleware = true;
-    var url_parts = url.parse(req.url, true);
+    if (req.query.transaction_id) {
+      req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+      req.session[req.query.transaction_id].questionsMiddleware = false;
+    }
 
     if (req.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
-      if (req.session[req.query.transaction_id].authenticatedOnce) {
-        shouldAuthenticate = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 5*60*1000;
+      if (req.query.transaction_id) {
+        req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+        if (req.session[req.query.transaction_id].authenticatedOnce) {
+          authenticatedOnce = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 5*60*1000;
+        } else {
+          shouldAuthenticate = true;
+        }
       } else {
-        shouldAuthenticate = true;
+        if (req.session.authenticatedOnce) {
+          shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 5*60*1000;
+        } else {
+          shouldAuthenticate = true;
+        }
       }
       console.log("\n\n\n" + shouldAuthenticate + "\n\n\n");
       if (shouldAuthenticate) {
-        queryParamsString = url_parts.search;
         console.log("\n\n\n eq.originalUrl2: " + req.originalUrl);
         console.log("\n\n\n eq.url: " + req.url);
+        req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+        req.session[req.query.transaction_id].queryParams = req.query;
         req.session[req.query.transaction_id].questionsLoginRedirectPage = req.url;
         next();
       } else {
