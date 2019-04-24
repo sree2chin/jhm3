@@ -99,6 +99,13 @@ class CustomSelect extends React.Component<Props, {}> {
       return true;
     }
   }
+  getStateId(state) {
+    for(var i=0; i<this.props.question.options.length; i++) {
+      if ((state.toLowerCase().indexOf(this.props.question.options[i].id.toLowerCase()) > -1) || (this.props.question.options[i].id.toLowerCase().indexOf(state.toLowerCase()) > -1)) {
+        return this.props.question.options[i];
+      }
+    }
+  }
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.question) && !isEmpty(nextProps.question.answer)) {
       this.setState({
@@ -111,10 +118,7 @@ class CustomSelect extends React.Component<Props, {}> {
         for (var key in nextProps.googlePlacesQuestionsAnswersMap) {
           if (key == this.props.question.id) {
             var state = nextProps.googlePlacesQuestionsAnswersMap[key];
-            var stateObj = { id: state,
-              value: state,
-              label:  state
-            };
+            let stateObj = this.getStateId(state);
             this.onChange1(stateObj);
           }
         }
