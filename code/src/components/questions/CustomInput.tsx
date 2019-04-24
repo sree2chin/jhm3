@@ -1,6 +1,12 @@
 import * as React from 'react';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import {isEmpty} from "underscore";
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import Autocomplete from 'react-google-autocomplete';
+import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
+import { setGoogleQuestionsAnswersMap } from '../../actions/Questions';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 
 interface Props extends React.Props<CustomInput> {
   question: any,
@@ -10,7 +16,7 @@ interface Props extends React.Props<CustomInput> {
   counter?: any
 }
 
-export default class CustomInput extends React.Component<Props, {}> {
+class CustomInput extends React.Component<Props, {}> {
   constructor(props : Props){
     super(props);
     this.validate.bind(this);
@@ -38,6 +44,17 @@ export default class CustomInput extends React.Component<Props, {}> {
       this.setState({
         value: answer
       });
+    }
+
+    if (nextProps.googlePlacesQuestionsAnswersMap && 
+      (!this.props.googlePlacesQuestionsAnswersMap || nextProps.googlePlacesQuestionsAnswersMap[this.props.question.id] != this.props.googlePlacesQuestionsAnswersMap[this.props.question.id])) {
+      if (this.props.googlePlacesConfig && this.props.googlePlacesConfig.google_address_prefill) {
+        for (var key in nextProps.googlePlacesQuestionsAnswersMap) {
+          if (key == this.props.question.id) {
+            this.onChange(nextProps.googlePlacesQuestionsAnswersMap[key]);
+          }
+        }
+      }
     }
   }
   validate() {
@@ -109,6 +126,54 @@ export default class CustomInput extends React.Component<Props, {}> {
     }
 
   }
+
+  handleOtherQuestions(place) {
+    var questionIdAnswerMaps = {};
+
+    if (this.props.googlePlacesConfig && this.props.googlePlacesConfig.address_fields_mapping_data) {
+      if (place && place.address_components) {
+        let googleFieldsmap = this.props.googlePlacesConfig.address_fields_mapping_data;
+
+        for (var key in googleFieldsmap) {
+          for(var i=0; i<place.address_components.length; i++) {
+            if (place.address_components[i].types.indexOf(key) > -1) {
+              questionIdAnswerMaps[googleFieldsmap[key]] = place.address_components[i].long_name;
+            }
+          }
+        }
+        questionIdAnswerMaps;
+      }
+    }
+    this.props.setGoogleQuestionsAnswersMap(questionIdAnswerMaps);
+  }
+
+  getInputBox(question) {
+    if (this.props.googlePlacesConfig && this.props.googlePlacesConfig.google_address_prefill && 
+    this.props.googlePlacesConfig.address_fields_mapping_data.route == this.props.question.id) {
+      return (<div className="google-autocomplete-input-container"><Autocomplete
+          style={{width: '90%'}}
+          value={this.state.value}
+          onChange={(e)=>{
+            console.log("\n\ne.target.value" + e.target.value);
+            this.onChange(e.target.value);
+          }}
+          onPlaceSelected={(place) => {
+            //this.onChange(place.formatted_address);
+            this.handleOtherQuestions(place);
+          }}
+          types={["address"]}
+        /></div>)
+    }
+    return (<input type={"text"}
+            name={question.name}
+            className={this.getClassName()}
+            placeholder={""}
+            ref={question.name}
+            value={this.state.value}
+            onChange={(e)=>{
+              this.onChange(e.target.value);
+            }} />)
+  }
   public render() {
     var wrapperClass : string = 'form-group';
     if (this.props.error && this.props.error.length > 0) {
@@ -123,15 +188,7 @@ export default class CustomInput extends React.Component<Props, {}> {
           {question.caption}
         </label>
         <div className="field">
-          <input type={"text"}
-            name={question.name}
-            className={this.getClassName()}
-            placeholder={""}
-            ref={question.name}
-            value={this.state.value}
-            onChange={(e)=>{
-              this.onChange(e.target.value);
-            }} />
+            {this.getInputBox(question)}
             {question.defaultUnit && question.defaultUnit.label &&
               <span className="custom-input-unit-label"> {question.defaultUnit.label} </span>
             }
@@ -154,3 +211,20 @@ export default class CustomInput extends React.Component<Props, {}> {
     );
   }
 }
+
+
+const mapStateToProps = (state: any): Props => {
+  return {
+    googlePlacesQuestionsAnswersMap: state.questions.googlePlacesQuestionsAnswersMap
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): Props => {
+  return {
+    setGoogleQuestionsAnswersMap: (data: any) => {
+      return dispatch(setGoogleQuestionsAnswersMap(data))
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomInput);
