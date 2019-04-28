@@ -16,17 +16,22 @@ module.exports = function(app) {
 
   var samlAuthenticateMiddleware = function(req, res, next) {
     req.session = req.session || {};
-    req.session = req.session || {};
     req.session.questionsMiddleware = false;
-    console.log("\n\n\nsamlAfdffdfuthenticateMiddleware quote" + req.session.questionsMiddleware + "\n\n\n");
+
     var url_parts = url.parse(req.url, true);
 
     if (req.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
       if (req.query.transaction_id) {
         req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+        if (req.session.authenticatedOnce) {
+          req.session[req.query.transaction_id].authenticatedOnce = req.session.authenticatedOnce;
+          req.session[req.query.transaction_id].authenticatedTime = req.session.authenticatedTime;
+          req.session.authenticatedOnce = false;
+          req.session.authenticatedTime = null;
+        }
         if (req.session[req.query.transaction_id].authenticatedOnce) {
-          authenticatedOnce = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 5*60*1000;
+          shouldAuthenticate = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 5*60*1000;
         } else {
           shouldAuthenticate = true;
         }

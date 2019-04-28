@@ -625,7 +625,8 @@ const mapStateToProps = (state: any): Props => {
     editablePersonIndex: state.quotes.editablePersonIndex,
     productValidations: state.quotes.productValidations,
     is_agent: state.quotes.is_agent,
-    premiums: state.quotes.premiums
+    premiums: state.quotes.premiums,
+    plans: state.quotes.plans,
   };
 }
 
