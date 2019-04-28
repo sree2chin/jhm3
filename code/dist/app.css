@@ -1571,6 +1571,16 @@ input.form-control:focus {
     letter-spacing: 1.3px;
     width: auto !important; }
 
+.google-autocomplete-input-container input {
+  border: none;
+  border-bottom: 1px solid #cccccc;
+  width: 50%;
+  max-width: 300px;
+  transition: border-bottom 500ms ease-out;
+  display: inline-block;
+  margin-bottom: 15px;
+  margin-top: 10px; }
+
 .all-group-header {
   color: #515151;
   font-family: Nunito-ExtraBold;

@@ -96,6 +96,14 @@ function postUnSubscribeOptions(data) {
 			data => dispatch({
 				type: 'POST_UNSUBSCRIBITIONS_OPTIONS', thanksMessage: data.message
 			}));
+	}
+}
+
+function setGoogleQuestionsAnswersMap(data) {
+	return (dispatch) => {
+		return dispatch({
+			type: 'SET_GOOGLE_QUESTIONS_ANSWER_MAP', googlePlacesQuestionsAnswersMap: data
+		});
 	};
 }
 
@@ -111,4 +119,5 @@ export {
 	sendResetLink,
 	getUnSubscribeOptions,
 	postUnSubscribeOptions,
+	setGoogleQuestionsAnswersMap,
 }

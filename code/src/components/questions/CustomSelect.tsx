@@ -2,6 +2,9 @@ import * as React from 'react';
 import {Button, Row, Col, FormGroup, Radio} from "react-bootstrap";
 import Select from 'react-select';
 import {isEmpty, map, contains} from "underscore";
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+
 interface Props extends React.Props<CustomSelect> {
   onChange: any,
   question: any,
@@ -11,7 +14,7 @@ interface Props extends React.Props<CustomSelect> {
   counter?: any
 }
 
-export default class CustomSelect extends React.Component<Props, {}> {
+class CustomSelect extends React.Component<Props, {}> {
   constructor(props : Props){
     super(props);
   }
@@ -96,11 +99,30 @@ export default class CustomSelect extends React.Component<Props, {}> {
       return true;
     }
   }
+  getStateId(state) {
+    for(var i=0; i<this.props.question.options.length; i++) {
+      if ((state.toLowerCase().indexOf(this.props.question.options[i].id.toLowerCase()) > -1) || (this.props.question.options[i].id.toLowerCase().indexOf(state.toLowerCase()) > -1)) {
+        return this.props.question.options[i];
+      }
+    }
+  }
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.question) && !isEmpty(nextProps.question.answer)) {
       this.setState({
         state: nextProps.question.answer
       });
+    }
+    if (nextProps.googlePlacesQuestionsAnswersMap && 
+      (!this.props.googlePlacesQuestionsAnswersMap || nextProps.googlePlacesQuestionsAnswersMap[this.props.question.id] != this.props.googlePlacesQuestionsAnswersMap[this.props.question.id])) {
+      if (this.props.googlePlacesConfig && this.props.googlePlacesConfig.google_address_prefill) {
+        for (var key in nextProps.googlePlacesQuestionsAnswersMap) {
+          if (key == this.props.question.id) {
+            var state = nextProps.googlePlacesQuestionsAnswersMap[key];
+            let stateObj = this.getStateId(state);
+            this.onChange1(stateObj);
+          }
+        }
+      }
     }
   }
   onChange1(val) {
@@ -179,3 +201,20 @@ export default class CustomSelect extends React.Component<Props, {}> {
     );
   }
 }
+
+
+const mapStateToProps = (state: any): Props => {
+  return {
+    googlePlacesQuestionsAnswersMap: state.questions.googlePlacesQuestionsAnswersMap
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): Props => {
+  return {
+    setGoogleQuestionsAnswersMap: (data: any) => {
+      return dispatch(setGoogleQuestionsAnswersMap(data))
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomSelect);

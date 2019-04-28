@@ -4,6 +4,8 @@ export default (state: Array<any> = [], action) => {
   switch (action.type) {
     case 'FETCHING_QUESTIONS':
       return objectAssign({}, state, {questions: action.questions});
+    case 'SET_GOOGLE_QUESTIONS_ANSWER_MAP':
+      return objectAssign({}, state, {googlePlacesQuestionsAnswersMap: action.googlePlacesQuestionsAnswersMap});
     case 'POSTING_QUESTIONS':
       return objectAssign({}, state, {questions: action.questions});
     case "CONFIRM_QUESTIONS":
