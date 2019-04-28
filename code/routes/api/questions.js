@@ -43,8 +43,8 @@ module.exports = function(app) {
       console.log("\n\n\nqueryParamsString: " + queryParamsString + "\n\n\n");
 
       var queryParamsString1 = "";
-      if (req.session.currentTransactionId && req.session.queryParams[req.session.currentTransactionId]) {
-        queryParams = req.session[req.query.transaction_id].queryParams;
+      if (req.session.currentTransactionId && req.session[req.session.currentTransactionId].queryParams) {
+        queryParams = req.session[req.session.currentTransactionId].queryParams;
         
         for(var k in queryParams) {
           if (queryParams[k]) {
