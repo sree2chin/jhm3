@@ -21,15 +21,15 @@ module.exports = function(app) {
       req.session.authenticatedOnce = true;
       req.session.authenticatedTime = new Date().getTime();
 
-      if (req.query.transaction_id) {
-        req.session[req.query.transaction_id].authenticatedOnce = true;
-        req.session[req.query.transaction_id].authenticatedTime = new Date().getTime();
+      if (req.session.currentTransactionId) {
+        req.session[req.session.currentTransactionId].authenticatedOnce = true;
+        req.session[req.session.currentTransactionId].authenticatedTime = new Date().getTime();
         req.session.authenticatedOnce = false;
         req.session.authenticatedTime = null;
       }
 
       var queryParamsString = "?";
-      if (!req.query.transaction_id) {
+      if (!req.session.currentTransactionId) {
         var queryParams = req.session.queryParams || {};
         for(var k in queryParams) {
           if (queryParams[k]) {
@@ -43,9 +43,8 @@ module.exports = function(app) {
       console.log("\n\n\nqueryParamsString: " + queryParamsString + "\n\n\n");
 
       var queryParamsString1 = "";
-      if (req.query.transaction_id && req.session.queryParams[req.query.transaction_id]) {
-        
-        queryParams = req.session.queryParams[req.query.transaction_id].queryParams;
+      if (req.session.currentTransactionId && req.session.queryParams[req.session.currentTransactionId]) {
+        queryParams = req.session.queryParams[req.session.currentTransactionId].queryParams;
         
         for(var k in queryParams) {
           if (queryParams[k]) {
@@ -61,7 +60,7 @@ module.exports = function(app) {
 
       console.log("\n\n\nqueryParamsString: " + queryParamsString + "\n\n\n");
       //console.log("\n\n\nin login callback: " + req.session.questionsMiddleware + "\n\n\n");
-      if (req.session[req.query.transaction_id].questionsMiddleware) {
+      if (req.session[req.session.currentTransactionId].questionsMiddleware) {
         res.redirect('/questions' + queryParamsString);
       } else {
         res.redirect('/' + queryParamsString);
@@ -100,6 +99,7 @@ module.exports = function(app) {
         req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
         req.session[req.query.transaction_id].queryParams = req.query;
         req.session[req.query.transaction_id].questionsLoginRedirectPage = req.url;
+        req.session.currentTransactionId = req.query.transaction_id;
         next();
       } else {
         next();
@@ -229,8 +229,6 @@ module.exports = function(app) {
       res.send(data);
     });
   });
-
-
 
   app.post(prefix + '/error/logs', function(req, res) {
     QuestionsService.logErrors(req, function(statusCode, data) {

@@ -46,6 +46,7 @@ module.exports = function(app) {
         if (req.query.transaction_id) { 
           req.session.redirectToLogin = false;
           req.session[req.query.transaction_id].redirectToLogin = true;
+          req.session.currentTransactionId = req.query.transaction_id;
         } else {
           req.session.redirectToLogin = true;
         }  
