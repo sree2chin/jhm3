@@ -44,7 +44,7 @@ module.exports = function(app) {
 
       var queryParamsString1 = "";
       if (req.session.currentTransactionId && req.session.queryParams[req.session.currentTransactionId]) {
-        queryParams = req.session.queryParams[req.session.currentTransactionId].queryParams;
+        queryParams = req.session[req.query.transaction_id].queryParams;
         
         for(var k in queryParams) {
           if (queryParams[k]) {
@@ -99,6 +99,7 @@ module.exports = function(app) {
         req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
         req.session[req.query.transaction_id].queryParams = req.query;
         req.session[req.query.transaction_id].questionsLoginRedirectPage = req.url;
+        console.log("req.query: " + JSON.stringify(req.query));
         req.session.currentTransactionId = req.query.transaction_id;
         next();
       } else {
