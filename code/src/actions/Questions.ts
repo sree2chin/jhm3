@@ -81,6 +81,14 @@ function postPayment(data) {
 	};
 }
 
+function setGoogleQuestionsAnswersMap(data) {
+	return (dispatch) => {
+		return dispatch({
+			type: 'SET_GOOGLE_QUESTIONS_ANSWER_MAP', googlePlacesQuestionsAnswersMap: data
+		});
+	};
+}
+
 export {
 	getQuestions,
 	postQuestions,
@@ -91,4 +99,5 @@ export {
 	postPayment,
 	makePayment,
 	sendResetLink,
+	setGoogleQuestionsAnswersMap,
 }

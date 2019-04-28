@@ -18,7 +18,6 @@ const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 
-
 interface Props  extends React.Props<Main> {
   submitQuoteForm: ()=>void,
   submitProductsForm: ()=>void,
@@ -34,6 +33,7 @@ class Main extends React.Component<Props, {}> {
     super();
     this.keyDownTextField.bind(this);
     this.onQuestionSubmit.bind(this);
+    this.handleGooglePlacesQuestions = this.handleGooglePlacesQuestions.bind(this);
   }
   state = {};
   questions:any = {};
@@ -41,6 +41,13 @@ class Main extends React.Component<Props, {}> {
   questionComponents: any = [];
   currentlyAnsweredQuestions: any = [];
   questionsSource: any = [];
+
+  handleGooglePlacesQuestions(questionIdAnswerMaps) {
+    for(var questionId in questionIdAnswerMaps) {
+      var q = this.findQuestionById(this.questions.data.questionnaire.questions, questionId, questionId)
+      this.onChangeInput(q, questionIdAnswerMaps[questionId]);
+    }
+  }
 
   componentWillMount() {
     this.props.getQuestions().then(()=>{
@@ -155,6 +162,8 @@ class Main extends React.Component<Props, {}> {
                     error={""}
                     onChange={this.onChangeInput.bind(this)}
                     alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                    googlePlacesConfig={this.questions.google_places_config_data}
+                    handleGooglePlacesQuestions={this.handleGooglePlacesQuestions}
                   />
           } else if (q.type == "date") {
             return <QuestionsCustomDatePicker
@@ -341,6 +350,8 @@ class Main extends React.Component<Props, {}> {
                   onChange={this.onChangeInput.bind(this)}
                   alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
                   key={q.id}
+                  googlePlacesConfig={this.questions.google_places_config_data}
+                  handleGooglePlacesQuestions={this.handleGooglePlacesQuestions}
                 />)
                 actualQuestionLists.push(q);
         } else if (q.type == "date") {
@@ -528,6 +539,8 @@ class Main extends React.Component<Props, {}> {
               onChange={this.onChangeInput.bind(this)}
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               key={q.id}
+              googlePlacesConfig={this.questions.google_places_config_data}
+              handleGooglePlacesQuestions={this.handleGooglePlacesQuestions}
             />)
             actualQuestionLists.push(q);
           } else if (q.type == "date") {
@@ -893,6 +906,8 @@ class Main extends React.Component<Props, {}> {
         alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
         key={q.id}
         counter={this.counter++}
+        googlePlacesConfig={this.questions.google_places_config_data}
+        handleGooglePlacesQuestions={this.handleGooglePlacesQuestions}
       />;
     } else if (q.type == "date") {
       qComponent = <QuestionsCustomDatePicker

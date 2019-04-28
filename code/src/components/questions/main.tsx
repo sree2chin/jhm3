@@ -35,12 +35,59 @@ class Main extends React.Component<Props, {}> {
     super();
     this.keyDownTextField.bind(this);
     this.onQuestionSubmit.bind(this);
+    this.handleGooglePlacesQuestions = this.handleGooglePlacesQuestions.bind(this);
   }
+
   state = {};
   questions:any = {};
   actualQuestionLists: any = [];
   questionComponents: any = [];
 
+  handleGooglePlacesQuestions(questionIdAnswerMaps) {
+    for(var questionId in questionIdAnswerMaps) {
+      var q = this.findQuestionByIdFromQuestions(this.questions.data.questionnaire.questions, questionId, questionId)
+      this.onChangeInput(q, questionIdAnswerMaps[questionId]);
+    }
+  }
+
+  findQuestionByIdFromQuestions(actualQuestions, questionId) : any {
+    if (!isEmpty(actualQuestions)) {
+      var targetQuestion = {};
+      for(var i=0; i<(actualQuestions.length); i++) {
+        var qe = actualQuestions[i];
+        var q = qe;
+        q.key = q.id;
+
+        if (qe.type == "group") {
+          this.noFoGroupsCompleted = i;
+        }
+
+        if (q.id == questionId) {
+          return q;
+        }
+
+        if (qe.type == "group" || qe.type == "assessment-factor-group" || qe.hasReflexive) {
+          targetQuestion = this.findQuestionById(q.questions, questionId)
+        }
+
+        if (qe.type == "list" && q.answer && q.answer[0].elements) {
+          targetQuestion = this.findQuestionById(q.answer[0].elements, questionId)
+        }
+
+        if (qe.type == "struct") {
+          targetQuestion = this.findQuestionById(q.elements, questionId)
+        }
+
+        if (!isEmpty(targetQuestion)) {
+          return targetQuestion;
+        }
+      }
+
+      return {};
+    } else {
+      return {};
+    }
+  }
   componentWillMount() {
     this.setState({
       gettingQuestions: true
@@ -218,6 +265,7 @@ class Main extends React.Component<Props, {}> {
                 error={""}
                 onChange={this.onChangeInput.bind(this)}
                 alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                googlePlacesConfig={this.questions.google_places_config_data}
               />
             }
           } else if (q.type == "multiselection") {
@@ -227,6 +275,7 @@ class Main extends React.Component<Props, {}> {
                 onChange={this.onChangeInput.bind(this)}
                 alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
                 multi={true}
+                googlePlacesConfig={this.questions.google_places_config_data}
               />
           } else if (q.type == "label") {
             return <Label
@@ -240,6 +289,8 @@ class Main extends React.Component<Props, {}> {
                     error={""}
                     onChange={this.onChangeInput.bind(this)}
                     alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
+                    googlePlacesConfig={this.questions.google_places_config_data}
+                    handleGooglePlacesQuestions={this.handleGooglePlacesQuestions}
                   />
           } else if (q.type == "date") {
             return <QuestionsCustomDatePicker
@@ -378,6 +429,7 @@ class Main extends React.Component<Props, {}> {
               onChange={this.onChangeInput.bind(this)}
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               key={q.id}
+              googlePlacesConfig={this.questions.google_places_config_data}
             />)
             actualQuestionLists.push(q);
           }
@@ -389,6 +441,7 @@ class Main extends React.Component<Props, {}> {
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               multi={true}
               key={q.id}
+              googlePlacesConfig={this.questions.google_places_config_data}
             />)
           actualQuestionLists.push(q);
         } else if (q.type == "label") {
@@ -506,6 +559,8 @@ class Main extends React.Component<Props, {}> {
                   onChange={this.onChangeInput.bind(this)}
                   alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
                   key={q.id}
+                  googlePlacesConfig={this.questions.google_places_config_data}
+                  handleGooglePlacesQuestions={this.handleGooglePlacesQuestions}
                 />)
                 actualQuestionLists.push(q);
         } else if (q.type == "date") {
@@ -605,6 +660,7 @@ class Main extends React.Component<Props, {}> {
                   onChange={this.onChangeInput.bind(this)}
                   alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
                   key={q.id}
+                  googlePlacesConfig={this.questions.google_places_config_data}
                 /> )
                 actualQuestionLists.push(q);
             }
@@ -616,6 +672,7 @@ class Main extends React.Component<Props, {}> {
                 alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
                 key={q.id}
                 multi={true}
+                googlePlacesConfig={this.questions.google_places_config_data}
               />)
             actualQuestionLists.push(q);
           } else if (q.type == "label") {
@@ -704,6 +761,8 @@ class Main extends React.Component<Props, {}> {
               onChange={this.onChangeInput.bind(this)}
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               key={q.id}
+              googlePlacesConfig={this.questions.google_places_config_data}
+              handleGooglePlacesQuestions={this.handleGooglePlacesQuestions}
             />)
             actualQuestionLists.push(q);
           } else if (q.type == "date") {
@@ -806,6 +865,7 @@ class Main extends React.Component<Props, {}> {
                   onChange={this.onChangeInput.bind(this)}
                   alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
                   key={q.id}
+                  googlePlacesConfig={this.questions.google_places_config_data}
                 /> )
                 actualQuestionLists.push(q);
             }
@@ -817,6 +877,7 @@ class Main extends React.Component<Props, {}> {
                 alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
                 key={q.id}
                 multi={true}
+                googlePlacesConfig={this.questions.google_places_config_data}
               />)
             actualQuestionLists.push(q);
           } else if (q.type == "label") {
@@ -915,6 +976,8 @@ class Main extends React.Component<Props, {}> {
               onChange={this.onChangeInput.bind(this)}
               alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
               key={q.id}
+              googlePlacesConfig={this.questions.google_places_config_data}
+              handleGooglePlacesQuestions={this.handleGooglePlacesQuestions}
             />)
             actualQuestionLists.push(q);
           } else if (q.type == "date") {
@@ -1435,6 +1498,7 @@ class Main extends React.Component<Props, {}> {
             alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
             key={q.id}
             counter={this.counter++}
+            googlePlacesConfig={this.questions.google_places_config_data}
           />;
       }
     } else if (q.type == "multiselection") {
@@ -1446,6 +1510,7 @@ class Main extends React.Component<Props, {}> {
           key={q.id}
           multi={true}
           counter={this.counter++}
+          googlePlacesConfig={this.questions.google_places_config_data}
         />;
     } else if (q.type == "label") {
       qComponent = <Label
@@ -1459,6 +1524,8 @@ class Main extends React.Component<Props, {}> {
         alreadyOnceSubmitted={this.state.alreadyOnceSubmitted}
         key={q.id}
         counter={this.counter++}
+        googlePlacesConfig={this.questions.google_places_config_data}
+        handleGooglePlacesQuestions={this.handleGooglePlacesQuestions}
       />;
     } else if (q.type == "date") {
       qComponent = <QuestionsCustomDatePicker
