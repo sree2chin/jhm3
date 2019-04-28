@@ -27,9 +27,9 @@ module.exports = function(app) {
         req.session.authenticatedTime = null;
       }
 
+      var queryParamsString = "?";
       if (!req.query.transaction_id) {
         var queryParams = req.session.queryParams || {};
-        var queryParamsString = "?";
         for(var k in queryParams) {
           if (queryParams[k]) {
             queryParamsString += k + "=" + queryParams[k] + "&";
@@ -37,9 +37,9 @@ module.exports = function(app) {
             queryParamsString += k + "&";
           }
         }
+        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
       }
 
-      queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
       var queryParamsString1 = "";
       if (req.query.transaction_id && req.session.queryParams[req.query.transaction_id]) {
         
