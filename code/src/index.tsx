@@ -187,6 +187,13 @@ function loadPaymentPage(location: any, callback: LoadCallback) {
     "QuotePage");
 }
 
+function loadUnsubscribePage(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/questions/unsubscribe") as typeof _QuestionsPage).default),
+    "QuotePage");
+}
+
 function checkAccessable(nextState, replace, callback) {  
   Access.getQuoteAccess(nextState.location.query, function(res){
     if(res != undefined && res != null && res.access){
@@ -225,6 +232,7 @@ ReactDOM.render(
       <Route path="/offer" getComponent={ getOfferPage } />
       <Route path="/payment_success" getComponent={ loadPaymentSuccessPage } />
       <Route path="/payment" getComponent={ loadPaymentPage } />
+      <Route path="/unsubscribe" getComponent={ loadUnsubscribePage } />
 
       <Route path="/agent" getComponent={ loadQuotePage } />
       <Route path="/agent/products" getComponent={ loadProductsPage } />

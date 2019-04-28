@@ -134,8 +134,6 @@ class PlansPage extends React.Component<Props, {}> {
         });
       }
 
-
-      setTimeout(() => {
         this.props.submitPlansForm(persons).then(() => {
           if (this.props.premiums && this.props.premiums.LOGIN_URL && this.props.premiums.LOGIN_URL.length > 0) {
             window.location.href = this.props.premiums.LOGIN_URL;
@@ -170,7 +168,6 @@ class PlansPage extends React.Component<Props, {}> {
           });
           this.submmitedProductForm = false;
         });
-      }, 10)
     } else {
       if(successCb) { successCb(); }
     }
@@ -318,7 +315,6 @@ class PlansPage extends React.Component<Props, {}> {
 
       this.props.setPersonsData(persons);
 
-      setTimeout(() => {
         var queryParams = this.props.location.query;
         var queryParamsString = "?";
         for(var k in queryParams) {
@@ -331,7 +327,7 @@ class PlansPage extends React.Component<Props, {}> {
         queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
         const basePath = this.props.location.pathname.indexOf("agent") >=0 || this.props.is_agent ? "/agent/" : "/";
         browserHistory.push(basePath + "next-steps" + queryParamsString);
-      }, 500);
+
 
     } else {
       this.setPlanFormSubmissionErrorMsg();
@@ -543,6 +539,13 @@ class PlansPage extends React.Component<Props, {}> {
     const individualPlanContainerWidth = this.props.noOfPersons == 2 ? 6 : 12;
     const paymentSchedules = this.state.paymentSchedules;
     var additionalPersonClass = this.props.noOfPersons==2 ? "all-plan-person-info-container" : "";
+
+    if (isEmpty(persons)) {
+      return (
+        <div className="quote-main-loader-container">
+          <i style={{marginTop: "25px"}} className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>
+        </div>);
+    }
 
     return (
       <div className="product-pager-container">

@@ -224,6 +224,12 @@ input.form-control:focus {
   border: solid 1px #d4d4d4;
   height: 80px; }
 
+.quote-main-loader-container {
+  padding-left: calc(18% - 15px);
+  margin-top: 50px; }
+  .quote-main-loader-container .main-loader {
+    font-size: 150px; }
+
 .custom-checkbox-container {
   display: block;
   position: relative;
@@ -1565,6 +1571,16 @@ input.form-control:focus {
     letter-spacing: 1.3px;
     width: auto !important; }
 
+.google-autocomplete-input-container input {
+  border: none;
+  border-bottom: 1px solid #cccccc;
+  width: 50%;
+  max-width: 300px;
+  transition: border-bottom 500ms ease-out;
+  display: inline-block;
+  margin-bottom: 15px;
+  margin-top: 10px; }
+
 .all-group-header {
   color: #515151;
   font-family: Nunito-ExtraBold;
@@ -1768,12 +1784,12 @@ input.form-control:focus {
   padding-left: 0px; }
 
 .async-auto-suggest-container .autosuggest .input-group-btn {
-  display: inline; }
+  display: inline-block; }
   .async-auto-suggest-container .autosuggest .input-group-btn button {
     height: 44px;
     visibility: hidden; }
   .async-auto-suggest-container .autosuggest .input-group-btn img {
-    height: 44px;
+    height: 46px;
     background-color: #e7e5e5; }
 
 .async-auto-suggest-container .autosuggest .dropdown-menu {
@@ -1793,17 +1809,26 @@ input.form-control:focus {
 
 .async-auto-suggest-container .autosuggest-choices {
   padding-top: 0px;
-  height: 44px;
+  height: auto;
   width: 70% !important;
-  min-width: 260px;
+  min-width: 240px;
   max-width: max-content;
-  margin-bottom: 15px; }
+  margin-bottom: 15px !important;
+  display: inline-block !important;
+  padding-bottom: 0px; }
+  .async-auto-suggest-container .autosuggest-choices.ul {
+    display: inline; }
   .async-auto-suggest-container .autosuggest-choices li.autosuggest-input-choice {
     margin-top: 0px; }
     .async-auto-suggest-container .autosuggest-choices li.autosuggest-input-choice input {
-      font-size: 16px; }
+      font-size: 16px;
+      padding-top: 5px; }
   .async-auto-suggest-container .autosuggest-choices .autosuggest-choice {
     margin-left: 10px; }
+
+@media (max-width: 768px) {
+  .async-auto-suggest-container .autosuggest-choices {
+    min-width: 230px; } }
 
 .input-without-border-group {
   position: relative;

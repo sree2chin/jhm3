@@ -170,10 +170,10 @@ class CustomSelect extends React.Component<Props, {}> {
     var question = this.props.question;
 
     return (
-     <div id={question.id.replace(/[^a-zA-Z0-9]/g, "")}>
+     <div id={question.id ? question.id.replace(/[^a-zA-Z0-9]/g, "") : ""}>
         <Col className={"c-subheader-text fs18"} style={{marginTop: "5px", paddingLeft: "0px", marginBottom: "18px"}}>
         {question.constraints && question.constraints.required && <span style={{color: "rgb(255, 73, 73)", marginRight: "9px"}}>*</span>}
-          {question.caption}
+          {question.caption ? question.caption: (question.text ? question.text: "")}
         </Col>
           <Col style={{paddingRight: "15px", marginBottom: "30px"}} className="person-gender-container c-custom-select">
             <Row style={{marginLeft: "0px"}}>
@@ -187,7 +187,7 @@ class CustomSelect extends React.Component<Props, {}> {
             <Col sm={12} className={`c-subheader-text error`} style={{paddingLeft: "0px", marginTop: "0px"}}>
               {!this.validate() &&
                 <div className="input" style={{marginTop: "5px", color: "#ff4949"}}>
-                  {question.constraints.patternViolationMessage || "Required"}
+                  {question.constraints && question.constraints.patternViolationMessage || "Required"}
                 </div>
               }
               {question.answerState=="invalid" &&

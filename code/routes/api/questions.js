@@ -20,16 +20,42 @@ module.exports = function(app) {
     function(req, res) {
       req.session.authenticatedOnce = true;
       req.session.authenticatedTime = new Date().getTime();
-      var queryParams = req.session.queryParams || {};
-      var queryParamsString = "?";
-      for(var k in queryParams) {
-        if (queryParams[k]) {
-          queryParamsString += k + "=" + queryParams[k] + "&";
-        } else {
-          queryParamsString += k + "&";
+      if (req.query.transaction_id) {
+        req.session[req.query.transaction_id].authenticatedOnce = true;
+        req.session[req.query.transaction_id].authenticatedTime = new Date().getTime();
+        req.session.authenticatedOnce = false;
+        req.session.authenticatedTime = null;
+      }
+
+      if (!req.query.transaction_id) {
+        var queryParams = req.session.queryParams || {};
+        var queryParamsString = "?";
+        for(var k in queryParams) {
+          if (queryParams[k]) {
+            queryParamsString += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString += k + "&";
+          }
         }
       }
+
       queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+      var queryParamsString1 = "";
+      if (req.query.transaction_id && req.session.queryParams[req.query.transaction_id]) {
+        
+        queryParams = req.session.queryParams[req.query.transaction_id].queryParams;
+        
+        for(var k in queryParams) {
+          if (queryParams[k]) {
+            queryParamsString1 += k + "=" + queryParams[k] + "&";
+          } else {
+            queryParamsString1 += k + "&";
+          }
+        }
+        queryParamsString1 = queryParamsString1.substring(0, queryParamsString.length-1);
+      }
+      queryParamsString = queryParamsString + queryParamsString1;
+
       console.log("\n\n\nin login callback: " + queryParamsString + "\n\n\n");
       console.log("\n\n\nin login callback: " + req.session.questionsMiddleware + "\n\n\n");
       if (req.session.questionsMiddleware) {
@@ -43,34 +69,34 @@ module.exports = function(app) {
 
   var samlAuthenticateQuestionsMiddleware = function(req, res, next) {
     req.session = req.session || {};
-    req.session.questionsMiddleware = true;
-    var url_parts = url.parse(req.url, true);
-    console.log("\n\n\neq.session.queryParams: " + JSON.stringify(req.session.queryParams)+ "\n\n\n\n");
-    req.session = req.session || {};
-    req.session.queryParams = req.session.queryParams || {};
+    if (req.query.transaction_id) {
+      req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+      req.session[req.query.transaction_id].questionsMiddleware = false;
+    }
 
-    if (req.session.queryParams && req.session.queryParams.agent_number && config.passport.saml.on) {
+    if (req.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
-      if (req.session.authenticatedOnce) {
-        shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 5*60*1000;
+      if (req.query.transaction_id) {
+        req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+        if (req.session[req.query.transaction_id].authenticatedOnce) {
+          authenticatedOnce = new Date().getTime() - new Date(req.session[req.query.transaction_id].authenticatedTime).getTime() >= 5*60*1000;
+        } else {
+          shouldAuthenticate = true;
+        }
       } else {
-        shouldAuthenticate = true;
+        if (req.session.authenticatedOnce) {
+          shouldAuthenticate = new Date().getTime() - new Date(req.session.authenticatedTime).getTime() >= 5*60*1000;
+        } else {
+          shouldAuthenticate = true;
+        }
       }
       console.log("\n\n\n" + shouldAuthenticate + "\n\n\n");
       if (shouldAuthenticate) {
-        var queryParams = req.session.queryParams;
-        var queryParamsString = "?";
-        for(var k in queryParams) {
-          if (queryParams[k]) {
-            queryParamsString += k + "=" + queryParams[k] + "&";
-          } else {
-            queryParamsString += k + "&";
-          }
-        }
-        queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
         console.log("\n\n\n eq.originalUrl2: " + req.originalUrl);
         console.log("\n\n\n eq.url: " + req.url);
-        req.session.questionsLoginRedirectPage = req.url;
+        req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+        req.session[req.query.transaction_id].queryParams = req.query;
+        req.session[req.query.transaction_id].questionsLoginRedirectPage = req.url;
         next();
       } else {
         next();
@@ -84,9 +110,9 @@ module.exports = function(app) {
     QuestionsService.getQuestions(req, function(statusCode, data) {
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
-      if (req.session.questionsLoginRedirectPage && req.session.questionsLoginRedirectPage.length > 0 ) {
-        req.session.questionsLoginRedirectPage1 = req.session.questionsLoginRedirectPage;
-        req.session.questionsLoginRedirectPage = null;
+      if (req.session[req.query.transaction_id].questionsLoginRedirectPage && req.session[req.query.transaction_id].questionsLoginRedirectPage.length > 0 ) {
+        req.session[req.query.transaction_id].questionsLoginRedirectPage1 = req.session[req.query.transaction_id].questionsLoginRedirectPage;
+        req.session[req.query.transaction_id].questionsLoginRedirectPage = null;
         res.send({
           LOGIN_URL: QUESTIONS_LOGIN_URL
         });
@@ -100,9 +126,9 @@ module.exports = function(app) {
     QuestionsService.postQuestions(req, function(statusCode, data) {
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
-      if (req.session.questionsLoginRedirectPage && req.session.questionsLoginRedirectPage.length > 0 ) {
-        req.session.questionsLoginRedirectPage1 = req.session.questionsLoginRedirectPage;
-        req.session.questionsLoginRedirectPage = null;
+      if (req.session[req.query.transaction_id].questionsLoginRedirectPage && req.session[req.query.transaction_id].questionsLoginRedirectPage.length > 0 ) {
+        req.session[req.query.transaction_id].questionsLoginRedirectPage1 = req.session[req.query.transaction_id].questionsLoginRedirectPage;
+        req.session[req.query.transaction_id].questionsLoginRedirectPage = null;
         res.send({
           LOGIN_URL: QUESTIONS_LOGIN_URL
         });
@@ -117,9 +143,9 @@ module.exports = function(app) {
       console.log("return in post payment");
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
-      if (req.session.questionsLoginRedirectPage && req.session.questionsLoginRedirectPage.length > 0 ) {
-        req.session.questionsLoginRedirectPage1 = req.session.questionsLoginRedirectPage;
-        req.session.questionsLoginRedirectPage = null;
+      if (req.session[req.query.transaction_id].questionsLoginRedirectPage && req.session[req.query.transaction_id].questionsLoginRedirectPage.length > 0 ) {
+        req.session[req.query.transaction_id].questionsLoginRedirectPage1 = req.session[req.query.transaction_id].questionsLoginRedirectPage;
+        req.session[req.query.transaction_id].questionsLoginRedirectPage = null;
         res.send({
           LOGIN_URL: QUESTIONS_LOGIN_URL
         });
@@ -133,9 +159,9 @@ module.exports = function(app) {
     QuestionsService.confirmQuestions(req, function(statusCode, data) {
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
-      if (req.session.questionsLoginRedirectPage && req.session.questionsLoginRedirectPage.length > 0 ) {
-        req.session.questionsLoginRedirectPage1 = req.session.questionsLoginRedirectPage;
-        req.session.questionsLoginRedirectPage = null;
+      if (req.session[req.query.transaction_id].questionsLoginRedirectPage && req.session[req.query.transaction_id].questionsLoginRedirectPage.length > 0 ) {
+        req.session[req.query.transaction_id].questionsLoginRedirectPage1 = req.session[req.query.transaction_id].questionsLoginRedirectPage;
+        req.session[req.query.transaction_id].questionsLoginRedirectPage = null;
         res.send({
           LOGIN_URL: QUESTIONS_LOGIN_URL
         });
@@ -149,9 +175,9 @@ module.exports = function(app) {
     QuestionsService.makePayment(req, function(statusCode, data) {
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
-      if (req.session.questionsLoginRedirectPage && req.session.questionsLoginRedirectPage.length > 0 ) {
-        req.session.questionsLoginRedirectPage1 = req.session.questionsLoginRedirectPage;
-        req.session.questionsLoginRedirectPage = null;
+      if (req.session[req.query.transaction_id].questionsLoginRedirectPage && req.session[req.query.transaction_id].questionsLoginRedirectPage.length > 0 ) {
+        req.session[req.query.transaction_id].questionsLoginRedirectPage1 = req.session[req.query.transaction_id].questionsLoginRedirectPage;
+        req.session[req.query.transaction_id].questionsLoginRedirectPage = null;
         res.send({
           LOGIN_URL: QUESTIONS_LOGIN_URL
         });
@@ -165,9 +191,9 @@ module.exports = function(app) {
     QuestionsService.getFactorsearch(req, function(statusCode, data) {
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
-      if (req.session.questionsLoginRedirectPage && req.session.questionsLoginRedirectPage.length > 0 ) {
-        req.session.questionsLoginRedirectPage1 = req.session.questionsLoginRedirectPage;
-        req.session.questionsLoginRedirectPage = null;
+      if (req.session[req.query.transaction_id].questionsLoginRedirectPage && req.session[req.query.transaction_id].questionsLoginRedirectPage.length > 0 ) {
+        req.session[req.query.transaction_id].questionsLoginRedirectPage1 = req.session[req.query.transaction_id].questionsLoginRedirectPage;
+        req.session[req.query.transaction_id].questionsLoginRedirectPage = null;
         res.send({
           LOGIN_URL: QUESTIONS_LOGIN_URL
         });

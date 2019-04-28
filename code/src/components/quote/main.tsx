@@ -163,6 +163,7 @@ class Main extends React.Component<Props, {}> {
           }
         }
         queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
+        queryParamsString += "&transaction_id=" + this.props.uniqueTransactionId;
         browserHistory.push(basePath + "products" + queryParamsString);
         this.setState({
           submittingUserInfo: false
@@ -274,6 +275,7 @@ class Main extends React.Component<Props, {}> {
           {value: "Very Good", label: "Very Good"},
           {value: "Excellent", label: "Excellent"},
         ];
+
     return (
       <div>
         <ScrollToTopOnMount />
@@ -349,7 +351,8 @@ const mapStateToProps = (state: any): Props => {
     persons: state.quotes.persons,
     noOfPersons: state.selectPersons.noOfPersons,
     is_agent: state.quotes.is_agent,
-    premiums: state.quotes.premiums
+    premiums: state.quotes.premiums,
+    uniqueTransactionId: state.quotes.uniqueTransactionId,
   };
 }
 

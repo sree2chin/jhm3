@@ -439,10 +439,22 @@ class ProductsPage extends React.Component<Props, {}> {
   isEmptyProducts() {
 
   }
+  isProductsAvailable() {
+    return this.props.products && this.props.products.length >=1 && this.props.products[0] &&
+                this.props.products[0].products_data && this.props.products[0].products_data.products_list &&
+                this.props.products[0].products_data.products_list.length > 0;
+  }
+
   public render() {
     var {persons} = this.props;
     persons = persons || [];
     const personsContainerWidth = this.props.noOfPersons == 2 ? 4 : 8;
+    if (isEmpty(persons)) {
+      return (
+        <div className="quote-main-loader-container">
+          <i style={{marginTop: "25px"}} className="fa fa-spinner fa-spin fa-3x fa-fw main-loader"></i>
+        </div>);
+    }
     return (
       <div className="product-pager-container" ref={(c) => { this._scrollView = c; }}>
         <ScrollToTopOnMount />
@@ -561,20 +573,21 @@ class ProductsPage extends React.Component<Props, {}> {
               >
                 PREVIOUS
               </span>
-              <Button style={{ marginTop: "10px", marginBottom: "15px", marginLeft: "17px"}} className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} onClick={(){
+              {this.isProductsAvailable() && <Button style={{ marginTop: "10px", marginBottom: "15px", marginLeft: "17px"}} className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} 
+              onClick={(){
                   this.submitProductsForm()
                 }}
               >
                 NEXT
                 {this.state.submittingProductsInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-              </Button>
-              <Button className={`c-button-default visible-xs ${this.getContinueBtnActiveClass()}`} style={{marginBottom: "15px"}} onClick={()=>{
+              </Button>}
+              {this.isProductsAvailable() && <Button className={`c-button-default visible-xs ${this.getContinueBtnActiveClass()}`} style={{marginBottom: "15px"}} onClick={()=>{
                   this.submitProductsForm()
                 }}
               >
                 NEXT
                 {this.state.submittingProductsInfo && <i className="fa fa-circle-o-notch fa-spin fa-fw"></i> }
-              </Button>
+              </Button>}
             </div>
             <Button className="c-button-default visible-xs back-btn" style={{backgroundColor: "#fb4d3d!important", marginBottom: "15px"}} onClick={(){
                 this.redirectToMainPage()
