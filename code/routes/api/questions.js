@@ -20,6 +20,7 @@ module.exports = function(app) {
     function(req, res) {
       req.session.authenticatedOnce = true;
       req.session.authenticatedTime = new Date().getTime();
+
       if (req.query.transaction_id) {
         req.session[req.query.transaction_id].authenticatedOnce = true;
         req.session[req.query.transaction_id].authenticatedTime = new Date().getTime();
@@ -39,6 +40,7 @@ module.exports = function(app) {
         }
         queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
       }
+      console.log("\n\n\nqueryParamsString: " + queryParamsString + "\n\n\n");
 
       var queryParamsString1 = "";
       if (req.query.transaction_id && req.session.queryParams[req.query.transaction_id]) {
@@ -54,11 +56,12 @@ module.exports = function(app) {
         }
         queryParamsString1 = queryParamsString1.substring(0, queryParamsString.length-1);
       }
+      console.log("\n\n\nqueryParamsString1: " + queryParamsString + "\n\n\n");
       queryParamsString = queryParamsString + queryParamsString1;
 
-      console.log("\n\n\nin login callback: " + queryParamsString + "\n\n\n");
-      console.log("\n\n\nin login callback: " + req.session.questionsMiddleware + "\n\n\n");
-      if (req.session.questionsMiddleware) {
+      console.log("\n\n\nqueryParamsString: " + queryParamsString + "\n\n\n");
+      //console.log("\n\n\nin login callback: " + req.session.questionsMiddleware + "\n\n\n");
+      if (req.session[req.query.transaction_id].questionsMiddleware) {
         res.redirect('/questions' + queryParamsString);
       } else {
         res.redirect('/' + queryParamsString);
@@ -71,7 +74,7 @@ module.exports = function(app) {
     req.session = req.session || {};
     if (req.query.transaction_id) {
       req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
-      req.session[req.query.transaction_id].questionsMiddleware = false;
+      req.session[req.query.transaction_id].questionsMiddleware = true;
     }
 
     if (req.query.agent_number && config.passport.saml.on) {
