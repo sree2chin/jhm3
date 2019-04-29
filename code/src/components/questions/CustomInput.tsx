@@ -130,18 +130,25 @@ class CustomInput extends React.Component<Props, {}> {
   handleOtherQuestions(place) {
     var questionIdAnswerMaps = {};
 
-    if (this.props.googlePlacesConfig && this.props.googlePlacesConfig.address_fields_mapping_data) {
+    if (this.props.googlePlacesConfig && this.props.googlePlacesConfig.address_fields_mapping_data && this.props.googlePlacesConfig.address_fields_mapping_data.mapping_data) {
       if (place && place.address_components) {
-        let googleFieldsmap = this.props.googlePlacesConfig.address_fields_mapping_data;
-
+        let googleFieldsmap = this.props.googlePlacesConfig.address_fields_mapping_data.mapping_data;
+        let fieldsResultList = [];
         for (var key in googleFieldsmap) {
-          for(var i=0; i<place.address_components.length; i++) {
-            if (place.address_components[i].types.indexOf(key) > -1) {
-              questionIdAnswerMaps[googleFieldsmap[key]] = place.address_components[i].long_name;
+          fieldsResultList = [];
+          if (googleFieldsmap[key].fields && googleFieldsmap[key].fields.length) {
+            const mappingDataFieldsLength = googleFieldsmap[key].fields.length;
+            for(let j = 0; j < mappingDataFieldsLength; j++) {
+              const placeAddressComponentsLength = place.address_components.length;
+              for (var i = 0; i < placeAddressComponentsLength; i++) {
+                if (place.address_components[i].types.indexOf(googleFieldsmap[key].fields[j]) !== -1) {
+                  fieldsResultList.push(place.address_components[i].long_name);
+                }
+              }
             }
+            questionIdAnswerMaps[key] = fieldsResultList.join(", ");
           }
         }
-        questionIdAnswerMaps;
       }
     }
     this.props.setGoogleQuestionsAnswersMap(questionIdAnswerMaps);
