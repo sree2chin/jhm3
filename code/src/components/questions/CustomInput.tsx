@@ -146,7 +146,7 @@ class CustomInput extends React.Component<Props, {}> {
                 }
               }
             }
-            questionIdAnswerMaps[key] = fieldsResultList.join(", ");
+            questionIdAnswerMaps[key] = fieldsResultList.join(googleFieldsmap[key].delimiter);
           }
         }
       }
