@@ -51,12 +51,16 @@ module.exports = function(app) {
 
       if (shouldAuthenticate) {
         var queryParamsString = url_parts.search;
-
-        req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
-        req.session[req.query.transaction_id].queryParams = req.query;
-        req.session[req.query.transaction_id].questionsLoginRedirectPage = req.url;
-        req.session.currentTransactionId = req.query.transaction_id;
-
+        if (req.query.transaction_id) {
+          req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+          req.session[req.query.transaction_id].queryParams = req.query;
+          req.session[req.query.transaction_id].questionsLoginRedirectPage = req.url;
+          req.session.currentTransactionId = req.query.transaction_id;          
+        } else {
+          req.session = req.session || {};
+          req.session.queryParams = req.query;
+          req.session.questionsLoginRedirectPage = req.url; 
+        }
         passport.authenticate('saml', { failureRedirect: '/login' + queryParamsString, failureFlash: true })(req, res, next);
       } else {
         next();
@@ -129,6 +133,9 @@ module.exports = function(app) {
     if (req.query.transaction_id) {
       req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
       req.session[req.query.transaction_id].queryParams = req.query;
+    } else {
+      req.session = req.session || {};
+      req.session.queryParams = req.query;
     }
 
     var url_parts = url.parse(req.url, true);
