@@ -142,7 +142,7 @@ class Main extends React.Component<Props, {}> {
       }
 
       this.props.setPersonsData(persons);
-
+      persons.uniqueTransactionId = this.props.uniqueTransactionId;
       return this.props.submitQuoteForm(persons).then(() => {
         if (this.props.products && this.props.products.LOGIN_URL && this.props.products.LOGIN_URL.length > 0) {
           window.location.href = this.props.products.LOGIN_URL;
@@ -163,7 +163,10 @@ class Main extends React.Component<Props, {}> {
           }
         }
         queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-        queryParamsString += "&transaction_id=" + this.props.uniqueTransactionId;
+        if (!queryParams["transaction_id"]) {
+          queryParamsString += "&transaction_id=" + this.props.uniqueTransactionId;
+        }
+
         browserHistory.push(basePath + "products" + queryParamsString);
         this.setState({
           submittingUserInfo: false

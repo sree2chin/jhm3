@@ -120,7 +120,7 @@ module.exports = new function(){
     };
     console.log("req.query.isFromMainPage: " + JSON.stringify(req.query.isFromMainPage));
 
-    if (req.query.isFromMainPage == true || req.query.isFromMainPage == "true") {
+    if (!req.body.uniqueTransactionId && (req.query.isFromMainPage == true || req.query.isFromMainPage == "true")) {
       req.session.uniqueTransactionId = uuidV1() + "_" + new Date().getTime();
       req.session[req.session.uniqueTransactionId] = {};
     }
@@ -136,6 +136,8 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
+      console.log("\n\n\nhttpResponse: ",  httpResponse);
+      console.log("\n\n\nhttpResponse: " + JSON.stringify(httpResponse));
       if (httpResponse && httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
