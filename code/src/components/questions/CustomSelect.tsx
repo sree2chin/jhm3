@@ -101,7 +101,7 @@ class CustomSelect extends React.Component<Props, {}> {
   }
   getStateId(state) {
     for(var i=0; i<this.props.question.options.length; i++) {
-      var stateIdFromGoogle = state.replace(" ", "").toLowerCase();
+      var stateIdFromGoogle = state.replace(/ /g, "").toLowerCase();
 
       if ((stateIdFromGoogle.indexOf(this.props.question.options[i].id.toLowerCase()) > -1) || (this.props.question.options[i].id.toLowerCase().indexOf(stateIdFromGoogle) > -1)) {
         return this.props.question.options[i];
