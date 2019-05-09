@@ -44,7 +44,7 @@ class Offer extends React.Component<Props, {}> {
   componentWillMount() {
     var eventFired = false;
     for(var i=0; i<window.initialTagManager.length; i++) {
-      if (window.initialTagManager[i].page_id == PAGES_LIST.QUESTIONS_PAGE.page_id) {
+      if (window.initialTagManager[i].page_id == PAGES_LIST.OFFER_PAGE.page_id) {
         eventFired = true;
         break;
       }
@@ -52,8 +52,8 @@ class Offer extends React.Component<Props, {}> {
     if (!eventFired) {
       window.dataLayer.push({
         'event':'VirtualPageView',
-        'virtualPageURL':'/' + PAGES_LIST.QUESTIONS_PAGE.page_id,
-        'virtualPageTitle' : PAGES_LIST.QUESTIONS_PAGE.page_title 
+        'virtualPageURL':'/' + PAGES_LIST.OFFER_PAGE.page_id,
+        'virtualPageTitle' : PAGES_LIST.OFFER_PAGE.page_title 
       });
     }
     

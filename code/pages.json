@@ -34,9 +34,5 @@
   "PAYMENT_SUCCESS_PAGE": {
     "page_id": "PAYMENT_SUCCESS_PAGE_ID",
     "page_title": "PAYMENT_SUCCESS_PAGE"
-  },
-  "PAYMENT_SUCCESS_PAGE": {
-    "page_id": "PAYMENT_SUCCESS_PAGE_ID",
-    "page_title": "PAYMENT_SUCCESS_PAGE"
   }
 }
