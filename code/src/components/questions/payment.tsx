@@ -5,6 +5,7 @@ import SingleSelection from "./SingleSelection";
 import {each, isEmpty, map} from "underscore";
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
+import { PAGES_LIST } from "./../../pages";
 
 interface Props  extends React.Props<Payment> {
 
@@ -15,6 +16,22 @@ class Payment extends React.Component<Props, {}> {
     super();
   }
   state = {};
+  componentWillMount() {
+    var eventFired = false;
+    for(var i=0; i<window.initialTagManager.length; i++) {
+      if (window.initialTagManager[i].page_id == PAGES_LIST.QUESTIONS_PAGE.page_id) {
+        eventFired = true;
+        break;
+      }
+    }
+    if (!eventFired) {
+      window.dataLayer.push({
+        'event':'VirtualPageView',
+        'virtualPageURL':'/' + PAGES_LIST.QUESTIONS_PAGE.page_id,
+        'virtualPageTitle' : PAGES_LIST.QUESTIONS_PAGE.page_title 
+      });
+    }
+  }
   htmlDecode(input){
     var e = document.createElement('div');
     e.innerHTML = input;

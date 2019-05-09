@@ -19,6 +19,7 @@ import Subheader from "../common/subheader";
 import { browserHistory } from 'react-router';
 import AgentEmailModalCapture from "./AgentEmailModalCapture";
 import * as _ from "underscore"
+import { PAGES_LIST } from "./../../pages";
 
 interface Props {
   plans: [any]
@@ -47,6 +48,23 @@ class PlansPage extends React.Component<Props, {}> {
 
       const basePath = this.props.location.pathname.indexOf("agent") > 1 || this.props.is_agent ? "/agent" : "/";
       browserHistory.push(basePath + queryParamsString);
+    }
+  }
+
+  componentDidMount () {
+    var eventFired = false;
+    for(var i=0; i<window.initialTagManager.length; i++) {
+      if (window.initialTagManager[i].page_id == PAGES_LIST.NEXT_STEPS_PAGE.page_id) {
+        eventFired = true;
+        break;
+      }
+    }
+    if (!eventFired) {
+      window.dataLayer.push({
+        'event':'VirtualPageView',
+        'virtualPageURL':'/' + PAGES_LIST.NEXT_STEPS_PAGE.page_id,
+        'virtualPageTitle' : PAGES_LIST.NEXT_STEPS_PAGE.page_title 
+      });
     }
   }
 

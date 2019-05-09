@@ -8,6 +8,7 @@ import * as _QuestionsPage from "./components/questions/main";
 import * as _AllQuestionsPage from "./components/questions/all";
 import * as Access from "./actions/Access";
 import {isEmpty} from "underscore";
+import { PAGES_LIST } from "./pages";
 
 type LoadCallback = (error: any, component: React.ComponentClass<any>) => void;
 
@@ -194,9 +195,19 @@ function loadUnsubscribePage(location: any, callback: LoadCallback) {
     "QuotePage");
 }
 
-function checkAccessable(nextState, replace, callback) {  
+function checkAccessable(nextState, replace, callback) {      
+  window.initialTagManager = window.initialTagManager || [];
   Access.getQuoteAccess(nextState.location.query, function(res){
-    if(res != undefined && res != null && res.access){
+    window.uniqueTransactionId = res.uniqueTransactionId;
+    window.initialTagManager = res.tag_manager;
+    if (res.firstTime) {
+      window.dataLayer.push({
+        'event':'VirtualPageView',
+        'virtualPageURL':'/' + PAGES_LIST.LANDING_PAGE.page_id,
+        'virtualPageTitle' : PAGES_LIST.LANDING_PAGE.page_title 
+      });
+    }
+    if(res != undefined && res != null && res.data && res.data.access){
       return callback();  
     }
     return false;

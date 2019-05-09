@@ -19,7 +19,7 @@ import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 import PdfModal from "./PdfModal";
 import RawHtml from "react-raw-html";
-
+import { PAGES_LIST } from "./../../pages";
 
 interface Props  extends React.Props<Offer> {
   submitQuoteForm: ()=>void,
@@ -42,6 +42,21 @@ class Offer extends React.Component<Props, {}> {
   questionComponents: any = [];
 
   componentWillMount() {
+    var eventFired = false;
+    for(var i=0; i<window.initialTagManager.length; i++) {
+      if (window.initialTagManager[i].page_id == PAGES_LIST.QUESTIONS_PAGE.page_id) {
+        eventFired = true;
+        break;
+      }
+    }
+    if (!eventFired) {
+      window.dataLayer.push({
+        'event':'VirtualPageView',
+        'virtualPageURL':'/' + PAGES_LIST.QUESTIONS_PAGE.page_id,
+        'virtualPageTitle' : PAGES_LIST.QUESTIONS_PAGE.page_title 
+      });
+    }
+    
     var offerData = this.props.confirmationData && this.props.confirmationData.data && this.props.confirmationData.data.offer_data;
     if (offerData && !isEmpty(offerData.elavon_params)) {
       this.setState({

@@ -19,6 +19,7 @@ import {submitQuoteForm, submitPlansForm, submitProductsForm, setPersonsData} fr
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
+import { PAGES_LIST } from "./../../pages";
 
 interface Props {
   submitQuoteForm?: (a: any)=>void,
@@ -142,7 +143,22 @@ class Main extends React.Component<Props, {}> {
       }
 
       this.props.setPersonsData(persons);
-      persons.uniqueTransactionId = this.props.uniqueTransactionId;
+      persons.uniqueTransactionId = window.uniqueTransactionId;
+
+    var eventFired = false;
+    for(var i=0; i<window.initialTagManager.length; i++) {
+      if (window.initialTagManager[i].page_id == PAGES_LIST.PRODUCT_PAGE.page_id) {
+        eventFired = true;
+        break;
+      }
+    }
+    if (!eventFired) {
+      window.dataLayer.push({
+        'event':'VirtualPageView',
+        'virtualPageURL':'/' + PAGES_LIST.PRODUCT_PAGE.page_id,
+        'virtualPageTitle' : PAGES_LIST.PRODUCT_PAGE.page_title 
+      });
+    }
       return this.props.submitQuoteForm(persons).then(() => {
         if (this.props.products && this.props.products.LOGIN_URL && this.props.products.LOGIN_URL.length > 0) {
           window.location.href = this.props.products.LOGIN_URL;
@@ -164,7 +180,7 @@ class Main extends React.Component<Props, {}> {
         }
         queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
         if (!queryParams["transaction_id"]) {
-          queryParamsString += "&transaction_id=" + this.props.uniqueTransactionId;
+          queryParamsString += "&transaction_id=" + window.uniqueTransactionId;
         }
 
         browserHistory.push(basePath + "products" + queryParamsString);

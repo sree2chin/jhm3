@@ -8,6 +8,7 @@ function submitQuoteForm(postData, isFromMainPage=false) {
 					window._mfq = window._mfq || [];
 					window._mfq.push(["setVariable", "transaction_id", data.uniqueTransactionId]);
 				}
+				window.initialTagManager = data.tag_manager;
 				if (data && data.data && data.data.applicants) {
 					dispatch({
 						type: 'SUMBMITTED_PERSONAL_INFO', 
@@ -78,6 +79,7 @@ function submitProductsForm(postData) : any {
 	return (dispatch) => {
 		return SubmitQuoteApi.submitProductsForm(postData).then(
 			data => {
+			window.initialTagManager = data.tag_manager;
 			if (data && data.data && data.data.applicants) {
 				dispatch({
 					type: 'SUMBMITTED_PRODUCTS_INFO', isSubmmitedProductsForm: true, plans: data.data.applicants
@@ -96,6 +98,7 @@ function submitPlansForm(postData) : any {
 	return (dispatch) => {
 		return SubmitQuoteApi.plansSubmit(postData).then(
 			data => {
+				window.initialTagManager = data.tag_manager;
 				if (data && data.data && data.data.applicants) {
 					dispatch({
 						type: 'SUMBMITTED_PLANS_INFO',
@@ -115,6 +118,7 @@ function saveQuoteForm(postData) : any{
 	return (dispatch) => {
 		return SubmitQuoteApi.saveQuoteForm(postData).then(
 			data => {
+				window.initialTagManager = data.tag_manager;
 				if (data && data.data && data.data.applicants) {
 					dispatch({
 						type: 'SUMBMITTED_SAVE_QUOTE', quoteResponse: data

@@ -21,6 +21,7 @@ import {Tooltip} from 'react-lightweight-tooltip';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 import { browserHistory } from 'react-router';
 import * as _ from "underscore";
+import { PAGES_LIST } from "./../../pages";
 
 interface Props {
   plans: [any],
@@ -48,6 +49,23 @@ class PlansPage extends React.Component<Props, {}> {
       queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
       browserHistory.push(basePath + queryParamsString);
       //window.location.href = basePath + queryParamsString;
+    }
+  }
+
+  componentDidMount () {
+    var eventFired = false;
+    for(var i=0; i<window.initialTagManager.length; i++) {
+      if (window.initialTagManager[i].page_id == PAGES_LIST.NEXT_STEPS_PAGE.page_id) {
+        eventFired = true;
+        break;
+      }
+    }
+    if (!eventFired) {
+      window.dataLayer.push({
+        'event':'VirtualPageView',
+        'virtualPageURL':'/' + PAGES_LIST.NEXT_STEPS_PAGE.page_id,
+        'virtualPageTitle' : PAGES_LIST.NEXT_STEPS_PAGE.page_title 
+      });
     }
   }
 

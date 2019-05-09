@@ -4,6 +4,7 @@ var url = require('url');
 var appConfig       = require('../config/service.js');
 var _           = require('underscore');
 const uuidV1 = require('uuid/v1');
+var PAGES_LIST = require("./../pages.json");
 
 var restOptions = {
   host: appConfig.getProperty('server_domain'),
@@ -37,6 +38,7 @@ module.exports = new function(){
   };
 
   this.getQuotesAccess = function(req, cb){
+    var uniqueTransactionId, firstTime = true;
     var options = {
       url: restOptions.host + '/v1/quote/access',
       headers: {
@@ -44,8 +46,20 @@ module.exports = new function(){
       },
       method: 'POST'
     }
-    var formData = req.body;    
+    var formData = req.body;  
+    formData.page_id = PAGES_LIST.LANDING_PAGE.page_id; 
+    formData.page_title = PAGES_LIST.LANDING_PAGE.page_title; 
     //appendAgentInfo(req, formData);
+    console.log("req.body: " + JSON.stringify(req.body));
+    if (!req.body.transaction_id) {
+      uniqueTransactionId = uuidV1() + "_" + new Date().getTime();
+      req.session[uniqueTransactionId] = {};
+    } else {
+      firstTime = false;
+      uniqueTransactionId = req.body.transaction_id;
+    }
+    formData.transaction_id = uniqueTransactionId;
+    console.log("req.session.uniqueTransactionId: " + JSON.stringify(uniqueTransactionId));
     appendQueryParams(req, formData);
     options.formData = formData;
     console.log("\n\n\nformData: " + JSON.stringify(formData) + "\n\n\n");
@@ -62,6 +76,10 @@ module.exports = new function(){
             console.log("Error posted for api: /v1/quote/access");
           });
       }
+      httpResponse.body = httpResponse.body || {};
+      httpResponse.body = JSON.parse(httpResponse.body);
+      httpResponse.body.uniqueTransactionId = uniqueTransactionId;
+      httpResponse.body.firstTime = firstTime;
       cb(httpResponse.statusCode, httpResponse.body);
     });
   };
@@ -113,20 +131,23 @@ module.exports = new function(){
   };
 
   this.getQuoteProducts = function(req, cb) {
+
     var data = req.body;
     var url = restOptions.host + '/v1/quote/products';
-    var formData = {
-      applicants: JSON.stringify(data)
-    };
-    console.log("req.query.isFromMainPage: " + JSON.stringify(req.query.isFromMainPage));
+    var formData = {};
 
-    if (!req.body.uniqueTransactionId && (req.query.isFromMainPage == true || req.query.isFromMainPage == "true")) {
-      req.session.uniqueTransactionId = uuidV1() + "_" + new Date().getTime();
-      req.session[req.session.uniqueTransactionId] = {};
+    console.log("req.body.uniqueTransactionId getQuoteProducts: ", req.body);
+    if (req.body.uniqueTransactionId) {
+      formData.transaction_id = req.body.uniqueTransactionId;
     }
-    console.log("req.session.uniqueTransactionId: " + JSON.stringify(req.session.uniqueTransactionId));
+
+    formData.applicants = JSON.stringify(data);
+    formData.page_id = PAGES_LIST.PRODUCT_PAGE.page_id; 
+    formData.page_title = PAGES_LIST.PRODUCT_PAGE.page_title; 
+    console.log("req.query.isFromMainPage: " + JSON.stringify(req.query.isFromMainPage));
     appendAgentInfo(req, formData);
     appendQueryParams(req, formData);
+
     console.log("\n\n\nin getQuoteProducts formData: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: url,
@@ -136,8 +157,7 @@ module.exports = new function(){
       },
       method: 'POST'
     }, function callback(err, httpResponse, body) {
-      console.log("\n\n\nhttpResponse: ",  httpResponse);
-      console.log("\n\n\nhttpResponse: " + JSON.stringify(httpResponse));
+
       if (httpResponse && httpResponse.body && (httpResponse.body.indexOf("A PHP Error was encountered") >-1 || httpResponse.body.indexOf("You have an error in your SQL syntax") >-1)) {
         self.logErrors(req, {
             user: null,
@@ -153,7 +173,7 @@ module.exports = new function(){
       } else {
         httpResponse.body = httpResponse.body || {};
         httpResponse.body = JSON.parse(httpResponse.body);
-        httpResponse.body.uniqueTransactionId = req.session.uniqueTransactionId;
+        httpResponse.body.uniqueTransactionId = req.body.uniqueTransactionId;
         cb(err, httpResponse);
       }
 
@@ -167,6 +187,8 @@ module.exports = new function(){
     };
     appendAgentInfo(req, formData);
     appendQueryParams(req, formData);
+    formData.page_id = PAGES_LIST.PLANS_PAGE.page_id; 
+    formData.page_title = PAGES_LIST.PLANS_PAGE.page_title; 
     console.log("\n\n\nin getQuotePlans formData: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/quote/productplans',
@@ -196,6 +218,8 @@ module.exports = new function(){
     var data = req.body;
     appendAgentInfo(req, data);
     appendQueryParams(req, data);
+    data.page_id = PAGES_LIST.NEXT_STEPS_PAGE.page_id; 
+    data.page_title = PAGES_LIST.NEXT_STEPS_PAGE.page_title; 
     console.log("\n\n\nin saveQuoteForm formData: " + JSON.stringify(data) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/quote/savequote',
@@ -225,6 +249,8 @@ module.exports = new function(){
     var data = {};
     appendAgentInfo(req, data);
     appendQueryParams(req, data);
+    data.page_id = PAGES_LIST.QUESTIONS_PAGE.page_id; 
+    data.page_title = PAGES_LIST.QUESTIONS_PAGE.page_title; 
     console.log("\n\n\nin getQuestions formData: " + JSON.stringify(data) + "\n\n\n");
 
     request({

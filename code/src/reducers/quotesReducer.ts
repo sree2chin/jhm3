@@ -8,8 +8,7 @@ export default (state: Array<any> = [], action) => {
         productValidations: action.productValidations, 
         isProductFetchCallDone: true, 
         is_agent: action.is_agent,
-        saveQuoteOptions: action.saveQuoteOptions,
-        uniqueTransactionId: action.uniqueTransactionId
+        saveQuoteOptions: action.saveQuoteOptions
       }
     	return objectAssign({}, state, obj);
     case 'SUMBMITTED_PRODUCTS_INFO':

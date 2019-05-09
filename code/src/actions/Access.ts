@@ -3,7 +3,7 @@ import AccessApi from '../api/AccessApi';
 function getQuoteAccess(query, cb) : any{
 	return AccessApi.getQuoteAccess(query).then(
 		data => {
-			cb(data.data);
+			cb(data);
 			if (data && data.data && data.data.phone_number) {
 				reduxDispatch({
 					type: 'GOT_PHONE_NUMBER_DETAILS', 

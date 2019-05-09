@@ -17,6 +17,7 @@ import {getQuestions, postQuestions, getFactorsearch, confirmQuestions} from '..
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
+import { PAGES_LIST } from "./../../pages";
 
 interface Props  extends React.Props<Main> {
   submitQuoteForm: ()=>void,
@@ -61,6 +62,21 @@ class Main extends React.Component<Props, State> {
   noFoGroupsCompleted: any = [];
 
   componentWillMount() {
+    var eventFired = false;
+    window.initialTagManager = window.initialTagManager || [];
+    for(var i=0; i<window.initialTagManager.length; i++) {
+      if (window.initialTagManager[i].page_id == PAGES_LIST.REVIEW_PAGE.page_id) {
+        eventFired = true;
+        break;
+      }
+    }
+    if (!eventFired) {
+      window.dataLayer.push({
+        'event':'VirtualPageView',
+        'virtualPageURL':'/' + PAGES_LIST.REVIEW_PAGE.page_id,
+        'virtualPageTitle' : PAGES_LIST.REVIEW_PAGE.page_title 
+      });
+    }
     this.setState({
       gettingQuestions: true
     });

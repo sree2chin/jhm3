@@ -16,7 +16,7 @@ import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 import { browserHistory } from 'react-router';
 import EditPerson from "./EditPerson";
 import NoProducts from "./NoProducts"
-
+import { PAGES_LIST } from "./../../pages";
 
 interface Props {
   persons: [any],
@@ -349,6 +349,20 @@ class ProductsPage extends React.Component<Props, {}> {
 
       this.props.setPersonsData(persons);
 
+    var eventFired = false;
+    for(var i=0; i<window.initialTagManager.length; i++) {
+      if (window.initialTagManager[i].page_id == PAGES_LIST.PLANS_PAGE.page_id) {
+        eventFired = true;
+        break;
+      }
+    }
+    if (!eventFired) {
+      window.dataLayer.push({
+        'event':'VirtualPageView',
+        'virtualPageURL':'/' + PAGES_LIST.PLANS_PAGE.page_id,
+        'virtualPageTitle' : PAGES_LIST.PLANS_PAGE.page_title 
+      });
+    }
       this.props.submitProductsForm(persons).then(() => {
         if (this.props.plans && this.props.plans.LOGIN_URL && this.props.plans.LOGIN_URL.length > 0) {
           window.location.href = this.props.plans.LOGIN_URL;

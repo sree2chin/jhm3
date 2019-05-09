@@ -82,6 +82,7 @@ module.exports = function(app) {
       res.statusCode = statusCode;
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       res.setHeader('Content-Type', 'application/json');
+      req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
       if ((req.query.transaction_id && req.session[req.query.transaction_id].redirectToLogin) || req.session.redirectToLogin) {
         if (req.query.transaction_id) {
           req.session[req.query.transaction_id].redirectToLogin = false;
