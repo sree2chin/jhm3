@@ -18,7 +18,7 @@ const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
 import PdfModal from "./PdfModal"
-
+import { PAGES_LIST } from "./../../pages";
 
 interface Props  extends React.Props<Signature> {
   submitQuoteForm: ()=>void,
@@ -103,8 +103,37 @@ class Signature extends React.Component<Props, {}> {
       if (!isEmpty(link)){
         window.location.href = link;
       } else if (isEmpty(this.props.confirmationData.data.current_document_data) && !isEmpty(this.props.confirmationData.data.offer_data)) {
+    var eventFired = false;
+    for(var i=0; i<window.initialTagManager.length; i++) {
+      if (window.initialTagManager[i].page_id == PAGES_LIST.OFFER_PAGE.page_id) {
+        eventFired = true;
+        break;
+      }
+    }
+    if (!eventFired) {
+      window.dataLayer.push({
+        'event':'VirtualPageView',
+        'virtualPageURL':'/' + PAGES_LIST.OFFER_PAGE.page_id,
+        'virtualPageTitle' : PAGES_LIST.OFFER_PAGE.page_title 
+      });
+    }
         browserHistory.push("/offer" + queryParamsString);
       } else if(isEmpty(this.props.confirmationData.data.offer_data) && isEmpty(this.props.confirmationData.data.offer_data)) {
+        var eventFired = false;
+        window.initialTagManager = window.initialTagManager || [];
+        for(var i=0; i<window.initialTagManager.length; i++) {
+          if (window.initialTagManager[i].page_id == PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id) {
+            eventFired = true;
+            break;
+          }
+        }
+        if (!eventFired) {
+          window.dataLayer.push({
+            'event':'VirtualPageView',
+            'virtualPageURL':'/' + PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id,
+            'virtualPageTitle' : PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_title 
+          });
+        }
         browserHistory.push("/payment_success" + queryParamsString);
       }
 

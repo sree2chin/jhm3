@@ -102,22 +102,23 @@ class Main extends React.Component<Props, {}> {
       }
     }
     queryParamsString = queryParamsString.substring(0, queryParamsString.length-1);
-    var eventFired = false;
-    window.initialTagManager = window.initialTagManager || [];
-    for(var i=0; i<window.initialTagManager.length; i++) {
-      if (window.initialTagManager[i].page_id == PAGES_LIST.QUESTIONS_PAGE.page_id) {
-        eventFired = true;
-        break;
-      }
-    }
-    if (!eventFired) {
-      window.dataLayer.push({
-        'event':'VirtualPageView',
-        'virtualPageURL':'/' + PAGES_LIST.QUESTIONS_PAGE.page_id,
-        'virtualPageTitle' : PAGES_LIST.QUESTIONS_PAGE.page_title 
-      });
-    }
+
     this.props.getQuestions().then(()=> {
+      var eventFired = false;
+      window.initialTagManager = window.initialTagManager || [];
+      for(var i=0; i<window.initialTagManager.length; i++) {
+        if (window.initialTagManager[i].page_id == PAGES_LIST.QUESTIONS_PAGE.page_id) {
+          eventFired = true;
+          break;
+        }
+      }
+      if (!eventFired) {
+        window.dataLayer.push({
+          'event':'VirtualPageView',
+          'virtualPageURL':'/' + PAGES_LIST.QUESTIONS_PAGE.page_id,
+          'virtualPageTitle' : PAGES_LIST.QUESTIONS_PAGE.page_title 
+        });
+      }
       if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
         window.location.href = this.questions.LOGIN_URL;
         return;
@@ -149,6 +150,21 @@ class Main extends React.Component<Props, {}> {
           if (this.questions.application_confirm_status == 1) {
             browserHistory.push("/signature" + queryParamsString);
           } else {
+      var eventFired = false;
+      window.initialTagManager = window.initialTagManager || [];
+      for(var i=0; i<window.initialTagManager.length; i++) {
+        if (window.initialTagManager[i].page_id == PAGES_LIST.REVIEW_PAGE.page_id) {
+          eventFired = true;
+          break;
+        }
+      }
+      if (!eventFired) {
+        window.dataLayer.push({
+          'event':'VirtualPageView',
+          'virtualPageURL':'/' + PAGES_LIST.REVIEW_PAGE.page_id,
+          'virtualPageTitle' : PAGES_LIST.REVIEW_PAGE.page_title 
+        });
+      }
             browserHistory.push("/all-questions" +queryParamsString);
           }
           return;
@@ -200,6 +216,21 @@ class Main extends React.Component<Props, {}> {
       if (this.questions.application_confirm_status == 1) {
         browserHistory.push("/signature" + queryParamsString);
       } else {
+      var eventFired = false;
+      window.initialTagManager = window.initialTagManager || [];
+      for(var i=0; i<window.initialTagManager.length; i++) {
+        if (window.initialTagManager[i].page_id == PAGES_LIST.REVIEW_PAGE.page_id) {
+          eventFired = true;
+          break;
+        }
+      }
+      if (!eventFired) {
+        window.dataLayer.push({
+          'event':'VirtualPageView',
+          'virtualPageURL':'/' + PAGES_LIST.REVIEW_PAGE.page_id,
+          'virtualPageTitle' : PAGES_LIST.REVIEW_PAGE.page_title 
+        });
+      }
         browserHistory.push("/all-questions" +queryParamsString);
       }
       return;
@@ -1362,6 +1393,21 @@ class Main extends React.Component<Props, {}> {
             if (this.questions.application_confirm_status == 1) {
               browserHistory.push("/signature" + queryParamsString);
             } else {
+              var eventFired = false;
+              window.initialTagManager = window.initialTagManager || [];
+              for(var i=0; i<window.initialTagManager.length; i++) {
+                if (window.initialTagManager[i].page_id == PAGES_LIST.REVIEW_PAGE.page_id) {
+                  eventFired = true;
+                  break;
+                }
+              }
+              if (!eventFired) {
+                window.dataLayer.push({
+                  'event':'VirtualPageView',
+                  'virtualPageURL':'/' + PAGES_LIST.REVIEW_PAGE.page_id,
+                  'virtualPageTitle' : PAGES_LIST.REVIEW_PAGE.page_title 
+                });
+              }
               browserHistory.push("/all-questions" +queryParamsString);
             }
 

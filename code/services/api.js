@@ -51,12 +51,13 @@ module.exports = new function(){
     formData.page_title = PAGES_LIST.LANDING_PAGE.page_title; 
     //appendAgentInfo(req, formData);
     console.log("req.body: " + JSON.stringify(req.body));
-    if (!req.body.transaction_id) {
+    if (!req.body.transaction_id && !req.session.uniqueTransactionId) {
       uniqueTransactionId = uuidV1() + "_" + new Date().getTime();
+      req.session.uniqueTransactionId = uniqueTransactionId;
       req.session[uniqueTransactionId] = {};
     } else {
       firstTime = false;
-      uniqueTransactionId = req.body.transaction_id;
+      uniqueTransactionId = req.body.transaction_id || req.session.uniqueTransactionId;
     }
     formData.transaction_id = uniqueTransactionId;
     console.log("req.session.uniqueTransactionId: " + JSON.stringify(uniqueTransactionId));
@@ -147,7 +148,7 @@ module.exports = new function(){
     console.log("req.query.isFromMainPage: " + JSON.stringify(req.query.isFromMainPage));
     appendAgentInfo(req, formData);
     appendQueryParams(req, formData);
-
+    req.session.uniqueTransactionId = null;
     console.log("\n\n\nin getQuoteProducts formData: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: url,
@@ -245,14 +246,36 @@ module.exports = new function(){
     });
   };
 
-  this.getQuestions = function(req, cb){
+  this.getQuestions = function(req, cb, isFromPayment){
     var data = {};
     appendAgentInfo(req, data);
     appendQueryParams(req, data);
-    data.page_id = PAGES_LIST.QUESTIONS_PAGE.page_id; 
-    data.page_title = PAGES_LIST.QUESTIONS_PAGE.page_title; 
-    console.log("\n\n\nin getQuestions formData: " + JSON.stringify(data) + "\n\n\n");
 
+    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    if (req.session[req.query.transaction_id].notFirstTime) {
+      data.page_id = PAGES_LIST.QUESTIONS_PAGE.page_id; 
+      data.page_title = PAGES_LIST.QUESTIONS_PAGE.page_title;       
+    } else {
+      req.session[req.query.transaction_id].notFirstTime = true; 
+    }
+
+    if (req.query.isFromReviewPage) {
+      data.page_id = PAGES_LIST.REVIEW_PAGE.page_id; 
+      data.page_title = PAGES_LIST.REVIEW_PAGE.page_title; 
+    }
+    if (isFromPayment) {
+      data.page_id = PAGES_LIST.PAYMENT_PAGE.page_id; 
+      data.page_title = PAGES_LIST.PAYMENT_PAGE.page_title; 
+    }
+    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    console.log("req.session[req.query.transaction_id]2: " + JSON.stringify(req.session[req.query.transaction_id]));
+    if (req.session[req.query.transaction_id].isFromOfferRoute) {
+      data.page_id = PAGES_LIST.OFFER_PAGE.page_id; 
+      data.page_title = PAGES_LIST.OFFER_PAGE.page_title; 
+      delete req.session[req.query.transaction_id].isFromOfferRoute;
+    }
+
+console.log("\n\n\nin getQuestions formData: " + JSON.stringify(data) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/questions/questions',
       formData: data,
@@ -289,7 +312,16 @@ module.exports = new function(){
     }
     appendAgentInfo(req, formData);
     appendQueryParams(req, formData);
-
+    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    if (req.session[req.query.transaction_id].notFirstTime) {
+      formData.page_id = PAGES_LIST.QUESTIONS_PAGE.page_id; 
+      formData.page_title = PAGES_LIST.QUESTIONS_PAGE.page_title;     
+    }
+    if (req.body.isFromEditQuestionsPage) {
+      formData.page_id = PAGES_LIST.EDIT_QUESTIONS_PAGE.page_id; 
+      formData.page_title = PAGES_LIST.EDIT_QUESTIONS_PAGE.page_title; 
+    }
+  
     request({
       url: restOptions.host + '/v1/questions/questions',
       headers: {
@@ -324,10 +356,14 @@ module.exports = new function(){
       this.makePayment1(req, cb, true);
       return;
     }
-    console.log("\n\n\n in postPayment: " + JSON.stringify(elavonConfig) + "\n\n\n");
+    console.log("\n\n\n in postPayment: " + JSON.stringify(req.body) + "\n\n\n");
     console.log("in postPayment req.body.elavon_url: " + req.body.elavon_url + "\n\n\n");
     elavonConfig.url = req.body.elavon_url;
     //appendQueryParams(req, elavonConfig);
+    //if (req.body.isFromOfferPage) {
+      this.getQuestions(req, ()=>{}, true);
+      delete req.body.isFromOfferPage;
+    //}
     request({
       url: req.body.elavon_url,
       method: 'POST',
@@ -393,7 +429,11 @@ module.exports = new function(){
     }
     appendAgentInfo(req, formData);
     appendQueryParams(req, formData);
-
+    if (req.body.isFromOfferPage) {
+      formData.page_id = PAGES_LIST.OFFER_PAGE.page_id; 
+      formData.page_title = PAGES_LIST.OFFER_PAGE.page_title; 
+      delete req.body.isFromOfferPage;
+    }
     console.log("\n\n\nformData in makePayment1: " + JSON.stringify(formData) + "\n\n\n");
     request({
       url: restOptions.host + '/v1/questions/questions',

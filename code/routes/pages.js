@@ -193,7 +193,9 @@ module.exports = function(app) {
     var url_parts = url.parse(req.url, true);
     console.log("in offer url: " + JSON.stringify(url_parts));
     var queryParamsString = url_parts.search;
-
+    req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
+    req.session[req.query.transaction_id].isFromOfferRoute = true;
+    console.log("req.session[req.query.transaction_id]1: " + JSON.stringify(req.session[req.query.transaction_id]));
     res.redirect("/questions" + queryParamsString);
     //templatePath = "./dist/";
     //res.render(templatePath);

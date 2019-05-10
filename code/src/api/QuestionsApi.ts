@@ -31,9 +31,14 @@ interface QuotesApiI {
 
 class QuestionsApi {
 
-  get() : Promise<any> {
+  get(mergeObjWithQueryParams) : Promise<any> {
     var q = getQueryParms();
     q = updateQueryStringParameter(String(window.location.search), "currentTime", new Date().getTime());
+    if (mergeObjWithQueryParams) {
+      for(var k in mergeObjWithQueryParams) {
+        q = q + `&${k}=${mergeObjWithQueryParams[k]}`;
+      }
+    }
     return fetch('/v1/questions/questions' + q, {
         method: "GET",
 

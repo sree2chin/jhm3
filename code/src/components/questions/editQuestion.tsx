@@ -17,6 +17,7 @@ import {getQuestions, postQuestions, getFactorsearch} from '../../actions/Questi
 const objectAssign = require('object-assign');
 import { browserHistory } from 'react-router';
 import ScrollToTopOnMount from "../common/ScrollToTopOnMount";
+import { PAGES_LIST } from "./../../pages";
 
 interface Props  extends React.Props<Main> {
   submitQuoteForm: ()=>void,
@@ -51,6 +52,21 @@ class Main extends React.Component<Props, {}> {
 
   componentWillMount() {
     this.props.getQuestions().then(()=>{
+              var eventFired = false;
+              window.initialTagManager = window.initialTagManager || [];
+              for(var i=0; i<window.initialTagManager.length; i++) {
+                if (window.initialTagManager[i].page_id == PAGES_LIST.EDIT_QUESTIONS_PAGE.page_id) {
+                  eventFired = true;
+                  break;
+                }
+              }
+              if (!eventFired) {
+                window.dataLayer.push({
+                  'event':'VirtualPageView',
+                  'virtualPageURL':'/' + PAGES_LIST.EDIT_QUESTIONS_PAGE.page_id,
+                  'virtualPageTitle' : PAGES_LIST.EDIT_QUESTIONS_PAGE.page_title 
+                });
+              }
       if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
         window.location.href = this.questions.LOGIN_URL;
         return;
@@ -675,6 +691,7 @@ class Main extends React.Component<Props, {}> {
         questions: this.questions,
         answered_questions: answered_questions
       };
+      data.isFromEditQuestionsPage = true;
 
       this.props.postQuestions(data).then(() => {
         window.scrollTo(0, 0);

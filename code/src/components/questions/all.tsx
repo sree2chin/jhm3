@@ -62,25 +62,7 @@ class Main extends React.Component<Props, State> {
   noFoGroupsCompleted: any = [];
 
   componentWillMount() {
-    var eventFired = false;
-    window.initialTagManager = window.initialTagManager || [];
-    for(var i=0; i<window.initialTagManager.length; i++) {
-      if (window.initialTagManager[i].page_id == PAGES_LIST.REVIEW_PAGE.page_id) {
-        eventFired = true;
-        break;
-      }
-    }
-    if (!eventFired) {
-      window.dataLayer.push({
-        'event':'VirtualPageView',
-        'virtualPageURL':'/' + PAGES_LIST.REVIEW_PAGE.page_id,
-        'virtualPageTitle' : PAGES_LIST.REVIEW_PAGE.page_title 
-      });
-    }
-    this.setState({
-      gettingQuestions: true
-    });
-    this.props.getQuestions().then(()=>{
+    this.props.getQuestions({isFromReviewPage: true}).then(()=>{
       if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
         window.location.href = this.questions.LOGIN_URL;
         return;
@@ -385,8 +367,38 @@ class Main extends React.Component<Props, State> {
       if (!isEmpty(link)){
         window.location.href = link;
       } else if (isEmpty(this.props.confirmationData.data.current_document_data) && !isEmpty(this.props.confirmationData.data.offer_data)) {
+        var eventFired = false;
+        window.initialTagManager = window.initialTagManager || [];
+        for(var i=0; i<window.initialTagManager.length; i++) {
+          if (window.initialTagManager[i].page_id == PAGES_LIST.OFFER_PAGE.page_id) {
+            eventFired = true;
+            break;
+          }
+        }
+        if (!eventFired) {
+          window.dataLayer.push({
+            'event':'VirtualPageView',
+            'virtualPageURL':'/' + PAGES_LIST.OFFER_PAGE.page_id,
+            'virtualPageTitle' : PAGES_LIST.OFFER_PAGE.page_title 
+          });
+        }
         browserHistory.push("/offer" + queryParamsString);
-      } else if(isEmpty(this.props.confirmationData.data.offer_data) && isEmpty(this.props.confirmationData.data.offer_data)) {
+      } else if(isEmpty(this.props.confirmationData.data.offer_data) &&   isEmpty(this.props.confirmationData.data.offer_data)) {
+        var eventFired = false;
+        window.initialTagManager = window.initialTagManager || [];
+        for(var i=0; i<window.initialTagManager.length; i++) {
+          if (window.initialTagManager[i].page_id == PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id) {
+            eventFired = true;
+            break;
+          }
+        }
+        if (!eventFired) {
+          window.dataLayer.push({
+            'event':'VirtualPageView',
+            'virtualPageURL':'/' + PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id,
+            'virtualPageTitle' : PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_title 
+          });
+        }
         browserHistory.push("/payment_success" + queryParamsString);
       }
 

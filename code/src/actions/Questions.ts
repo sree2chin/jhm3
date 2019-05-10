@@ -1,8 +1,8 @@
 import QuestionsApi from '../api/QuestionsApi';
 
-function getQuestions() {
+function getQuestions(mergeObjWithQueryParams) {
 	return (dispatch) => {
-		return QuestionsApi.get().then(
+		return QuestionsApi.get(mergeObjWithQueryParams).then(
 			data => {
 				window.initialTagManager = data.tag_manager;
 				return dispatch({

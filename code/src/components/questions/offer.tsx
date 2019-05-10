@@ -42,21 +42,6 @@ class Offer extends React.Component<Props, {}> {
   questionComponents: any = [];
 
   componentWillMount() {
-    var eventFired = false;
-    for(var i=0; i<window.initialTagManager.length; i++) {
-      if (window.initialTagManager[i].page_id == PAGES_LIST.OFFER_PAGE.page_id) {
-        eventFired = true;
-        break;
-      }
-    }
-    if (!eventFired) {
-      window.dataLayer.push({
-        'event':'VirtualPageView',
-        'virtualPageURL':'/' + PAGES_LIST.OFFER_PAGE.page_id,
-        'virtualPageTitle' : PAGES_LIST.OFFER_PAGE.page_title 
-      });
-    }
-    
     var offerData = this.props.confirmationData && this.props.confirmationData.data && this.props.confirmationData.data.offer_data;
     if (offerData && !isEmpty(offerData.elavon_params)) {
       this.setState({
@@ -147,8 +132,24 @@ class Offer extends React.Component<Props, {}> {
       if (!isEmpty(link)){
         window.location.href = link;
       } else if (isEmpty(this.props.confirmationData.data.current_document_data)) {
+
         browserHistory.push("/offer" + queryParamsString);
       } else if(isEmpty(this.props.confirmationData.data.offer_data)) {
+        var eventFired = false;
+        window.initialTagManager = window.initialTagManager || [];
+        for(var i=0; i<window.initialTagManager.length; i++) {
+          if (window.initialTagManager[i].page_id == PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id) {
+            eventFired = true;
+            break;
+          }
+        }
+        if (!eventFired) {
+          window.dataLayer.push({
+            'event':'VirtualPageView',
+            'virtualPageURL':'/' + PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id,
+            'virtualPageTitle' : PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_title 
+          });
+        }
         browserHistory.push("/payment_success" + queryParamsString);
       }
 
@@ -195,6 +196,7 @@ class Offer extends React.Component<Props, {}> {
       window.location.href = this.props.confirmationData.redirect_url;
       return;
     }
+    data.isFromOfferPage = true;
     this.props.postPayment(data).then(()=> {
       if (this.props.paymentInfo && this.props.paymentInfo.LOGIN_URL && this.props.paymentInfo.LOGIN_URL.length > 0) {
         window.location.href = this.props.paymentInfo.LOGIN_URL;
@@ -237,12 +239,57 @@ class Offer extends React.Component<Props, {}> {
         if (!isEmpty(link)){
           window.location.href = link;
         } else if (!isEmpty(questionsInfo.data) && isEmpty(questionsInfo.data.current_document_data) && !isEmpty(questionsInfo.data.offer_data)) {
+        var eventFired = false;
+        window.initialTagManager = window.initialTagManager || [];
+        for(var i=0; i<window.initialTagManager.length; i++) {
+          if (window.initialTagManager[i].page_id == PAGES_LIST.OFFER_PAGE.page_id) {
+            eventFired = true;
+            break;
+          }
+        }
+        if (!eventFired) {
+          window.dataLayer.push({
+            'event':'VirtualPageView',
+            'virtualPageURL':'/' + PAGES_LIST.OFFER_PAGE.page_id,
+            'virtualPageTitle' : PAGES_LIST.OFFER_PAGE.page_title 
+          });
+        }
           browserHistory.push("/offer" + queryParamsString);
         } else {
+        var eventFired = false;
+        window.initialTagManager = window.initialTagManager || [];
+        for(var i=0; i<window.initialTagManager.length; i++) {
+          if (window.initialTagManager[i].page_id == PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id) {
+            eventFired = true;
+            break;
+          }
+        }
+        if (!eventFired) {
+          window.dataLayer.push({
+            'event':'VirtualPageView',
+            'virtualPageURL':'/' + PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id,
+            'virtualPageTitle' : PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_title 
+          });
+        }
           browserHistory.push("/payment_success" + queryParamsString);
         }
         return;
       }
+        var eventFired = false;
+        window.initialTagManager = window.initialTagManager || [];
+        for(var i=0; i<window.initialTagManager.length; i++) {
+          if (window.initialTagManager[i].page_id == PAGES_LIST.PAYMENT_PAGE.page_id) {
+            eventFired = true;
+            break;
+          }
+        }
+        if (!eventFired) {
+          window.dataLayer.push({
+            'event':'VirtualPageView',
+            'virtualPageURL':'/' + PAGES_LIST.PAYMENT_PAGE.page_id,
+            'virtualPageTitle' : PAGES_LIST.PAYMENT_PAGE.page_title 
+          });
+        }
 
       window.location.href = `/payment` + window.location.search;
       this.setState({

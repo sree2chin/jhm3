@@ -5,6 +5,7 @@ import {makePayment, postPayment} from '../../actions/Questions';
 import { browserHistory } from 'react-router';
 import { isEmpty } from "underscore";
 import {Button, Row, Col} from "react-bootstrap";
+import { PAGES_LIST } from "./../../pages";
 
 interface Props extends React.Props<paymentSuccess> {
     location: any
@@ -78,6 +79,7 @@ class paymentSuccess extends React.Component<Props, {}> {
         if (!isEmpty(link)){
           window.location.href = link;
         } else if (isEmpty(this.props.paymentData.data.current_document_data) && !isEmpty(this.props.paymentData.data.offer_data)) {
+
           browserHistory.push("/offer" + queryParamsString);
         } else if(isEmpty(this.props.paymentData.data.offer_data) && isEmpty(this.props.paymentData.data.offer_data)) {
           this.setState({
@@ -87,6 +89,21 @@ class paymentSuccess extends React.Component<Props, {}> {
         }
       });
     } else {
+        var eventFired = false;
+        window.initialTagManager = window.initialTagManager || [];
+        for(var i=0; i<window.initialTagManager.length; i++) {
+          if (window.initialTagManager[i].page_id == PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id) {
+            eventFired = true;
+            break;
+          }
+        }
+        if (!eventFired) {
+          window.dataLayer.push({
+            'event':'VirtualPageView',
+            'virtualPageURL':'/' + PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id,
+            'virtualPageTitle' : PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_title 
+          });
+        }
       this.setState({
         allDone: true
       });
@@ -152,13 +169,55 @@ class paymentSuccess extends React.Component<Props, {}> {
         if (!isEmpty(link)){
           window.location.href = link;
         } else if (!isEmpty(questionsInfo.data) && isEmpty(questionsInfo.data.current_document_data) && !isEmpty(questionsInfo.data.offer_data)) {
+    var eventFired = false;
+    for(var i=0; i<window.initialTagManager.length; i++) {
+      if (window.initialTagManager[i].page_id == PAGES_LIST.OFFER_PAGE.page_id) {
+        eventFired = true;
+        break;
+      }
+    }
+    if (!eventFired) {
+      window.dataLayer.push({
+        'event':'VirtualPageView',
+        'virtualPageURL':'/' + PAGES_LIST.OFFER_PAGE.page_id,
+        'virtualPageTitle' : PAGES_LIST.OFFER_PAGE.page_title 
+      });
+    }
           browserHistory.push("/offer" + queryParamsString);
         } else {
+        var eventFired = false;
+        window.initialTagManager = window.initialTagManager || [];
+        for(var i=0; i<window.initialTagManager.length; i++) {
+          if (window.initialTagManager[i].page_id == PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id) {
+            eventFired = true;
+            break;
+          }
+        }
+        if (!eventFired) {
+          window.dataLayer.push({
+            'event':'VirtualPageView',
+            'virtualPageURL':'/' + PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id,
+            'virtualPageTitle' : PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_title 
+          });
+        }
           browserHistory.push("/payment_success" + queryParamsString);
         }
         return;
       }
-
+    var eventFired = false;
+    for(var i=0; i<window.initialTagManager.length; i++) {
+      if (window.initialTagManager[i].page_id == PAGES_LIST.PAYMENT_PAGE.page_id) {
+        eventFired = true;
+        break;
+      }
+    }
+    if (!eventFired) {
+      window.dataLayer.push({
+        'event':'VirtualPageView',
+        'virtualPageURL':'/' + PAGES_LIST.PAYMENT_PAGE.page_id,
+        'virtualPageTitle' : PAGES_LIST.PAYMENT_PAGE.page_title 
+      });
+    }
       window.location.href = `/payment`;
       this.setState({
         onPaymentGoingTo: false

@@ -15,6 +15,10 @@
     "page_id": "NEXT_STEPS_PAGE_ID",
     "page_title": "NEXT_STEPS_PAGE"
   },
+  "AGENT_NEXT_STEPS_PAGE": {
+    "page_id": "AGENT_NEXT_STEPS_PAGE_ID",
+    "page_title": "AGENT_NEXT_STEPS_PAGE"
+  },
   "QUESTIONS_PAGE": {
     "page_id": "QUESTIONS_PAGE_ID",
     "page_title": "QUESTIONS_PAGE"

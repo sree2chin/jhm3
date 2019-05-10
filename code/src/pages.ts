@@ -15,9 +15,17 @@ var PAGES_LIST = {
     "page_id": "NEXT_STEPS_PAGE_ID",
     "page_title": "NEXT_STEPS_PAGE"
   },
+  "AGENT_NEXT_STEPS_PAGE": {
+    "page_id": "AGENT_NEXT_STEPS_PAGE_ID",
+    "page_title": "AGENT_NEXT_STEPS_PAGE"
+  },
   "QUESTIONS_PAGE": {
     "page_id": "QUESTIONS_PAGE_ID",
     "page_title": "QUESTIONS_PAGE"
+  },
+  "EDIT_QUESTIONS_PAGE": {
+    "page_id": "EDIT_QUESTIONS_PAGE_ID",
+    "page_title": "EDIT_QUESTIONS_PAGE"
   },
   "REVIEW_PAGE": {
     "page_id": "REVIEW_PAGE_ID",
