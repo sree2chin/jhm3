@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import {makePayment, postPayment} from '../../actions/Questions';
+import { makePayment, postPayment, getQuestions, getQuestionsAndUpdateTagManager } from '../../actions/Questions';
 import { browserHistory } from 'react-router';
 import { isEmpty } from "underscore";
 import {Button, Row, Col} from "react-bootstrap";
@@ -89,6 +89,7 @@ class paymentSuccess extends React.Component<Props, {}> {
         }
       });
     } else {
+      this.props.getQuestionsAndUpdateTagManager({}).then(()=>{ 
         var eventFired = false;
         window.initialTagManager = window.initialTagManager || [];
         for(var i=0; i<window.initialTagManager.length; i++) {
@@ -98,12 +99,14 @@ class paymentSuccess extends React.Component<Props, {}> {
           }
         }
         if (!eventFired) {
+          this.props.getQuestionsAndUpdateTagManager({isFromPaymentSuccessPage: true});
           window.dataLayer.push({
             'event':'VirtualPageView',
             'virtualPageURL':'/' + PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id,
             'virtualPageTitle' : PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_title 
           });
         }
+      });
       this.setState({
         allDone: true
       });
@@ -273,6 +276,9 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
     },
     postPayment: (data) => {
       return dispatch(postPayment(data));
+    }
+    getQuestionsAndUpdateTagManager: (data)=> {
+      return dispatch(getQuestionsAndUpdateTagManager(data));
     }
   };
 }

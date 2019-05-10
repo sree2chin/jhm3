@@ -267,6 +267,12 @@ module.exports = new function(){
       data.page_id = PAGES_LIST.PAYMENT_PAGE.page_id; 
       data.page_title = PAGES_LIST.PAYMENT_PAGE.page_title; 
     }
+
+    if (req.query.isFromPaymentSuccessPage) {
+      data.page_id = PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id; 
+      data.page_title = PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_title; 
+      delete req.query.isFromPaymentSuccessPage;
+    }
     req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
     console.log("req.session[req.query.transaction_id]2: " + JSON.stringify(req.session[req.query.transaction_id]));
     if (req.session[req.query.transaction_id].isFromOfferRoute) {

@@ -12,6 +12,18 @@ function getQuestions(mergeObjWithQueryParams) {
 	};
 }
 
+function getQuestionsAndUpdateTagManager(mergeObjWithQueryParams) {
+	return (dispatch) => {
+		return QuestionsApi.get(mergeObjWithQueryParams).then(
+			data => {
+				window.initialTagManager = data.tag_manager;
+				return dispatch({
+					type: 'FETCHING_QUESTIONS_WITH_NO_UPDATES', questions: data
+				}));
+			}
+	};
+}
+
 function postQuestions(data) {
 	return (dispatch) => {
 		return QuestionsApi.post(data).then(
@@ -150,4 +162,5 @@ export {
 	getUnSubscribeOptions,
 	postUnSubscribeOptions,
 	setGoogleQuestionsAnswersMap,
+	getQuestionsAndUpdateTagManager,
 }
