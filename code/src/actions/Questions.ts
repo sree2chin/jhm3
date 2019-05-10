@@ -131,7 +131,7 @@ function postUnSubscribeOptions(data) {
 
 function setGoogleQuestionsAnswersMap(data) {
 	return (dispatch) => {
-		return return dispatch({
+		return dispatch({
 			type: 'SET_GOOGLE_QUESTIONS_ANSWER_MAP', googlePlacesQuestionsAnswersMap: data
 		});
 	};
