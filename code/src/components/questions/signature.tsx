@@ -119,21 +119,6 @@ class Signature extends React.Component<Props, {}> {
     }
         browserHistory.push("/offer" + queryParamsString);
       } else if(isEmpty(this.props.confirmationData.data.offer_data) && isEmpty(this.props.confirmationData.data.offer_data)) {
-        var eventFired = false;
-        window.initialTagManager = window.initialTagManager || [];
-        for(var i=0; i<window.initialTagManager.length; i++) {
-          if (window.initialTagManager[i].page_id == PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id) {
-            eventFired = true;
-            break;
-          }
-        }
-        if (!eventFired) {
-          window.dataLayer.push({
-            'event':'VirtualPageView',
-            'virtualPageURL':'/' + PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id,
-            'virtualPageTitle' : PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_title 
-          });
-        }
         browserHistory.push("/payment_success" + queryParamsString);
       }
 
