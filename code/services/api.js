@@ -51,7 +51,7 @@ module.exports = new function(){
     formData.page_title = PAGES_LIST.LANDING_PAGE.page_title; 
     //appendAgentInfo(req, formData);
     console.log("req.body: " + JSON.stringify(req.body));
-    if (!req.body.transaction_id && !req.session.uniqueTransactionId) {
+    if (!req.body.transaction_id) {
       uniqueTransactionId = uuidV1() + "_" + new Date().getTime();
       req.session.uniqueTransactionId = uniqueTransactionId;
       req.session[uniqueTransactionId] = {};
@@ -60,7 +60,8 @@ module.exports = new function(){
       uniqueTransactionId = req.body.transaction_id || req.session.uniqueTransactionId;
     }
     formData.transaction_id = uniqueTransactionId;
-    console.log("req.session.uniqueTransactionId: " + JSON.stringify(uniqueTransactionId));
+    console.log("req.session.uniqueTransactionId: " + JSON.stringify(req.session.uniqueTransactionId));
+    console.log("req.body.transaction_id: " + JSON.stringify(req.body.transaction_id));
     appendQueryParams(req, formData);
     options.formData = formData;
     console.log("\n\n\nformData: " + JSON.stringify(formData) + "\n\n\n");
@@ -150,6 +151,7 @@ module.exports = new function(){
     appendQueryParams(req, formData);
     req.session.uniqueTransactionId = null;
     console.log("\n\n\nin getQuoteProducts formData: " + JSON.stringify(formData) + "\n\n\n");
+    console.log("\n\n\nreq.session.uniqueTransactionId: " + JSON.stringify(req.session.uniqueTransactionId) + "\n\n\n");
     request({
       url: url,
       formData: formData,
