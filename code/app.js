@@ -79,6 +79,7 @@ app.locals.pagesPath        = '/pages';
 app.locals.trackingUrl           = appConfig.getProperty("trackingUrl");
 app.locals.goAgentWeb           = appConfig.getProperty("goAgentWeb");
 app.locals.lifetimeAgentPanel           = appConfig.getProperty("lifetimeAgentPanel");
+app.locals.gtmAccountId           = appConfig.getProperty("gtmAccountId");
 
 var thirtyDay = 10 * 86400000;
 
