@@ -359,8 +359,10 @@ class ProductsPage extends React.Component<Props, {}> {
     if (!eventFired) {
       window.dataLayer.push({
         'event':'VirtualPageView',
-        'virtualPageURL':'/' + PAGES_LIST.PLANS_PAGE.page_id,
-        'virtualPageTitle' : PAGES_LIST.PLANS_PAGE.page_title 
+        'virtualPageURL': 'VirtualPageView',
+        'virtualPageTitle' : PAGES_LIST.PLANS_PAGE.page_title,
+                  'VirtualPageVisitAgentNumber': this.props.location.query.agent_number,
+                  'VirtualPageVisitTransactionId': this.props.location.query.transaction_id 
       });
     }
       this.props.submitProductsForm(persons).then(() => {

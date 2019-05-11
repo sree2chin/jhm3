@@ -12,6 +12,13 @@ import { PAGES_LIST } from "./pages";
 
 type LoadCallback = (error: any, component: React.ComponentClass<any>) => void;
 
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
 function loadAboutPage(location: any, callback: LoadCallback) {
   require.ensure(
     [],
@@ -203,8 +210,10 @@ function checkAccessable(nextState, replace, callback) {
     if (res.firstTime) {
       window.dataLayer.push({
         'event':'VirtualPageView',
-        'virtualPageURL':'/' + PAGES_LIST.LANDING_PAGE.page_id,
-        'virtualPageTitle' : PAGES_LIST.LANDING_PAGE.page_title 
+        'virtualPageURL': 'VirtualPageView',
+        'virtualPageTitle' : PAGES_LIST.LANDING_PAGE.page_title,
+                  'VirtualPageVisitAgentNumber': getUrlParameter("agent_number"),
+                  'VirtualPageVisitTransactionId': res.uniqueTransactionId
       });
     }
     if(res != undefined && res != null && res.data && res.data.access){

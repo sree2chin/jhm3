@@ -102,8 +102,10 @@ class paymentSuccess extends React.Component<Props, {}> {
           this.props.getQuestionsAndUpdateTagManager({isFromPaymentSuccessPage: true});
           window.dataLayer.push({
             'event':'VirtualPageView',
-            'virtualPageURL':'/' + PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id,
-            'virtualPageTitle' : PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_title 
+            'virtualPageURL': 'VirtualPageView',
+            'virtualPageTitle' : PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_title,
+                  'VirtualPageVisitAgentNumber': this.props.location.query.agent_number,
+                  'VirtualPageVisitTransactionId': this.props.location.query.transaction_id 
           });
         }
       });
@@ -182,8 +184,10 @@ class paymentSuccess extends React.Component<Props, {}> {
     if (!eventFired) {
       window.dataLayer.push({
         'event':'VirtualPageView',
-        'virtualPageURL':'/' + PAGES_LIST.OFFER_PAGE.page_id,
-        'virtualPageTitle' : PAGES_LIST.OFFER_PAGE.page_title 
+        'virtualPageURL': 'VirtualPageView',
+        'virtualPageTitle' : PAGES_LIST.OFFER_PAGE.page_title,
+                  'VirtualPageVisitAgentNumber': this.props.location.query.agent_number,
+                  'VirtualPageVisitTransactionId': this.props.location.query.transaction_id 
       });
     }
           browserHistory.push("/offer" + queryParamsString);
@@ -199,8 +203,10 @@ class paymentSuccess extends React.Component<Props, {}> {
         if (!eventFired) {
           window.dataLayer.push({
             'event':'VirtualPageView',
-            'virtualPageURL':'/' + PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_id,
-            'virtualPageTitle' : PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_title 
+            'virtualPageURL': 'VirtualPageView',
+            'virtualPageTitle' : PAGES_LIST.PAYMENT_SUCCESS_PAGE.page_title,
+                  'VirtualPageVisitAgentNumber': this.props.location.query.agent_number,
+                  'VirtualPageVisitTransactionId': this.props.location.query.transaction_id 
           });
         }
           browserHistory.push("/payment_success" + queryParamsString);
@@ -217,8 +223,10 @@ class paymentSuccess extends React.Component<Props, {}> {
     if (!eventFired) {
       window.dataLayer.push({
         'event':'VirtualPageView',
-        'virtualPageURL':'/' + PAGES_LIST.PAYMENT_PAGE.page_id,
-        'virtualPageTitle' : PAGES_LIST.PAYMENT_PAGE.page_title 
+        'virtualPageURL': 'VirtualPageView',
+        'virtualPageTitle' : PAGES_LIST.PAYMENT_PAGE.page_title,
+                  'VirtualPageVisitAgentNumber': this.props.location.query.agent_number,
+                  'VirtualPageVisitTransactionId': this.props.location.query.transaction_id 
       });
     }
       window.location.href = `/payment`;

@@ -155,8 +155,10 @@ class Main extends React.Component<Props, {}> {
     if (!eventFired) {
       window.dataLayer.push({
         'event':'VirtualPageView',
-        'virtualPageURL':'/' + PAGES_LIST.PRODUCT_PAGE.page_id,
-        'virtualPageTitle' : PAGES_LIST.PRODUCT_PAGE.page_title 
+        'virtualPageURL': 'VirtualPageView',
+        'virtualPageTitle' : PAGES_LIST.PRODUCT_PAGE.page_title,
+                  'VirtualPageVisitAgentNumber': this.props.location.query.agent_number,
+                  'VirtualPageVisitTransactionId': window.uniqueTransactionId
       });
     }
       return this.props.submitQuoteForm(persons).then(() => {
