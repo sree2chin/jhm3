@@ -80,11 +80,11 @@
       		"strategy": "saml",
 			"saml": {
 				"path":  "https://vantislifeinsurancestg.sureify.com/login/callback",
-				"entryPoint": "https://sureify1-dev.onelogin.com/trust/saml2/http-redirect/sso/778980",
+				"entryPoint": "https://www.goagentweb.com/isam/mtfim/sps/saml20ip/saml20/login",
 				"issuer": "https://vantislifeinsurancestg.sureify.com/saml/Metadata",
 				"cert":  "prod_cert.cert",
 				"privateKey": "prod_privateKey.pem",
-				"on": true
+				"on": false
 			}
 		}
 	},
