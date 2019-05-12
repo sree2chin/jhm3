@@ -26,7 +26,7 @@ class QuotesApi {
   submit(payload, isFromMainPage) {
     var q = getQueryParms();
     q = q + new Date().getTime() + '&isFromMainPage=' + isFromMainPage;
-    if (payload.uniqueTransactionId) {
+    if (payload.uniqueTransactionId && !(q.indexOf("transaction_id=") > -1)) {
       q = q + "&transaction_id=" + payload.uniqueTransactionId;
     }
     return fetch('/v1/quote/products' + q, {

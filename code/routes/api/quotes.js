@@ -19,7 +19,7 @@ module.exports = function(app) {
     req.session.questionsMiddleware = false;
 
     var url_parts = url.parse(req.url, true);
-
+    console.log("\n\n\n\nreq.session[req.query.transaction_id]: " + JSON.stringify(req.session[req.query.transaction_id]));
     if (req.query.agent_number && config.passport.saml.on) {
       var shouldAuthenticate;
       if (req.query.transaction_id) {
@@ -42,6 +42,7 @@ module.exports = function(app) {
           shouldAuthenticate = true;
         }
       }
+      console.log("req.query: " + JSON.stringify(req.query));
       if (shouldAuthenticate) {
         if (req.query.transaction_id) { 
           req.session.redirectToLogin = false;

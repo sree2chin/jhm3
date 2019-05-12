@@ -43,6 +43,7 @@ module.exports = function(app) {
       console.log("\n\n\nqueryParamsString: " + queryParamsString + "\n\n\n");
 
       var queryParamsString1 = "";
+      console.log("req.session[req.session.currentTransactionId]: " + JSON.stringify(req.session[req.session.currentTransactionId]));
       if (req.session.currentTransactionId && req.session[req.session.currentTransactionId].queryParams) {
         queryParams = req.session[req.session.currentTransactionId].queryParams;
         
@@ -58,12 +59,13 @@ module.exports = function(app) {
       console.log("\n\n\nqueryParamsString1: " + queryParamsString1 + "\n\n\n");
       queryParamsString = queryParamsString + queryParamsString1;
 
-      console.log("\n\n\nqueryParamsString: " + queryParamsString + "\n\n\n");
+      console.log("\n\n\nqueryParamsString in login callback: " + queryParamsString + "\n\n\n");
       //console.log("\n\n\nin login callback: " + req.session.questionsMiddleware + "\n\n\n");
       if (req.session.currentTransactionId && req.session[req.session.currentTransactionId].questionsMiddleware) {
         req.session.currentTransactionId = null;
         res.redirect('/questions' + queryParamsString);
       } else {
+        req.session.currentTransactionId = null;
         res.redirect('/' + queryParamsString);
       }
 

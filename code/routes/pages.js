@@ -124,12 +124,14 @@ module.exports = function(app) {
     var url_parts = url.parse(req.url, true);
 
     var queryParamsString = url_parts.search;
+    console.log("in loginMiddleware" + queryParamsString);
     passport.authenticate('saml', { failureRedirect: '/login' + queryParamsString, failureFlash: true })(req, res, next);
 
   };
 
   app.get("/login", loginMiddleware, function(req,  res, next) {
     req.session = req.session || {};
+    console.log("in login" + JSON.stringify(req.query));
     if (req.query.transaction_id) {
       req.session[req.query.transaction_id] = req.session[req.query.transaction_id] || {};
       req.session[req.query.transaction_id].queryParams = req.query;
