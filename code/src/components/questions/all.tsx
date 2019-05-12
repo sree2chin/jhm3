@@ -62,6 +62,9 @@ class Main extends React.Component<Props, State> {
   noFoGroupsCompleted: any = [];
 
   componentWillMount() {
+      this.setState({
+        gettingQuestions: true
+      });
     this.props.getQuestions({isFromReviewPage: true}).then(()=>{
       if (this.questions && this.questions.LOGIN_URL && this.questions.LOGIN_URL.length > 0) {
         window.location.href = this.questions.LOGIN_URL;
