@@ -230,7 +230,7 @@ export default class AsyncCustomSelect extends React.Component<Props, {selectedI
                 onChange={this.onItemChange.bind(this)}
                 multiple
                 datalistOnly={true} 
-                buttonAfter={(this.state.selectedItem && this.state.selectedItem.length > 0) ? null : <img src={"../images/iconfinder_icon.svg"}/> }/>
+                buttonAfter={(this.state.selectedItem && this.state.selectedItem.length > 0) ? null : <img src={"../images/iconfinder_icon_1.svg"}/> }/>
                 {question.hint && <Col className="help-text" style={{marginTop: "12px"}}>
                   {question.hint}
                   </Col>
