@@ -1481,7 +1481,6 @@ class Main extends React.Component<Props, {}> {
               //})
             }
           </Row>
-          {questionsList.isQuestionsBeneficiaries && <div className="primary-beneficiary-main-header">Primary beneficiaries</div>}
           {questionsList.isQuestionsBeneficiaries &&
             map(questionsList.primaryBeneficiaryQuestionsComps, (s, i)=>{
                 return <div className="" key={i}>
@@ -1520,7 +1519,6 @@ class Main extends React.Component<Props, {}> {
               </Row>
             </div>
           }
-          {questionsList.isQuestionsBeneficiaries && <div className="primary-beneficiary-main-header">Contingent beneficiaries</div>}
           {questionsList.isQuestionsBeneficiaries &&
             map(questionsList.contingencyBeneficiaryQuestionsComps, (s, i)=>{
                 return <div className="" key={i}>
