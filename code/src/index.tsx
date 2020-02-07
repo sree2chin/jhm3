@@ -236,7 +236,7 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route  path="/" component= {App} >
 
-      <IndexRoute onEnter={checkAccessable}  getComponent={ loadQuotePage } />
+      <IndexRoute getComponent={ loadQuotePage } />
       <Route path="/products" getComponent={ loadProductsPage } />
       <Route path="/plans" getComponent={ loadPlansPage } />
       <Route path="/next-steps" getComponent={ loadNextStepsPage } />
@@ -278,8 +278,6 @@ ReactDOM.render(
       <Route path="/customer" getComponent={ loadQuotePage } />
       <Route path="/quote" getComponent={ loadQuotePage } />
       <Route path="/about" getComponent={ loadAboutPage } />
-      
-      
       
       <Route path="*" getComponent={ loadErrorRedirectPage } />
       
