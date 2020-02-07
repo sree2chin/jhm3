@@ -4,7 +4,9 @@ export interface TelLinkProps {
   phoneNumber: string
 }
 
-const TelLinkComponent = React.createClass<TelLinkProps, {}>({
+var createReactClass = require('create-react-class');
+
+const TelLinkComponent = createReactClass<TelLinkProps, {}>({
   render() {
   	if (this.props.phoneNumber) {
 	    return (

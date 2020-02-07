@@ -3,7 +3,7 @@ import { Modal, Button, Row, Col } from "react-bootstrap";
 import Input from "../common/textInput";
 import {isEmpty} from "underscore";
 
-interface Props extends React.Props<EmailModal> {
+interface Props extends React.Props<AgentEmailModal> {
   onCloseModal: any,
   showModalEmail: any,
   saveQuote: any

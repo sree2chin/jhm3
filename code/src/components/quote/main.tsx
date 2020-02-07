@@ -35,7 +35,7 @@ interface Props {
   premiums?:
 }
 
-class Main extends React.Component<Props, {}> {
+export default class Main extends React.Component<Props, {}> {
   constructor(){
     super();
     this.submitQuoteForm.bind(this);
@@ -296,7 +296,7 @@ class Main extends React.Component<Props, {}> {
           {value: "Very Good", label: "Very Good"},
           {value: "Excellent", label: "Excellent"},
         ];
-
+    this.props = {};
     return (
       <div>
         <ScrollToTopOnMount />
@@ -315,32 +315,7 @@ class Main extends React.Component<Props, {}> {
               </div>
           </div>
             <div className={this.props.noOfPersons==2 ? "two-person-outer-container c-center": "one-person-outer-container"}>
-              <Col sm={personsContainerWidth} className="one-person-content">
-                <Person
-                  onChange={this.changePersonInfo.bind(this)}
-                  index={0}
-                  personIndex={0}
-                  person={this.state.persons[0]}
-                  errors={this.state.errors[0]}
-                  submitQuoteForm={this.submitQuoteForm.bind(this)}
-                  validateQuoteForm={this.validateQuoteForm.bind(this)}
-                  initialQuoteSubmittedOnce={this.state.initialQuoteSubmittedOnce}
-                />
-              </Col>
-              { this.props.noOfPersons==2 &&
-                <Col sm={personsContainerWidth} className="second-person-content">
-                  <Person
-                    onChange={this.changePersonInfo.bind(this)}
-                    index={1}
-                    personIndex={1}
-                    person={this.state.persons[1]}
-                    errors={this.state.errors[1]}
-                    submitQuoteForm={this.submitQuoteForm.bind(this)}
-                    validateQuoteForm={this.validateQuoteForm.bind(this)}
-                    initialQuoteSubmittedOnce={this.state.initialQuoteSubmittedOnce}
-                  />
-                </Col>
-              }
+
               <div className="c-submit-person-info-btn c-center" style={{marginTop: "30px"}}>
                   <Button  className={`c-button-default circular hidden-xs ${this.getContinueBtnActiveClass()}`} 
                      onClick={()=>{
@@ -389,4 +364,4 @@ const mapDispatchToProps = (dispatch: Dispatch): Props => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+connect(mapStateToProps, mapDispatchToProps)(Main);

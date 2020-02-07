@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { IndexRoute, browserHistory,  } from 'react-router';
+import { BrowserRouter as Route, Router } from 'react-router-dom';
 import App from './components/app';
 import * as _AboutPage from "./components/about/aboutPage";
 import * as _QuotePage from "./components/quote/main";
@@ -227,60 +228,21 @@ var onRouteChange = ()=>{
   window._mfq = window._mfq || [];
   window._mfq.push(["newPageView"]);
 };
-browserHistory.listen( location =>  {
-  window._mfq = window._mfq || [];
-  window._mfq.push(["newPageView"]);
- });
+// browserHistory.listen( location =>  {
+//   window._mfq = window._mfq || [];
+//   window._mfq.push(["newPageView"]);
+//  });
 
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route  path="/" component= {App} >
-
-      <IndexRoute getComponent={ loadQuotePage } />
-      <Route path="/products" getComponent={ loadProductsPage } />
-      <Route path="/plans" getComponent={ loadPlansPage } />
-      <Route path="/next-steps" getComponent={ loadNextStepsPage } />
-
-      <Route path="/questions" getComponent={ loadQuestionsPage } />
-      <Route path="/authorize" getComponent={ loadAuthorisePage } />
-      <Route path="/error" getComponent={ loadErrorPage } />
-
-      <Route path="/all-questions" getComponent={ allQuestionsPage } />
-      <Route path="/edit-questions" getComponent={ editQuestionsPage } />
-      <Route path="/edit-questions/beneficiaries" getComponent={ editBeneficiaryQuestionsPage } />
-      <Route path="/signature" getComponent={ getSignaturePage } />
-      <Route path="/offer" getComponent={ getOfferPage } />
-      <Route path="/payment_success" getComponent={ loadPaymentSuccessPage } />
-      <Route path="/payment" getComponent={ loadPaymentPage } />
-      <Route path="/unsubscribe" getComponent={ loadUnsubscribePage } />
-
-      <Route path="/agent" getComponent={ loadQuotePage } />
-      <Route path="/agent/products" getComponent={ loadProductsPage } />
-      <Route path="/agent/plans" getComponent={ loadPlansPage } />
-      <Route path="/agent/next-steps" getComponent={ loadAgentNextStepsPage } />
-
-      <Route path="/connect-to-agent" getComponent={ loadContactAgent } />
-      <Route path="/connect-through-application" getComponent={ loadEmailCaptureToQuote } />
-      <Route path="/agent/connect-to-agent" getComponent={ loadContactAgent } />
-
-
-      <Route path="/connect-agent-success" getComponent={ loadContactAgentSuccess } />
-      <Route path="/agent/connect-agent-success" getComponent={ loadContactAgentSuccess } />
-
-
-      <Route path="/email-to-quote" getComponent={ loadEmailToQuote } />
-      <Route path="/agent/email-to-quote" getComponent={ loadAgentEmailToQuote } />
-      <Route path="/agent/connect-through-application" getComponent={ loadAgentEmailCaptureToQuote } />
-      <Route path="/agent/email-quote-success" getComponent={ loadEmailToQuoteSuccess } />
-      <Route path="/email-quote-success" getComponent={ loadEmailToQuoteSuccess } />
-
-
-      <Route path="/customer" getComponent={ loadQuotePage } />
-      <Route path="/quote" getComponent={ loadQuotePage } />
-      <Route path="/about" getComponent={ loadAboutPage } />
-      
-      <Route path="*" getComponent={ loadErrorRedirectPage } />
-      
+      <Route
+        path={"/"}
+        render={props => (
+          // pass the sub-routes down to keep nesting
+          <div {...props}> {"dddsd"}</div>
+        )}
+      />      
     </Route>
   </Router>,
   document.getElementById('root'));
