@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node --debug ./bin/www",
-    "dev": "webpack-dev-server --config ./webpack.config.js",
-    "build": "babel src --out-dir dist"
+    "webpack-dev": "webpack-dev-server --config ./webpack.config.js",
+    "build": "babel src --out-dir dist",
+    "dev": "NODE_ENV=dev gulp"
   },
   "dependencies": {
     "@google/maps": "^0.3.0",

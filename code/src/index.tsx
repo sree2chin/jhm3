@@ -236,7 +236,7 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route  path="/" component= {App} >
 
-      <IndexRoute onEnter={checkAccessable}  getComponent={ loadQuotePage } />
+      <IndexRoute getComponent={ loadQuotePage } />
       <Route path="/products" getComponent={ loadProductsPage } />
       <Route path="/plans" getComponent={ loadPlansPage } />
       <Route path="/next-steps" getComponent={ loadNextStepsPage } />
