@@ -36,7 +36,7 @@ function loadErrorRedirectPage(location: any, callback: LoadCallback) {
 function loadQuotePage(location: any, callback: LoadCallback) {
   require.ensure(
     [],
-    () => callback(null, (require("./components/quote/main") as typeof _QuotePage).default),
+    () => callback(null, (require("./components/quote/index") as typeof _QuotePage).default),
     "QuotePage");
 }
 
@@ -202,26 +202,26 @@ function loadUnsubscribePage(location: any, callback: LoadCallback) {
     "QuotePage");
 }
 
-function checkAccessable(nextState, replace, callback) {      
-  window.initialTagManager = window.initialTagManager || [];
-  Access.getQuoteAccess(nextState.location.query, function(res){
-    window.uniqueTransactionId = res.uniqueTransactionId;
-    window.initialTagManager = res.tag_manager;
-    if (res.firstTime) {
-      window.dataLayer.push({
-        'event':'VirtualPageView',
-        'virtualPageURL': 'VirtualPageView',
-        'virtualPageTitle' : PAGES_LIST.LANDING_PAGE.page_title,
-                  'VirtualPageVisitAgentNumber': getUrlParameter("agent_number"),
-                  'VirtualPageVisitTransactionId': res.uniqueTransactionId
-      });
-    }
-    if(res != undefined && res != null && res.data && res.data.access){
-      return callback();  
-    }
-    return false;
-  })
-}
+// function checkAccessable(nextState, replace, callback) {      
+//   window.initialTagManager = window.initialTagManager || [];
+//   Access.getQuoteAccess(nextState.location.query, function(res){
+//     window.uniqueTransactionId = res.uniqueTransactionId;
+//     window.initialTagManager = res.tag_manager;
+//     if (res.firstTime) {
+//       window.dataLayer.push({
+//         'event':'VirtualPageView',
+//         'virtualPageURL': 'VirtualPageView',
+//         'virtualPageTitle' : PAGES_LIST.LANDING_PAGE.page_title,
+//                   'VirtualPageVisitAgentNumber': getUrlParameter("agent_number"),
+//                   'VirtualPageVisitTransactionId': res.uniqueTransactionId
+//       });
+//     }
+//     if(res != undefined && res != null && res.data && res.data.access){
+//       return callback();  
+//     }
+//     return false;
+//   })
+// }
 
 var onRouteChange = ()=>{
   window._mfq = window._mfq || [];
@@ -237,7 +237,7 @@ ReactDOM.render(
     <Route  path="/" component= {App} >
 
       <IndexRoute getComponent={ loadQuotePage } />
-      <Route path="/products" getComponent={ loadProductsPage } />
+      {/* <Route path="/products" getComponent={ loadProductsPage } />
       <Route path="/plans" getComponent={ loadPlansPage } />
       <Route path="/next-steps" getComponent={ loadNextStepsPage } />
 
@@ -277,7 +277,7 @@ ReactDOM.render(
 
       <Route path="/customer" getComponent={ loadQuotePage } />
       <Route path="/quote" getComponent={ loadQuotePage } />
-      <Route path="/about" getComponent={ loadAboutPage } />
+      <Route path="/about" getComponent={ loadAboutPage } /> */}
       
       
       
