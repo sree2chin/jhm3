@@ -5,6 +5,15 @@
     &-header {
         text-align: center;
     }
+    &-banner-image {
+        width: 100%;
+    }
+    &-main-container {
+        margin: 0 auto;
+        padding-right: 10%;
+        padding-left: 10%;
+        max-width: 1185px;
+    }
     &-content-box {
         border: solid 2px $grey3;
         text-align: center;

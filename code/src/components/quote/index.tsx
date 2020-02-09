@@ -4,25 +4,15 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import {getCollegesList} from '../../actions/College';
 import { Button, Row, Col } from "react-bootstrap";
-import CollegeCard from "./college-card"
+import CollegeCard from "./college-card";
+import { getCs } from "../../utility/util";
 
 interface Props {
   colleges?: any, 
 }
 
 const prefix = "jhm-home-page";
-const cs = cls => {
-    if (typeof cls === "string") {
-        return `${prefix}-${cls}`;
-    } else {
-        let className = "";
-        let clsListLength = cls.length;
-        for (let i=0; i<clsListLength; i++) {
-            className += `${prefix}-${cls[i]} `;
-        }
-        return className.trim();
-    }   
-}
+const cs = getCs(prefix);
 
 class Index extends React.Component<Props, {}> {
   constructor(){
@@ -38,41 +28,45 @@ class Index extends React.Component<Props, {}> {
     const { collegesList } = this.props;
     return (
       <div>
-        <h1 className = {cs("header")}>Join Hotel management</h1>
-        <Row className = {cs("content-box")}>
-            <Col sm={8} className = {cs("content-sub-box")}>
-                <p>Looking to kickstart your career in hotel management?</p>
-                <p>Sign up to choose best college</p>
-                <Button variant="primary">
-                    Sign up
-                </Button>
-            </Col>
-            <Col sm={4} className = {cs(["content-sub-box", "content-right-box"])}>
-                <img className={cs("icon-image")} 
-                    src={"../images/student/student.svg"} />
-            </Col>
-        </Row>
-        <Row className = {cs("content-box")}>
-            <Col sm={4} className = {cs(["content-sub-box", "content-right-box"])}>
-                <img className={cs("icon-image")} 
-                    src={"../images/college/university.svg"} />
-            </Col>
-            <Col sm={8} className = {cs("content-sub-box")}>
-                <p>Want to join students for your institution?</p>
-                <p>Sign up to find eligible students</p>
-                <Button variant="primary">
-                    Sign up
-                </Button>
-            </Col>            
-        </Row>
-        <div className = {cs("colleges-list")}>
-            {
-                collegesList.map((elem, index) => {
-                    return (
-                        <CollegeCard collegeObj={elem} />
-                    )
-                })
-            }
+        {/* <h1 className = {cs("header")}>Join Hotel management</h1> */}
+        <img className = {cs("banner-image")} src = "https://joinhotelmanagement.s3.ap-south-1.amazonaws.com/bannerImage1.jpg"
+            alt="banner" />
+        <div className = {cs("main-container")}>
+            <Row className = {cs("content-box")}>
+                <Col sm={8} className = {cs("content-sub-box")}>
+                    <p>Looking to kickstart your career in hotel management?</p>
+                    <p>Sign up to choose best college</p>
+                    <Button variant="primary">
+                        Sign up
+                    </Button>
+                </Col>
+                <Col sm={4} className = {cs(["content-sub-box", "content-right-box"])}>
+                    <img className={cs("icon-image")} 
+                        src={"../images/student/student.svg"} />
+                </Col>
+            </Row>
+            <Row className = {cs("content-box")}>
+                <Col sm={4} className = {cs(["content-sub-box", "content-right-box"])}>
+                    <img className={cs("icon-image")} 
+                        src={"../images/college/university.svg"} />
+                </Col>
+                <Col sm={8} className = {cs("content-sub-box")}>
+                    <p>Want to join students for your institution?</p>
+                    <p>Sign up to find eligible students</p>
+                    <Button variant="primary">
+                        Sign up
+                    </Button>
+                </Col>            
+            </Row>
+            <div className = {cs("colleges-list")}>
+                {
+                    collegesList.map((elem, index) => {
+                        return (
+                            <CollegeCard collegeObj={elem} />
+                        )
+                    })
+                }
+            </div>
         </div>
       </div>);
   }
