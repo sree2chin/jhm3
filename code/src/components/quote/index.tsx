@@ -29,8 +29,11 @@ class Index extends React.Component<Props, {}> {
     return (
       <div>
         {/* <h1 className = {cs("header")}>Join Hotel management</h1> */}
-        <img className = {cs("banner-image")} src = "https://joinhotelmanagement.s3.ap-south-1.amazonaws.com/bannerImage1.jpg"
-            alt="banner" />
+        <div className = {cs("banner-img-cont")}>
+            <img className = {cs("banner-image")} src = "https://joinhotelmanagement.s3.ap-south-1.amazonaws.com/bannerImage2.jpg"
+                alt="banner" />
+            <p className = {cs("banner-img-txt")}>Join Hotel Management</p>
+        </div>
         <div className = {cs("main-container")}>
             <Row className = {cs("content-box")}>
                 <Col sm={8} className = {cs("content-sub-box")}>
@@ -51,7 +54,7 @@ class Index extends React.Component<Props, {}> {
                         src={"../images/college/university.svg"} />
                 </Col>
                 <Col sm={8} className = {cs("content-sub-box")}>
-                    <p>Want to join students for your institution?</p>
+                    <p>Want to get students joined in your institution?</p>
                     <p>Sign up to find eligible students</p>
                     <Button variant="primary">
                         Sign up

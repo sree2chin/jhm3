@@ -8,11 +8,24 @@
     &-banner-image {
         width: 100%;
     }
+    &-banner-img-cont {
+        position: relative;
+    }
+    &-banner-img-txt {
+        position: absolute;
+        bottom: 20px;
+        right: 26px;
+        line-height: 24px;
+        color: white;
+        font-size: 42px;
+        font-family: serif;
+    }
     &-main-container {
         margin: 0 auto;
         padding-right: 10%;
         padding-left: 10%;
         max-width: 1185px;
+        box-sizing: content-box;
     }
     &-content-box {
         border: solid 2px $grey3;
@@ -33,6 +46,9 @@
             border-color: #4a90e2;
             color: white;
             margin-top: 16px;
+            border-radius: 0px;
+            width: 175px;
+            font-size: 18px;
         }
     }
     &-content-right-box {

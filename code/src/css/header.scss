@@ -1,17 +1,27 @@
 .navbar-collapse {
     float: right;
+    font-size: 16px;
+    .navbar-nav {
+        li {
+            a {
+                padding-top: 0;
+                padding-bottom: 0;
+                line-height: 70px;
+            }
+        }
+    }
 }
 .navbar-brand {
     padding: 0px !important;
     vertical-align: middle;
     img {
-        width: 40px;
+        width: 50px;
         margin-right: 8px;
         vertical-align: middle;
         display: inline !important;
     }
     span {
-        line-height: 50px;
+        line-height: 70px;
         font-weight: 600;
     }
 }
