@@ -33,11 +33,11 @@ function loadErrorRedirectPage(location: any, callback: LoadCallback) {
     "Error404");
 };
 
-function loadQuotePage(location: any, callback: LoadCallback) {
+function loadHomePage(location: any, callback: LoadCallback) {
   require.ensure(
     [],
-    () => callback(null, (require("./components/quote/index") as typeof _QuotePage).default),
-    "QuotePage");
+    () => callback(null, (require("./components/home/index") as typeof _HomePage).default),
+    "HomePage");
 }
 
 function loadQuestionsPage(location: any, callback: LoadCallback) {
@@ -236,7 +236,7 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route  path="/" component= {App} >
 
-      <IndexRoute getComponent={ loadQuotePage } />
+      <IndexRoute getComponent={ loadHomePage } />
       {/* <Route path="/products" getComponent={ loadProductsPage } />
       <Route path="/plans" getComponent={ loadPlansPage } />
       <Route path="/next-steps" getComponent={ loadNextStepsPage } />

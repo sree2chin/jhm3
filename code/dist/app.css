@@ -308,10 +308,7 @@ input.form-control:focus {
     margin-bottom: 0px; } }
 
 .c-body {
-  margin: 0 auto;
-  padding-right: 10%;
-  padding-left: 10%;
-  max-width: 1185px;
+  margin-top: 50px;
   color: #666666;
   font-size: 14px; }
   .c-body + div {
@@ -776,22 +773,57 @@ tbody:before {
   width: 100%; }
 
 .navbar-collapse {
-  float: right; }
+  float: right;
+  font-size: 16px; }
+  .navbar-collapse .navbar-nav li a {
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 70px; }
 
 .navbar-brand {
   padding: 0px !important;
   vertical-align: middle; }
   .navbar-brand img {
-    width: 40px;
+    width: 50px;
     margin-right: 8px;
     vertical-align: middle;
     display: inline !important; }
   .navbar-brand span {
-    line-height: 50px;
+    line-height: 70px;
     font-weight: 600; }
+
+.navbar-default {
+  width: 100%;
+  top: 0px;
+  position: fixed !important;
+  z-index: 10;
+  box-shadow: 0px 0px 16px 2px #f3f3f3;
+  border-color: #f3f3f3; }
 
 .jhm-home-page-header {
   text-align: center; }
+
+.jhm-home-page-banner-image {
+  width: 100%; }
+
+.jhm-home-page-banner-img-cont {
+  position: relative; }
+
+.jhm-home-page-banner-img-txt {
+  position: absolute;
+  bottom: 20px;
+  right: 26px;
+  line-height: 24px;
+  color: white;
+  font-size: 42px;
+  font-family: serif; }
+
+.jhm-home-page-main-container {
+  margin: 0 auto;
+  padding-right: 10%;
+  padding-left: 10%;
+  max-width: 1185px;
+  box-sizing: content-box; }
 
 .jhm-home-page-content-box {
   border: solid 2px #f3f3f3;
@@ -810,7 +842,10 @@ tbody:before {
     background-color: #4a90e2;
     border-color: #4a90e2;
     color: white;
-    margin-top: 16px; }
+    margin-top: 16px;
+    border-radius: 0px;
+    width: 175px;
+    font-size: 18px; }
 
 .jhm-home-page-content-right-box {
   background: #f3f3f3; }
@@ -830,7 +865,7 @@ tbody:before {
   .jhm-college-card img {
     width: 100%;
     display: block;
-    height: 200px;
+    height: 300px;
     object-fit: cover; }
   .jhm-college-card-card-bottom-cont {
     padding: 8px; }

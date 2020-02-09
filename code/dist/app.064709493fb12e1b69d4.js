@@ -23,77 +23,77 @@ webpackJsonp([0],{
 	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(547).default); });
 	}
 	;
-	function loadQuotePage(location, callback) {
+	function loadHomePage(location, callback) {
 	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(548).default); });
 	}
 	function loadQuestionsPage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/main\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/main\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadAuthorisePage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/authorise\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/authorise\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadErrorPage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/error\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/error\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function allQuestionsPage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/all\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/all\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function getSignaturePage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/signature\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/signature\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function getOfferPage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/offer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/offer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function editQuestionsPage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/editQuestion\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/editQuestion\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function editBeneficiaryQuestionsPage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/editBeneficiaryQuestion\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/editBeneficiaryQuestion\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function editSignaturePage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/editQuestion\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/editQuestion\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadProductsPage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(551).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/quote/ProductsPage\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadPlansPage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(870).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/quote/PlansPage\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadNextStepsPage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(932).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/quote/NextSteps\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadAgentNextStepsPage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(939).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/quote/AgentNextSteps\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadContactAgent(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(943).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/quote/ContactAgent\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadEmailToQuote(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(944).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/quote/EmailToQuote\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadAgentEmailToQuote(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(945).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/quote/AgentEmailToQuote\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadEmailCaptureToQuote(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(946).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/quote/EmailToQuoteCapture\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadAgentEmailCaptureToQuote(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(947).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/quote/AgentEmailToQuoteCapture\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadContactAgentSuccess(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(948).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/quote/ContactAgentSuccess\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadEmailToQuoteSuccess(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(949).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/quote/EmailToQuoteSuccess\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadPaymentSuccessPage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/PaymentSuccess\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/PaymentSuccess\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadPaymentPage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/payment\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/payment\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	function loadUnsubscribePage(location, callback) {
-	    __webpack_require__.e/* nsure */(3, function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/unsubscribe\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); });
+	    !/* require.ensure */(function () { return callback(null, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/questions/unsubscribe\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default); }(__webpack_require__));
 	}
 	var onRouteChange = function () {
 	    window._mfq = window._mfq || [];
@@ -103,7 +103,7 @@ webpackJsonp([0],{
 	    window._mfq = window._mfq || [];
 	    window._mfq.push(["newPageView"]);
 	});
-	ReactDOM.render(React.createElement(react_router_1.Router, {history: react_router_1.browserHistory}, React.createElement(react_router_1.Route, {path: "/", component: app_1.default}, React.createElement(react_router_1.IndexRoute, {getComponent: loadQuotePage}), React.createElement(react_router_1.Route, {path: "*", getComponent: loadErrorRedirectPage}))), document.getElementById('root'));
+	ReactDOM.render(React.createElement(react_router_1.Router, {history: react_router_1.browserHistory}, React.createElement(react_router_1.Route, {path: "/", component: app_1.default}, React.createElement(react_router_1.IndexRoute, {getComponent: loadHomePage}), React.createElement(react_router_1.Route, {path: "*", getComponent: loadErrorRedirectPage}))), document.getElementById('root'));
 
 
 /***/ }),
@@ -1101,6 +1101,17 @@ webpackJsonp([0],{
 	        }
 	    ]
 	};
+	var student = [
+	    {
+	        name: "",
+	        contactNumber: "",
+	        education: "",
+	        interestedCourse: "",
+	        interestedLocation: "",
+	        location: "",
+	        joiningYear: ""
+	    }
+	];
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.default = function (state, action) {
 	    if (state === void 0) { state = intitalState; }
@@ -1199,4 +1210,4 @@ webpackJsonp([0],{
 /***/ })
 
 });
-//# sourceMappingURL=app.f6f6cad62659046bf5f8.js.map
+//# sourceMappingURL=app.064709493fb12e1b69d4.js.map
