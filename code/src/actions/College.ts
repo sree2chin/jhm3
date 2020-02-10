@@ -1,8 +1,12 @@
+import CollegeApi from '../api/college-api';
 
 export const getCollegesList = () => {
     return (dispatch) => {
-        return dispatch({
-            type: 'GET_COLLEGES_LIST'
-        })
-    }
+		return CollegeApi.getCollegesList().then(data => {
+			dispatch({
+                type: 'GET_COLLEGES_LIST', 
+                payload: data
+            })
+		})
+	};
 }

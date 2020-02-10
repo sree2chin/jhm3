@@ -85,7 +85,7 @@ export default (state = intitalState, action) => {
   switch (action.type) {
     case 'GET_COLLEGES_LIST':
       return {
-          state
+        collegesList: action.payload
       };
     default:
       return state;

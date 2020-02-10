@@ -17,11 +17,15 @@ const cs = getCs(prefix);
 class Index extends React.Component<Props, {}> {
   constructor(){
     super();
-    // this.submitQuoteForm.bind(this);
+    this.onSignUpClick = this._onSignUpClick.bind(this);
   }
 
   componentWillMount() {
-    // this.props.getCollegesList();
+    this.props.getCollegesList();
+  }
+
+  _onSignUpClick() {
+    browserHistory.push("/college-registration");
   }
 
   public render() {
@@ -39,7 +43,7 @@ class Index extends React.Component<Props, {}> {
                 <Col sm={8} className = {cs("content-sub-box")}>
                     <p>Looking to kickstart your career in hotel management?</p>
                     <p>Sign up to choose best college</p>
-                    <Button variant="primary">
+                    <Button variant="primary" onClick={this.onSignUpClick}>
                         Sign up
                     </Button>
                 </Col>
