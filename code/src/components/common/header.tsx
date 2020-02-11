@@ -3,20 +3,10 @@ import {Link} from 'react-router';
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { getCs } from "../../utility/util";
 
 const prefix = "jhm-navbar";
-const cs = cls => {
-    if (typeof cls === "string") {
-        return `${prefix}-${cls}`;
-    } else {
-        let className = "";
-        let clsListLength = cls.length;
-        for (let i=0; i<clsListLength; i++) {
-            className += `${prefix}-${cls[i]} `;
-        }
-        return className.trim();
-    }   
-}
+const cs = getCs(prefix);
 
 class Header extends React.Component<Props, {}> {
   public render() {
