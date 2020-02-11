@@ -32,7 +32,7 @@
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
-/******/ 		7:0
+/******/ 		8:0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -78,7 +78,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"app","1":"AboutPage","2":"Error404","3":"HomePage","5":"vendor","6":"vendor1"}[chunkId]||chunkId) + "." + "064709493fb12e1b69d4" + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"app","1":"HomePage","2":"CollegeRegistration","3":"AboutPage","4":"Error404","6":"vendor","7":"vendor1"}[chunkId]||chunkId) + "." + "63de293e1fd57f314fd9" + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
