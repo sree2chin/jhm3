@@ -1,62 +1,10 @@
-webpackJsonp([1],{
+webpackJsonp([2],{
 
-/***/ 601:
+/***/ 603:
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var React = __webpack_require__(1);
-	var react_redux_1 = __webpack_require__(268);
-	var react_router_1 = __webpack_require__(184);
-	var College_1 = __webpack_require__(602);
-	var react_bootstrap_1 = __webpack_require__(280);
-	var college_card_1 = __webpack_require__(630);
-	var util_1 = __webpack_require__(631);
-	var prefix = "jhm-home-page";
-	var cs = util_1.getCs(prefix);
-	var Index = (function (_super) {
-	    __extends(Index, _super);
-	    function Index() {
-	        _super.call(this);
-	        this.onSignUpClick = this._onSignUpClick.bind(this);
-	    }
-	    Index.prototype.componentWillMount = function () {
-	        this.props.getCollegesList();
-	    };
-	    Index.prototype._onSignUpClick = function () {
-	        react_router_1.browserHistory.push("/college-registration");
-	    };
-	    Index.prototype.render = function () {
-	        var collegesList = this.props.collegesList;
-	        return (React.createElement("div", null, React.createElement("div", {className: cs("banner-img-cont")}, React.createElement("img", {className: cs("banner-image"), src: "https://joinhotelmanagement.s3.ap-south-1.amazonaws.com/bannerImage2.jpg", alt: "banner"}), React.createElement("p", {className: cs("banner-img-txt")}, "Join Hotel Management")), React.createElement("div", {className: cs("main-container")}, React.createElement(react_bootstrap_1.Row, {className: cs("content-box")}, React.createElement(react_bootstrap_1.Col, {sm: 8, className: cs("content-sub-box")}, React.createElement("p", null, "Looking to kickstart your career in hotel management?"), React.createElement("p", null, "Sign up to choose best college"), React.createElement(react_bootstrap_1.Button, {variant: "primary", onClick: this.onSignUpClick}, "Sign up")), React.createElement(react_bootstrap_1.Col, {sm: 4, className: cs(["content-sub-box", "content-right-box"])}, React.createElement("img", {className: cs("icon-image"), src: "../images/student/student.svg"}))), React.createElement(react_bootstrap_1.Row, {className: cs("content-box")}, React.createElement(react_bootstrap_1.Col, {sm: 4, className: cs(["content-sub-box", "content-right-box"])}, React.createElement("img", {className: cs("icon-image"), src: "../images/college/university.svg"})), React.createElement(react_bootstrap_1.Col, {sm: 8, className: cs("content-sub-box")}, React.createElement("p", null, "Want to get students joined in your institution?"), React.createElement("p", null, "Sign up to find eligible students"), React.createElement(react_bootstrap_1.Button, {variant: "primary"}, "Sign up"))), React.createElement("div", {className: cs("colleges-list")}, collegesList.map(function (elem, index) {
-	            return (React.createElement(college_card_1.default, {collegeObj: elem}));
-	        })))));
-	    };
-	    return Index;
-	}(React.Component));
-	var mapStateToProps = function (state) {
-	    return {
-	        collegesList: state.college.collegesList
-	    };
-	};
-	var mapDispatchToProps = {
-	    getCollegesList: College_1.getCollegesList
-	};
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(Index);
-
-
-/***/ }),
-
-/***/ 602:
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var college_api_1 = __webpack_require__(603);
+	var college_api_1 = __webpack_require__(604);
 	exports.getCollegesList = function () {
 	    return function (dispatch) {
 	        return college_api_1.getCollegesListApi().then(function (data) {
@@ -73,11 +21,11 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 603:
+/***/ 604:
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var axios_1 = __webpack_require__(604);
+	var axios_1 = __webpack_require__(605);
 	exports.getCollegesListApi = function () {
 	    return axios_1.default.get('/v1/api/college');
 	};
@@ -85,23 +33,23 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 604:
+/***/ 605:
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(605);
+	module.exports = __webpack_require__(606);
 
 /***/ }),
 
-/***/ 605:
+/***/ 606:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(606);
-	var bind = __webpack_require__(607);
-	var Axios = __webpack_require__(608);
-	var mergeConfig = __webpack_require__(626);
-	var defaults = __webpack_require__(614);
+	var utils = __webpack_require__(607);
+	var bind = __webpack_require__(608);
+	var Axios = __webpack_require__(609);
+	var mergeConfig = __webpack_require__(627);
+	var defaults = __webpack_require__(615);
 	
 	/**
 	 * Create an instance of Axios
@@ -134,15 +82,15 @@ webpackJsonp([1],{
 	};
 	
 	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(627);
-	axios.CancelToken = __webpack_require__(628);
-	axios.isCancel = __webpack_require__(613);
+	axios.Cancel = __webpack_require__(628);
+	axios.CancelToken = __webpack_require__(629);
+	axios.isCancel = __webpack_require__(614);
 	
 	// Expose all/spread
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(629);
+	axios.spread = __webpack_require__(630);
 	
 	module.exports = axios;
 	
@@ -152,12 +100,12 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 606:
+/***/ 607:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var bind = __webpack_require__(607);
+	var bind = __webpack_require__(608);
 	
 	/*global toString:true*/
 	
@@ -503,7 +451,7 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 607:
+/***/ 608:
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -521,16 +469,16 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 608:
+/***/ 609:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(606);
-	var buildURL = __webpack_require__(609);
-	var InterceptorManager = __webpack_require__(610);
-	var dispatchRequest = __webpack_require__(611);
-	var mergeConfig = __webpack_require__(626);
+	var utils = __webpack_require__(607);
+	var buildURL = __webpack_require__(610);
+	var InterceptorManager = __webpack_require__(611);
+	var dispatchRequest = __webpack_require__(612);
+	var mergeConfig = __webpack_require__(627);
 	
 	/**
 	 * Create a new instance of Axios
@@ -622,12 +570,12 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 609:
+/***/ 610:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(606);
+	var utils = __webpack_require__(607);
 	
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -700,12 +648,12 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 610:
+/***/ 611:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(606);
+	var utils = __webpack_require__(607);
 	
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -759,15 +707,15 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 611:
+/***/ 612:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(606);
-	var transformData = __webpack_require__(612);
-	var isCancel = __webpack_require__(613);
-	var defaults = __webpack_require__(614);
+	var utils = __webpack_require__(607);
+	var transformData = __webpack_require__(613);
+	var isCancel = __webpack_require__(614);
+	var defaults = __webpack_require__(615);
 	
 	/**
 	 * Throws a `Cancel` if cancellation has been requested.
@@ -845,12 +793,12 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 612:
+/***/ 613:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(606);
+	var utils = __webpack_require__(607);
 	
 	/**
 	 * Transform the data for a request or a response
@@ -872,7 +820,7 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 613:
+/***/ 614:
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -884,13 +832,13 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 614:
+/***/ 615:
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
-	var utils = __webpack_require__(606);
-	var normalizeHeaderName = __webpack_require__(615);
+	var utils = __webpack_require__(607);
+	var normalizeHeaderName = __webpack_require__(616);
 	
 	var DEFAULT_CONTENT_TYPE = {
 	  'Content-Type': 'application/x-www-form-urlencoded'
@@ -906,10 +854,10 @@ webpackJsonp([1],{
 	  var adapter;
 	  if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(616);
+	    adapter = __webpack_require__(617);
 	  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(616);
+	    adapter = __webpack_require__(617);
 	  }
 	  return adapter;
 	}
@@ -989,12 +937,12 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 615:
+/***/ 616:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(606);
+	var utils = __webpack_require__(607);
 	
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -1008,18 +956,18 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 616:
+/***/ 617:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(606);
-	var settle = __webpack_require__(617);
-	var buildURL = __webpack_require__(609);
-	var buildFullPath = __webpack_require__(620);
-	var parseHeaders = __webpack_require__(623);
-	var isURLSameOrigin = __webpack_require__(624);
-	var createError = __webpack_require__(618);
+	var utils = __webpack_require__(607);
+	var settle = __webpack_require__(618);
+	var buildURL = __webpack_require__(610);
+	var buildFullPath = __webpack_require__(621);
+	var parseHeaders = __webpack_require__(624);
+	var isURLSameOrigin = __webpack_require__(625);
+	var createError = __webpack_require__(619);
 	
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -1116,7 +1064,7 @@ webpackJsonp([1],{
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(625);
+	      var cookies = __webpack_require__(626);
 	
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
@@ -1195,12 +1143,12 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 617:
+/***/ 618:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var createError = __webpack_require__(618);
+	var createError = __webpack_require__(619);
 	
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -1227,12 +1175,12 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 618:
+/***/ 619:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var enhanceError = __webpack_require__(619);
+	var enhanceError = __webpack_require__(620);
 	
 	/**
 	 * Create an Error with the specified message, config, error code, request and response.
@@ -1252,7 +1200,7 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 619:
+/***/ 620:
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -1301,13 +1249,13 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 620:
+/***/ 621:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var isAbsoluteURL = __webpack_require__(621);
-	var combineURLs = __webpack_require__(622);
+	var isAbsoluteURL = __webpack_require__(622);
+	var combineURLs = __webpack_require__(623);
 	
 	/**
 	 * Creates a new URL by combining the baseURL with the requestedURL,
@@ -1328,7 +1276,7 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 621:
+/***/ 622:
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -1349,7 +1297,7 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 622:
+/***/ 623:
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -1370,12 +1318,12 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 623:
+/***/ 624:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(606);
+	var utils = __webpack_require__(607);
 	
 	// Headers whose duplicates are ignored by node
 	// c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -1430,12 +1378,12 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 624:
+/***/ 625:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(606);
+	var utils = __webpack_require__(607);
 	
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -1505,12 +1453,12 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 625:
+/***/ 626:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(606);
+	var utils = __webpack_require__(607);
 	
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -1565,12 +1513,12 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 626:
+/***/ 627:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(606);
+	var utils = __webpack_require__(607);
 	
 	/**
 	 * Config-specific merge-function which creates a new config-object
@@ -1645,7 +1593,7 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 627:
+/***/ 628:
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -1671,12 +1619,12 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 628:
+/***/ 629:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Cancel = __webpack_require__(627);
+	var Cancel = __webpack_require__(628);
 	
 	/**
 	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -1735,7 +1683,7 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 629:
+/***/ 630:
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -1769,7 +1717,7 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 630:
+/***/ 632:
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1779,48 +1727,37 @@ webpackJsonp([1],{
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var React = __webpack_require__(1);
-	var util_1 = __webpack_require__(631);
-	var prefix = "jhm-college-card";
+	var react_redux_1 = __webpack_require__(268);
+	var College_1 = __webpack_require__(603);
+	var react_bootstrap_1 = __webpack_require__(280);
+	var util_1 = __webpack_require__(598);
+	var prefix = "jhm-home-page";
 	var cs = util_1.getCs(prefix);
-	var CollegeCard = (function (_super) {
-	    __extends(CollegeCard, _super);
-	    function CollegeCard() {
+	var Index = (function (_super) {
+	    __extends(Index, _super);
+	    function Index() {
 	        _super.call(this);
 	    }
-	    CollegeCard.prototype.render = function () {
-	        var collegeObj = this.props.collegeObj;
-	        return (React.createElement("div", {className: prefix}, React.createElement("img", {src: collegeObj.bannerImage, alt: collegeObj.name}), React.createElement("div", {className: cs("card-bottom-cont")}, React.createElement("p", null, collegeObj.name, " - ", collegeObj.location))));
+	    Index.prototype.render = function () {
+	        return (React.createElement("div", null, "Registration", React.createElement("form", null, React.createElement(react_bootstrap_1.FormGroup, {controlId: "formValidationSuccess1", validationState: "success"}, React.createElement(react_bootstrap_1.ControlLabel, null, "Input with success"), React.createElement(react_bootstrap_1.FormControl, {type: "text"}), React.createElement(react_bootstrap_1.HelpBlock, null, "Help text with validation state.")), React.createElement(react_bootstrap_1.FormGroup, {controlId: "formValidationWarning1", validationState: "warning"}, React.createElement(react_bootstrap_1.ControlLabel, null, "Input with warning"), React.createElement(react_bootstrap_1.FormControl, {type: "text"})), React.createElement(react_bootstrap_1.FormGroup, {controlId: "formValidationError1", validationState: "error"}, React.createElement(react_bootstrap_1.ControlLabel, null, "Input with error"), React.createElement(react_bootstrap_1.FormControl, {type: "text"})), React.createElement(react_bootstrap_1.FormGroup, {controlId: "formValidationNull", validationState: null}, React.createElement(react_bootstrap_1.ControlLabel, null, "Input with no validation state"), React.createElement(react_bootstrap_1.FormControl, {type: "text"})), React.createElement(react_bootstrap_1.FormGroup, {controlId: "formValidationSuccess2", validationState: "success"}, React.createElement(react_bootstrap_1.ControlLabel, null, "Input with success and feedback icon"), React.createElement(react_bootstrap_1.FormControl, {type: "text"}), React.createElement(react_bootstrap_1.FormControl.Feedback, null)), React.createElement(react_bootstrap_1.FormGroup, {controlId: "formValidationWarning2", validationState: "warning"}, React.createElement(react_bootstrap_1.ControlLabel, null, "Input with warning and feedback icon"), React.createElement(react_bootstrap_1.FormControl, {type: "text"}), React.createElement(react_bootstrap_1.FormControl.Feedback, null)), React.createElement(react_bootstrap_1.FormGroup, {controlId: "formValidationError2", validationState: "error"}, React.createElement(react_bootstrap_1.ControlLabel, null, "Input with error and feedback icon"), React.createElement(react_bootstrap_1.FormControl, {type: "text"}), React.createElement(react_bootstrap_1.FormControl.Feedback, null)), React.createElement(react_bootstrap_1.FormGroup, {controlId: "formValidationSuccess3", validationState: "success"}, React.createElement(react_bootstrap_1.ControlLabel, null, "Input with success and custom feedback icon"), React.createElement(react_bootstrap_1.FormControl, {type: "text"}), React.createElement(react_bootstrap_1.FormControl.Feedback, null, React.createElement(react_bootstrap_1.Glyphicon, {glyph: "music"}))), React.createElement(react_bootstrap_1.FormGroup, {controlId: "formValidationWarning3", validationState: "warning"}, React.createElement(react_bootstrap_1.ControlLabel, null, "Input group with warning"), React.createElement(react_bootstrap_1.InputGroup, null, React.createElement(react_bootstrap_1.InputGroup.Addon, null, "@"), React.createElement(react_bootstrap_1.FormControl, {type: "text"})), React.createElement(react_bootstrap_1.FormControl.Feedback, null)), React.createElement(react_bootstrap_1.Form, {componentClass: "fieldset", horizontal: true}, React.createElement(react_bootstrap_1.FormGroup, {controlId: "formValidationError3", validationState: "error"}, React.createElement(react_bootstrap_1.Col, {componentClass: react_bootstrap_1.ControlLabel, xs: 3}, "Input with error"), React.createElement(react_bootstrap_1.Col, {xs: 9}, React.createElement(react_bootstrap_1.FormControl, {type: "text"}), React.createElement(react_bootstrap_1.FormControl.Feedback, null))), React.createElement(react_bootstrap_1.FormGroup, {controlId: "formValidationSuccess4", validationState: "success"}, React.createElement(react_bootstrap_1.Col, {componentClass: react_bootstrap_1.ControlLabel, xs: 3}, "Input group with success"), React.createElement(react_bootstrap_1.Col, {xs: 9}, React.createElement(react_bootstrap_1.InputGroup, null, React.createElement(react_bootstrap_1.InputGroup.Addon, null, "@"), React.createElement(react_bootstrap_1.FormControl, {type: "text"})), React.createElement(react_bootstrap_1.FormControl.Feedback, null)))), React.createElement(react_bootstrap_1.Form, {componentClass: "fieldset", inline: true}, React.createElement(react_bootstrap_1.FormGroup, {controlId: "formValidationWarning4", validationState: "warning"}, React.createElement(react_bootstrap_1.ControlLabel, null, "Input with warning"), ' ', React.createElement(react_bootstrap_1.FormControl, {type: "text"}), React.createElement(react_bootstrap_1.FormControl.Feedback, null)), ' ', React.createElement(react_bootstrap_1.FormGroup, {controlId: "formValidationError4", validationState: "error"}, React.createElement(react_bootstrap_1.ControlLabel, null, "Input group with error"), ' ', React.createElement(react_bootstrap_1.InputGroup, null, React.createElement(react_bootstrap_1.InputGroup.Addon, null, "@"), React.createElement(react_bootstrap_1.FormControl, {type: "text"})), React.createElement(react_bootstrap_1.FormControl.Feedback, null))), React.createElement(react_bootstrap_1.Checkbox, {validationState: "success"}, "Checkbox with success"), React.createElement(react_bootstrap_1.Radio, {validationState: "warning"}, "Radio with warning"), React.createElement(react_bootstrap_1.Checkbox, {validationState: "error"}, "Checkbox with error"), React.createElement(react_bootstrap_1.FormGroup, {validationState: "success"}, React.createElement(react_bootstrap_1.Checkbox, {inline: true}, "Checkbox"), " ", React.createElement(react_bootstrap_1.Checkbox, {inline: true}, "with"), ' ', React.createElement(react_bootstrap_1.Checkbox, {inline: true}, "success"))), ";"));
 	    };
-	    return CollegeCard;
+	    return Index;
 	}(React.Component));
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = CollegeCard;
-
-
-/***/ }),
-
-/***/ 631:
-/***/ (function(module, exports) {
-
-	"use strict";
-	exports.getCs = function (prefix) {
-	    return function (cls) {
-	        if (typeof cls === "string") {
-	            return prefix + "-" + cls;
-	        }
-	        else {
-	            var className = "";
-	            var clsListLength = cls.length;
-	            for (var i = 0; i < clsListLength; i++) {
-	                className += prefix + "-" + cls[i] + " ";
-	            }
-	            return className.trim();
-	        }
+	var mapStateToProps = function (state) {
+	    return {
+	        collegesList: state.college.collegesList
 	    };
 	};
+	var mapDispatchToProps = function (dispatch) {
+	    return {
+	        getCollegesList: function (data) { return dispatch(College_1.getCollegesList(data)); },
+	    };
+	};
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(Index);
 
 
 /***/ })
 
 });
-//# sourceMappingURL=1.HomePage.63de293e1fd57f314fd9.js.map
+//# sourceMappingURL=2.CollegeRegistration.2a3ba2b46c75e1a2d98d.js.map

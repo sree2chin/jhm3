@@ -16,7 +16,7 @@ webpackJsonp([0],{
 	}
 	;
 	function loadHomePage(location, callback) {
-	    __webpack_require__.e/* nsure */(1, function () { return callback(null, __webpack_require__(601).default); });
+	    __webpack_require__.e/* nsure */(1, function () { return callback(null, __webpack_require__(602).default); });
 	}
 	function loadCollegeRegistrationPage(location, callback) {
 	    __webpack_require__.e/* nsure */(2, function () { return callback(null, __webpack_require__(632).default); });
@@ -56,9 +56,9 @@ webpackJsonp([0],{
 	var react_redux_1 = __webpack_require__(268);
 	var redux_thunk_1 = __webpack_require__(278);
 	var header_1 = __webpack_require__(279);
-	var reducers_1 = __webpack_require__(598);
+	var reducers_1 = __webpack_require__(599);
 	var react_bootstrap_1 = __webpack_require__(280);
-	var ErrorLogsApi_1 = __webpack_require__(600);
+	var ErrorLogsApi_1 = __webpack_require__(601);
 	window.errorLogsApiIns = new ErrorLogsApi_1.default();
 	var store = redux_1.createStore(reducers_1.default, redux_1.applyMiddleware(redux_thunk_1.default));
 	window.reduxDispatch = store.dispatch;
@@ -786,20 +786,9 @@ webpackJsonp([0],{
 	var React = __webpack_require__(1);
 	var react_bootstrap_1 = __webpack_require__(280);
 	var react_redux_1 = __webpack_require__(268);
+	var util_1 = __webpack_require__(598);
 	var prefix = "jhm-navbar";
-	var cs = function (cls) {
-	    if (typeof cls === "string") {
-	        return prefix + "-" + cls;
-	    }
-	    else {
-	        var className = "";
-	        var clsListLength = cls.length;
-	        for (var i = 0; i < clsListLength; i++) {
-	            className += prefix + "-" + cls[i] + " ";
-	        }
-	        return className.trim();
-	    }
-	};
+	var cs = util_1.getCs(prefix);
 	var Header = (function (_super) {
 	    __extends(Header, _super);
 	    function Header() {
@@ -823,11 +812,34 @@ webpackJsonp([0],{
 /***/ }),
 
 /***/ 598:
+/***/ (function(module, exports) {
+
+	"use strict";
+	exports.getCs = function (prefix) {
+	    return function (cls) {
+	        if (typeof cls === "string") {
+	            return prefix + "-" + cls;
+	        }
+	        else {
+	            var className = "";
+	            var clsListLength = cls.length;
+	            for (var i = 0; i < clsListLength; i++) {
+	                className += prefix + "-" + cls[i] + " ";
+	            }
+	            return className.trim();
+	        }
+	    };
+	};
+
+
+/***/ }),
+
+/***/ 599:
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var redux_1 = __webpack_require__(248);
-	var collegeReducer_1 = __webpack_require__(599);
+	var collegeReducer_1 = __webpack_require__(600);
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.default = redux_1.combineReducers({
 	    college: collegeReducer_1.default
@@ -836,7 +848,7 @@ webpackJsonp([0],{
 
 /***/ }),
 
-/***/ 599:
+/***/ 600:
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -859,7 +871,7 @@ webpackJsonp([0],{
 
 /***/ }),
 
-/***/ 600:
+/***/ 601:
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -922,4 +934,4 @@ webpackJsonp([0],{
 /***/ })
 
 });
-//# sourceMappingURL=app.63de293e1fd57f314fd9.js.map
+//# sourceMappingURL=app.2a3ba2b46c75e1a2d98d.js.map

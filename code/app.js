@@ -151,25 +151,6 @@ app.use(function (err, req, res, next) {
 });
 
 app.use(function (req, res, next) {
-  /*var url_parts = req.url.parse(req.url, true);
-  req.session = req.session || {};
-  console.log("\n\n\n eq.originalUrl3: " + req.originalUrl);
-  console.log("\n\n\n req.url3 : " + req.url + "\n\n\n");
-
-  if (!_.isEmpty(url_parts.query) && url_parts.query.source == "agent_web") {
-    req.session.queryParams = {};
-    for(var k in url_parts.query) {
-      if (k != "source") {
-        req.session.queryParams[k] = url_parts.query[k] || "";
-      }
-    }
-    templatePath = "../../dist/";
-    res.render(templatePath);
-    return;
-  };*/
-
-  //if(req.url.indexOf("/js") < 0 && req.url.indexOf("/css") < 0 && req.url.indexOf("/fonts") < 0 && req.url.indexOf("/img") < 0
-  //    && req.url.indexOf("/installapps") < 0) {
   res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
   res.header('Expires', '-1');
   res.header('Pragma', 'no-cache');
