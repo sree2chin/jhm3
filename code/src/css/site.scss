@@ -1,5 +1,14 @@
 @import "./commonMixins";
 
+/* Overriding bootstrap */
+  // .btn-default {
+  //   color: white !important;
+  //   background-color: #4a90e2 !important;
+  //   border-color: #4a90e2 !important;
+  //   border-radius: 0px !important;
+  // }
+/* Overriding bootstrap end */
+
 .top-buffer{
   margin-top: 20px;
 }
@@ -62,8 +71,10 @@
     background-color: white;
     margin-bottom: 0px;
     .container {
-      padding-left: calc(18% - 15px);
-      padding-right: calc(18% - 15px);
+      margin: 0 auto;
+      padding-right: 10%;
+      padding-left: 10%;
+      max-width: 1185px;
       margin-left: 0px;
       margin-right: 0px;
       width: 100%;
@@ -123,6 +134,7 @@
 }
 
 .c-body {
+  margin-top: 70px;
   color: $default-font-color;
   font-size: $default-font-size;
   &+div {

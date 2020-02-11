@@ -19,6 +19,20 @@ function getUrlParameter(name) {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 
+function loadHomePage(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/home/index") as typeof _HomePage).default),
+    "HomePage");
+}
+
+function loadCollegeRegistrationPage(location: any, callback: LoadCallback) {
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/college/registration") as typeof _collegeRegistrationPage).default),
+    "CollegeRegistration");
+}
+
 function loadAboutPage(location: any, callback: LoadCallback) {
   require.ensure(
     [],
@@ -33,195 +47,188 @@ function loadErrorRedirectPage(location: any, callback: LoadCallback) {
     "Error404");
 };
 
-function loadQuotePage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/quote/main") as typeof _QuotePage).default),
-    "QuotePage");
-}
+// function loadQuestionsPage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/questions/main") as typeof _QuestionsPage).default),
+//     "QuotePage");
+// }
 
-function loadQuestionsPage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/questions/main") as typeof _QuestionsPage).default),
-    "QuotePage");
-}
+// function loadAuthorisePage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/questions/authorise") as typeof _QuestionsPage).default),
+//     "QuotePage");
+// }
 
-function loadAuthorisePage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/questions/authorise") as typeof _QuestionsPage).default),
-    "QuotePage");
-}
+// function loadErrorPage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/questions/error") as typeof _QuestionsPage).default),
+//     "QuotePage");
+// }
 
-function loadErrorPage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/questions/error") as typeof _QuestionsPage).default),
-    "QuotePage");
-}
+// function allQuestionsPage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/questions/all") as typeof _QuestionsPage).default),
+//     "QuotePage");
+// }
 
-function allQuestionsPage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/questions/all") as typeof _QuestionsPage).default),
-    "QuotePage");
-}
+// function getSignaturePage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/questions/signature") as typeof _QuestionsPage).default),
+//     "QuotePage");
+// }
 
-function getSignaturePage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/questions/signature") as typeof _QuestionsPage).default),
-    "QuotePage");
-}
+// function getOfferPage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/questions/offer") as typeof _QuestionsPage).default),
+//     "QuotePage");
+// }
 
-function getOfferPage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/questions/offer") as typeof _QuestionsPage).default),
-    "QuotePage");
-}
+// function editQuestionsPage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/questions/editQuestion") as typeof _QuestionsPage).default),
+//     "QuotePage");
+// }
 
-function editQuestionsPage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/questions/editQuestion") as typeof _QuestionsPage).default),
-    "QuotePage");
-}
+// function editBeneficiaryQuestionsPage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/questions/editBeneficiaryQuestion") as typeof _QuestionsPage).default),
+//     "QuotePage");
+// }
 
-function editBeneficiaryQuestionsPage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/questions/editBeneficiaryQuestion") as typeof _QuestionsPage).default),
-    "QuotePage");
-}
+// function editSignaturePage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/questions/editQuestion") as typeof _QuestionsPage).default),
+//     "QuotePage");
+// }
 
-function editSignaturePage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/questions/editQuestion") as typeof _QuestionsPage).default),
-    "QuotePage");
-}
+// function loadProductsPage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/quote/ProductsPage") as typeof _QuotePage).default),
+//     "QuotePage");
+// }
 
-function loadProductsPage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/quote/ProductsPage") as typeof _QuotePage).default),
-    "QuotePage");
-}
+// function loadPlansPage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/quote/PlansPage") as typeof _QuotePage).default),
+//     "QuotePage");
+// }
 
-function loadPlansPage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/quote/PlansPage") as typeof _QuotePage).default),
-    "QuotePage");
-}
+// function loadNextStepsPage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/quote/NextSteps") as typeof _QuotePage).default),
+//     "QuotePage");
+// }
 
-function loadNextStepsPage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/quote/NextSteps") as typeof _QuotePage).default),
-    "QuotePage");
-}
+// function loadAgentNextStepsPage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/quote/AgentNextSteps") as typeof _QuotePage).default),
+//     "QuotePage");
+// }
 
-function loadAgentNextStepsPage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/quote/AgentNextSteps") as typeof _QuotePage).default),
-    "QuotePage");
-}
+// function loadContactAgent(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/quote/ContactAgent") as typeof _QuotePage).default),
+//     "QuotePage");
+// }
 
-function loadContactAgent(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/quote/ContactAgent") as typeof _QuotePage).default),
-    "QuotePage");
-}
+// function loadEmailToQuote(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/quote/EmailToQuote") as typeof _QuotePage).default),
+//     "QuotePage");
+// }
 
-function loadEmailToQuote(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/quote/EmailToQuote") as typeof _QuotePage).default),
-    "QuotePage");
-}
-
-function loadAgentEmailToQuote(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/quote/AgentEmailToQuote") as typeof _QuotePage).default),
-    "QuotePage");
-}
+// function loadAgentEmailToQuote(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/quote/AgentEmailToQuote") as typeof _QuotePage).default),
+//     "QuotePage");
+// }
 
 
-function loadEmailCaptureToQuote(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/quote/EmailToQuoteCapture") as typeof _QuotePage).default),
-    "QuotePage");
-}
+// function loadEmailCaptureToQuote(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/quote/EmailToQuoteCapture") as typeof _QuotePage).default),
+//     "QuotePage");
+// }
 
-function loadAgentEmailCaptureToQuote(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/quote/AgentEmailToQuoteCapture") as typeof _QuotePage).default),
-    "QuotePage");
-}
+// function loadAgentEmailCaptureToQuote(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/quote/AgentEmailToQuoteCapture") as typeof _QuotePage).default),
+//     "QuotePage");
+// }
 
-function loadContactAgentSuccess(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/quote/ContactAgentSuccess") as typeof _QuotePage).default),
-    "QuotePage");
-}
+// function loadContactAgentSuccess(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/quote/ContactAgentSuccess") as typeof _QuotePage).default),
+//     "QuotePage");
+// }
 
-function loadEmailToQuoteSuccess(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/quote/EmailToQuoteSuccess") as typeof _QuotePage).default),
-    "QuotePage");
-}
+// function loadEmailToQuoteSuccess(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/quote/EmailToQuoteSuccess") as typeof _QuotePage).default),
+//     "QuotePage");
+// }
 
-function loadPaymentSuccessPage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/questions/PaymentSuccess") as typeof _QuestionsPage).default),
-    "QuotePage");
-}
+// function loadPaymentSuccessPage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/questions/PaymentSuccess") as typeof _QuestionsPage).default),
+//     "QuotePage");
+// }
 
-function loadPaymentPage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/questions/payment") as typeof _QuestionsPage).default),
-    "QuotePage");
-}
+// function loadPaymentPage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/questions/payment") as typeof _QuestionsPage).default),
+//     "QuotePage");
+// }
 
-function loadUnsubscribePage(location: any, callback: LoadCallback) {
-  require.ensure(
-    [],
-    () => callback(null, (require("./components/questions/unsubscribe") as typeof _QuestionsPage).default),
-    "QuotePage");
-}
+// function loadUnsubscribePage(location: any, callback: LoadCallback) {
+//   require.ensure(
+//     [],
+//     () => callback(null, (require("./components/questions/unsubscribe") as typeof _QuestionsPage).default),
+//     "QuotePage");
+// }
 
-function checkAccessable(nextState, replace, callback) {      
-  window.initialTagManager = window.initialTagManager || [];
-  Access.getQuoteAccess(nextState.location.query, function(res){
-    window.uniqueTransactionId = res.uniqueTransactionId;
-    window.initialTagManager = res.tag_manager;
-    if (res.firstTime) {
-      window.dataLayer.push({
-        'event':'VirtualPageView',
-        'virtualPageURL': 'VirtualPageView',
-        'virtualPageTitle' : PAGES_LIST.LANDING_PAGE.page_title,
-                  'VirtualPageVisitAgentNumber': getUrlParameter("agent_number"),
-                  'VirtualPageVisitTransactionId': res.uniqueTransactionId
-      });
-    }
-    if(res != undefined && res != null && res.data && res.data.access){
-      return callback();  
-    }
-    return false;
-  })
-}
+// function checkAccessable(nextState, replace, callback) {      
+//   window.initialTagManager = window.initialTagManager || [];
+//   Access.getQuoteAccess(nextState.location.query, function(res){
+//     window.uniqueTransactionId = res.uniqueTransactionId;
+//     window.initialTagManager = res.tag_manager;
+//     if (res.firstTime) {
+//       window.dataLayer.push({
+//         'event':'VirtualPageView',
+//         'virtualPageURL': 'VirtualPageView',
+//         'virtualPageTitle' : PAGES_LIST.LANDING_PAGE.page_title,
+//                   'VirtualPageVisitAgentNumber': getUrlParameter("agent_number"),
+//                   'VirtualPageVisitTransactionId': res.uniqueTransactionId
+//       });
+//     }
+//     if(res != undefined && res != null && res.data && res.data.access){
+//       return callback();  
+//     }
+//     return false;
+//   })
+// }
 
 var onRouteChange = ()=>{
   window._mfq = window._mfq || [];
@@ -236,8 +243,9 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route  path="/" component= {App} >
 
-      <IndexRoute getComponent={ loadQuotePage } />
-      <Route path="/products" getComponent={ loadProductsPage } />
+      <IndexRoute getComponent={ loadHomePage } />
+      <Route path="/college-registration" getComponent={ loadCollegeRegistrationPage } />
+      {/* <Route path="/products" getComponent={ loadProductsPage } />
       <Route path="/plans" getComponent={ loadPlansPage } />
       <Route path="/next-steps" getComponent={ loadNextStepsPage } />
 
@@ -277,7 +285,7 @@ ReactDOM.render(
 
       <Route path="/customer" getComponent={ loadQuotePage } />
       <Route path="/quote" getComponent={ loadQuotePage } />
-      <Route path="/about" getComponent={ loadAboutPage } />
+      <Route path="/about" getComponent={ loadAboutPage } /> */}
       
       
       

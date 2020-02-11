@@ -116,7 +116,7 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'dist'), {maxAge: thirtyDay}));
 app.use("/dist", express.static(__dirname +'/dist/'));
-app.use("/favicon.ico", express.static(__dirname +'/dist/images/favicon.ico'));
+// app.use("/favicon.ico", express.static(__dirname +'/dist/images/favicon.ico'));
 app.use("/agent", express.static(__dirname +'/dist/'));
 
 app.use(passport.initialize());

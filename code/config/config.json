@@ -7,7 +7,7 @@
 		"redis_url": "localhost",
 		"redis_port": 6379,
 		"redis_password": "",
-		"server_domain": "http://ec2-52-55-71-95.compute-1.amazonaws.com",
+		"server_domain": "http://127.0.0.1:3025",
 		"client_domain": "http://127.0.0.1:3001",
 		"minify" : true,
 		"static_root" : "/pages",

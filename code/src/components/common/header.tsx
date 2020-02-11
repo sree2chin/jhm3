@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Link} from 'react-router';
-import { Navbar } from "react-bootstrap";
+import { Navbar, Nav, NavItem } from "react-bootstrap";
 import TelLinkComponent from "./TelLinkComponent";
 import {each, isEmpty} from "underscore";
 import { Dispatch } from 'redux';
@@ -11,6 +11,20 @@ interface Props extends React.Props<Header> {
   location? : any
 }
 
+const prefix = "jhm-navbar";
+const cs = cls => {
+    if (typeof cls === "string") {
+        return `${prefix}-${cls}`;
+    } else {
+        let className = "";
+        let clsListLength = cls.length;
+        for (let i=0; i<clsListLength; i++) {
+            className += `${prefix}-${cls[i]} `;
+        }
+        return className.trim();
+    }   
+}
+
 class Header extends React.Component<Props, {}> {
   shouldShowAgentLinks() {
     var queryParams = this.props.location.query;
@@ -19,37 +33,24 @@ class Header extends React.Component<Props, {}> {
   }
   public render() {
     return (
-      <Navbar className="cf-nav-main-header">
-        <Navbar.Header>
-          <div>
-            <span>
-              <img className="navbar-brand" src={this.props.logoImgSrc} />
-            </span>
-            {this.shouldShowAgentLinks() && <span className="navbar-links">
-                  {window.goAgentWeb && <a href={window.goAgentWeb} className="first-link">Go Agent Web</a>}
-                  {window.lifetimeAgentPanel && <a href={window.lifetimeAgentPanel}>Lifetime Agent Panel</a>}
-                </span>
-              }
-          </div>
-        </Navbar.Header>
-        <Navbar.Text pullRight>
-          <div className="header-text" style={{marginLeft: "22px", fontSize: "16px"}}>
-            <div style={{textAlign: "right"}}>
-              Need help?
-              <a href={this.props.phoneNumberDetails ? this.props.phoneNumberDetails.phone_number_href :  "tel:" + "1-866-826-8471"}>
-                <img className="visible-xs"
-                  style={{float: "right", paddingLeft: "10px", paddingTop: "4px"}}
-                  src={"../images/small-phone.svg"} />
-              </a>
-            </div>
-            <div className="hidden-xs" style={{fontSize: "18px"}}>
-              <TelLinkComponent
-                phoneNumber={this.props.phoneNumberDetails}
-              />
-            </div>
-          </div>
-
-        </Navbar.Text>
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="#home">
+          <a href = "/">
+            <img src={"../images/others/logo.png"} alt="logo" />
+            <span>JHM</span>
+          </a>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" pullRight>
+          <Nav>
+            <NavItem eventKey="a" href="#">
+              About
+            </NavItem>
+            <NavItem eventKey="b" href="#">
+              Login
+            </NavItem>
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     );
   }
