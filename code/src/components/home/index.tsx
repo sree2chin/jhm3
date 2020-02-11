@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import {getCollegesList} from '../../actions/College';
+import { getCollegesList } from '../../actions/College';
 import { Button, Row, Col } from "react-bootstrap";
 import CollegeCard from "./college-card";
 import { getCs } from "../../utility/util";
@@ -85,10 +85,8 @@ const mapStateToProps = (state: any): Props => {
   };
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): Props => {
-    return {
-      getCollegesList: data => {return dispatch(getCollegesList(data))},
-    };
-  }
+const mapDispatchToProps = {
+  getCollegesList
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);
