@@ -22,7 +22,7 @@
     "debug": "~2.1.1",
     "ejs": "~2.5.2",
     "es6-promise": "^4.1.1",
-    "express": "~4.11.1",
+    "express": "~4.17.3",
     "express-session": "^1.11.2",
     "express-sitemap": "^1.6.3",
     "file-stream-rotator": "0.0.6",
